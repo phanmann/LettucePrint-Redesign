@@ -76,30 +76,33 @@ export default async function Testimonials() {
             return (
               <div
                 key={t._id}
-                className="bg-white rounded-card shadow-card border border-gray-100 p-8 relative"
+                className="bg-white rounded-card shadow-card border border-gray-100 p-8"
               >
-                <span className="absolute top-6 left-6 text-6xl font-semibold text-lp-green/20 leading-none select-none">&ldquo;</span>
-                <div className="border-t-[3px] border-lp-green pt-6 mt-2">
-                  <p className="text-body text-gray-700 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center text-white font-bold text-sm"
-                      style={{ backgroundColor: avatarColor }}
-                    >
-                      {imageUrl ? (
-                        <Image
-                          src={imageUrl}
-                          alt={t.name}
-                          width={40}
-                          height={40}
-                          className="w-full h-full object-cover rounded-full"
-                        />
-                      ) : initials}
-                    </div>
-                    <div>
-                      <p className="text-small font-semibold text-gray-900">{t.name}</p>
-                      {t.company && <p className="text-xs text-gray-500">{t.company}</p>}
-                    </div>
+                {/* Green top bar */}
+                <div className="border-t-[3px] border-lp-green mb-5" />
+                {/* Quote mark */}
+                <span className="block text-5xl font-semibold text-lp-green/30 leading-none select-none mb-3">&ldquo;</span>
+                {/* Quote text */}
+                <p className="text-body text-gray-700 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
+                {/* Author */}
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center text-white font-bold text-sm"
+                    style={{ backgroundColor: avatarColor }}
+                  >
+                    {imageUrl ? (
+                      <Image
+                        src={imageUrl}
+                        alt={t.name}
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover rounded-full"
+                      />
+                    ) : initials}
+                  </div>
+                  <div>
+                    <p className="text-small font-semibold text-gray-900">{t.name}</p>
+                    {t.company && <p className="text-xs text-gray-500">{t.company}</p>}
                   </div>
                 </div>
               </div>
