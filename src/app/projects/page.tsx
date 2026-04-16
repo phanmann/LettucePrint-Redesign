@@ -2,13 +2,21 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import CTABanner from '@/components/sections/CTABanner'
 import PortfolioGrid from '@/components/sections/PortfolioGrid'
+import { client } from '@/sanity/client'
+import { allPortfolioQuery } from '@/sanity/queries'
 
 export const metadata = {
   title: 'Portfolio | Lettuce Print',
   description: 'Browse our work — packaging, signage, screen printing, stickers, and more for brands across NYC and beyond.',
 }
 
-export default function PortfolioPage() {
+export default async function PortfolioPage() {
+  let projects = []
+  try {
+    projects = await client.fetch(allPortfolioQuery)
+  } catch {
+    // fallback to placeholder
+  }
   return (
     <>
       <Navbar />
@@ -26,7 +34,7 @@ export default function PortfolioPage() {
           </div>
         </section>
 
-        <PortfolioGrid />
+        <PortfolioGrid projects={projects} />
         <CTABanner />
       </main>
       <Footer />

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { urlFor } from '@/sanity/image'
 
 interface Project {
   _id: string
@@ -72,6 +73,7 @@ export default function PortfolioGrid({ projects }: PortfolioGridProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((project, i) => {
             const bgColor = FALLBACK_COLORS[project.service] ?? '#00A175'
+            const imageUrl = project.coverImage ? urlFor(project.coverImage).width(600).height(450).url() : null
             return (
               <motion.div
                 key={project._id}
@@ -84,9 +86,9 @@ export default function PortfolioGrid({ projects }: PortfolioGridProps) {
                     className="relative rounded-card overflow-hidden aspect-[4/3] mb-4"
                     style={{ backgroundColor: bgColor }}
                   >
-                    {project.coverImage ? (
+                    {imageUrl ? (
                       <Image
-                        src={`/api/placeholder`}
+                        src={imageUrl}
                         alt={project.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
