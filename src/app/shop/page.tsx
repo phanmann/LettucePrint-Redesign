@@ -16,11 +16,21 @@ const products = [
     name: 'Custom Die-Cut Stickers',
     href: '/shop/stickers',
     badge: { label: 'Most Popular', variant: 'popular' as const },
-    description: 'Premium vinyl stickers cut precisely to your shape. Standard, holographic, and spot UV finishes available.',
+    description: 'Premium vinyl stickers cut precisely to your shape. Standard and holographic finishes available.',
     startingAt: '$38',
     forQty: '50 stickers',
-    features: ['Die-cut to shape', 'Waterproof & UV resistant', '3–5 day turnaround', 'Holographic & Spot UV available'],
+    features: ['Die-cut to shape', 'Waterproof & UV resistant', '3–5 day turnaround', 'Standard & holographic vinyl'],
     color: 'bg-lp-green',
+  },
+  {
+    name: 'Spot UV Stickers',
+    href: '/shop/spot-uv',
+    badge: { label: 'Premium', variant: 'popular' as const },
+    description: 'Gloss UV coating over a matte base for a luxury tactile finish. The sticker that gets noticed.',
+    startingAt: '$61',
+    forQty: '50 stickers',
+    features: ['Gloss-on-matte effect', 'Premium tactile finish', 'Die-cut to shape', '3–5 day turnaround'],
+    color: 'bg-lp-black',
   },
   {
     name: 'Roll Labels',
@@ -56,7 +66,7 @@ export default function ShopPage() {
 
         {/* Products */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {products.map((product) => (
               <div
                 key={product.href}
