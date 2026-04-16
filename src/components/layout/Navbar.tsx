@@ -13,7 +13,6 @@ const navLinks = [
     href: '/shop',
     children: [
       { label: 'Stickers & Labels', href: '/shop/stickers' },
-      { label: 'Spot UV Stickers', href: '/shop/spot-uv-stickers' },
       { label: 'Roll Labels', href: '/shop/roll-labels' },
     ],
   },
