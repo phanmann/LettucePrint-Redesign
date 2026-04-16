@@ -21,7 +21,9 @@ const FALLBACK_TESTIMONIALS = [
     company: 'Local Business Owner',
     quote: 'Lettuce Print delivered exactly what we needed — fast, professional, and the quality was outstanding. Our stickers and packaging look incredible.',
     photo: null,
-    localImage: '/images/reviews/review-mike-ghattas.png',
+    localImage: null,
+    initials: 'MG',
+    color: '#00A175',
   },
   {
     _id: 'fallback-2',
@@ -29,7 +31,9 @@ const FALLBACK_TESTIMONIALS = [
     company: 'Brand Manager',
     quote: "The design team at Lettuce Print took our rough concept and turned it into something we're genuinely proud of. The turnaround was faster than we expected.",
     photo: null,
-    localImage: '/images/reviews/review-sarah-sathre.png',
+    localImage: null,
+    initials: 'SS',
+    color: '#7E6AAE',
   },
   {
     _id: 'fallback-3',
@@ -37,7 +41,9 @@ const FALLBACK_TESTIMONIALS = [
     company: 'Event Organizer',
     quote: 'We needed everything last minute — banners, programs, signage. Lettuce Print made it happen without a single hiccup. Absolute lifesavers.',
     photo: null,
-    localImage: '/images/reviews/review-shameeza-singh.png',
+    localImage: null,
+    initials: 'SS',
+    color: '#006145',
   },
 ]
 
@@ -62,9 +68,10 @@ export default async function Testimonials() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((t, i) => {
-            const isFallback = 'localImage' in t
+            const isFallback = 'initials' in t
             const imageUrl = !isFallback && t.photo ? urlFor(t.photo).width(80).height(80).url() : null
-            const localImage = isFallback ? (t as typeof FALLBACK_TESTIMONIALS[0]).localImage : null
+            const initials = isFallback ? (t as typeof FALLBACK_TESTIMONIALS[0]).initials : t.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2)
+            const avatarColor = isFallback ? (t as typeof FALLBACK_TESTIMONIALS[0]).color : '#00A175'
 
             return (
               <div
@@ -75,20 +82,19 @@ export default async function Testimonials() {
                 <div className="border-t-[3px] border-lp-green pt-6 mt-2">
                   <p className="text-body text-gray-700 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full overflow-hidden bg-lp-green/10 flex-shrink-0">
-                      {(imageUrl || localImage) ? (
+                    <div
+                      className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center text-white font-bold text-sm"
+                      style={{ backgroundColor: avatarColor }}
+                    >
+                      {imageUrl ? (
                         <Image
-                          src={imageUrl || localImage!}
+                          src={imageUrl}
                           alt={t.name}
                           width={40}
                           height={40}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover rounded-full"
                         />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-lp-green font-bold text-sm">
-                          {t.name[0]}
-                        </div>
-                      )}
+                      ) : initials}
                     </div>
                     <div>
                       <p className="text-small font-semibold text-gray-900">{t.name}</p>
