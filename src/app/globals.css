@@ -53,8 +53,8 @@
 
 /* Custom font size utilities */
 @utility text-hero {
-  font-size: clamp(64px, 9vw, 120px);
-  line-height: 0.95;
+  font-size: clamp(40px, 9vw, 120px);
+  line-height: 1.0;
   letter-spacing: -0.03em;
 }
 

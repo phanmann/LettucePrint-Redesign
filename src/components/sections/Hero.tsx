@@ -31,7 +31,7 @@ export default function Hero() {
       {/* Parallax content */}
       <motion.div
         style={{ y }}
-        className="relative z-10 flex flex-col items-center text-center px-6 max-w-6xl mx-auto"
+        className="relative z-10 flex flex-col items-center text-center px-5 sm:px-8 max-w-6xl mx-auto w-full"
       >
         {/* Logo mark */}
         <motion.div
@@ -64,7 +64,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="text-hero font-semibold text-white mb-8 max-w-4xl"
+          className="text-hero font-semibold text-white mb-6 sm:mb-8 max-w-4xl w-full"
         >
           Print that makes your brand impossible to ignore.
         </motion.h1>
