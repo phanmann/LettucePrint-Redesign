@@ -60,7 +60,7 @@ export default async function Testimonials() {
           <h2 className="text-h2 font-semibold text-gray-900">Don&apos;t take our word for it.</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((t, i) => {
             const isFallback = 'localImage' in t
             const imageUrl = !isFallback && t.photo ? urlFor(t.photo).width(80).height(80).url() : null

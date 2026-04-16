@@ -47,7 +47,7 @@ export default function AboutPage() {
       <main>
 
         {/* Hero */}
-        <section className="pt-32 pb-20 bg-white">
+        <section className="pt-[calc(72px+4rem)] pb-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>

@@ -63,10 +63,10 @@ export default function GetQuotePage() {
                   Call or text us directly for urgent orders.
                 </p>
                 <a
-                  href="tel:+17182550000"
+                  href="tel:+13476030557"
                   className="inline-block text-small font-semibold text-white underline underline-offset-2"
                 >
-                  (718) 255-0000
+                  (347) 603-0557
                 </a>
               </div>
 
