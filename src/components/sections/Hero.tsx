@@ -99,17 +99,17 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          transition={{ delay: 1.4, duration: 0.6 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <span className="text-xs text-white/50 uppercase tracking-widest">Scroll</span>
-          <div className="w-px h-12 bg-white/30 relative overflow-hidden">
-            <motion.div
-              className="w-full h-1/2 bg-white/80 absolute top-0"
-              animate={{ y: ['-100%', '200%'] }}
-              transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
-            />
-          </div>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-white/50">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>
