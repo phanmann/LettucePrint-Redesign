@@ -8,7 +8,7 @@ import Button from '@/components/ui/Button'
 
 export const metadata: Metadata = {
   title: 'Shop — Custom Print Products',
-  description: 'Order custom stickers, spot UV stickers, and roll labels online. Real-time pricing, fast turnaround, printed in Brooklyn.',
+  description: 'Order custom stickers and roll labels online. Real-time pricing, fast turnaround, printed in Brooklyn.',
 }
 
 const products = [
@@ -21,16 +21,6 @@ const products = [
     forQty: '50 stickers',
     features: ['Die-cut to shape', 'Waterproof & UV resistant', '3–5 day turnaround', 'Holographic & Spot UV available'],
     color: 'bg-lp-green',
-  },
-  {
-    name: 'Spot UV Stickers',
-    href: '/shop/spot-uv-stickers',
-    badge: { label: 'Premium', variant: 'new' as const },
-    description: 'Standard vinyl base with a UV-cured clear coat for a high-end tactile finish. Perfect for premium brands.',
-    startingAt: '$61',
-    forQty: '50 stickers',
-    features: ['UV-cured clear coat', 'Premium tactile finish', 'Die-cut to shape', '3–5 day turnaround'],
-    color: 'bg-lp-purple',
   },
   {
     name: 'Roll Labels',
@@ -66,7 +56,7 @@ export default function ShopPage() {
 
         {/* Products */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 max-w-4xl mx-auto">
             {products.map((product) => (
               <div
                 key={product.href}

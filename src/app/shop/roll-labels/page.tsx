@@ -185,16 +185,16 @@ export default function RollLabelsPage() {
                   View product <ArrowRight size={12} />
                 </span>
               </Link>
-              <Link href="/shop/spot-uv-stickers" className="group block bg-white rounded-card shadow-card hover:shadow-card-hover border border-gray-100 p-6 transition-all duration-250">
-                <Badge variant="new" className="mb-4">Premium</Badge>
-                <h3 className="text-h4 font-semibold text-gray-900 group-hover:text-lp-green transition-colors mb-2">
-                  Spot UV Stickers
+              <Link href="/get-quote" className="group block bg-lp-green rounded-card p-6 transition-all duration-250 hover:bg-lp-green-dark">
+                <Badge variant="new" className="mb-4">Custom</Badge>
+                <h3 className="text-h4 font-semibold text-white mb-2">
+                  Need something custom?
                 </h3>
-                <p className="text-small text-gray-600 mb-4">
-                  Standard vinyl with a UV-cured clear coat. Premium tactile finish that demands attention.
+                <p className="text-small text-white/80 mb-4">
+                  Unusual sizes, specialty adhesives, multiple SKUs, or food-safe requirements? Get a quote.
                 </p>
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-lp-green">
-                  View product <ArrowRight size={12} />
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-white">
+                  Request a quote <ArrowRight size={12} />
                 </span>
               </Link>
             </div>
