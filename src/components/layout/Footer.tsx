@@ -18,9 +18,9 @@ const footerLinks = {
     { label: 'Large Format', href: '/services/large-format' },
   ],
   'Shop': [
-    { label: 'Stickers & Labels', href: '/shop/stickers' },
-    { label: 'Spot UV Stickers', href: '/shop/spot-uv-stickers' },
+    { label: 'Custom Stickers', href: '/shop/stickers' },
     { label: 'Roll Labels', href: '/shop/roll-labels' },
+    { label: 'All Products', href: '/shop' },
   ],
   'Support': [
     { label: 'Shipping & Delivery', href: '/shipping-policy' },

@@ -68,8 +68,13 @@ export default function RollLabelsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
+            {/* Calculator first on mobile */}
+            <div className="order-first lg:order-last">
+              <RollLabelCalculator productName="Custom Roll Labels" />
+            </div>
+
             {/* Left — Product Info */}
-            <div>
+            <div className="order-last lg:order-first">
               <div className="mb-8">
                 <div className="flex items-center gap-2 mb-4">
                   <Badge variant="popular">High Volume</Badge>
@@ -163,10 +168,7 @@ export default function RollLabelsPage() {
               </div>
             </div>
 
-            {/* Right — Calculator */}
-            <div>
-              <RollLabelCalculator productName="Custom Roll Labels" />
-            </div>
+
           </div>
 
           {/* Related */}

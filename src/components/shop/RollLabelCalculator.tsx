@@ -328,8 +328,8 @@ export default function RollLabelCalculator({ productName }: RollLabelCalculator
                 transition={{ duration: 0.2 }}
                 className="overflow-hidden mb-6"
               >
-                <div className="bg-white rounded-card border border-gray-100 overflow-hidden">
-                  <table className="w-full text-small">
+                <div className="bg-white rounded-card border border-gray-100 overflow-x-auto">
+                  <table className="w-full text-small min-w-[320px]">
                     <thead>
                       <tr className="bg-gray-50 border-b border-gray-100">
                         <th className="text-left px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-500">Qty</th>

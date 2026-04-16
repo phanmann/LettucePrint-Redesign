@@ -65,7 +65,7 @@ export default function PricingCalculator({ productName }: PricingCalculatorProp
   }
 
   return (
-    <div className="bg-gray-50 rounded-modal border border-gray-100 p-8 sticky top-24">
+    <div className="bg-gray-50 rounded-modal border border-gray-100 p-5 sm:p-8 lg:sticky lg:top-24">
       <h2 className="text-h3 font-semibold text-gray-900 mb-2">Configure & Price</h2>
       <p className="text-small text-gray-500 mb-8">Price updates instantly as you select options.</p>
 
@@ -74,7 +74,7 @@ export default function PricingCalculator({ productName }: PricingCalculatorProp
         <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-3">
           Size
         </label>
-        <div className="grid grid-cols-5 gap-2">
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
           {SIZES.map((s) => (
             <button
               key={s}
@@ -247,8 +247,8 @@ export default function PricingCalculator({ productName }: PricingCalculatorProp
             transition={{ duration: 0.2 }}
             className="overflow-hidden mb-6"
           >
-            <div className="bg-white rounded-card border border-gray-100 overflow-hidden">
-              <table className="w-full text-small">
+            <div className="bg-white rounded-card border border-gray-100 overflow-x-auto">
+              <table className="w-full text-small min-w-[320px]">
                 <thead>
                   <tr className="bg-gray-50 border-b border-gray-100">
                     <th className="text-left px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-500">Qty</th>
