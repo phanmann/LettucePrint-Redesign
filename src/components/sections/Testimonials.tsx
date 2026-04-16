@@ -79,9 +79,7 @@ export default async function Testimonials() {
                 className="bg-white rounded-card shadow-card border border-gray-100 p-8"
               >
                 {/* Green top bar */}
-                <div className="border-t-[3px] border-lp-green mb-5" />
-                {/* Quote mark */}
-                <span className="block text-5xl font-semibold text-lp-green/30 leading-none select-none mb-3">&ldquo;</span>
+                <div className="border-t-[3px] border-lp-green mb-6" />
                 {/* Quote text */}
                 <p className="text-body text-gray-700 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
                 {/* Author */}
