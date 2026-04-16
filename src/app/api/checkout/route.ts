@@ -6,16 +6,19 @@ import type { StickerSize, StickerMaterial, StickerFinish, RushOption } from '@/
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { size, quantity, material, finish, rush, productName } = body as {
+    const { size, quantity, material, finish, rush, productName, overridePriceCents } = body as {
       size: StickerSize
       quantity: number
       material: StickerMaterial
       finish: StickerFinish
       rush: RushOption
       productName: string
+      overridePriceCents?: number
     }
 
-    const price = calculatePrice(size, quantity, material, finish, rush)
+    const price = overridePriceCents
+      ? { totalCents: overridePriceCents }
+      : calculatePrice(size, quantity, material, finish, rush)
 
     const session = await getStripe().checkout.sessions.create({
       payment_method_types: ['card'],
