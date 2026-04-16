@@ -16,11 +16,20 @@ export const metadata: Metadata = {
     siteName: 'Lettuce Print',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: 'https://lettuceprint.vercel.app/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Lettuce Print — Brooklyn\'s Creative Print Studio',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Lettuce Print — Brooklyn\'s Creative Print Studio',
     description: 'Premium print, design, and fulfillment studio in Brooklyn, NY.',
+    images: ['https://lettuceprint.vercel.app/og-image.png'],
   },
   robots: {
     index: true,
