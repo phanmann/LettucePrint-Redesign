@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 
 export const metadata: Metadata = {
@@ -15,30 +14,21 @@ const products = [
   {
     name: 'Custom Die-Cut Stickers',
     href: '/shop/stickers',
-    badge: { label: 'Most Popular', variant: 'popular' as const },
     description: 'Premium vinyl stickers cut precisely to your shape. Standard and holographic finishes available.',
-    startingAt: '$38',
-    forQty: '50 stickers',
     features: ['Die-cut to shape', 'Waterproof & UV resistant', '3–5 day turnaround', 'Standard & holographic vinyl'],
     color: 'bg-lp-green',
   },
   {
     name: 'Spot UV Stickers',
     href: '/shop/spot-uv',
-    badge: { label: 'Premium', variant: 'popular' as const },
     description: 'Gloss UV coating over a matte base for a luxury tactile finish. The sticker that gets noticed.',
-    startingAt: '$61',
-    forQty: '50 stickers',
     features: ['Gloss-on-matte effect', 'Premium tactile finish', 'Die-cut to shape', '3–5 day turnaround'],
     color: 'bg-lp-black',
   },
   {
     name: 'Roll Labels',
     href: '/shop/roll-labels',
-    badge: { label: 'Bulk', variant: 'rush' as const },
     description: 'High-volume kiss-cut labels on a roll. Ideal for product packaging, retail, food & beverage.',
-    startingAt: 'Custom',
-    forQty: 'pricing',
     features: ['Kiss-cut on roll', 'High-volume ready', 'Food-safe options', 'Custom sizes'],
     color: 'bg-lp-green-dark',
   },
@@ -74,14 +64,13 @@ export default function ShopPage() {
               >
                 {/* Color block */}
                 <div className={`${product.color} h-32 flex items-center justify-center`}>
-                  <span className="text-white/20 text-xs uppercase tracking-widest font-semibold">
+                  <span className="text-white/60 text-xs uppercase tracking-widest font-semibold">
                     {product.name}
                   </span>
                 </div>
 
                 <div className="p-6 flex flex-col flex-1">
                   <div className="mb-4">
-                    <Badge variant={product.badge.variant} className="mb-3">{product.badge.label}</Badge>
                     <h2 className="text-h3 font-semibold text-gray-900 mb-2">{product.name}</h2>
                     <p className="text-small text-gray-600">{product.description}</p>
                   </div>
@@ -96,13 +85,9 @@ export default function ShopPage() {
                   </ul>
 
                   <div className="mt-auto">
-                    <div className="flex items-baseline gap-1.5 mb-4">
-                      <span className="text-h3 font-semibold text-gray-900">{product.startingAt}</span>
-                      <span className="text-small text-gray-500">/ {product.forQty}</span>
-                    </div>
                     <Link href={product.href}>
                       <Button size="md" className="w-full">
-                        Configure & Order
+                        Order Now
                       </Button>
                     </Link>
                   </div>
