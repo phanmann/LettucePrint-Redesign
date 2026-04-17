@@ -70,7 +70,7 @@ export default function Hero() {
 
         {/* Top row: headline left, photo right */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 pt-10 lg:pt-14 pb-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-8 lg:gap-16 pt-10 lg:pt-14 pb-8 items-center">
 
             {/* Left — Headline + desc */}
             <motion.div
@@ -81,7 +81,7 @@ export default function Hero() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-5">
                 Brooklyn&apos;s Creative Print Studio
               </p>
-              <h1 className="text-hero font-semibold text-gray-900 leading-[0.95] mb-6">
+              <h1 className="text-h1 font-semibold text-gray-900 leading-[1.0] mb-6">
                 Print that makes your brand impossible to ignore.
               </h1>
               <p className="text-body-lg text-gray-500 max-w-md mb-8 leading-relaxed">
