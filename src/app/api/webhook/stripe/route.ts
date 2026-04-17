@@ -32,7 +32,13 @@ export async function POST(req: NextRequest) {
 
   // Only handle checkout.session.completed
   if (event.type === 'checkout.session.completed') {
-    const session = event.data.object as Stripe.Checkout.Session
+    const session = event.data.object as Stripe.Checkout.Session & {
+      shipping_details?: {
+        name?: string
+        address?: { line1?: string; line2?: string; city?: string; state?: string; postal_code?: string; country?: string }
+      }
+      shipping_cost?: { amount_total?: number; shipping_rate?: { display_name?: string } }
+    }
 
     if (session.payment_status !== 'paid') {
       return NextResponse.json({ received: true })
@@ -61,6 +67,15 @@ export async function POST(req: NextRequest) {
         stripePaymentIntentId: session.payment_intent as string ?? null,
         customerEmail: session.customer_details?.email ?? null,
         customerName: session.customer_details?.name ?? null,
+        shippingName: session.shipping_details?.name ?? null,
+        shippingLine1: session.shipping_details?.address?.line1 ?? null,
+        shippingLine2: session.shipping_details?.address?.line2 ?? null,
+        shippingCity: session.shipping_details?.address?.city ?? null,
+        shippingState: session.shipping_details?.address?.state ?? null,
+        shippingZip: session.shipping_details?.address?.postal_code ?? null,
+        shippingCountry: session.shipping_details?.address?.country ?? null,
+        shippingRateName: session.shipping_cost?.shipping_rate?.display_name ?? null,
+        shippingAmountCents: session.shipping_cost?.amount_total ?? null,
         productName: meta.product ?? 'Unknown product',
         quantity: meta.quantity ? parseInt(meta.quantity, 10) : null,
         size: meta.size ?? null,

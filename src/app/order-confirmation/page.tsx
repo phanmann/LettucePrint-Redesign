@@ -27,31 +27,51 @@ interface OrderDetails {
   finish: string
   rush: string
   hasArtwork: boolean
+  shippingName: string | null
+  shippingAddress: string | null
+  shippingMethod: string | null
+  shippingCost: number | null
 }
 
 async function getOrderDetails(sessionId: string): Promise<OrderDetails | null> {
   try {
     const stripe = getStripe()
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
-      expand: ['line_items'],
+      expand: ['line_items', 'shipping_cost.shipping_rate'],
     })
+    const s = session as typeof session & {
+      shipping_details?: {
+        name?: string
+        address?: { line1?: string; line2?: string; city?: string; state?: string; postal_code?: string; country?: string }
+      }
+      shipping_cost?: { amount_total?: number; shipping_rate?: { display_name?: string } }
+    }
 
-    if (session.payment_status !== 'paid') return null
+    if (s.payment_status !== 'paid') return null
 
-    const lineItem = session.line_items?.data?.[0]
-    const meta = session.metadata ?? {}
+    const lineItem = s.line_items?.data?.[0]
+    const meta = s.metadata ?? {}
+
+    const addr = s.shipping_details?.address
+    const shippingAddress = addr
+      ? [addr.line1, addr.line2, addr.city, addr.state, addr.postal_code].filter(Boolean).join(', ')
+      : null
 
     return {
-      id: session.id,
-      customerEmail: session.customer_details?.email ?? null,
-      productName: lineItem?.description ?? lineItem?.price?.product?.toString() ?? 'Custom Print Order',
-      amount: session.amount_total ?? 0,
+      id: s.id,
+      customerEmail: s.customer_details?.email ?? null,
+      productName: lineItem?.description ?? 'Custom Print Order',
+      amount: s.amount_total ?? 0,
       quantity: meta.quantity ?? '—',
       size: meta.size ?? '—',
       material: meta.material ?? '—',
       finish: meta.finish ?? '—',
       rush: meta.rush ?? 'standard',
       hasArtwork: Boolean(meta.artworkUrl),
+      shippingName: s.shipping_details?.name ?? null,
+      shippingAddress,
+      shippingMethod: s.shipping_cost?.shipping_rate?.display_name ?? null,
+      shippingCost: s.shipping_cost?.amount_total ?? null,
     }
   } catch {
     return null
@@ -147,6 +167,9 @@ export default async function OrderConfirmationPage({ searchParams }: PageProps)
                   { label: 'Material',   value: MATERIAL_LABELS[order.material] ?? order.material },
                   { label: 'Finish',     value: FINISH_LABELS[order.finish] ?? order.finish },
                   { label: 'Production', value: RUSH_LABELS[order.rush] ?? order.rush },
+                  { label: 'Subtotal',    value: `$${((order.amount - (order.shippingCost ?? 0)) / 100).toFixed(2)}` },
+                  ...(order.shippingMethod ? [{ label: 'Shipping', value: `${order.shippingMethod} — $${((order.shippingCost ?? 0) / 100).toFixed(2)}` }] : []),
+                  ...(order.shippingAddress ? [{ label: 'Ship to', value: order.shippingName ? `${order.shippingName}, ${order.shippingAddress}` : order.shippingAddress }] : []),
                   { label: 'Total paid', value: `$${(order.amount / 100).toFixed(2)}`, highlight: true },
                 ].map(row => (
                   <div key={row.label} className="flex justify-between py-3">

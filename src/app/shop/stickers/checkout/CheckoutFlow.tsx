@@ -321,10 +321,18 @@ export default function CheckoutFlow({ config }: CheckoutFlowProps) {
           ))}
         </div>
 
-        <div className="border-t border-gray-100 pt-4 mb-6">
+        <div className="border-t border-gray-100 pt-4 mb-6 space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-small font-semibold text-gray-700">Total</span>
-            <span className="text-h3 font-semibold text-lp-green">{config.totalFormatted}</span>
+            <span className="text-xs text-gray-500">Subtotal</span>
+            <span className="text-xs font-semibold text-gray-900">{config.totalFormatted}</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-xs text-gray-500">Shipping</span>
+            <span className="text-xs font-medium text-gray-500 italic">Calculated at checkout</span>
+          </div>
+          <div className="flex justify-between items-center pt-2 border-t border-gray-100">
+            <span className="text-small font-semibold text-gray-900">Est. Total</span>
+            <span className="text-h3 font-semibold text-lp-green">{config.totalFormatted}+</span>
           </div>
         </div>
 

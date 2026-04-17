@@ -45,6 +45,16 @@ export async function POST(req: NextRequest) {
         },
       ],
       mode: 'payment',
+      shipping_address_collection: {
+        allowed_countries: ['US', 'CA'],
+      },
+      shipping_options: [
+        {
+          shipping_rate: process.env.NODE_ENV === 'production'
+            ? process.env.STRIPE_SHIPPING_RATE_LIVE!
+            : process.env.STRIPE_SHIPPING_RATE_TEST!,
+        },
+      ],
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/shop/stickers`,
       metadata: {

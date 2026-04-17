@@ -69,6 +69,62 @@ export const order = defineType({
       readOnly: true,
     }),
 
+    // ── Shipping ───────────────────────────────────────────────────
+    defineField({
+      name: 'shippingName',
+      title: 'Ship To (Name)',
+      type: 'string',
+      readOnly: true,
+    }),
+    defineField({
+      name: 'shippingLine1',
+      title: 'Address Line 1',
+      type: 'string',
+      readOnly: true,
+    }),
+    defineField({
+      name: 'shippingLine2',
+      title: 'Address Line 2',
+      type: 'string',
+      readOnly: true,
+    }),
+    defineField({
+      name: 'shippingCity',
+      title: 'City',
+      type: 'string',
+      readOnly: true,
+    }),
+    defineField({
+      name: 'shippingState',
+      title: 'State',
+      type: 'string',
+      readOnly: true,
+    }),
+    defineField({
+      name: 'shippingZip',
+      title: 'ZIP Code',
+      type: 'string',
+      readOnly: true,
+    }),
+    defineField({
+      name: 'shippingCountry',
+      title: 'Country',
+      type: 'string',
+      readOnly: true,
+    }),
+    defineField({
+      name: 'shippingRateName',
+      title: 'Shipping Method',
+      type: 'string',
+      readOnly: true,
+    }),
+    defineField({
+      name: 'shippingAmountCents',
+      title: 'Shipping Cost (cents)',
+      type: 'number',
+      readOnly: true,
+    }),
+
     // ── Artwork ────────────────────────────────────────────────────
     defineField({
       name: 'artworkUrl',

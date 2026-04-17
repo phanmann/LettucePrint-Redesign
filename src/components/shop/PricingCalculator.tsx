@@ -294,7 +294,7 @@ export default function PricingCalculator({ productName }: PricingCalculatorProp
       </Button>
 
       <p className="text-xs text-gray-400 text-center mt-3">
-        Upload your artwork · Approve proof · Then we print
+        + shipping calculated at checkout · Upload artwork · Approve proof
       </p>
     </div>
   )
