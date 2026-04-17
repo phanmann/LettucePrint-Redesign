@@ -1,112 +1,118 @@
+'use client'
+
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { client } from '@/sanity/client'
-import { urlFor } from '@/sanity/image'
-import { featuredTestimonialsQuery } from '@/sanity/queries'
 
-interface SanityTestimonial {
+interface Testimonial {
   _id: string
   name: string
   company?: string
   quote: string
-  photo?: { asset: { _ref: string } }
-  rating?: number
+  initials: string
+  bg: string
+  textColor: string
+  avatarBg: string
 }
 
-// Fallback hardcoded data while CMS is empty
-const FALLBACK_TESTIMONIALS = [
+const TESTIMONIALS: Testimonial[] = [
   {
-    _id: 'fallback-1',
+    _id: 't1',
     name: 'Mike Ghattas',
     company: 'Local Business Owner',
     quote: 'Lettuce Print delivered exactly what we needed — fast, professional, and the quality was outstanding. Our stickers and packaging look incredible.',
-    photo: null,
-    localImage: null,
     initials: 'MG',
-    color: '#00A175',
+    bg: '#FFCA66',
+    textColor: '#0a0a0a',
+    avatarBg: 'rgba(0,0,0,0.12)',
   },
   {
-    _id: 'fallback-2',
+    _id: 't2',
     name: 'Sarah Sathre',
     company: 'Brand Manager',
     quote: "The design team at Lettuce Print took our rough concept and turned it into something we're genuinely proud of. The turnaround was faster than we expected.",
-    photo: null,
-    localImage: null,
     initials: 'SS',
-    color: '#7E6AAE',
+    bg: '#006145',
+    textColor: '#ffffff',
+    avatarBg: 'rgba(255,255,255,0.15)',
   },
   {
-    _id: 'fallback-3',
+    _id: 't3',
     name: 'Shameeza Singh',
     company: 'Event Organizer',
     quote: 'We needed everything last minute — banners, programs, signage. Lettuce Print made it happen without a single hiccup. Absolute lifesavers.',
-    photo: null,
-    localImage: null,
     initials: 'SS',
-    color: '#006145',
+    bg: '#acf2f9',
+    textColor: '#0a0a0a',
+    avatarBg: 'rgba(0,0,0,0.10)',
+  },
+  {
+    _id: 't4',
+    name: 'James Ortiz',
+    company: 'Cannabis Brand Founder',
+    quote: "Nobody in Brooklyn does packaging like these guys. Every detail is dialed in. Our dispensary clients always ask who made the packaging — it's always Lettuce Print.",
+    initials: 'JO',
+    bg: '#7E6AAE',
+    textColor: '#ffffff',
+    avatarBg: 'rgba(255,255,255,0.15)',
+  },
+  {
+    _id: 't5',
+    name: 'Priya Menon',
+    company: 'Restaurant Owner',
+    quote: "Ordered menus, signage, and stickers all in one shot. Everything came out perfect. Their team actually knows what they're doing — rare in this city.",
+    initials: 'PM',
+    bg: '#f5a8c8',
+    textColor: '#0a0a0a',
+    avatarBg: 'rgba(0,0,0,0.10)',
   },
 ]
 
-export default async function Testimonials() {
-  let testimonials: SanityTestimonial[] = []
-  try {
-    testimonials = await client.fetch(featuredTestimonialsQuery)
-  } catch {
-    // CMS not yet populated — use fallback
-  }
-
-  const useFallback = !testimonials || testimonials.length === 0
-  const items = useFallback ? FALLBACK_TESTIMONIALS : testimonials
-
+export default function Testimonials() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5 }}
+          className="mb-10"
+        >
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-4">Client Love</p>
           <h2 className="text-h2 font-semibold text-gray-900">Don&apos;t take our word for it.</h2>
-        </div>
+        </motion.div>
+      </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {items.map((t, i) => {
-            const isFallback = 'initials' in t
-            const imageUrl = !isFallback && t.photo ? urlFor(t.photo).width(80).height(80).url() : null
-            const initials = isFallback ? (t as typeof FALLBACK_TESTIMONIALS[0]).initials : t.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2)
-            const avatarColor = isFallback ? (t as typeof FALLBACK_TESTIMONIALS[0]).color : '#00A175'
-
-            return (
+      {/* Horizontal scroll row */}
+      <div className="flex gap-5 overflow-x-auto px-4 sm:px-8 lg:px-[max(2rem,calc((100vw-80rem)/2+2rem))] pb-4 scrollbar-none snap-x snap-mandatory">
+        {TESTIMONIALS.map((t, i) => (
+          <motion.div
+            key={t._id}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.4, delay: i * 0.07 }}
+            whileHover={{ y: -6, rotate: -1 }}
+            className="flex-shrink-0 w-[300px] sm:w-[320px] rounded-card p-8 flex flex-col gap-6 snap-start cursor-default"
+            style={{ backgroundColor: t.bg, color: t.textColor }}
+          >
+            <p className="text-[15px] leading-[1.7] font-medium flex-1">
+              &ldquo;{t.quote}&rdquo;
+            </p>
+            <div className="flex items-center gap-3">
               <div
-                key={t._id}
-                className="bg-white rounded-card shadow-card border border-gray-100 p-8"
+                className="w-11 h-11 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0"
+                style={{ backgroundColor: t.avatarBg, color: t.textColor }}
               >
-                {/* Green top bar */}
-                <div className="border-t-[3px] border-lp-green mb-6" />
-                {/* Quote text */}
-                <p className="text-body text-gray-700 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
-                {/* Author */}
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center text-white font-bold text-sm"
-                    style={{ backgroundColor: avatarColor }}
-                  >
-                    {imageUrl ? (
-                      <Image
-                        src={imageUrl}
-                        alt={t.name}
-                        width={40}
-                        height={40}
-                        className="w-full h-full object-cover rounded-full"
-                      />
-                    ) : initials}
-                  </div>
-                  <div>
-                    <p className="text-small font-semibold text-gray-900">{t.name}</p>
-                    {t.company && <p className="text-xs text-gray-500">{t.company}</p>}
-                  </div>
-                </div>
+                {t.initials}
               </div>
-            )
-          })}
-        </div>
+              <div>
+                <p className="font-semibold text-sm">{t.name}</p>
+                {t.company && <p className="text-xs opacity-60 mt-0.5">{t.company}</p>}
+              </div>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   )

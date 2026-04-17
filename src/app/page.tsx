@@ -4,7 +4,7 @@ import Hero from '@/components/sections/Hero'
 import Marquee from '@/components/sections/Marquee'
 import TrustBar from '@/components/sections/TrustBar'
 import ServicesOverview from '@/components/sections/ServicesOverview'
-import PortfolioTeaser from '@/components/sections/PortfolioTeaser'
+import PortfolioStrip from '@/components/sections/PortfolioStrip'
 import Testimonials from '@/components/sections/Testimonials'
 import CTABanner from '@/components/sections/CTABanner'
 
@@ -27,7 +27,7 @@ export default function HomePage() {
         />
         <TrustBar />
         <ServicesOverview />
-        <PortfolioTeaser />
+        <PortfolioStrip />
         <Testimonials />
         <CTABanner />
       </main>

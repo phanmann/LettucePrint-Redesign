@@ -102,6 +102,20 @@
   letter-spacing: 0.01em;
 }
 
+@keyframes portfolio-strip {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@utility animate-portfolio-strip {
+  animation: portfolio-strip 36s linear infinite;
+}
+
+/* Custom cursor */
+@utility cursor-none-all {
+  cursor: none;
+}
+
 /* Base resets */
 *, *::before, *::after { box-sizing: border-box; }
 
