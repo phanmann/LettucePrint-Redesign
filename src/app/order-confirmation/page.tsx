@@ -58,10 +58,17 @@ async function getOrderDetails(sessionId: string): Promise<OrderDetails | null> 
   }
 }
 
+const SIZE_LABELS: Record<string, string> = {
+  '1x1': '1” × 1”', '2x2': '2” × 2”', '3x3': '3” × 3”', '4x4': '4” × 4”', '5x5': '5” × 5”',
+}
+const MATERIAL_LABELS: Record<string, string> = {
+  standard: 'Standard Vinyl', holographic: 'Holographic',
+}
+const FINISH_LABELS: Record<string, string> = {
+  matte: 'Matte', gloss: 'Gloss', laminate: 'Laminate',
+}
 const RUSH_LABELS: Record<string, string> = {
-  standard: '3–5 business days',
-  '48hr': '48-hour rush',
-  '24hr': '24-hour rush',
+  standard: '3–5 business days', '48hr': '48-hour rush', '24hr': '24-hour rush',
 }
 
 const STEPS = [
@@ -107,9 +114,9 @@ export default async function OrderConfirmationPage({ searchParams }: PageProps)
                   { label: 'Order ID',   value: order.id.slice(-12).toUpperCase() },
                   { label: 'Product',    value: order.productName },
                   { label: 'Quantity',   value: Number(order.quantity).toLocaleString() },
-                  { label: 'Size',       value: order.size },
-                  { label: 'Material',   value: order.material },
-                  { label: 'Finish',     value: order.finish },
+                  { label: 'Size',       value: SIZE_LABELS[order.size] ?? order.size },
+                  { label: 'Material',   value: MATERIAL_LABELS[order.material] ?? order.material },
+                  { label: 'Finish',     value: FINISH_LABELS[order.finish] ?? order.finish },
                   { label: 'Production', value: RUSH_LABELS[order.rush] ?? order.rush },
                   { label: 'Total paid', value: `$${(order.amount / 100).toFixed(2)}`, highlight: true },
                 ].map(row => (
@@ -122,14 +129,39 @@ export default async function OrderConfirmationPage({ searchParams }: PageProps)
                 ))}
               </div>
 
-              {/* Artwork status badge */}
-              <div className={`mt-6 pt-6 border-t border-gray-100 flex items-center gap-3 text-sm ${order.hasArtwork ? 'text-green-700' : 'text-amber-700'}`}>
-                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${order.hasArtwork ? 'bg-green-500' : 'bg-amber-400'}`} />
-                {order.hasArtwork
-                  ? 'Artwork received — proof coming soon'
-                  : 'Artwork not yet received — please email your file to steve@lettuceprint.com'
-                }
-              </div>
+              {/* Artwork status */}
+              {order.hasArtwork ? (
+                <div className="mt-6 pt-6 border-t border-gray-100">
+                  <div className="bg-lp-green/5 border border-lp-green/30 rounded-xl p-5 flex gap-4 items-start">
+                    <div className="w-10 h-10 rounded-full bg-lp-green flex items-center justify-center flex-shrink-0">
+                      <CheckCircle size={20} className="text-white" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 mb-1">Artwork received — you're all set!</p>
+                      <p className="text-sm text-gray-600 mb-3">We'll review your file and email you a digital proof within 1 business day. Nothing goes to print until you approve it.</p>
+                      <div className="flex items-center gap-2 text-xs font-medium text-lp-green">
+                        <span className="w-1.5 h-1.5 rounded-full bg-lp-green animate-pulse" />
+                        Next: proof sent to {order.customerEmail ?? 'your email'}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="mt-6 pt-6 border-t border-gray-100">
+                  <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 flex gap-4 items-start">
+                    <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                      <Mail size={20} className="text-amber-600" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 mb-1">Artwork still needed</p>
+                      <p className="text-sm text-gray-600">Email your file to{' '}
+                        <a href="mailto:steve@lettuceprint.com" className="text-lp-green font-semibold hover:underline">steve@lettuceprint.com</a>
+                        {' '}with your order ID and we'll get started.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
