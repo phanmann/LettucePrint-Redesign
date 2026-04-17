@@ -5,6 +5,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Button from '@/components/ui/Button'
 import { getStripe } from '@/lib/stripe'
+import ArtworkUploader from './ArtworkUploader'
 
 export const metadata: Metadata = {
   title: 'Order Confirmed',
@@ -63,10 +64,10 @@ const RUSH_LABELS: Record<string, string> = {
 }
 
 const STEPS = [
-  { icon: Mail,     title: 'Check your email',        desc: 'A receipt has been sent to your email address.' },
-  { icon: FileText, title: 'Upload your artwork',      desc: 'You\'ll receive a separate email with artwork upload instructions within 1 hour.' },
-  { icon: CheckCircle, title: 'Proof & approval',     desc: 'We\'ll send a digital proof before anything goes to print.' },
-  { icon: Clock,    title: 'Production & shipping',   desc: 'Once approved, we\'ll print and ship your order.' },
+  { icon: Mail,        title: 'Check your email',       desc: 'A receipt has been sent to your email address.' },
+  { icon: FileText,    title: 'Upload your artwork',    desc: 'Use the uploader below — or email your file to steve@lettuceprint.com.' },
+  { icon: CheckCircle, title: 'Approve your proof',    desc: "We'll send a digital proof for your approval before anything goes to print." },
+  { icon: Clock,       title: 'Production & shipping', desc: 'Once you approve the final proof, we print and ship.' },
 ]
 
 export default async function OrderConfirmationPage({ searchParams }: PageProps) {
@@ -97,6 +98,11 @@ export default async function OrderConfirmationPage({ searchParams }: PageProps)
         </div>
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+          {/* Artwork upload — shown when order is loaded */}
+          {order && (
+            <ArtworkUploader stripeSessionId={order.id} />
+          )}
 
           {/* Order summary */}
           {order && (
