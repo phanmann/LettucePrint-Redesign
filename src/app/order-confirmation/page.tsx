@@ -93,8 +93,37 @@ export default async function OrderConfirmationPage({ searchParams }: PageProps)
             <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle size={40} className="text-white" />
             </div>
-            <h1 className="text-h1 font-semibold text-white mb-4">Order confirmed!</h1>
-            <p className="text-body-lg text-white/80">
+
+            {/* Artwork status — hero */}
+            {order?.hasArtwork ? (
+              <div className="bg-white/15 backdrop-blur rounded-2xl px-6 py-5 mb-5 text-left flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle size={20} className="text-white" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white text-base mb-1">Artwork received — you're all set!</p>
+                  <p className="text-sm text-white/80 mb-2">We'll review your file and email you a digital proof within 1 business day. Nothing goes to print until you approve it.</p>
+                  <div className="flex items-center gap-2 text-xs font-medium text-white/70">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/70 animate-pulse" />
+                    Next: proof sent to {order.customerEmail ?? 'your email'}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white/15 backdrop-blur rounded-2xl px-6 py-5 mb-5 text-left flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-full bg-amber-400/30 flex items-center justify-center flex-shrink-0">
+                  <Mail size={20} className="text-white" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white text-base mb-1">Artwork still needed</p>
+                  <p className="text-sm text-white/80">
+                    Email your file to <a href="mailto:steve@lettuceprint.com" className="underline text-white font-semibold">steve@lettuceprint.com</a> with your order ID.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            <p className="text-sm text-white/70">
               {order?.customerEmail
                 ? <>A receipt has been sent to <strong className="text-white">{order.customerEmail}</strong></>
                 : "Thank you for your order. We've got it and will be in touch shortly."
@@ -129,39 +158,7 @@ export default async function OrderConfirmationPage({ searchParams }: PageProps)
                 ))}
               </div>
 
-              {/* Artwork status */}
-              {order.hasArtwork ? (
-                <div className="mt-6 pt-6 border-t border-gray-100">
-                  <div className="bg-lp-green/5 border border-lp-green/30 rounded-xl p-5 flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-full bg-lp-green flex items-center justify-center flex-shrink-0">
-                      <CheckCircle size={20} className="text-white" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-900 mb-1">Artwork received — you're all set!</p>
-                      <p className="text-sm text-gray-600 mb-3">We'll review your file and email you a digital proof within 1 business day. Nothing goes to print until you approve it.</p>
-                      <div className="flex items-center gap-2 text-xs font-medium text-lp-green">
-                        <span className="w-1.5 h-1.5 rounded-full bg-lp-green animate-pulse" />
-                        Next: proof sent to {order.customerEmail ?? 'your email'}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="mt-6 pt-6 border-t border-gray-100">
-                  <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
-                      <Mail size={20} className="text-amber-600" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-900 mb-1">Artwork still needed</p>
-                      <p className="text-sm text-gray-600">Email your file to{' '}
-                        <a href="mailto:steve@lettuceprint.com" className="text-lp-green font-semibold hover:underline">steve@lettuceprint.com</a>
-                        {' '}with your order ID and we'll get started.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
+
             </div>
           )}
 
