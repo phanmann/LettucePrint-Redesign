@@ -40,22 +40,9 @@ export default function ShopPage() {
       <Navbar />
       <main className="pt-[72px]">
 
-        {/* Header */}
-        <div className="bg-lp-green py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70 mb-4">Shop</p>
-            <h1 className="text-h1 font-semibold text-white mb-4">
-              Order online. Pick up or ship.
-            </h1>
-            <p className="text-body-lg text-white/80 max-w-xl">
-              Transparent pricing, instant quotes, and real turnaround times.
-              No back-and-forth for standard products.
-            </p>
-          </div>
-        </div>
-
         {/* Products */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-8">Shop</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {products.map((product) => (
               <div
