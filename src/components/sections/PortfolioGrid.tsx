@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
@@ -36,42 +35,20 @@ const FALLBACK_PROJECTS: Project[] = [
   { _id: 'f8', title: 'Apparel Brand Launch',        client: 'Streetwear Brand',   service: 'Screen Printing',     slug: { current: 'apparel-brand-launch' },         coverImage: null },
 ]
 
-const FILTERS = ['All', 'Stickers & Labels', 'Packaging', 'Screen Printing', 'Signage & Displays', 'Large Format', 'Graphic Design']
-
 interface PortfolioGridProps {
   projects?: Project[]
 }
 
 export default function PortfolioGrid({ projects }: PortfolioGridProps) {
-  const [active, setActive] = useState('All')
   const items = (!projects || projects.length === 0) ? FALLBACK_PROJECTS : projects
-
-  const filtered = active === 'All' ? items : items.filter(p => p.service === active)
 
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Filter pills */}
-        <div className="flex flex-wrap gap-2 mb-12">
-          {FILTERS.map(f => (
-            <button
-              key={f}
-              onClick={() => setActive(f)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
-                active === f
-                  ? 'bg-lp-green text-white'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
-
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((project, i) => {
+          {items.map((project, i) => {
             const bgColor = FALLBACK_COLORS[project.service] ?? '#00A175'
             const imageUrl = project.coverImage ? urlFor(project.coverImage).width(600).height(450).url() : null
             return (
@@ -113,9 +90,9 @@ export default function PortfolioGrid({ projects }: PortfolioGridProps) {
           })}
         </div>
 
-        {filtered.length === 0 && (
+        {items.length === 0 && (
           <div className="text-center py-24 text-gray-400">
-            <p className="text-body-lg">No projects in this category yet.</p>
+            <p className="text-body-lg">No projects yet.</p>
           </div>
         )}
       </div>
