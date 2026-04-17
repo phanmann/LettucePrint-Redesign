@@ -133,12 +133,12 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10"
         >
-          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none">
+          <div className="flex gap-3">
             {heroCards.map((card, i) => (
               <div
                 key={card.label}
-                className="flex-shrink-0 rounded-card flex items-end justify-start p-4 relative overflow-hidden transition-transform duration-300 hover:-translate-y-1"
-                style={{ backgroundColor: card.bg, width: '180px', height: '140px' }}
+                className="flex-1 min-w-0 rounded-card flex items-end justify-start p-4 relative overflow-hidden transition-transform duration-300 hover:-translate-y-1"
+                style={{ backgroundColor: card.bg, height: '140px' }}
               >
                 <div className="absolute inset-0 flex items-center justify-center text-[56px] opacity-20 select-none">
                   {card.emoji}
