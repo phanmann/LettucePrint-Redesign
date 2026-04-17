@@ -151,13 +151,13 @@ export default async function OrderConfirmationPage({ searchParams }: PageProps)
               <p className="text-small font-semibold text-gray-900 mb-1">Questions about your order?</p>
               <p className="text-small text-gray-500">
                 Email us at{' '}
-                <a href="mailto:hello@lettuceprint.com" className="text-lp-green font-semibold hover:underline">
-                  hello@lettuceprint.com
+                <a href="mailto:info@lettuceprint.com" className="text-lp-green font-semibold hover:underline">
+                  info@lettuceprint.com
                 </a>{' '}
                 with your order ID.
               </p>
             </div>
-            <a href="mailto:hello@lettuceprint.com" className="flex-shrink-0">
+            <a href="mailto:info@lettuceprint.com" className="flex-shrink-0">
               <Button variant="secondary" size="md">Contact us</Button>
             </a>
           </div>
