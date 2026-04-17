@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -14,23 +15,20 @@ const products = [
   {
     name: 'Custom Die-Cut Stickers',
     href: '/shop/stickers',
-    description: 'Premium vinyl stickers cut precisely to your shape. Standard and holographic finishes available.',
+    image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80',
     features: ['Die-cut to shape', 'Waterproof & UV resistant', '3–5 day turnaround', 'Standard & holographic vinyl'],
-    color: 'bg-lp-green',
   },
   {
     name: 'Spot UV Stickers',
     href: '/shop/spot-uv',
-    description: 'Gloss UV coating over a matte base for a luxury tactile finish. The sticker that gets noticed.',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
     features: ['Gloss-on-matte effect', 'Premium tactile finish', 'Die-cut to shape', '3–5 day turnaround'],
-    color: 'bg-lp-black',
   },
   {
     name: 'Roll Labels',
     href: '/shop/roll-labels',
-    description: 'High-volume kiss-cut labels on a roll. Ideal for product packaging, retail, food & beverage.',
+    image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&q=80',
     features: ['Kiss-cut on roll', 'High-volume ready', 'Food-safe options', 'Custom sizes'],
-    color: 'bg-lp-green-dark',
   },
 ]
 
@@ -49,17 +47,20 @@ export default function ShopPage() {
                 key={product.href}
                 className="bg-white rounded-card shadow-card border border-gray-100 overflow-hidden flex flex-col"
               >
-                {/* Color block */}
-                <div className={`${product.color} h-32 flex items-center justify-center`}>
-                  <span className="text-white/60 text-xs uppercase tracking-widest font-semibold">
-                    {product.name}
-                  </span>
+                {/* Product image */}
+                <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
                 </div>
 
                 <div className="p-6 flex flex-col flex-1">
                   <div className="mb-4">
                     <h2 className="text-h3 font-semibold text-gray-900 mb-2">{product.name}</h2>
-                    <p className="text-small text-gray-600">{product.description}</p>
                   </div>
 
                   <ul className="space-y-2 mb-6">
