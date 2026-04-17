@@ -31,9 +31,7 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-lp-black text-white pt-20 pb-10">
-      {/* Green top accent */}
-      <div className="h-[3px] bg-lp-green w-full absolute top-0 left-0" style={{ position: 'relative' }} />
+    <footer className="bg-lp-black text-white border-t-[3px] border-lp-green pt-20 pb-10">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top row */}
