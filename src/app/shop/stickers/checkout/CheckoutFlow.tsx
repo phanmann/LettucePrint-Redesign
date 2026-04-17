@@ -240,18 +240,21 @@ export default function CheckoutFlow({ config }: CheckoutFlowProps) {
                   />
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-center py-14 text-gray-400">
-                  <FileText size={40} className="mb-3" />
-                  <p className="text-sm font-medium text-gray-600">{uploadedFile.name}</p>
-                  <p className="text-xs text-gray-400 mt-1">Preview not available for this file type</p>
+                <div className="flex flex-col items-center justify-center py-12 px-8 text-center">
+                  <div className="w-16 h-16 rounded-full bg-lp-green/10 flex items-center justify-center mb-4">
+                    <FileText size={28} className="text-lp-green" />
+                  </div>
+                  <p className="text-sm font-semibold text-gray-900 mb-1">{uploadedFile.name}</p>
+                  <p className="text-xs text-gray-500 mb-4">Browser previews aren't available for {uploadedFile.name.split('.').pop()?.toUpperCase()} files — but your file uploaded successfully.</p>
                   <a
                     href={uploadedFile.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 text-xs text-lp-green hover:underline"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-white border border-gray-200 rounded-lg text-xs font-semibold text-lp-green hover:border-lp-green transition-colors"
                   >
-                    Open file to verify →
+                    Open in new tab to verify →
                   </a>
+                  <p className="text-xs text-gray-400 mt-4">If this is the wrong file, use "Upload different file" below.</p>
                 </div>
               )}
             </div>
