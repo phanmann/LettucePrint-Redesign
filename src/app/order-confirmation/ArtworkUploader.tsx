@@ -57,7 +57,7 @@ export default function ArtworkUploader({ stripeSessionId, onConfirmed }: Artwor
     setUploadState('confirming')
 
     try {
-      const res = await fetch('/api/artwork', {
+      await fetch('/api/artwork', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -66,14 +66,13 @@ export default function ArtworkUploader({ stripeSessionId, onConfirmed }: Artwor
           fileName: uploadedFile.name,
         }),
       })
-
-      if (!res.ok) throw new Error('Notification failed')
-
+    } catch (err) {
+      // Log but don't block — file is safely stored in Uploadthing
+      console.error('Artwork notification failed:', err)
+    } finally {
+      // Always confirm to the customer regardless of backend status
       setUploadState('confirmed')
-      onConfirmed() // reveal order summary below
-    } catch {
-      setUploadState('error')
-      setErrorMsg("We received your file but couldn't confirm it. Please email us if you don't hear from us within an hour.")
+      onConfirmed()
     }
   }
 

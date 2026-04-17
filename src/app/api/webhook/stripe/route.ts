@@ -38,8 +38,17 @@ export async function POST(req: NextRequest) {
     const meta = session.metadata ?? {}
 
     try {
-      await writeClient.create({
+      // Use createOrReplace with deterministic ID so artwork-first orders get merged
+      const existingOrder = await writeClient.fetch(
+        `*[_type == "order" && stripeSessionId == $id][0]{ _id, artworkUrl, artworkFilename, artworkUploadedAt }`,
+        { id: session.id } as Record<string, string>
+      )
+
+      const docId = existingOrder?._id ?? `order-${session.id}`
+
+      await writeClient.createOrReplace({
         _type: 'order',
+        _id: docId,
         stripeSessionId: session.id,
         stripePaymentIntentId: session.payment_intent as string ?? null,
         customerEmail: session.customer_details?.email ?? null,
@@ -51,12 +60,18 @@ export async function POST(req: NextRequest) {
         finish: meta.finish ?? null,
         rush: meta.rush ?? null,
         amountPaidCents: session.amount_total ?? 0,
-        orderStatus: 'paid',
+        orderStatus: existingOrder?.artworkUrl ? 'artwork_received' : 'paid',
         proofStatus: 'pending',
         paidAt: new Date().toISOString(),
+        // Preserve artwork if already uploaded before webhook fired
+        ...(existingOrder?.artworkUrl && {
+          artworkUrl: existingOrder.artworkUrl,
+          artworkFilename: existingOrder.artworkFilename,
+          artworkUploadedAt: existingOrder.artworkUploadedAt,
+        }),
       })
 
-      console.log(`✅ Order created in Sanity for session ${session.id}`)
+      console.log(`✅ Order upserted in Sanity for session ${session.id}`)
     } catch (err) {
       console.error('Failed to create Sanity order:', err)
       // Return 500 so Stripe retries

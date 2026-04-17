@@ -15,23 +15,35 @@ export async function POST(req: NextRequest) {
     // Find the Sanity order by Stripe session ID
     const order = await client.fetch(
       `*[_type == "order" && stripeSessionId == $id][0]`,
-      { id: stripeSessionId }
+      { id: stripeSessionId } as Record<string, string>
     )
 
-    if (!order) {
-      return NextResponse.json({ error: 'Order not found' }, { status: 404 })
-    }
-
-    // Update the order with artwork details
-    await writeClient
-      .patch(order._id)
-      .set({
+    if (order) {
+      // Order exists — patch it
+      await writeClient
+        .patch(order._id)
+        .set({
+          artworkUrl: fileUrl,
+          artworkFilename: fileName,
+          artworkUploadedAt: new Date().toISOString(),
+          orderStatus: 'artwork_received',
+        })
+        .commit()
+    } else {
+      // Webhook hasn't fired yet — create the order record now
+      // We only have session ID at this point; webhook will fill in the rest if/when it fires
+      await writeClient.createOrReplace({
+        _type: 'order',
+        _id: `order-${stripeSessionId}`,
+        stripeSessionId,
         artworkUrl: fileUrl,
         artworkFilename: fileName,
         artworkUploadedAt: new Date().toISOString(),
         orderStatus: 'artwork_received',
+        proofStatus: 'pending',
+        paidAt: new Date().toISOString(),
       })
-      .commit()
+    }
 
     // Email Steve
     await resend.emails.send({
