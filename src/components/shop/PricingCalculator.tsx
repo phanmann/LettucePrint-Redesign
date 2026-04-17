@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Zap, Clock, Package, ChevronDown } from 'lucide-react'
 import Button from '@/components/ui/Button'
@@ -36,7 +37,7 @@ export default function PricingCalculator({ productName }: PricingCalculatorProp
   const [finish, setFinish] = useState<StickerFinish>('matte')
   const [rush, setRush] = useState<RushOption>('standard')
   const [showBreaks, setShowBreaks] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
   const price = useMemo(
     () => calculatePrice(size, quantity, material, finish, rush),
@@ -48,20 +49,16 @@ export default function PricingCalculator({ productName }: PricingCalculatorProp
     [size, material, finish]
   )
 
-  const handleAddToCart = async () => {
-    setLoading(true)
-    try {
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ size, quantity, material, finish, rush, productName }),
-      })
-      const data = await res.json()
-      if (data.url) window.location.href = data.url
-    } catch (e) {
-      console.error(e)
-      setLoading(false)
-    }
+  const handleAddToCart = () => {
+    const params = new URLSearchParams({
+      size,
+      qty: String(quantity),
+      material,
+      finish,
+      rush,
+      product: productName,
+    })
+    router.push(`/shop/stickers/checkout?${params.toString()}`)
   }
 
   return (
@@ -290,15 +287,14 @@ export default function PricingCalculator({ productName }: PricingCalculatorProp
       {/* CTA */}
       <Button
         onClick={handleAddToCart}
-        disabled={loading}
         size="lg"
         className="w-full"
       >
-        {loading ? 'Redirecting...' : `Order ${quantity.toLocaleString()} Stickers — ${price.totalFormatted}`}
+        {`Order ${quantity.toLocaleString()} Stickers — ${price.totalFormatted}`}
       </Button>
 
       <p className="text-xs text-gray-400 text-center mt-3">
-        Artwork upload after checkout · Proof before production
+        Upload your artwork · Approve proof · Then we print
       </p>
     </div>
   )

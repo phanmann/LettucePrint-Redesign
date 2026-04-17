@@ -6,7 +6,7 @@ import type { StickerSize, StickerMaterial, StickerFinish, RushOption } from '@/
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { size, quantity, material, finish, rush, productName, overridePriceCents } = body as {
+    const { size, quantity, material, finish, rush, productName, overridePriceCents, artworkUrl, artworkFilename } = body as {
       size: StickerSize
       quantity: number
       material: StickerMaterial
@@ -14,6 +14,8 @@ export async function POST(req: NextRequest) {
       rush: RushOption
       productName: string
       overridePriceCents?: number
+      artworkUrl?: string
+      artworkFilename?: string
     }
 
     const price = overridePriceCents
@@ -52,6 +54,8 @@ export async function POST(req: NextRequest) {
         material,
         finish,
         rush,
+        ...(artworkUrl && { artworkUrl }),
+        ...(artworkFilename && { artworkFilename }),
       },
     })
 
