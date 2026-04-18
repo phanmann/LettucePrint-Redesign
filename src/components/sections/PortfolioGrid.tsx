@@ -61,7 +61,7 @@ export default function PortfolioGrid({ projects }: PortfolioGridProps) {
   const [focused, setFocused] = useState<Project | null>(null)
 
   return (
-    <section className="py-12 pb-24 bg-white">
+    <section className="py-12 pb-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/*
@@ -69,7 +69,7 @@ export default function PortfolioGrid({ projects }: PortfolioGridProps) {
           no fixed row heights, gaps are physically impossible.
           break-inside-avoid keeps each card whole.
         */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-3">
+        <div className={`columns-1 sm:columns-2 ${items.length >= 9 ? 'lg:columns-3' : ''} gap-3`}>
           {items.map((project, i) => {
             const bgColor = FALLBACK_COLORS[project.service] ?? '#00A175'
             const aspectClass = ASPECT_RATIOS[i % ASPECT_RATIOS.length]
