@@ -29,7 +29,7 @@ interface SpotUVCalculatorProps {
 export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps) {
   const [size, setSize] = useState<StickerSize>('2x2')
   const [quantity, setQuantity] = useState<number>(100)
-  const [layers, setLayers] = useState<EmbossingLayers>(1)
+  const [layers, setLayers] = useState<EmbossingLayers>(0)
   const [rush, setRush] = useState<RushOption>('standard')
   const [showBreaks, setShowBreaks] = useState(false)
   const router = useRouter()
@@ -125,7 +125,7 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
           ))}
         </div>
         <p className="text-xs text-gray-400 mt-2">
-          Layer 1 = $0.041/sq in · Each additional = +$0.0135/sq in
+          1 layer included standard · Each extra = +$0.0135/sq in
         </p>
       </div>
 

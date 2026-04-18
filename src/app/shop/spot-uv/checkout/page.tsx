@@ -30,8 +30,8 @@ export default async function SpotUVCheckoutPage({ searchParams }: PageProps) {
 
   const size = VALID_SIZES.includes(params.size as StickerSize) ? params.size as StickerSize : null
   const qty = params.qty ? parseInt(params.qty, 10) : null
-  const layersRaw = params.layers ? parseInt(params.layers, 10) : 1
-  const layers = ([1,2,3,4,5].includes(layersRaw) ? layersRaw : 1) as EmbossingLayers
+  const layersRaw = params.layers ? parseInt(params.layers, 10) : 0
+  const layers = ([0,1,2,3,4].includes(layersRaw) ? layersRaw : 0) as EmbossingLayers
   const rush = VALID_RUSH.includes(params.rush as RushOption) ? params.rush as RushOption : 'standard' as RushOption
   const product = params.product ?? 'Spot UV Stickers'
 
@@ -45,7 +45,7 @@ export default async function SpotUVCheckoutPage({ searchParams }: PageProps) {
     size,
     qty,
     material: 'spot-uv',
-    finish: `${layers} embossing layer${layers > 1 ? 's' : ''}`,
+    finish: layers === 0 ? 'Standard (1 layer)' : `+${layers} extra layer${layers > 1 ? 's' : ''}`,
     rush,
     product,
     totalFormatted: price.totalFormatted,

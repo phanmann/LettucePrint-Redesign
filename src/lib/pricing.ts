@@ -173,33 +173,32 @@ export const FINISH_LABELS: Record<StickerFinish, string> = {
 }
 
 // ── Spot UV Embossing Layers ───────────────────────────────────────────────────
-// Formula: $0.041/sq in for layer 1, +$0.0135/sq in per additional layer
-// All rates in cents per sq inch
-export type EmbossingLayers = 1 | 2 | 3 | 4 | 5
+// Base spot-UV price already includes standard print + 1 embossing layer ($0.041/sq in baked in)
+// This selector adds EXTRA layers on top of the included 1: 0 = standard, 1–4 = extras
+// Each extra layer = +$0.0135/sq in × quantity
+export type EmbossingLayers = 0 | 1 | 2 | 3 | 4
 
-const EMBOSSING_BASE_RATE_CENTS = 4.1   // $0.041 in cents
-const EMBOSSING_EXTRA_RATE_CENTS = 1.35  // $0.0135 in cents
+const EMBOSSING_EXTRA_RATE_CENTS = 1.35  // $0.0135 per sq in per extra layer
 
-export const EMBOSSING_LAYER_OPTIONS: EmbossingLayers[] = [1, 2, 3, 4, 5]
+export const EMBOSSING_LAYER_OPTIONS: EmbossingLayers[] = [0, 1, 2, 3, 4]
 
 export const EMBOSSING_LAYER_LABELS: Record<EmbossingLayers, string> = {
-  1: '1 Layer',
-  2: '2 Layers',
-  3: '3 Layers',
-  4: '4 Layers',
-  5: '5 Layers',
+  0: 'Standard',
+  1: '+1 Layer',
+  2: '+2 Layers',
+  3: '+3 Layers',
+  4: '+4 Layers',
 }
 
 export function calculateEmbossingAddon(
   size: StickerSize,
   quantity: number,
-  layers: EmbossingLayers
+  extraLayers: EmbossingLayers
 ): number {
+  if (extraLayers === 0) return 0
   const sqIn = SIZE_SQ_IN[size]
   const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
-  // Layer 1 rate + (additional layers × extra rate)
-  const ratePerSqIn = EMBOSSING_BASE_RATE_CENTS + (layers - 1) * EMBOSSING_EXTRA_RATE_CENTS
-  return Math.round(ratePerSqIn * sqIn * tier)
+  return Math.round(EMBOSSING_EXTRA_RATE_CENTS * sqIn * tier * extraLayers)
 }
 
 export function calculateSpotUVPrice(
