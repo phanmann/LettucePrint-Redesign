@@ -235,7 +235,11 @@ export default function CheckoutFlow({ config }: { config: CheckoutFlowConfig })
                 <img src={uploadedFile.url} alt="Artwork preview" className="w-full max-h-[420px] object-contain p-6" />
               ) : uploadedFile.isPdf ? (
                 <div className="p-4">
-                  <iframe src={`${uploadedFile.url}#toolbar=0&navpanes=0`} className="w-full h-[380px] rounded border border-gray-200" title="Artwork PDF" />
+                  <iframe
+                    src={`https://docs.google.com/viewer?url=${encodeURIComponent(uploadedFile.url)}&embedded=true`}
+                    className="w-full h-[380px] rounded border-0"
+                    title="Artwork PDF preview"
+                  />
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center py-12 px-8 text-center">

@@ -427,7 +427,11 @@ export default function RollLabelCheckoutFlow({ config }: { config: Config }) {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={fileUrl} alt="Artwork preview" className="w-full max-h-80 object-contain p-4" />
                 ) : isPDF ? (
-                  <iframe src={fileUrl} className="w-full h-80" title="PDF preview" />
+                  <iframe
+                    src={`https://docs.google.com/viewer?url=${encodeURIComponent(fileUrl!)}&embedded=true`}
+                    className="w-full h-80 border-0"
+                    title="Artwork PDF preview"
+                  />
                 ) : (
                   <div className="h-40 flex items-center justify-center text-gray-400">
                     <div className="text-center">
