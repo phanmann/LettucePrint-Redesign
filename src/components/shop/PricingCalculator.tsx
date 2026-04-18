@@ -189,16 +189,19 @@ export default function PricingCalculator({ productName }: Props) {
       {/* ── Finish ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Select a finish</p>
-        <div className="space-y-2">
+        <div className="flex flex-wrap gap-2">
           {FINISHES.map(f => (
-            <label key={f} className={radioRow(finish === f)} onClick={() => setFinish(f)}>
-              <div className="flex items-center gap-3">
-                <div className={radioCircle(finish === f)} />
-                <span className={`text-sm font-medium ${finish === f ? 'text-gray-900' : 'text-gray-700'}`}>
-                  {FINISH_LABELS[f]}
-                </span>
-              </div>
-            </label>
+            <button
+              key={f}
+              onClick={() => setFinish(f)}
+              className={`px-4 py-2.5 rounded-full text-sm font-semibold border transition-all duration-150 ${
+                finish === f
+                  ? 'bg-lp-green text-white border-lp-green'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-gray-400'
+              }`}
+            >
+              {FINISH_LABELS[f]}
+            </button>
           ))}
         </div>
       </div>

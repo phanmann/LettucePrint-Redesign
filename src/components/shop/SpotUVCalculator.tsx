@@ -166,26 +166,20 @@ export default function SpotUVCalculator({ productName }: Props) {
       {/* ── Embossing Layers ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Additional embossing layers</p>
-        <p className="text-xs text-gray-500 mb-3">1 UV layer included standard. More layers = deeper raised texture.</p>
-        <div className="space-y-2">
+        <p className="text-xs text-gray-500 mb-3">1 UV layer included. More layers = deeper raised texture.</p>
+        <div className="flex flex-wrap gap-2">
           {EMBOSSING_LAYER_OPTIONS.map(l => (
-            <label key={l} className={radioRow(layers === l)} onClick={() => setLayers(l)}>
-              <div className="flex items-center gap-3">
-                <div className={radioCircle(layers === l)} />
-                <div>
-                  <p className={`text-sm font-medium leading-tight ${layers === l ? 'text-gray-900' : 'text-gray-700'}`}>
-                    {EMBOSSING_LAYER_LABELS[l]}
-                    {l === 0 && (
-                      <span className="ml-2 text-xs font-semibold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded-full">Included</span>
-                    )}
-                  </p>
-                  <p className="text-xs text-gray-400 mt-0.5">{layerDescriptions[l]}</p>
-                </div>
-              </div>
-              {l > 0 && (
-                <span className="text-xs text-gray-500 font-medium">+cost</span>
-              )}
-            </label>
+            <button
+              key={l}
+              onClick={() => setLayers(l)}
+              className={`px-4 py-2.5 rounded-full text-sm font-semibold border transition-all duration-150 ${
+                layers === l
+                  ? 'bg-lp-green text-white border-lp-green'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-gray-400'
+              }`}
+            >
+              {EMBOSSING_LAYER_LABELS[l]}
+            </button>
           ))}
         </div>
       </div>

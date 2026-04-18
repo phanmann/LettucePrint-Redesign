@@ -166,7 +166,7 @@ export const MATERIAL_DESCRIPTIONS: Record<StickerMaterial, string> = {
 export const FINISH_LABELS: Record<StickerFinish, string> = {
   'matte':    'Matte',
   'gloss':    'Gloss',
-  'laminate': 'Laminate (+$0.40/sq in)',
+  'laminate': 'Laminate (Additional)',
 }
 
 // ── Spot UV Embossing Layers ───────────────────────────────────────────────────
