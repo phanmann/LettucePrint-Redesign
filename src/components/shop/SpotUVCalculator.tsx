@@ -168,12 +168,12 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
         className="bg-lp-green rounded-card p-6 mb-4"
       >
         <div className="mb-1">
-          <p className="text-xs font-semibold uppercase tracking-wider text-white/70 mb-1">Total Price</p>
-          <p className="text-display font-semibold text-white leading-none">{price.totalFormatted}</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-white/70 mb-1">Per Unit</p>
+          <p className="text-display font-semibold text-white leading-none">{price.unitFormatted}</p>
         </div>
         <div className="mt-3 pt-3 border-t border-white/20 flex items-center justify-between">
-          <p className="text-xs text-white/60">Per unit</p>
-          <p className="text-h3 font-semibold text-white/90">{price.unitFormatted}</p>
+          <p className="text-xs text-white/60">Total</p>
+          <p className="text-h3 font-semibold text-white/90">{price.totalFormatted}</p>
         </div>
         <p className="text-xs text-white/60 mt-3 pt-3 border-t border-white/20">
           {EMBOSSING_LAYER_LABELS[layers]} · {size} · {quantity.toLocaleString()} pcs
