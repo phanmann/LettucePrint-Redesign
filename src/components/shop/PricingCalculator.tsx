@@ -206,15 +206,13 @@ export default function PricingCalculator({ productName }: PricingCalculatorProp
         transition={{ duration: 0.2 }}
         className="bg-lp-green rounded-card p-6 mb-4"
       >
-        <div className="flex items-end justify-between mb-1">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-white/70 mb-1">Total Price</p>
-            <p className="text-display font-semibold text-white leading-none">{price.totalFormatted}</p>
-          </div>
-          <div className="text-right">
-            <p className="text-xs text-white/70 mb-1">Per unit</p>
-            <p className="text-h3 font-semibold text-white/90">{price.unitFormatted}</p>
-          </div>
+        <div className="mb-1">
+          <p className="text-xs font-semibold uppercase tracking-wider text-white/70 mb-1">Total Price</p>
+          <p className="text-display font-semibold text-white leading-none">{price.totalFormatted}</p>
+        </div>
+        <div className="mt-3 pt-3 border-t border-white/20 flex items-center justify-between">
+          <p className="text-xs text-white/60">Per unit</p>
+          <p className="text-h3 font-semibold text-white/90">{price.unitFormatted}</p>
         </div>
         {rush !== 'standard' && (
           <p className="text-xs text-white/60 mt-3 pt-3 border-t border-white/20">
