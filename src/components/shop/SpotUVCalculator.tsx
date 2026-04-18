@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Zap, Clock, Package, ChevronDown } from 'lucide-react'
 import Button from '@/components/ui/Button'
@@ -31,7 +32,7 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
   const [finish, setFinish] = useState<StickerFinish>('matte')
   const [rush, setRush] = useState<RushOption>('standard')
   const [showBreaks, setShowBreaks] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
   // Always locked to spot-uv material
   const price = useMemo(
@@ -44,20 +45,16 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
     [size, finish]
   )
 
-  const handleOrder = async () => {
-    setLoading(true)
-    try {
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ size, quantity, material: 'spot-uv', finish, rush, productName }),
-      })
-      const data = await res.json()
-      if (data.url) window.location.href = data.url
-    } catch (e) {
-      console.error(e)
-      setLoading(false)
-    }
+  const handleOrder = () => {
+    const params = new URLSearchParams({
+      size,
+      qty: String(quantity),
+      material: 'spot-uv',
+      finish,
+      rush,
+      product: productName,
+    })
+    router.push(`/shop/spot-uv/checkout?${params.toString()}`)
   }
 
   return (
@@ -246,12 +243,12 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
         )}
       </AnimatePresence>
 
-      <Button onClick={handleOrder} disabled={loading} size="lg" className="w-full">
-        {loading ? 'Redirecting...' : `Order ${quantity.toLocaleString()} Stickers — ${price.totalFormatted}`}
+      <Button onClick={handleOrder} size="lg" className="w-full">
+        {`Order ${quantity.toLocaleString()} Stickers — ${price.totalFormatted}`}
       </Button>
 
       <p className="text-xs text-white/30 text-center mt-3">
-        Artwork upload after checkout · Proof before production
+        + shipping calculated at checkout · Upload artwork · Approve proof
       </p>
     </div>
   )
