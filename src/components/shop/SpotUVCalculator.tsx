@@ -58,16 +58,16 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
   }
 
   return (
-    <div className="bg-lp-black rounded-modal border border-white/10 p-5 sm:p-8 lg:sticky lg:top-24">
+    <div className="bg-gray-50 rounded-modal border border-gray-100 p-5 sm:p-8 lg:sticky lg:top-24">
       <div className="flex items-center gap-2 mb-1">
-        <h2 className="text-h3 font-semibold text-white">Configure & Price</h2>
+        <h2 className="text-h3 font-semibold text-gray-900">Configure & Price</h2>
         <Badge variant="popular">Premium</Badge>
       </div>
-      <p className="text-small text-white/50 mb-8">Price updates instantly as you select options.</p>
+      <p className="text-small text-gray-900/50 mb-8">Price updates instantly as you select options.</p>
 
       {/* Size */}
       <div className="mb-6">
-        <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">Size</label>
+        <label className="block text-xs font-semibold uppercase tracking-wider text-gray-900/40 mb-3">Size</label>
         <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
           {SIZES.map((s) => (
             <button
@@ -75,8 +75,8 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
               onClick={() => setSize(s)}
               className={`py-2.5 rounded-input text-xs font-semibold border transition-all duration-150 ${
                 size === s
-                  ? 'bg-lp-green text-white border-lp-green'
-                  : 'bg-white/5 text-white/70 border-white/10 hover:border-lp-green hover:text-white'
+                  ? 'bg-lp-green text-gray-900 border-lp-green'
+                  : 'bg-white/5 text-gray-900/70 border-white/10 hover:border-lp-green hover:text-gray-900'
               }`}
             >
               {SIZE_LABELS[s]}
@@ -87,7 +87,7 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
 
       {/* Quantity */}
       <div className="mb-6">
-        <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">Quantity</label>
+        <label className="block text-xs font-semibold uppercase tracking-wider text-gray-900/40 mb-3">Quantity</label>
         <div className="grid grid-cols-3 gap-2">
           {QUANTITY_TIERS.map((q) => (
             <button
@@ -95,8 +95,8 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
               onClick={() => setQuantity(q)}
               className={`py-2.5 rounded-input text-xs font-semibold border transition-all duration-150 ${
                 quantity === q
-                  ? 'bg-lp-green text-white border-lp-green'
-                  : 'bg-white/5 text-white/70 border-white/10 hover:border-lp-green hover:text-white'
+                  ? 'bg-lp-green text-gray-900 border-lp-green'
+                  : 'bg-white/5 text-gray-900/70 border-white/10 hover:border-lp-green hover:text-gray-900'
               }`}
             >
               {q.toLocaleString()}
@@ -107,7 +107,7 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
 
       {/* Finish */}
       <div className="mb-6">
-        <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">Base Finish</label>
+        <label className="block text-xs font-semibold uppercase tracking-wider text-gray-900/40 mb-3">Base Finish</label>
         <div className="grid grid-cols-3 gap-2">
           {FINISHES.map((f) => (
             <button
@@ -115,8 +115,8 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
               onClick={() => setFinish(f)}
               className={`py-2.5 rounded-input text-xs font-semibold border transition-all duration-150 ${
                 finish === f
-                  ? 'bg-lp-green text-white border-lp-green'
-                  : 'bg-white/5 text-white/70 border-white/10 hover:border-lp-green hover:text-white'
+                  ? 'bg-lp-green text-gray-900 border-lp-green'
+                  : 'bg-white/5 text-gray-900/70 border-white/10 hover:border-lp-green hover:text-gray-900'
               }`}
             >
               {f === 'laminate' ? 'Laminate' : FINISH_LABELS[f]}
@@ -127,7 +127,7 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
 
       {/* Rush */}
       <div className="mb-8">
-        <label className="block text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">Production Speed</label>
+        <label className="block text-xs font-semibold uppercase tracking-wider text-gray-900/40 mb-3">Production Speed</label>
         <div className="space-y-2">
           {RUSH_OPTIONS.map((r) => (
             <button
@@ -145,8 +145,8 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
               <div className="flex items-center gap-2 flex-1">
                 {r === '48hr' && <Zap size={13} className="text-lp-yellow flex-shrink-0" />}
                 {r === '24hr' && <Zap size={13} className="text-red-400 flex-shrink-0" />}
-                {r === 'standard' && <Clock size={13} className="text-white/30 flex-shrink-0" />}
-                <span className={`text-small font-semibold ${rush === r ? 'text-lp-green' : 'text-white/70'}`}>
+                {r === 'standard' && <Clock size={13} className="text-gray-900/30 flex-shrink-0" />}
+                <span className={`text-small font-semibold ${rush === r ? 'text-lp-green' : 'text-gray-900/70'}`}>
                   {RUSH_LABELS[r]}
                 </span>
                 {r === '48hr' && <Badge variant="rush" className="ml-auto">Rush</Badge>}
@@ -167,16 +167,16 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
       >
         <div className="flex items-end justify-between mb-1">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-white/70 mb-1">Total Price</p>
-            <p className="text-display font-semibold text-white leading-none">{price.totalFormatted}</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-gray-900/70 mb-1">Total Price</p>
+            <p className="text-display font-semibold text-gray-900 leading-none">{price.totalFormatted}</p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-white/70 mb-1">Per unit</p>
-            <p className="text-h3 font-semibold text-white/90">{price.unitFormatted}</p>
+            <p className="text-xs text-gray-900/70 mb-1">Per unit</p>
+            <p className="text-h3 font-semibold text-gray-900/90">{price.unitFormatted}</p>
           </div>
         </div>
         {rush !== 'standard' && (
-          <p className="text-xs text-white/60 mt-3 pt-3 border-t border-white/20">
+          <p className="text-xs text-gray-900/60 mt-3 pt-3 border-t border-white/20">
             Includes rush fee of {rush === '48hr' ? '$200' : '$300'}
           </p>
         )}
@@ -185,7 +185,7 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
       {/* Quantity breaks */}
       <button
         onClick={() => setShowBreaks(!showBreaks)}
-        className="w-full flex items-center justify-between text-small text-lp-green font-semibold mb-4 py-2 hover:text-white transition-colors"
+        className="w-full flex items-center justify-between text-small text-lp-green font-semibold mb-4 py-2 hover:text-gray-900 transition-colors"
       >
         <span className="flex items-center gap-2">
           <Package size={14} />
@@ -207,10 +207,10 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
               <table className="w-full text-small min-w-[320px]">
                 <thead>
                   <tr className="border-b border-white/10">
-                    <th className="text-left px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-white/40">Qty</th>
-                    <th className="text-right px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-white/40">Total</th>
-                    <th className="text-right px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-white/40">Per Unit</th>
-                    <th className="text-right px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-white/40">Save</th>
+                    <th className="text-left px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-900/40">Qty</th>
+                    <th className="text-right px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-900/40">Total</th>
+                    <th className="text-right px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-900/40">Per Unit</th>
+                    <th className="text-right px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-900/40">Save</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -222,16 +222,16 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
                         quantity === row.qty ? 'bg-lp-green/10' : 'hover:bg-white/5'
                       }`}
                     >
-                      <td className={`px-4 py-2.5 font-semibold ${quantity === row.qty ? 'text-lp-green' : 'text-white/80'}`}>
+                      <td className={`px-4 py-2.5 font-semibold ${quantity === row.qty ? 'text-lp-green' : 'text-gray-900/80'}`}>
                         {row.qty.toLocaleString()}
                       </td>
-                      <td className="px-4 py-2.5 text-right text-white/60">{row.total}</td>
-                      <td className="px-4 py-2.5 text-right text-white/60">{row.unit}</td>
+                      <td className="px-4 py-2.5 text-right text-gray-900/60">{row.total}</td>
+                      <td className="px-4 py-2.5 text-right text-gray-900/60">{row.unit}</td>
                       <td className="px-4 py-2.5 text-right">
                         {row.savingsPct > 0 ? (
                           <span className="text-lp-green font-semibold">{row.savingsPct}%</span>
                         ) : (
-                          <span className="text-white/30">—</span>
+                          <span className="text-gray-900/30">—</span>
                         )}
                       </td>
                     </tr>
@@ -247,7 +247,7 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
         {`Order ${quantity.toLocaleString()} Stickers — ${price.totalFormatted}`}
       </Button>
 
-      <p className="text-xs text-white/30 text-center mt-3">
+      <p className="text-xs text-gray-900/30 text-center mt-3">
         + shipping calculated at checkout · Upload artwork · Approve proof
       </p>
     </div>
