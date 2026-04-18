@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Package, Ruler } from 'lucide-react'
 import Button from '@/components/ui/Button'
@@ -35,7 +36,7 @@ export default function RollLabelCalculator({ productName }: RollLabelCalculator
   const [material, setMaterial] = useState<LabelMaterial>('standard')
   const [finish, setFinish] = useState<LabelFinish>('matte')
   const [showBreaks, setShowBreaks] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
   const preset = PRESET_SIZES.find(p => p.id === selectedPreset)!
   const isCustomSize = selectedPreset === 'custom'
@@ -54,29 +55,18 @@ export default function RollLabelCalculator({ productName }: RollLabelCalculator
     return getRollLabelQuantityBreaks(width, height, material, finish)
   }, [width, height, material, finish, validDimensions])
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = () => {
     if (!price) return
-    setLoading(true)
-    try {
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          productName,
-          size: isCustomSize ? `${width}"×${height}"` : preset.label,
-          quantity,
-          material,
-          finish,
-          rush: 'standard',
-          overridePriceCents: price.totalCents,
-        }),
-      })
-      const data = await res.json()
-      if (data.url) window.location.href = data.url
-    } catch (e) {
-      console.error(e)
-      setLoading(false)
-    }
+    const params = new URLSearchParams({
+      width: String(width),
+      height: String(height),
+      qty: String(quantity),
+      material,
+      finish,
+      size: isCustomSize ? `${width}" × ${height}"` : preset.label,
+      product: productName,
+    })
+    router.push(`/shop/roll-labels/checkout?${params.toString()}`)
   }
 
   return (
@@ -370,11 +360,10 @@ export default function RollLabelCalculator({ productName }: RollLabelCalculator
 
           <Button
             onClick={handleAddToCart}
-            disabled={loading}
             size="lg"
             className="w-full"
           >
-            {loading ? 'Redirecting...' : `Order ${quantity.toLocaleString()} Labels — ${price.totalFormatted}`}
+            {`Order ${quantity.toLocaleString()} Labels — ${price.totalFormatted}`}
           </Button>
           <p className="text-xs text-gray-400 text-center mt-3">
             Artwork upload after checkout · Proof before production
