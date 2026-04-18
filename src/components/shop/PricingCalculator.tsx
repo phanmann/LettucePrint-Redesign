@@ -281,6 +281,10 @@ export default function PricingCalculator({ productName }: Props) {
           <p className="text-xs text-gray-400 text-center mt-3">
             Upload artwork · Proof before production · Shipping at checkout
           </p>
+          <p className="text-xs text-center mt-2">
+            <span className="text-gray-500">Need rush? Call us: </span>
+            <a href="tel:3476030557" className="font-semibold text-lp-green hover:underline">347.603.0557</a>
+          </p>
         </>
       )}
     </div>
