@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import CheckoutFlow from '@/components/shop/CheckoutFlow'
-import { calculatePrice, type StickerSize, type StickerFinish, type RushOption } from '@/lib/pricing'
+import { calculateSpotUVPrice, type StickerSize, type RushOption, type EmbossingLayers } from '@/lib/pricing'
 
 export const metadata: Metadata = {
   title: 'Upload Artwork & Checkout — Spot UV Stickers | Lettuce Print',
@@ -16,14 +16,13 @@ interface PageProps {
   searchParams: Promise<{
     size?: string
     qty?: string
-    finish?: string
+    layers?: string
     rush?: string
     product?: string
   }>
 }
 
 const VALID_SIZES: StickerSize[] = ['1x1', '2x2', '3x3', '4x4', '5x5']
-const VALID_FINISHES: StickerFinish[] = ['matte', 'gloss', 'laminate']
 const VALID_RUSH: RushOption[] = ['standard', '48hr', '24hr']
 
 export default async function SpotUVCheckoutPage({ searchParams }: PageProps) {
@@ -31,21 +30,22 @@ export default async function SpotUVCheckoutPage({ searchParams }: PageProps) {
 
   const size = VALID_SIZES.includes(params.size as StickerSize) ? params.size as StickerSize : null
   const qty = params.qty ? parseInt(params.qty, 10) : null
-  const finish = VALID_FINISHES.includes(params.finish as StickerFinish) ? params.finish as StickerFinish : null
+  const layersRaw = params.layers ? parseInt(params.layers, 10) : 1
+  const layers = ([1,2,3,4,5].includes(layersRaw) ? layersRaw : 1) as EmbossingLayers
   const rush = VALID_RUSH.includes(params.rush as RushOption) ? params.rush as RushOption : 'standard' as RushOption
   const product = params.product ?? 'Spot UV Stickers'
 
-  if (!size || !qty || !finish || isNaN(qty)) {
+  if (!size || !qty || isNaN(qty)) {
     redirect('/shop/spot-uv')
   }
 
-  const price = calculatePrice(size, qty, 'spot-uv', finish, rush)
+  const price = calculateSpotUVPrice(size, qty, layers, rush)
 
   const config = {
     size,
     qty,
     material: 'spot-uv',
-    finish,
+    finish: `${layers} embossing layer${layers > 1 ? 's' : ''}`,
     rush,
     product,
     totalFormatted: price.totalFormatted,

@@ -171,3 +171,75 @@ export const FINISH_LABELS: Record<StickerFinish, string> = {
   'gloss':    'Gloss',
   'laminate': 'Laminate (+$0.40/sq in)',
 }
+
+// ── Spot UV Embossing Layers ───────────────────────────────────────────────────
+// Formula: $0.041/sq in for layer 1, +$0.0135/sq in per additional layer
+// All rates in cents per sq inch
+export type EmbossingLayers = 1 | 2 | 3 | 4 | 5
+
+const EMBOSSING_BASE_RATE_CENTS = 4.1   // $0.041 in cents
+const EMBOSSING_EXTRA_RATE_CENTS = 1.35  // $0.0135 in cents
+
+export const EMBOSSING_LAYER_OPTIONS: EmbossingLayers[] = [1, 2, 3, 4, 5]
+
+export const EMBOSSING_LAYER_LABELS: Record<EmbossingLayers, string> = {
+  1: '1 Layer',
+  2: '2 Layers',
+  3: '3 Layers',
+  4: '4 Layers',
+  5: '5 Layers',
+}
+
+export function calculateEmbossingAddon(
+  size: StickerSize,
+  quantity: number,
+  layers: EmbossingLayers
+): number {
+  const sqIn = SIZE_SQ_IN[size]
+  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
+  // Layer 1 rate + (additional layers × extra rate)
+  const ratePerSqIn = EMBOSSING_BASE_RATE_CENTS + (layers - 1) * EMBOSSING_EXTRA_RATE_CENTS
+  return Math.round(ratePerSqIn * sqIn * tier)
+}
+
+export function calculateSpotUVPrice(
+  size: StickerSize,
+  quantity: number,
+  layers: EmbossingLayers,
+  rush: RushOption
+): PriceResult {
+  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
+  const base2x2 = BASE_PRICES_2x2[tier]
+  const sizeAdjusted = Math.round(base2x2 * SIZE_MULTIPLIERS[size])
+  const materialAdjusted = Math.round(sizeAdjusted * MATERIAL_MULTIPLIERS['spot-uv'])
+  const embossingAddon = calculateEmbossingAddon(size, quantity, layers)
+  const subtotal = materialAdjusted + embossingAddon
+  const rushFee = RUSH_FEES[rush]
+  const total = subtotal + rushFee
+  const unitCents = Math.round(total / tier)
+  return {
+    totalCents: total,
+    unitCents,
+    totalFormatted: formatCents(total),
+    unitFormatted: formatCents(unitCents),
+    rushFeeCents: rushFee,
+    baseBeforeRush: subtotal,
+  }
+}
+
+export function getSpotUVQuantityBreaks(
+  size: StickerSize,
+  layers: EmbossingLayers
+) {
+  return QUANTITY_TIERS.map(qty => {
+    const result = calculateSpotUVPrice(size, qty, layers, 'standard')
+    const maxPrice = calculateSpotUVPrice(size, 50, layers, 'standard')
+    const savings = Math.max(0, Math.round(((maxPrice.totalCents - result.totalCents) / maxPrice.totalCents) * 100))
+    return {
+      qty,
+      total: result.totalFormatted,
+      unit: result.unitFormatted,
+      savingsPct: savings,
+    }
+  })
+}
