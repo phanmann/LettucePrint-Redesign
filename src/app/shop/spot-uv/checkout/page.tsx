@@ -50,42 +50,43 @@ export default async function SpotUVCheckoutPage({ searchParams }: PageProps) {
     product,
     totalFormatted: price.totalFormatted,
     totalCents: price.totalCents,
-    theme: 'dark' as const,
-    artworkNote: 'Spot UV layer in white (100% K) on separate layer',
+    theme: 'light' as const,
+    artworkNote: 'Spot UV layer in yellow (100% Y) on separate layer',
+    acceptedFormats: 'AI · EPS · SVG · PDF',
     cancelPath: '/shop/spot-uv',
   }
 
   return (
     <>
       <Navbar />
-      <main className="pt-[72px] min-h-screen bg-lp-black">
+      <main className="pt-[72px] min-h-screen bg-gray-50">
 
         {/* Breadcrumb */}
-        <div className="bg-lp-black border-b border-white/10">
+        <div className="bg-white border-b border-gray-100">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <nav className="flex items-center gap-2 text-xs text-white/40">
+            <nav className="flex items-center gap-2 text-xs text-gray-500">
               <Link href="/" className="hover:text-lp-green transition-colors">Home</Link>
               <span>/</span>
               <Link href="/shop" className="hover:text-lp-green transition-colors">Shop</Link>
               <span>/</span>
               <Link href="/shop/spot-uv" className="hover:text-lp-green transition-colors">Spot UV Stickers</Link>
               <span>/</span>
-              <span className="text-white/70 font-medium">Upload & Checkout</span>
+              <span className="text-gray-900 font-medium">Upload & Checkout</span>
             </nav>
           </div>
         </div>
 
         {/* Header */}
-        <div className="bg-lp-black border-b border-white/10">
+        <div className="bg-white border-b border-gray-100">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <h1 className="text-h2 font-semibold text-white mb-1">Upload your artwork</h1>
-            <p className="text-small text-white/50">
+            <h1 className="text-h2 font-semibold text-gray-900 mb-1">Upload your artwork</h1>
+            <p className="text-small text-gray-500">
               Upload your file, preview it, then proceed to payment. We'll send a proof before anything goes to print.
             </p>
-            <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-lg">
-              <span className="text-xs font-medium text-amber-400">
-                ⚠ Spot UV requires a separate spot layer in white (100% K). 
-                <a href="mailto:steve@lettuceprint.com" className="underline ml-1">Not sure? Email us.</a>
+            <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-lg">
+              <span className="text-xs font-medium text-amber-700">
+                ⚠ Spot UV requires a separate spot layer in yellow (100% Y).{' '}
+                <a href="mailto:steve@lettuceprint.com" className="underline">Not sure? Email us.</a>
               </span>
             </div>
           </div>

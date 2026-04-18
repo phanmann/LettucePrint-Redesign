@@ -20,6 +20,8 @@ export interface CheckoutFlowConfig {
   theme?: 'light' | 'dark'
   // Extra artwork note shown in spec bar
   artworkNote?: string
+  // Override accepted formats label (e.g. 'AI · EPS · SVG · PDF')
+  acceptedFormats?: string
   // Cancel URL if user wants to go back
   cancelPath?: string
 }
@@ -120,11 +122,12 @@ export default function CheckoutFlow({ config }: { config: CheckoutFlowConfig })
     }
   }
 
+  const formatsLabel = config.acceptedFormats ?? 'PDF · AI · EPS · PNG · SVG'
   const specs = [
     '300 DPI minimum',
     'CMYK preferred',
     'Include bleed if possible',
-    ...(config.artworkNote ? [config.artworkNote] : ['PDF · AI · EPS · PNG · SVG']),
+    ...(config.artworkNote ? [config.artworkNote] : [formatsLabel]),
   ]
 
   return (
@@ -191,7 +194,7 @@ export default function CheckoutFlow({ config }: { config: CheckoutFlowConfig })
                     <p className={`text-sm font-semibold ${isDark ? 'text-white/80' : 'text-gray-900'}`}>
                       Drop your file here, or <span className="text-lp-green">browse</span>
                     </p>
-                    <p className={`text-xs mt-1 ${isDark ? 'text-white/40' : 'text-gray-500'}`}>Max 64MB · PDF, AI, EPS, PNG, SVG</p>
+                    <p className={`text-xs mt-1 ${isDark ? 'text-white/40' : 'text-gray-500'}`}>Max 64MB · {formatsLabel}</p>
                   </div>
                 </>
               )}
