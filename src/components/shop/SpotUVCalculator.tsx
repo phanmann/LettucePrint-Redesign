@@ -124,9 +124,7 @@ export default function SpotUVCalculator({ productName }: SpotUVCalculatorProps)
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-400 mt-2">
-          1 layer included standard · Each extra = +$0.0135/sq in
-        </p>
+        <p className="text-xs text-gray-400 mt-2">1 layer included standard</p>
       </div>
 
       {/* Rush */}
