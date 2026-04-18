@@ -18,17 +18,17 @@ export default async function PortfolioPage() {
     // fallback to placeholder
   }
   return (
-    <div className="bg-[#0f0f0f] min-h-screen">
+    <>
       <Navbar />
       <main>
-        {/* Hero — dark */}
-        <section className="pt-[calc(72px+4rem)] pb-12 bg-[#0f0f0f]">
+        {/* Hero */}
+        <section className="pt-[calc(72px+4rem)] pb-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-4">Our Work</p>
-            <h1 className="text-display font-semibold text-white mb-6 max-w-2xl">
+            <h1 className="text-display font-semibold text-gray-900 mb-6 max-w-2xl">
               The proof is in the print.
             </h1>
-            <p className="text-body-lg text-white/50 max-w-xl">
+            <p className="text-body-lg text-gray-600 max-w-xl">
               From cannabis brands to restaurants to streetwear drops — here&apos;s what we&apos;ve been making.
             </p>
           </div>
@@ -38,6 +38,6 @@ export default async function PortfolioPage() {
         <CTABanner />
       </main>
       <Footer />
-    </div>
+    </>
   )
 }
