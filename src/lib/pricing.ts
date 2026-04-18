@@ -3,7 +3,7 @@
 // All prices in USD cents to avoid floating point issues
 
 export type StickerSize = '1x1' | '2x2' | '3x3' | '4x4' | '5x5'
-export type StickerMaterial = 'standard' | 'holographic' | 'spot-uv'
+export type StickerMaterial = 'standard' | 'holographic'
 export type StickerFinish = 'matte' | 'gloss' | 'laminate'
 export type RushOption = 'standard' | '48hr' | '24hr'
 
@@ -42,7 +42,6 @@ export const SIZE_SQ_IN: Record<StickerSize, number> = {
 const MATERIAL_MULTIPLIERS: Record<StickerMaterial, number> = {
   'standard':    1.00,
   'holographic': 2.80,
-  'spot-uv':     1.60,
 }
 
 // Finish add-on in cents per sq inch on sell price
@@ -157,13 +156,11 @@ export const SIZE_LABELS: Record<StickerSize, string> = {
 export const MATERIAL_LABELS: Record<StickerMaterial, string> = {
   'standard':    'Standard Vinyl',
   'holographic': 'Holographic',
-  'spot-uv':     'Spot UV',
 }
 
 export const MATERIAL_DESCRIPTIONS: Record<StickerMaterial, string> = {
   'standard':    'Durable white vinyl. Matte or gloss finish. Weather resistant.',
   'holographic': 'Eye-catching rainbow effect. Premium iridescent vinyl.',
-  'spot-uv':     'Standard vinyl + UV-cured clear coat for a premium tactile finish.',
 }
 
 export const FINISH_LABELS: Record<StickerFinish, string> = {
@@ -210,7 +207,7 @@ export function calculateSpotUVPrice(
   const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
   const base2x2 = BASE_PRICES_2x2[tier]
   const sizeAdjusted = Math.round(base2x2 * SIZE_MULTIPLIERS[size])
-  const materialAdjusted = Math.round(sizeAdjusted * MATERIAL_MULTIPLIERS['spot-uv'])
+  const materialAdjusted = Math.round(sizeAdjusted * 1.60) // Spot UV fixed multiplier
   const embossingAddon = calculateEmbossingAddon(size, quantity, layers)
   const subtotal = materialAdjusted + embossingAddon
   const rushFee = RUSH_FEES[rush]
