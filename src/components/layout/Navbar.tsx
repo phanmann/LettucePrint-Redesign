@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, ShoppingCart } from 'lucide-react'
@@ -36,6 +36,16 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const openDropdown = (label: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    setActiveDropdown(label)
+  }
+
+  const closeDropdown = () => {
+    closeTimer.current = setTimeout(() => setActiveDropdown(null), 120)
+  }
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 16)
@@ -71,8 +81,8 @@ export default function Navbar() {
                 <div
                   key={link.label}
                   className="relative"
-                  onMouseEnter={() => link.children && setActiveDropdown(link.label)}
-                  onMouseLeave={() => setActiveDropdown(null)}
+                  onMouseEnter={() => link.children && openDropdown(link.label)}
+                  onMouseLeave={closeDropdown}
                 >
                   <Link
                     href={link.href}
@@ -88,7 +98,13 @@ export default function Navbar() {
 
                   {/* Dropdown */}
                   {link.children && activeDropdown === link.label && (
-                    <div className="absolute top-full left-0 mt-2 w-52 bg-white rounded-card shadow-nav border border-gray-100 py-2 z-50">
+                    <div
+                      className="absolute top-full left-0 w-52 bg-white rounded-card shadow-nav border border-gray-100 py-2 z-50"
+                      onMouseEnter={() => openDropdown(link.label)}
+                      onMouseLeave={closeDropdown}
+                    >
+                      {/* Invisible bridge covers the gap between trigger and menu */}
+                      <div className="absolute -top-3 left-0 right-0 h-3" />
                       {link.children.map((child) => (
                         <Link
                           key={child.href}
