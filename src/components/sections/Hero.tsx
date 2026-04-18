@@ -4,14 +4,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useEffect, useRef } from 'react'
+import { Package, Shirt, PanelTop, Tag, Expand, MapPin } from 'lucide-react'
 import Button from '@/components/ui/Button'
 
 const heroCards = [
-  { label: 'Packaging',      bg: '#00A175', emoji: '📦', img: null },
-  { label: 'Screen Printing',bg: '#7E6AAE', emoji: '👕', img: null },
-  { label: 'Signage',        bg: '#FFCA66', emoji: '🪧', img: null },
-  { label: 'Stickers',       bg: '#acf2f9', emoji: '🏷️', img: null },
-  { label: 'Large Format',   bg: '#0a0a0a', emoji: '🖼️', img: null },
+  { label: 'Packaging',      bg: '#00A175', icon: Package },
+  { label: 'Screen Printing',bg: '#7E6AAE', icon: Shirt },
+  { label: 'Signage',        bg: '#FFCA66', icon: PanelTop },
+  { label: 'Stickers',       bg: '#acf2f9', icon: Tag },
+  { label: 'Large Format',   bg: '#0a0a0a', icon: Expand },
 ]
 
 const stats = [
@@ -119,8 +120,9 @@ export default function Hero() {
                 </div>
               </div>
               {/* Location badge */}
-              <div className="absolute bottom-4 left-4 bg-lp-yellow text-gray-900 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full">
-                📍 361 Stagg St, Brooklyn
+              <div className="absolute bottom-4 left-4 bg-lp-yellow text-gray-900 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full flex items-center gap-1.5">
+                <MapPin size={11} strokeWidth={2.5} />
+                361 Stagg St, Brooklyn
               </div>
             </motion.div>
           </div>
@@ -140,8 +142,8 @@ export default function Hero() {
                 className="flex-1 min-w-0 rounded-card flex items-end justify-start p-4 relative overflow-hidden transition-transform duration-300 hover:-translate-y-1"
                 style={{ backgroundColor: card.bg, height: '140px' }}
               >
-                <div className="absolute inset-0 flex items-center justify-center text-[56px] opacity-20 select-none">
-                  {card.emoji}
+                <div className="absolute inset-0 flex items-center justify-center opacity-20 select-none">
+                  <card.icon size={52} strokeWidth={1.25} />
                 </div>
                 <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.12em] bg-white/90 text-gray-900 px-3 py-1.5 rounded-full">
                   {card.label}

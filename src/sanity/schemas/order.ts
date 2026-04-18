@@ -203,13 +203,13 @@ export const order = defineType({
       type: 'string',
       options: {
         list: [
-          { title: '💳 Paid', value: 'paid' },
-          { title: '📁 Artwork Received', value: 'artwork_received' },
-          { title: '🎨 Proof Sent', value: 'proof_sent' },
-          { title: '✅ Proof Approved', value: 'proof_approved' },
-          { title: '📧 Final Proof Sent', value: 'final_proof_sent' },
-          { title: '🖨️ In Production', value: 'in_production' },
-          { title: '📦 Shipped', value: 'shipped' },
+          { title: 'Paid', value: 'paid' },
+          { title: 'Artwork Received', value: 'artwork_received' },
+          { title: 'Proof Sent', value: 'proof_sent' },
+          { title: 'Proof Approved', value: 'proof_approved' },
+          { title: 'Final Proof Sent', value: 'final_proof_sent' },
+          { title: 'In Production', value: 'in_production' },
+          { title: 'Shipped', value: 'shipped' },
         ],
         layout: 'radio',
       },
@@ -241,18 +241,9 @@ export const order = defineType({
       media: 'productName',
     },
     prepare({ title, subtitle }) {
-      const statusEmoji: Record<string, string> = {
-        paid: '💳',
-        artwork_received: '📁',
-        proof_sent: '🎨',
-        proof_approved: '✅',
-        final_proof_sent: '📧',
-        in_production: '🖨️',
-        shipped: '📦',
-      }
       return {
         title: title ?? 'Unknown customer',
-        subtitle: statusEmoji[subtitle] ? `${statusEmoji[subtitle]} ${subtitle?.replace(/_/g, ' ')}` : subtitle,
+        subtitle: subtitle ? subtitle.replace(/_/g, ' ') : '',
       }
     },
   },

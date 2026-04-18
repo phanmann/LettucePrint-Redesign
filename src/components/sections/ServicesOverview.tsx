@@ -2,11 +2,20 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Package, Palette, Monitor, Shirt, Maximize } from 'lucide-react'
+import { Package, Palette, PanelTop, Shirt, Expand, type LucideIcon } from 'lucide-react'
 
-const services = [
+const services: {
+  icon: LucideIcon
+  iconColor: string
+  num: string
+  title: string
+  description: string
+  href: string
+  bg: string
+}[] = [
   {
-    icon: '📦',
+    icon: Package,
+    iconColor: 'text-lp-green',
     num: '01',
     title: 'Packaging',
     description: 'Custom boxes, bags, tissue paper, and branded packaging that makes unboxing unforgettable.',
@@ -14,7 +23,8 @@ const services = [
     bg: 'bg-lp-green/10',
   },
   {
-    icon: '🎨',
+    icon: Palette,
+    iconColor: 'text-amber-600',
     num: '02',
     title: 'Graphic Design',
     description: 'Brand identity, marketing collateral, and print-ready artwork from our in-house design team.',
@@ -22,7 +32,8 @@ const services = [
     bg: 'bg-lp-yellow/40',
   },
   {
-    icon: '🪧',
+    icon: PanelTop,
+    iconColor: 'text-sky-600',
     num: '03',
     title: 'Signage & Displays',
     description: 'Banners, foam boards, window graphics, and trade show displays that command attention.',
@@ -30,7 +41,8 @@ const services = [
     bg: 'bg-lp-blue/50',
   },
   {
-    icon: '👕',
+    icon: Shirt,
+    iconColor: 'text-lp-purple',
     num: '04',
     title: 'Screen Printing',
     description: 'Premium apparel printing for brands, events, and merch drops. No minimum on select styles.',
@@ -38,7 +50,8 @@ const services = [
     bg: 'bg-lp-purple/20',
   },
   {
-    icon: '🖼️',
+    icon: Expand,
+    iconColor: 'text-gray-600',
     num: '05',
     title: 'Large Format',
     description: 'Murals, vehicle wraps, backdrops, and anything that needs to go big. We go big.',
@@ -96,8 +109,8 @@ export default function ServicesOverview() {
                 </span>
 
                 {/* Icon bubble */}
-                <div className={`w-12 h-12 rounded-full ${service.bg} flex items-center justify-center flex-shrink-0 text-xl group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300`}>
-                  {service.icon}
+                <div className={`w-12 h-12 rounded-full ${service.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300`}>
+                  <service.icon size={20} strokeWidth={1.75} className={service.iconColor} />
                 </div>
 
                 {/* Name */}

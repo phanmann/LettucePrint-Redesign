@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, ArrowLeft, CheckCircle, Loader2 } from 'lucide-react'
+import { ArrowRight, ArrowLeft, CheckCircle, Loader2, Tag, Package, PanelTop, Shirt, Expand, Sparkles, type LucideIcon } from 'lucide-react'
 import Button from '@/components/ui/Button'
 
 // ─── Types ─────────────────────────────────────────────────────────────────
@@ -29,13 +29,13 @@ interface FormState {
 
 // ─── Constants ──────────────────────────────────────────────────────────────
 
-const SERVICES: { id: ServiceType; icon: string; desc: string }[] = [
-  { id: 'Stickers & Labels', icon: '🏷️', desc: 'Die-cut stickers, roll labels, spot UV' },
-  { id: 'Packaging',         icon: '📦', desc: 'Custom boxes, bags, tissue, inserts' },
-  { id: 'Signage & Displays',icon: '🪧', desc: 'Banners, foam boards, window graphics' },
-  { id: 'Screen Printing',   icon: '👕', desc: 'Apparel, merch drops, event tees' },
-  { id: 'Large Format',      icon: '🖼️', desc: 'Murals, wraps, backdrops, trade show' },
-  { id: 'Other',             icon: '✨', desc: 'Something else — tell us about it' },
+const SERVICES: { id: ServiceType; icon: LucideIcon; desc: string }[] = [
+  { id: 'Stickers & Labels', icon: Tag,      desc: 'Die-cut stickers, roll labels, spot UV' },
+  { id: 'Packaging',         icon: Package,  desc: 'Custom boxes, bags, tissue, inserts' },
+  { id: 'Signage & Displays',icon: PanelTop, desc: 'Banners, foam boards, window graphics' },
+  { id: 'Screen Printing',   icon: Shirt,    desc: 'Apparel, merch drops, event tees' },
+  { id: 'Large Format',      icon: Expand,   desc: 'Murals, wraps, backdrops, trade show' },
+  { id: 'Other',             icon: Sparkles, desc: 'Something else — tell us about it' },
 ]
 
 const TIMELINE_OPTIONS = [
@@ -258,7 +258,7 @@ export default function QuoteForm() {
                           : 'border-gray-200 bg-white hover:border-lp-green/50'
                       }`}
                     >
-                      <span className="text-2xl flex-shrink-0">{s.icon}</span>
+                      <s.icon size={22} strokeWidth={1.75} className="flex-shrink-0 text-lp-green" />
                       <div>
                         <p className={`text-small font-semibold mb-0.5 ${form.service === s.id ? 'text-lp-green' : 'text-gray-900'}`}>
                           {s.id}
