@@ -19,7 +19,7 @@ import {
 } from '@/lib/roll-label-pricing'
 
 const MATERIALS: LabelMaterial[] = ['standard', 'bopp']
-const FINISHES: LabelFinish[] = ['matte', 'gloss', 'laminate']
+const FINISHES: LabelFinish[] = ['matte', 'gloss']
 
 interface RollLabelCalculatorProps {
   productName: string
@@ -271,7 +271,7 @@ export default function RollLabelCalculator({ productName }: RollLabelCalculator
               <div>
                 <p className={`text-small font-semibold ${finish === f ? 'text-lp-green' : 'text-gray-900'}`}>
                   {FINISH_LABELS[f]}
-                  {f === 'laminate' && <span className="ml-2"><Badge variant="new">Heavy Duty</Badge></span>}
+
                 </p>
                 <p className="text-xs text-gray-500 mt-0.5">{FINISH_DESCRIPTIONS[f]}</p>
               </div>

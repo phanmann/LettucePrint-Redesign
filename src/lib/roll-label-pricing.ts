@@ -3,7 +3,7 @@
 // All prices in USD cents to avoid floating point issues
 
 export type LabelMaterial = 'standard' | 'bopp'
-export type LabelFinish = 'matte' | 'gloss' | 'laminate'
+export type LabelFinish = 'matte' | 'gloss'
 
 // ─── Press Constants ───────────────────────────────────────────────────────
 const ROLL_WIDTH_IN = 12.25          // inches across
@@ -96,7 +96,7 @@ export function calculateRollLabelPrice(
   let laminateRollsNeeded: number | null = null
   let laminateCostCents = 0
 
-  if (finish === 'matte' || finish === 'gloss' || finish === 'laminate') {
+  if (finish === 'matte' || finish === 'gloss') {
     const labelsAroundPerLaminateRoll = Math.floor(
       LAMINATE_ROLL_LENGTH_IN / (heightIn + GAP_AROUND_IN)
     )
@@ -177,13 +177,11 @@ export const MATERIAL_DESCRIPTIONS: Record<LabelMaterial, string> = {
 }
 
 export const FINISH_LABELS: Record<LabelFinish, string> = {
-  'matte':    'Matte Laminate',
-  'gloss':    'Gloss Laminate',
-  'laminate': 'Heavy Laminate',
+  'matte': 'Matte Laminate',
+  'gloss': 'Gloss Laminate',
 }
 
 export const FINISH_DESCRIPTIONS: Record<LabelFinish, string> = {
-  'matte':    'Smooth, non-reflective finish. Elegant and easy to write on.',
-  'gloss':    'Shiny, vibrant finish. Colors pop. Great for food & beverage.',
-  'laminate': 'Extra-thick protective overlaminate. Maximum durability.',
+  'matte': 'Smooth, non-reflective finish. Elegant and easy to write on.',
+  'gloss': 'Shiny, vibrant finish. Colors pop. Great for food & beverage.',
 }
