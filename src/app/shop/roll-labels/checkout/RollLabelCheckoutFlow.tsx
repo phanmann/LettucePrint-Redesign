@@ -439,12 +439,32 @@ export default function RollLabelCheckoutFlow({ config }: { config: Config }) {
                 )}
               </div>
 
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-input border border-gray-100 mb-6 text-xs text-gray-600">
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-input border border-gray-100 mb-4 text-xs text-gray-600">
                 <span>📎 {fileName}</span>
                 <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="text-lp-green font-semibold hover:underline">
                   Open full size
                 </a>
               </div>
+
+              {/* Unwind direction confirmation */}
+              {direction && (
+                <div className="mb-6 flex items-center gap-4 p-4 bg-lp-green/5 border border-lp-green/20 rounded-card">
+                  <div className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border border-lp-green/30">
+                    <DirectionDiagram dir={direction} selected={true} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1">Unwind Direction</p>
+                    <p className="text-base font-bold text-lp-green">Direction {direction}</p>
+                    <p className="text-xs text-gray-600 mt-0.5">{DIRECTIONS[direction - 1].description}</p>
+                    <button
+                      onClick={() => setStep(0)}
+                      className="text-xs text-gray-400 hover:text-lp-green underline mt-1 transition-colors"
+                    >
+                      Change direction
+                    </button>
+                  </div>
+                </div>
+              )}
 
               <div className="flex gap-3">
                 <Button onClick={handlePay} disabled={loading} size="lg" className="flex-1">
