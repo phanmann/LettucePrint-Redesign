@@ -208,43 +208,30 @@ export default function PricingCalculator({ productName }: Props) {
 
       <div className="border-t border-gray-100 mb-6" />
 
-      {/* ── Quantity + Price Breakdown ── */}
+      {/* ── Quantity ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Select a quantity</p>
         {validSize ? (
-          <div className="space-y-1.5">
-            {qtyRows.map(row => (
-              <label
-                key={row.qty}
-                className={radioRow(quantity === row.qty && !showCustomQty)}
-                onClick={() => { setQuantity(row.qty); setShowCustomQty(false) }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className={radioCircle(quantity === row.qty && !showCustomQty)} />
-                  <span className={`text-sm font-medium ${quantity === row.qty && !showCustomQty ? 'text-gray-900' : 'text-gray-700'}`}>
-                    {row.qty.toLocaleString()}
-                  </span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-sm font-semibold text-gray-900">{row.totalFmt}</span>
-                  {row.save > 0 && (
-                    <span className="text-xs font-semibold text-lp-green">Save {row.save}%</span>
-                  )}
-                </div>
-              </label>
-            ))}
-            {/* Custom quantity */}
-            <label
-              className={radioRow(showCustomQty)}
-              onClick={() => setShowCustomQty(true)}
+          <div className="space-y-2">
+            <select
+              value={showCustomQty ? 'custom' : String(quantity)}
+              onChange={e => {
+                if (e.target.value === 'custom') {
+                  setShowCustomQty(true)
+                } else {
+                  setShowCustomQty(false)
+                  setQuantity(parseInt(e.target.value))
+                }
+              }}
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm font-medium text-gray-900 focus:outline-none focus:border-lp-green focus:ring-2 focus:ring-lp-green/20 transition-all cursor-pointer"
             >
-              <div className="flex items-center gap-3">
-                <div className={radioCircle(showCustomQty)} />
-                <span className={`text-sm font-medium ${showCustomQty ? 'text-gray-900' : 'text-gray-700'}`}>
-                  Custom quantity
-                </span>
-              </div>
-            </label>
+              {qtyRows.map(row => (
+                <option key={row.qty} value={String(row.qty)}>
+                  {row.qty.toLocaleString()} — {row.totalFmt}{row.save > 0 ? ` (Save ${row.save}%)` : ''}
+                </option>
+              ))}
+              <option value="custom">Custom quantity…</option>
+            </select>
             <AnimatePresence>
               {showCustomQty && (
                 <motion.div
@@ -263,7 +250,7 @@ export default function PricingCalculator({ productName }: Props) {
                       if (n >= 50) setQuantity(n)
                     }}
                     placeholder="Enter quantity (min 50)"
-                    className="w-full mt-2 pl-7 px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-lp-green"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-lp-green focus:ring-2 focus:ring-lp-green/20"
                   />
                 </motion.div>
               )}
