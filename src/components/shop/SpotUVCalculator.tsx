@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import Button from '@/components/ui/Button'
+import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import {
   calculateSpotUVPrice,
   QUANTITY_TIERS,
@@ -193,50 +194,21 @@ export default function SpotUVCalculator({ productName }: Props) {
       <div className="mb-6">
         <p className={sectionLabel}>Select a quantity</p>
         {validSize ? (
-          <div className="space-y-2">
-            <select
-              value={showCustomQty ? 'custom' : String(quantity)}
-              onChange={e => {
-                if (e.target.value === 'custom') {
-                  setShowCustomQty(true)
-                } else {
-                  setShowCustomQty(false)
-                  setQuantity(parseInt(e.target.value))
-                }
-              }}
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm font-medium text-gray-900 focus:outline-none focus:border-lp-green focus:ring-2 focus:ring-lp-green/20 transition-all cursor-pointer"
-            >
-              {qtyRows.map(row => (
-                <option key={row.qty} value={String(row.qty)}>
-                  {row.qty.toLocaleString()} — {row.totalFmt}{row.save > 0 ? ` (Save ${row.save}%)` : ''}
-                </option>
-              ))}
-              <option value="custom">Custom quantity…</option>
-            </select>
-            <AnimatePresence>
-              {showCustomQty && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.15 }}
-                  className="overflow-hidden"
-                >
-                  <input
-                    type="number" min="50" step="50"
-                    value={customQty}
-                    onChange={e => {
-                      setCustomQty(e.target.value)
-                      const n = parseInt(e.target.value)
-                      if (n >= 50) setQuantity(n)
-                    }}
-                    placeholder="Enter quantity (min 50)"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-lp-green focus:ring-2 focus:ring-lp-green/20"
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          <QuantityDropdown
+            rows={qtyRows}
+            value={quantity}
+            showCustom={showCustomQty}
+            customValue={customQty}
+            onSelect={qty => { setQuantity(qty); setShowCustomQty(false) }}
+            onSelectCustom={() => setShowCustomQty(true)}
+            onCustomChange={val => {
+              setCustomQty(val)
+              const n = parseInt(val)
+              if (n >= 50) setQuantity(n)
+            }}
+            minCustom={50}
+            stepCustom={50}
+          />
         ) : (
           <p className="text-sm text-gray-400 py-4 text-center">Enter dimensions above to see pricing</p>
         )}
