@@ -86,13 +86,10 @@ export default function RollLabelCalculator({ productName }: Props) {
     }`
 
   return (
-    <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm lg:sticky lg:top-24 lg:max-h-[calc(100vh-112px)] flex flex-col">
-
-      {/* Scrollable body */}
-      <div className="overflow-y-auto flex-1 p-5 sm:p-7">
+    <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24">
 
       {/* ── Size ── */}
-      <div className="mb-5">
+      <div className="mb-6">
         <p className={sectionLabel}>Select a size</p>
         <div className="flex flex-wrap gap-2 mb-2">
           {PRESET_SIZES.filter(s => s.id !== 'custom').map(s => (
@@ -265,26 +262,24 @@ export default function RollLabelCalculator({ productName }: Props) {
         )}
       </div>
 
-      </div>{/* end scrollable body */}
-
-      {/* ── Price Footer + CTA — pinned to bottom ── */}
+      {/* ── Price Footer + CTA ── */}
       {validSize && price && (
-        <div className="border-t border-gray-200 p-5 sm:p-7 pt-4 bg-white rounded-b-2xl">
-          <div className="flex items-end justify-between mb-3">
-            <p className="text-3xl font-bold text-gray-900 leading-none">{price.totalFormatted}</p>
-            <p className="text-sm text-gray-500 pb-0.5">{price.unitFormatted} / label</p>
+        <>
+          <div className="border-t border-gray-200 pt-5 mb-4 flex items-end justify-between">
+            <p className="text-4xl font-bold text-gray-900 leading-none">{price.totalFormatted}</p>
+            <p className="text-sm text-gray-500 pb-1">{price.unitFormatted} / label</p>
           </div>
-          <Button onClick={handleOrder} size="lg" className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-3.5 rounded-xl">
+          <Button onClick={handleOrder} size="lg" className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
             Continue
           </Button>
-          <p className="text-xs text-gray-400 text-center mt-2.5">
+          <p className="text-xs text-gray-400 text-center mt-3">
             Upload artwork · Proof before production · Shipping at checkout
           </p>
-          <p className="text-xs text-center mt-1.5">
+          <p className="text-xs text-center mt-2">
             <span className="text-gray-500">Need rush? Call us: </span>
             <a href="tel:3476030557" className="font-semibold text-lp-green hover:underline">347.603.0557</a>
           </p>
-        </div>
+        </>
       )}
     </div>
   )
