@@ -54,6 +54,7 @@ export default async function SpotUVCheckoutPage({ searchParams }: PageProps) {
     artworkNote: 'Spot UV layer in yellow (100% Y) on separate layer',
     acceptedFormats: 'AI · EPS · SVG · PDF',
     cancelPath: '/shop/spot-uv',
+    skipPreview: true,
   }
 
   return (

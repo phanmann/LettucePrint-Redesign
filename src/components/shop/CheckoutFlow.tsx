@@ -24,6 +24,8 @@ export interface CheckoutFlowConfig {
   acceptedFormats?: string
   // Cancel URL if user wants to go back
   cancelPath?: string
+  // Skip preview step — just show file received confirmation (for non-previewable formats like AI/EPS)
+  skipPreview?: boolean
 }
 
 const SIZE_LABELS: Record<string, string> = {
@@ -47,7 +49,7 @@ interface UploadedFile {
   isImage: boolean
 }
 
-type FlowState = 'upload' | 'uploading' | 'preview' | 'paying' | 'error'
+type FlowState = 'upload' | 'uploading' | 'preview' | 'received' | 'paying' | 'error'
 
 export default function CheckoutFlow({ config }: { config: CheckoutFlowConfig }) {
   const [flowState, setFlowState] = useState<FlowState>('upload')
@@ -70,7 +72,7 @@ export default function CheckoutFlow({ config }: { config: CheckoutFlowConfig })
         isPdf: ext === 'pdf',
         isImage: ['png', 'jpg', 'jpeg', 'svg', 'gif', 'webp'].includes(ext),
       })
-      setFlowState('preview')
+      setFlowState(config.skipPreview ? 'received' : 'preview')
     },
     onUploadError: (err) => {
       setFlowState('error')
@@ -216,6 +218,53 @@ export default function CheckoutFlow({ config }: { config: CheckoutFlowConfig })
               <a href="mailto:steve@lettuceprint.com" className="text-lp-green hover:underline">Email us your file</a>
               {' '}and we'll set you up manually.
             </p>
+          </div>
+        )}
+
+        {/* File received — no preview (skipPreview mode) */}
+        {(flowState === 'received' || (config.skipPreview && flowState === 'paying')) && uploadedFile && (
+          <div className={`rounded-card shadow-card border p-8 ${isDark ? 'bg-lp-black border-white/10' : 'bg-white border-gray-100'}`}>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-full bg-lp-green flex items-center justify-center">
+                <CheckCircle size={16} className="text-white" />
+              </div>
+              <h2 className={`text-h3 font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>File received</h2>
+            </div>
+
+            <div className={`flex items-center gap-4 px-5 py-4 rounded-xl border mb-6 ${isDark ? 'bg-white/5 border-white/10' : 'bg-lp-green/5 border-lp-green/20'}`}>
+              <div className="w-10 h-10 rounded-full bg-lp-green/10 flex items-center justify-center flex-shrink-0">
+                <FileText size={20} className="text-lp-green" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className={`text-sm font-semibold truncate ${isDark ? 'text-white' : 'text-gray-900'}`}>{uploadedFile.name}</p>
+                <p className={`text-xs mt-0.5 ${isDark ? 'text-white/50' : 'text-gray-500'}`}>Uploaded successfully</p>
+              </div>
+              <CheckCircle size={18} className="text-lp-green flex-shrink-0" />
+            </div>
+
+            <p className={`text-sm mb-6 ${isDark ? 'text-white/60' : 'text-gray-600'}`}>
+              We&apos;ll review your file and send a proof before anything goes to print. Proceed to payment to confirm your order.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={handleProceedToPayment}
+                disabled={flowState === 'paying'}
+                className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-lp-green text-white font-semibold rounded-lg hover:bg-lp-green-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed text-sm"
+              >
+                {flowState === 'paying'
+                  ? <><Loader2 size={16} className="animate-spin" /> Taking you to payment…</>
+                  : <><CheckCircle size={16} /> Proceed to payment <ArrowRight size={14} /></>
+                }
+              </button>
+              <button
+                onClick={handleReupload}
+                disabled={flowState === 'paying'}
+                className={`flex items-center justify-center gap-2 px-6 py-4 border-2 font-semibold rounded-lg transition-colors disabled:opacity-60 text-sm ${isDark ? 'border-white/20 text-white/70 hover:border-white/40' : 'border-gray-300 text-gray-700 hover:border-gray-400'}`}
+              >
+                <RefreshCw size={16} /> Upload different file
+              </button>
+            </div>
           </div>
         )}
 
