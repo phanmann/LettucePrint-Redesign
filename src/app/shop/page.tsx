@@ -9,6 +9,7 @@ import Button from '@/components/ui/Button'
 export const metadata: Metadata = {
   title: 'Shop — Custom Print Products',
   description: 'Order custom stickers and roll labels online. Real-time pricing, fast turnaround, printed in Brooklyn.',
+  alternates: { canonical: 'https://lettuceprint.com/shop' },
 }
 
 const products = [

@@ -6,8 +6,9 @@ import { client } from '@/sanity/client'
 import { allPortfolioQuery } from '@/sanity/queries'
 
 export const metadata = {
-  title: 'Portfolio | Lettuce Print',
+  title: 'Portfolio',
   description: 'Browse our work — packaging, signage, screen printing, stickers, and more for brands across NYC and beyond.',
+  alternates: { canonical: 'https://lettuceprint.com/projects' },
 }
 
 export default async function PortfolioPage() {

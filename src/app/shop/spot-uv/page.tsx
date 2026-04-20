@@ -9,6 +9,7 @@ import Badge from '@/components/ui/Badge'
 export const metadata: Metadata = {
   title: 'Spot UV Stickers',
   description: 'Premium Spot UV stickers printed in Brooklyn. High-gloss UV coating over a matte base for a luxury tactile finish. Custom shapes, fast turnaround.',
+  alternates: { canonical: 'https://lettuceprint.com/shop/spot-uv' },
 }
 
 const specs = [

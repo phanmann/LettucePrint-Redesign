@@ -6,6 +6,7 @@ import QuoteForm from '@/components/quote/QuoteForm'
 export const metadata: Metadata = {
   title: 'Get a Quote',
   description: 'Request a custom print quote from Lettuce Print. Packaging, stickers, signage, screen printing, large format — we do it all. Response within 1 business day.',
+  alternates: { canonical: 'https://lettuceprint.com/get-quote' },
 }
 
 export default function GetQuotePage() {

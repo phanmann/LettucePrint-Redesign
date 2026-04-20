@@ -6,8 +6,9 @@ import Link from 'next/link'
 import Button from '@/components/ui/Button'
 
 export const metadata = {
-  title: 'About | Lettuce Print',
+  title: 'About Us',
   description: 'Brooklyn-based print and design studio. We handle design, print, and fulfillment under one roof — no middlemen, no headaches.',
+  alternates: { canonical: 'https://lettuceprint.com/about-us' },
 }
 
 const stats = [

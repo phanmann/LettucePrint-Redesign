@@ -9,6 +9,7 @@ import Badge from '@/components/ui/Badge'
 export const metadata: Metadata = {
   title: 'Custom Roll Labels',
   description: 'High-volume custom roll labels printed in Brooklyn. Standard and Premium BOPP materials, matte or gloss laminate. Real-time pricing calculator.',
+  alternates: { canonical: 'https://lettuceprint.com/shop/roll-labels' },
 }
 
 const specs = [
