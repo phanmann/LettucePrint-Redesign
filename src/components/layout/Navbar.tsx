@@ -11,7 +11,11 @@ type NavLink = { label: string; href: string; children?: { label: string; href: 
 
 const navLinks: NavLink[] = [
   { label: 'Marketing Materials', href: '/services/marketing-materials' },
-  { label: 'Stickers & Labels', href: '/shop/stickers' },
+  { label: 'Stickers & Labels', href: '/shop/stickers', children: [
+    { label: 'Stickers', href: '/shop/stickers' },
+    { label: 'Spot UV Stickers', href: '/shop/spot-uv' },
+    { label: 'Roll Labels', href: '/shop/roll-labels' },
+  ]},
   { label: 'Boxes & Packaging', href: '/services/packaging' },
   { label: 'Signs & Banners', href: '/services/signage' },
   { label: 'Apparel & Promo', href: '/services/apparel' },
