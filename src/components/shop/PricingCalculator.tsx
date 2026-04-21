@@ -61,12 +61,19 @@ export default function PricingCalculator({ productName }: Props) {
 
   // Quantity rows with per-tier pricing
   const qtyRows = useMemo(() => {
+    const baseAt50 = calculatePrice(priceSize, 50, material, finish, 'standard')
+    const unitAt50 = isCustomSize && validSize
+      ? Math.round(baseAt50.totalCents * mult) / 50
+      : baseAt50.unitCents
+
     return QUANTITY_TIERS.map(qty => {
       const base = calculatePrice(priceSize, qty, material, finish, 'standard')
       const total = isCustomSize && validSize ? Math.round(base.totalCents * mult) : base.totalCents
-      const baseAt50 = calculatePrice(priceSize, 50, material, finish, 'standard')
-      const maxTotal = isCustomSize && validSize ? Math.round(baseAt50.totalCents * mult) : baseAt50.totalCents
-      const save = Math.max(0, Math.round(((maxTotal - total) / maxTotal) * 100))
+      const unitCost = total / qty
+      // Savings = how much cheaper per unit vs buying just 50
+      const save = unitAt50 > unitCost
+        ? Math.round(((unitAt50 - unitCost) / unitAt50) * 100)
+        : 0
       return { qty, total, totalFmt: fmt(total), save }
     })
   }, [priceSize, material, finish, isCustomSize, validSize, mult])

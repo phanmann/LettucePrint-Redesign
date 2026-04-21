@@ -55,12 +55,18 @@ export default function SpotUVCalculator({ productName }: Props) {
   }, [priceSize, quantity, layers, isCustomSize, validSize, mult])
 
   const qtyRows = useMemo(() => {
+    const baseAt50 = calculateSpotUVPrice(priceSize, 50, layers, rush)
+    const unitAt50 = isCustomSize && validSize
+      ? Math.round(baseAt50.totalCents * mult) / 50
+      : baseAt50.unitCents
+
     return QUANTITY_TIERS.map(qty => {
       const base = calculateSpotUVPrice(priceSize, qty, layers, rush)
       const total = isCustomSize && validSize ? Math.round(base.totalCents * mult) : base.totalCents
-      const baseAt50 = calculateSpotUVPrice(priceSize, 50, layers, rush)
-      const maxTotal = isCustomSize && validSize ? Math.round(baseAt50.totalCents * mult) : baseAt50.totalCents
-      const save = Math.max(0, Math.round(((maxTotal - total) / maxTotal) * 100))
+      const unitCost = total / qty
+      const save = unitAt50 > unitCost
+        ? Math.round(((unitAt50 - unitCost) / unitAt50) * 100)
+        : 0
       return { qty, total, totalFmt: fmt(total), save }
     })
   }, [priceSize, layers, isCustomSize, validSize, mult])
