@@ -35,7 +35,12 @@ const navLinks: NavLink[] = [
     { label: 'SEG Light Displays', href: '/services/signage/seg-light-displays' },
     { label: 'Roll-Up Banners', href: '/services/signage/roll-up-banners' },
   ]},
-  { label: 'Apparel & Promo', href: '/services/apparel' },
+  { label: 'Apparel & Promo', href: '/services/apparel', children: [
+    { label: 'Screenprint', href: '/services/apparel/screenprint' },
+    { label: 'Embroidery', href: '/services/apparel/embroidery' },
+    { label: 'DTG', href: '/services/apparel/dtg' },
+    { label: 'Custom Items', href: '/services/apparel/custom-items' },
+  ]},
 ]
 
 export default function Navbar() {
