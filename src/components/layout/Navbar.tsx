@@ -95,7 +95,7 @@ export default function Navbar() {
                 >
                   <span
                     className={cn(
-                      'text-small font-medium text-gray-900 transition-colors duration-200 select-none',
+                      'text-xs font-medium text-gray-700 transition-colors duration-200 select-none tracking-wide',
                       link.children ? 'cursor-default' : 'cursor-pointer hover:text-lp-green'
                     )}
                   >
