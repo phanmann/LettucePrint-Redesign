@@ -2,23 +2,19 @@
 
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
 import Button from '@/components/ui/Button'
 import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import {
   calculatePrice,
   QUANTITY_TIERS,
-  SIZE_LABELS,
   MATERIAL_LABELS,
   MATERIAL_DESCRIPTIONS,
   FINISH_LABELS,
   formatCents,
-  type StickerSize,
   type StickerMaterial,
   type StickerFinish,
 } from '@/lib/pricing'
 
-const PRESET_SIZES: StickerSize[] = ['1x1', '2x2', '3x3', '4x4', '5x5']
 const MATERIALS: StickerMaterial[] = ['standard', 'holographic']
 const FINISHES: StickerFinish[] = ['matte', 'gloss', 'laminate']
 
@@ -31,7 +27,6 @@ function customMultiplier(w: number, h: number): number {
 interface Props { productName: string }
 
 export default function PricingCalculator({ productName }: Props) {
-  const [selectedPreset, setSelectedPreset] = useState<StickerSize | 'custom'>('2x2')
   const [customWidth, setCustomWidth] = useState('')
   const [customHeight, setCustomHeight] = useState('')
   const [material, setMaterial] = useState<StickerMaterial>('standard')
@@ -41,34 +36,33 @@ export default function PricingCalculator({ productName }: Props) {
   const [showCustomQty, setShowCustomQty] = useState(false)
   const router = useRouter()
 
-  const isCustomSize = selectedPreset === 'custom'
   const cw = parseFloat(customWidth) || 0
   const ch = parseFloat(customHeight) || 0
-  const validSize = isCustomSize ? (cw > 0 && ch > 0) : true
-  const priceSize: StickerSize = isCustomSize ? '2x2' : selectedPreset
-  const mult = isCustomSize && validSize ? customMultiplier(cw, ch) : 1
+  const validSize = cw > 0 && ch > 0
+  const priceSize = '2x2' as const
+  const mult = validSize ? customMultiplier(cw, ch) : 1
 
   const fmt = (cents: number) => formatCents(cents)
 
   // Compute price for current selection
   const price = useMemo(() => {
     const base = calculatePrice(priceSize, quantity, material, finish, 'standard')
-    if (!isCustomSize || !validSize) return base
+    if (!validSize) return base
     const total = Math.round(base.totalCents * mult)
     const unit = Math.round(total / quantity)
     return { ...base, totalCents: total, unitCents: unit, totalFormatted: fmt(total), unitFormatted: fmt(unit) }
-  }, [priceSize, quantity, material, finish, isCustomSize, validSize, mult])
+  }, [priceSize, quantity, material, finish, validSize, mult])
 
   // Quantity rows with per-tier pricing
   const qtyRows = useMemo(() => {
     const baseAt50 = calculatePrice(priceSize, 50, material, finish, 'standard')
-    const unitAt50 = isCustomSize && validSize
+    const unitAt50 = validSize
       ? Math.round(baseAt50.totalCents * mult) / 50
       : baseAt50.unitCents
 
     return QUANTITY_TIERS.map(qty => {
       const base = calculatePrice(priceSize, qty, material, finish, 'standard')
-      const total = isCustomSize && validSize ? Math.round(base.totalCents * mult) : base.totalCents
+      const total = validSize ? Math.round(base.totalCents * mult) : base.totalCents
       const unitCost = total / qty
       // Savings = how much cheaper per unit vs buying just 50
       const save = unitAt50 > unitCost
@@ -76,12 +70,12 @@ export default function PricingCalculator({ productName }: Props) {
         : 0
       return { qty, total, totalFmt: fmt(total), save }
     })
-  }, [priceSize, material, finish, isCustomSize, validSize, mult])
+  }, [priceSize, material, finish, validSize, mult])
 
   const handleOrder = () => {
     if (!validSize) return
     const params = new URLSearchParams({
-      size: isCustomSize ? `${cw}" × ${ch}"` : selectedPreset,
+      size: `${cw}" × ${ch}"`,
       qty: String(quantity),
       material,
       finish,
@@ -106,65 +100,28 @@ export default function PricingCalculator({ productName }: Props) {
 
       {/* ── Size ── */}
       <div className="mb-6">
-        <p className={sectionLabel}>Select a size</p>
-        <div className="flex flex-wrap gap-2 mb-2">
-          {PRESET_SIZES.map(s => (
-            <button
-              key={s}
-              onClick={() => setSelectedPreset(s)}
-              className={`px-4 py-2.5 rounded-full text-sm font-semibold border transition-all duration-150 ${
-                selectedPreset === s
-                  ? 'bg-lp-green text-white border-lp-green'
-                  : 'bg-white text-gray-700 border-gray-200 hover:border-gray-400'
-              }`}
-            >
-              {SIZE_LABELS[s]}
-            </button>
-          ))}
-          <button
-            onClick={() => setSelectedPreset('custom')}
-            className={`px-4 py-2.5 rounded-full text-sm font-semibold border transition-all duration-150 ${
-              selectedPreset === 'custom'
-                ? 'bg-lp-green text-white border-lp-green'
-                : 'bg-white text-gray-700 border-gray-200 hover:border-gray-400'
-            }`}
-          >
-            Custom
-          </button>
+        <p className={sectionLabel}>Size (inches)</p>
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="block text-xs text-gray-500 mb-1">Width (W)</label>
+            <input
+              type="number" min="0.5" max="60" step="0.25"
+              value={customWidth} onChange={e => setCustomWidth(e.target.value)}
+              placeholder="e.g. 3.5"
+              className="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-lp-green"
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-gray-500 mb-1">Length (L)</label>
+            <input
+              type="number" min="0.5" max="60" step="0.25"
+              value={customHeight} onChange={e => setCustomHeight(e.target.value)}
+              placeholder="e.g. 2.5"
+              className="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-lp-green"
+            />
+          </div>
         </div>
-        <AnimatePresence>
-          {isCustomSize && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.18 }}
-              className="overflow-hidden"
-            >
-              <div className="grid grid-cols-2 gap-3 pt-2">
-                <div>
-                  <label className="block text-xs text-gray-500 mb-1">Width (in)</label>
-                  <input
-                    type="number" min="0.5" max="12" step="0.25"
-                    value={customWidth} onChange={e => setCustomWidth(e.target.value)}
-                    placeholder="e.g. 3.5"
-                    className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-lp-green"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs text-gray-500 mb-1">Height (in)</label>
-                  <input
-                    type="number" min="0.5" max="12" step="0.25"
-                    value={customHeight} onChange={e => setCustomHeight(e.target.value)}
-                    placeholder="e.g. 2.5"
-                    className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-lp-green"
-                  />
-                </div>
-                <p className="col-span-2 text-xs text-gray-400">Pricing estimated — we'll confirm unusual sizes.</p>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <p className="text-xs text-gray-400 mt-2">Pricing is estimated — we'll confirm any unusual sizes before production.</p>
       </div>
 
       <div className="border-t border-gray-100 mb-6" />
