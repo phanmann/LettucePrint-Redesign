@@ -115,7 +115,7 @@ export default function Navbar() {
                         <Link
                           key={child.href}
                           href={child.href}
-                          className="block px-4 py-2.5 text-small text-gray-700 hover:text-lp-green hover:bg-gray-50 transition-colors"
+                          className="block px-4 py-2.5 text-[11px] font-medium text-gray-700 hover:text-lp-green hover:bg-gray-50 transition-colors"
                         >
                           {child.label}
                         </Link>
