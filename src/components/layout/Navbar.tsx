@@ -70,7 +70,7 @@ export default function Navbar() {
           ? 'bg-white/95 backdrop-blur-md shadow-nav border-b border-gray-100'
           : 'bg-white border-b border-gray-100'
       )}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="flex items-center justify-between h-[72px]">
 
             {/* Logo */}
@@ -95,7 +95,7 @@ export default function Navbar() {
                 >
                   <span
                     className={cn(
-                      'text-xs font-medium text-gray-700 transition-colors duration-200 select-none tracking-wide',
+                      'text-[11px] font-medium text-gray-700 transition-colors duration-200 select-none tracking-wide',
                       link.children ? 'cursor-default' : 'cursor-pointer hover:text-lp-green'
                     )}
                   >
