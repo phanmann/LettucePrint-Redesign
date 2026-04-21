@@ -10,14 +10,31 @@ import Button from '@/components/ui/Button'
 type NavLink = { label: string; href: string; children?: { label: string; href: string }[] }
 
 const navLinks: NavLink[] = [
-  { label: 'Marketing Materials', href: '/services/marketing-materials' },
+  { label: 'Marketing Materials', href: '/services/marketing-materials', children: [
+    { label: 'Business Cards', href: '/services/marketing-materials/business-cards' },
+    { label: 'Postcards', href: '/services/marketing-materials/postcards' },
+    { label: 'Flyers', href: '/services/marketing-materials/flyers' },
+    { label: 'Posters', href: '/services/marketing-materials/posters' },
+    { label: 'Brochures', href: '/services/marketing-materials/brochures' },
+    { label: 'Booklets', href: '/services/marketing-materials/booklets' },
+  ]},
   { label: 'Stickers & Labels', href: '/shop/stickers', children: [
     { label: 'Stickers', href: '/shop/stickers' },
     { label: 'Spot UV Stickers', href: '/shop/spot-uv' },
     { label: 'Roll Labels', href: '/shop/roll-labels' },
   ]},
-  { label: 'Boxes & Packaging', href: '/services/packaging' },
-  { label: 'Signs & Banners', href: '/services/signage' },
+  { label: 'Boxes & Packaging', href: '/services/packaging', children: [
+    { label: 'Shipping Boxes', href: '/services/packaging/shipping-boxes' },
+    { label: 'Mylar Bags', href: '/services/packaging/mylar-bags' },
+    { label: 'Custom Packaging', href: '/services/packaging/custom-packaging' },
+  ]},
+  { label: 'Signs & Banners', href: '/services/signage', children: [
+    { label: 'Banners', href: '/services/signage/banners' },
+    { label: 'Step & Repeat Eurofit Backdrops', href: '/services/signage/step-repeat-backdrops' },
+    { label: 'Popup Display', href: '/services/signage/popup-display' },
+    { label: 'SEG Light Displays', href: '/services/signage/seg-light-displays' },
+    { label: 'Roll-Up Banners', href: '/services/signage/roll-up-banners' },
+  ]},
   { label: 'Apparel & Promo', href: '/services/apparel' },
 ]
 
