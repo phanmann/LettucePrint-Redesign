@@ -93,17 +93,14 @@ export default function Navbar() {
                   onMouseEnter={() => link.children && openDropdown(link.label)}
                   onMouseLeave={closeDropdown}
                 >
-                  <Link
-                    href={link.href}
+                  <span
                     className={cn(
-                      'text-small font-medium text-gray-900 transition-colors duration-200',
-                      'hover:text-lp-green relative',
-                      'after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-lp-green',
-                      'after:w-0 hover:after:w-full after:transition-all after:duration-200'
+                      'text-small font-medium text-gray-900 transition-colors duration-200 select-none',
+                      link.children ? 'cursor-default' : 'cursor-pointer hover:text-lp-green'
                     )}
                   >
                     {link.label}
-                  </Link>
+                  </span>
 
                   {/* Dropdown */}
                   {link.children && activeDropdown === link.label && (
@@ -165,13 +162,9 @@ export default function Navbar() {
             <nav className="flex-1 overflow-y-auto py-4">
               {navLinks.map((link) => (
                 <div key={link.label}>
-                  <Link
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="block px-6 py-4 text-h4 font-semibold text-gray-900 hover:text-lp-green border-b border-gray-50 transition-colors"
-                  >
+                  <span className="block px-6 py-4 text-h4 font-semibold text-gray-900 border-b border-gray-50 select-none cursor-default">
                     {link.label}
-                  </Link>
+                  </span>
                   {link.children && (
                     <div className="bg-gray-50">
                       {link.children.map((child) => (
