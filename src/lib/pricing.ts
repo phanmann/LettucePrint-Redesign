@@ -169,6 +169,12 @@ export const FINISH_LABELS: Record<StickerFinish, string> = {
   'laminate': 'Laminate (Additional)',
 }
 
+export const FINISH_DESCRIPTIONS: Record<StickerFinish, string> = {
+  'matte':    'Smooth, non-reflective finish. Clean and modern look.',
+  'gloss':    'High-shine coating. Colors pop, great for photos and bold designs.',
+  'laminate': 'Extra protective film layer. Adds durability and a premium feel.',
+}
+
 // ── Spot UV Embossing Layers ───────────────────────────────────────────────────
 // Base spot-UV price already includes standard print + 1 embossing layer ($0.041/sq in baked in)
 // This selector adds EXTRA layers on top of the included 1: 0 = standard, 1–4 = extras
