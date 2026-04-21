@@ -30,10 +30,8 @@ const navLinks: NavLink[] = [
   ]},
   { label: 'Signs & Banners', href: '/services/signage', children: [
     { label: 'Banners', href: '/services/signage/banners' },
-    { label: 'Step & Repeat Eurofit Backdrops', href: '/services/signage/step-repeat-backdrops' },
-    { label: 'Popup Display', href: '/services/signage/popup-display' },
+    { label: 'Backdrops', href: '/services/signage/backdrops' },
     { label: 'SEG Light Displays', href: '/services/signage/seg-light-displays' },
-    { label: 'Roll-Up Banners', href: '/services/signage/roll-up-banners' },
   ]},
   { label: 'Apparel & Promo', href: '/services/apparel', children: [
     { label: 'Screenprint', href: '/services/apparel/screenprint' },
