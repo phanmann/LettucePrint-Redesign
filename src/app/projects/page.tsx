@@ -5,6 +5,8 @@ import PortfolioGrid from '@/components/sections/PortfolioGrid'
 import { client } from '@/sanity/client'
 import { allPortfolioQuery } from '@/sanity/queries'
 
+export const revalidate = 0
+
 export const metadata = {
   title: 'Portfolio',
   description: 'Browse our work — packaging, signage, screen printing, stickers, and more for brands across NYC and beyond.',
