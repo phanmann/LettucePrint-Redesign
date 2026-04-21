@@ -7,29 +7,14 @@ import { Menu, X, ShoppingCart } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Button from '@/components/ui/Button'
 
-const navLinks = [
-  {
-    label: 'Shop',
-    href: '/shop',
-    children: [
-      { label: 'Stickers & Labels', href: '/shop/stickers' },
-      { label: 'Spot UV Stickers', href: '/shop/spot-uv' },
-      { label: 'Roll Labels', href: '/shop/roll-labels' },
-    ],
-  },
-  {
-    label: 'Services',
-    href: '/services',
-    children: [
-      { label: 'Packaging', href: '/services/packaging' },
-      { label: 'Graphic Design', href: '/services/graphic-design' },
-      { label: 'Signage', href: '/services/signage' },
-      { label: 'Screen Printing', href: '/services/screen-printing' },
-      { label: 'Large Format', href: '/services/large-format' },
-    ],
-  },
-  { label: 'Portfolio', href: '/projects' },
-  { label: 'About', href: '/about-us' },
+type NavLink = { label: string; href: string; children?: { label: string; href: string }[] }
+
+const navLinks: NavLink[] = [
+  { label: 'Marketing Materials', href: '/services/marketing-materials' },
+  { label: 'Stickers & Labels', href: '/shop/stickers' },
+  { label: 'Boxes & Packaging', href: '/services/packaging' },
+  { label: 'Signs & Banners', href: '/services/signage' },
+  { label: 'Apparel & Promo', href: '/services/apparel' },
 ]
 
 export default function Navbar() {
@@ -76,7 +61,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-6">
               {navLinks.map((link) => (
                 <div
                   key={link.label}
@@ -180,7 +165,12 @@ export default function Navbar() {
                 </div>
               ))}
             </nav>
-            <div className="p-6 border-t border-gray-100">
+            <div className="p-6 border-t border-gray-100 space-y-3">
+              <div className="flex gap-4 text-sm text-gray-500">
+                <Link href="/projects" onClick={() => setMobileOpen(false)} className="hover:text-lp-green transition-colors">Portfolio</Link>
+                <Link href="/about-us" onClick={() => setMobileOpen(false)} className="hover:text-lp-green transition-colors">About</Link>
+                <Link href="/contact-us" onClick={() => setMobileOpen(false)} className="hover:text-lp-green transition-colors">Contact</Link>
+              </div>
               <Link href="/get-quote" onClick={() => setMobileOpen(false)}>
                 <Button size="lg" className="w-full">Get a Quote</Button>
               </Link>
