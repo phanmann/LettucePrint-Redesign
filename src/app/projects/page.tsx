@@ -2,7 +2,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import CTABanner from '@/components/sections/CTABanner'
 import PortfolioGrid from '@/components/sections/PortfolioGrid'
-import { client } from '@/sanity/client'
+import { previewClient as client } from '@/sanity/client'
 import { allPortfolioQuery } from '@/sanity/queries'
 
 export const revalidate = 0
