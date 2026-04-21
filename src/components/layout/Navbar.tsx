@@ -24,7 +24,7 @@ const navLinks: NavLink[] = [
     { label: 'Roll Labels', href: '/shop/roll-labels' },
   ]},
   { label: 'Boxes & Packaging', href: '/services/packaging', children: [
-    { label: 'Shipping Boxes', href: '/services/packaging/shipping-boxes' },
+    { label: 'Boxes', href: '/services/packaging/boxes' },
     { label: 'Mylar Bags', href: '/services/packaging/mylar-bags' },
     { label: 'Custom Packaging', href: '/services/packaging/custom-packaging' },
   ]},
