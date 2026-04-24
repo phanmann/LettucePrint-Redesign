@@ -33,7 +33,7 @@ export default function Marquee({
             )}
           >
             {item}
-            <span className="text-lp-green text-lg">·</span>
+            <span className="text-white/50 text-lg">·</span>
           </span>
         ))}
       </div>

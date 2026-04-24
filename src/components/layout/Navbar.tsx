@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, ShoppingCart } from 'lucide-react'
@@ -42,6 +43,7 @@ const navLinks: NavLink[] = [
 ]
 
 export default function Navbar() {
+  const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
@@ -86,7 +88,9 @@ export default function Navbar() {
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-6">
-              {navLinks.map((link) => (
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
+                return (
                 <div
                   key={link.label}
                   className="relative"
@@ -95,8 +99,12 @@ export default function Navbar() {
                 >
                   <span
                     className={cn(
-                      'text-[11px] font-medium text-gray-700 transition-colors duration-200 select-none tracking-wide',
-                      link.children ? 'cursor-default' : 'cursor-pointer hover:text-lp-green'
+                      'text-[11px] font-medium transition-colors duration-200 select-none tracking-wide pb-0.5',
+                      'relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:rounded-full after:transition-all after:duration-200',
+                      link.children ? 'cursor-default' : 'cursor-pointer',
+                      isActive
+                        ? 'text-lp-green after:bg-lp-green after:opacity-100'
+                        : 'text-gray-700 hover:text-lp-green after:bg-lp-green after:opacity-0 hover:after:opacity-100'
                     )}
                   >
                     {link.label}
@@ -111,19 +119,28 @@ export default function Navbar() {
                     >
                       {/* Invisible bridge covers the gap between trigger and menu */}
                       <div className="absolute -top-3 left-0 right-0 h-3" />
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className="block px-4 py-2.5 text-[11px] font-medium text-gray-700 hover:text-lp-green hover:bg-gray-50 transition-colors"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
+                      {link.children.map((child) => {
+                        const isChildActive = pathname === child.href
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className={cn(
+                              'block px-4 py-2.5 text-[11px] font-medium transition-colors',
+                              isChildActive
+                                ? 'text-lp-green bg-lp-green/5 font-semibold'
+                                : 'text-gray-700 hover:text-lp-green hover:bg-gray-50'
+                            )}
+                          >
+                            {child.label}
+                          </Link>
+                        )
+                      })}
                     </div>
                   )}
                 </div>
-              ))}
+                )
+              })}
             </nav>
 
             {/* Desktop Actions */}

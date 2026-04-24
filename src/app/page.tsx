@@ -22,7 +22,7 @@ export default function HomePage() {
         <Marquee
           items={capabilitiesMarquee}
           speed="fast"
-          bgClassName="bg-lp-black"
+          bgClassName="bg-lp-green"
           textClassName="text-white"
         />
         <TrustBar />
