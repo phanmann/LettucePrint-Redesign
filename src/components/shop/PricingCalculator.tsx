@@ -5,12 +5,13 @@ import { useRouter } from 'next/navigation'
 import Button from '@/components/ui/Button'
 import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import {
-  calculatePrice,
   QUANTITY_TIERS,
   MATERIAL_LABELS,
   MATERIAL_DESCRIPTIONS,
   FINISH_LABELS,
   FINISH_DESCRIPTIONS,
+  FINISH_ADDON_PER_SQIN,
+  MATERIAL_MULTIPLIERS,
   formatCents,
   type StickerMaterial,
   type StickerFinish,
@@ -19,10 +20,28 @@ import {
 const MATERIALS: StickerMaterial[] = ['standard', 'holographic']
 const FINISHES: StickerFinish[] = ['matte', 'gloss', 'laminate']
 
-// Area-based multiplier for custom sizes
-function customMultiplier(w: number, h: number): number {
-  const sqIn = w * h
-  return Math.max(0.3, Math.round(0.125 * Math.pow(sqIn, 0.85) * 100) / 100)
+// Core formula constants (must match pricing.ts)
+const COST_PER_SQ_IN_CENTS = 2.7
+const MARKUP_MULTIPLIER    = 3.87
+
+// Compute total sell price in cents for custom dimensions
+function calcCustomPrice(
+  sqIn: number,
+  quantity: number,
+  material: StickerMaterial,
+  finish: StickerFinish
+): { totalCents: number; unitCents: number; totalFormatted: string; unitFormatted: string } {
+  const base = Math.round(sqIn * COST_PER_SQ_IN_CENTS * MARKUP_MULTIPLIER * quantity)
+  const materialAdj = Math.round(base * MATERIAL_MULTIPLIERS[material])
+  const finishAddon = FINISH_ADDON_PER_SQIN[finish] * sqIn * quantity
+  const total = materialAdj + finishAddon
+  const unit = Math.round(total / quantity)
+  return {
+    totalCents: total,
+    unitCents: unit,
+    totalFormatted: formatCents(total),
+    unitFormatted: formatCents(unit),
+  }
 }
 
 interface Props { productName: string }
@@ -40,38 +59,22 @@ export default function PricingCalculator({ productName }: Props) {
   const cw = parseFloat(customWidth) || 0
   const ch = parseFloat(customHeight) || 0
   const validSize = cw > 0 && ch > 0
-  const priceSize = '2x2' as const
-  const mult = validSize ? customMultiplier(cw, ch) : 1
-
-  const fmt = (cents: number) => formatCents(cents)
+  const sqIn = cw * ch
 
   // Compute price for current selection
   const price = useMemo(() => {
-    const base = calculatePrice(priceSize, quantity, material, finish, 'standard')
-    if (!validSize) return base
-    const total = Math.round(base.totalCents * mult)
-    const unit = Math.round(total / quantity)
-    return { ...base, totalCents: total, unitCents: unit, totalFormatted: fmt(total), unitFormatted: fmt(unit) }
-  }, [priceSize, quantity, material, finish, validSize, mult])
+    if (!validSize) return null
+    return calcCustomPrice(sqIn, quantity, material, finish)
+  }, [sqIn, quantity, material, finish, validSize])
 
-  // Quantity rows with per-tier pricing
+  // Quantity rows
   const qtyRows = useMemo(() => {
-    const baseAt50 = calculatePrice(priceSize, 50, material, finish, 'standard')
-    const unitAt50 = validSize
-      ? Math.round(baseAt50.totalCents * mult) / 50
-      : baseAt50.unitCents
-
+    if (!validSize) return []
     return QUANTITY_TIERS.map(qty => {
-      const base = calculatePrice(priceSize, qty, material, finish, 'standard')
-      const total = validSize ? Math.round(base.totalCents * mult) : base.totalCents
-      const unitCost = total / qty
-      // Savings = how much cheaper per unit vs buying just 50
-      const save = unitAt50 > unitCost
-        ? Math.round(((unitAt50 - unitCost) / unitAt50) * 100)
-        : 0
-      return { qty, total, totalFmt: fmt(total), save }
+      const p = calcCustomPrice(sqIn, qty, material, finish)
+      return { qty, total: p.totalCents, totalFmt: p.totalFormatted, save: 0 }
     })
-  }, [priceSize, material, finish, validSize, mult])
+  }, [sqIn, material, finish, validSize])
 
   const handleOrder = () => {
     if (!validSize) return
@@ -202,7 +205,7 @@ export default function PricingCalculator({ productName }: Props) {
       </div>
 
       {/* ── Price Footer + CTA ── */}
-      {validSize && (
+      {validSize && price && (
         <>
           <div className="border-t border-gray-200 pt-5 mb-4 flex items-end justify-between">
             <div>
