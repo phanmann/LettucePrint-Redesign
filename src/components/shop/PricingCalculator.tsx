@@ -6,6 +6,7 @@ import Button from '@/components/ui/Button'
 import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import {
   QUANTITY_TIERS,
+  TIER_DISCOUNTS,
   MATERIAL_LABELS,
   MATERIAL_DESCRIPTIONS,
   FINISH_LABELS,
@@ -20,22 +21,31 @@ import {
 const MATERIALS: StickerMaterial[] = ['standard', 'holographic']
 const FINISHES: StickerFinish[] = ['matte', 'gloss', 'laminate']
 
-// Core formula constants (must match pricing.ts)
-const COST_PER_SQ_IN_CENTS = 2.7
-const MARKUP_MULTIPLIER    = 3.87
+// Reference tier prices for 3×3" @ each tier (cents) — must match pricing.ts
+const REF_PRICES_3x3_CENTS: Record<number, number> = {
+  50:   7500,
+  100:  9800,
+  250:  19500,
+  500:  30000,
+  1000: 45000,
+  2500: 86200,
+}
+const REF_SQ_IN = 9
 
-// Compute total sell price in cents for custom dimensions
+// Compute total sell price in cents for custom dimensions using tier table
 function calcCustomPrice(
   sqIn: number,
   quantity: number,
   material: StickerMaterial,
   finish: StickerFinish
 ): { totalCents: number; unitCents: number; totalFormatted: string; unitFormatted: string } {
-  const base = Math.round(sqIn * COST_PER_SQ_IN_CENTS * MARKUP_MULTIPLIER * quantity)
+  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
+  const ref = REF_PRICES_3x3_CENTS[tier]
+  const base = Math.round(ref * (sqIn / REF_SQ_IN))
   const materialAdj = Math.round(base * MATERIAL_MULTIPLIERS[material])
-  const finishAddon = FINISH_ADDON_PER_SQIN[finish] * sqIn * quantity
+  const finishAddon = FINISH_ADDON_PER_SQIN[finish] * sqIn * tier
   const total = materialAdj + finishAddon
-  const unit = Math.round(total / quantity)
+  const unit = Math.round(total / tier)
   return {
     totalCents: total,
     unitCents: unit,
@@ -72,7 +82,7 @@ export default function PricingCalculator({ productName }: Props) {
     if (!validSize) return []
     return QUANTITY_TIERS.map(qty => {
       const p = calcCustomPrice(sqIn, qty, material, finish)
-      return { qty, total: p.totalCents, totalFmt: p.totalFormatted, save: 0 }
+      return { qty, total: p.totalCents, totalFmt: p.totalFormatted, save: TIER_DISCOUNTS[qty] ?? 0 }
     })
   }, [sqIn, material, finish, validSize])
 

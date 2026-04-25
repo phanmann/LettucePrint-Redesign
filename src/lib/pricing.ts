@@ -1,18 +1,40 @@
 // Lettuce Print — Sticker Pricing Engine
-// Formula: sell price = sq_inches × $0.027 (cost/sq in) × 3.87 (387% markup)
-// Reference: 3×3" sticker @ 100 units = $94.04 total
+// Anchor: 3×3" sticker @ 50 units = $75 ($1.50/unit)
+// Volume discounts off $1.50/unit base: 35% / 48% / 60% / 70% / 77%
+// All other sizes scale linearly by sq-inch area relative to 3×3 (9 sq in)
+// Minimum margin floor: 20% (actual floor is ~29.5% at 2500 units)
 
 export type StickerSize = '1x1' | '2x2' | '3x3' | '4x4' | '5x5'
 export type StickerMaterial = 'standard' | 'holographic'
 export type StickerFinish = 'matte' | 'gloss' | 'laminate'
 export type RushOption = 'standard' | '48hr' | '24hr'
 
-// Core pricing constants
-const COST_PER_SQ_IN_CENTS = 2.7        // $0.027 per sq inch (in cents)
-const MARKUP_MULTIPLIER    = 3.87       // 387% of cost
+// Reference tier prices for 3×3" standard sticker (in cents)
+// Anchor: 50 units = $75. Discounts: 35% / 48% / 60% / 70% / 77% off $1.50/unit
+const REF_PRICES_3x3_CENTS: Record<number, number> = {
+  50:   7500,   // $75.00  — $1.50/unit
+  100:  9800,   // $98.00  — $0.98/unit (save 35%)
+  250:  19500,  // $195.00 — $0.78/unit (save 48%)
+  500:  30000,  // $300.00 — $0.60/unit (save 60%)
+  1000: 45000,  // $450.00 — $0.45/unit (save 70%)
+  2500: 86200,  // $862.00 — $0.345/unit (save 77%)
+}
+
+// Reference sq inches for anchor size (3×3)
+const REF_SQ_IN = 9
 
 // Available quantity tiers
 export const QUANTITY_TIERS = [50, 100, 250, 500, 1000, 2500]
+
+// Discount percentages per tier (for display only)
+export const TIER_DISCOUNTS: Record<number, number> = {
+  50:   0,
+  100:  35,
+  250:  48,
+  500:  60,
+  1000: 70,
+  2500: 77,
+}
 
 // Size in square inches
 export const SIZE_SQ_IN: Record<StickerSize, number> = {
@@ -23,9 +45,11 @@ export const SIZE_SQ_IN: Record<StickerSize, number> = {
   '5x5': 25,
 }
 
-// Core formula: sell price in cents for a given sq-inch area and quantity
+// Base price in cents: scale 3×3 reference price by area ratio, snap to nearest tier
 function basePriceCents(sqIn: number, quantity: number): number {
-  return Math.round(sqIn * COST_PER_SQ_IN_CENTS * MARKUP_MULTIPLIER * quantity)
+  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
+  const ref = REF_PRICES_3x3_CENTS[tier]
+  return Math.round(ref * (sqIn / REF_SQ_IN))
 }
 
 // Material multipliers on sell price
@@ -71,15 +95,16 @@ export function calculatePrice(
   rush: RushOption
 ): PriceResult {
   const sqIn = SIZE_SQ_IN[size]
+  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
 
-  // Base price from formula: sqIn × $0.027 × 3.87 × qty
-  const base = basePriceCents(sqIn, quantity)
+  // Base price: scale 3×3 reference by area, snapped to tier
+  const base = basePriceCents(sqIn, tier)
 
   // Apply material multiplier (holographic premium)
   const materialAdjusted = Math.round(base * MATERIAL_MULTIPLIERS[material])
 
-  // Apply finish add-on (per sq in × quantity)
-  const finishAddon = FINISH_ADDON_PER_SQIN[finish] * sqIn * quantity
+  // Apply finish add-on (per sq in × tier qty)
+  const finishAddon = FINISH_ADDON_PER_SQIN[finish] * sqIn * tier
 
   // Subtotal before rush
   const subtotal = materialAdjusted + finishAddon
@@ -91,7 +116,7 @@ export function calculatePrice(
   const total = subtotal + rushFee
 
   // Unit price
-  const unitCents = Math.round(total / quantity)
+  const unitCents = Math.round(total / tier)
 
   return {
     totalCents: total,
@@ -123,7 +148,7 @@ export function getQuantityBreaks(
       qty,
       total: result.totalFormatted,
       unit: result.unitFormatted,
-      savingsPct: 0, // Flat rate formula — no volume discount tiers
+      savingsPct: TIER_DISCOUNTS[qty] ?? 0,
     }
   })
 }
@@ -183,7 +208,8 @@ export function calculateEmbossingAddon(
 ): number {
   if (extraLayers === 0) return 0
   const sqIn = SIZE_SQ_IN[size]
-  return Math.round(EMBOSSING_EXTRA_RATE_CENTS * sqIn * quantity * extraLayers)
+  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
+  return Math.round(EMBOSSING_EXTRA_RATE_CENTS * sqIn * tier * extraLayers)
 }
 
 export function calculateSpotUVPrice(
@@ -193,20 +219,21 @@ export function calculateSpotUVPrice(
   rush: RushOption
 ): PriceResult {
   const sqIn = SIZE_SQ_IN[size]
+  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
 
-  // Base sticker price from formula
-  const base = basePriceCents(sqIn, quantity)
+  // Base sticker price from tier table
+  const base = basePriceCents(sqIn, tier)
 
   // Spot UV premium: 1.60× the standard sticker sell price
   const spotUVBase = Math.round(base * 1.60)
 
   // Embossing add-on for extra layers
-  const embossingAddon = calculateEmbossingAddon(size, quantity, layers)
+  const embossingAddon = calculateEmbossingAddon(size, tier, layers)
 
   const subtotal = spotUVBase + embossingAddon
   const rushFee = RUSH_FEES[rush]
   const total = subtotal + rushFee
-  const unitCents = Math.round(total / quantity)
+  const unitCents = Math.round(total / tier)
   return {
     totalCents: total,
     unitCents,
