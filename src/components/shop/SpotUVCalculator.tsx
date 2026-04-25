@@ -8,9 +8,12 @@ import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import {
   calculateSpotUVPrice,
   QUANTITY_TIERS,
+  TIER_DISCOUNTS,
   SIZE_LABELS,
+  SIZE_SQ_IN,
   EMBOSSING_LAYER_OPTIONS,
   EMBOSSING_LAYER_LABELS,
+  EMBOSSING_EXTRA_RATE_CENTS,
   formatCents,
   type StickerSize,
   type RushOption,
@@ -19,9 +22,31 @@ import {
 
 const PRESET_SIZES: StickerSize[] = ['1x1', '2x2', '3x3', '4x4', '5x5']
 
-function customMultiplier(w: number, h: number): number {
-  const sqIn = w * h
-  return Math.max(0.3, Math.round(0.125 * Math.pow(sqIn, 0.85) * 100) / 100)
+// Tier table for custom Spot UV pricing (must match pricing.ts)
+const REF_PRICES_3x3_CENTS: Record<number, number> = {
+  50:   7500,
+  100:  9800,
+  250:  19500,
+  500:  30000,
+  1000: 45000,
+  2500: 86200,
+}
+const REF_SQ_IN = 9
+const SPOT_UV_MULT = 1.60
+
+function calcCustomSpotUVPrice(
+  sqIn: number,
+  quantity: number,
+  layers: EmbossingLayers
+): { totalCents: number; unitCents: number; totalFormatted: string; unitFormatted: string } {
+  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
+  const ref = REF_PRICES_3x3_CENTS[tier]
+  const base = Math.round(ref * (sqIn / REF_SQ_IN))
+  const spotBase = Math.round(base * SPOT_UV_MULT)
+  const embossing = layers > 0 ? Math.round(EMBOSSING_EXTRA_RATE_CENTS * sqIn * tier * layers) : 0
+  const total = spotBase + embossing
+  const unit = Math.round(total / tier)
+  return { totalCents: total, unitCents: unit, totalFormatted: formatCents(total), unitFormatted: formatCents(unit) }
 }
 
 interface Props { productName: string }
@@ -41,35 +66,24 @@ export default function SpotUVCalculator({ productName }: Props) {
   const ch = parseFloat(customHeight) || 0
   const validSize = isCustomSize ? (cw > 0 && ch > 0) : true
   const priceSize: StickerSize = isCustomSize ? '2x2' : selectedPreset
-  const mult = isCustomSize && validSize ? customMultiplier(cw, ch) : 1
+  const customSqIn = cw * ch
   const rush: RushOption = 'standard'
 
-  const fmt = (cents: number) => formatCents(cents)
-
   const price = useMemo(() => {
-    const base = calculateSpotUVPrice(priceSize, quantity, layers, rush)
-    if (!isCustomSize || !validSize) return base
-    const total = Math.round(base.totalCents * mult)
-    const unit = Math.round(total / quantity)
-    return { ...base, totalCents: total, unitCents: unit, totalFormatted: fmt(total), unitFormatted: fmt(unit) }
-  }, [priceSize, quantity, layers, isCustomSize, validSize, mult])
+    if (isCustomSize && validSize) {
+      return calcCustomSpotUVPrice(customSqIn, quantity, layers)
+    }
+    return calculateSpotUVPrice(priceSize, quantity, layers, rush)
+  }, [priceSize, quantity, layers, isCustomSize, validSize, customSqIn])
 
   const qtyRows = useMemo(() => {
-    const baseAt50 = calculateSpotUVPrice(priceSize, 50, layers, rush)
-    const unitAt50 = isCustomSize && validSize
-      ? Math.round(baseAt50.totalCents * mult) / 50
-      : baseAt50.unitCents
-
     return QUANTITY_TIERS.map(qty => {
-      const base = calculateSpotUVPrice(priceSize, qty, layers, rush)
-      const total = isCustomSize && validSize ? Math.round(base.totalCents * mult) : base.totalCents
-      const unitCost = total / qty
-      const save = unitAt50 > unitCost
-        ? Math.round(((unitAt50 - unitCost) / unitAt50) * 100)
-        : 0
-      return { qty, total, totalFmt: fmt(total), save }
+      const p = isCustomSize && validSize
+        ? calcCustomSpotUVPrice(customSqIn, qty, layers)
+        : calculateSpotUVPrice(priceSize, qty, layers, rush)
+      return { qty, total: p.totalCents, totalFmt: p.totalFormatted, save: TIER_DISCOUNTS[qty] ?? 0 }
     })
-  }, [priceSize, layers, isCustomSize, validSize, mult])
+  }, [priceSize, layers, isCustomSize, validSize, customSqIn])
 
   const handleOrder = () => {
     if (!validSize) return

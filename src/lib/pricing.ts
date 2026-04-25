@@ -189,7 +189,7 @@ export const FINISH_DESCRIPTIONS: Record<StickerFinish, string> = {
 // Each extra layer = +$0.0135/sq in × quantity
 export type EmbossingLayers = 0 | 1 | 2 | 3 | 4
 
-const EMBOSSING_EXTRA_RATE_CENTS = 1.35  // $0.0135 per sq in per extra layer
+export const EMBOSSING_EXTRA_RATE_CENTS = 1.35  // $0.0135 per sq in per extra layer
 
 export const EMBOSSING_LAYER_OPTIONS: EmbossingLayers[] = [0, 1, 2, 3, 4]
 
@@ -250,13 +250,11 @@ export function getSpotUVQuantityBreaks(
 ) {
   return QUANTITY_TIERS.map(qty => {
     const result = calculateSpotUVPrice(size, qty, layers, 'standard')
-    const maxPrice = calculateSpotUVPrice(size, 50, layers, 'standard')
-    const savings = Math.max(0, Math.round(((maxPrice.totalCents - result.totalCents) / maxPrice.totalCents) * 100))
     return {
       qty,
       total: result.totalFormatted,
       unit: result.unitFormatted,
-      savingsPct: savings,
+      savingsPct: TIER_DISCOUNTS[qty] ?? 0,
     }
   })
 }
