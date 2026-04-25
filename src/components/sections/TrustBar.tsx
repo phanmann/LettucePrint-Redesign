@@ -1,16 +1,18 @@
 'use client'
 
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 
-const brands = [
-  { name: 'KITH',       logo: '/images/brands/kith.svg' },
-  { name: 'Hard Rock',  logo: '/images/brands/hard-rock.svg' },
-  { name: 'Seagate',    logo: '/images/brands/seagate.svg' },
+const items = [
+  { type: 'logo', name: 'KITH',       logo: '/images/brands/kith.svg' },
+  { type: 'logo', name: 'Hard Rock',  logo: '/images/brands/hard-rock.svg' },
+  { type: 'logo', name: 'Seagate',    logo: '/images/brands/seagate.svg' },
+  { type: 'text', name: 'NYC Restaurants' },
+  { type: 'text', name: 'Cannabis Dispensaries' },
+  { type: 'text', name: 'Event Organizers' },
+  { type: 'text', name: 'Local Brands' },
 ]
 
-// Text-only fallback brands for variety
-const textBrands = ['NYC Restaurants', 'Cannabis Dispensaries', 'Event Organizers', 'Local Brands']
+const doubled = [...items, ...items]
 
 export default function TrustBar() {
   return (
@@ -28,28 +30,26 @@ export default function TrustBar() {
       </motion.div>
 
       <div className="overflow-hidden">
-        <div className="flex animate-marquee whitespace-nowrap items-center">
-          {[...brands, ...brands].map((brand, i) => (
+        <div className="flex whitespace-nowrap animate-marquee items-center">
+          {doubled.map((item, i) => (
             <span
               key={i}
-              className="inline-flex items-center justify-center px-10"
+              className="inline-flex items-center justify-center gap-8 px-8"
             >
-              <Image
-                src={brand.logo}
-                alt={brand.name}
-                width={120}
-                height={40}
-                className="h-8 w-auto object-contain opacity-40 hover:opacity-70 transition-opacity grayscale"
-              />
-            </span>
-          ))}
-          {[...textBrands, ...textBrands].map((brand, i) => (
-            <span
-              key={`text-${i}`}
-              className="inline-flex items-center gap-8 px-8 text-h4 font-semibold text-gray-300 hover:text-lp-green transition-colors cursor-default"
-            >
-              {brand}
-              <span className="text-lp-green/30 text-2xl">·</span>
+              {item.type === 'logo' ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={item.logo}
+                  alt={item.name}
+                  className="h-7 w-auto object-contain opacity-30 hover:opacity-60 transition-opacity grayscale"
+                  style={{ maxWidth: '120px' }}
+                />
+              ) : (
+                <span className="text-sm font-semibold text-gray-300 uppercase tracking-widest hover:text-lp-green transition-colors cursor-default">
+                  {item.name}
+                </span>
+              )}
+              <span className="text-lp-green/30 text-xl">·</span>
             </span>
           ))}
         </div>

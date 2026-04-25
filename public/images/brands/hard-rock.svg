@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2500" viewBox="0 0 192.756 192.756"><g fill-rule="evenodd" clip-rule="evenodd"><path fill="none" d="M0 0h192.756v192.756H0V0z"/><path d="M99.17 137.227c27.674 0 49.787-22.525 49.787-50.065 0-27.539-22.197-49.862-49.873-49.862-27.673 0-50.107 22.323-50.107 49.862s22.52 50.065 50.193 50.065z" fill="currentColor" opacity=".15"/><text x="50%" y="78%" dominant-baseline="middle" text-anchor="middle" font-family="'Georgia', serif" font-weight="700" font-size="18" letter-spacing="1" fill="currentColor">HARD ROCK</text></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80">
+  <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle"
+    font-family="'Georgia', 'Times New Roman', serif"
+    font-weight="700" font-size="28" letter-spacing="2" fill="#111827">HARD ROCK</text>
+</svg>
