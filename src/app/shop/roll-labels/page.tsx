@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { CheckCircle, FileText, ArrowRight } from 'lucide-react'
+import { CheckCircle, FileText, ArrowRight, Layers } from 'lucide-react'
 import { Disclosure } from '@/components/shop/ProductDisclosure'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -121,7 +121,12 @@ export default function RollLabelsPage() {
               <div className="mb-8 border border-gray-200 rounded-card px-5 py-4">
                 <Disclosure
                   title={
-                    <h3 className="text-h4 font-semibold text-gray-900">Specifications</h3>
+                    <div className="flex items-center gap-2">
+                      <Layers size={16} className="text-gray-500" />
+                      <h3 className="text-small font-semibold text-gray-500 uppercase tracking-wider">
+                        Specifications
+                      </h3>
+                    </div>
                   }
                 >
                   <div className="divide-y divide-gray-100">

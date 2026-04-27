@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { CheckCircle, FileText, ArrowRight } from 'lucide-react'
+import { CheckCircle, FileText, ArrowRight, Layers } from 'lucide-react'
 import { Disclosure } from '@/components/shop/ProductDisclosure'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import PricingCalculator from '@/components/shop/PricingCalculator'
 import Badge from '@/components/ui/Badge'
+import ProductImageGallery from '@/components/shop/ProductImageGallery'
 
 export const metadata: Metadata = {
   title: 'Custom Stickers & Labels',
@@ -84,6 +85,15 @@ export default function StickersPage() {
                 </p>
               </div>
 
+              {/* Product Image Gallery */}
+              <ProductImageGallery
+                images={[
+                  { src: '/images/products/stickers/sticker-single.png', alt: 'Custom die-cut stickers' },
+                  { src: '/images/products/stickers/lettuce-stickers.png', alt: 'Lettuce Print custom stickers' },
+                  { src: '/images/products/stickers/holo-stickers.png', alt: 'Holographic stickers' },
+                ]}
+              />
+
               {/* What's included */}
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">
                 <h3 className="text-small font-semibold text-lp-green uppercase tracking-wider mb-4">
@@ -103,7 +113,12 @@ export default function StickersPage() {
               <div className="mb-8 border border-gray-200 rounded-card px-5 py-4">
                 <Disclosure
                   title={
-                    <h3 className="text-h4 font-semibold text-gray-900">Specifications</h3>
+                    <div className="flex items-center gap-2">
+                      <Layers size={16} className="text-gray-500" />
+                      <h3 className="text-small font-semibold text-gray-500 uppercase tracking-wider">
+                        Specifications
+                      </h3>
+                    </div>
                   }
                 >
                   <div className="divide-y divide-gray-100">
