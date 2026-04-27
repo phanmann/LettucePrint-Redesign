@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { CheckCircle, FileText, ArrowRight } from 'lucide-react'
+import { Disclosure } from '@/components/shop/ProductDisclosure'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import PricingCalculator from '@/components/shop/PricingCalculator'
@@ -99,40 +100,50 @@ export default function StickersPage() {
               </div>
 
               {/* Specs */}
-              <div className="mb-8">
-                <h3 className="text-h4 font-semibold text-gray-900 mb-4">Specifications</h3>
-                <div className="divide-y divide-gray-100">
-                  {specs.map((spec) => (
-                    <div key={spec.label} className="flex justify-between py-3">
-                      <span className="text-small font-semibold text-gray-500">{spec.label}</span>
-                      <span className="text-small text-gray-900 text-right max-w-[60%]">{spec.value}</span>
-                    </div>
-                  ))}
-                </div>
+              <div className="mb-8 border border-gray-200 rounded-card px-5 py-4">
+                <Disclosure
+                  title={
+                    <h3 className="text-h4 font-semibold text-gray-900">Specifications</h3>
+                  }
+                >
+                  <div className="divide-y divide-gray-100">
+                    {specs.map((spec) => (
+                      <div key={spec.label} className="flex justify-between py-3">
+                        <span className="text-small font-semibold text-gray-500">{spec.label}</span>
+                        <span className="text-small text-gray-900 text-right max-w-[60%]">{spec.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Disclosure>
               </div>
 
               {/* Artwork Requirements */}
-              <div className="bg-lp-blue/30 rounded-card border border-lp-blue p-6 mb-8">
-                <div className="flex items-center gap-2 mb-4">
-                  <FileText size={16} className="text-lp-green-dark" />
-                  <h3 className="text-small font-semibold text-lp-green-dark uppercase tracking-wider">
-                    Artwork Requirements
-                  </h3>
-                </div>
-                <div className="space-y-2">
-                  {artworkRequirements.map((req) => (
-                    <div key={req.label} className="flex justify-between">
-                      <span className="text-small text-lp-green-dark font-medium">{req.label}</span>
-                      <span className="text-small text-gray-700 text-right max-w-[55%]">{req.value}</span>
+              <div className="bg-lp-blue/30 rounded-card border border-lp-blue px-5 py-4 mb-8">
+                <Disclosure
+                  title={
+                    <div className="flex items-center gap-2">
+                      <FileText size={16} className="text-lp-green-dark" />
+                      <h3 className="text-small font-semibold text-lp-green-dark uppercase tracking-wider">
+                        Artwork Requirements
+                      </h3>
                     </div>
-                  ))}
-                </div>
-                <p className="text-xs text-gray-500 mt-4 pt-4 border-t border-lp-blue">
-                  Don&apos;t have print-ready files? Our design team can help.{' '}
-                  <Link href="/services/graphic-design" className="text-lp-green font-semibold hover:underline">
-                    Ask about design services →
-                  </Link>
-                </p>
+                  }
+                >
+                  <div className="space-y-2">
+                    {artworkRequirements.map((req) => (
+                      <div key={req.label} className="flex justify-between">
+                        <span className="text-small text-lp-green-dark font-medium">{req.label}</span>
+                        <span className="text-small text-gray-700 text-right max-w-[55%]">{req.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-4 pt-4 border-t border-lp-blue">
+                    Don&apos;t have print-ready files? Our design team can help.{' '}
+                    <Link href="/services/graphic-design" className="text-lp-green font-semibold hover:underline">
+                      Ask about design services →
+                    </Link>
+                  </p>
+                </Disclosure>
               </div>
 
               {/* Custom/Escape hatch */}
