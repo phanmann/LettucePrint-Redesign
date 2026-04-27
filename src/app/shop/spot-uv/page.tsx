@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import SpotUVCalculator from '@/components/shop/SpotUVCalculator'
 import Badge from '@/components/ui/Badge'
+import ProductImageGallery from '@/components/shop/ProductImageGallery'
 
 export const metadata: Metadata = {
   title: 'Spot UV Stickers',
@@ -112,6 +113,14 @@ export default function SpotUVPage() {
                   </div>
                 ))}
               </div>
+
+              {/* Product Image Gallery */}
+              <ProductImageGallery
+                images={[
+                  { src: '/images/products/spot-uv/spot-uv-1.png', alt: 'Spot UV sticker close-up' },
+                  { src: '/images/products/spot-uv/spot-uv-2.jpg', alt: 'Spot UV stickers lifestyle' },
+                ]}
+              />
 
               {/* What's included */}
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">

@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import RollLabelCalculator from '@/components/shop/RollLabelCalculator'
 import Badge from '@/components/ui/Badge'
+import ProductImageGallery from '@/components/shop/ProductImageGallery'
 
 export const metadata: Metadata = {
   title: 'Custom Roll Labels',
@@ -101,6 +102,13 @@ export default function RollLabelsPage() {
                   </div>
                 ))}
               </div>
+
+              {/* Product Image Gallery */}
+              <ProductImageGallery
+                images={[
+                  { src: '/images/products/roll-labels/roll-labels-1.png', alt: 'Custom roll labels' },
+                ]}
+              />
 
               {/* Included */}
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">
