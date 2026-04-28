@@ -86,6 +86,11 @@ export default function SpotUVPage() {
             <div className="order-last lg:order-first">
 
               <div className="mb-8">
+                {/* Badges */}
+                <div className="flex items-center gap-2 mb-4">
+                  <Badge variant="popular">Premium</Badge>
+                  <Badge variant="new">High Impact</Badge>
+                </div>
                 <h1 className="text-h1 font-semibold text-gray-900 mb-4">
                   Spot UV Stickers
                 </h1>
@@ -105,11 +110,7 @@ export default function SpotUVPage() {
                 ]}
               />
 
-              {/* Badges */}
-              <div className="flex items-center gap-2 mb-8">
-                <Badge variant="popular">Premium</Badge>
-                <Badge variant="new">High Impact</Badge>
-              </div>
+
 
               {/* Why Spot UV */}
               <div className="space-y-4 mb-8">

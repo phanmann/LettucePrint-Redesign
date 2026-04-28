@@ -71,6 +71,11 @@ export default function StickersPage() {
             <div className="order-last lg:order-first">
               {/* Header */}
               <div className="mb-8">
+                {/* Badges */}
+                <div className="flex items-center gap-2 mb-4">
+                  <Badge variant="popular">Most Popular</Badge>
+                  <Badge variant="new">Fast Turnaround</Badge>
+                </div>
                 <h1 className="text-h1 font-semibold text-gray-900 mb-4">
                   Custom Die-Cut Stickers
                 </h1>
@@ -90,11 +95,7 @@ export default function StickersPage() {
                 ]}
               />
 
-              {/* Badges */}
-              <div className="flex items-center gap-2 mb-8">
-                <Badge variant="popular">Most Popular</Badge>
-                <Badge variant="new">Fast Turnaround</Badge>
-              </div>
+
 
 
               {/* What's included */}

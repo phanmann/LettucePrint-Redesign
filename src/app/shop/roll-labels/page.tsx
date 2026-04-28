@@ -79,6 +79,11 @@ export default function RollLabelsPage() {
             {/* Left — Product Info */}
             <div className="order-last lg:order-first">
               <div className="mb-8">
+                {/* Badges */}
+                <div className="flex items-center gap-2 mb-4">
+                  <Badge variant="popular">High Volume</Badge>
+                  <Badge variant="new">Custom Sizes</Badge>
+                </div>
                 <h1 className="text-h1 font-semibold text-gray-900 mb-4">
                   Custom Roll Labels
                 </h1>
@@ -98,11 +103,7 @@ export default function RollLabelsPage() {
                 ]}
               />
 
-              {/* Badges */}
-              <div className="flex items-center gap-2 mb-8">
-                <Badge variant="popular">High Volume</Badge>
-                <Badge variant="new">Custom Sizes</Badge>
-              </div>
+
 
               {/* Use cases */}
               <div className="grid grid-cols-2 gap-3 mb-8">
