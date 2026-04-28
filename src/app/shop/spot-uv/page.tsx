@@ -97,19 +97,6 @@ export default function SpotUVPage() {
                 </p>
               </div>
 
-              {/* Why Spot UV */}
-              <div className="space-y-4 mb-8">
-                {whySpotUV.map((item) => (
-                  <div key={item.title} className="flex gap-4">
-                    <div className="w-1.5 h-1.5 rounded-full bg-lp-green mt-2 flex-shrink-0" />
-                    <div>
-                      <p className="text-small font-semibold text-gray-900 mb-1">{item.title}</p>
-                      <p className="text-small text-gray-600">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
               {/* Product Image Gallery */}
               <ProductImageGallery
                 images={[
@@ -122,6 +109,19 @@ export default function SpotUVPage() {
               <div className="flex items-center gap-2 mb-8">
                 <Badge variant="popular">Premium</Badge>
                 <Badge variant="new">High Impact</Badge>
+              </div>
+
+              {/* Why Spot UV */}
+              <div className="space-y-4 mb-8">
+                {whySpotUV.map((item) => (
+                  <div key={item.title} className="flex gap-4">
+                    <div className="w-1.5 h-1.5 rounded-full bg-lp-green mt-2 flex-shrink-0" />
+                    <div>
+                      <p className="text-small font-semibold text-gray-900 mb-1">{item.title}</p>
+                      <p className="text-small text-gray-600">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
 
               {/* What's included */

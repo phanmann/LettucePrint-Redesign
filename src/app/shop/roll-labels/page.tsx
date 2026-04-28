@@ -89,16 +89,6 @@ export default function RollLabelsPage() {
                 </p>
               </div>
 
-              {/* Use cases */}
-              <div className="grid grid-cols-2 gap-3 mb-8">
-                {useCases.map((u) => (
-                  <div key={u.label} className="bg-gray-50 rounded-card border border-gray-100 p-4">
-                    <p className="text-small font-semibold text-gray-900 mb-1">{u.label}</p>
-                    <p className="text-xs text-gray-500">{u.desc}</p>
-                  </div>
-                ))}
-              </div>
-
               {/* Product Image Gallery */}
               <ProductImageGallery
                 images={[
@@ -110,6 +100,16 @@ export default function RollLabelsPage() {
               <div className="flex items-center gap-2 mb-8">
                 <Badge variant="popular">High Volume</Badge>
                 <Badge variant="new">Custom Sizes</Badge>
+              </div>
+
+              {/* Use cases */}
+              <div className="grid grid-cols-2 gap-3 mb-8">
+                {useCases.map((u) => (
+                  <div key={u.label} className="bg-gray-50 rounded-card border border-gray-100 p-4">
+                    <p className="text-small font-semibold text-gray-900 mb-1">{u.label}</p>
+                    <p className="text-xs text-gray-500">{u.desc}</p>
+                  </div>
+                ))}
               </div>
 
               {/* Included */
