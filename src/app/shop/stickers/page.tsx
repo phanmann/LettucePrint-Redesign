@@ -71,10 +71,6 @@ export default function StickersPage() {
             <div className="order-last lg:order-first">
               {/* Header */}
               <div className="mb-8">
-                <div className="flex items-center gap-2 mb-4">
-                  <Badge variant="popular">Most Popular</Badge>
-                  <Badge variant="new">Fast Turnaround</Badge>
-                </div>
                 <h1 className="text-h1 font-semibold text-gray-900 mb-4">
                   Custom Die-Cut Stickers
                 </h1>
@@ -93,6 +89,12 @@ export default function StickersPage() {
                   { src: '/images/products/stickers/holo-stickers.png', alt: 'Holographic stickers' },
                 ]}
               />
+
+              {/* Badges */}
+              <div className="flex items-center gap-2 mb-8">
+                <Badge variant="popular">Most Popular</Badge>
+                <Badge variant="new">Fast Turnaround</Badge>
+              </div>
 
               {/* What's included */}
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">
@@ -133,12 +135,12 @@ export default function StickersPage() {
               </div>
 
               {/* Artwork Requirements */}
-              <div className="bg-lp-blue/30 rounded-card border border-lp-blue px-5 py-4 mb-8">
+              <div className="bg-white rounded-card border border-gray-200 px-5 py-4 mb-8">
                 <Disclosure
                   title={
                     <div className="flex items-center gap-2">
-                      <FileText size={16} className="text-lp-green-dark" />
-                      <h3 className="text-small font-semibold text-lp-green-dark uppercase tracking-wider">
+                      <FileText size={16} className="text-gray-500" />
+                      <h3 className="text-small font-semibold text-gray-500 uppercase tracking-wider">
                         Artwork Requirements
                       </h3>
                     </div>
@@ -147,12 +149,12 @@ export default function StickersPage() {
                   <div className="space-y-2">
                     {artworkRequirements.map((req) => (
                       <div key={req.label} className="flex justify-between">
-                        <span className="text-small text-lp-green-dark font-medium">{req.label}</span>
+                        <span className="text-small font-semibold text-gray-500">{req.label}</span>
                         <span className="text-small text-gray-700 text-right max-w-[55%]">{req.value}</span>
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-gray-500 mt-4 pt-4 border-t border-lp-blue">
+                  <p className="text-xs text-gray-500 mt-4 pt-4 border-t border-gray-100">
                     Don&apos;t have print-ready files? Our design team can help.{' '}
                     <Link href="/services/graphic-design" className="text-lp-green font-semibold hover:underline">
                       Ask about design services →

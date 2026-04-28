@@ -86,10 +86,6 @@ export default function SpotUVPage() {
             <div className="order-last lg:order-first">
 
               <div className="mb-8">
-                <div className="flex items-center gap-2 mb-4">
-                  <Badge variant="popular">Premium</Badge>
-                  <Badge variant="new">High Impact</Badge>
-                </div>
                 <h1 className="text-h1 font-semibold text-gray-900 mb-4">
                   Spot UV Stickers
                 </h1>
@@ -122,7 +118,13 @@ export default function SpotUVPage() {
                 ]}
               />
 
-              {/* What's included */}
+              {/* Badges */}
+              <div className="flex items-center gap-2 mb-8">
+                <Badge variant="popular">Premium</Badge>
+                <Badge variant="new">High Impact</Badge>
+              </div>
+
+              {/* What's included */
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">
                 <h3 className="text-small font-semibold text-lp-green uppercase tracking-wider mb-4">
                   Every order includes
@@ -161,12 +163,12 @@ export default function SpotUVPage() {
               </div>
 
               {/* Artwork Requirements */}
-              <div className="bg-lp-blue/30 rounded-card border border-lp-blue px-5 py-4 mb-8">
+              <div className="bg-white rounded-card border border-gray-200 px-5 py-4 mb-8">
                 <Disclosure
                   title={
                     <div className="flex items-center gap-2">
-                      <FileText size={16} className="text-lp-green-dark" />
-                      <h3 className="text-small font-semibold text-lp-green-dark uppercase tracking-wider">
+                      <FileText size={16} className="text-gray-500" />
+                      <h3 className="text-small font-semibold text-gray-500 uppercase tracking-wider">
                         Artwork Requirements
                       </h3>
                     </div>
@@ -175,12 +177,12 @@ export default function SpotUVPage() {
                   <div className="space-y-2">
                     {artworkRequirements.map((req) => (
                       <div key={req.label} className="flex justify-between">
-                        <span className="text-small text-lp-green-dark font-medium">{req.label}</span>
+                        <span className="text-small font-semibold text-gray-500">{req.label}</span>
                         <span className="text-small text-gray-700 text-right max-w-[55%]">{req.value}</span>
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-gray-500 mt-4 pt-4 border-t border-lp-blue">
+                  <p className="text-xs text-gray-500 mt-4 pt-4 border-t border-gray-100">
                     Not sure how to set up your spot layer? Our design team can prep your file.{' '}
                     <Link href="/services/graphic-design" className="text-lp-green font-semibold hover:underline">
                       Ask about design services →
