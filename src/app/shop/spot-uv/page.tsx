@@ -124,7 +124,7 @@ export default function SpotUVPage() {
                 ))}
               </div>
 
-              {/* What's included */
+              {/* What's included */}
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">
                 <h3 className="text-small font-semibold text-lp-green uppercase tracking-wider mb-4">
                   Every order includes
