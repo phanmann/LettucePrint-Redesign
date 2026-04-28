@@ -6,6 +6,8 @@ const items = [
   { type: 'logo', name: 'KITH',       logo: '/images/brands/kith.svg' },
   { type: 'logo', name: 'Hard Rock',  logo: '/images/brands/hard-rock.svg' },
   { type: 'logo', name: 'Seagate',    logo: '/images/brands/seagate.svg' },
+  { type: 'logo', name: 'REBNY',      logo: '/images/brands/rebny.svg' },
+  { type: 'logo', name: 'Kiva',        logo: '/images/brands/kiva.svg' },
   { type: 'text', name: 'NYC Restaurants' },
   { type: 'text', name: 'Cannabis Dispensaries' },
   { type: 'text', name: 'Event Organizers' },
