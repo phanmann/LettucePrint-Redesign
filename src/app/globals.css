@@ -94,7 +94,7 @@
 
 @utility text-body-lg {
   font-size: clamp(17px, 1.5vw, 20px);
-  line-height: 1.6;
+  line-height: 1.2;
 }
 
 @utility text-body {
