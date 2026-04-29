@@ -80,8 +80,7 @@ export default function Hero() {
               transition={{ duration: 0.6, ease: 'easeOut' }}
               className="order-2 lg:order-1"
             >
-              {/* Eyebrow — hidden on mobile (shown above slideshow instead) */}
-              <p className="hidden lg:block text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-5">
                 Brooklyn&apos;s Creative Print Studio
               </p>
               <h1 className="text-h1 font-semibold text-gray-900 leading-[1.0] mb-6">
@@ -108,10 +107,6 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
               className="order-1 lg:order-2"
             >
-              {/* Eyebrow — mobile only, sits above slideshow */}
-              <p className="lg:hidden text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-3">
-                Brooklyn&apos;s Creative Print Studio
-              </p>
               <HeroSlideshow />
             </motion.div>
           </div>
@@ -125,7 +120,13 @@ export default function Hero() {
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10"
         >
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex gap-3">
-            {heroCards.map((card) => (
+            {heroCards.map((card) => card.label === 'Large Format' ? (
+              <div key={card.label} className="hidden lg:block lg:flex-1 rounded-card flex items-end justify-start p-4 relative overflow-hidden transition-transform duration-300 hover:-translate-y-1 group" style={{ backgroundColor: card.bg, height: '140px' }}>
+                <Image src={card.img} alt={card.label} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="240px" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.12em] bg-white/90 text-gray-900 px-3 py-1.5 rounded-full whitespace-nowrap">{card.label}</span>
+              </div>
+            ) : (
               <div
                 key={card.label}
                 className="lg:flex-1 rounded-card flex items-end justify-start p-4 relative overflow-hidden transition-transform duration-300 hover:-translate-y-1 group"
@@ -145,7 +146,7 @@ export default function Hero() {
                   {card.label}
                 </span>
               </div>
-            ))}
+            ))})
           </div>
         </motion.div>
 
