@@ -80,7 +80,8 @@ export default function Hero() {
               transition={{ duration: 0.6, ease: 'easeOut' }}
               className="order-2 lg:order-1"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-5">
+              {/* Eyebrow — hidden on mobile (shown above slideshow instead) */}
+              <p className="hidden lg:block text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-5">
                 Brooklyn&apos;s Creative Print Studio
               </p>
               <h1 className="text-h1 font-semibold text-gray-900 leading-[1.0] mb-6">
@@ -107,6 +108,10 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
               className="order-1 lg:order-2"
             >
+              {/* Eyebrow — mobile only, sits above slideshow */}
+              <p className="lg:hidden text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-3">
+                Brooklyn&apos;s Creative Print Studio
+              </p>
               <HeroSlideshow />
             </motion.div>
           </div>
