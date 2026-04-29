@@ -78,6 +78,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="order-2 lg:order-1"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-5">
                 Brooklyn&apos;s Creative Print Studio
@@ -104,6 +105,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
+              className="order-1 lg:order-2"
             >
               <HeroSlideshow />
             </motion.div>
