@@ -90,12 +90,12 @@ export default function Hero() {
                 Custom stickers, packaging, signage, and apparel — designed and printed in Brooklyn.
                 Fast turnaround. Real expertise.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="/get-quote">
-                  <Button size="lg">Get a Quote</Button>
-                </Link>
+              <div className="flex flex-row gap-3">
                 <Link href="/shop">
-                  <Button variant="secondary" size="lg">Shop Products</Button>
+                  <Button variant="secondary" size="md">Shop Products</Button>
+                </Link>
+                <Link href="/get-quote">
+                  <Button size="md">Get a Quote</Button>
                 </Link>
               </div>
             </motion.div>
