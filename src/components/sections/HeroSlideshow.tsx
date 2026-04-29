@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { MapPin } from 'lucide-react'
 
 const slides = [
   { src: '/images/hero/hero-1.png',  alt: 'Lettuce Print studio work' },
@@ -52,7 +51,7 @@ export default function HeroSlideshow() {
       ))}
 
       {/* Dot indicators */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
         {slides.map((_, i) => (
           <button
             key={i}
@@ -68,11 +67,6 @@ export default function HeroSlideshow() {
         ))}
       </div>
 
-      {/* Location badge */}
-      <div className="absolute bottom-4 left-4 bg-lp-yellow text-gray-900 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full flex items-center gap-1.5 z-10">
-        <MapPin size={11} strokeWidth={2.5} />
-        361 Stagg St, Brooklyn
-      </div>
     </div>
   )
 }
