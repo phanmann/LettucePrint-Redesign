@@ -1,18 +1,18 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useEffect, useRef } from 'react'
-import { Package, Shirt, PanelTop, Tag, Expand } from 'lucide-react'
 import HeroSlideshow from './HeroSlideshow'
 import Button from '@/components/ui/Button'
 
 const heroCards = [
-  { label: 'Packaging',      bg: '#00A175', icon: Package },
-  { label: 'Screen Printing',bg: '#7E6AAE', icon: Shirt },
-  { label: 'Signage',        bg: '#FFCA66', icon: PanelTop },
-  { label: 'Stickers',       bg: '#acf2f9', icon: Tag },
-  { label: 'Large Format',   bg: '#0a0a0a', icon: Expand },
+  { label: 'Packaging',      bg: '#00A175', img: '/images/hero-cards/packaging.jpg' },
+  { label: 'Screen Printing',bg: '#7E6AAE', img: '/images/hero-cards/screen-printing.jpg' },
+  { label: 'Signage',        bg: '#FFCA66', img: '/images/hero-cards/signage.png' },
+  { label: 'Stickers',       bg: '#acf2f9', img: '/images/hero-cards/stickers.png' },
+  { label: 'Large Format',   bg: '#0a0a0a', img: '/images/hero-cards/large-format.png' },
 ]
 
 const stats = [
@@ -121,12 +121,19 @@ export default function Hero() {
             {heroCards.map((card) => (
               <div
                 key={card.label}
-                className="lg:flex-1 rounded-card flex items-end justify-start p-4 relative overflow-hidden transition-transform duration-300 hover:-translate-y-1"
+                className="lg:flex-1 rounded-card flex items-end justify-start p-4 relative overflow-hidden transition-transform duration-300 hover:-translate-y-1 group"
                 style={{ backgroundColor: card.bg, height: '140px' }}
               >
-                <div className="absolute inset-0 flex items-center justify-center opacity-20 select-none">
-                  <card.icon size={52} strokeWidth={1.25} />
-                </div>
+                {/* Photo */}
+                <Image
+                  src={card.img}
+                  alt={card.label}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 240px"
+                />
+                {/* Dark gradient scrim so label is readable */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.12em] bg-white/90 text-gray-900 px-3 py-1.5 rounded-full whitespace-nowrap">
                   {card.label}
                 </span>
