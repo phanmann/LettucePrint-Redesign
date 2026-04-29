@@ -72,7 +72,7 @@ export default function RollLabelsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_600px] gap-12 items-start">
 
             {/* Calculator first on mobile */}
-            <div className="order-first lg:order-last">
+            <div className="order-first lg:order-last lg:sticky lg:top-24">
               <RollLabelCalculator productName="Custom Roll Labels" />
             </div>
 

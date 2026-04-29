@@ -63,7 +63,7 @@ export default function StickersPage() {
 
             {/* Calculator first on mobile (order-first), specs second */}
             {/* Right — Pricing Calculator */}
-            <div className="order-first lg:order-last">
+            <div className="order-first lg:order-last lg:sticky lg:top-24">
               <PricingCalculator productName="Custom Die-Cut Stickers" />
             </div>
 
