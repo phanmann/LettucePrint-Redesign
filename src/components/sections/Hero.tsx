@@ -1,10 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useEffect, useRef } from 'react'
-import { Package, Shirt, PanelTop, Tag, Expand, MapPin } from 'lucide-react'
+import { Package, Shirt, PanelTop, Tag, Expand } from 'lucide-react'
+import HeroSlideshow from './HeroSlideshow'
 import Button from '@/components/ui/Button'
 
 const heroCards = [
@@ -99,31 +99,13 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* Right — Hero image */}
+            {/* Right — Hero slideshow */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
-              className="relative rounded-card overflow-hidden h-[280px] lg:h-[340px] bg-lp-green/10"
             >
-              <Image
-                src="/images/logos/LP_Logos_Heart-Green.png"
-                alt="Lettuce Print Studio"
-                fill
-                className="object-contain p-12 opacity-20"
-                priority
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <p className="text-lp-green font-semibold text-sm uppercase tracking-widest mb-2">Est. Brooklyn, NY</p>
-                  <p className="text-gray-400 text-xs">361 Stagg Street</p>
-                </div>
-              </div>
-              {/* Location badge */}
-              <div className="absolute bottom-4 left-4 bg-lp-yellow text-gray-900 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full flex items-center gap-1.5">
-                <MapPin size={11} strokeWidth={2.5} />
-                361 Stagg St, Brooklyn
-              </div>
+              <HeroSlideshow />
             </motion.div>
           </div>
         </div>
