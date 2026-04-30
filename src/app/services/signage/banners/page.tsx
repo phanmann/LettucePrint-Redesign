@@ -5,7 +5,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
-import { ArrowRight, ChevronDown } from 'lucide-react'
+import ProductCard from '@/components/shop/ProductCard'
 import { motion, AnimatePresence } from 'framer-motion'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -19,7 +19,7 @@ const CATEGORIES = [
       {
         id: 'retractable-standard-33',
         name: 'Standard Retractable Banner',
-        size: '33" × 80"',
+        subtitle: '33" × 80"',
         description: 'Our most popular retractable banner. Lightweight aluminum base, full-color print on premium banner material.',
         features: ['Aluminum base', 'Full-color print', 'Carrying bag included', 'Setup in under 60 seconds'],
         turnaround: '3–5 business days',
@@ -28,7 +28,7 @@ const CATEGORIES = [
       {
         id: 'retractable-luxury-33',
         name: 'Luxury Base Retractable',
-        size: '33" × 80"',
+        subtitle: '33" × 80"',
         description: 'Premium weighted base for a more stable, upscale presentation. Perfect for lobbies, showrooms, and high-end events.',
         features: ['Heavy-duty base', 'Premium banner material', 'Carrying bag included', 'Enhanced stability'],
         turnaround: '3–5 business days',
@@ -37,7 +37,7 @@ const CATEGORIES = [
       {
         id: 'retractable-tabletop',
         name: 'Table Top Retractable',
-        size: '9" × 12"',
+        subtitle: '9" × 12"',
         description: 'Compact tabletop version for product displays, reception desks, and counter promotions.',
         features: ['Compact design', 'Desk & counter ready', 'Full-color print', 'Lightweight'],
         turnaround: '3–5 business days',
@@ -46,7 +46,7 @@ const CATEGORIES = [
       {
         id: 'retractable-standard-48',
         name: 'Standard Retractable Banner',
-        size: '48" × 80"',
+        subtitle: '48" × 80"',
         description: 'Wide-format retractable for maximum visual impact. Ideal for large booths and open floor spaces.',
         features: ['Wide 48" format', 'Aluminum base', 'Full-color print', 'Carrying bag included'],
         turnaround: '3–5 business days',
@@ -55,7 +55,7 @@ const CATEGORIES = [
       {
         id: 'retractable-standard-60',
         name: 'Standard Retractable Banner',
-        size: '60" × 80"',
+        subtitle: '60" × 80"',
         description: 'Our largest retractable format — a commanding presence at any event or trade show floor.',
         features: ['XL 60" format', 'Dual base system', 'Full-color print', 'Heavy-duty carrying case'],
         turnaround: '5–7 business days',
@@ -71,7 +71,7 @@ const CATEGORIES = [
       {
         id: 'hanging-vinyl',
         name: 'Vinyl Banner',
-        size: 'Custom sizes available',
+        subtitle: 'Custom sizes available',
         description: 'Durable, weather-resistant vinyl banners for indoor and outdoor hanging. Grommets included for easy install.',
         features: ['13 oz. scrim vinyl', 'Grommets included', 'Indoor & outdoor use', 'Custom sizes'],
         turnaround: '2–4 business days',
@@ -80,7 +80,7 @@ const CATEGORIES = [
       {
         id: 'hanging-fabric',
         name: 'Fabric Banner',
-        size: 'Custom sizes available',
+        subtitle: 'Custom sizes available',
         description: 'Soft, wrinkle-resistant fabric with vibrant dye-sublimation printing. Lightweight and elegant.',
         features: ['Dye-sublimation print', 'Wrinkle resistant', 'Lightweight fabric', 'Machine washable'],
         turnaround: '3–5 business days',
@@ -89,7 +89,7 @@ const CATEGORIES = [
       {
         id: 'hanging-mesh',
         name: 'Perforated Mesh Banner',
-        size: 'Custom sizes available',
+        subtitle: 'Custom sizes available',
         description: 'Wind-permeable mesh for outdoor hanging. Maintains visibility while reducing wind load on large installations.',
         features: ['Wind-permeable mesh', 'Outdoor rated', 'Grommets included', 'UV resistant inks'],
         turnaround: '3–5 business days',
@@ -101,72 +101,6 @@ const CATEGORIES = [
 
 // ─── Product Card ─────────────────────────────────────────────────────────────
 
-function ProductCard({ product, categoryLabel }: { product: typeof CATEGORIES[0]['products'][0]; categoryLabel: string }) {
-  const [expanded, setExpanded] = useState(false)
-
-  return (
-    <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200">
-      {/* Placeholder image */}
-      <div
-        className="w-full h-52 flex items-center justify-center"
-        style={{ backgroundColor: product.color }}
-      >
-        <div className="text-center px-6">
-          <p className="text-sm font-semibold text-gray-500 mb-1">{product.name}</p>
-          <p className="text-xs text-gray-400">{product.size}</p>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-5">
-        <div className="flex items-start justify-between gap-3 mb-2">
-          <h3 className="text-base font-semibold text-gray-900 leading-snug">{product.name}</h3>
-          <span className="text-xs font-medium text-gray-400 bg-gray-50 px-2 py-1 rounded-full whitespace-nowrap flex-shrink-0">{product.size}</span>
-        </div>
-        <p className="text-sm text-gray-600 mb-4 leading-relaxed">{product.description}</p>
-
-        {/* Expandable features */}
-        <button
-          onClick={() => setExpanded(e => !e)}
-          className="flex items-center gap-1.5 text-xs font-medium text-gray-400 hover:text-lp-green transition-colors mb-4"
-        >
-          <ChevronDown size={14} className={`transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`} />
-          {expanded ? 'Hide details' : 'See details'}
-        </button>
-
-        <AnimatePresence>
-          {expanded && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.15 }}
-              className="overflow-hidden"
-            >
-              <ul className="space-y-1.5 mb-4">
-                {product.features.map(f => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-gray-600">
-                    <span className="w-1.5 h-1.5 rounded-full bg-lp-green flex-shrink-0" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <p className="text-xs text-gray-400 mb-4">Turnaround: {product.turnaround}</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <Link
-          href={`/get-quote?product=${encodeURIComponent(product.name)}&size=${encodeURIComponent(product.size)}&category=${encodeURIComponent(categoryLabel)}`}
-        >
-          <Button size="sm" className="w-full">
-            Get a Quote <ArrowRight size={14} className="ml-1" />
-          </Button>
-        </Link>
-      </div>
-    </div>
-  )
-}
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -242,7 +176,7 @@ export default function BannersPage() {
                   {/* Product grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                     {category.products.map(product => (
-                      <ProductCard key={product.id} product={product} categoryLabel={category.label} />
+                      <ProductCard key={product.id} {...product} categoryLabel={category.label} />
                     ))}
                   </div>
                 </motion.div>

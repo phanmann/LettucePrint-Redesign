@@ -5,7 +5,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
-import { ArrowRight, ChevronDown } from 'lucide-react'
+import ProductCard from '@/components/shop/ProductCard'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const CATEGORIES = [
@@ -62,101 +62,6 @@ const CATEGORIES = [
   },
 ]
 
-function ConsolidatedCard({
-  card,
-  categoryLabel,
-}: {
-  card: typeof CATEGORIES[0]['card']
-  categoryLabel: string
-}) {
-  const [expanded, setExpanded] = useState(false)
-
-  return (
-    <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col">
-      {/* Color swatch header */}
-      <div
-        className="w-full h-36 flex items-center justify-center flex-shrink-0"
-        style={{ backgroundColor: card.color }}
-      >
-        <div className="text-center px-6">
-          <p className="text-sm font-semibold text-gray-500 mb-1">{card.name}</p>
-          <p className="text-xs text-gray-400">{card.subtitle}</p>
-        </div>
-      </div>
-
-      <div className="p-5 flex flex-col flex-1">
-        <h3 className="text-base font-semibold text-gray-900 mb-1">{card.name}</h3>
-        <p className="text-xs text-gray-400 mb-3">{card.subtitle}</p>
-        <p className="text-sm text-gray-600 mb-4 leading-relaxed">{card.description}</p>
-
-        {/* Option tags */}
-        <div className="space-y-2 mb-4">
-          {card.options.map(group => (
-            <div key={group.label} className="flex items-start gap-2 flex-wrap">
-              <span className="text-xs font-semibold text-gray-400 w-14 flex-shrink-0 pt-0.5">{group.label}:</span>
-              <div className="flex flex-wrap gap-1.5">
-                {group.values.map(v => (
-                  <span
-                    key={v}
-                    className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"
-                  >
-                    {v}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Expandable details */}
-        <button
-          onClick={() => setExpanded(e => !e)}
-          className="flex items-center gap-1.5 text-xs font-medium text-gray-400 hover:text-lp-green transition-colors mb-4"
-        >
-          <ChevronDown
-            size={14}
-            className={`transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
-          />
-          {expanded ? 'Hide details' : 'See details'}
-        </button>
-
-        <AnimatePresence>
-          {expanded && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.15 }}
-              className="overflow-hidden"
-            >
-              <ul className="space-y-1.5 mb-4">
-                {card.features.map(f => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-gray-600">
-                    <span className="w-1.5 h-1.5 rounded-full bg-lp-green flex-shrink-0" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <p className="text-xs text-gray-400 mb-4">Turnaround: {card.turnaround}</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Push CTA to bottom */}
-        <div className="mt-auto">
-          <Link
-            href={`/get-quote?product=${encodeURIComponent(card.name)}&category=${encodeURIComponent(categoryLabel)}`}
-          >
-            <Button size="sm" className="w-full">
-              Get a Quote <ArrowRight size={14} className="ml-1" />
-            </Button>
-          </Link>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export default function BusinessCardsPage() {
   const [activeCategory, setActiveCategory] = useState('all')
   const filtered =
@@ -207,12 +112,11 @@ export default function BusinessCardsPage() {
           </div>
         </section>
 
-        {/* Cards — 2-column grid */}
+        {/* Cards */}
         <section className="py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <AnimatePresence mode="wait">
               {activeCategory === 'all' ? (
-                /* Both categories side by side */
                 <motion.div
                   key="all"
                   initial={{ opacity: 0, y: 12 }}
@@ -222,15 +126,14 @@ export default function BusinessCardsPage() {
                   className="grid grid-cols-1 sm:grid-cols-2 gap-6"
                 >
                   {CATEGORIES.map(cat => (
-                    <ConsolidatedCard
+                    <ProductCard
                       key={cat.id}
-                      card={cat.card}
+                      {...cat.card}
                       categoryLabel={cat.label}
                     />
                   ))}
                 </motion.div>
               ) : (
-                /* Single category filtered view */
                 filtered.map(category => (
                   <motion.div
                     key={category.id}
@@ -244,10 +147,7 @@ export default function BusinessCardsPage() {
                       <p className="text-body text-gray-500 max-w-2xl">{category.description}</p>
                     </div>
                     <div className="max-w-sm">
-                      <ConsolidatedCard
-                        card={category.card}
-                        categoryLabel={category.label}
-                      />
+                      <ProductCard {...category.card} categoryLabel={category.label} />
                     </div>
                   </motion.div>
                 ))

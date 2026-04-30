@@ -5,7 +5,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
-import { ArrowRight, ChevronDown } from 'lucide-react'
+import ProductCard from '@/components/shop/ProductCard'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const CATEGORIES = [
@@ -86,45 +86,6 @@ const CATEGORIES = [
   },
 ]
 
-function ProductCard({ product, categoryLabel }: { product: typeof CATEGORIES[0]['products'][0]; categoryLabel: string }) {
-  const [expanded, setExpanded] = useState(false)
-  return (
-    <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200">
-      <div className="w-full h-48 flex items-center justify-center" style={{ backgroundColor: product.color }}>
-        <div className="text-center px-6">
-          <p className="text-sm font-semibold text-gray-500 mb-1">{product.name}</p>
-          <p className="text-xs text-gray-400">{product.subtitle}</p>
-        </div>
-      </div>
-      <div className="p-5">
-        <h3 className="text-base font-semibold text-gray-900 mb-1">{product.name}</h3>
-        <p className="text-xs text-gray-400 mb-3">{product.subtitle}</p>
-        <p className="text-sm text-gray-600 mb-4 leading-relaxed">{product.description}</p>
-        <button onClick={() => setExpanded(e => !e)} className="flex items-center gap-1.5 text-xs font-medium text-gray-400 hover:text-lp-green transition-colors mb-4">
-          <ChevronDown size={14} className={`transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`} />
-          {expanded ? 'Hide details' : 'See details'}
-        </button>
-        <AnimatePresence>
-          {expanded && (
-            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.15 }} className="overflow-hidden">
-              <ul className="space-y-1.5 mb-4">
-                {product.features.map(f => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-gray-600">
-                    <span className="w-1.5 h-1.5 rounded-full bg-lp-green flex-shrink-0" />{f}
-                  </li>
-                ))}
-              </ul>
-              <p className="text-xs text-gray-400 mb-4">Turnaround: {product.turnaround}</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <Link href={`/get-quote?product=${encodeURIComponent(product.name)}&category=${encodeURIComponent(categoryLabel)}`}>
-          <Button size="sm" className="w-full">Get a Quote <ArrowRight size={14} className="ml-1" /></Button>
-        </Link>
-      </div>
-    </div>
-  )
-}
 
 export default function BookletsPage() {
   const [activeCategory, setActiveCategory] = useState('all')
@@ -163,7 +124,7 @@ export default function BookletsPage() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {category.products.map(product => (
-                      <ProductCard key={product.id} product={product} categoryLabel={category.label} />
+                      <ProductCard key={product.id} {...product} categoryLabel={category.label} />
                     ))}
                   </div>
                 </motion.div>
