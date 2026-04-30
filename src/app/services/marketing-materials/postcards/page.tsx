@@ -16,6 +16,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'pc-4x6',
+        href: '/services/marketing-materials/postcards/4x6',
         name: 'Postcard 4" × 6"',
         subtitle: '4" × 6"',
         description: 'The classic mailer size. Cost-effective for high-volume campaigns, event announcements, and promotional drops.',
@@ -25,6 +26,7 @@ const CATEGORIES = [
       },
       {
         id: 'pc-5x7',
+        href: '/services/marketing-materials/postcards/5x7',
         name: 'Postcard 5" × 7"',
         subtitle: '5" × 7"',
         description: 'More visual real estate for bold imagery, menus, event details, or product showcases.',
@@ -34,6 +36,7 @@ const CATEGORIES = [
       },
       {
         id: 'pc-6x9',
+        href: '/services/marketing-materials/postcards/6x9',
         name: 'Postcard 6" × 9"',
         subtitle: '6" × 9"',
         description: 'Large-format postcard that stands out in any mailbox. Great for real estate, promotions, and direct mail campaigns.',
@@ -43,6 +46,7 @@ const CATEGORIES = [
       },
       {
         id: 'pc-6x11',
+        href: '/services/marketing-materials/postcards/6x11',
         name: 'Postcard 6" × 11"',
         subtitle: '6" × 11"',
         description: 'Maximum impact, maximum visibility. The largest standard postcard size — designed to dominate the mailbox.',
@@ -59,6 +63,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'pc-soft-touch',
+        href: '/services/marketing-materials/postcards/soft-touch',
         name: 'Soft Touch Postcard',
         subtitle: 'Custom sizes available',
         description: 'Velvety soft-touch laminate on heavy stock. Stands apart in any stack — a luxury feel that drives open rates.',
@@ -68,6 +73,7 @@ const CATEGORIES = [
       },
       {
         id: 'pc-spot-uv',
+        href: '/services/marketing-materials/postcards/spot-uv',
         name: 'Spot UV Postcard',
         subtitle: 'Custom sizes available',
         description: 'Raised gloss UV highlights on a matte base — draws the eye to logos, headlines, and CTAs.',
@@ -117,7 +123,7 @@ export default function PostcardsPage() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {category.products.map(product => (
-                      <ProductCard key={product.id} {...product} categoryLabel={category.label} />
+                      <ProductCard key={product.id} {...product} categoryLabel={category.label} href={product.href} />
                     ))}
                   </div>
                 </motion.div>

@@ -16,6 +16,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'flyer-55x85',
+        href: '/services/marketing-materials/flyers/half-sheet',
         name: 'Half Sheet Flyer',
         subtitle: '5.5" × 8.5"',
         description: 'The workhorse handout. Fits in bags, pockets, and racks. Great for menus, event promos, and retail inserts.',
@@ -32,6 +33,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'flyer-85x11-gloss',
+        href: '/services/marketing-materials/flyers/letter-gloss',
         name: 'Letter Flyer — Gloss',
         subtitle: '8.5" × 11"',
         description: 'Vibrant high-gloss finish that makes photos and colors pop. Ideal for event promos, product launches, and retail displays.',
@@ -41,6 +43,7 @@ const CATEGORIES = [
       },
       {
         id: 'flyer-85x11-matte',
+        href: '/services/marketing-materials/flyers/letter-matte',
         name: 'Letter Flyer — Matte',
         subtitle: '8.5" × 11"',
         description: 'Soft matte finish for a sophisticated look — ideal for menus, lookbooks, and editorial-style promotions.',
@@ -50,9 +53,10 @@ const CATEGORIES = [
       },
       {
         id: 'flyer-85x11-heavy',
+        href: '/services/marketing-materials/flyers/heavy-stock',
         name: 'Heavy Stock Flyer',
         subtitle: '8.5" × 11"',
-        description: 'Heavier 100 lb. cover stock for a more substantial, premium feel. Doesn\'t flop or bend in hand.',
+        description: "Heavier 100 lb. cover stock for a more substantial, premium feel. Doesn't flop or bend in hand.",
         features: ['100 lb. cover stock', 'Matte or gloss coating', 'Full-color printing', 'Double-sided'],
         turnaround: '2–3 business days',
         color: '#F0E8F5',
@@ -66,6 +70,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'flyer-11x17',
+        href: '/services/marketing-materials/flyers/tabloid',
         name: 'Tabloid Flyer',
         subtitle: '11" × 17"',
         description: 'Twice the real estate of a letter flyer. Perfect for menus, in-store promotions, concert bills, and display boards.',
@@ -115,7 +120,7 @@ export default function FlyersPage() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {category.products.map(product => (
-                      <ProductCard key={product.id} {...product} categoryLabel={category.label} />
+                      <ProductCard key={product.id} {...product} categoryLabel={category.label} href={product.href} />
                     ))}
                   </div>
                 </motion.div>

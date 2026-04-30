@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 const PRODUCTS = [
   {
     id: 'mylar-standard',
+        href: '/services/packaging/mylar-bags/standard',
     name: 'Standard Mylar Bag',
     subtitle: 'Custom sizes available',
     description: 'Heat-sealable, smell-proof, and child-resistant mylar bags for cannabis, food, supplements, and general retail. Full-color custom print.',
@@ -27,6 +28,7 @@ const PRODUCTS = [
   },
   {
     id: 'mylar-diecut',
+        href: '/services/packaging/mylar-bags/die-cut',
     name: 'Die-Cut Mylar Bag',
     subtitle: 'Custom shapes available',
     description: "Custom-shaped mylar bags cut to your brand's silhouette. Stand out on the shelf with a unique form factor.",

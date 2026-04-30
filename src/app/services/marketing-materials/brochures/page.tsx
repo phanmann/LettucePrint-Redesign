@@ -16,6 +16,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'brochure-trifold-letter',
+        href: '/services/marketing-materials/brochures/tri-fold-letter',
         name: 'Tri-Fold Brochure',
         subtitle: '8.5" × 11" folded to 3.67" × 8.5"',
         description: 'The most universally recognized brochure format. Perfect for service menus, product overviews, real estate, and event guides.',
@@ -25,6 +26,7 @@ const CATEGORIES = [
       },
       {
         id: 'brochure-trifold-legal',
+        href: '/services/marketing-materials/brochures/tri-fold-legal',
         name: 'Tri-Fold Brochure — Legal',
         subtitle: '8.5" × 14" folded to 4.67" × 8.5"',
         description: 'Wider panel gives you more breathing room for copy-heavy content, photo layouts, or multi-column designs.',
@@ -41,6 +43,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'brochure-bifold-letter',
+        href: '/services/marketing-materials/brochures/bi-fold-letter',
         name: 'Bi-Fold Brochure',
         subtitle: '8.5" × 11" folded to 5.5" × 8.5"',
         description: 'Simple, elegant two-fold. A natural fit for lookbooks, service guides, annual reports, and menus.',
@@ -50,6 +53,7 @@ const CATEGORIES = [
       },
       {
         id: 'brochure-bifold-tabloid',
+        href: '/services/marketing-materials/brochures/bi-fold-tabloid',
         name: 'Bi-Fold Brochure — Tabloid',
         subtitle: '11" × 17" folded to 8.5" × 11"',
         description: 'Large-format bi-fold that opens to a full 11×17 spread. Ideal for bold visual campaigns and high-impact presentations.',
@@ -66,6 +70,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'brochure-soft-touch',
+        href: '/services/marketing-materials/brochures/soft-touch',
         name: 'Soft Touch Brochure',
         subtitle: 'Custom sizes available',
         description: 'Soft-touch laminated cover with offset-quality interior. Leaves a lasting impression at sales meetings, events, and pitch decks.',
@@ -75,6 +80,7 @@ const CATEGORIES = [
       },
       {
         id: 'brochure-uncoated',
+        href: '/services/marketing-materials/brochures/uncoated',
         name: 'Uncoated Brochure',
         subtitle: 'Custom sizes available',
         description: 'Natural, tactile paper with rich ink absorption — great for a more editorial or artisan brand feel.',
@@ -124,7 +130,7 @@ export default function BrochuresPage() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {category.products.map(product => (
-                      <ProductCard key={product.id} {...product} categoryLabel={category.label} />
+                      <ProductCard key={product.id} {...product} categoryLabel={category.label} href={product.href} />
                     ))}
                   </div>
                 </motion.div>

@@ -16,6 +16,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'poster-11x17',
+        href: '/services/marketing-materials/posters/small',
         name: 'Small Poster',
         subtitle: '11" × 17"',
         description: 'The classic concert bill size. Works everywhere — bulletin boards, windows, retail counters, and bar walls.',
@@ -25,6 +26,7 @@ const CATEGORIES = [
       },
       {
         id: 'poster-18x24',
+        href: '/services/marketing-materials/posters/medium',
         name: 'Medium Poster',
         subtitle: '18" × 24"',
         description: 'Standard poster size for retail displays, in-store promotions, event signage, and gallery prints.',
@@ -34,6 +36,7 @@ const CATEGORIES = [
       },
       {
         id: 'poster-24x36',
+        href: '/services/marketing-materials/posters/large',
         name: 'Large Poster',
         subtitle: '24" × 36"',
         description: 'Movie-poster size. Maximum impact for storefronts, events, trade shows, and gallery spaces.',
@@ -50,6 +53,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'poster-art-print',
+        href: '/services/marketing-materials/posters/art-print',
         name: 'Art Print Poster',
         subtitle: 'Custom sizes available',
         description: 'Heavy-weight uncoated stock for a fine-art feel — rich ink absorption, matte surface, and museum-quality output.',
@@ -59,6 +63,7 @@ const CATEGORIES = [
       },
       {
         id: 'poster-soft-touch',
+        href: '/services/marketing-materials/posters/soft-touch',
         name: 'Soft Touch Poster',
         subtitle: 'Custom sizes available',
         description: 'Velvety soft-touch laminate over a heavy stock base — tactile luxury for limited edition prints, brand activations, and retail.',
@@ -108,7 +113,7 @@ export default function PostersPage() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {category.products.map(product => (
-                      <ProductCard key={product.id} {...product} categoryLabel={category.label} />
+                      <ProductCard key={product.id} {...product} categoryLabel={category.label} href={product.href} />
                     ))}
                   </div>
                 </motion.div>

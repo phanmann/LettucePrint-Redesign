@@ -18,6 +18,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'retractable-standard-33',
+        href: '/services/signage/banners/retractable-33',
         name: 'Standard Retractable Banner',
         subtitle: '33" × 80"',
         description: 'Our most popular retractable banner. Lightweight aluminum base, full-color print on premium banner material.',
@@ -27,6 +28,7 @@ const CATEGORIES = [
       },
       {
         id: 'retractable-luxury-33',
+        href: '/services/signage/banners/retractable-luxury-33',
         name: 'Luxury Base Retractable',
         subtitle: '33" × 80"',
         description: 'Premium weighted base for a more stable, upscale presentation. Perfect for lobbies, showrooms, and high-end events.',
@@ -36,6 +38,7 @@ const CATEGORIES = [
       },
       {
         id: 'retractable-tabletop',
+        href: '/services/signage/banners/retractable-tabletop',
         name: 'Table Top Retractable',
         subtitle: '9" × 12"',
         description: 'Compact tabletop version for product displays, reception desks, and counter promotions.',
@@ -45,6 +48,7 @@ const CATEGORIES = [
       },
       {
         id: 'retractable-standard-48',
+        href: '/services/signage/banners/retractable-48',
         name: 'Standard Retractable Banner',
         subtitle: '48" × 80"',
         description: 'Wide-format retractable for maximum visual impact. Ideal for large booths and open floor spaces.',
@@ -54,6 +58,7 @@ const CATEGORIES = [
       },
       {
         id: 'retractable-standard-60',
+        href: '/services/signage/banners/retractable-60',
         name: 'Standard Retractable Banner',
         subtitle: '60" × 80"',
         description: 'Our largest retractable format — a commanding presence at any event or trade show floor.',
@@ -70,6 +75,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'hanging-vinyl',
+        href: '/services/signage/banners/vinyl-banner',
         name: 'Vinyl Banner',
         subtitle: 'Custom sizes available',
         description: 'Durable, weather-resistant vinyl banners for indoor and outdoor hanging. Grommets included for easy install.',
@@ -79,6 +85,7 @@ const CATEGORIES = [
       },
       {
         id: 'hanging-fabric',
+        href: '/services/signage/banners/fabric-banner',
         name: 'Fabric Banner',
         subtitle: 'Custom sizes available',
         description: 'Soft, wrinkle-resistant fabric with vibrant dye-sublimation printing. Lightweight and elegant.',
@@ -88,6 +95,7 @@ const CATEGORIES = [
       },
       {
         id: 'hanging-mesh',
+        href: '/services/signage/banners/mesh-banner',
         name: 'Perforated Mesh Banner',
         subtitle: 'Custom sizes available',
         description: 'Wind-permeable mesh for outdoor hanging. Maintains visibility while reducing wind load on large installations.',
@@ -176,7 +184,7 @@ export default function BannersPage() {
                   {/* Product grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                     {category.products.map(product => (
-                      <ProductCard key={product.id} {...product} categoryLabel={category.label} />
+                      <ProductCard key={product.id} {...product} categoryLabel={category.label} href={product.href} />
                     ))}
                   </div>
                 </motion.div>

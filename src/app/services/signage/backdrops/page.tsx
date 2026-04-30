@@ -16,8 +16,9 @@ const CATEGORIES = [
     products: [
       {
         id: 'sr-8x8',
+        href: '/services/signage/backdrops/step-repeat-8x8',
         name: 'Step & Repeat Backdrop',
-        subtitle: '8\' × 8\'',
+        subtitle: '8ft x 8ft',
         description: 'Standard step & repeat size for most events. Full-color dye-sublimation on wrinkle-resistant fabric with aluminum frame system.',
         features: ['Dye-sublimation fabric print', 'Wrinkle-resistant polyester', 'Aluminum frame included', 'Carry bag included', 'Tool-free assembly'],
         turnaround: '5–7 business days',
@@ -25,8 +26,9 @@ const CATEGORIES = [
       },
       {
         id: 'sr-10x8',
+        href: '/services/signage/backdrops/step-repeat-10x8',
         name: 'Step & Repeat Backdrop',
-        subtitle: '10\' × 8\'',
+        subtitle: '10ft x 8ft',
         description: 'Wider format for larger press walls, red carpets, and branded activations with more visual real estate.',
         features: ['Dye-sublimation fabric print', 'Wrinkle-resistant polyester', 'Aluminum frame included', 'Carry bag included', 'Tool-free assembly'],
         turnaround: '5–7 business days',
@@ -41,8 +43,9 @@ const CATEGORIES = [
     products: [
       {
         id: 'eurofit-8x8',
+        href: '/services/signage/backdrops/eurofit-8x8',
         name: 'Eurofit Backdrop',
-        subtitle: '8\' × 8\'',
+        subtitle: '8ft x 8ft',
         description: 'Stretch-fit fabric graphic slides over the aluminum extrusion frame for a taut, seamless display. Clean and professional.',
         features: ['Stretch dye-sublimation fabric', 'Pillow-case edge fit', 'Aluminum extrusion frame', 'No visible hardware', 'Carry bag included'],
         turnaround: '5–7 business days',
@@ -50,8 +53,9 @@ const CATEGORIES = [
       },
       {
         id: 'eurofit-10x8',
+        href: '/services/signage/backdrops/eurofit-10x8',
         name: 'Eurofit Backdrop',
-        subtitle: '10\' × 8\'',
+        subtitle: '10ft x 8ft',
         description: 'Wider Eurofit configuration for larger event footprints — same seamless finish, more coverage.',
         features: ['Stretch dye-sublimation fabric', 'Pillow-case edge fit', 'Aluminum extrusion frame', 'No visible hardware', 'Carry bag included'],
         turnaround: '5–7 business days',
@@ -66,8 +70,9 @@ const CATEGORIES = [
     products: [
       {
         id: 'popup-8x8',
+        href: '/services/signage/backdrops/popup-8x8',
         name: 'Pop Up Display',
-        subtitle: '8\' × 8\'',
+        subtitle: '8ft x 8ft',
         description: 'Compact pop-up backdrop ideal for smaller booths, photo ops, and press setups. Collapses into a carry case in minutes.',
         features: ['Full-color fabric or vinyl graphic', 'Spring-loaded frame', 'Collapses to carry case', 'Reusable graphic panels', 'Setup under 10 minutes'],
         turnaround: '5–7 business days',
@@ -75,8 +80,9 @@ const CATEGORIES = [
       },
       {
         id: 'popup-10x8',
+        href: '/services/signage/backdrops/popup-10x8',
         name: 'Pop Up Display',
-        subtitle: '10\' × 8\'',
+        subtitle: '10ft x 8ft',
         description: 'Mid-size pop-up for standard trade show booths and event backdrops. Maximum visual impact with minimal setup time.',
         features: ['Full-color fabric or vinyl graphic', 'Spring-loaded frame', 'Collapses to carry case', 'Reusable graphic panels', 'Setup under 10 minutes'],
         turnaround: '5–7 business days',
@@ -84,8 +90,9 @@ const CATEGORIES = [
       },
       {
         id: 'popup-20x8',
+        href: '/services/signage/backdrops/popup-20x8',
         name: 'Pop Up Display',
-        subtitle: '20\' × 8\'',
+        subtitle: '20ft x 8ft',
         description: 'Full-width trade show wall — commands the back of any 20-foot booth. Multiple frame sections connect seamlessly.',
         features: ['Full-color fabric or vinyl graphic', 'Multi-section frame system', 'Collapses to carry cases', 'Continuous seamless graphic', 'Setup under 20 minutes'],
         turnaround: '7–10 business days',
@@ -100,8 +107,9 @@ const CATEGORIES = [
     products: [
       {
         id: 'seg-10x8',
+        href: '/services/signage/backdrops/seg-10x8',
         name: 'SEG Pop Up Stand',
-        subtitle: '10\' × 8\'',
+        subtitle: '10ft x 8ft',
         description: 'SEG fabric graphic with a silicone bead edge pressed into an aluminum frame channel. Zero hardware visible, perfectly flat print.',
         features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Aluminum extrusion frame', 'Tool-free graphic swap', 'Carry bag included'],
         turnaround: '7–10 business days',
@@ -109,8 +117,9 @@ const CATEGORIES = [
       },
       {
         id: 'seg-8x10',
+        href: '/services/signage/backdrops/seg-8x10',
         name: 'SEG Pop Up Stand',
-        subtitle: '8\' × 10\'',
+        subtitle: '8ft x 10ft',
         description: 'Taller SEG configuration — great for double-deck activations, stage backdrops, and high-ceiling venues.',
         features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Aluminum extrusion frame', 'Tool-free graphic swap', 'Carry bag included'],
         turnaround: '7–10 business days',
@@ -118,8 +127,9 @@ const CATEGORIES = [
       },
       {
         id: 'seg-20x8',
+        href: '/services/signage/backdrops/seg-20x8',
         name: 'SEG Pop Up Stand',
-        subtitle: '20\' × 8\'',
+        subtitle: '20ft x 8ft',
         description: 'Full 20-foot SEG wall for large activations, keynote stages, and trade show island booths. Maximum presence, seamless execution.',
         features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Multi-section aluminum frame', 'Continuous seamless graphic', 'Carry bags included'],
         turnaround: '7–10 business days',
@@ -167,7 +177,7 @@ export default function BackdropsPage() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {category.products.map(product => (
-                      <ProductCard key={product.id} {...product} categoryLabel={category.label} />
+                      <ProductCard key={product.id} {...product} categoryLabel={category.label} href={product.href} />
                     ))}
                   </div>
                 </motion.div>

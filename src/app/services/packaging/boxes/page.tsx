@@ -16,6 +16,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'shipping-mailer',
+        href: '/services/packaging/boxes/mailer-box',
         name: 'Mailer Box',
         subtitle: 'Custom sizes available',
         description: 'Rigid self-locking mailer box — no tape needed. Perfect for subscription boxes and DTC unboxing experiences.',
@@ -25,6 +26,7 @@ const CATEGORIES = [
       },
       {
         id: 'shipping-rsc',
+        href: '/services/packaging/boxes/rsc-box',
         name: 'Regular Slotted Carton (RSC)',
         subtitle: 'Custom sizes available',
         description: 'Classic corrugated shipping box for bulk fulfillment. Functional, stackable, and fully custom printed.',
@@ -41,6 +43,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'paperboard-folding',
+        href: '/services/packaging/boxes/folding-carton',
         name: 'Folding Carton',
         subtitle: 'Custom sizes available',
         description: 'Reverse tuck, straight tuck, or auto-bottom — full-color folding cartons for retail shelves and DTC.',
@@ -50,6 +53,7 @@ const CATEGORIES = [
       },
       {
         id: 'paperboard-sleeve',
+        href: '/services/packaging/boxes/box-sleeve',
         name: 'Box Sleeve / Wrap',
         subtitle: 'Custom sizes available',
         description: 'Slide-over sleeve for plain boxes — cost-effective way to brand standard packaging.',
@@ -66,6 +70,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'rigid-lid-base',
+        href: '/services/packaging/boxes/lid-base-box',
         name: 'Lid & Base Box',
         subtitle: 'Custom sizes available',
         description: 'Classic two-piece rigid box with separate lid. The gold standard for premium unboxing — cosmetics, jewelry, spirits, gifts.',
@@ -75,6 +80,7 @@ const CATEGORIES = [
       },
       {
         id: 'rigid-magnetic',
+        href: '/services/packaging/boxes/magnetic-closure-box',
         name: 'Magnetic Closure Box',
         subtitle: 'Custom sizes available',
         description: 'Hinged rigid box with hidden magnetic closure. Feels expensive. Because it is.',
@@ -120,7 +126,7 @@ export default function BoxesPage() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {category.products.map(product => (
-                      <ProductCard key={product.id} {...product} categoryLabel={category.label} />
+                      <ProductCard key={product.id} {...product} categoryLabel={category.label} href={product.href} />
                     ))}
                   </div>
                 </motion.div>

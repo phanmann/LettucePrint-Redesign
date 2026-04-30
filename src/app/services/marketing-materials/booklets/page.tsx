@@ -16,6 +16,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'booklet-ss-55x85',
+        href: '/services/marketing-materials/booklets/saddle-stitch-55x85',
         name: 'Saddle-Stitch Booklet',
         subtitle: '5.5" × 8.5"',
         description: 'Half-size booklet — compact, easy to carry, and perfect for menus, mini-catalogs, and pocket guides.',
@@ -25,6 +26,7 @@ const CATEGORIES = [
       },
       {
         id: 'booklet-ss-85x11',
+        href: '/services/marketing-materials/booklets/saddle-stitch-85x11',
         name: 'Saddle-Stitch Booklet',
         subtitle: '8.5" × 11"',
         description: 'Full letter-size booklet — the standard for lookbooks, product catalogs, annual reports, and event programs.',
@@ -34,6 +36,7 @@ const CATEGORIES = [
       },
       {
         id: 'booklet-ss-square',
+        href: '/services/marketing-materials/booklets/saddle-stitch-square',
         name: 'Square Saddle-Stitch Booklet',
         subtitle: '8.5" × 8.5"',
         description: 'Square format for a modern, editorial feel. Stands out on a shelf and works especially well for photo-heavy content.',
@@ -50,6 +53,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'booklet-pb-85x11',
+        href: '/services/marketing-materials/booklets/perfect-bound-85x11',
         name: 'Perfect Bound Booklet',
         subtitle: '8.5" × 11"',
         description: 'Flat spine, square edges, and a substantial feel. The go-to for product catalogs, brand books, and trade publications.',
@@ -59,6 +63,7 @@ const CATEGORIES = [
       },
       {
         id: 'booklet-pb-6x9',
+        href: '/services/marketing-materials/booklets/perfect-bound-6x9',
         name: 'Perfect Bound Booklet',
         subtitle: '6" × 9"',
         description: 'Compact trade-book format. Clean and professional for B2B collateral, directories, and editorial-style publications.',
@@ -75,6 +80,7 @@ const CATEGORIES = [
     products: [
       {
         id: 'booklet-soft-touch',
+        href: '/services/marketing-materials/booklets/soft-touch-cover',
         name: 'Soft Touch Cover Booklet',
         subtitle: 'Custom sizes available',
         description: 'Saddle-stitch or perfect-bound booklet with a soft-touch laminated cover. The finish that separates a premium brand from everyone else.',
@@ -124,7 +130,7 @@ export default function BookletsPage() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {category.products.map(product => (
-                      <ProductCard key={product.id} {...product} categoryLabel={category.label} />
+                      <ProductCard key={product.id} {...product} categoryLabel={category.label} href={product.href} />
                     ))}
                   </div>
                 </motion.div>
