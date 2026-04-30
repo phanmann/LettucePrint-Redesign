@@ -32,10 +32,10 @@ export default function ProductCard({
   const [expanded, setExpanded] = useState(false)
 
   return (
-    <div className="flex flex-col">
-      {/* ── Swatch — detached rounded card ── */}
+    <div className="flex flex-col bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200">
+      {/* ── Swatch — connected to content, no gap ── */}
       <div
-        className="w-full h-44 rounded-2xl flex items-center justify-center mb-4"
+        className="w-full h-44 flex items-center justify-center flex-shrink-0"
         style={{ backgroundColor: color }}
       >
         <div className="text-center px-6">
@@ -44,8 +44,8 @@ export default function ProductCard({
         </div>
       </div>
 
-      {/* ── Content — open, no outer border ── */}
-      <div className="flex flex-col flex-1 bg-white rounded-2xl p-5">
+      {/* ── Content ── */}
+      <div className="flex flex-col flex-1 p-5">
         <h3 className="text-base font-bold text-gray-900 mb-0.5">{name}</h3>
         <p className="text-xs text-gray-400 mb-3">{subtitle}</p>
         <p className="text-sm text-gray-600 mb-4 leading-relaxed">{description}</p>
