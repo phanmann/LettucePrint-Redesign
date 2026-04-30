@@ -22,7 +22,8 @@ const CATEGORIES = [
         description: 'The workhorse handout. Fits in bags, pockets, and racks. Great for menus, event promos, and retail inserts.',
         features: ['100 lb. gloss or matte stock', 'Full-color single or double-sided', 'Bulk pricing available', 'Fast turnaround'],
         turnaround: '1–2 business days',
-        color: '#E8F5F1',
+        color: '#E8F5F1'
+        image: '/images/products/flyers/flyer-1.jpg',,
       },
     ],
   },
@@ -39,7 +40,8 @@ const CATEGORIES = [
         description: 'Vibrant high-gloss finish that makes photos and colors pop. Ideal for event promos, product launches, and retail displays.',
         features: ['80 lb. gloss text', 'Full-color printing', 'Single or double-sided', 'Bulk pricing available'],
         turnaround: '1–2 business days',
-        color: '#E8F0F5',
+        color: '#E8F0F5'
+        image: '/images/products/flyers/flyer-1.jpg',,
       },
       {
         id: 'flyer-85x11-matte',
@@ -49,7 +51,8 @@ const CATEGORIES = [
         description: 'Soft matte finish for a sophisticated look — ideal for menus, lookbooks, and editorial-style promotions.',
         features: ['80 lb. matte text', 'Full-color printing', 'Single or double-sided', 'Writable surface'],
         turnaround: '1–2 business days',
-        color: '#F5F0E8',
+        color: '#F5F0E8'
+        image: '/images/products/flyers/flyer-2.jpg',,
       },
       {
         id: 'flyer-85x11-heavy',
@@ -59,7 +62,8 @@ const CATEGORIES = [
         description: "Heavier 100 lb. cover stock for a more substantial, premium feel. Doesn't flop or bend in hand.",
         features: ['100 lb. cover stock', 'Matte or gloss coating', 'Full-color printing', 'Double-sided'],
         turnaround: '2–3 business days',
-        color: '#F0E8F5',
+        color: '#F0E8F5'
+        image: '/images/products/flyers/flyer-2.jpg',,
       },
     ],
   },
@@ -76,7 +80,8 @@ const CATEGORIES = [
         description: 'Twice the real estate of a letter flyer. Perfect for menus, in-store promotions, concert bills, and display boards.',
         features: ['80 lb. gloss or matte text', 'Full-color printing', 'Single or double-sided', 'Folding available'],
         turnaround: '2–3 business days',
-        color: '#E8F5EF',
+        color: '#E8F5EF'
+        image: '/images/products/flyers/flyer-1.jpg',,
       },
     ],
   },

@@ -19,7 +19,8 @@ const CATEGORIES = [
       name: 'Standard Business Cards',
       subtitle: '3.5" × 2"',
       description: 'Full-color printing on your choice of finish — matte, gloss, or uncoated. Clean, professional, and fast.',
-      color: '#E8F5F1',
+      color: '#E8F5F1'
+        image: 'https://drive.usercontent.google.com/download?id=1LYzqKl5GRanrRWxBdsn_tnLxmp2dau-D&export=view',,
       options: [
         { label: 'Finishes', values: ['Matte', 'Gloss', 'Uncoated'] },
         { label: 'Stock',    values: ['14 pt', '16 pt'] },
@@ -45,7 +46,8 @@ const CATEGORIES = [
       name: 'Premium Business Cards',
       subtitle: '3.5" × 2"',
       description: 'Stand-out finishes for brands that want to leave an impression. Soft-touch, spot UV, foil, and extra-thick options.',
-      color: '#F0E8F5',
+      color: '#F0E8F5'
+        image: 'https://drive.usercontent.google.com/download?id=1MHeRH5jLNMqM58gLeg9xmIsKEn791F7K&export=view',,
       options: [
         { label: 'Finishes', values: ['Soft Touch', 'Spot UV', 'Foil Stamped', 'Extra Thick 32pt'] },
         { label: 'Stock',    values: ['18 pt', '32 pt'] },

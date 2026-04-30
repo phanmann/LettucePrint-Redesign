@@ -22,7 +22,8 @@ const CATEGORIES = [
         description: 'The classic mailer size. Cost-effective for high-volume campaigns, event announcements, and promotional drops.',
         features: ['100 lb. gloss or matte stock', 'Full-color both sides', 'USPS postcard compliant', 'Bulk pricing available'],
         turnaround: '2–3 business days',
-        color: '#E8F5F1',
+        color: '#E8F5F1'
+        image: 'https://drive.usercontent.google.com/download?id=16GP_uv16UVWwZyO_WAvAZDfCMoMRsCoE&export=view',,
       },
       {
         id: 'pc-5x7',
@@ -32,7 +33,8 @@ const CATEGORIES = [
         description: 'More visual real estate for bold imagery, menus, event details, or product showcases.',
         features: ['100 lb. gloss or matte stock', 'Full-color both sides', 'USPS first-class compliant', 'Rounded corner option'],
         turnaround: '2–3 business days',
-        color: '#F5F0E8',
+        color: '#F5F0E8'
+        image: 'https://drive.usercontent.google.com/download?id=1C-8AXzKw1umGCMhR2T03yzFlOZXMBdoX&export=view',,
       },
       {
         id: 'pc-6x9',
@@ -42,7 +44,8 @@ const CATEGORIES = [
         description: 'Large-format postcard that stands out in any mailbox. Great for real estate, promotions, and direct mail campaigns.',
         features: ['100 lb. gloss or matte stock', 'Full-color both sides', 'USPS bulk mail ready', 'Bleed printing'],
         turnaround: '3–5 business days',
-        color: '#E8F0F5',
+        color: '#E8F0F5'
+        image: 'https://drive.usercontent.google.com/download?id=1_To7GcDYNA3b28ywoo0S8Ev4H5uct3O6&export=view',,
       },
       {
         id: 'pc-6x11',
@@ -52,7 +55,8 @@ const CATEGORIES = [
         description: 'Maximum impact, maximum visibility. The largest standard postcard size — designed to dominate the mailbox.',
         features: ['100 lb. gloss or matte stock', 'Full-color both sides', 'USPS standard mail', 'Panoramic design space'],
         turnaround: '3–5 business days',
-        color: '#F0E8F5',
+        color: '#F0E8F5'
+        image: 'https://drive.usercontent.google.com/download?id=1qt5HNfk394sSSzs9teHR1T5eh5dtwZAc&export=view',,
       },
     ],
   },
@@ -69,7 +73,8 @@ const CATEGORIES = [
         description: 'Velvety soft-touch laminate on heavy stock. Stands apart in any stack — a luxury feel that drives open rates.',
         features: ['18 pt card stock', 'Soft-touch matte laminate', 'Full-color printing', 'Spot UV available'],
         turnaround: '3–5 business days',
-        color: '#E8F5EF',
+        color: '#E8F5EF'
+        image: 'https://drive.usercontent.google.com/download?id=1wnC7cM8WjOAV5H2gx3DK3u9gr5WLmx4A&export=view',,
       },
       {
         id: 'pc-spot-uv',
@@ -79,7 +84,8 @@ const CATEGORIES = [
         description: 'Raised gloss UV highlights on a matte base — draws the eye to logos, headlines, and CTAs.',
         features: ['18 pt card stock', 'Matte laminate base', 'Raised spot UV overlay', 'Full-color printing'],
         turnaround: '3–5 business days',
-        color: '#F5E8E8',
+        color: '#F5E8E8'
+        image: 'https://drive.usercontent.google.com/download?id=16GP_uv16UVWwZyO_WAvAZDfCMoMRsCoE&export=view',,
       },
     ],
   },

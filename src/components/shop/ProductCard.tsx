@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -19,6 +20,8 @@ export interface ProductCardProps {
   options?: { label: string; values: string[] }[]
   /** Optional override link for the CTA button. Defaults to /get-quote */
   href?: string
+  /** Optional product image — replaces the color swatch */
+  image?: string
 }
 
 export default function ProductCard({
@@ -31,21 +34,34 @@ export default function ProductCard({
   categoryLabel,
   options,
   href,
+  image,
 }: ProductCardProps) {
   const [expanded, setExpanded] = useState(false)
 
   return (
     <div className="flex flex-col bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200">
-      {/* ── Swatch — connected to content, no gap ── */}
-      <div
-        className="w-full h-44 flex items-center justify-center flex-shrink-0"
-        style={{ backgroundColor: color }}
-      >
-        <div className="text-center px-6">
-          <p className="text-sm font-semibold text-gray-500 mb-1">{name}</p>
-          <p className="text-xs text-gray-400">{subtitle}</p>
+      {/* ── Image or swatch ── */}
+      {image ? (
+        <div className="relative w-full h-44 flex-shrink-0 overflow-hidden">
+          <Image
+            src={image}
+            alt={name}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
         </div>
-      </div>
+      ) : (
+        <div
+          className="w-full h-44 flex items-center justify-center flex-shrink-0"
+          style={{ backgroundColor: color }}
+        >
+          <div className="text-center px-6">
+            <p className="text-sm font-semibold text-gray-500 mb-1">{name}</p>
+            <p className="text-xs text-gray-400">{subtitle}</p>
+          </div>
+        </div>
+      )}
 
       {/* ── Content ── */}
       <div className="flex flex-col flex-1 p-5">

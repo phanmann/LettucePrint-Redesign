@@ -22,7 +22,8 @@ const CATEGORIES = [
         description: 'Standard step & repeat size for most events. Full-color dye-sublimation on wrinkle-resistant fabric with aluminum frame system.',
         features: ['Dye-sublimation fabric print', 'Wrinkle-resistant polyester', 'Aluminum frame included', 'Carry bag included', 'Tool-free assembly'],
         turnaround: '5–7 business days',
-        color: '#E8F5F1',
+        color: '#E8F5F1'
+        image: '/images/products/backdrops/step-repeat.jpg',,
       },
       {
         id: 'sr-10x8',
@@ -32,7 +33,8 @@ const CATEGORIES = [
         description: 'Wider format for larger press walls, red carpets, and branded activations with more visual real estate.',
         features: ['Dye-sublimation fabric print', 'Wrinkle-resistant polyester', 'Aluminum frame included', 'Carry bag included', 'Tool-free assembly'],
         turnaround: '5–7 business days',
-        color: '#F5F0E8',
+        color: '#F5F0E8'
+        image: '/images/products/backdrops/step-repeat.jpg',,
       },
     ],
   },
@@ -49,7 +51,8 @@ const CATEGORIES = [
         description: 'Stretch-fit fabric graphic slides over the aluminum extrusion frame for a taut, seamless display. Clean and professional.',
         features: ['Stretch dye-sublimation fabric', 'Pillow-case edge fit', 'Aluminum extrusion frame', 'No visible hardware', 'Carry bag included'],
         turnaround: '5–7 business days',
-        color: '#E8F0F5',
+        color: '#E8F0F5'
+        image: '/images/products/backdrops/seg-lightbox.jpg',,
       },
       {
         id: 'eurofit-10x8',
@@ -59,7 +62,8 @@ const CATEGORIES = [
         description: 'Wider Eurofit configuration for larger event footprints — same seamless finish, more coverage.',
         features: ['Stretch dye-sublimation fabric', 'Pillow-case edge fit', 'Aluminum extrusion frame', 'No visible hardware', 'Carry bag included'],
         turnaround: '5–7 business days',
-        color: '#F0E8F5',
+        color: '#F0E8F5'
+        image: '/images/products/backdrops/seg-lightbox.jpg',,
       },
     ],
   },
@@ -76,7 +80,8 @@ const CATEGORIES = [
         description: 'Compact pop-up backdrop ideal for smaller booths, photo ops, and press setups. Collapses into a carry case in minutes.',
         features: ['Full-color fabric or vinyl graphic', 'Spring-loaded frame', 'Collapses to carry case', 'Reusable graphic panels', 'Setup under 10 minutes'],
         turnaround: '5–7 business days',
-        color: '#E8F5EF',
+        color: '#E8F5EF'
+        image: '/images/products/backdrops/popup.jpg',,
       },
       {
         id: 'popup-10x8',
@@ -86,7 +91,8 @@ const CATEGORIES = [
         description: 'Mid-size pop-up for standard trade show booths and event backdrops. Maximum visual impact with minimal setup time.',
         features: ['Full-color fabric or vinyl graphic', 'Spring-loaded frame', 'Collapses to carry case', 'Reusable graphic panels', 'Setup under 10 minutes'],
         turnaround: '5–7 business days',
-        color: '#F5E8E8',
+        color: '#F5E8E8'
+        image: '/images/products/backdrops/popup.jpg',,
       },
       {
         id: 'popup-20x8',
@@ -96,7 +102,8 @@ const CATEGORIES = [
         description: 'Full-width trade show wall — commands the back of any 20-foot booth. Multiple frame sections connect seamlessly.',
         features: ['Full-color fabric or vinyl graphic', 'Multi-section frame system', 'Collapses to carry cases', 'Continuous seamless graphic', 'Setup under 20 minutes'],
         turnaround: '7–10 business days',
-        color: '#E8F5F5',
+        color: '#E8F5F5'
+        image: '/images/products/backdrops/popup.jpg',,
       },
     ],
   },
@@ -113,7 +120,8 @@ const CATEGORIES = [
         description: 'SEG fabric graphic with a silicone bead edge pressed into an aluminum frame channel. Zero hardware visible, perfectly flat print.',
         features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Aluminum extrusion frame', 'Tool-free graphic swap', 'Carry bag included'],
         turnaround: '7–10 business days',
-        color: '#F0E8F5',
+        color: '#F0E8F5'
+        image: '/images/products/backdrops/seg-lightbox.jpg',,
       },
       {
         id: 'seg-8x10',
@@ -123,7 +131,8 @@ const CATEGORIES = [
         description: 'Taller SEG configuration — great for double-deck activations, stage backdrops, and high-ceiling venues.',
         features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Aluminum extrusion frame', 'Tool-free graphic swap', 'Carry bag included'],
         turnaround: '7–10 business days',
-        color: '#E8F0F5',
+        color: '#E8F0F5'
+        image: '/images/products/backdrops/seg-lightbox.jpg',,
       },
       {
         id: 'seg-20x8',
@@ -133,7 +142,8 @@ const CATEGORIES = [
         description: 'Full 20-foot SEG wall for large activations, keynote stages, and trade show island booths. Maximum presence, seamless execution.',
         features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Multi-section aluminum frame', 'Continuous seamless graphic', 'Carry bags included'],
         turnaround: '7–10 business days',
-        color: '#E8F5F1',
+        color: '#E8F5F1'
+        image: '/images/products/backdrops/seg-lightbox.jpg',,
       },
     ],
   },

@@ -24,7 +24,8 @@ const CATEGORIES = [
         description: 'Our most popular retractable banner. Lightweight aluminum base, full-color print on premium banner material.',
         features: ['Aluminum base', 'Full-color print', 'Carrying bag included', 'Setup in under 60 seconds'],
         turnaround: '3–5 business days',
-        color: '#E8F5F1',
+        color: '#E8F5F1'
+        image: 'https://drive.usercontent.google.com/download?id=1lkdgvN3wjRMfftKmeu5X47ZwHyor7dzB&export=view',,
       },
       {
         id: 'retractable-luxury-33',
@@ -34,7 +35,8 @@ const CATEGORIES = [
         description: 'Premium weighted base for a more stable, upscale presentation. Perfect for lobbies, showrooms, and high-end events.',
         features: ['Heavy-duty base', 'Premium banner material', 'Carrying bag included', 'Enhanced stability'],
         turnaround: '3–5 business days',
-        color: '#E8F0F5',
+        color: '#E8F0F5'
+        image: 'https://drive.usercontent.google.com/download?id=1lkdgvN3wjRMfftKmeu5X47ZwHyor7dzB&export=view',,
       },
       {
         id: 'retractable-tabletop',
@@ -44,7 +46,8 @@ const CATEGORIES = [
         description: 'Compact tabletop version for product displays, reception desks, and counter promotions.',
         features: ['Compact design', 'Desk & counter ready', 'Full-color print', 'Lightweight'],
         turnaround: '3–5 business days',
-        color: '#F5F0E8',
+        color: '#F5F0E8'
+        image: 'https://drive.usercontent.google.com/download?id=1lkdgvN3wjRMfftKmeu5X47ZwHyor7dzB&export=view',,
       },
       {
         id: 'retractable-standard-48',
@@ -54,7 +57,8 @@ const CATEGORIES = [
         description: 'Wide-format retractable for maximum visual impact. Ideal for large booths and open floor spaces.',
         features: ['Wide 48" format', 'Aluminum base', 'Full-color print', 'Carrying bag included'],
         turnaround: '3–5 business days',
-        color: '#F0E8F5',
+        color: '#F0E8F5'
+        image: 'https://drive.usercontent.google.com/download?id=1p_mlXivZBXkObui0RQPrmVH8uhVf9WNl&export=view',,
       },
       {
         id: 'retractable-standard-60',
@@ -64,7 +68,8 @@ const CATEGORIES = [
         description: 'Our largest retractable format — a commanding presence at any event or trade show floor.',
         features: ['XL 60" format', 'Dual base system', 'Full-color print', 'Heavy-duty carrying case'],
         turnaround: '5–7 business days',
-        color: '#E8F5EF',
+        color: '#E8F5EF'
+        image: 'https://drive.usercontent.google.com/download?id=1p_mlXivZBXkObui0RQPrmVH8uhVf9WNl&export=view',,
       },
     ],
   },
@@ -81,7 +86,8 @@ const CATEGORIES = [
         description: 'Durable, weather-resistant vinyl banners for indoor and outdoor hanging. Grommets included for easy install.',
         features: ['13 oz. scrim vinyl', 'Grommets included', 'Indoor & outdoor use', 'Custom sizes'],
         turnaround: '2–4 business days',
-        color: '#E8F5F1',
+        color: '#E8F5F1'
+        image: '/images/products/banners/vinyl-banner.jpg',,
       },
       {
         id: 'hanging-fabric',
@@ -91,7 +97,8 @@ const CATEGORIES = [
         description: 'Soft, wrinkle-resistant fabric with vibrant dye-sublimation printing. Lightweight and elegant.',
         features: ['Dye-sublimation print', 'Wrinkle resistant', 'Lightweight fabric', 'Machine washable'],
         turnaround: '3–5 business days',
-        color: '#F5F0E8',
+        color: '#F5F0E8'
+        image: '/images/products/banners/fabric-banner.jpg',,
       },
       {
         id: 'hanging-mesh',
@@ -101,7 +108,8 @@ const CATEGORIES = [
         description: 'Wind-permeable mesh for outdoor hanging. Maintains visibility while reducing wind load on large installations.',
         features: ['Wind-permeable mesh', 'Outdoor rated', 'Grommets included', 'UV resistant inks'],
         turnaround: '3–5 business days',
-        color: '#E8F0F5',
+        color: '#E8F0F5'
+        image: '/images/products/banners/mesh-banner.jpg',,
       },
     ],
   },
