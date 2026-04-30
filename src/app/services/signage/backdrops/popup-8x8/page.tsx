@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/backdrops/popup.jpg', alt: 'Pop-up display 8x8' },
+        { src: '/images/products/backdrops/step-repeat.jpg', alt: 'Event pop-up backdrop' },
+      ]}
       name="Pop Up Display"
       tagline="Spring-loaded pop-up frame with fabric graphic. Setup in under 5 minutes."
       parentHref="/services/signage/backdrops"

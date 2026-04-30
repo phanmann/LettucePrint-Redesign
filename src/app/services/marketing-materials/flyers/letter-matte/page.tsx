@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/flyers/flyer-2.jpg', alt: 'Matte letter flyers' },
+        { src: '/images/products/flyers/flyer-1.jpg', alt: 'Custom full-color flyers' },
+      ]}
       name="Letter Flyer - Matte"
       tagline="Soft matte for a sophisticated look. Ideal for menus, lookbooks, and editorial promotions."
       parentHref="/services/marketing-materials/flyers"

@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/flyers/flyer-2.jpg', alt: 'Tabloid flyer print' },
+        { src: '/images/products/flyers/flyer-1.jpg', alt: 'Large format flyers' },
+      ]}
       name="Tabloid Flyer"
       tagline="Twice the real estate of a letter flyer. Perfect for menus, concert bills, and display boards."
       parentHref="/services/marketing-materials/flyers"

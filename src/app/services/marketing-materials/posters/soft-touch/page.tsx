@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/posters/poster-soft-touch.jpg', alt: 'Soft-touch poster finish' },
+        { src: '/images/products/posters/poster-1.jpg', alt: 'Premium soft-touch poster' },
+      ]}
       name="Soft Touch Poster"
       tagline="Velvety soft-touch laminate over full-color printing. A tactile luxury finish that elevates any space."
       parentHref="/services/marketing-materials/posters"

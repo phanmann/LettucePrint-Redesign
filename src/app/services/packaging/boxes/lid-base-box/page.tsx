@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/boxes/box-magnetic.jpg', alt: 'Lid and base box' },
+        { src: '/images/products/boxes/box-folding-carton.jpg', alt: 'Custom printed box' },
+      ]}
       name="Lid and Base Box"
       tagline="Premium two-piece rigid box for luxury gifting, retail, and unboxing experiences."
       parentHref="/services/packaging/boxes"

@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/boxes/box-folding-carton.jpg', alt: 'Folding carton box' },
+        { src: '/images/products/boxes/box-mailer.jpg', alt: 'Custom retail packaging' },
+      ]}
       name="Folding Carton"
       tagline="Custom folding cartons for retail packaging, cosmetics, food, supplements, and consumer goods."
       parentHref="/services/packaging/boxes"

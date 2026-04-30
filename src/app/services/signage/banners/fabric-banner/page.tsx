@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/banners/fabric-banner.jpg', alt: 'Fabric tension banner' },
+        { src: '/images/products/banners/vinyl-banner.jpg', alt: 'Fabric display banner' },
+      ]}
       name="Fabric Banner"
       tagline="Soft, wrinkle-resistant fabric with dye-sublimation printing. Lightweight and elegant."
       parentHref="/services/signage/banners"

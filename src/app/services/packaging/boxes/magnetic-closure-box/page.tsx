@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/boxes/box-magnetic.jpg', alt: 'Magnetic closure gift box' },
+        { src: '/images/products/boxes/box-mailer.jpg', alt: 'Premium custom packaging' },
+      ]}
       name="Magnetic Closure Box"
       tagline="High-end magnetic closure rigid box. The gold standard for luxury packaging and gifting."
       parentHref="/services/packaging/boxes"

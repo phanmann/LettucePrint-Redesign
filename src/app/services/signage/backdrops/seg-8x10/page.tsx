@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/backdrops/seg-lightbox.jpg', alt: 'SEG light box display' },
+        { src: '/images/products/backdrops/step-repeat.jpg', alt: 'Fabric frame display' },
+      ]}
       name="SEG Pop Up Stand"
       tagline="Portrait SEG stand for tall installations and feature walls."
       parentHref="/services/signage/backdrops"

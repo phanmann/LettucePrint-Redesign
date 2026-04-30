@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/posters/poster-2.jpg', alt: 'Large format poster' },
+        { src: '/images/products/posters/poster-1.jpg', alt: 'Custom printed poster' },
+      ]}
       name="Large Poster"
       tagline="Large-format poster for maximum visual presence at concerts, retail, and exhibitions."
       parentHref="/services/marketing-materials/posters"

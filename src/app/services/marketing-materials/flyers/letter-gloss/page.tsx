@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/flyers/flyer-1.jpg', alt: 'Gloss letter flyer print' },
+        { src: '/images/products/flyers/flyer-2.jpg', alt: 'Custom full-color flyers' },
+      ]}
       name="Letter Flyer - Gloss"
       tagline="High-gloss finish that makes photos and colors pop. Ideal for events, product launches, and retail."
       parentHref="/services/marketing-materials/flyers"

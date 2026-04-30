@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/flyers/flyer-1.jpg', alt: 'Heavy stock flyers' },
+        { src: '/images/products/flyers/flyer-2.jpg', alt: 'Premium printed flyers' },
+      ]}
       name="Heavy Stock Flyer"
       tagline="Heavier 100 lb. cover stock for a more substantial, premium feel that does not flop or bend."
       parentHref="/services/marketing-materials/flyers"

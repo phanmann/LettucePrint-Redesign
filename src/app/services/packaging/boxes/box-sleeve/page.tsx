@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/boxes/box-folding-carton.jpg', alt: 'Printed box sleeve' },
+        { src: '/images/products/boxes/box-magnetic.jpg', alt: 'Custom sleeve packaging' },
+      ]}
       name="Box Sleeve"
       tagline="Printed sleeve that wraps around an existing box. A cost-effective way to add branded packaging."
       parentHref="/services/packaging/boxes"

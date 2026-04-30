@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/flyers/flyer-1.jpg', alt: 'Half-sheet flyer print' },
+        { src: '/images/products/flyers/flyer-2.jpg', alt: 'Custom flyers stack' },
+      ]}
       name="Half Sheet Flyer"
       tagline="The workhorse handout. Great for menus, event promos, and retail inserts."
       parentHref="/services/marketing-materials/flyers"

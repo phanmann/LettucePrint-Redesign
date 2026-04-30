@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/boxes/box-mailer.jpg', alt: 'RSC shipping box' },
+        { src: '/images/products/boxes/box-folding-carton.jpg', alt: 'Custom printed RSC box' },
+      ]}
       name="Regular Slotted Carton"
       tagline="Workhorse shipping box with full-color exterior. Cost-effective for high-volume e-commerce."
       parentHref="/services/packaging/boxes"

@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/banners/mesh-banner.jpg', alt: 'Mesh vinyl banner' },
+        { src: '/images/products/banners/vinyl-banner.jpg', alt: 'Outdoor mesh banner' },
+      ]}
       name="Perforated Mesh Banner"
       tagline="Wind-permeable mesh for outdoor hanging. Reduces wind load on large installations."
       parentHref="/services/signage/banners"

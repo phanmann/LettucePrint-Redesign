@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/backdrops/step-repeat.jpg', alt: '8x8 step and repeat backdrop' },
+        { src: '/images/products/backdrops/popup.jpg', alt: 'Event backdrop display' },
+      ]}
       name="Step and Repeat Backdrop"
       tagline="The classic event backdrop. Full-color logo repeat on tension fabric or vinyl."
       parentHref="/services/signage/backdrops"

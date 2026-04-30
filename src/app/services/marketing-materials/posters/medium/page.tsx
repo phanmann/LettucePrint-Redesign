@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/posters/poster-1.jpg', alt: 'Medium poster print' },
+        { src: '/images/products/posters/poster-2.jpg', alt: 'Custom printed poster' },
+      ]}
       name="Medium Poster"
       tagline="The classic event poster size. Big enough to command attention, manageable to hang."
       parentHref="/services/marketing-materials/posters"

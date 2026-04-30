@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/booklets/booklet-open.jpg', alt: 'Saddle-stitch booklet open' },
+        { src: '/images/products/booklets/booklet-closed.jpg', alt: 'Saddle-stitch booklet' },
+      ]}
       name="Saddle-Stitch Booklet"
       tagline="Standard letter-size saddle-stitch. The go-to for catalogs, annual reports, and event programs."
       parentHref="/services/marketing-materials/booklets"

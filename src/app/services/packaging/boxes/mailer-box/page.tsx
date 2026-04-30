@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/boxes/box-mailer.jpg', alt: 'Custom printed mailer box' },
+        { src: '/images/products/boxes/box-folding-carton.jpg', alt: 'Custom packaging box' },
+      ]}
       name="Mailer Box"
       tagline="Custom-printed mailer boxes for e-commerce, subscription boxes, and brand gifting."
       parentHref="/services/packaging/boxes"

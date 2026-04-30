@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/backdrops/seg-lightbox.jpg', alt: 'Eurofit 8x8 display' },
+        { src: '/images/products/backdrops/popup.jpg', alt: 'Eurofit fabric display' },
+      ]}
       name="Eurofit Backdrop"
       tagline="Seamless fabric display with aluminum frame. Clean, frameless look."
       parentHref="/services/signage/backdrops"

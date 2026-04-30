@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/posters/poster-soft-touch.jpg', alt: 'Soft-touch cover booklet' },
+        { src: '/images/products/booklets/booklet-open.jpg', alt: 'Soft-touch booklet interior' },
+      ]}
       name="Soft Touch Cover Booklet"
       tagline="Premium soft-touch laminated cover. A favorite for brand books, portfolios, and annual reports."
       parentHref="/services/marketing-materials/booklets"

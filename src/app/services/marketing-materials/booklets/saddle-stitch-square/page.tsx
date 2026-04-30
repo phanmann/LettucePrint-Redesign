@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/booklets/booklet-closed.jpg', alt: 'Square saddle-stitch booklet' },
+        { src: '/images/products/booklets/booklet-open.jpg', alt: 'Booklet interior spreads' },
+      ]}
       name="Square Saddle-Stitch Booklet"
       tagline="Eye-catching square format for portfolios, lookbooks, and brand books."
       parentHref="/services/marketing-materials/booklets"

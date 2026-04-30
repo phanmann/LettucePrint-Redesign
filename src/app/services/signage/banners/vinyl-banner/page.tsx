@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/banners/vinyl-banner.jpg', alt: 'Custom vinyl banner' },
+        { src: '/images/products/banners/mesh-banner.jpg', alt: 'Outdoor banner print' },
+      ]}
       name="Vinyl Banner"
       tagline="Durable, weather-resistant vinyl for indoor and outdoor hanging. Grommets included."
       parentHref="/services/signage/banners"

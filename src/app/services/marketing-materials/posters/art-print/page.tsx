@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: '/images/products/posters/poster-1.jpg', alt: 'Art print poster' },
+        { src: '/images/products/posters/poster-2.jpg', alt: 'Custom art prints' },
+      ]}
       name="Art Print Poster"
       tagline="Museum-quality fine art prints on premium paper. For artists, photographers, and brands that demand the best."
       parentHref="/services/marketing-materials/posters"
