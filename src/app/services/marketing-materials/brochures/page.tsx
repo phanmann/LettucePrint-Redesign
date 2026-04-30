@@ -22,8 +22,8 @@ const CATEGORIES = [
         description: 'The most universally recognized brochure format. Perfect for service menus, product overviews, real estate, and event guides.',
         features: ['100 lb. gloss or matte text', 'Full-color both sides', 'Scored & folded', 'Bulk pricing available'],
         turnaround: '3–5 business days',
-        color: '#E8F5F1'
-        image: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view',,
+        color: '#E8F5F1',
+        image: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view',
       },
       {
         id: 'brochure-trifold-legal',
@@ -33,8 +33,8 @@ const CATEGORIES = [
         description: 'Wider panel gives you more breathing room for copy-heavy content, photo layouts, or multi-column designs.',
         features: ['100 lb. gloss or matte text', 'Full-color both sides', 'Scored & folded', 'Legal-size extra panel space'],
         turnaround: '3–5 business days',
-        color: '#F5F0E8'
-        image: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view',,
+        color: '#F5F0E8',
+        image: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view',
       },
     ],
   },
@@ -51,8 +51,8 @@ const CATEGORIES = [
         description: 'Simple, elegant two-fold. A natural fit for lookbooks, service guides, annual reports, and menus.',
         features: ['100 lb. gloss or matte text', 'Full-color both sides', 'Scored & folded', 'Optional lamination'],
         turnaround: '3–5 business days',
-        color: '#E8F0F5'
-        image: 'https://drive.usercontent.google.com/download?id=1_pNzHBcCwVT_F3rvdcMUWz76DQh77Wvm&export=view',,
+        color: '#E8F0F5',
+        image: 'https://drive.usercontent.google.com/download?id=1_pNzHBcCwVT_F3rvdcMUWz76DQh77Wvm&export=view',
       },
       {
         id: 'brochure-bifold-tabloid',
@@ -62,8 +62,8 @@ const CATEGORIES = [
         description: 'Large-format bi-fold that opens to a full 11×17 spread. Ideal for bold visual campaigns and high-impact presentations.',
         features: ['100 lb. cover stock', 'Full-color both sides', 'Scored & folded', 'Matte or gloss coating'],
         turnaround: '3–5 business days',
-        color: '#F0E8F5'
-        image: 'https://drive.usercontent.google.com/download?id=1_pNzHBcCwVT_F3rvdcMUWz76DQh77Wvm&export=view',,
+        color: '#F0E8F5',
+        image: 'https://drive.usercontent.google.com/download?id=1_pNzHBcCwVT_F3rvdcMUWz76DQh77Wvm&export=view',
       },
     ],
   },
@@ -80,8 +80,8 @@ const CATEGORIES = [
         description: 'Soft-touch laminated cover with offset-quality interior. Leaves a lasting impression at sales meetings, events, and pitch decks.',
         features: ['100 lb. cover stock', 'Soft-touch matte laminate', 'Full-color printing', 'Spot UV available on cover'],
         turnaround: '5–7 business days',
-        color: '#E8F5EF'
-        image: 'https://drive.usercontent.google.com/download?id=1t0H52pTZPlm1sxpTlC5uSaiYK1Ud-PMg&export=view',,
+        color: '#E8F5EF',
+        image: 'https://drive.usercontent.google.com/download?id=1t0H52pTZPlm1sxpTlC5uSaiYK1Ud-PMg&export=view',
       },
       {
         id: 'brochure-uncoated',
@@ -91,8 +91,8 @@ const CATEGORIES = [
         description: 'Natural, tactile paper with rich ink absorption — great for a more editorial or artisan brand feel.',
         features: ['100 lb. uncoated text', 'Full-color printing', 'Writable surface', 'Eco-friendly paper options'],
         turnaround: '3–5 business days',
-        color: '#F5E8E8'
-        image: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view',,
+        color: '#F5E8E8',
+        image: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view',
       },
     ],
   },

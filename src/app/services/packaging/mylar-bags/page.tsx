@@ -24,8 +24,8 @@ const PRODUCTS = [
       'Matte or gloss finish',
     ],
     turnaround: '10–14 business days',
-    color: '#E8F5F1'
-        image: 'https://drive.usercontent.google.com/download?id=1tnUvh9Y9jYsoOKPUbS9g0-NWdt_CR0KV&export=view',,
+    color: '#E8F5F1',
+        image: 'https://drive.usercontent.google.com/download?id=1tnUvh9Y9jYsoOKPUbS9g0-NWdt_CR0KV&export=view',
   },
   {
     id: 'mylar-diecut',
@@ -42,8 +42,8 @@ const PRODUCTS = [
       'Great for cannabis & boutique food brands',
     ],
     turnaround: '14–21 business days',
-    color: '#F5F0E8'
-        image: 'https://drive.usercontent.google.com/download?id=1tnUvh9Y9jYsoOKPUbS9g0-NWdt_CR0KV&export=view',,
+    color: '#F5F0E8',
+        image: 'https://drive.usercontent.google.com/download?id=1tnUvh9Y9jYsoOKPUbS9g0-NWdt_CR0KV&export=view',
   },
 ]
 

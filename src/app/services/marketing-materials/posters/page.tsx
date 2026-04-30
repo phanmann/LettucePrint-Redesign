@@ -22,8 +22,8 @@ const CATEGORIES = [
         description: 'The classic concert bill size. Works everywhere — bulletin boards, windows, retail counters, and bar walls.',
         features: ['80 lb. gloss or matte text', 'Full-color printing', 'Crisp edge-to-edge coverage', 'Bulk pricing available'],
         turnaround: '1–2 business days',
-        color: '#E8F5F1'
-        image: '/images/products/posters/poster-1.jpg',,
+        color: '#E8F5F1',
+        image: '/images/products/posters/poster-1.jpg',
       },
       {
         id: 'poster-18x24',
@@ -33,8 +33,8 @@ const CATEGORIES = [
         description: 'Standard poster size for retail displays, in-store promotions, event signage, and gallery prints.',
         features: ['80 lb. gloss or matte text', 'Full-color printing', 'Vivid, accurate color reproduction', 'Optional lamination'],
         turnaround: '2–3 business days',
-        color: '#F5F0E8'
-        image: '/images/products/posters/poster-1.jpg',,
+        color: '#F5F0E8',
+        image: '/images/products/posters/poster-1.jpg',
       },
       {
         id: 'poster-24x36',
@@ -44,8 +44,8 @@ const CATEGORIES = [
         description: 'Movie-poster size. Maximum impact for storefronts, events, trade shows, and gallery spaces.',
         features: ['80 lb. or 100 lb. stock', 'Full-color printing', 'Matte or gloss finish', 'Optional tube rolling'],
         turnaround: '2–3 business days',
-        color: '#E8F0F5'
-        image: '/images/products/posters/poster-2.jpg',,
+        color: '#E8F0F5',
+        image: '/images/products/posters/poster-2.jpg',
       },
     ],
   },
@@ -62,8 +62,8 @@ const CATEGORIES = [
         description: 'Heavy-weight uncoated stock for a fine-art feel — rich ink absorption, matte surface, and museum-quality output.',
         features: ['100 lb. uncoated cover', 'Fine-art quality output', 'Accurate color profiling', 'Custom sizes available'],
         turnaround: '3–5 business days',
-        color: '#F0E8F5'
-        image: '/images/products/posters/poster-2.jpg',,
+        color: '#F0E8F5',
+        image: '/images/products/posters/poster-2.jpg',
       },
       {
         id: 'poster-soft-touch',
@@ -73,8 +73,8 @@ const CATEGORIES = [
         description: 'Velvety soft-touch laminate over a heavy stock base — tactile luxury for limited edition prints, brand activations, and retail.',
         features: ['100 lb. cover stock', 'Soft-touch matte laminate', 'Full-color printing', 'Spot UV available'],
         turnaround: '3–5 business days',
-        color: '#E8F5EF'
-        image: '/images/products/posters/poster-soft-touch.jpg',,
+        color: '#E8F5EF',
+        image: '/images/products/posters/poster-soft-touch.jpg',
       },
     ],
   },

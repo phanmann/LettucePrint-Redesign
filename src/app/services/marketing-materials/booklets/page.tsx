@@ -22,8 +22,8 @@ const CATEGORIES = [
         description: 'Half-size booklet — compact, easy to carry, and perfect for menus, mini-catalogs, and pocket guides.',
         features: ['80 lb. gloss or matte text', 'Full-color cover & interior', 'Saddle-stitch binding', '8–64 page range'],
         turnaround: '5–7 business days',
-        color: '#E8F5F1'
-        image: '/images/products/booklets/booklet-open.jpg',,
+        color: '#E8F5F1',
+        image: '/images/products/booklets/booklet-open.jpg',
       },
       {
         id: 'booklet-ss-85x11',
@@ -33,8 +33,8 @@ const CATEGORIES = [
         description: 'Full letter-size booklet — the standard for lookbooks, product catalogs, annual reports, and event programs.',
         features: ['80 lb. gloss or matte text', 'Full-color cover & interior', 'Saddle-stitch binding', '8–80 page range'],
         turnaround: '5–7 business days',
-        color: '#F5F0E8'
-        image: '/images/products/booklets/booklet-open.jpg',,
+        color: '#F5F0E8',
+        image: '/images/products/booklets/booklet-open.jpg',
       },
       {
         id: 'booklet-ss-square',
@@ -44,8 +44,8 @@ const CATEGORIES = [
         description: 'Square format for a modern, editorial feel. Stands out on a shelf and works especially well for photo-heavy content.',
         features: ['80 lb. gloss or matte text', 'Full-color throughout', 'Saddle-stitch binding', '8–48 page range'],
         turnaround: '5–7 business days',
-        color: '#E8F0F5'
-        image: '/images/products/booklets/booklet-closed.jpg',,
+        color: '#E8F0F5',
+        image: '/images/products/booklets/booklet-closed.jpg',
       },
     ],
   },
@@ -62,8 +62,8 @@ const CATEGORIES = [
         description: 'Flat spine, square edges, and a substantial feel. The go-to for product catalogs, brand books, and trade publications.',
         features: ['100 lb. cover stock', '80 lb. interior text', 'Perfect bind (glued spine)', 'Full-color throughout', '48+ pages'],
         turnaround: '7–10 business days',
-        color: '#F0E8F5'
-        image: '/images/products/booklets/booklet-closed.jpg',,
+        color: '#F0E8F5',
+        image: '/images/products/booklets/booklet-closed.jpg',
       },
       {
         id: 'booklet-pb-6x9',
@@ -73,8 +73,8 @@ const CATEGORIES = [
         description: 'Compact trade-book format. Clean and professional for B2B collateral, directories, and editorial-style publications.',
         features: ['100 lb. cover stock', '80 lb. interior text', 'Perfect bind (glued spine)', 'Full-color throughout', '48+ pages'],
         turnaround: '7–10 business days',
-        color: '#E8F5EF'
-        image: '/images/products/booklets/booklet-closed.jpg',,
+        color: '#E8F5EF',
+        image: '/images/products/booklets/booklet-closed.jpg',
       },
     ],
   },
@@ -91,8 +91,8 @@ const CATEGORIES = [
         description: 'Saddle-stitch or perfect-bound booklet with a soft-touch laminated cover. The finish that separates a premium brand from everyone else.',
         features: ['Soft-touch laminated cover', '100 lb. interior text', 'Full-color throughout', 'Spot UV on cover available'],
         turnaround: '7–10 business days',
-        color: '#F5E8E8'
-        image: '/images/products/posters/poster-soft-touch.jpg',,
+        color: '#F5E8E8',
+        image: '/images/products/posters/poster-soft-touch.jpg',
       },
     ],
   },

@@ -22,8 +22,8 @@ const CATEGORIES = [
         description: 'Rigid self-locking mailer box — no tape needed. Perfect for subscription boxes and DTC unboxing experiences.',
         features: ['Rigid corrugated board', 'Full-color inside & out', 'Self-locking lid', 'Custom sizes'],
         turnaround: '7–10 business days',
-        color: '#E8F5F1'
-        image: '/images/products/boxes/box-mailer.jpg',,
+        color: '#E8F5F1',
+        image: '/images/products/boxes/box-mailer.jpg',
       },
       {
         id: 'shipping-rsc',
@@ -33,8 +33,8 @@ const CATEGORIES = [
         description: 'Classic corrugated shipping box for bulk fulfillment. Functional, stackable, and fully custom printed.',
         features: ['32 ECT corrugated', 'Exterior print', 'Custom sizes', 'Bulk pricing available'],
         turnaround: '7–10 business days',
-        color: '#F5F0E8'
-        image: '/images/products/boxes/box-mailer.jpg',,
+        color: '#F5F0E8',
+        image: '/images/products/boxes/box-mailer.jpg',
       },
     ],
   },
@@ -51,8 +51,8 @@ const CATEGORIES = [
         description: 'Reverse tuck, straight tuck, or auto-bottom — full-color folding cartons for retail shelves and DTC.',
         features: ['Multiple tuck styles', 'Full-color offset or digital', 'Soft-touch, gloss, or matte finish', 'Custom dielines'],
         turnaround: '10–14 business days',
-        color: '#E8F0F5'
-        image: '/images/products/boxes/box-folding-carton.jpg',,
+        color: '#E8F0F5',
+        image: '/images/products/boxes/box-folding-carton.jpg',
       },
       {
         id: 'paperboard-sleeve',
@@ -62,8 +62,8 @@ const CATEGORIES = [
         description: 'Slide-over sleeve for plain boxes — cost-effective way to brand standard packaging.',
         features: ['Slides over existing box', 'Full-color print', 'Matte or gloss finish', 'No minimum dieline'],
         turnaround: '7–10 business days',
-        color: '#F0E8F5'
-        image: '/images/products/boxes/box-folding-carton.jpg',,
+        color: '#F0E8F5',
+        image: '/images/products/boxes/box-folding-carton.jpg',
       },
     ],
   },
@@ -80,8 +80,8 @@ const CATEGORIES = [
         description: 'Classic two-piece rigid box with separate lid. The gold standard for premium unboxing — cosmetics, jewelry, spirits, gifts.',
         features: ['2mm rigid greyboard', 'Wrapped in custom paper or fabric', 'Magnet close option', 'Interior foam/EVA insert available'],
         turnaround: '14–21 business days',
-        color: '#E8F5EF'
-        image: '/images/products/boxes/box-magnetic.jpg',,
+        color: '#E8F5EF',
+        image: '/images/products/boxes/box-magnetic.jpg',
       },
       {
         id: 'rigid-magnetic',
@@ -91,8 +91,8 @@ const CATEGORIES = [
         description: 'Hinged rigid box with hidden magnetic closure. Feels expensive. Because it is.',
         features: ['Hidden magnet closure', 'Rigid board construction', 'Custom interior print', 'Ribbon pull option'],
         turnaround: '14–21 business days',
-        color: '#F5E8F0'
-        image: '/images/products/boxes/box-magnetic.jpg',,
+        color: '#F5E8F0',
+        image: '/images/products/boxes/box-magnetic.jpg',
       },
     ],
   },
