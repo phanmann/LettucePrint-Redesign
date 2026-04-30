@@ -64,20 +64,18 @@ const CATEGORIES = [
 
 function ConsolidatedCard({
   card,
-  categoryId,
   categoryLabel,
 }: {
   card: typeof CATEGORIES[0]['card']
-  categoryId: string
   categoryLabel: string
 }) {
   const [expanded, setExpanded] = useState(false)
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200 max-w-xl">
+    <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col">
       {/* Color swatch header */}
       <div
-        className="w-full h-48 flex items-center justify-center"
+        className="w-full h-36 flex items-center justify-center flex-shrink-0"
         style={{ backgroundColor: card.color }}
       >
         <div className="text-center px-6">
@@ -86,7 +84,7 @@ function ConsolidatedCard({
         </div>
       </div>
 
-      <div className="p-5">
+      <div className="p-5 flex flex-col flex-1">
         <h3 className="text-base font-semibold text-gray-900 mb-1">{card.name}</h3>
         <p className="text-xs text-gray-400 mb-3">{card.subtitle}</p>
         <p className="text-sm text-gray-600 mb-4 leading-relaxed">{card.description}</p>
@@ -144,13 +142,16 @@ function ConsolidatedCard({
           )}
         </AnimatePresence>
 
-        <Link
-          href={`/get-quote?product=${encodeURIComponent(card.name)}&category=${encodeURIComponent(categoryLabel)}`}
-        >
-          <Button size="sm" className="w-full">
-            Get a Quote <ArrowRight size={14} className="ml-1" />
-          </Button>
-        </Link>
+        {/* Push CTA to bottom */}
+        <div className="mt-auto">
+          <Link
+            href={`/get-quote?product=${encodeURIComponent(card.name)}&category=${encodeURIComponent(categoryLabel)}`}
+          >
+            <Button size="sm" className="w-full">
+              Get a Quote <ArrowRight size={14} className="ml-1" />
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   )
@@ -206,29 +207,51 @@ export default function BusinessCardsPage() {
           </div>
         </section>
 
-        {/* Cards */}
+        {/* Cards — 2-column grid */}
         <section className="py-16 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <AnimatePresence mode="wait">
-              {filtered.map(category => (
+              {activeCategory === 'all' ? (
+                /* Both categories side by side */
                 <motion.div
-                  key={category.id}
+                  key="all"
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.2 }}
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-6"
                 >
-                  <div className="mb-8">
-                    <h2 className="text-h2 font-semibold text-gray-900 mb-2">{category.label}</h2>
-                    <p className="text-body text-gray-500 max-w-2xl">{category.description}</p>
-                  </div>
-                  <ConsolidatedCard
-                    card={category.card}
-                    categoryId={category.id}
-                    categoryLabel={category.label}
-                  />
+                  {CATEGORIES.map(cat => (
+                    <ConsolidatedCard
+                      key={cat.id}
+                      card={cat.card}
+                      categoryLabel={cat.label}
+                    />
+                  ))}
                 </motion.div>
-              ))}
+              ) : (
+                /* Single category filtered view */
+                filtered.map(category => (
+                  <motion.div
+                    key={category.id}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="mb-8">
+                      <h2 className="text-h2 font-semibold text-gray-900 mb-2">{category.label}</h2>
+                      <p className="text-body text-gray-500 max-w-2xl">{category.description}</p>
+                    </div>
+                    <div className="max-w-sm">
+                      <ConsolidatedCard
+                        card={category.card}
+                        categoryLabel={category.label}
+                      />
+                    </div>
+                  </motion.div>
+                ))
+              )}
             </AnimatePresence>
           </div>
         </section>
