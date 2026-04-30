@@ -12,11 +12,8 @@ export default function Page() {
       ]}
       badges={["Fast Turnaround"]}
       color="#E8F5EF"
+      showQuantity={true}
       optionGroups={[
-        { label: "Finish", options: [
-          { id: "gloss", label: "Gloss print", description: "Vibrant high-shine." },
-          { id: "matte", label: "Matte print", description: "Soft matte." },
-        ] },
         { label: "Hardware", options: [
           { id: "included", label: "Hardware Included", description: "Base and carry bag included." },
           { id: "graphic-only", label: "Graphic Only", description: "Print only, no hardware." },

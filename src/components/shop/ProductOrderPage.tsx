@@ -37,6 +37,7 @@ export interface ProductOrderPageProps {
   parentHref: string
   relatedProducts?: { href: string; name: string; description: string; dark?: boolean }[]
   customNote?: string
+  showQuantity?: boolean
 }
 
 function fmt(n: number) {
@@ -48,11 +49,13 @@ function Configurator({
   optionGroups,
   pricingTable,
   pricingNote,
+  showQuantity,
 }: {
   name: string
   optionGroups: OptionGroup[]
   pricingTable?: PricingRow[]
   pricingNote?: string
+  showQuantity?: boolean
 }) {
   const router = useRouter()
   const hasQtyTiers = pricingTable && pricingTable.length > 1
@@ -63,6 +66,7 @@ function Configurator({
   )
   const [selectedRowIdx, setSelectedRowIdx] = useState(0)
   const [isRush, setIsRush] = useState(false)
+  const [quantity, setQuantity] = useState(1)
 
   const currentRow = pricingTable?.[selectedRowIdx]
   const displayPrice = currentRow
@@ -89,7 +93,7 @@ function Configurator({
         return `${g.label}: ${sel?.label ?? selections[g.label]}`
       })
       .join(', ')
-    const qtyStr = currentRow ? `, Qty: ${currentRow.qty}` : ''
+    const qtyStr = showQuantity ? `, Qty: ${quantity}` : currentRow ? `, Qty: ${currentRow.qty}` : ''
     const rushStr = isRush ? ', Rush' : ''
     router.push(
       `/get-quote?product=${encodeURIComponent(name)}&details=${encodeURIComponent(details + qtyStr + rushStr)}`
@@ -98,6 +102,21 @@ function Configurator({
 
   return (
     <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24">
+
+      {/* Quantity field */}
+      {showQuantity && (
+        <div className="mb-6">
+          <p className={sectionLabel}>Quantity</p>
+          <input
+            type="number"
+            min={1}
+            value={quantity}
+            onChange={e => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+            className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm font-medium text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-lp-green/30 focus:border-lp-green"
+          />
+          <div className="border-t border-gray-100 mt-6" />
+        </div>
+      )}
 
       {/* Option groups */}
       {optionGroups.map((group, i) => (
@@ -251,6 +270,7 @@ export default function ProductOrderPage({
   included,
   relatedProducts = [],
   customNote,
+  showQuantity,
 }: ProductOrderPageProps) {
   return (
     <>
@@ -285,6 +305,7 @@ export default function ProductOrderPage({
                 optionGroups={optionGroups}
                 pricingTable={pricingTable}
                 pricingNote={pricingNote}
+                showQuantity={showQuantity}
               />
             </div>
 
