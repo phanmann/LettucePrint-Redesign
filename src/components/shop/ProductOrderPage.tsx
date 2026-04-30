@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
 import { Disclosure } from '@/components/shop/ProductDisclosure'
-import { ArrowRight, CheckCircle, FileText, Layers } from 'lucide-react'
+import { ArrowRight, CheckCircle, FileText, Layers, Zap } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 export interface OptionGroup {
@@ -23,44 +23,54 @@ export interface PricingRow {
 }
 
 export interface ProductOrderPageProps {
-  // Identity
   name: string
   tagline: string
   breadcrumb: { label: string; href: string }[]
   badges?: string[]
   color: string
-
-  // Configurator
   optionGroups: OptionGroup[]
-
-  // Pricing
   pricingTable?: PricingRow[]
   pricingNote?: string
-
-  // Info
   specs: { label: string; value: string }[]
   artworkRequirements: { label: string; value: string }[]
   included: string[]
-
-  // Navigation
   parentHref: string
   relatedProducts?: { href: string; name: string; description: string; dark?: boolean }[]
-
-  // Upsell / escape
   customNote?: string
+}
+
+function fmt(n: number) {
+  return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
 function Configurator({
   name,
   optionGroups,
+  pricingTable,
+  pricingNote,
 }: {
   name: string
   optionGroups: OptionGroup[]
+  pricingTable?: PricingRow[]
+  pricingNote?: string
 }) {
   const router = useRouter()
+  const hasQtyTiers = pricingTable && pricingTable.length > 1
+  const isSingleUnit = pricingTable && pricingTable.length === 1
+
   const [selections, setSelections] = useState<Record<string, string>>(() =>
     Object.fromEntries(optionGroups.map(g => [g.label, g.options[0].id]))
   )
+  const [selectedRowIdx, setSelectedRowIdx] = useState(0)
+  const [isRush, setIsRush] = useState(false)
+
+  const currentRow = pricingTable?.[selectedRowIdx]
+  const displayPrice = currentRow
+    ? isRush && currentRow.rushPrice
+      ? currentRow.rushPrice
+      : currentRow.standardPrice
+    : null
+  const hasRush = pricingTable?.some(r => r.rushPrice)
 
   const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
   const radioRow = (active: boolean) =>
@@ -72,20 +82,24 @@ function Configurator({
       active ? 'border-lp-green bg-lp-green' : 'border-gray-300 bg-white'
     }`
 
-  const handleQuote = () => {
+  const handleOrderNow = () => {
     const details = optionGroups
       .map(g => {
         const sel = g.options.find(o => o.id === selections[g.label])
         return `${g.label}: ${sel?.label ?? selections[g.label]}`
       })
       .join(', ')
+    const qtyStr = currentRow ? `, Qty: ${currentRow.qty}` : ''
+    const rushStr = isRush ? ', Rush' : ''
     router.push(
-      `/get-quote?product=${encodeURIComponent(name)}&details=${encodeURIComponent(details)}`
+      `/get-quote?product=${encodeURIComponent(name)}&details=${encodeURIComponent(details + qtyStr + rushStr)}`
     )
   }
 
   return (
     <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24">
+
+      {/* Option groups */}
       {optionGroups.map((group, i) => (
         <div key={group.label}>
           <div className="mb-6">
@@ -115,21 +129,103 @@ function Configurator({
               ))}
             </div>
           </div>
-          {i < optionGroups.length - 1 && <div className="border-t border-gray-100 mb-6" />}
+          {(i < optionGroups.length - 1 || pricingTable) && (
+            <div className="border-t border-gray-100 mb-6" />
+          )}
         </div>
       ))}
 
-      <div className="border-t border-gray-200 pt-5">
+      {/* Qty selector — tiered pricing */}
+      {hasQtyTiers && (
+        <div className="mb-6">
+          <p className={sectionLabel}>Quantity</p>
+          <select
+            value={selectedRowIdx}
+            onChange={e => setSelectedRowIdx(Number(e.target.value))}
+            className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm font-medium text-gray-900 bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-lp-green/30 focus:border-lp-green"
+          >
+            {pricingTable!.map((row, i) => (
+              <option key={i} value={i}>
+                {typeof row.qty === 'number' ? row.qty.toLocaleString() : row.qty} units
+                {' — '}
+                {fmt(row.standardPrice)}
+                {row.note ? ` (${row.note})` : ''}
+              </option>
+            ))}
+          </select>
+
+          {/* Rush toggle */}
+          {hasRush && (
+            <label className={`mt-2 ${radioRow(isRush)}`} onClick={() => setIsRush(r => !r)}>
+              <div className={radioCircle(isRush)} />
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <Zap size={13} className={isRush ? 'text-amber-500' : 'text-gray-400'} />
+                  <p className="text-sm font-medium text-gray-800">Rush production</p>
+                  <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full">Next day</span>
+                </div>
+                <p className="text-xs text-gray-400 mt-0.5">
+                  {currentRow?.rushPrice ? `Add ${fmt(currentRow.rushPrice - currentRow.standardPrice)} — total ${fmt(currentRow.rushPrice)}` : 'Price on request'}
+                </p>
+              </div>
+            </label>
+          )}
+
+          <div className="border-t border-gray-100 mt-6 mb-0" />
+        </div>
+      )}
+
+      {/* Single-unit price display */}
+      {isSingleUnit && (
+        <div className="mb-6">
+          {hasRush && (
+            <label className={`mb-3 ${radioRow(isRush)}`} onClick={() => setIsRush(r => !r)}>
+              <div className={radioCircle(isRush)} />
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <Zap size={13} className={isRush ? 'text-amber-500' : 'text-gray-400'} />
+                  <p className="text-sm font-medium text-gray-800">Rush production</p>
+                  <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full">Next day</span>
+                </div>
+                <p className="text-xs text-gray-400 mt-0.5">
+                  {pricingTable![0].rushPrice ? `+${fmt(pricingTable![0].rushPrice! - pricingTable![0].standardPrice)} — total ${fmt(pricingTable![0].rushPrice!)}` : 'Price on request'}
+                </p>
+              </div>
+            </label>
+          )}
+          <div className="border-t border-gray-100 mb-0" />
+        </div>
+      )}
+
+      {/* Price + CTA */}
+      <div className={pricingTable ? 'pt-5' : 'border-t border-gray-200 pt-5'}>
+        {displayPrice != null && (
+          <div className="flex items-baseline justify-between mb-4">
+            <span className="text-3xl font-bold text-gray-900">{fmt(displayPrice)}</span>
+            {isRush && (
+              <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full flex items-center gap-1">
+                <Zap size={11} /> Rush
+              </span>
+            )}
+          </div>
+        )}
+
         <Button
-          onClick={handleQuote}
+          onClick={handleOrderNow}
           size="lg"
           className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl"
         >
-          Get a Quote <ArrowRight size={16} className="ml-2" />
+          {displayPrice != null ? 'Order Now' : 'Get a Quote'} <ArrowRight size={16} className="ml-2" />
         </Button>
+
         <p className="text-xs text-gray-400 text-center mt-3">
-          We'll confirm pricing + turnaround within a few hours.
+          {displayPrice != null
+            ? 'Upload artwork · Proof before production · Pickup or ship'
+            : "We'll confirm pricing + turnaround within a few hours."}
         </p>
+        {pricingNote && (
+          <p className="text-xs text-gray-500 text-center mt-2">{pricingNote}</p>
+        )}
         <p className="text-xs text-center mt-2">
           <span className="text-gray-500">Questions? Call us: </span>
           <a href="tel:3476030557" className="font-semibold text-lp-green hover:underline">
@@ -184,7 +280,12 @@ export default function ProductOrderPage({
 
             {/* Right — Configurator (first on mobile) */}
             <div className="order-first lg:order-last">
-              <Configurator name={name} optionGroups={optionGroups} />
+              <Configurator
+                name={name}
+                optionGroups={optionGroups}
+                pricingTable={pricingTable}
+                pricingNote={pricingNote}
+              />
             </div>
 
             {/* Left — Product Info */}
@@ -203,7 +304,7 @@ export default function ProductOrderPage({
                 <p className="text-body-lg text-gray-600 leading-relaxed">{tagline}</p>
               </div>
 
-              {/* Color swatch preview */}
+              {/* Color swatch / image placeholder */}
               <div
                 className="w-full h-36 rounded-2xl flex items-center justify-center mb-8"
                 style={{ backgroundColor: color }}
@@ -225,47 +326,6 @@ export default function ProductOrderPage({
                   ))}
                 </ul>
               </div>
-
-              {/* Pricing Table */}
-              {pricingTable && pricingTable.length > 0 && (
-                <div className="mb-8">
-                  <h3 className="text-h4 font-semibold text-gray-900 mb-4">Pricing</h3>
-                  <div className="rounded-2xl border border-gray-200 overflow-hidden">
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="bg-gray-50 border-b border-gray-200">
-                          <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Qty</th>
-                          <th className="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">3-Day Price</th>
-                          {pricingTable.some(r => r.rushPrice) && (
-                            <th className="text-right px-4 py-3 text-xs font-semibold text-amber-600 uppercase tracking-wider">Rush Price</th>
-                          )}
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-gray-100">
-                        {pricingTable.map((row, i) => (
-                          <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}>
-                            <td className="px-4 py-3 font-semibold text-gray-900">
-                              {typeof row.qty === 'number' ? row.qty.toLocaleString() : row.qty}
-                              {row.note && <span className="ml-2 text-xs text-gray-400 font-normal">{row.note}</span>}
-                            </td>
-                            <td className="px-4 py-3 text-right font-semibold text-lp-green">
-                              ${row.standardPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                            </td>
-                            {pricingTable.some(r => r.rushPrice) && (
-                              <td className="px-4 py-3 text-right text-amber-600 font-semibold">
-                                {row.rushPrice ? `$${row.rushPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '—'}
-                              </td>
-                            )}
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  {pricingNote && (
-                    <p className="text-xs text-gray-500 mt-3">{pricingNote}</p>
-                  )}
-                </div>
-              )}
 
               {/* Specs */}
               <div className="mb-8 border border-gray-200 rounded-card px-5 py-4">
@@ -325,7 +385,7 @@ export default function ProductOrderPage({
               <div className="rounded-card border border-gray-200 p-6">
                 <h3 className="text-h4 font-semibold text-gray-900 mb-2">Need something custom?</h3>
                 <p className="text-small text-gray-600 mb-4">
-                  {customNote ?? 'Unusual sizes, specialty materials, bulk orders, or branded packaging? Let\'s talk.'}
+                  {customNote ?? "Unusual sizes, specialty materials, bulk orders, or branded packaging? Let's talk."}
                 </p>
                 <Link
                   href="/get-quote"
