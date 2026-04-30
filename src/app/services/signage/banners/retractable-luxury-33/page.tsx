@@ -6,6 +6,10 @@ export default function Page() {
       name="Luxury Base Retractable"
       tagline="Premium weighted base for a stable, upscale presentation. Perfect for lobbies and showrooms."
       parentHref="/services/signage/banners"
+      pricingTable={[
+        { qty: "1 unit", standardPrice: 190.4, rushPrice: 247.52 },
+      ]}
+      pricingNote="Luxury weighted base, full-color print, carry bag. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
       breadcrumb={[
         { label: "Banners", href: "/services/signage/banners" },
         { label: "Luxury Base Retractable", href: "" },

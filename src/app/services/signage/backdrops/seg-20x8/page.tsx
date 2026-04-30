@@ -6,6 +6,15 @@ export default function Page() {
       name="SEG Pop Up Stand"
       tagline="Wide SEG for large-scale brand activations and trade show booths."
       parentHref="/services/signage/backdrops"
+      pricingTable={[
+        { qty: 1, standardPrice: 2912.0, rushPrice: 4076.8 },
+        { qty: 5, standardPrice: 14560.0, rushPrice: 20384.0 },
+        { qty: 10, standardPrice: 29120.0, rushPrice: 40768.0 },
+        { qty: 25, standardPrice: 72800.0, rushPrice: 101920.0 },
+        { qty: 50, standardPrice: 145600.0, rushPrice: 203840.0 },
+        { qty: 100, standardPrice: 291200.0, rushPrice: 407680.0 },
+      ]}
+      pricingNote="Config: Double Sided Package with Hardware. Single-sided and hardware-only options available on request. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
       breadcrumb={[
         { label: "Backdrops", href: "/services/signage/backdrops" },
         { label: "SEG Pop Up Stand 20 x 8 ft.", href: "" },

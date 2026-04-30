@@ -15,6 +15,13 @@ export interface OptionGroup {
   options: { id: string; label: string; description: string; badge?: string }[]
 }
 
+export interface PricingRow {
+  qty: number | string
+  standardPrice: number
+  rushPrice?: number
+  note?: string
+}
+
 export interface ProductOrderPageProps {
   // Identity
   name: string
@@ -25,6 +32,10 @@ export interface ProductOrderPageProps {
 
   // Configurator
   optionGroups: OptionGroup[]
+
+  // Pricing
+  pricingTable?: PricingRow[]
+  pricingNote?: string
 
   // Info
   specs: { label: string; value: string }[]
@@ -137,6 +148,8 @@ export default function ProductOrderPage({
   badges = [],
   color,
   optionGroups,
+  pricingTable,
+  pricingNote,
   specs,
   artworkRequirements,
   included,
@@ -212,6 +225,47 @@ export default function ProductOrderPage({
                   ))}
                 </ul>
               </div>
+
+              {/* Pricing Table */}
+              {pricingTable && pricingTable.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="text-h4 font-semibold text-gray-900 mb-4">Pricing</h3>
+                  <div className="rounded-2xl border border-gray-200 overflow-hidden">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="bg-gray-50 border-b border-gray-200">
+                          <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Qty</th>
+                          <th className="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">3-Day Price</th>
+                          {pricingTable.some(r => r.rushPrice) && (
+                            <th className="text-right px-4 py-3 text-xs font-semibold text-amber-600 uppercase tracking-wider">Rush Price</th>
+                          )}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-100">
+                        {pricingTable.map((row, i) => (
+                          <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}>
+                            <td className="px-4 py-3 font-semibold text-gray-900">
+                              {typeof row.qty === 'number' ? row.qty.toLocaleString() : row.qty}
+                              {row.note && <span className="ml-2 text-xs text-gray-400 font-normal">{row.note}</span>}
+                            </td>
+                            <td className="px-4 py-3 text-right font-semibold text-lp-green">
+                              ${row.standardPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                            </td>
+                            {pricingTable.some(r => r.rushPrice) && (
+                              <td className="px-4 py-3 text-right text-amber-600 font-semibold">
+                                {row.rushPrice ? `$${row.rushPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '—'}
+                              </td>
+                            )}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  {pricingNote && (
+                    <p className="text-xs text-gray-500 mt-3">{pricingNote}</p>
+                  )}
+                </div>
+              )}
 
               {/* Specs */}
               <div className="mb-8 border border-gray-200 rounded-card px-5 py-4">

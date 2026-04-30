@@ -6,6 +6,15 @@ export default function Page() {
       name="Step and Repeat Backdrop"
       tagline="Wide-format step and repeat for larger stages, red carpets, and events."
       parentHref="/services/signage/backdrops"
+      pricingTable={[
+        { qty: 1, standardPrice: 374.4, rushPrice: 524.16 },
+        { qty: 5, standardPrice: 1864.0, rushPrice: 2609.6 },
+        { qty: 10, standardPrice: 3712.0, rushPrice: 5196.8 },
+        { qty: 25, standardPrice: 9240.0, rushPrice: 12936.0 },
+        { qty: 50, standardPrice: 18400.0, rushPrice: 25760.0 },
+        { qty: 100, standardPrice: 36640.0, rushPrice: 51296.0 },
+      ]}
+      pricingNote="Prices include hardware + full-color print. Rush = next-day production. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
       breadcrumb={[
         { label: "Backdrops", href: "/services/signage/backdrops" },
         { label: "Step and Repeat Backdrop 10 x 8 ft.", href: "" },

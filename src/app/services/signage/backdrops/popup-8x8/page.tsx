@@ -6,6 +6,15 @@ export default function Page() {
       name="Pop Up Display"
       tagline="Spring-loaded pop-up frame with fabric graphic. Setup in under 5 minutes."
       parentHref="/services/signage/backdrops"
+      pricingTable={[
+        { qty: 1, standardPrice: 592.0, rushPrice: 828.8 },
+        { qty: 5, standardPrice: 2952.0, rushPrice: 4132.8 },
+        { qty: 10, standardPrice: 5840.0, rushPrice: 8176.0 },
+        { qty: 25, standardPrice: 14400.0, rushPrice: 20160.0 },
+        { qty: 50, standardPrice: 28400.0, rushPrice: 39760.0 },
+        { qty: 100, standardPrice: 56320.0, rushPrice: 78848.0 },
+      ]}
+      pricingNote="Config: Straight, White Stretch Fabric 9oz. Wrap style and grey back options available on request. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
       breadcrumb={[
         { label: "Backdrops", href: "/services/signage/backdrops" },
         { label: "Pop Up Display 8 x 8 ft.", href: "" },

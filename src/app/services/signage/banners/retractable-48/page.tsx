@@ -6,6 +6,10 @@ export default function Page() {
       name="Standard Retractable Banner"
       tagline="Wide-format retractable for maximum impact. Ideal for large booths and open floor spaces."
       parentHref="/services/signage/banners"
+      pricingTable={[
+        { qty: "1 unit", standardPrice: 260.8, rushPrice: 339.04 },
+      ]}
+      pricingNote="Includes hardware, full-color print, and carry bag. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
       breadcrumb={[
         { label: "Banners", href: "/services/signage/banners" },
         { label: "Standard Retractable Banner", href: "" },

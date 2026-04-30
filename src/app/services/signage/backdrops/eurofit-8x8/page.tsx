@@ -6,6 +6,15 @@ export default function Page() {
       name="Eurofit Backdrop"
       tagline="Seamless fabric display with aluminum frame. Clean, frameless look."
       parentHref="/services/signage/backdrops"
+      pricingTable={[
+        { qty: 1, standardPrice: 571.2, rushPrice: 742.56 },
+        { qty: 5, standardPrice: 2824.0, rushPrice: 3671.2 },
+        { qty: 10, standardPrice: 5616.0, rushPrice: 7300.8 },
+        { qty: 25, standardPrice: 13920.0, rushPrice: 18096.0 },
+        { qty: 50, standardPrice: 27600.0, rushPrice: 35880.0 },
+        { qty: 100, standardPrice: 53600.0, rushPrice: 69680.0 },
+      ]}
+      pricingNote="Config: With Fabric Print, Double Sided. Single-sided and zipper options available on request. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
       breadcrumb={[
         { label: "Backdrops", href: "/services/signage/backdrops" },
         { label: "Eurofit Backdrop 8 x 8 ft.", href: "" },

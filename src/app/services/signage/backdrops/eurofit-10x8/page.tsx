@@ -6,6 +6,15 @@ export default function Page() {
       name="Eurofit Backdrop"
       tagline="Wide eurofit for larger installations. Lightweight, packable, and fast to set up."
       parentHref="/services/signage/backdrops"
+      pricingTable={[
+        { qty: 1, standardPrice: 635.2, rushPrice: 825.76 },
+        { qty: 5, standardPrice: 3120.0, rushPrice: 4056.0 },
+        { qty: 10, standardPrice: 6128.0, rushPrice: 7966.4 },
+        { qty: 25, standardPrice: 15160.0, rushPrice: 19708.0 },
+        { qty: 50, standardPrice: 29600.0, rushPrice: 38480.0 },
+        { qty: 100, standardPrice: 57600.0, rushPrice: 74880.0 },
+      ]}
+      pricingNote="Config: With Fabric Print, Double Sided. Single-sided and zipper options available on request. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
       breadcrumb={[
         { label: "Backdrops", href: "/services/signage/backdrops" },
         { label: "Eurofit Backdrop 10 x 8 ft.", href: "" },

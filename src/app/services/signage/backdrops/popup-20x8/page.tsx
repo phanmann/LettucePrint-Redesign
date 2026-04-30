@@ -6,6 +6,15 @@ export default function Page() {
       name="Pop Up Display"
       tagline="Double-wide pop-up for large booths and conference stages."
       parentHref="/services/signage/backdrops"
+      pricingTable={[
+        { qty: 1, standardPrice: 1436.8, rushPrice: 1867.84 },
+        { qty: 5, standardPrice: 7184.0, rushPrice: 9339.2 },
+        { qty: 10, standardPrice: 14368.0, rushPrice: 18678.4 },
+        { qty: 25, standardPrice: 35920.0, rushPrice: 46696.0 },
+        { qty: 50, standardPrice: 71840.0, rushPrice: 93392.0 },
+        { qty: 100, standardPrice: 143680.0, rushPrice: 186784.0 },
+      ]}
+      pricingNote="Prices include hardware + full-color print. Rush = next-day production. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
       breadcrumb={[
         { label: "Backdrops", href: "/services/signage/backdrops" },
         { label: "Pop Up Display 20 x 8 ft.", href: "" },

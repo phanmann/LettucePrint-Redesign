@@ -6,6 +6,10 @@ export default function Page() {
       name="Table Top Retractable"
       tagline="Compact tabletop version for product displays, reception desks, and counter promotions."
       parentHref="/services/signage/banners"
+      pricingTable={[
+        { qty: "1 unit", standardPrice: 43.2, rushPrice: 56.16 },
+      ]}
+      pricingNote="Compact tabletop unit with full-color print. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
       breadcrumb={[
         { label: "Banners", href: "/services/signage/banners" },
         { label: "Table Top Retractable", href: "" },

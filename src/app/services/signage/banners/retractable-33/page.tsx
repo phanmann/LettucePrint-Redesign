@@ -6,6 +6,10 @@ export default function Page() {
       name="Standard Retractable Banner"
       tagline="Lightweight aluminum base, full-color print, carrying bag included."
       parentHref="/services/signage/banners"
+      pricingTable={[
+        { qty: "1 unit", standardPrice: 126.4, rushPrice: 164.32 },
+      ]}
+      pricingNote="Includes hardware, full-color print, and carry bag. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
       breadcrumb={[
         { label: "Banners", href: "/services/signage/banners" },
         { label: "Standard Retractable Banner", href: "" },

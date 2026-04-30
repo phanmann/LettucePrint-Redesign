@@ -6,6 +6,15 @@ export default function Page() {
       name="Step and Repeat Backdrop"
       tagline="The classic event backdrop. Full-color logo repeat on tension fabric or vinyl."
       parentHref="/services/signage/backdrops"
+      pricingTable={[
+        { qty: 1, standardPrice: 302.4, rushPrice: 423.36 },
+        { qty: 5, standardPrice: 1496.0, rushPrice: 2094.4 },
+        { qty: 10, standardPrice: 2960.0, rushPrice: 4144.0 },
+        { qty: 25, standardPrice: 7360.0, rushPrice: 10304.0 },
+        { qty: 50, standardPrice: 14240.0, rushPrice: 19936.0 },
+        { qty: 100, standardPrice: 27840.0, rushPrice: 38976.0 },
+      ]}
+      pricingNote="Prices include hardware + full-color print. Rush = next-day production. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
       breadcrumb={[
         { label: "Backdrops", href: "/services/signage/backdrops" },
         { label: "Step and Repeat Backdrop 8 x 8 ft.", href: "" },
