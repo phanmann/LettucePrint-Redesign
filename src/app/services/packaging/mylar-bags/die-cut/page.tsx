@@ -3,6 +3,9 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: 'https://drive.usercontent.google.com/download?id=1tnUvh9Y9jYsoOKPUbS9g0-NWdt_CR0KV&export=view', alt: 'Die-cut mylar bags' },
+      ]}
       name="Die-Cut Mylar Bag"
       tagline="Custom die-cut shaped mylar bags. A unique silhouette that stands out on any shelf."
       parentHref="/services/packaging/mylar-bags"

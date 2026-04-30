@@ -3,6 +3,9 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: 'https://drive.usercontent.google.com/download?id=1tnUvh9Y9jYsoOKPUbS9g0-NWdt_CR0KV&export=view', alt: 'Custom mylar bags' },
+      ]}
       name="Standard Mylar Bag"
       tagline="Custom-printed mylar bags for cannabis, food, supplements, and consumer goods."
       parentHref="/services/packaging/mylar-bags"

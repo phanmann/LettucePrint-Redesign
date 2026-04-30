@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view', alt: 'Brochure print sample' },
+        { src: 'https://drive.usercontent.google.com/download?id=1_pNzHBcCwVT_F3rvdcMUWz76DQh77Wvm&export=view', alt: 'Custom brochure' },
+      ]}
       name="Tri-Fold Brochure - Legal"
       tagline="Wider panel for copy-heavy content, photo layouts, or multi-column designs."
       parentHref="/services/marketing-materials/brochures"

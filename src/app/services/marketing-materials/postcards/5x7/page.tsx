@@ -3,6 +3,13 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: 'https://drive.usercontent.google.com/download?id=16GP_uv16UVWwZyO_WAvAZDfCMoMRsCoE&export=view', alt: 'Postcard print samples' },
+        { src: 'https://drive.usercontent.google.com/download?id=1C-8AXzKw1umGCMhR2T03yzFlOZXMBdoX&export=view', alt: 'Custom postcards' },
+        { src: 'https://drive.usercontent.google.com/download?id=1_To7GcDYNA3b28ywoo0S8Ev4H5uct3O6&export=view', alt: 'Postcard detail' },
+        { src: 'https://drive.usercontent.google.com/download?id=1qt5HNfk394sSSzs9teHR1T5eh5dtwZAc&export=view', alt: 'Postcard stack' },
+        { src: 'https://drive.usercontent.google.com/download?id=1wnC7cM8WjOAV5H2gx3DK3u9gr5WLmx4A&export=view', alt: 'Postcard finish' },
+      ]}
       name="Postcard 5x7"
       tagline="More visual real estate for bold imagery, menus, and product showcases."
       parentHref="/services/marketing-materials/postcards"

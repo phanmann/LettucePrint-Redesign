@@ -8,6 +8,7 @@ import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
 import { Disclosure } from '@/components/shop/ProductDisclosure'
 import { ArrowRight, CheckCircle, FileText, Layers, Zap } from 'lucide-react'
+import ProductImageGallery from '@/components/shop/ProductImageGallery'
 import { useRouter } from 'next/navigation'
 
 export interface OptionGroup {
@@ -38,6 +39,7 @@ export interface ProductOrderPageProps {
   relatedProducts?: { href: string; name: string; description: string; dark?: boolean }[]
   customNote?: string
   showQuantity?: boolean
+  images?: { src: string; alt: string }[]
 }
 
 function fmt(n: number) {
@@ -271,6 +273,7 @@ export default function ProductOrderPage({
   relatedProducts = [],
   customNote,
   showQuantity,
+  images,
 }: ProductOrderPageProps) {
   return (
     <>
@@ -325,13 +328,20 @@ export default function ProductOrderPage({
                 <p className="text-body-lg text-gray-600 leading-relaxed">{tagline}</p>
               </div>
 
-              {/* Color swatch / image placeholder */}
-              <div
-                className="w-full h-36 rounded-2xl flex items-center justify-center mb-8"
-                style={{ backgroundColor: color }}
-              >
-                <p className="text-sm font-semibold text-gray-500">{name}</p>
-              </div>
+              {/* Product Image Gallery */}
+              {images && images.length > 0 && (
+                <ProductImageGallery images={images} />
+              )}
+
+              {/* Color swatch / image placeholder — hidden when real images provided */}
+              {(!images || images.length === 0) && (
+                <div
+                  className="w-full h-36 rounded-2xl flex items-center justify-center mb-8"
+                  style={{ backgroundColor: color }}
+                >
+                  <p className="text-sm font-semibold text-gray-500">{name}</p>
+                </div>
+              )}
 
               {/* What's included */}
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">

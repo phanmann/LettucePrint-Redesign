@@ -3,6 +3,10 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: 'https://drive.usercontent.google.com/download?id=1tWRHBlafbGurio0agdnnz9CCS-rnlXuI&export=view', alt: 'Spot UV finish' },
+        { src: 'https://drive.usercontent.google.com/download?id=1xTAtYiJEtjruQUDKDUDOS7gj924_InzW&export=view', alt: 'Spot UV sticker detail' },
+      ]}
       name="Spot UV Postcard"
       tagline="Raised gloss UV highlights on a matte base. Draws the eye to logos, headlines, and CTAs."
       parentHref="/services/marketing-materials/postcards"

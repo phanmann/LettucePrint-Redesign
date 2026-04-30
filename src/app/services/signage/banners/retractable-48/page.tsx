@@ -16,6 +16,10 @@ export default function Page() {
       ]}
       badges={["Fast Turnaround"]}
       color="#F0E8F5"
+      images={[
+        { src: 'https://drive.usercontent.google.com/download?id=1lkdgvN3wjRMfftKmeu5X47ZwHyor7dzB&export=view', alt: 'Retractable banner display' },
+        { src: 'https://drive.usercontent.google.com/download?id=1p_mlXivZBXkObui0RQPrmVH8uhVf9WNl&export=view', alt: 'Retractable banner setup' },
+      ]}
       showQuantity={true}
       optionGroups={[
         { label: "Hardware", options: [

@@ -3,6 +3,11 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
+      images={[
+        { src: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view', alt: 'Brochure print sample' },
+        { src: 'https://drive.usercontent.google.com/download?id=1_pNzHBcCwVT_F3rvdcMUWz76DQh77Wvm&export=view', alt: 'Custom brochure' },
+        { src: 'https://drive.usercontent.google.com/download?id=1t0H52pTZPlm1sxpTlC5uSaiYK1Ud-PMg&export=view', alt: 'Brochure detail' },
+      ]}
       name="Bi-Fold Brochure"
       tagline="Simple, elegant two-fold. Natural fit for lookbooks, service guides, and menus."
       parentHref="/services/marketing-materials/brochures"

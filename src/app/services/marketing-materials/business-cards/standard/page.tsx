@@ -8,6 +8,7 @@ import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
 import { Disclosure } from '@/components/shop/ProductDisclosure'
 import { ArrowRight, CheckCircle, FileText, Layers } from 'lucide-react'
+import ProductImageGallery from '@/components/shop/ProductImageGallery'
 import { useRouter } from 'next/navigation'
 
 // ─── Option data ──────────────────────────────────────────────────────────────
@@ -194,6 +195,13 @@ export default function StandardBusinessCardsPage() {
                   Classic 3.5″ × 2″ business cards with crisp full-color printing. Choose your finish — matte, gloss, or uncoated — and we'll handle the rest. Printed in Brooklyn.
                 </p>
               </div>
+
+              <ProductImageGallery
+                images={[
+                  { src: 'https://drive.usercontent.google.com/download?id=1LYzqKl5GRanrRWxBdsn_tnLxmp2dau-D&export=view', alt: 'Business card print samples' },
+                  { src: 'https://drive.usercontent.google.com/download?id=1MHeRH5jLNMqM58gLeg9xmIsKEn791F7K&export=view', alt: 'Custom business cards' },
+                ]}
+              />
 
               {/* What's included */}
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">
