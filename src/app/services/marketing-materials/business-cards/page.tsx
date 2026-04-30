@@ -13,6 +13,7 @@ const CATEGORIES = [
     id: 'standard',
     label: 'Standard Business Cards',
     description: 'Classic 3.5" × 2" business cards with crisp full-color printing and a range of stock options.',
+    href: '/services/marketing-materials/business-cards/standard',
     card: {
       id: 'bc-standard',
       name: 'Standard Business Cards',
@@ -38,6 +39,7 @@ const CATEGORIES = [
     id: 'premium',
     label: 'Premium Business Cards',
     description: 'Elevated finishes that make a lasting first impression — soft-touch, foil, raised spot UV, and thick board.',
+    href: '/services/marketing-materials/business-cards/premium',
     card: {
       id: 'bc-premium',
       name: 'Premium Business Cards',
@@ -130,6 +132,7 @@ export default function BusinessCardsPage() {
                       key={cat.id}
                       {...cat.card}
                       categoryLabel={cat.label}
+                      href={cat.href}
                     />
                   ))}
                 </motion.div>
@@ -147,7 +150,7 @@ export default function BusinessCardsPage() {
                       <p className="text-body text-gray-500 max-w-2xl">{category.description}</p>
                     </div>
                     <div className="max-w-sm">
-                      <ProductCard {...category.card} categoryLabel={category.label} />
+                      <ProductCard {...category.card} categoryLabel={category.label} href={category.href} />
                     </div>
                   </motion.div>
                 ))

@@ -17,6 +17,8 @@ export interface ProductCardProps {
   categoryLabel: string
   /** Optional pill-style option tags shown below the description */
   options?: { label: string; values: string[] }[]
+  /** Optional override link for the CTA button. Defaults to /get-quote */
+  href?: string
 }
 
 export default function ProductCard({
@@ -28,6 +30,7 @@ export default function ProductCard({
   color,
   categoryLabel,
   options,
+  href,
 }: ProductCardProps) {
   const [expanded, setExpanded] = useState(false)
 
@@ -110,10 +113,10 @@ export default function ProductCard({
         {/* CTA pinned to bottom */}
         <div className="mt-auto pt-2">
           <Link
-            href={`/get-quote?product=${encodeURIComponent(name)}&category=${encodeURIComponent(categoryLabel)}`}
+            href={href ?? `/get-quote?product=${encodeURIComponent(name)}&category=${encodeURIComponent(categoryLabel)}`}
           >
             <Button size="sm" className="w-full">
-              Get a Quote <ArrowRight size={14} className="ml-1" />
+              Order Now <ArrowRight size={14} className="ml-1" />
             </Button>
           </Link>
         </div>
