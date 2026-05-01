@@ -16,7 +16,27 @@ const items = [
   { name: 'Golden Krust',               logo: '/images/brands/golden-krust.svg',  height: 44 }, // 208×101
 ]
 
-const doubled = [...items, ...items]
+function LogoTrack() {
+  return (
+    <div className="flex shrink-0 items-center">
+      {items.map((item, i) => (
+        <span
+          key={i}
+          className="inline-flex items-center justify-center gap-8 px-8"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={item.logo}
+            alt={item.name}
+            className="w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+            style={{ height: `${item.height}px` }}
+          />
+          <span className="text-white/30 text-xl">·</span>
+        </span>
+      ))}
+    </div>
+  )
+}
 
 export default function TrustBar() {
   return (
@@ -33,23 +53,11 @@ export default function TrustBar() {
         </p>
       </motion.div>
 
+      {/* Two identical tracks — first slides out, second seamlessly takes over */}
       <div className="overflow-hidden">
-        <div className="flex whitespace-nowrap animate-marquee items-center">
-          {doubled.map((item, i) => (
-            <span
-              key={i}
-              className="inline-flex items-center justify-center gap-8 px-8"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.logo}
-                alt={item.name}
-                className="w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
-                style={{ height: `${item.height}px` }}
-              />
-              <span className="text-white/30 text-xl">·</span>
-            </span>
-          ))}
+        <div className="flex w-max animate-marquee items-center">
+          <LogoTrack />
+          <LogoTrack />
         </div>
       </div>
     </section>
