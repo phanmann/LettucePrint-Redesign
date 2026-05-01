@@ -3,15 +3,14 @@
 import { motion } from 'framer-motion'
 
 const items = [
-  { type: 'logo', name: 'KITH',       logo: '/images/brands/kith.svg' },
-  { type: 'logo', name: 'Hard Rock',  logo: '/images/brands/hard-rock.png' },
-  { type: 'logo', name: 'Seagate',    logo: '/images/brands/seagate.svg' },
-  { type: 'logo', name: 'REBNY',      logo: '/images/brands/rebny.svg' },
-  { type: 'logo', name: 'Kiva',        logo: '/images/brands/kiva.svg' },
-  { type: 'text', name: 'NYC Restaurants' },
-  { type: 'text', name: 'Cannabis Dispensaries' },
-  { type: 'text', name: 'Event Organizers' },
-  { type: 'text', name: 'Local Brands' },
+  { name: 'KITH',                 logo: '/images/brands/kith.svg' },
+  { name: 'Hard Rock Hotel',      logo: '/images/brands/hard-rock.svg' },
+  { name: 'REBNY',                logo: '/images/brands/rebny.svg' },
+  { name: 'Seagate',              logo: '/images/brands/seagate.svg' },
+  { name: 'Kiva',                 logo: '/images/brands/kiva.svg' },
+  { name: 'The Mechanic Farm',    logo: '/images/brands/mechanic-farm.svg' },
+  { name: 'Orange County Cannabis Co.', logo: '/images/brands/orange-county.svg' },
+  { name: 'Terp Bros',            logo: '/images/brands/terp-bros.svg' },
 ]
 
 const doubled = [...items, ...items]
@@ -38,19 +37,13 @@ export default function TrustBar() {
               key={i}
               className="inline-flex items-center justify-center gap-8 px-8"
             >
-              {item.type === 'logo' ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={item.logo}
-                  alt={item.name}
-                  className="h-7 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
-                  style={{ maxWidth: '120px' }}
-                />
-              ) : (
-                <span className="text-sm font-semibold text-white/50 uppercase tracking-widest hover:text-white transition-colors cursor-default">
-                  {item.name}
-                </span>
-              )}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={item.logo}
+                alt={item.name}
+                className="h-7 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+                style={{ maxWidth: '120px' }}
+              />
               <span className="text-white/30 text-xl">·</span>
             </span>
           ))}
