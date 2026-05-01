@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
+import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -26,6 +27,7 @@ const PRODUCTS = [
     turnaround: '10–14 business days',
     color: '#E8F5F1',
         image: 'https://drive.usercontent.google.com/download?id=1tnUvh9Y9jYsoOKPUbS9g0-NWdt_CR0KV&export=view',
+    imageAlt: 'Standard mylar bag printed with custom design',
   },
   {
     id: 'mylar-diecut',
@@ -44,6 +46,7 @@ const PRODUCTS = [
     turnaround: '14–21 business days',
     color: '#F5F0E8',
         image: 'https://drive.usercontent.google.com/download?id=1tnUvh9Y9jYsoOKPUbS9g0-NWdt_CR0KV&export=view',
+    imageAlt: 'Die-cut mylar bag with custom shape',
   },
 ]
 
@@ -67,11 +70,14 @@ export default function MylarBagsPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {PRODUCTS.map(product => (
                 <div key={product.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200">
-                  <div className="w-full h-48 flex items-center justify-center" style={{ backgroundColor: product.color }}>
-                    <div className="text-center px-6">
-                      <p className="text-sm font-semibold text-gray-500 mb-1">{product.name}</p>
-                      <p className="text-xs text-gray-400">{product.subtitle}</p>
-                    </div>
+                  <div className="relative w-full h-48 overflow-hidden" style={{ backgroundColor: product.color }}>
+                    <Image
+                      src={product.image}
+                      alt={product.imageAlt ?? product.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
                   </div>
                   <div className="p-5">
                     <h3 className="text-base font-semibold text-gray-900 mb-1">{product.name}</h3>
@@ -95,8 +101,8 @@ export default function MylarBagsPage() {
                         </motion.div>
                       )}
                     </AnimatePresence>
-                    <Link href={`/get-quote?product=${encodeURIComponent(product.name)}&category=Mylar+Bags`}>
-                      <Button size="sm" className="w-full">Get a Quote <ArrowRight size={14} className="ml-1" /></Button>
+                    <Link href={product.href}>
+                      <Button size="sm" className="w-full">Order Now <ArrowRight size={14} className="ml-1" /></Button>
                     </Link>
                   </div>
                 </div>
