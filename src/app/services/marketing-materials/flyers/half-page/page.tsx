@@ -14,12 +14,17 @@ import { useRouter } from 'next/navigation'
 // ─── Option data ──────────────────────────────────────────────────────────────
 
 type Finish  = 'gloss' | 'matte'
+type Stock   = '80lb-text' | '100lb-cover'
 type Sides   = 'double' | 'single'
-type Fold    = 'none' | 'half' | 'tri'
 
 const FINISHES: { id: Finish; label: string; description: string }[] = [
-  { id: 'gloss', label: 'Gloss', description: 'High-shine coating. Colors pop — great for event posters and bold imagery.' },
-  { id: 'matte', label: 'Matte', description: 'Soft, non-reflective finish. Clean and sophisticated — ideal for menus and lookbooks.' },
+  { id: 'gloss', label: 'Gloss', description: 'High-shine coating. Colors pop — great for bold imagery and photos.' },
+  { id: 'matte', label: 'Matte', description: 'Soft, non-reflective finish. Clean, readable, and writable.' },
+]
+
+const STOCKS: { id: Stock; label: string; description: string }[] = [
+  { id: '80lb-text',  label: '80 lb. Text',  description: 'Standard weight — lightweight and economical for high-volume runs.' },
+  { id: '100lb-cover', label: '100 lb. Cover', description: 'Heavier premium feel. Doesn\'t flop or bend in hand.' },
 ]
 
 const SIDES: { id: Sides; label: string; description: string }[] = [
@@ -27,19 +32,13 @@ const SIDES: { id: Sides; label: string; description: string }[] = [
   { id: 'single', label: 'Single-Sided', description: 'Front only.' },
 ]
 
-const FOLDS: { id: Fold; label: string; description: string }[] = [
-  { id: 'none', label: 'No Fold',    description: 'Flat sheet — standard.' },
-  { id: 'half', label: 'Half Fold',  description: 'Folded to 8.5" × 11" — works as a booklet or menu.' },
-  { id: 'tri',  label: 'Tri-Fold',   description: 'Three panels — great for brochures and handouts.' },
-]
-
 const specs = [
-  { label: 'Size',          value: '11" × 17"' },
-  { label: 'Stock',         value: '80 lb. gloss or matte text' },
+  { label: 'Size',          value: '5.5" × 8.5"' },
+  { label: 'Stock options', value: '80 lb. text, 100 lb. cover' },
+  { label: 'Finish',        value: 'Gloss or matte' },
   { label: 'Color mode',    value: 'Full-color CMYK' },
-  { label: 'Minimum order', value: '50 flyers' },
-  { label: 'Turnaround',    value: '2–3 business days after approval' },
-  { label: 'Folding',       value: 'Half fold, tri-fold available' },
+  { label: 'Minimum order', value: '100 flyers' },
+  { label: 'Turnaround',    value: '1–2 business days after approval' },
 ]
 
 const artworkRequirements = [
@@ -61,8 +60,8 @@ const included = [
 
 function Configurator() {
   const [finish, setFinish] = useState<Finish>('gloss')
+  const [stock,  setStock]  = useState<Stock>('80lb-text')
   const [sides,  setSides]  = useState<Sides>('double')
-  const [fold,   setFold]   = useState<Fold>('none')
   const router = useRouter()
 
   const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
@@ -77,11 +76,11 @@ function Configurator() {
 
   const handleQuote = () => {
     const f  = FINISHES.find(x => x.id === finish)?.label ?? finish
+    const st = STOCKS.find(x => x.id === stock)?.label ?? stock
     const sd = SIDES.find(x => x.id === sides)?.label ?? sides
-    const fo = FOLDS.find(x => x.id === fold)?.label ?? fold
-    const details = `Tabloid Flyer — ${f} finish, ${sd}${fold !== 'none' ? `, ${fo}` : ''}`
+    const details = `Half Page Flyer — ${f} finish, ${st}, ${sd}`
     router.push(
-      `/get-quote?product=${encodeURIComponent('Tabloid Flyer')}&details=${encodeURIComponent(details)}`
+      `/get-quote?product=${encodeURIComponent('Half Page Flyer')}&details=${encodeURIComponent(details)}`
     )
   }
 
@@ -106,6 +105,24 @@ function Configurator() {
 
       <div className="border-t border-gray-100 mb-6" />
 
+      {/* ── Stock ── */}
+      <div className="mb-6">
+        <p className={sectionLabel}>Paper stock</p>
+        <div className="space-y-2">
+          {STOCKS.map(s => (
+            <label key={s.id} className={radioRow(stock === s.id)} onClick={() => setStock(s.id)}>
+              <div className={radioCircle(stock === s.id)} />
+              <div>
+                <p className={`text-sm font-medium leading-tight ${stock === s.id ? 'text-gray-900' : 'text-gray-700'}`}>{s.label}</p>
+                <p className="text-xs text-gray-400 mt-0.5">{s.description}</p>
+              </div>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div className="border-t border-gray-100 mb-6" />
+
       {/* ── Sides ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Printing sides</p>
@@ -116,24 +133,6 @@ function Configurator() {
               <div>
                 <p className={`text-sm font-medium leading-tight ${sides === s.id ? 'text-gray-900' : 'text-gray-700'}`}>{s.label}</p>
                 <p className="text-xs text-gray-400 mt-0.5">{s.description}</p>
-              </div>
-            </label>
-          ))}
-        </div>
-      </div>
-
-      <div className="border-t border-gray-100 mb-6" />
-
-      {/* ── Fold ── */}
-      <div className="mb-6">
-        <p className={sectionLabel}>Folding</p>
-        <div className="space-y-2">
-          {FOLDS.map(fo => (
-            <label key={fo.id} className={radioRow(fold === fo.id)} onClick={() => setFold(fo.id)}>
-              <div className={radioCircle(fold === fo.id)} />
-              <div>
-                <p className={`text-sm font-medium leading-tight ${fold === fo.id ? 'text-gray-900' : 'text-gray-700'}`}>{fo.label}</p>
-                <p className="text-xs text-gray-400 mt-0.5">{fo.description}</p>
               </div>
             </label>
           ))}
@@ -163,7 +162,7 @@ function Configurator() {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function TabloidFlyerPage() {
+export default function HalfPageFlyerPage() {
   return (
     <>
       <Navbar />
@@ -177,7 +176,7 @@ export default function TabloidFlyerPage() {
               <span>/</span>
               <Link href="/services/marketing-materials/flyers" className="hover:text-lp-green transition-colors">Flyers</Link>
               <span>/</span>
-              <span className="text-gray-900 font-medium">Tabloid Flyer</span>
+              <span className="text-gray-900 font-medium">Half Page Flyer</span>
             </nav>
           </div>
         </div>
@@ -194,18 +193,19 @@ export default function TabloidFlyerPage() {
             <div className="order-last lg:order-first">
               <div className="mb-8">
                 <div className="flex items-center gap-2 mb-4">
-                  <Badge variant="new">Large Format</Badge>
+                  <Badge variant="new">Fast Turnaround</Badge>
+                  <Badge variant="popular">Most Popular</Badge>
                 </div>
-                <h1 className="text-h1 font-semibold text-gray-900 mb-4">Tabloid Flyer</h1>
+                <h1 className="text-h1 font-semibold text-gray-900 mb-4">Half Page Flyer</h1>
                 <p className="text-body-lg text-gray-600 leading-relaxed">
-                  11″ × 17″ — twice the real estate of a letter flyer. Impossible to miss. Perfect for menus, in-store promotions, concert bills, and display boards. Available flat or folded. Printed in Brooklyn.
+                  The workhorse handout at 5.5″ × 8.5″. Fits in bags, pockets, and rack slots. Perfect for menus, event promos, and retail inserts — available in gloss, matte, or heavy cover stock. Printed in Brooklyn.
                 </p>
               </div>
 
               <ProductImageGallery
                 images={[
-                  { src: '/images/products/flyers/flyer-1.jpg', alt: 'Tabloid flyer print' },
-                  { src: '/images/products/flyers/flyer-2.jpg', alt: 'Large format flyer stack' },
+                  { src: '/images/products/flyers/flyer-1.jpg', alt: 'Half-sheet flyer print' },
+                  { src: '/images/products/flyers/flyer-2.jpg', alt: 'Custom flyers stack' },
                 ]}
               />
 
@@ -270,26 +270,18 @@ export default function TabloidFlyerPage() {
                 </Disclosure>
               </div>
 
-              {/* Downsize */}
+              {/* Upsell */}
               <div className="rounded-card border border-gray-200 p-6">
-                <h3 className="text-h4 font-semibold text-gray-900 mb-2">Need a smaller size?</h3>
+                <h3 className="text-h4 font-semibold text-gray-900 mb-2">Need more real estate?</h3>
                 <p className="text-small text-gray-600 mb-4">
-                  Full-page 8.5″ × 11″ or half-page 5.5″ × 8.5″ — same great quality, smaller footprint.
+                  Full-page 8.5″ × 11″ and tabloid 11″ × 17″ flyers also available.
                 </p>
-                <div className="flex flex-col gap-2">
-                  <Link
-                    href="/services/marketing-materials/flyers/full-page"
-                    className="inline-flex items-center gap-2 text-small font-semibold text-lp-green hover:text-lp-green-dark transition-colors"
-                  >
-                    See Full Page Flyers <ArrowRight size={14} />
-                  </Link>
-                  <Link
-                    href="/services/marketing-materials/flyers/half-page"
-                    className="inline-flex items-center gap-2 text-small font-semibold text-lp-green hover:text-lp-green-dark transition-colors"
-                  >
-                    See Half Page Flyers <ArrowRight size={14} />
-                  </Link>
-                </div>
+                <Link
+                  href="/services/marketing-materials/flyers/full-page"
+                  className="inline-flex items-center gap-2 text-small font-semibold text-lp-green hover:text-lp-green-dark transition-colors"
+                >
+                  See Full Page Flyers <ArrowRight size={14} />
+                </Link>
               </div>
             </div>
           </div>
@@ -302,7 +294,7 @@ export default function TabloidFlyerPage() {
                 href="/services/marketing-materials/flyers/full-page"
                 className="group block bg-lp-black rounded-card p-6 transition-all duration-250 hover:opacity-90"
               >
-                <Badge variant="new" className="mb-4">Full Size</Badge>
+                <Badge variant="popular" className="mb-4">Full Size</Badge>
                 <h3 className="text-h4 font-semibold text-white mb-2">Full Page Flyer</h3>
                 <p className="text-small text-white/70 mb-4">8.5″ × 11″ in gloss, matte, or heavy cover stock.</p>
                 <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-lp-green">
@@ -310,12 +302,12 @@ export default function TabloidFlyerPage() {
                 </span>
               </Link>
               <Link
-                href="/services/marketing-materials/postcards"
+                href="/services/marketing-materials/flyers/tabloid"
                 className="group block bg-white rounded-card shadow-card hover:shadow-card-hover border border-gray-100 p-6 transition-all duration-250"
               >
-                <Badge variant="popular" className="mb-4">Popular</Badge>
-                <h3 className="text-h4 font-semibold text-gray-900 group-hover:text-lp-green transition-colors mb-2">Postcards</h3>
-                <p className="text-small text-gray-600 mb-4">Standard and premium postcards for direct mail campaigns.</p>
+                <Badge variant="new" className="mb-4">Large Format</Badge>
+                <h3 className="text-h4 font-semibold text-gray-900 group-hover:text-lp-green transition-colors mb-2">Tabloid Flyer</h3>
+                <p className="text-small text-gray-600 mb-4">11″ × 17″ — maximum presence for menus and event sheets.</p>
                 <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-lp-green">
                   View product <ArrowRight size={12} />
                 </span>
