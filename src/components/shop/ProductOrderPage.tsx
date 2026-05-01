@@ -46,65 +46,93 @@ function fmt(n: number) {
   return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
-function Configurator({
-  name,
+// ─── Shared radio styles ──────────────────────────────────────────────────────
+const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
+const radioRow = (active: boolean) =>
+  `flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer transition-all duration-150 ${
+    active ? 'border-lp-green bg-lp-green/5' : 'border-gray-200 bg-white hover:border-gray-300'
+  }`
+const radioCircle = (active: boolean) =>
+  `w-4 h-4 rounded-full border-2 flex-shrink-0 transition-colors ${
+    active ? 'border-lp-green bg-lp-green' : 'border-gray-300 bg-white'
+  }`
+
+// ─── CTA block (reused in both desktop panel and mobile inline slot) ──────────
+function CtaBlock({
+  onClick,
+  displayPrice,
+  isRush,
+  pricingNote,
+}: {
+  onClick: () => void
+  displayPrice: number | null
+  isRush: boolean
+  pricingNote?: string
+}) {
+  const subtext = displayPrice != null
+    ? 'Upload artwork · Proof before production · Pickup or ship'
+    : "We'll confirm pricing + turnaround within a few hours."
+  return (
+    <>
+      {displayPrice != null && (
+        <div className="flex items-baseline justify-between mb-4">
+          <span className="text-3xl font-bold text-gray-900">{fmt(displayPrice)}</span>
+          {isRush && (
+            <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full flex items-center gap-1">
+              <Zap size={11} /> Rush
+            </span>
+          )}
+        </div>
+      )}
+      <Button
+        onClick={onClick}
+        size="lg"
+        className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl"
+      >
+        Order Now <ArrowRight size={16} className="ml-2" />
+      </Button>
+      <p className="text-xs text-gray-400 text-center mt-3">{subtext}</p>
+      {pricingNote && <p className="text-xs text-gray-500 text-center mt-2">{pricingNote}</p>}
+      <p className="text-xs text-center mt-2">
+        <span className="text-gray-500">Questions? Call us: </span>
+        <a href="tel:3476030557" className="font-semibold text-lp-green hover:underline">347.603.0557</a>
+      </p>
+    </>
+  )
+}
+
+// ─── Configurator panel (options only — no CTA) ───────────────────────────────
+function ConfiguratorOptions({
   optionGroups,
   pricingTable,
-  pricingNote,
   showQuantity,
+  selections,
+  setSelections,
+  selectedRowIdx,
+  setSelectedRowIdx,
+  isRush,
+  setIsRush,
+  quantity,
+  setQuantity,
 }: {
-  name: string
   optionGroups: OptionGroup[]
   pricingTable?: PricingRow[]
-  pricingNote?: string
   showQuantity?: boolean
+  selections: Record<string, string>
+  setSelections: (s: Record<string, string>) => void
+  selectedRowIdx: number
+  setSelectedRowIdx: (i: number) => void
+  isRush: boolean
+  setIsRush: (v: boolean) => void
+  quantity: number
+  setQuantity: (n: number) => void
 }) {
-  const router = useRouter()
   const hasQtyTiers = pricingTable && pricingTable.length > 1
-  const isSingleUnit = pricingTable && pricingTable.length === 1
-
-  const [selections, setSelections] = useState<Record<string, string>>(() =>
-    Object.fromEntries(optionGroups.map(g => [g.label, g.options[0].id]))
-  )
-  const [selectedRowIdx, setSelectedRowIdx] = useState(0)
-  const [isRush, setIsRush] = useState(false)
-  const [quantity, setQuantity] = useState(1)
-
   const currentRow = pricingTable?.[selectedRowIdx]
-  const displayPrice = currentRow
-    ? isRush && currentRow.rushPrice
-      ? currentRow.rushPrice
-      : currentRow.standardPrice
-    : null
   const hasRush = pricingTable?.some(r => r.rushPrice)
 
-  const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
-  const radioRow = (active: boolean) =>
-    `flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer transition-all duration-150 ${
-      active ? 'border-lp-green bg-lp-green/5' : 'border-gray-200 bg-white hover:border-gray-300'
-    }`
-  const radioCircle = (active: boolean) =>
-    `w-4 h-4 rounded-full border-2 flex-shrink-0 transition-colors ${
-      active ? 'border-lp-green bg-lp-green' : 'border-gray-300 bg-white'
-    }`
-
-  const handleOrderNow = () => {
-    const details = optionGroups
-      .map(g => {
-        const sel = g.options.find(o => o.id === selections[g.label])
-        return `${g.label}: ${sel?.label ?? selections[g.label]}`
-      })
-      .join(', ')
-    const qtyStr = showQuantity ? `, Qty: ${quantity}` : currentRow ? `, Qty: ${currentRow.qty}` : ''
-    const rushStr = isRush ? ', Rush' : ''
-    router.push(
-      `/get-quote?product=${encodeURIComponent(name)}&details=${encodeURIComponent(details + qtyStr + rushStr)}`
-    )
-  }
-
   return (
-    <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24">
-
+    <>
       {/* Quantity field */}
       {showQuantity && (
         <div className="mb-6">
@@ -130,7 +158,7 @@ function Configurator({
                 <label
                   key={opt.id}
                   className={radioRow(selections[group.label] === opt.id)}
-                  onClick={() => setSelections(s => ({ ...s, [group.label]: opt.id }))}
+                  onClick={() => setSelections({ ...selections, [group.label]: opt.id })}
                 >
                   <div className={radioCircle(selections[group.label] === opt.id)} />
                   <div className="flex-1">
@@ -174,10 +202,8 @@ function Configurator({
               </option>
             ))}
           </select>
-
-          {/* Rush toggle */}
           {hasRush && (
-            <label className={`mt-2 ${radioRow(isRush)}`} onClick={() => setIsRush(r => !r)}>
+            <label className={`mt-2 ${radioRow(isRush)}`} onClick={() => setIsRush(!isRush)}>
               <div className={radioCircle(isRush)} />
               <div className="flex-1">
                 <div className="flex items-center gap-2">
@@ -186,78 +212,43 @@ function Configurator({
                   <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full">Next day</span>
                 </div>
                 <p className="text-xs text-gray-400 mt-0.5">
-                  {currentRow?.rushPrice ? `Add ${fmt(currentRow.rushPrice - currentRow.standardPrice)} — total ${fmt(currentRow.rushPrice)}` : 'Price on request'}
+                  {currentRow?.rushPrice
+                    ? `Add ${fmt(currentRow.rushPrice - currentRow.standardPrice)} — total ${fmt(currentRow.rushPrice)}`
+                    : 'Price on request'}
                 </p>
               </div>
             </label>
           )}
-
           <div className="border-t border-gray-100 mt-6 mb-0" />
         </div>
       )}
 
-      {/* Single-unit price display */}
-      {isSingleUnit && (
+      {/* Single-unit rush toggle */}
+      {pricingTable && pricingTable.length === 1 && hasRush && (
         <div className="mb-6">
-          {hasRush && (
-            <label className={`mb-3 ${radioRow(isRush)}`} onClick={() => setIsRush(r => !r)}>
-              <div className={radioCircle(isRush)} />
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <Zap size={13} className={isRush ? 'text-amber-500' : 'text-gray-400'} />
-                  <p className="text-sm font-medium text-gray-800">Rush production</p>
-                  <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full">Next day</span>
-                </div>
-                <p className="text-xs text-gray-400 mt-0.5">
-                  {pricingTable![0].rushPrice ? `+${fmt(pricingTable![0].rushPrice! - pricingTable![0].standardPrice)} — total ${fmt(pricingTable![0].rushPrice!)}` : 'Price on request'}
-                </p>
+          <label className={`mb-3 ${radioRow(isRush)}`} onClick={() => setIsRush(!isRush)}>
+            <div className={radioCircle(isRush)} />
+            <div className="flex-1">
+              <div className="flex items-center gap-2">
+                <Zap size={13} className={isRush ? 'text-amber-500' : 'text-gray-400'} />
+                <p className="text-sm font-medium text-gray-800">Rush production</p>
+                <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full">Next day</span>
               </div>
-            </label>
-          )}
+              <p className="text-xs text-gray-400 mt-0.5">
+                {pricingTable[0].rushPrice
+                  ? `+${fmt(pricingTable[0].rushPrice - pricingTable[0].standardPrice)} — total ${fmt(pricingTable[0].rushPrice)}`
+                  : 'Price on request'}
+              </p>
+            </div>
+          </label>
           <div className="border-t border-gray-100 mb-0" />
         </div>
       )}
-
-      {/* Price + CTA */}
-      <div className={pricingTable ? 'pt-5' : 'border-t border-gray-200 pt-5'}>
-        {displayPrice != null && (
-          <div className="flex items-baseline justify-between mb-4">
-            <span className="text-3xl font-bold text-gray-900">{fmt(displayPrice)}</span>
-            {isRush && (
-              <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full flex items-center gap-1">
-                <Zap size={11} /> Rush
-              </span>
-            )}
-          </div>
-        )}
-
-        <Button
-          onClick={handleOrderNow}
-          size="lg"
-          className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl"
-        >
-          {displayPrice != null ? 'Order Now' : 'Get a Quote'} <ArrowRight size={16} className="ml-2" />
-        </Button>
-
-        <p className="text-xs text-gray-400 text-center mt-3">
-          {displayPrice != null
-            ? 'Upload artwork · Proof before production · Pickup or ship'
-            : "We'll confirm pricing + turnaround within a few hours."}
-        </p>
-        {pricingNote && (
-          <p className="text-xs text-gray-500 text-center mt-2">{pricingNote}</p>
-        )}
-        <p className="text-xs text-center mt-2">
-          <span className="text-gray-500">Questions? Call us: </span>
-          <a href="tel:3476030557" className="font-semibold text-lp-green hover:underline">
-            347.603.0557
-          </a>
-        </p>
-      </div>
-    </div>
+    </>
   )
 }
 
+// ─── Main page ────────────────────────────────────────────────────────────────
 export default function ProductOrderPage({
   name,
   tagline,
@@ -275,6 +266,35 @@ export default function ProductOrderPage({
   showQuantity,
   images,
 }: ProductOrderPageProps) {
+  const router = useRouter()
+
+  // ── Lifted configurator state ──────────────────────────────────────────────
+  const [selections, setSelections] = useState<Record<string, string>>(() =>
+    Object.fromEntries(optionGroups.map(g => [g.label, g.options[0].id]))
+  )
+  const [selectedRowIdx, setSelectedRowIdx] = useState(0)
+  const [isRush, setIsRush] = useState(false)
+  const [quantity, setQuantity] = useState(1)
+
+  const currentRow = pricingTable?.[selectedRowIdx]
+  const displayPrice = currentRow
+    ? isRush && currentRow.rushPrice ? currentRow.rushPrice : currentRow.standardPrice
+    : null
+
+  const handleOrderNow = () => {
+    const details = optionGroups
+      .map(g => {
+        const sel = g.options.find(o => o.id === selections[g.label])
+        return `${g.label}: ${sel?.label ?? selections[g.label]}`
+      })
+      .join(', ')
+    const qtyStr = showQuantity ? `, Qty: ${quantity}` : currentRow ? `, Qty: ${currentRow.qty}` : ''
+    const rushStr = isRush ? ', Rush' : ''
+    router.push(
+      `/get-quote?product=${encodeURIComponent(name)}&details=${encodeURIComponent(details + qtyStr + rushStr)}`
+    )
+  }
+
   return (
     <>
       <Navbar />
@@ -301,18 +321,35 @@ export default function ProductOrderPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_520px] gap-12 items-start">
 
-            {/* Right — Configurator (first on mobile) */}
+            {/* Right — Configurator panel (first on mobile) */}
             <div className="order-first lg:order-last">
-              <Configurator
-                name={name}
-                optionGroups={optionGroups}
-                pricingTable={pricingTable}
-                pricingNote={pricingNote}
-                showQuantity={showQuantity}
-              />
+              <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24">
+                <ConfiguratorOptions
+                  optionGroups={optionGroups}
+                  pricingTable={pricingTable}
+                  showQuantity={showQuantity}
+                  selections={selections}
+                  setSelections={setSelections}
+                  selectedRowIdx={selectedRowIdx}
+                  setSelectedRowIdx={setSelectedRowIdx}
+                  isRush={isRush}
+                  setIsRush={setIsRush}
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                />
+                {/* CTA — desktop only */}
+                <div className={`${pricingTable ? 'pt-5' : 'border-t border-gray-200 pt-5'} hidden lg:block`}>
+                  <CtaBlock
+                    onClick={handleOrderNow}
+                    displayPrice={displayPrice}
+                    isRush={isRush}
+                    pricingNote={pricingNote}
+                  />
+                </div>
+              </div>
             </div>
 
-            {/* Left — Product Info */}
+            {/* Left — Product info */}
             <div className="order-last lg:order-first">
               <div className="mb-8">
                 {badges.length > 0 && (
@@ -328,12 +365,10 @@ export default function ProductOrderPage({
                 <p className="text-body-lg text-gray-600 leading-relaxed">{tagline}</p>
               </div>
 
-              {/* Product Image Gallery */}
-              {images && images.length > 0 && (
-                <ProductImageGallery images={images} />
-              )}
+              {/* Image gallery */}
+              {images && images.length > 0 && <ProductImageGallery images={images} />}
 
-              {/* Color swatch / image placeholder — hidden when real images provided */}
+              {/* Color swatch fallback */}
               {(!images || images.length === 0) && (
                 <div
                   className="w-full h-36 rounded-2xl flex items-center justify-center mb-8"
@@ -343,7 +378,19 @@ export default function ProductOrderPage({
                 </div>
               )}
 
-              {/* What's included */}
+              {/* Mobile-only CTA — between gallery and every order includes */}
+              <div className="lg:hidden mb-8">
+                <div className={pricingTable ? 'pt-0' : 'border-t border-gray-200 pt-5'}>
+                  <CtaBlock
+                    onClick={handleOrderNow}
+                    displayPrice={displayPrice}
+                    isRush={isRush}
+                    pricingNote={pricingNote}
+                  />
+                </div>
+              </div>
+
+              {/* Every order includes */}
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">
                 <h3 className="text-small font-semibold text-lp-green uppercase tracking-wider mb-4">
                   Every order includes

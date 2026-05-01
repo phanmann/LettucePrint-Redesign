@@ -142,13 +142,13 @@ function Configurator() {
       </div>
 
       {/* ── CTA ── */}
-      <div className="border-t border-gray-200 pt-5">
+      <div className="border-t border-gray-200 pt-5 hidden lg:block">
         <Button
           onClick={handleQuote}
           size="lg"
           className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl"
         >
-          Get a Quote <ArrowRight size={16} className="ml-2" />
+          Order Now <ArrowRight size={16} className="ml-2" />
         </Button>
         <p className="text-xs text-gray-400 text-center mt-3">
           We&apos;ll confirm pricing + turnaround within a few hours.
@@ -214,6 +214,24 @@ export default function StandardPostcardsPage() {
               />
 
               {/* What's included */}
+              {/* Mobile-only CTA — between gallery and every order includes */}
+              <div className="lg:hidden mb-8 border-t border-gray-200 pt-5">
+                <Link href="/get-quote?product=Standard%20Postcard">
+                  <Button
+                    size="lg"
+                    className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl"
+                  >
+                    Order Now <ArrowRight size={16} className="ml-2" />
+                  </Button>
+                </Link>
+                <p className="text-xs text-gray-400 text-center mt-3">We&apos;ll confirm pricing + turnaround within a few hours.</p>
+                <p className="text-xs text-center mt-2">
+                  <span className="text-gray-500">Questions? Call us: </span>
+                  <a href="tel:3476030557" className="font-semibold text-lp-green hover:underline">347.603.0557</a>
+                </p>
+              </div>
+
+
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">
                 <h3 className="text-small font-semibold text-lp-green uppercase tracking-wider mb-4">Every order includes</h3>
                 <ul className="space-y-2.5">
