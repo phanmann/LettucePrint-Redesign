@@ -13,7 +13,7 @@ const items = [
   { name: 'The Mechanic Farm',          logo: '/images/brands/mechanic-farm.svg', height: 44 }, // 139×93
   { name: 'Orange County Cannabis Co.', logo: '/images/brands/orange-county.svg', height: 44 }, // 165×92
   { name: 'Terp Bros',                  logo: '/images/brands/terp-bros.svg',     height: 44 }, // 109×96
-  { name: 'Cannabis Du',                 logo: '/images/brands/cannabis-du.svg',   height: 44 }, // 208×101
+  { name: 'Golden Krust',               logo: '/images/brands/golden-krust.svg',  height: 44 }, // 208×101
 ]
 
 const doubled = [...items, ...items]
