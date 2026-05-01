@@ -321,8 +321,8 @@ export default function ProductOrderPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_520px] gap-12 items-start">
 
-            {/* Right — Configurator panel (first on mobile) */}
-            <div className="order-first lg:order-last">
+            {/* Right — Configurator panel (below gallery on mobile, sticky right on desktop) */}
+            <div className="order-2 lg:order-last">
               <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24">
                 <ConfiguratorOptions
                   optionGroups={optionGroups}
@@ -337,8 +337,8 @@ export default function ProductOrderPage({
                   quantity={quantity}
                   setQuantity={setQuantity}
                 />
-                {/* CTA — desktop only */}
-                <div className={`${pricingTable ? 'pt-5' : 'border-t border-gray-200 pt-5'} hidden lg:block`}>
+                {/* CTA — always inside the panel */}
+                <div className={pricingTable ? 'pt-5' : 'border-t border-gray-200 pt-5'}>
                   <CtaBlock
                     onClick={handleOrderNow}
                     displayPrice={displayPrice}
@@ -350,7 +350,7 @@ export default function ProductOrderPage({
             </div>
 
             {/* Left — Product info */}
-            <div className="order-last lg:order-first">
+            <div className="order-1 lg:order-first">
               <div className="mb-8">
                 {badges.length > 0 && (
                   <div className="flex items-center gap-2 mb-4 flex-wrap">
@@ -377,18 +377,6 @@ export default function ProductOrderPage({
                   <p className="text-sm font-semibold text-gray-500">{name}</p>
                 </div>
               )}
-
-              {/* Mobile-only CTA — between gallery and every order includes */}
-              <div className="lg:hidden mb-8">
-                <div className={pricingTable ? 'pt-0' : 'border-t border-gray-200 pt-5'}>
-                  <CtaBlock
-                    onClick={handleOrderNow}
-                    displayPrice={displayPrice}
-                    isRush={isRush}
-                    pricingNote={pricingNote}
-                  />
-                </div>
-              </div>
 
               {/* Every order includes */}
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">

@@ -119,7 +119,7 @@ function Configurator() {
       </div>
 
       {/* ── CTA ── */}
-      <div className="border-t border-gray-200 pt-5 hidden lg:block">
+      <div className="border-t border-gray-200 pt-5">
         <Button
           onClick={handleQuote}
           size="lg"
@@ -164,12 +164,12 @@ export default function FullPageFlyerPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_520px] gap-12 items-start">
 
             {/* Right — Configurator (first on mobile) */}
-            <div className="order-first lg:order-last">
+            <div className="order-2 lg:order-last">
               <Configurator />
             </div>
 
             {/* Left — Product Info */}
-            <div className="order-last lg:order-first">
+            <div className="order-1 lg:order-first">
               <div className="mb-8">
                 <div className="flex items-center gap-2 mb-4">
                   <Badge variant="new">Fast Turnaround</Badge>
