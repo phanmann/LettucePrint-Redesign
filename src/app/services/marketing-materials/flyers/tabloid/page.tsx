@@ -186,12 +186,12 @@ export default function TabloidFlyerPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_520px] gap-12 items-start">
 
             {/* Right — Configurator (first on mobile) */}
-            <div className="order-2 lg:order-last">
+            <div className="hidden lg:block lg:order-last">
               <Configurator />
             </div>
 
             {/* Left — Product Info */}
-            <div className="order-1 lg:order-first">
+            <div className="lg:order-first">
               <div className="mb-8">
                 <div className="flex items-center gap-2 mb-4">
                   <Badge variant="new">Large Format</Badge>
@@ -208,24 +208,11 @@ export default function TabloidFlyerPage() {
                   { src: '/images/products/flyers/flyer-2.jpg', alt: 'Large format flyer stack' },
                 ]}
               />
-
-              {/* What's included */}
-              {/* Mobile-only CTA — between gallery and every order includes */}
-              <div className="lg:hidden mb-8 border-t border-gray-200 pt-5">
-                <Link href="/get-quote?product=Tabloid%20Flyer">
-                  <Button
-                    size="lg"
-                    className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl"
-                  >
-                    Order Now <ArrowRight size={16} className="ml-2" />
-                  </Button>
-                </Link>
-                <p className="text-xs text-gray-400 text-center mt-3">We&apos;ll confirm pricing + turnaround within a few hours.</p>
-                <p className="text-xs text-center mt-2">
-                  <span className="text-gray-500">Questions? Call us: </span>
-                  <a href="tel:3476030557" className="font-semibold text-lp-green hover:underline">347.603.0557</a>
-                </p>
+              {/* Mobile-only configurator — inline after gallery */}
+              <div className="lg:hidden mb-8">
+                <Configurator />
               </div>
+
 
 
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">
