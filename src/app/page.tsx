@@ -19,12 +19,6 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
-        <Marquee
-          items={capabilitiesMarquee}
-          speed="fast"
-          bgClassName="bg-lp-green"
-          textClassName="text-white"
-        />
         <TrustBar />
         <ServicesOverview />
         <PortfolioStrip />

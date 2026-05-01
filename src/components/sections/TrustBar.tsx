@@ -18,7 +18,7 @@ const doubled = [...items, ...items]
 
 export default function TrustBar() {
   return (
-    <section className="py-12 bg-white border-y border-gray-100">
+    <section className="py-12 bg-lp-green">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -26,7 +26,7 @@ export default function TrustBar() {
         transition={{ duration: 0.5 }}
         className="text-center mb-8"
       >
-        <p className="text-xs uppercase tracking-[0.2em] text-gray-400 font-semibold">
+        <p className="text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">
           Trusted by brands that take their image seriously
         </p>
       </motion.div>
@@ -43,15 +43,15 @@ export default function TrustBar() {
                 <img
                   src={item.logo}
                   alt={item.name}
-                  className="h-7 w-auto object-contain opacity-30 hover:opacity-60 transition-opacity grayscale"
+                  className="h-7 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
                   style={{ maxWidth: '120px' }}
                 />
               ) : (
-                <span className="text-sm font-semibold text-gray-300 uppercase tracking-widest hover:text-lp-green transition-colors cursor-default">
+                <span className="text-sm font-semibold text-white/50 uppercase tracking-widest hover:text-white transition-colors cursor-default">
                   {item.name}
                 </span>
               )}
-              <span className="text-lp-green/30 text-xl">·</span>
+              <span className="text-white/30 text-xl">·</span>
             </span>
           ))}
         </div>

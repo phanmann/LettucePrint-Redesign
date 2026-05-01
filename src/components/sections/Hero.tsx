@@ -95,7 +95,7 @@ export default function Hero() {
                   <Button variant="secondary" size="md">Shop Products</Button>
                 </Link>
                 <Link href="/get-quote">
-                  <Button size="md">Get a Quote</Button>
+                  <Button size="md" className="!text-white">Get a Quote</Button>
                 </Link>
               </div>
             </motion.div>
@@ -124,7 +124,7 @@ export default function Hero() {
               <div key={card.label} className="hidden lg:block lg:flex-1 rounded-card flex items-end justify-start p-4 relative overflow-hidden transition-transform duration-300 hover:-translate-y-1 group" style={{ backgroundColor: card.bg, height: '140px' }}>
                 <Image src={card.img} alt={card.label} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="240px" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.12em] bg-white/90 text-gray-900 px-3 py-1.5 rounded-full whitespace-nowrap">{card.label}</span>
+                <span className="absolute bottom-4 left-4 z-10 text-[10px] font-bold uppercase tracking-[0.12em] bg-white/90 text-gray-900 px-3 py-1.5 rounded-full whitespace-nowrap">{card.label}</span>
               </div>
             ) : (
               <div
