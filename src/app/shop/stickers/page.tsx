@@ -61,14 +61,13 @@ export default function StickersPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_600px] gap-12 items-start">
 
-            {/* Calculator first on mobile (order-first), specs second */}
-            {/* Right — Pricing Calculator */}
-            <div className="order-first lg:order-last lg:sticky lg:top-24">
+            {/* Right — Pricing Calculator (desktop only) */}
+            <div className="hidden lg:block lg:order-last lg:sticky lg:top-24">
               <PricingCalculator productName="Custom Die-Cut Stickers" />
             </div>
 
             {/* Left — Product Info */}
-            <div className="order-last lg:order-first">
+            <div className="lg:order-first">
               {/* Header */}
               <div className="mb-8">
                 {/* Badges */}
@@ -95,8 +94,10 @@ export default function StickersPage() {
                 ]}
               />
 
-
-
+              {/* Mobile-only calculator — inline after gallery */}
+              <div className="lg:hidden mb-8">
+                <PricingCalculator productName="Custom Die-Cut Stickers" />
+              </div>
 
               {/* What's included */}
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">

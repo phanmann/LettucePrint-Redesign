@@ -71,13 +71,13 @@ export default function RollLabelsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_600px] gap-12 items-start">
 
-            {/* Calculator first on mobile */}
-            <div className="order-first lg:order-last lg:sticky lg:top-24">
+            {/* Right — Calculator (desktop only) */}
+            <div className="hidden lg:block lg:order-last lg:sticky lg:top-24">
               <RollLabelCalculator productName="Custom Roll Labels" />
             </div>
 
             {/* Left — Product Info */}
-            <div className="order-last lg:order-first">
+            <div className="lg:order-first">
               <div className="mb-8">
                 {/* Badges */}
                 <div className="flex items-center gap-2 mb-4">
@@ -103,7 +103,10 @@ export default function RollLabelsPage() {
                 ]}
               />
 
-
+              {/* Mobile-only calculator — inline after gallery */}
+              <div className="lg:hidden mb-8">
+                <RollLabelCalculator productName="Custom Roll Labels" />
+              </div>
 
               {/* Use cases */}
               <div className="grid grid-cols-2 gap-3 mb-8">
