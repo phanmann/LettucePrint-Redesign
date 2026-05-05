@@ -15,12 +15,6 @@ const heroCards = [
   { label: 'Large Format',   bg: '#0a0a0a', img: '/images/hero-cards/large-format.png' },
 ]
 
-const stats = [
-  { value: '500+', label: 'Projects Delivered' },
-  { value: '10+',  label: 'Years in Brooklyn' },
-  { value: '3–5',  label: 'Day Turnaround' },
-]
-
 export default function Hero() {
   const cursorRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
@@ -94,9 +88,6 @@ export default function Hero() {
                 <Link href="/shop">
                   <Button variant="secondary" size="md">Shop Products</Button>
                 </Link>
-                <Link href="/get-quote">
-                  <Button size="md" className="!text-white">Get a Quote</Button>
-                </Link>
               </div>
             </motion.div>
 
@@ -150,33 +141,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Bottom bar: CTAs + stats */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.45 }}
-          className="border-t border-gray-100 bg-white"
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex gap-8 sm:gap-12">
-              {stats.map((s) => (
-                <div key={s.label}>
-                  <p className="text-2xl font-semibold text-lp-green leading-none">{s.value}</p>
-                  <p className="text-[11px] uppercase tracking-wider text-gray-400 mt-1 font-medium">{s.label}</p>
-                </div>
-              ))}
-            </div>
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-              className="hidden sm:block text-gray-300"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M6 9l6 6 6-6" />
-              </svg>
-            </motion.div>
-          </div>
-        </motion.div>
+
       </section>
     </>
   )
