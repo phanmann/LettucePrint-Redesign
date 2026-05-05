@@ -18,8 +18,10 @@ const heroCards = [
 export default function Hero() {
   const cursorRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
+  const gradientRef = useRef<HTMLDivElement>(null)
   const ringPos = useRef({ x: 0, y: 0 })
   const mousePos = useRef({ x: 0, y: 0 })
+  const gradientPos = useRef({ x: 0.5, y: 0.5 }) // normalised 0–1
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -32,11 +34,30 @@ export default function Hero() {
 
     let raf: number
     const loop = () => {
+      // Lazy-follow ring
       ringPos.current.x += (mousePos.current.x - ringPos.current.x) * 0.1
       ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.1
       if (ringRef.current) {
         ringRef.current.style.transform = `translate(${ringPos.current.x - 20}px, ${ringPos.current.y - 20}px)`
       }
+
+      // Gradient follows cursor even more lazily (smoother feel)
+      const targetX = mousePos.current.x / window.innerWidth
+      const targetY = mousePos.current.y / window.innerHeight
+      gradientPos.current.x += (targetX - gradientPos.current.x) * 0.04
+      gradientPos.current.y += (targetY - gradientPos.current.y) * 0.04
+
+      if (gradientRef.current) {
+        const x = gradientPos.current.x * 100
+        const y = gradientPos.current.y * 100
+        // Blue blob follows cursor, green blob is mirrored opposite corner
+        gradientRef.current.style.background = [
+          `radial-gradient(ellipse 55% 55% at ${x}% ${y}%, rgba(172,242,249,0.50) 0%, transparent 70%)`,
+          `radial-gradient(ellipse 50% 50% at ${100 - x}% ${100 - y}%, rgba(0,161,117,0.28) 0%, transparent 65%)`,
+          `radial-gradient(ellipse 40% 40% at ${100 - x}% ${y}%, rgba(172,242,249,0.30) 0%, transparent 60%)`,
+        ].join(', ')
+      }
+
       raf = requestAnimationFrame(loop)
     }
     raf = requestAnimationFrame(loop)
@@ -62,13 +83,18 @@ export default function Hero() {
       />
 
       <section className="pt-[72px] overflow-hidden relative bg-white">
-        {/* Animated gradient background */}
+        {/* Cursor-reactive gradient background */}
         <div
+          ref={gradientRef}
           aria-hidden
-          className="absolute inset-0 pointer-events-none animate-gradient-shift"
+          className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 60% 60% at 0% 0%, rgba(172,242,249,0.55) 0%, transparent 70%), radial-gradient(ellipse 55% 55% at 100% 100%, rgba(0,161,117,0.30) 0%, transparent 65%), radial-gradient(ellipse 45% 45% at 100% 0%, rgba(172,242,249,0.35) 0%, transparent 60%)',
-            backgroundSize: '300% 300%',
+            // Initial state — blobs at corners, matching the reference image
+            background: [
+              'radial-gradient(ellipse 55% 55% at 0% 0%, rgba(172,242,249,0.50) 0%, transparent 70%)',
+              'radial-gradient(ellipse 50% 50% at 100% 100%, rgba(0,161,117,0.28) 0%, transparent 65%)',
+              'radial-gradient(ellipse 40% 40% at 100% 0%, rgba(172,242,249,0.30) 0%, transparent 60%)',
+            ].join(', '),
           }}
         />
 
