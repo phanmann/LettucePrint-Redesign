@@ -79,10 +79,16 @@ function Configurator() {
     const f  = FINISHES.find(x => x.id === finish)?.label ?? finish
     const sd = SIDES.find(x => x.id === sides)?.label ?? sides
     const fo = FOLDS.find(x => x.id === fold)?.label ?? fold
-    const details = `Tabloid Flyer — ${f} finish, ${sd}${fold !== 'none' ? `, ${fo}` : ''}`
-    router.push(
-      `/get-quote?product=${encodeURIComponent('Tabloid Flyer')}&details=${encodeURIComponent(details)}`
-    )
+    const params = new URLSearchParams({
+      product: 'Tabloid Flyers',
+      size: '11" × 17"',
+      qty: '250',
+      material: sd,
+      finish: fold !== 'none' ? `${f} · ${fo}` : f,
+      rush: 'standard',
+      cancelPath: '/services/marketing-materials/flyers/tabloid',
+    })
+    router.push(`/services/marketing-materials/checkout?${params.toString()}`)
   }
 
   return (

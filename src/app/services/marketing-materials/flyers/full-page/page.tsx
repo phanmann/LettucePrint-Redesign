@@ -70,10 +70,16 @@ function Configurator() {
   const handleQuote = () => {
     const f  = FINISHES.find(x => x.id === finish)?.label ?? finish
     const sd = SIDES.find(x => x.id === sides)?.label ?? sides
-    const details = `Full Page Flyer — ${f}, ${sd}`
-    router.push(
-      `/get-quote?product=${encodeURIComponent('Full Page Flyer')}&details=${encodeURIComponent(details)}`
-    )
+    const params = new URLSearchParams({
+      product: 'Full Page Flyers',
+      size: '8.5" × 11"',
+      qty: '250',
+      material: sd,
+      finish: f,
+      rush: 'standard',
+      cancelPath: '/services/marketing-materials/flyers/full-page',
+    })
+    router.push(`/services/marketing-materials/checkout?${params.toString()}`)
   }
 
   return (

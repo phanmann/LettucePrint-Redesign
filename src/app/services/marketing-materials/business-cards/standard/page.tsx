@@ -80,8 +80,16 @@ function Configurator() {
     const f = FINISHES.find(x => x.id === finish)?.label ?? finish
     const s = SIDES.find(x => x.id === sides)?.label ?? sides
     const w = WEIGHTS.find(x => x.id === weight)?.label ?? weight
-    const details = `Standard Business Card — ${f} finish, ${s}, ${w} stock`
-    router.push(`/get-quote?product=${encodeURIComponent('Standard Business Card')}&details=${encodeURIComponent(details)}`)
+    const params = new URLSearchParams({
+      product: 'Standard Business Cards',
+      size: '3.5" × 2"',
+      qty: '100',
+      material: `${s}`,
+      finish: `${f} · ${w} stock`,
+      rush: 'standard',
+      cancelPath: '/services/marketing-materials/business-cards/standard',
+    })
+    router.push(`/services/marketing-materials/checkout?${params.toString()}`)
   }
 
   return (

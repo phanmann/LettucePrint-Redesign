@@ -78,10 +78,16 @@ function Configurator() {
     const f  = FINISHES.find(x => x.id === finish)?.label ?? finish
     const st = STOCKS.find(x => x.id === stock)?.label ?? stock
     const sd = SIDES.find(x => x.id === sides)?.label ?? sides
-    const details = `Half Page Flyer — ${f} finish, ${st}, ${sd}`
-    router.push(
-      `/get-quote?product=${encodeURIComponent('Half Page Flyer')}&details=${encodeURIComponent(details)}`
-    )
+    const params = new URLSearchParams({
+      product: 'Half Page Flyers',
+      size: '5.5" × 8.5"',
+      qty: '250',
+      material: sd,
+      finish: `${f} · ${st}`,
+      rush: 'standard',
+      cancelPath: '/services/marketing-materials/flyers/half-page',
+    })
+    router.push(`/services/marketing-materials/checkout?${params.toString()}`)
   }
 
   return (

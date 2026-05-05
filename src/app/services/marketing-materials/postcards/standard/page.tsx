@@ -80,10 +80,16 @@ function Configurator() {
     const s  = SIZES.find(x => x.id === size)?.label ?? size
     const f  = FINISHES.find(x => x.id === finish)?.label ?? finish
     const sd = SIDES.find(x => x.id === sides)?.label ?? sides
-    const details = `Standard Postcard — ${s}, ${f} finish, ${sd}`
-    router.push(
-      `/get-quote?product=${encodeURIComponent('Standard Postcard')}&details=${encodeURIComponent(details)}`
-    )
+    const params = new URLSearchParams({
+      product: 'Standard Postcards',
+      size: s,
+      qty: '250',
+      material: sd,
+      finish: f,
+      rush: 'standard',
+      cancelPath: '/services/marketing-materials/postcards/standard',
+    })
+    router.push(`/services/marketing-materials/checkout?${params.toString()}`)
   }
 
   return (

@@ -80,10 +80,16 @@ function Configurator() {
   const handleQuote = () => {
     const f  = FINISHES.find(x => x.id === finish)?.label ?? finish
     const sd = SIDES.find(x => x.id === sides)?.label ?? sides
-    const details = `Premium Postcard — ${f} finish, ${sd}`
-    router.push(
-      `/get-quote?product=${encodeURIComponent('Premium Postcard')}&details=${encodeURIComponent(details)}`
-    )
+    const params = new URLSearchParams({
+      product: 'Premium Postcards',
+      size: '4" × 6" – 6" × 11"',
+      qty: '250',
+      material: sd,
+      finish: f,
+      rush: 'standard',
+      cancelPath: '/services/marketing-materials/postcards/premium',
+    })
+    router.push(`/services/marketing-materials/checkout?${params.toString()}`)
   }
 
   return (
