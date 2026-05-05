@@ -107,6 +107,7 @@ export default function CheckoutFlow({ config }: { config: CheckoutFlowConfig })
           finish: config.finish,
           rush: config.rush,
           productName: config.product,
+          overridePriceCents: config.totalCents,
           artworkUrl: uploadedFile.url,
           artworkFilename: uploadedFile.name,
         }),
