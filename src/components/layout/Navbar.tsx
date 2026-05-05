@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, ShoppingCart, Search } from 'lucide-react'
@@ -47,7 +47,12 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const searchContainerRef = useRef<HTMLDivElement>(null)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const router = useRouter()
 
   const openDropdown = (label: string) => {
     if (closeTimer.current) clearTimeout(closeTimer.current)
@@ -63,6 +68,39 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Auto-focus input when search opens
+  useEffect(() => {
+    if (searchOpen) {
+      setTimeout(() => searchInputRef.current?.focus(), 50)
+    } else {
+      setSearchQuery('')
+    }
+  }, [searchOpen])
+
+  // Close search on outside click or Escape
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSearchOpen(false) }
+    const handleClick = (e: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
+        setSearchOpen(false)
+      }
+    }
+    document.addEventListener('keydown', handleKey)
+    document.addEventListener('mousedown', handleClick)
+    return () => {
+      document.removeEventListener('keydown', handleKey)
+      document.removeEventListener('mousedown', handleClick)
+    }
+  }, [])
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const q = searchQuery.trim()
+    if (!q) return
+    setSearchOpen(false)
+    router.push(`/search?q=${encodeURIComponent(q)}`)
+  }
 
   return (
     <>
@@ -148,9 +186,46 @@ export default function Navbar() {
               <Link href="/get-quote">
                 <Button size="sm" className="h-11 !text-white">Get a Quote</Button>
               </Link>
-              <button className="w-11 h-11 flex items-center justify-center rounded-full bg-gray-100 hover:bg-lp-green hover:text-white transition-all duration-150" aria-label="Search">
-                <Search size={18} />
-              </button>
+              {/* Search */}
+              <div ref={searchContainerRef} className="relative">
+                <button
+                  onClick={() => setSearchOpen((o) => !o)}
+                  className={cn(
+                    'w-11 h-11 flex items-center justify-center rounded-full transition-all duration-150',
+                    searchOpen
+                      ? 'bg-lp-green text-white'
+                      : 'bg-gray-100 hover:bg-lp-green hover:text-white'
+                  )}
+                  aria-label="Search"
+                >
+                  <Search size={18} />
+                </button>
+
+                {/* Dropdown */}
+                {searchOpen && (
+                  <div className="absolute top-[calc(100%+10px)] right-0 w-72 bg-white border border-gray-200 rounded-2xl shadow-nav overflow-hidden">
+                    <form onSubmit={handleSearchSubmit} className="flex items-center gap-2 p-2">
+                      <Search size={15} className="ml-1 text-gray-400 flex-shrink-0" />
+                      <input
+                        ref={searchInputRef}
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Search products..."
+                        className="flex-1 text-sm text-gray-900 placeholder-gray-400 bg-transparent outline-none py-2"
+                      />
+                      {searchQuery && (
+                        <button
+                          type="submit"
+                          className="flex-shrink-0 bg-lp-green text-white text-[11px] font-semibold uppercase tracking-wide px-3 py-1.5 rounded-full hover:bg-lp-green-dark transition-colors"
+                        >
+                          Go
+                        </button>
+                      )}
+                    </form>
+                  </div>
+                )}
+              </div>
               <button className="w-11 h-11 flex items-center justify-center rounded-full bg-gray-100 hover:bg-lp-green hover:text-white transition-all duration-150" aria-label="Cart">
                 <ShoppingCart size={18} />
               </button>
