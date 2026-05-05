@@ -77,6 +77,7 @@ function Configurator() {
     }`
 
   const { addItem } = useCart()
+  const [added, setAdded] = useState(false)
 
   const handleQuote = () => {
     const f  = FINISHES.find(x => x.id === finish)?.label ?? finish
@@ -93,7 +94,8 @@ function Configurator() {
       totalFormatted: 'Quote pending',
       productPath: '/services/marketing-materials/flyers/tabloid',
     })
-    router.push(`/cart`)
+    setAdded(true)
+    setTimeout(() => setAdded(false), 2000)
   }
 
   return (
@@ -155,7 +157,7 @@ function Configurator() {
       <div className="border-t border-gray-200 pt-5">
         <div className="flex gap-2">
           <Button onClick={handleQuote} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
-            Add to cart
+            {added ? '✓ Added to cart' : 'Add to cart'}
           </Button>
           <Button onClick={() => router.push('/cart')} size="lg" variant="secondary" className="px-4 py-4 rounded-xl border-gray-300 text-gray-700 hover:border-lp-green hover:text-lp-green">
             View cart
