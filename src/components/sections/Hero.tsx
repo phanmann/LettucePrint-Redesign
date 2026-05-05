@@ -52,9 +52,9 @@ export default function Hero() {
         const y = gradientPos.current.y * 100
         // Blue blob follows cursor, green blob is mirrored opposite corner
         gradientRef.current.style.background = [
-          `radial-gradient(ellipse 55% 55% at ${x}% ${y}%, rgba(172,242,249,0.50) 0%, transparent 70%)`,
-          `radial-gradient(ellipse 50% 50% at ${100 - x}% ${100 - y}%, rgba(0,161,117,0.28) 0%, transparent 65%)`,
-          `radial-gradient(ellipse 40% 40% at ${100 - x}% ${y}%, rgba(172,242,249,0.30) 0%, transparent 60%)`,
+          `radial-gradient(ellipse 55% 55% at ${x}% ${y}%, rgba(172,242,249,0.25) 0%, transparent 70%)`,
+          `radial-gradient(ellipse 50% 50% at ${100 - x}% ${100 - y}%, rgba(0,161,117,0.14) 0%, transparent 65%)`,
+          `radial-gradient(ellipse 40% 40% at ${100 - x}% ${y}%, rgba(172,242,249,0.15) 0%, transparent 60%)`,
         ].join(', ')
       }
 
@@ -91,9 +91,9 @@ export default function Hero() {
           style={{
             // Initial state — blobs at corners, matching the reference image
             background: [
-              'radial-gradient(ellipse 55% 55% at 0% 0%, rgba(172,242,249,0.50) 0%, transparent 70%)',
-              'radial-gradient(ellipse 50% 50% at 100% 100%, rgba(0,161,117,0.28) 0%, transparent 65%)',
-              'radial-gradient(ellipse 40% 40% at 100% 0%, rgba(172,242,249,0.30) 0%, transparent 60%)',
+              'radial-gradient(ellipse 55% 55% at 0% 0%, rgba(172,242,249,0.25) 0%, transparent 70%)',
+              'radial-gradient(ellipse 50% 50% at 100% 100%, rgba(0,161,117,0.14) 0%, transparent 65%)',
+              'radial-gradient(ellipse 40% 40% at 100% 0%, rgba(172,242,249,0.15) 0%, transparent 60%)',
             ].join(', '),
           }}
         />
