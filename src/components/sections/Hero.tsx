@@ -61,7 +61,16 @@ export default function Hero() {
         style={{ willChange: 'transform' }}
       />
 
-      <section className="pt-[72px] bg-white overflow-hidden">
+      <section className="pt-[72px] overflow-hidden relative bg-white">
+        {/* Animated gradient background */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none animate-gradient-shift"
+          style={{
+            background: 'radial-gradient(ellipse 60% 60% at 0% 0%, rgba(172,242,249,0.55) 0%, transparent 70%), radial-gradient(ellipse 55% 55% at 100% 100%, rgba(0,161,117,0.30) 0%, transparent 65%), radial-gradient(ellipse 45% 45% at 100% 0%, rgba(172,242,249,0.35) 0%, transparent 60%)',
+            backgroundSize: '300% 300%',
+          }}
+        />
 
         {/* Top row: headline left, photo right */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -36,6 +36,19 @@
   --animate-fade-up:      fade-up 0.5s ease-out forwards;
 }
 
+@keyframes gradient-shift {
+  0%   { background-position: 0% 0%; }
+  25%  { background-position: 100% 0%; }
+  50%  { background-position: 100% 100%; }
+  75%  { background-position: 0% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+@utility animate-gradient-shift {
+  animation: gradient-shift 18s ease infinite;
+  background-size: 300% 300%;
+}
+
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
