@@ -62,7 +62,6 @@ export default function RollLabelCalculator({ productName }: Props) {
   }, [width, height, material, finish, validSize])
 
   const { addItem } = useCart()
-  const [added, setAdded] = useState(false)
 
   const handleOrder = () => {
     if (!price) return
@@ -78,8 +77,7 @@ export default function RollLabelCalculator({ productName }: Props) {
       totalFormatted: price.totalFormatted,
       productPath: '/shop/roll-labels',
     })
-    setAdded(true)
-    setTimeout(() => setAdded(false), 2000)
+    router.push(`/cart`)
   }
 
   const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
@@ -203,7 +201,7 @@ export default function RollLabelCalculator({ productName }: Props) {
           </div>
           <div className="flex gap-2">
             <Button onClick={handleOrder} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
-              {added ? '✓ Added to cart' : 'Add to cart'}
+              Add to cart
             </Button>
             <Button onClick={() => router.push('/cart')} size="lg" variant="secondary" className="px-4 py-4 rounded-xl border-gray-300 text-gray-700 hover:border-lp-green hover:text-lp-green">
               View cart

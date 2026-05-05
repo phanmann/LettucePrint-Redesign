@@ -78,7 +78,6 @@ function Configurator() {
     }`
 
   const { addItem } = useCart()
-  const [added, setAdded] = useState(false)
 
   const handleQuote = () => {
     const s  = SIZES.find(x => x.id === size)?.label ?? size
@@ -95,8 +94,7 @@ function Configurator() {
       totalFormatted: 'Quote pending',
       productPath: '/services/marketing-materials/postcards/standard',
     })
-    setAdded(true)
-    setTimeout(() => setAdded(false), 2000)
+    router.push(`/cart`)
   }
 
   return (
@@ -158,7 +156,7 @@ function Configurator() {
       <div className="border-t border-gray-200 pt-5">
         <div className="flex gap-2">
           <Button onClick={handleQuote} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
-            {added ? '✓ Added to cart' : 'Add to cart'}
+            Add to cart
           </Button>
           <Button onClick={() => router.push('/cart')} size="lg" variant="secondary" className="px-4 py-4 rounded-xl border-gray-300 text-gray-700 hover:border-lp-green hover:text-lp-green">
             View cart
