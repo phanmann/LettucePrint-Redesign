@@ -294,9 +294,11 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-              <button className="w-11 h-11 flex items-center justify-center rounded-full bg-gray-100 hover:bg-lp-green hover:text-white transition-all duration-150" aria-label="Cart">
-                <ShoppingCart size={18} />
-              </button>
+              <Link href="/cart">
+                <span className="w-11 h-11 flex items-center justify-center rounded-full bg-gray-100 hover:bg-lp-green hover:text-white transition-all duration-150 cursor-pointer">
+                  <ShoppingCart size={18} />
+                </span>
+              </Link>
             </div>
 
             {/* Mobile Toggle */}
