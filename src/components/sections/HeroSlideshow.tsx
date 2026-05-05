@@ -5,12 +5,11 @@ import { useEffect, useState } from 'react'
 
 const slides = [
   { src: '/images/hero/hero-1.jpg', alt: 'Lettuce Print roll labels' },
+  { src: '/images/hero/hero-7.jpg', alt: 'Lettuce Print label printing' },
   { src: '/images/hero/hero-2.jpg', alt: 'Lettuce Print holographic stickers' },
+  { src: '/images/hero/hero-5.jpg', alt: 'Lettuce Print custom print' },
   { src: '/images/hero/hero-3.jpg', alt: 'Lettuce Print print production' },
   { src: '/images/hero/hero-4.jpg', alt: 'Lettuce Print studio work' },
-  { src: '/images/hero/hero-5.jpg', alt: 'Lettuce Print custom print' },
-  { src: '/images/hero/hero-6.jpg', alt: 'Lettuce Print product labels' },
-  { src: '/images/hero/hero-7.jpg', alt: 'Lettuce Print label printing' },
 ]
 
 export default function HeroSlideshow() {
