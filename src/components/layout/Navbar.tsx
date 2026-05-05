@@ -1,12 +1,46 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, ShoppingCart, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Button from '@/components/ui/Button'
+
+// ── Product search index ──────────────────────────────────────────────────────
+const allProducts = [
+  { label: 'Business Cards – Standard',    href: '/services/marketing-materials/business-cards/standard',   tags: ['business cards', 'cards'] },
+  { label: 'Business Cards – Premium',     href: '/services/marketing-materials/business-cards/premium',    tags: ['business cards', 'cards', 'premium'] },
+  { label: 'Postcards – Standard',         href: '/services/marketing-materials/postcards/standard',        tags: ['postcards', 'mailers'] },
+  { label: 'Postcards – Premium',          href: '/services/marketing-materials/postcards/premium',         tags: ['postcards', 'mailers', 'premium'] },
+  { label: 'Flyers – Full Page',           href: '/services/marketing-materials/flyers/full-page',          tags: ['flyers', 'print'] },
+  { label: 'Flyers – Half Page',           href: '/services/marketing-materials/flyers/half-page',          tags: ['flyers', 'print'] },
+  { label: 'Flyers – Tabloid',             href: '/services/marketing-materials/flyers/tabloid',            tags: ['flyers', 'print', 'large'] },
+  { label: 'Posters',                      href: '/services/marketing-materials/posters',                   tags: ['posters', 'print', 'large format'] },
+  { label: 'Soft Touch Posters',           href: '/services/marketing-materials/posters/soft-touch',        tags: ['posters', 'soft touch', 'premium'] },
+  { label: 'Art Print Posters',            href: '/services/marketing-materials/posters/art-print',         tags: ['posters', 'art print'] },
+  { label: 'Brochures – Tri-Fold Letter',  href: '/services/marketing-materials/brochures/tri-fold-letter', tags: ['brochures', 'tri-fold'] },
+  { label: 'Brochures – Bi-Fold Letter',   href: '/services/marketing-materials/brochures/bi-fold-letter',  tags: ['brochures', 'bi-fold'] },
+  { label: 'Brochures – Bi-Fold Tabloid',  href: '/services/marketing-materials/brochures/bi-fold-tabloid', tags: ['brochures', 'bi-fold', 'large'] },
+  { label: 'Brochures – Uncoated',         href: '/services/marketing-materials/brochures/uncoated',        tags: ['brochures', 'uncoated'] },
+  { label: 'Booklets',                     href: '/services/marketing-materials/booklets',                  tags: ['booklets', 'catalogs', 'magazines'] },
+  { label: 'Stickers',                     href: '/shop/stickers',                                          tags: ['stickers', 'die cut', 'custom stickers'] },
+  { label: 'Spot UV Stickers',             href: '/shop/spot-uv',                                           tags: ['stickers', 'spot uv', 'premium stickers'] },
+  { label: 'Roll Labels',                  href: '/shop/roll-labels',                                       tags: ['labels', 'roll labels', 'stickers', 'packaging'] },
+  { label: 'Boxes',                        href: '/services/packaging/boxes',                               tags: ['boxes', 'packaging', 'custom boxes'] },
+  { label: 'Mylar Bags',                   href: '/services/packaging/mylar-bags',                          tags: ['mylar', 'bags', 'packaging', 'cannabis'] },
+  { label: 'Custom Packaging',             href: '/services/packaging/custom-packaging',                    tags: ['packaging', 'custom', 'boxes'] },
+  { label: 'Vinyl Banners',               href: '/services/signage/banners/vinyl-banner',                  tags: ['banners', 'vinyl', 'signage', 'outdoor'] },
+  { label: 'Mesh Banners',                href: '/services/signage/banners/mesh-banner',                   tags: ['banners', 'mesh', 'signage', 'outdoor'] },
+  { label: 'Fabric Banners',              href: '/services/signage/banners/fabric-banner',                 tags: ['banners', 'fabric', 'signage'] },
+  { label: 'Retractable Banners',         href: '/services/signage/banners/retractable-33',                tags: ['banners', 'retractable', 'signage', 'events'] },
+  { label: 'Backdrops',                    href: '/services/signage/backdrops',                             tags: ['backdrops', 'signage', 'large format', 'events'] },
+  { label: 'Screenprint',                  href: '/services/apparel/screenprint',                           tags: ['screen print', 'apparel', 't-shirts', 'clothing'] },
+  { label: 'Embroidery',                   href: '/services/apparel/embroidery',                            tags: ['embroidery', 'apparel', 'hats', 'clothing'] },
+  { label: 'DTG Printing',                 href: '/services/apparel/dtg',                                   tags: ['dtg', 'direct to garment', 'apparel', 't-shirts'] },
+  { label: 'Custom Promo Items',           href: '/services/apparel/custom-items',                          tags: ['custom', 'promo', 'merch', 'swag'] },
+]
 
 type NavLink = { label: string; href: string; children?: { label: string; href: string }[] }
 
@@ -78,7 +112,7 @@ export default function Navbar() {
     }
   }, [searchOpen])
 
-  // Close search on outside click or Escape
+  // Close on outside click or Escape
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSearchOpen(false) }
     const handleClick = (e: MouseEvent) => {
@@ -94,12 +128,21 @@ export default function Navbar() {
     }
   }, [])
 
+  // Live filtered results
+  const searchResults = useMemo(() => {
+    const q = searchQuery.toLowerCase().trim()
+    if (!q) return []
+    return allProducts.filter(
+      (p) => p.label.toLowerCase().includes(q) || p.tags.some((t) => t.includes(q))
+    ).slice(0, 6)
+  }, [searchQuery])
+
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const q = searchQuery.trim()
-    if (!q) return
-    setSearchOpen(false)
-    router.push(`/search?q=${encodeURIComponent(q)}`)
+    if (searchResults.length === 1) {
+      setSearchOpen(false)
+      router.push(searchResults[0].href)
+    }
   }
 
   return (
@@ -203,9 +246,10 @@ export default function Navbar() {
 
                 {/* Dropdown */}
                 {searchOpen && (
-                  <div className="absolute top-[calc(100%+10px)] right-0 w-72 bg-white border border-gray-200 rounded-2xl shadow-nav overflow-hidden">
-                    <form onSubmit={handleSearchSubmit} className="flex items-center gap-2 p-2">
-                      <Search size={15} className="ml-1 text-gray-400 flex-shrink-0" />
+                  <div className="absolute top-[calc(100%+10px)] right-0 w-80 bg-white border border-gray-200 rounded-2xl shadow-nav overflow-hidden">
+                    {/* Input row */}
+                    <form onSubmit={handleSearchSubmit} className="flex items-center gap-2 px-3 py-2 border-b border-gray-100">
+                      <Search size={15} className="text-gray-400 flex-shrink-0" />
                       <input
                         ref={searchInputRef}
                         type="text"
@@ -216,13 +260,37 @@ export default function Navbar() {
                       />
                       {searchQuery && (
                         <button
-                          type="submit"
-                          className="flex-shrink-0 bg-lp-green text-white text-[11px] font-semibold uppercase tracking-wide px-3 py-1.5 rounded-full hover:bg-lp-green-dark transition-colors"
+                          type="button"
+                          onClick={() => setSearchQuery('')}
+                          className="text-gray-300 hover:text-gray-500 transition-colors"
+                          aria-label="Clear"
                         >
-                          Go
+                          <X size={14} />
                         </button>
                       )}
                     </form>
+
+                    {/* Live results */}
+                    {searchResults.length > 0 && (
+                      <div className="py-1">
+                        {searchResults.map((r) => (
+                          <Link
+                            key={r.href}
+                            href={r.href}
+                            onClick={() => setSearchOpen(false)}
+                            className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 group transition-colors"
+                          >
+                            <Search size={13} className="text-gray-300 group-hover:text-lp-green flex-shrink-0 transition-colors" />
+                            <span className="text-sm text-gray-700 group-hover:text-lp-green transition-colors">{r.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* No results */}
+                    {searchQuery.trim() && searchResults.length === 0 && (
+                      <p className="text-xs text-gray-400 text-center py-4">No products found</p>
+                    )}
                   </div>
                 )}
               </div>
