@@ -4,7 +4,36 @@ import { redirect } from 'next/navigation'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import CheckoutFlow from '@/components/shop/CheckoutFlow'
-import { calculatePrice, type StickerSize, type StickerMaterial, type StickerFinish, type RushOption } from '@/lib/pricing'
+import {
+  QUANTITY_TIERS,
+  MATERIAL_MULTIPLIERS,
+  FINISH_ADDON_PER_SQIN,
+  formatCents,
+  type StickerMaterial,
+  type StickerFinish,
+  type RushOption,
+} from '@/lib/pricing'
+
+// Custom size pricing — mirrors PricingCalculator.tsx
+const REF_PRICES_3x3_CENTS: Record<number, number> = {
+  50: 7500, 100: 9800, 250: 19500, 500: 30000, 1000: 45000, 2500: 86200,
+}
+const REF_SQ_IN = 9
+
+function calcCustomPrice(
+  sqIn: number,
+  quantity: number,
+  material: StickerMaterial,
+  finish: StickerFinish
+) {
+  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
+  const ref = REF_PRICES_3x3_CENTS[tier]
+  const base = Math.round(ref * (sqIn / REF_SQ_IN))
+  const materialAdj = Math.round(base * MATERIAL_MULTIPLIERS[material])
+  const finishAddon = FINISH_ADDON_PER_SQIN[finish] * sqIn * tier
+  const total = materialAdj + finishAddon
+  return { totalCents: total, totalFormatted: formatCents(total) }
+}
 
 export const metadata: Metadata = {
   title: 'Upload Artwork & Checkout — Lettuce Print',
@@ -14,6 +43,8 @@ export const metadata: Metadata = {
 
 interface PageProps {
   searchParams: Promise<{
+    width?: string
+    height?: string
     size?: string
     qty?: string
     material?: string
@@ -23,7 +54,6 @@ interface PageProps {
   }>
 }
 
-const VALID_SIZES: StickerSize[] = ['1x1', '2x2', '3x3', '4x4', '5x5']
 const VALID_MATERIALS: StickerMaterial[] = ['standard', 'holographic']
 const VALID_FINISHES: StickerFinish[] = ['matte', 'gloss', 'laminate']
 const VALID_RUSH: RushOption[] = ['standard', '48hr', '24hr']
@@ -31,21 +61,24 @@ const VALID_RUSH: RushOption[] = ['standard', '48hr', '24hr']
 export default async function StickerCheckoutPage({ searchParams }: PageProps) {
   const params = await searchParams
 
-  const size = VALID_SIZES.includes(params.size as StickerSize) ? params.size as StickerSize : null
+  const width = params.width ? parseFloat(params.width) : null
+  const height = params.height ? parseFloat(params.height) : null
+  const sizeLabel = params.size ?? (width && height ? `${width}" × ${height}"` : null)
   const qty = params.qty ? parseInt(params.qty, 10) : null
   const material = VALID_MATERIALS.includes(params.material as StickerMaterial) ? params.material as StickerMaterial : null
   const finish = VALID_FINISHES.includes(params.finish as StickerFinish) ? params.finish as StickerFinish : null
   const rush = VALID_RUSH.includes(params.rush as RushOption) ? params.rush as RushOption : 'standard' as RushOption
   const product = params.product ?? 'Custom Die-Cut Stickers'
 
-  if (!size || !qty || !material || !finish || isNaN(qty)) {
+  if (!width || !height || !qty || !material || !finish || isNaN(qty)) {
     redirect('/shop/stickers')
   }
 
-  const price = calculatePrice(size, qty, material, finish, rush)
+  const sqIn = width * height
+  const price = calcCustomPrice(sqIn, qty, material, finish)
 
   const config = {
-    size,
+    size: sizeLabel as string,
     qty,
     material,
     finish,

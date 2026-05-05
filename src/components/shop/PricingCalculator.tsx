@@ -89,6 +89,8 @@ export default function PricingCalculator({ productName }: Props) {
   const handleOrder = () => {
     if (!validSize) return
     const params = new URLSearchParams({
+      width: String(cw),
+      height: String(ch),
       size: `${cw}" × ${ch}"`,
       qty: String(quantity),
       material,
