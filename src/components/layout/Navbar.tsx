@@ -149,7 +149,7 @@ export default function Navbar() {
                 <ShoppingCart size={18} />
               </button>
               <Link href="/get-quote">
-                <Button size="sm" className="h-11 text-white">Get a Quote</Button>
+                <Button size="sm" className="h-11 !text-white">Get a Quote</Button>
               </Link>
             </div>
 

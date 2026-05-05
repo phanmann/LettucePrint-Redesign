@@ -137,7 +137,7 @@ export default function Hero() {
                   {card.label}
                 </span>
               </div>
-            ))})
+            ))}
           </div>
         </motion.div>
 
