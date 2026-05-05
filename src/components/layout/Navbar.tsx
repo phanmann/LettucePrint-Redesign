@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useMemo } from 'react'
+import { useCart } from '@/context/CartContext'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -75,6 +76,16 @@ const navLinks: NavLink[] = [
     { label: 'Custom Items', href: '/services/apparel/custom-items' },
   ]},
 ]
+
+function CartBadge() {
+  const { count } = useCart()
+  if (count === 0) return null
+  return (
+    <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full bg-lp-green text-white text-[10px] font-bold leading-none">
+      {count > 9 ? '9+' : count}
+    </span>
+  )
+}
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -295,8 +306,9 @@ export default function Navbar() {
                 )}
               </div>
               <Link href="/cart">
-                <span className="w-11 h-11 flex items-center justify-center rounded-full bg-gray-100 hover:bg-lp-green hover:text-white transition-all duration-150 cursor-pointer">
+                <span className="relative w-11 h-11 flex items-center justify-center rounded-full bg-gray-100 hover:bg-lp-green hover:text-white transition-all duration-150 cursor-pointer">
                   <ShoppingCart size={18} />
+                  <CartBadge />
                 </span>
               </Link>
             </div>

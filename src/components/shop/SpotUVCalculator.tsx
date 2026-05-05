@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
+import { useCart } from '@/context/CartContext'
 import Button from '@/components/ui/Button'
 import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import {
@@ -82,19 +83,24 @@ export default function SpotUVCalculator({ productName }: Props) {
     })
   }, [priceSize, layers, isCustomSize, validSize, customSqIn])
 
+  const { addItem } = useCart()
+  const [added, setAdded] = useState(false)
+
   const handleOrder = () => {
     if (!validSize) return
-    const params = new URLSearchParams({
-      width: String(cw),
-      height: String(ch),
-      size: `${cw}" × ${ch}"`,
-      qty: String(quantity),
-      material: 'spot-uv',
-      layers: String(layers),
-      rush,
+    addItem({
       product: productName,
+      size: `${cw}" × ${ch}"`,
+      qty: quantity,
+      material: 'Spot UV',
+      finish: layers === 0 ? 'Standard (1 layer)' : `+${layers} extra layer${layers > 1 ? 's' : ''}`,
+      rush,
+      totalCents: price.totalCents,
+      totalFormatted: price.totalFormatted,
+      productPath: '/shop/spot-uv',
     })
-    router.push(`/shop/spot-uv/checkout?${params.toString()}`)
+    setAdded(true)
+    setTimeout(() => setAdded(false), 2000)
   }
 
   const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
@@ -203,9 +209,14 @@ export default function SpotUVCalculator({ productName }: Props) {
             <p className="text-4xl font-bold text-gray-900 leading-none">{price.totalFormatted}</p>
             <p className="text-sm text-gray-500 pb-1">{price.unitFormatted} / sticker</p>
           </div>
-          <Button onClick={handleOrder} size="lg" className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
-            Continue
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={handleOrder} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
+              {added ? '✓ Added to cart' : 'Add to cart'}
+            </Button>
+            <Button onClick={() => router.push('/cart')} size="lg" variant="secondary" className="px-4 py-4 rounded-xl border-gray-300 text-gray-700 hover:border-lp-green hover:text-lp-green">
+              View cart
+            </Button>
+          </div>
           <p className="text-xs text-gray-400 text-center mt-3">
             Upload artwork · Proof before production · Shipping at checkout
           </p>

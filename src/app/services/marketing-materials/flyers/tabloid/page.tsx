@@ -10,6 +10,7 @@ import { Disclosure } from '@/components/shop/ProductDisclosure'
 import { ArrowRight, CheckCircle, FileText, Layers } from 'lucide-react'
 import ProductImageGallery from '@/components/shop/ProductImageGallery'
 import { useRouter } from 'next/navigation'
+import { useCart } from '@/context/CartContext'
 
 // ─── Option data ──────────────────────────────────────────────────────────────
 
@@ -75,20 +76,26 @@ function Configurator() {
       active ? 'border-lp-green bg-lp-green' : 'border-gray-300 bg-white'
     }`
 
+  const { addItem } = useCart()
+  const [added, setAdded] = useState(false)
+
   const handleQuote = () => {
     const f  = FINISHES.find(x => x.id === finish)?.label ?? finish
     const sd = SIDES.find(x => x.id === sides)?.label ?? sides
     const fo = FOLDS.find(x => x.id === fold)?.label ?? fold
-    const params = new URLSearchParams({
+    addItem({
       product: 'Tabloid Flyers',
       size: '11" × 17"',
-      qty: '250',
+      qty: 250,
       material: sd,
       finish: fold !== 'none' ? `${f} · ${fo}` : f,
       rush: 'standard',
-      cancelPath: '/services/marketing-materials/flyers/tabloid',
+      totalCents: 0,
+      totalFormatted: 'Quote pending',
+      productPath: '/services/marketing-materials/flyers/tabloid',
     })
-    router.push(`/services/marketing-materials/checkout?${params.toString()}`)
+    setAdded(true)
+    setTimeout(() => setAdded(false), 2000)
   }
 
   return (
@@ -148,13 +155,14 @@ function Configurator() {
 
       {/* ── CTA ── */}
       <div className="border-t border-gray-200 pt-5">
-        <Button
-          onClick={handleQuote}
-          size="lg"
-          className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl"
-        >
-          Order Now <ArrowRight size={16} className="ml-2" />
-        </Button>
+        <div className="flex gap-2">
+          <Button onClick={handleQuote} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
+            {added ? '✓ Added to cart' : 'Add to cart'}
+          </Button>
+          <Button onClick={() => router.push('/cart')} size="lg" variant="secondary" className="px-4 py-4 rounded-xl border-gray-300 text-gray-700 hover:border-lp-green hover:text-lp-green">
+            View cart
+          </Button>
+        </div>
         <p className="text-xs text-gray-400 text-center mt-3">
           We&apos;ll confirm pricing + turnaround within a few hours.
         </p>

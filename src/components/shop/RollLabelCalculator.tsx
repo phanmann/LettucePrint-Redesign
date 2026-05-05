@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
+import { useCart } from '@/context/CartContext'
 import Button from '@/components/ui/Button'
 import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import {
@@ -60,19 +61,25 @@ export default function RollLabelCalculator({ productName }: Props) {
     })
   }, [width, height, material, finish, validSize])
 
+  const { addItem } = useCart()
+  const [added, setAdded] = useState(false)
+
   const handleOrder = () => {
     if (!price) return
     const sizeLabel = isCustomSize ? `${cw}" × ${ch}"` : (preset?.label ?? '')
-    const params = new URLSearchParams({
-      width: String(width),
-      height: String(height),
-      qty: String(quantity),
+    addItem({
+      product: productName,
+      size: sizeLabel,
+      qty: quantity,
       material,
       finish,
-      size: sizeLabel,
-      product: productName,
+      rush: 'standard',
+      totalCents: price.totalCents,
+      totalFormatted: price.totalFormatted,
+      productPath: '/shop/roll-labels',
     })
-    router.push(`/shop/roll-labels/checkout?${params.toString()}`)
+    setAdded(true)
+    setTimeout(() => setAdded(false), 2000)
   }
 
   const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
@@ -194,9 +201,14 @@ export default function RollLabelCalculator({ productName }: Props) {
             <p className="text-4xl font-bold text-gray-900 leading-none">{price.totalFormatted}</p>
             <p className="text-sm text-gray-500 pb-1">{price.unitFormatted} / label</p>
           </div>
-          <Button onClick={handleOrder} size="lg" className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
-            Continue
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={handleOrder} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
+              {added ? '✓ Added to cart' : 'Add to cart'}
+            </Button>
+            <Button onClick={() => router.push('/cart')} size="lg" variant="secondary" className="px-4 py-4 rounded-xl border-gray-300 text-gray-700 hover:border-lp-green hover:text-lp-green">
+              View cart
+            </Button>
+          </div>
           <p className="text-xs text-gray-400 text-center mt-3">
             Upload artwork · Proof before production · Shipping at checkout
           </p>

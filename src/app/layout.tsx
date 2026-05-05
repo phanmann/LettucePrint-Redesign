@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import { sharpGrotesk } from '@/lib/fonts'
+import { CartProvider } from '@/context/CartContext'
 import './globals.css'
 
 const BASE_URL = 'https://lettuceprint.com'
@@ -151,7 +152,9 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
-        {children}
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   )
