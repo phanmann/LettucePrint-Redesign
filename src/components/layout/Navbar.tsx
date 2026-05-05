@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X, ShoppingCart } from 'lucide-react'
+import { Menu, X, ShoppingCart, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Button from '@/components/ui/Button'
 
@@ -145,12 +145,15 @@ export default function Navbar() {
 
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center gap-3">
-              <button className="w-11 h-11 flex items-center justify-center rounded-full bg-gray-100 hover:bg-lp-green hover:text-white transition-all duration-150">
-                <ShoppingCart size={18} />
-              </button>
               <Link href="/get-quote">
                 <Button size="sm" className="h-11 !text-white">Get a Quote</Button>
               </Link>
+              <button className="w-11 h-11 flex items-center justify-center rounded-full bg-gray-100 hover:bg-lp-green hover:text-white transition-all duration-150" aria-label="Search">
+                <Search size={18} />
+              </button>
+              <button className="w-11 h-11 flex items-center justify-center rounded-full bg-gray-100 hover:bg-lp-green hover:text-white transition-all duration-150" aria-label="Cart">
+                <ShoppingCart size={18} />
+              </button>
             </div>
 
             {/* Mobile Toggle */}
