@@ -4,7 +4,25 @@ import { redirect } from 'next/navigation'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import CheckoutFlow from '@/components/shop/CheckoutFlow'
-import { calculateSpotUVPrice, type StickerSize, type RushOption, type EmbossingLayers } from '@/lib/pricing'
+import { QUANTITY_TIERS, formatCents, type RushOption, type EmbossingLayers } from '@/lib/pricing'
+
+// Custom size pricing — mirrors SpotUVCalculator
+const REF_PRICES_3x3_CENTS: Record<number, number> = {
+  50: 7500, 100: 9800, 250: 19500, 500: 30000, 1000: 45000, 2500: 86200,
+}
+const REF_SQ_IN = 9
+const SPOT_UV_MULT = 1.60
+const EMBOSSING_EXTRA_RATE_CENTS = 0.008
+
+function calcCustomSpotUVPrice(sqIn: number, quantity: number, layers: EmbossingLayers) {
+  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
+  const ref = REF_PRICES_3x3_CENTS[tier]
+  const base = Math.round(ref * (sqIn / REF_SQ_IN))
+  const spotBase = Math.round(base * SPOT_UV_MULT)
+  const embossing = layers > 0 ? Math.round(EMBOSSING_EXTRA_RATE_CENTS * sqIn * tier * layers) : 0
+  const total = spotBase + embossing
+  return { totalCents: total, totalFormatted: formatCents(total) }
+}
 
 export const metadata: Metadata = {
   title: 'Upload Artwork & Checkout — Spot UV Stickers | Lettuce Print',
@@ -14,6 +32,8 @@ export const metadata: Metadata = {
 
 interface PageProps {
   searchParams: Promise<{
+    width?: string
+    height?: string
     size?: string
     qty?: string
     layers?: string
@@ -22,27 +42,29 @@ interface PageProps {
   }>
 }
 
-const VALID_SIZES: StickerSize[] = ['1x1', '2x2', '3x3', '4x4', '5x5']
 const VALID_RUSH: RushOption[] = ['standard', '48hr', '24hr']
 
 export default async function SpotUVCheckoutPage({ searchParams }: PageProps) {
   const params = await searchParams
 
-  const size = VALID_SIZES.includes(params.size as StickerSize) ? params.size as StickerSize : null
+  const width = params.width ? parseFloat(params.width) : null
+  const height = params.height ? parseFloat(params.height) : null
+  const sizeLabel = params.size ?? (width && height ? `${width}" × ${height}"` : null)
   const qty = params.qty ? parseInt(params.qty, 10) : null
   const layersRaw = params.layers ? parseInt(params.layers, 10) : 0
   const layers = ([0,1,2,3,4].includes(layersRaw) ? layersRaw : 0) as EmbossingLayers
   const rush = VALID_RUSH.includes(params.rush as RushOption) ? params.rush as RushOption : 'standard' as RushOption
   const product = params.product ?? 'Spot UV Stickers'
 
-  if (!size || !qty || isNaN(qty)) {
+  if (!width || !height || !qty || isNaN(qty)) {
     redirect('/shop/spot-uv')
   }
 
-  const price = calculateSpotUVPrice(size, qty, layers, rush)
+  const sqIn = width * height
+  const price = calcCustomSpotUVPrice(sqIn, qty, layers)
 
   const config = {
-    size,
+    size: sizeLabel as string,
     qty,
     material: 'spot-uv',
     finish: layers === 0 ? 'Standard (1 layer)' : `+${layers} extra layer${layers > 1 ? 's' : ''}`,

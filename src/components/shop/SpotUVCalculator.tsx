@@ -85,7 +85,9 @@ export default function SpotUVCalculator({ productName }: Props) {
   const handleOrder = () => {
     if (!validSize) return
     const params = new URLSearchParams({
-      size: isCustomSize ? `${cw}" × ${ch}"` : selectedPreset,
+      width: String(cw),
+      height: String(ch),
+      size: `${cw}" × ${ch}"`,
       qty: String(quantity),
       material: 'spot-uv',
       layers: String(layers),
