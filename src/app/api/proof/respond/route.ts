@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { writeClient, client } from '@/sanity/client'
-import { Resend } from 'resend'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
+import { getResend } from '@/lib/resend'
 
 // Called from /proof/[token] page when customer approves or requests changes
 // POST { token, action: 'approve' | 'changes', feedback?: string }
 export async function POST(req: NextRequest) {
   try {
+    const resend = getResend()
     const { token, action, feedback } = await req.json()
 
     if (!token || !action) {

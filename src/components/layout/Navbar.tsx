@@ -189,18 +189,18 @@ export default function Navbar() {
                   onMouseEnter={() => link.children && openDropdown(link.label)}
                   onMouseLeave={closeDropdown}
                 >
-                  <span
+                  <Link
+                    href={link.href}
                     className={cn(
-                      'text-[11px] font-medium transition-colors duration-200 select-none tracking-wide pb-0.5',
+                      'text-[11px] font-medium transition-colors duration-200 tracking-wide pb-0.5',
                       'relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:rounded-full after:transition-all after:duration-200',
-                      link.children ? 'cursor-default' : 'cursor-pointer',
                       isActive
                         ? 'text-lp-green after:bg-lp-green after:opacity-100'
                         : 'text-gray-700 hover:text-lp-green after:bg-lp-green after:opacity-0 hover:after:opacity-100'
                     )}
                   >
                     {link.label}
-                  </span>
+                  </Link>
 
                   {/* Dropdown */}
                   {link.children && activeDropdown === link.label && (
@@ -339,9 +339,13 @@ export default function Navbar() {
             <nav className="flex-1 overflow-y-auto py-4">
               {navLinks.map((link) => (
                 <div key={link.label}>
-                  <span className="block px-6 py-4 text-h4 font-semibold text-gray-900 border-b border-gray-50 select-none cursor-default">
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="block px-6 py-4 text-h4 font-semibold text-gray-900 border-b border-gray-50 hover:text-lp-green transition-colors"
+                  >
                     {link.label}
-                  </span>
+                  </Link>
                   {link.children && (
                     <div className="bg-gray-50">
                       {link.children.map((child) => (

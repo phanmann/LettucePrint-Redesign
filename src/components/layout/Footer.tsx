@@ -11,11 +11,11 @@ const footerLinks = {
     { label: 'Get a Quote', href: '/get-quote' },
   ],
   'Services': [
-    { label: 'Packaging', href: '/services/packaging' },
-    { label: 'Design & Branding', href: '/services/graphic-design' },
-    { label: 'Signage & Displays', href: '/services/signage' },
-    { label: 'Apparel Printing', href: '/services/screen-printing' },
-    { label: 'Large Format', href: '/services/large-format' },
+    { label: 'Marketing Materials', href: '/services/marketing-materials' },
+    { label: 'Stickers & Labels', href: '/shop/stickers' },
+    { label: 'Boxes & Packaging', href: '/services/packaging' },
+    { label: 'Signs & Banners', href: '/services/signage' },
+    { label: 'Apparel & Promo', href: '/services/apparel' },
   ],
   'Shop': [
     { label: 'Custom Stickers', href: '/shop/stickers' },

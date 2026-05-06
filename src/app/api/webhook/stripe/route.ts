@@ -2,9 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { getStripe } from '@/lib/stripe'
 import { writeClient } from '@/sanity/client'
-import { Resend } from 'resend'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
+import { getResend } from '@/lib/resend'
 
 export const runtime = 'nodejs'
 
@@ -47,6 +45,8 @@ export async function POST(req: NextRequest) {
     const meta = session.metadata ?? {}
 
     try {
+      const resend = getResend()
+
       // Use createOrReplace with deterministic ID so artwork-first orders get merged
       const existingOrder = await writeClient.fetch(
         `*[_type == "order" && stripeSessionId == $id][0]{ _id, artworkUrl, artworkFilename, artworkUploadedAt }`,

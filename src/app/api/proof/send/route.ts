@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { writeClient, client } from '@/sanity/client'
-import { Resend } from 'resend'
+import { getResend } from '@/lib/resend'
 import { randomUUID } from 'crypto'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Called by Sanity webhook (or manually) when Steve uploads a proof
 // POST { sanityOrderId: string }
 export async function POST(req: NextRequest) {
   try {
+    const resend = getResend()
     const { sanityOrderId } = await req.json()
 
     if (!sanityOrderId) {
