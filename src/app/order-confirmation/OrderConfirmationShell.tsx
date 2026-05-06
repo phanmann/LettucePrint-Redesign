@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Mail, Clock, FileText, CheckCircle, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import ArtworkUploader from './ArtworkUploader'
+import { useCart } from '@/context/CartContext'
 
 interface OrderDetails {
   id: string
@@ -33,6 +34,13 @@ const STEPS = [
 
 export default function OrderConfirmationShell({ order }: { order: OrderDetails }) {
   const [showSummary, setShowSummary] = useState(false)
+  const { clearCart } = useCart()
+
+  // Clear cart only after confirmed successful payment
+  useEffect(() => {
+    clearCart()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>

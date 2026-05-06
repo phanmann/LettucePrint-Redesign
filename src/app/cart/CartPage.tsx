@@ -186,7 +186,7 @@ function CartItemRow({ item }: { item: CartItem }) {
 // ── Main cart page ────────────────────────────────────────────────────────────
 export default function CartPage() {
   const router = useRouter()
-  const { items, count, clearCart } = useCart()
+  const { items, count } = useCart()
   const [checkingOut, setCheckingOut] = useState(false)
   const [checkoutError, setCheckoutError] = useState<string | null>(null)
 
@@ -206,7 +206,8 @@ export default function CartPage() {
       })
       const data = await res.json()
       if (data.url) {
-        clearCart()
+        // ⚠️ Do NOT clear cart here — clear only after confirmed payment
+        // on /order-confirmation so users can return if they abandon Stripe
         window.location.href = data.url
       } else {
         throw new Error('No checkout URL')
