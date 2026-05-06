@@ -38,8 +38,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           'hover:scale-[1.02] active:scale-[0.98]',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lp-green focus-visible:ring-offset-2',
           'disabled:opacity-50 disabled:pointer-events-none',
-          variantStyles[variant],
           sizeStyles[size],
+          variantStyles[variant],
           className
         )}
         {...props}
