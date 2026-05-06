@@ -1,51 +1,5 @@
-import ProductOrderPage from '@/components/shop/ProductOrderPage'
+import { redirect } from 'next/navigation'
 
 export default function Page() {
-  return (
-    <ProductOrderPage
-      name="Standard Retractable Banner"
-      tagline="Our largest retractable format. A commanding presence at any event or trade show."
-      parentHref="/services/signage/banners"
-      breadcrumb={[
-        { label: "Banners", href: "/services/signage/banners" },
-        { label: "Standard Retractable Banner", href: "" },
-      ]}
-      badges={["Fast Turnaround"]}
-      color="#E8F5EF"
-      images={[
-        { src: 'https://drive.usercontent.google.com/download?id=1lkdgvN3wjRMfftKmeu5X47ZwHyor7dzB&export=view', alt: 'Retractable banner display' },
-        { src: 'https://drive.usercontent.google.com/download?id=1p_mlXivZBXkObui0RQPrmVH8uhVf9WNl&export=view', alt: 'Retractable banner setup' },
-      ]}
-      showQuantity={true}
-      optionGroups={[
-        { label: "Hardware", options: [
-          { id: "included", label: "Hardware Included", description: "Base and carry bag included." },
-          { id: "graphic-only", label: "Graphic Only", description: "Print only, no hardware." },
-        ] },
-      ]}
-      specs={[
-        { label: "Size", value: "60 x 80 in." },
-        { label: "Material", value: "Premium banner material" },
-        { label: "Color mode", value: "Full-color CMYK" },
-        { label: "Turnaround", value: "3-5 business days" },
-      ]}
-      artworkRequirements={[
-        { label: "Preferred formats", value: "AI, PDF, EPS" },
-        { label: "Accepted formats", value: "PSD, PNG, JPG (300 DPI min)" },
-        { label: "Color mode", value: "CMYK preferred" },
-        { label: "Bleed", value: "0.125 in. on all sides" },
-        { label: "Safe zone", value: "0.125 in. from all edges" },
-      ]}
-      included={[
-        "Digital proof before production",
-        "Full-color CMYK printing",
-        "Hardware and carry bag included",
-        "Quality check before ship",
-      ]}
-      relatedProducts={[
-        { href: "/services/signage/banners", name: "All Banners", description: "Full banner lineup." },
-        { href: "/services/signage/backdrops", name: "Backdrops", description: "Step and repeat, eurofit, and pop-up displays.", dark: true },
-      ]}
-    />
-  )
+  redirect('/services/signage/banners/retractable-standard')
 }
