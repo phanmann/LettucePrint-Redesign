@@ -84,7 +84,7 @@ export default function Testimonials() {
 
       {/* Static testimonial cards */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
           {TESTIMONIALS.map((t, i) => (
             <motion.div
               key={t._id}
@@ -93,7 +93,7 @@ export default function Testimonials() {
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.4, delay: i * 0.07 }}
               whileHover={{ y: -6, rotate: -1 }}
-              className="min-h-[280px] rounded-card p-8 flex flex-col gap-6 cursor-default"
+              className="min-h-[300px] rounded-card p-6 flex flex-col gap-5 cursor-default"
               style={{ backgroundColor: t.bg, color: t.textColor }}
             >
               <p className="text-[15px] leading-[1.7] font-medium flex-1">
