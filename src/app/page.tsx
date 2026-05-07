@@ -1,17 +1,12 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/Hero'
-import Marquee from '@/components/sections/Marquee'
 import TrustBar from '@/components/sections/TrustBar'
+import ShopAllSection from '@/components/sections/ShopAllSection'
 import ServicesOverview from '@/components/sections/ServicesOverview'
 import PortfolioStrip from '@/components/sections/PortfolioStrip'
 import Testimonials from '@/components/sections/Testimonials'
 import CTABanner from '@/components/sections/CTABanner'
-
-const capabilitiesMarquee = [
-  'Custom Stickers', 'Packaging', 'Large Format', 'Screen Printing',
-  'Graphic Design', 'Roll Labels', 'Signage', 'Spot UV', 'Apparel', 'Trade Show',
-]
 
 export default function HomePage() {
   return (
@@ -20,9 +15,10 @@ export default function HomePage() {
       <main>
         <Hero />
         <TrustBar />
-        <ServicesOverview />
+        <ShopAllSection />
         <PortfolioStrip />
         <Testimonials />
+        <ServicesOverview />
         <CTABanner />
       </main>
       <Footer />
