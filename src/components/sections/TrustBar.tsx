@@ -28,10 +28,10 @@ function LogoTrack() {
           <img
             src={item.logo}
             alt={item.name}
-            className="w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+            className="w-auto object-contain brightness-0 opacity-70 hover:opacity-100 transition-opacity"
             style={{ height: `${item.height}px` }}
           />
-          <span className="text-white/30 text-xl">·</span>
+          <span className="text-gray-900/30 text-xl">·</span>
         </span>
       ))}
     </div>
@@ -40,7 +40,7 @@ function LogoTrack() {
 
 export default function TrustBar() {
   return (
-    <section className="py-12 bg-lp-green">
+    <section className="py-12 bg-lp-blue">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -48,7 +48,7 @@ export default function TrustBar() {
         transition={{ duration: 0.5 }}
         className="text-center mb-8"
       >
-        <p className="text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">
+        <p className="text-xs uppercase tracking-[0.2em] text-gray-900/60 font-semibold">
           Trusted by brands that take their image seriously
         </p>
       </motion.div>
