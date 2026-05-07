@@ -17,8 +17,8 @@ export default function HomePage() {
         <TrustBar />
         <ShopAllSection />
         <PortfolioStrip />
-        <Testimonials />
         <ServicesOverview />
+        <Testimonials />
         <CTABanner />
       </main>
       <Footer />
