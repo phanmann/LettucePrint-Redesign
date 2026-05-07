@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 
 interface Testimonial {
   _id: string
@@ -69,7 +68,7 @@ const TESTIMONIALS: Testimonial[] = [
 
 export default function Testimonials() {
   return (
-    <section className="py-24 bg-gray-50 overflow-hidden">
+    <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -83,36 +82,38 @@ export default function Testimonials() {
         </motion.div>
       </div>
 
-      {/* Horizontal scroll row */}
-      <div className="flex gap-5 overflow-x-auto px-4 sm:px-8 lg:px-[max(2rem,calc((100vw-80rem)/2+2rem))] pb-4 scrollbar-none snap-x snap-mandatory">
-        {TESTIMONIALS.map((t, i) => (
-          <motion.div
-            key={t._id}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.4, delay: i * 0.07 }}
-            whileHover={{ y: -6, rotate: -1 }}
-            className="flex-shrink-0 w-[300px] sm:w-[320px] rounded-card p-8 flex flex-col gap-6 snap-start cursor-default"
-            style={{ backgroundColor: t.bg, color: t.textColor }}
-          >
-            <p className="text-[15px] leading-[1.7] font-medium flex-1">
-              &ldquo;{t.quote}&rdquo;
-            </p>
-            <div className="flex items-center gap-3">
-              <div
-                className="w-11 h-11 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0"
-                style={{ backgroundColor: t.avatarBg, color: t.textColor }}
-              >
-                {t.initials}
+      {/* Static testimonial cards */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {TESTIMONIALS.map((t, i) => (
+            <motion.div
+              key={t._id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.4, delay: i * 0.07 }}
+              whileHover={{ y: -6, rotate: -1 }}
+              className="min-h-[280px] rounded-card p-8 flex flex-col gap-6 cursor-default"
+              style={{ backgroundColor: t.bg, color: t.textColor }}
+            >
+              <p className="text-[15px] leading-[1.7] font-medium flex-1">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-11 h-11 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0"
+                  style={{ backgroundColor: t.avatarBg, color: t.textColor }}
+                >
+                  {t.initials}
+                </div>
+                <div>
+                  <p className="font-semibold text-sm">{t.name}</p>
+                  {t.company && <p className="text-xs opacity-60 mt-0.5">{t.company}</p>}
+                </div>
               </div>
-              <div>
-                <p className="font-semibold text-sm">{t.name}</p>
-                {t.company && <p className="text-xs opacity-60 mt-0.5">{t.company}</p>}
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )
