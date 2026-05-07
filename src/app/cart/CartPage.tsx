@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { Trash2, Upload, CheckCircle, AlertCircle, Loader2, ShoppingBag, ArrowRight, Plus } from 'lucide-react'
+import { Trash2, Upload, CheckCircle, AlertCircle, Loader2, ShoppingBag, ArrowRight, Plus, FileText } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import { useUploadThing } from '@/lib/uploadthingClient'
 import type { CartItem } from '@/lib/cart'
@@ -43,6 +43,102 @@ function getThumb(product: string): string | null {
     k.toLowerCase().includes(product.toLowerCase())
   )
   return key ? THUMBNAILS[key] : null
+}
+
+function getFileExt(filenameOrUrl?: string): string {
+  if (!filenameOrUrl) return ''
+  const clean = filenameOrUrl.split('?')[0]
+  return clean.split('.').pop()?.toLowerCase() ?? ''
+}
+
+function isPreviewableImage(filenameOrUrl?: string): boolean {
+  return ['png', 'jpg', 'jpeg', 'svg', 'gif', 'webp'].includes(getFileExt(filenameOrUrl))
+}
+
+function isPreviewablePdf(filenameOrUrl?: string): boolean {
+  return getFileExt(filenameOrUrl) === 'pdf'
+}
+
+function CartThumbnail({ item, thumb }: { item: CartItem; thumb: string | null }) {
+  if (item.artworkUrl) {
+    const previewName = item.artworkFilename ?? item.artworkUrl
+
+    if (isPreviewableImage(previewName)) {
+      return (
+        <a
+          href={item.artworkUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative block w-16 h-16 rounded-lg overflow-hidden border border-lp-green/30 bg-gray-50"
+          aria-label={`Open uploaded artwork for ${item.product}`}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={item.artworkUrl}
+            alt={`Uploaded artwork for ${item.product}`}
+            className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+          />
+          <span className="absolute inset-x-0 bottom-0 bg-lp-green/90 text-white text-[9px] font-bold uppercase tracking-wider text-center py-0.5">
+            Artwork
+          </span>
+        </a>
+      )
+    }
+
+    if (isPreviewablePdf(previewName)) {
+      return (
+        <a
+          href={item.artworkUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative block w-16 h-16 rounded-lg overflow-hidden border border-lp-green/30 bg-white"
+          aria-label={`Open uploaded PDF artwork for ${item.product}`}
+        >
+          <iframe
+            src={`https://docs.google.com/viewer?url=${encodeURIComponent(item.artworkUrl)}&embedded=true`}
+            title={`PDF preview for ${item.product}`}
+            className="w-full h-full pointer-events-none bg-white"
+          />
+          <span className="absolute inset-x-0 bottom-0 bg-lp-green/90 text-white text-[9px] font-bold uppercase tracking-wider text-center py-0.5">
+            Artwork
+          </span>
+        </a>
+      )
+    }
+
+    return (
+      <a
+        href={item.artworkUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-16 h-16 rounded-lg border border-lp-green/30 bg-lp-green/5 flex flex-col items-center justify-center text-lp-green hover:bg-lp-green/10 transition-colors"
+        aria-label={`Open uploaded artwork for ${item.product}`}
+      >
+        <FileText size={20} />
+        <span className="mt-1 text-[9px] font-bold uppercase tracking-wider">Artwork</span>
+      </a>
+    )
+  }
+
+  if (thumb) {
+    return (
+      <div className="w-16 h-16 rounded-lg overflow-hidden border border-gray-100 bg-gray-50">
+        <Image
+          src={thumb}
+          alt={item.product}
+          width={64}
+          height={64}
+          className="w-full h-full object-cover"
+        />
+      </div>
+    )
+  }
+
+  return (
+    <div className="w-16 h-16 rounded-lg border border-gray-100 bg-gray-100 flex items-center justify-center">
+      <span className="text-xl">🖴</span>
+    </div>
+  )
 }
 
 // ── Per-item artwork uploader ─────────────────────────────────────────────────
@@ -115,23 +211,9 @@ function CartItemRow({ item }: { item: CartItem }) {
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col sm:flex-row sm:items-start gap-4">
-      {/* Thumbnail */}
+      {/* Thumbnail — uploaded artwork takes priority over product default */}
       <div className="flex-shrink-0">
-        {thumb ? (
-          <div className="w-16 h-16 rounded-lg overflow-hidden border border-gray-100 bg-gray-50">
-            <Image
-              src={thumb}
-              alt={item.product}
-              width={64}
-              height={64}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ) : (
-          <div className="w-16 h-16 rounded-lg border border-gray-100 bg-gray-100 flex items-center justify-center">
-            <span className="text-xl">🖴</span>
-          </div>
-        )}
+        <CartThumbnail item={item} thumb={thumb} />
       </div>
 
       {/* Product info */}
