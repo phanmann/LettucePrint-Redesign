@@ -27,6 +27,30 @@ const products = [
     features: ['Bulk friendly', 'Custom sizes', 'Machine-ready rolls'],
     badge: 'Bulk Ready',
   },
+  {
+    name: 'Business Cards',
+    href: '/services/marketing-materials/business-cards',
+    image: '/images/hero/hero-2.jpg',
+    description: 'Premium business cards with clean stocks, sharp color, and finishing options that make intros feel polished.',
+    features: ['Premium stocks', 'Soft touch options', 'Fast reorders'],
+    badge: 'Classic',
+  },
+  {
+    name: 'Flyers',
+    href: '/services/marketing-materials/flyers',
+    image: '/images/products/flyers/flyer-1.jpg',
+    description: 'Full-color flyers for launches, menus, promos, handouts, and campaigns that need to move fast.',
+    features: ['Multiple sizes', 'Gloss or matte', 'Event ready'],
+    badge: 'Fast Print',
+  },
+  {
+    name: 'Banners',
+    href: '/services/signage/banners',
+    image: '/images/products/banners/vinyl-banner.jpg',
+    description: 'Indoor and outdoor banners for storefronts, events, pop-ups, step-and-repeats, and large-format moments.',
+    features: ['Vinyl & fabric', 'Indoor/outdoor', 'Custom sizes'],
+    badge: 'Large Format',
+  },
 ]
 
 export default function ShopAllSection() {
@@ -49,7 +73,7 @@ export default function ShopAllSection() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
             <Link
               key={product.href}
