@@ -115,25 +115,6 @@ export default async function PortfolioProjectPage({ params }: PageProps) {
           </div>
         </div>
 
-        <div className="bg-[#26302d] px-5 py-16 sm:px-10 sm:py-24">
-          <div className="mx-auto max-w-5xl">
-            <p className="mb-8 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">{project.client}</p>
-            <div className="grid gap-10 lg:grid-cols-[0.95fr_0.8fr] lg:items-end">
-              <div>
-                <h2 className="max-w-3xl text-[clamp(3rem,7vw,7.5rem)] font-normal uppercase leading-[0.84] tracking-[-0.08em] text-white">
-                  {project.category.replace(' / ', ' & ')}
-                </h2>
-                <Link href="/get-quote" className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/20 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/80 transition hover:bg-white hover:text-black">
-                  Start a related project <ArrowUpRight size={13} />
-                </Link>
-              </div>
-              <blockquote className="text-xl leading-[1.2] tracking-[-0.035em] text-white/76 sm:text-3xl">
-                “Physical brand systems should feel cohesive before a customer reads a single word.”
-                <footer className="mt-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40">— Lettuce Print</footer>
-              </blockquote>
-            </div>
-          </div>
-        </div>
 
         <div className="space-y-5 bg-[#111] p-5 sm:space-y-8 sm:p-8 lg:p-10">
           <div className="relative aspect-[16/10] overflow-hidden bg-[#1b1b1b]">
