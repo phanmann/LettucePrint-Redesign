@@ -5,7 +5,7 @@ const footerLinks = {
   'Quick Links': [
     { label: 'Shop Products', href: '/shop' },
     { label: 'Our Services', href: '/services' },
-    { label: 'Portfolio', href: '/projects' },
+    { label: 'Portfolio', href: '/portfolio' },
     { label: 'About Us', href: '/about-us' },
     { label: 'Contact Us', href: '/contact-us' },
     { label: 'Get a Quote', href: '/get-quote' },

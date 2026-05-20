@@ -365,7 +365,7 @@ export default function Navbar() {
             </nav>
             <div className="p-6 border-t border-gray-100 space-y-3">
               <div className="text-center text-sm text-gray-500 space-x-4">
-                <Link href="/projects" onClick={() => setMobileOpen(false)} className="hover:text-lp-green transition-colors">Portfolio</Link>
+                <Link href="/portfolio" onClick={() => setMobileOpen(false)} className="hover:text-lp-green transition-colors">Portfolio</Link>
                 <Link href="/about-us" onClick={() => setMobileOpen(false)} className="hover:text-lp-green transition-colors">About</Link>
                 <Link href="/contact-us" onClick={() => setMobileOpen(false)} className="hover:text-lp-green transition-colors">Contact</Link>
               </div>
