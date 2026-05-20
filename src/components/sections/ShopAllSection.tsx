@@ -38,7 +38,7 @@ const products = [
   {
     name: 'Flyers',
     href: '/services/marketing-materials/flyers',
-    image: '/images/products/flyers/flyer-1.jpg',
+    image: '/images/products/flyers/flyer-full-page-card.jpg',
     description: 'Full-color flyers for launches, menus, promos, handouts, and campaigns that need to move fast.',
     features: ['Multiple sizes', 'Gloss or matte', 'Event ready'],
     badge: 'Fast Print',

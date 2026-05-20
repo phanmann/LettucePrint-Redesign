@@ -64,7 +64,7 @@ const categories: Category[] = [
       {
         name: 'Flyers',
         href: '/services/marketing-materials/flyers',
-        image: '/images/products/flyers/flyer-1.jpg',
+        image: '/images/products/flyers/flyer-full-page-card.jpg',
         features: ['Full page, half page & tabloid', 'Gloss or matte coating', 'Full-color printing', '3–5 day turnaround'],
       },
       {

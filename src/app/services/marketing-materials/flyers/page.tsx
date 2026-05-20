@@ -20,7 +20,7 @@ const CATEGORIES = [
       subtitle: '5.5" × 8.5"',
       description: 'The workhorse handout. Fits in bags, pockets, and racks. Great for menus, event promos, and retail inserts.',
       color: '#E8F5F1',
-      image: '/images/products/flyers/flyer-1.jpg',
+      image: '/images/products/flyers/flyer-half-page-card.jpg',
       options: [
         { label: 'Size',    values: ['5.5" × 8.5"'] },
         { label: 'Stock',   values: ['80 lb. Gloss', '80 lb. Matte', '100 lb. Cover'] },
@@ -47,7 +47,7 @@ const CATEGORIES = [
       subtitle: '8.5" × 11"',
       description: 'Full letter-size flyers in gloss, matte, or heavy cover stock. High-volume or premium — your call.',
       color: '#E8F0F5',
-      image: '/images/products/flyers/flyer-2.jpg',
+      image: '/images/products/flyers/flyer-full-page-card.jpg',
       options: [
         { label: 'Size',    values: ['8.5" × 11"'] },
         { label: 'Finish',  values: ['Gloss', 'Matte', 'Heavy Stock'] },
@@ -74,7 +74,7 @@ const CATEGORIES = [
       subtitle: '11" × 17"',
       description: 'Twice the real estate of a letter flyer. Perfect for menus, in-store promotions, concert bills, and display boards.',
       color: '#E8F5EF',
-      image: '/images/products/flyers/flyer-1.jpg',
+      image: '/images/products/flyers/flyer-tabloid-card.jpg',
       options: [
         { label: 'Size',    values: ['11" × 17"'] },
         { label: 'Finish',  values: ['Gloss', 'Matte'] },

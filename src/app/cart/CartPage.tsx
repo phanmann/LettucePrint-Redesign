@@ -21,9 +21,9 @@ const THUMBNAILS: Record<string, string> = {
   // Marketing materials
   'Standard Business Cards':     '/images/hero-cards/packaging.jpg',
   'Premium Business Cards':      '/images/hero-cards/packaging.jpg',
-  'Full Page Flyers':            '/images/products/flyers/flyer-1.jpg',
-  'Half Page Flyers':            '/images/products/flyers/flyer-2.jpg',
-  'Tabloid Flyers':              '/images/products/flyers/flyer-1.jpg',
+  'Full Page Flyers':            '/images/products/flyers/flyer-full-page-card.jpg',
+  'Half Page Flyers':            '/images/products/flyers/flyer-half-page-card.jpg',
+  'Tabloid Flyers':              '/images/products/flyers/flyer-tabloid-card.jpg',
   'Standard Postcards':          '/images/products/flyers/flyer-2.jpg',
   'Premium Postcards':           '/images/products/flyers/flyer-2.jpg',
   // Signage

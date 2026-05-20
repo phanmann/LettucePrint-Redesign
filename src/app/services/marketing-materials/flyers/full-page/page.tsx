@@ -196,8 +196,9 @@ export default function FullPageFlyerPage() {
 
               <ProductImageGallery
                 images={[
-                  { src: '/images/products/flyers/flyer-2.jpg', alt: 'Full page flyer samples' },
-                  { src: '/images/products/flyers/flyer-1.jpg', alt: 'Custom flyer stack' },
+                  { src: '/images/products/flyers/flyer-full-page-fanned.jpg', alt: 'Full page flyer stack with event details' },
+                  { src: '/images/products/flyers/flyer-half-page-leflora.jpg', alt: 'Grand opening flyer stack' },
+                  { src: '/images/products/flyers/flyer-half-page-flourish.jpg', alt: 'Promotional flyer with QR code' },
                 ]}
               />
               {/* Mobile-only configurator — inline after gallery */}
