@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { portfolioProjects } from '@/lib/portfolioProjects'
 
 const BASE_URL = 'https://lettuceprint.com'
 
@@ -48,10 +49,18 @@ const entries: SitemapEntry[] = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
 
-  return entries.map((entry) => ({
-    url: `${BASE_URL}${entry.path}`,
-    lastModified: now,
-    changeFrequency: entry.changeFrequency,
-    priority: entry.priority,
-  }))
+  return [
+    ...entries.map((entry) => ({
+      url: `${BASE_URL}${entry.path}`,
+      lastModified: now,
+      changeFrequency: entry.changeFrequency,
+      priority: entry.priority,
+    })),
+    ...portfolioProjects.map((project) => ({
+      url: `${BASE_URL}/portfolio/${project.slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.55,
+    })),
+  ]
 }

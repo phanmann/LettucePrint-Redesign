@@ -2,181 +2,114 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
+import { portfolioProjects } from '@/lib/portfolioProjects'
 
 export const metadata: Metadata = {
   title: 'Portfolio — Lettuce Print Works',
-  description: 'A visual archive of print, packaging, signage, brand systems, and activations produced by Lettuce Print in Brooklyn.',
+  description: 'A dark, image-first portfolio archive of print, packaging, signage, brand systems, and activations produced by Lettuce Print in Brooklyn.',
   alternates: { canonical: 'https://lettuceprint.com/portfolio' },
 }
 
-const featured = [
-  {
-    title: 'Retail print systems',
-    client: 'Bergdorf Goodman',
-    type: 'Installation / Retail',
-    image: '/images/portfolio/bergdorf-print-install.jpg',
-    span: 'lg:col-span-7',
-    ratio: 'aspect-[4/3]',
-  },
-  {
-    title: 'Launch collateral',
-    client: 'Vitasoy',
-    type: 'Activation / Photo',
-    image: '/images/portfolio/vitasoy-activation.jpg',
-    span: 'lg:col-span-5',
-    ratio: 'aspect-[3/4]',
-  },
-  {
-    title: 'Cannabis label production',
-    client: 'Claudine Farms',
-    type: 'Packaging / Labels',
-    image: '/images/portfolio/claudine-farms-labels.jpeg',
-    span: 'lg:col-span-4',
-    ratio: 'aspect-[3/4]',
-  },
-  {
-    title: 'Backlit display graphics',
-    client: 'Seagate',
-    type: 'Large Format',
-    image: '/images/portfolio/lightbox-display.png',
-    span: 'lg:col-span-8',
-    ratio: 'aspect-[16/10]',
-  },
-]
+const marqueeProjects = [...portfolioProjects, ...portfolioProjects]
 
-const archive = [
-  { title: 'Business card system', type: 'Print', image: '/images/portfolio/business-card-system.png' },
-  { title: 'Sticker + label kit', type: 'Stickers', image: '/images/portfolio/sticker-labels.png' },
-  { title: 'Mylar packaging mockup', type: 'Packaging', image: '/images/portfolio/mylar-packaging.png' },
-  { title: 'Poster suite', type: 'Marketing', image: '/images/portfolio/poster-suite.png' },
-  { title: 'Farmers brand system', type: 'Identity', image: '/images/portfolio/farmers-brand-system.jpg' },
-]
-
-const disciplines = ['Packaging', 'Signage', 'Retail', 'Cannabis', 'Events', 'Stickers', 'Brand Systems', 'Apparel']
-
-function WorkCard({ item }: { item: (typeof featured)[number] }) {
+function Header() {
   return (
-    <article className={`${item.span} group`}> 
-      <div className={`relative ${item.ratio} overflow-hidden rounded-[2rem] bg-[#1c1c1c]`}> 
-        <Image
-          src={item.image}
-          alt={`${item.client} ${item.title}`}
-          fill
-          className="object-cover saturate-[0.9] transition duration-700 group-hover:scale-[1.035] group-hover:saturate-100"
-          sizes="(max-width: 1024px) 100vw, 66vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-85" />
-        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-7">
-          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f2ff70]/80">{item.type}</p>
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <h2 className="max-w-lg text-2xl font-semibold tracking-[-0.04em] text-white sm:text-4xl">{item.title}</h2>
-              <p className="mt-1 text-sm text-white/60">{item.client}</p>
-            </div>
-            <span className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/25 text-white transition group-hover:bg-white group-hover:text-black sm:flex">
-              <ArrowUpRight size={18} />
-            </span>
-          </div>
-        </div>
+    <header className="fixed left-0 right-0 top-0 z-50 px-4 py-5 sm:px-8">
+      <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-3">
+        <Link href="/portfolio" className="rounded-full border border-white/10 bg-black/35 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/80 backdrop-blur-xl transition hover:bg-white hover:text-black">
+          LP Works
+        </Link>
+        <nav className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/62">
+          <Link href="/" className="hidden rounded-full border border-white/10 bg-black/35 px-4 py-2 backdrop-blur-xl transition hover:bg-white hover:text-black sm:block">Main Site</Link>
+          <Link href="/shop" className="hidden rounded-full border border-white/10 bg-black/35 px-4 py-2 backdrop-blur-xl transition hover:bg-white hover:text-black sm:block">Shop</Link>
+          <Link href="/get-quote" className="rounded-full border border-[#f2ff70]/45 bg-[#f2ff70] px-4 py-2 text-black backdrop-blur-xl transition hover:border-white hover:bg-white">
+            Start a Project
+          </Link>
+        </nav>
       </div>
-    </article>
+    </header>
+  )
+}
+
+function ProjectMarquee() {
+  return (
+    <section className="relative -mx-4 mt-10 overflow-hidden py-6 sm:-mx-8 sm:mt-14 lg:mt-16">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-[#080808] to-transparent sm:w-40" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-[#080808] to-transparent sm:w-40" />
+      <div className="flex w-max gap-4 animate-portfolio-strip hover:[animation-play-state:paused] sm:gap-6">
+        {marqueeProjects.map((project, index) => (
+          <Link
+            key={`${project.slug}-${index}`}
+            href={`/portfolio/${project.slug}`}
+            className="group relative h-[300px] w-[220px] shrink-0 overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/30 sm:h-[440px] sm:w-[320px] sm:rounded-[32px] lg:h-[520px] lg:w-[380px]"
+          >
+            <Image
+              src={project.image}
+              alt={`${project.client} — ${project.title}`}
+              fill
+              className="object-cover transition duration-700 group-hover:scale-105 group-hover:saturate-110"
+              sizes="(max-width: 640px) 250px, (max-width: 1024px) 320px, 380px"
+              priority={index < 3}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-black/10 to-transparent opacity-90" />
+            <div className="absolute left-4 right-4 top-4 flex items-center justify-between gap-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/65">
+              <span className="rounded-full border border-white/15 bg-black/25 px-3 py-1.5 backdrop-blur-md">{project.category}</span>
+              <span className="grid h-9 w-9 place-items-center rounded-full border border-white/20 bg-black/25 text-white backdrop-blur-md transition group-hover:bg-white group-hover:text-black">
+                <ArrowUpRight size={15} />
+              </span>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+              <p className="mb-1 text-xs uppercase tracking-[0.16em] text-[#f2ff70]/80">{project.client}</p>
+              <h2 className="max-w-[12rem] text-2xl font-semibold leading-[0.9] tracking-[-0.07em] text-white sm:max-w-[15rem] sm:text-4xl">{project.title}</h2>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
   )
 }
 
 export default function PortfolioMicrositePage() {
   return (
-    <main className="min-h-screen bg-[#080808] text-[#f4f0e8] selection:bg-[#f2ff70] selection:text-black">
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#080808]/75 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-[1500px] items-center justify-between px-4 py-4 sm:px-8">
-          <Link href="/portfolio" className="text-sm font-semibold uppercase tracking-[0.22em] text-white">
-            LP Works
-          </Link>
-          <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-white/55 sm:gap-5">
-            <Link href="/" className="hidden transition hover:text-white sm:inline">Main Site</Link>
-            <Link href="/shop" className="hidden transition hover:text-white sm:inline">Shop</Link>
-            <Link href="/get-quote" className="rounded-full border border-[#f2ff70]/40 px-4 py-2 text-[#f2ff70] transition hover:bg-[#f2ff70] hover:text-black">
-              Start a Project
-            </Link>
-          </nav>
-        </div>
-      </header>
+    <main className="min-h-screen overflow-hidden bg-[#080808] text-[#f5f0e8] selection:bg-[#f2ff70] selection:text-black">
+      <Header />
 
-      <section className="mx-auto max-w-[1500px] px-4 pb-12 pt-16 sm:px-8 sm:pb-20 sm:pt-24">
-        <div className="grid gap-8 lg:grid-cols-[1.08fr_.92fr] lg:items-end">
-          <div>
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.3em] text-[#f2ff70]">Brooklyn print archive</p>
-            <h1 className="max-w-5xl text-[clamp(4.6rem,13vw,14rem)] font-semibold uppercase leading-[0.78] tracking-[-0.095em] text-white">
-              Work<br />that hits.
+      <section className="relative mx-auto flex max-w-[1600px] flex-col px-4 pb-10 pt-28 sm:px-8 sm:pt-32 lg:min-h-screen lg:pb-6">
+        <div className="grid items-start gap-8 lg:grid-cols-[1fr_auto_1fr]">
+          <div className="text-[11px] font-semibold uppercase leading-relaxed tracking-[0.2em] text-white/40">
+            <p>Brooklyn / print / archive</p>
+            <p className="mt-1 text-white/25">Portfolio index 001</p>
+          </div>
+
+          <div className="text-center">
+            <p className="mx-auto mb-4 w-fit rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#f2ff70]">
+              Selected physical work
+            </p>
+            <h1 className="text-[clamp(3.9rem,12vw,12.5rem)] font-semibold uppercase leading-[0.76] tracking-[-0.105em] text-white">
+              Print<br />in motion
             </h1>
           </div>
-          <div className="max-w-xl lg:pb-4">
-            <p className="text-xl leading-[1.35] tracking-[-0.035em] text-white/72 sm:text-3xl">
-              A separate, image-first portfolio for the projects where print becomes brand presence — packaging, launches, retail moments, and physical campaigns.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-2">
-              {disciplines.map((item) => (
-                <span key={item} className="rounded-full border border-white/15 px-3 py-1.5 text-xs uppercase tracking-[0.14em] text-white/55">
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section className="border-y border-white/10 bg-[#f2ff70] py-3 text-black">
-        <div className="flex overflow-hidden whitespace-nowrap text-sm font-semibold uppercase tracking-[0.2em]">
-          <div className="animate-portfolio-strip">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <span key={i} className="mx-5">Print / Packaging / Signage / Launch Systems / Brooklyn Production /</span>
+          <p className="max-w-sm text-balance text-right text-lg leading-[1.25] tracking-[-0.035em] text-white/55 max-lg:text-left sm:text-2xl">
+            A darker, image-led portfolio built around continuous project motion. Click any frame to open the project page.
+          </p>
+        </div>
+
+        <ProjectMarquee />
+
+        <div className="mt-8 grid items-end gap-8 pb-2 lg:mt-auto lg:grid-cols-[1fr_auto]">
+          <div className="flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/45">
+            {['Packaging', 'Retail', 'Events', 'Labels', 'Signage', 'Brand Systems'].map((tag) => (
+              <span key={tag} className="rounded-full border border-white/10 px-3 py-1.5">{tag}</span>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="mx-auto grid max-w-[1500px] grid-cols-1 gap-4 px-4 py-5 sm:px-8 lg:grid-cols-12">
-        {featured.map((item) => <WorkCard key={item.title} item={item} />)}
-      </section>
-
-      <section className="mx-auto max-w-[1500px] px-4 py-16 sm:px-8 sm:py-24">
-        <div className="mb-8 flex items-end justify-between gap-6">
-          <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-white/35">Selected archive</p>
-            <h2 className="text-4xl font-semibold tracking-[-0.06em] text-white sm:text-7xl">Production range.</h2>
-          </div>
-          <Link href="/projects" className="hidden text-sm font-semibold uppercase tracking-[0.16em] text-[#f2ff70] hover:text-white sm:inline-flex">
-            View old grid ↗
+          <Link href="/get-quote" className="justify-self-start rounded-full bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#f2ff70] lg:justify-self-end">
+            Turn this into a quote
           </Link>
         </div>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
-          {archive.map((item) => (
-            <article key={item.title} className="group rounded-[1.4rem] border border-white/10 bg-white/[0.035] p-2">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[1rem] bg-white/5">
-                <Image src={item.image} alt={item.title} fill className="object-cover transition duration-500 group-hover:scale-105" sizes="(max-width: 1024px) 50vw, 20vw" />
-              </div>
-              <div className="px-2 pb-3 pt-4">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#f2ff70]/70">{item.type}</p>
-                <h3 className="mt-1 text-lg font-semibold tracking-[-0.035em] text-white">{item.title}</h3>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
 
-      <section className="mx-auto max-w-[1500px] px-4 pb-20 sm:px-8">
-        <div className="rounded-[2rem] border border-white/10 bg-white p-6 text-black sm:p-10 lg:flex lg:items-center lg:justify-between">
-          <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-black/45">Connected to Lettuce Print</p>
-            <h2 className="max-w-3xl text-4xl font-semibold tracking-[-0.06em] sm:text-6xl">Like what you see? Move from reference to quote.</h2>
-          </div>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-0">
-            <Link href="/get-quote" className="rounded-full bg-black px-6 py-4 text-center text-sm font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-[#00A175]">
-              Request a Quote
-            </Link>
-            <Link href="/" className="rounded-full border border-black/15 px-6 py-4 text-center text-sm font-semibold uppercase tracking-[0.14em] text-black transition hover:border-black">
-              Back to Main Site
-            </Link>
-          </div>
+        <div className="pointer-events-none absolute -bottom-[0.18em] left-1/2 -z-0 hidden w-[140vw] -translate-x-1/2 text-center text-[clamp(7rem,22vw,23rem)] font-semibold uppercase leading-none tracking-[-0.12em] text-white/[0.035] sm:block">
+          Portfolio
         </div>
       </section>
     </main>
