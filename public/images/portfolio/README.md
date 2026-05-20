@@ -7,8 +7,8 @@ Each portfolio project has its own folder named after the project slug.
 1. Add new image files to the matching folder, for example:
 
 ```txt
-public/images/portfolio/bergdorf-retail-print-system/detail-01.jpg
-public/images/portfolio/bergdorf-retail-print-system/detail-02.jpg
+public/images/portfolio/rolling-green-cannabis/detail-01.jpg
+public/images/portfolio/rolling-green-cannabis/detail-02.jpg
 ```
 
 2. Reference those files in `src/lib/portfolioProjects.ts` inside that project's `galleryImages` array:
@@ -16,12 +16,12 @@ public/images/portfolio/bergdorf-retail-print-system/detail-02.jpg
 ```ts
 galleryImages: [
   {
-    src: '/images/portfolio/bergdorf-retail-print-system/hero.jpg',
+    src: '/images/portfolio/rolling-green-cannabis/hero.jpg',
     alt: 'Bergdorf Goodman retail print installation detail',
     caption: 'Retail print system produced for premium in-store presentation.',
   },
   {
-    src: '/images/portfolio/bergdorf-retail-print-system/detail-01.jpg',
+    src: '/images/portfolio/rolling-green-cannabis/detail-01.jpg',
     alt: 'Bergdorf Goodman print detail',
     caption: 'Close-up production detail.',
   },
@@ -31,7 +31,7 @@ galleryImages: [
 ## Current folders
 
 ```txt
-bergdorf-retail-print-system/
+rolling-green-cannabis/
 vitasoy-launch-activation/
 claudine-farms-labels/
 seagate-lightbox-display/

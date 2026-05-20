@@ -6,6 +6,7 @@ export type PortfolioProjectImage = {
 
 export type PortfolioProject = {
   slug: string
+  aliases?: string[]
   title: string
   client: string
   category: string
@@ -19,20 +20,21 @@ export type PortfolioProject = {
 
 export const portfolioProjects: PortfolioProject[] = [
   {
-    slug: 'bergdorf-retail-print-system',
-    title: 'Retail print systems',
-    client: 'Bergdorf Goodman',
-    category: 'Installation / Retail',
+    slug: 'rolling-green-cannabis',
+    aliases: ['bergdorf-retail-print-system'],
+    title: 'Rolling Green Cannabis',
+    client: 'Rolling Green Cannabis',
+    category: 'Packaging / Cannabis',
     year: '2026',
-    image: '/images/portfolio/bergdorf-retail-print-system/hero.jpg',
-    summary: 'Retail-facing print production built to feel polished, premium, and installation-ready.',
-    services: ['Retail graphics', 'Production', 'Finishing'],
-    output: 'Retail graphics, installation-ready print assets, finishing, and production support',
+    image: '/images/portfolio/rolling-green-cannabis/hero.jpg',
+    summary: 'Cannabis packaging photography and production details built around premium shelf presence.',
+    services: ['Cannabis packaging', 'Label production', 'Product photography'],
+    output: 'Cannabis packaging visuals, label production support, product photography, and shelf-ready presentation',
     galleryImages: [
       {
-        src: '/images/portfolio/bergdorf-retail-print-system/hero.jpg',
-        alt: 'Bergdorf Goodman retail print installation detail',
-        caption: 'Retail print system produced for premium in-store presentation.',
+        src: '/images/portfolio/rolling-green-cannabis/detail-01.jpg',
+        alt: 'Rolling Green Cannabis three jar packaging detail',
+        caption: 'Three-jar packaging detail showing label consistency across product variants.',
       },
     ],
   },
@@ -147,5 +149,5 @@ export const portfolioProjects: PortfolioProject[] = [
 ]
 
 export function getPortfolioProject(slug: string) {
-  return portfolioProjects.find((project) => project.slug === slug)
+  return portfolioProjects.find((project) => project.slug === slug || project.aliases?.includes(slug))
 }

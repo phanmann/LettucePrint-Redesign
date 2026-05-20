@@ -10,7 +10,10 @@ type PageProps = {
 }
 
 export function generateStaticParams() {
-  return portfolioProjects.map((project) => ({ slug: project.slug }))
+  return portfolioProjects.flatMap((project) => [
+    { slug: project.slug },
+    ...(project.aliases ?? []).map((alias) => ({ slug: alias })),
+  ])
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
