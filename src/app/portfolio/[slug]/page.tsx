@@ -162,13 +162,13 @@ export default async function PortfolioProjectPage({ params }: PageProps) {
           </div>
         </div>
 
-        <Link href={`/portfolio/${nextProject.slug}`} className="group block bg-[#eee9df] p-5 text-black transition hover:bg-white sm:p-10">
-          <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-black/40">Next project</p>
-          <div className="flex items-end justify-between gap-6">
-            <h2 className="max-w-4xl text-[clamp(3rem,8vw,9rem)] font-normal uppercase leading-[0.82] tracking-[-0.09em]">
+        <Link href={`/portfolio/${nextProject.slug}`} className="group block bg-[#eee9df] px-5 py-6 text-black transition hover:bg-white sm:px-10 sm:py-8">
+          <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-black/40">Next project</p>
+          <div className="flex items-center justify-between gap-6">
+            <h2 className="max-w-none truncate text-[clamp(1.75rem,4vw,4.75rem)] font-normal uppercase leading-[0.9] tracking-[-0.065em]">
               {nextProject.title}
             </h2>
-            <span className="mb-2 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-black text-white transition group-hover:bg-lp-green"><ArrowUpRight size={18} /></span>
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-black text-white transition group-hover:bg-lp-green sm:h-11 sm:w-11"><ArrowUpRight size={16} /></span>
           </div>
         </Link>
       </section>
