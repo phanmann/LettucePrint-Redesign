@@ -16,11 +16,17 @@ function Header() {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 px-4 py-5 sm:px-8">
       <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-3">
-        <Link href="/portfolio" className="rounded-full border border-white/10 bg-black/35 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/80 backdrop-blur-xl transition hover:bg-white hover:text-black">
-          LP Works
+        <Link href="/portfolio" aria-label="Lettuce Print portfolio home" className="flex h-11 w-[156px] items-center justify-center rounded-full border border-white/10 bg-black/35 px-4 backdrop-blur-xl transition hover:bg-white/10 sm:w-[178px]">
+          <Image
+            src="/images/logos/lp-wordmark-white.svg"
+            alt="Lettuce Print"
+            width={1366}
+            height={768}
+            className="h-9 w-auto"
+            priority
+          />
         </Link>
         <nav className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/62">
-          <Link href="/" className="hidden rounded-full border border-white/10 bg-black/35 px-4 py-2 backdrop-blur-xl transition hover:bg-white hover:text-black sm:block">Main Site</Link>
           <Link href="/shop" className="hidden rounded-full border border-white/10 bg-black/35 px-4 py-2 backdrop-blur-xl transition hover:bg-white hover:text-black sm:block">Shop</Link>
           <Link href="/get-quote" className="rounded-full border border-[#f2ff70]/45 bg-[#f2ff70] px-4 py-2 text-black backdrop-blur-xl transition hover:border-white hover:bg-white">
             Start a Project
