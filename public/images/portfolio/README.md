@@ -32,7 +32,7 @@ galleryImages: [
 
 ```txt
 rolling-green-cannabis/
-vitasoy-launch-activation/
+county-road-cannabis/
 claudine-farms-labels/
 seagate-lightbox-display/
 sticker-label-kit/
