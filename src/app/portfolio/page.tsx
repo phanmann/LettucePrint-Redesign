@@ -90,7 +90,7 @@ export default function PortfolioMicrositePage() {
               Design
             </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-balance text-center text-lg leading-[1.25] tracking-[-0.035em] text-white/55 sm:text-2xl">
+          <p className="mx-auto mt-12 max-w-2xl text-balance text-center text-lg leading-[1.25] tracking-[-0.035em] text-white/55 sm:mt-16 sm:text-2xl">
             A multi-disciplinary design studio crafting cohesive brand identities with a specialized expertise in print.
           </p>
         </div>
