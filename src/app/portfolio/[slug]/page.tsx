@@ -37,9 +37,9 @@ export default async function PortfolioProjectPage({ params }: PageProps) {
   const tertiaryImage = supportingProjects[(index + 3) % supportingProjects.length]?.image ?? project.image
 
   return (
-    <main className="min-h-screen bg-[#0b0b0b] text-white selection:bg-lp-green selection:text-white lg:grid lg:grid-cols-[37vw_1fr]">
+    <main className="min-h-screen bg-[#0b0b0b] text-white selection:bg-lp-green selection:text-white lg:grid lg:grid-cols-[40vw_1fr] xl:grid-cols-[38vw_1fr]">
       {/* Sticky project dossier — modeled after the reference's left information column */}
-      <aside className="bg-[#eee9df] text-[#111] lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col">
+      <aside className="bg-[#050505] text-white lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:overflow-y-auto">
         <div className="flex items-start justify-between gap-6 p-5 sm:p-8 lg:p-10">
           <Link href="/portfolio" aria-label="Back to portfolio index" className="block transition-opacity hover:opacity-60">
             <Image
@@ -47,12 +47,12 @@ export default async function PortfolioProjectPage({ params }: PageProps) {
               alt="Lettuce Print"
               width={1366}
               height={768}
-              className="h-16 w-auto invert sm:h-20"
+              className="h-16 w-auto sm:h-20"
               priority
             />
           </Link>
-          <nav className="flex flex-col items-end gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-black/55">
-            <Link href="/portfolio" className="inline-flex items-center gap-1 transition hover:text-black">
+          <nav className="flex flex-col items-end gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/50">
+            <Link href="/portfolio" className="inline-flex items-center gap-1 transition hover:text-white">
               <ArrowLeft size={12} /> Index
             </Link>
             <Link href="/get-quote" className="transition hover:text-lp-green">Start a Project</Link>
@@ -60,37 +60,37 @@ export default async function PortfolioProjectPage({ params }: PageProps) {
         </div>
 
         <div className="flex-1 px-5 pb-8 sm:px-8 lg:flex lg:flex-col lg:px-10 lg:pb-10">
-          <div className="pt-8 lg:pt-16">
-            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-black/40">
+          <div className="pt-6 lg:pt-8 xl:pt-10">
+            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-lp-green">
               {project.category} / {project.year}
             </p>
-            <h1 className="max-w-[11ch] text-[clamp(3.5rem,8.1vw,8.75rem)] font-normal uppercase leading-[0.82] tracking-[-0.09em] text-black">
+            <h1 className="max-w-[12ch] text-[clamp(3.1rem,5.9vw,6.9rem)] font-normal uppercase leading-[0.86] tracking-[-0.075em] text-white">
               {project.title}
             </h1>
           </div>
 
-          <div className="mt-10 divide-y divide-black/15 border-y border-black/15 text-sm sm:mt-12">
+          <div className="mt-8 divide-y divide-white/15 border-y border-white/15 text-sm sm:mt-9">
             <div className="grid grid-cols-[92px_1fr] gap-5 py-5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-black/35">Services</p>
-              <ul className="space-y-1.5 leading-snug text-black/80">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">Services</p>
+              <ul className="space-y-1.5 leading-snug text-white/78">
                 {project.services.map((service) => (
                   <li key={service}>{service}</li>
                 ))}
               </ul>
             </div>
             <div className="grid grid-cols-[92px_1fr] gap-5 py-5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-black/35">Output</p>
-              <p className="leading-snug text-black/80">Brand system, print production, physical campaign assets</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">Output</p>
+              <p className="leading-snug text-white/78">Brand system, print production, physical campaign assets</p>
             </div>
           </div>
 
-          <p className="mt-8 max-w-xl text-base leading-[1.45] tracking-[-0.025em] text-black/68 sm:text-lg">
+          <p className="mt-7 max-w-xl text-[15px] leading-[1.42] tracking-[-0.015em] text-white/62 sm:text-base lg:text-[15px] xl:text-base">
             {project.summary} Lettuce Print translates brand direction into tactile systems that work across launch moments, packaging, signage, and customer-facing print.
           </p>
 
-          <div className="mt-10 flex items-end justify-between gap-6 text-[11px] uppercase tracking-[0.16em] text-black/40 lg:mt-auto">
+          <div className="mt-8 flex items-end justify-between gap-6 text-[11px] uppercase tracking-[0.16em] text-white/35 lg:mt-auto lg:pt-8">
             <p className="max-w-[16rem] leading-relaxed">Contact for collaborations, projects & partnerships.</p>
-            <Link href={`/portfolio/${nextProject.slug}`} className="inline-flex items-center gap-1 font-semibold text-black/55 transition hover:text-black">
+            <Link href={`/portfolio/${nextProject.slug}`} className="inline-flex items-center gap-1 font-semibold text-white/55 transition hover:text-white">
               Next <ArrowUpRight size={12} />
             </Link>
           </div>
