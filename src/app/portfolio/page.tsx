@@ -81,34 +81,24 @@ export default function PortfolioMicrositePage() {
       <Header />
 
       <section className="relative mx-auto flex max-w-[1600px] flex-col px-4 pb-10 pt-28 sm:px-8 sm:pt-32 lg:min-h-screen lg:pb-6">
-        <div className="grid items-start gap-8 lg:grid-cols-[1fr_auto_1fr]">
-          <div aria-hidden="true" />
-
-          <div className="text-center">
-            <h1 className="text-white">
-              <span className="block text-[clamp(4.5rem,12vw,12rem)] font-normal normal-case leading-[0.74] tracking-[0.01em] [font-family:'Snell_Roundhand','Brush_Script_MT','Segoe_Script',cursive]">
-                Let Us
-              </span>
-              <span className="block font-sans text-[clamp(4.2rem,12vw,12.5rem)] font-semibold leading-[0.76] tracking-[-0.025em]">
-                Design
-              </span>
-            </h1>
-          </div>
-
-          <p className="max-w-sm text-balance text-right text-lg leading-[1.25] tracking-[-0.035em] text-white/55 max-lg:text-left sm:text-2xl">
+        <div className="mx-auto max-w-5xl text-center">
+          <h1 className="text-white">
+            <span className="block text-[clamp(4.5rem,12vw,12rem)] font-normal normal-case leading-[0.74] tracking-[0.01em] [font-family:'Snell_Roundhand','Brush_Script_MT','Segoe_Script',cursive]">
+              Let Us
+            </span>
+            <span className="block font-sans text-[clamp(4.2rem,12vw,12.5rem)] font-semibold leading-[0.76] tracking-[-0.025em]">
+              Design
+            </span>
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-balance text-center text-lg leading-[1.25] tracking-[-0.035em] text-white/55 sm:text-2xl">
             A multi-disciplinary design studio crafting cohesive brand identities with a specialized expertise in print.
           </p>
         </div>
 
         <ProjectMarquee />
 
-        <div className="mt-8 flex flex-wrap gap-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/45 lg:mt-auto">
-          {['Packaging', 'Retail', 'Events', 'Labels', 'Signage', 'Brand Systems'].map((tag) => (
-            <span key={tag} className="rounded-full border border-white/10 px-3 py-1.5">{tag}</span>
-          ))}
-        </div>
 
-        <div className="pointer-events-none absolute -bottom-[0.18em] left-1/2 -z-0 hidden w-[140vw] -translate-x-1/2 text-center text-[clamp(7rem,22vw,23rem)] font-semibold uppercase leading-none tracking-[-0.12em] text-white/[0.035] sm:block">
+        <div className="pointer-events-none absolute -bottom-[0.18em] left-1/2 -z-0 hidden w-[140vw] -translate-x-1/2 text-center text-[clamp(7rem,22vw,23rem)] font-normal uppercase leading-none tracking-[-0.12em] text-white/[0.035] sm:block">
           Portfolio
         </div>
       </section>
