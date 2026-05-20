@@ -22,7 +22,7 @@ function Header() {
             alt="Lettuce Print"
             width={1366}
             height={768}
-            className="h-12 w-auto sm:h-14"
+            className="h-[67px] w-auto sm:h-[78px]"
             priority
           />
         </Link>
@@ -82,10 +82,7 @@ export default function PortfolioMicrositePage() {
 
       <section className="relative mx-auto flex max-w-[1600px] flex-col px-4 pb-10 pt-28 sm:px-8 sm:pt-32 lg:min-h-screen lg:pb-6">
         <div className="grid items-start gap-8 lg:grid-cols-[1fr_auto_1fr]">
-          <div className="text-[11px] font-semibold uppercase leading-relaxed tracking-[0.2em] text-white/40">
-            <p>Brooklyn / print / archive</p>
-            <p className="mt-1 text-white/25">Portfolio index 001</p>
-          </div>
+          <div aria-hidden="true" />
 
           <div className="text-center">
             <h1 className="text-white">
@@ -99,7 +96,7 @@ export default function PortfolioMicrositePage() {
           </div>
 
           <p className="max-w-sm text-balance text-right text-lg leading-[1.25] tracking-[-0.035em] text-white/55 max-lg:text-left sm:text-2xl">
-            A darker, image-led portfolio built around continuous project motion. Click any frame to open the project page.
+            A multi-disciplinary design studio crafting cohesive brand identities with a specialized expertise in print.
           </p>
         </div>
 
