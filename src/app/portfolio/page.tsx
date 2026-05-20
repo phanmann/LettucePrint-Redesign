@@ -16,13 +16,13 @@ function Header() {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 px-4 py-5 sm:px-8">
       <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-3">
-        <Link href="/portfolio" aria-label="Lettuce Print portfolio home" className="flex h-11 w-[156px] items-center justify-center rounded-full border border-white/10 bg-black/35 px-4 backdrop-blur-xl transition hover:bg-white/10 sm:w-[178px]">
+        <Link href="/portfolio" aria-label="Lettuce Print portfolio home" className="block transition-opacity hover:opacity-75">
           <Image
             src="/images/logos/lp-wordmark-white.svg"
             alt="Lettuce Print"
             width={1366}
             height={768}
-            className="h-9 w-auto"
+            className="h-12 w-auto sm:h-14"
             priority
           />
         </Link>
@@ -88,14 +88,11 @@ export default function PortfolioMicrositePage() {
           </div>
 
           <div className="text-center">
-            <p className="mx-auto mb-4 w-fit rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#f2ff70]">
-              Selected physical work
-            </p>
-            <h1 className="whitespace-nowrap text-[clamp(3.15rem,9.5vw,10.75rem)] leading-[0.8] text-white">
-              <span className="mr-[0.18em] inline-block font-normal normal-case tracking-[0.01em] [font-family:'Snell_Roundhand','Brush_Script_MT','Segoe_Script',cursive]">
+            <h1 className="text-white">
+              <span className="block text-[clamp(4.5rem,12vw,12rem)] font-normal normal-case leading-[0.74] tracking-[0.01em] [font-family:'Snell_Roundhand','Brush_Script_MT','Segoe_Script',cursive]">
                 Let Us
               </span>
-              <span className="inline-block font-sans font-semibold tracking-[-0.025em]">
+              <span className="block font-sans text-[clamp(4.2rem,12vw,12.5rem)] font-semibold leading-[0.76] tracking-[-0.025em]">
                 Design
               </span>
             </h1>
