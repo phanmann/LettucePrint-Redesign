@@ -28,7 +28,7 @@ function Header() {
         </Link>
         <nav className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/62">
           <Link href="/shop" className="hidden rounded-full border border-white/10 bg-black/35 px-4 py-2 backdrop-blur-xl transition hover:bg-white hover:text-black sm:block">Shop</Link>
-          <Link href="/get-quote" className="rounded-full border border-[#f2ff70]/45 bg-[#f2ff70] px-4 py-2 text-black backdrop-blur-xl transition hover:border-white hover:bg-white">
+          <Link href="/get-quote" className="rounded-full border border-lp-green bg-lp-green px-4 py-2 text-white backdrop-blur-xl transition hover:border-lp-green-dark hover:bg-lp-green-dark">
             Start a Project
           </Link>
         </nav>
@@ -102,15 +102,10 @@ export default function PortfolioMicrositePage() {
 
         <ProjectMarquee />
 
-        <div className="mt-8 grid items-end gap-8 pb-2 lg:mt-auto lg:grid-cols-[1fr_auto]">
-          <div className="flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/45">
-            {['Packaging', 'Retail', 'Events', 'Labels', 'Signage', 'Brand Systems'].map((tag) => (
-              <span key={tag} className="rounded-full border border-white/10 px-3 py-1.5">{tag}</span>
-            ))}
-          </div>
-          <Link href="/get-quote" className="justify-self-start rounded-full bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#f2ff70] lg:justify-self-end">
-            Turn this into a quote
-          </Link>
+        <div className="mt-8 flex flex-wrap gap-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/45 lg:mt-auto">
+          {['Packaging', 'Retail', 'Events', 'Labels', 'Signage', 'Brand Systems'].map((tag) => (
+            <span key={tag} className="rounded-full border border-white/10 px-3 py-1.5">{tag}</span>
+          ))}
         </div>
 
         <div className="pointer-events-none absolute -bottom-[0.18em] left-1/2 -z-0 hidden w-[140vw] -translate-x-1/2 text-center text-[clamp(7rem,22vw,23rem)] font-semibold uppercase leading-none tracking-[-0.12em] text-white/[0.035] sm:block">
