@@ -35,9 +35,7 @@ bergdorf-retail-print-system/
 vitasoy-launch-activation/
 claudine-farms-labels/
 seagate-lightbox-display/
-business-card-system/
 sticker-label-kit/
 mylar-packaging-system/
-poster-suite/
 farmers-brand-system/
 ```
