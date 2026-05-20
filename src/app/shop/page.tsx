@@ -32,7 +32,7 @@ const categories: Category[] = [
       {
         name: 'Custom Die-Cut Stickers',
         href: '/shop/stickers',
-        image: '/images/hero-cards/stickers.png',
+        image: '/images/products/stickers/sticker-single.png',
         features: ['Die-cut to shape', 'Waterproof & UV resistant', '3–5 day turnaround', 'Standard & holographic vinyl'],
         badge: 'Order Online',
       },
@@ -58,7 +58,7 @@ const categories: Category[] = [
       {
         name: 'Business Cards',
         href: '/services/marketing-materials/business-cards',
-        image: '/images/hero/hero-2.jpg',
+        image: 'https://drive.usercontent.google.com/download?id=1LYzqKl5GRanrRWxBdsn_tnLxmp2dau-D&export=view',
         features: ['Standard & premium stock', 'Soft touch & gloss options', 'Spot UV available', 'Fast turnaround'],
       },
       {

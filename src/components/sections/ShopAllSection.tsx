@@ -6,7 +6,7 @@ const products = [
   {
     name: 'Custom Stickers',
     href: '/shop/stickers',
-    image: '/images/hero-cards/stickers.png',
+    image: '/images/products/stickers/sticker-single.png',
     description: 'Die-cut, kiss-cut, holographic, clear, and durable vinyl stickers made for brands that need sharp details.',
     features: ['Order online', 'Waterproof vinyl', 'Fast turnaround'],
     badge: 'Best Seller',
@@ -30,7 +30,7 @@ const products = [
   {
     name: 'Business Cards',
     href: '/services/marketing-materials/business-cards',
-    image: '/images/hero/hero-2.jpg',
+    image: 'https://drive.usercontent.google.com/download?id=1LYzqKl5GRanrRWxBdsn_tnLxmp2dau-D&export=view',
     description: 'Premium business cards with clean stocks, sharp color, and finishing options that make intros feel polished.',
     features: ['Premium stocks', 'Soft touch options', 'Fast reorders'],
     badge: 'Classic',
