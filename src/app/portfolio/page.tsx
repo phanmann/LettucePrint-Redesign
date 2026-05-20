@@ -51,14 +51,14 @@ function ProjectMarquee() {
               sizes="(max-width: 640px) 250px, (max-width: 1024px) 320px, 380px"
               priority={index < 3}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-black/10 to-transparent opacity-90" />
-            <div className="absolute left-4 right-4 top-4 flex items-center justify-between gap-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/65">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-90 group-focus-visible:opacity-90" />
+            <div className="absolute left-4 right-4 top-4 flex translate-y-2 items-center justify-between gap-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/65 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
               <span className="rounded-full border border-white/15 bg-black/25 px-3 py-1.5 backdrop-blur-md">{project.category}</span>
               <span className="grid h-9 w-9 place-items-center rounded-full border border-white/20 bg-black/25 text-white backdrop-blur-md transition group-hover:bg-white group-hover:text-black">
                 <ArrowUpRight size={15} />
               </span>
             </div>
-            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+            <div className="absolute bottom-0 left-0 right-0 translate-y-3 p-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 sm:p-6">
               <p className="mb-1 text-xs uppercase tracking-[0.16em] text-[#f2ff70]/80">{project.client}</p>
               <h2 className="max-w-[12rem] text-2xl font-semibold leading-[0.9] tracking-[-0.07em] text-white sm:max-w-[15rem] sm:text-4xl">{project.title}</h2>
             </div>
@@ -85,8 +85,13 @@ export default function PortfolioMicrositePage() {
             <p className="mx-auto mb-4 w-fit rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#f2ff70]">
               Selected physical work
             </p>
-            <h1 className="text-[clamp(3.9rem,12vw,12.5rem)] font-semibold uppercase leading-[0.76] tracking-[-0.105em] text-white">
-              Print<br />in motion
+            <h1 className="text-white">
+              <span className="block text-[clamp(4.5rem,12vw,12rem)] font-normal normal-case leading-[0.74] tracking-[-0.08em] [font-family:'Snell_Roundhand','Brush_Script_MT','Segoe_Script',cursive]">
+                Let Us
+              </span>
+              <span className="block font-sans text-[clamp(4.2rem,12vw,12.5rem)] font-semibold leading-[0.76] tracking-[-0.105em]">
+                Design
+              </span>
             </h1>
           </div>
 
