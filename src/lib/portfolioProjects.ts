@@ -1,3 +1,9 @@
+export type PortfolioProjectImage = {
+  src: string
+  alt: string
+  caption?: string
+}
+
 export type PortfolioProject = {
   slug: string
   title: string
@@ -7,6 +13,8 @@ export type PortfolioProject = {
   image: string
   summary: string
   services: string[]
+  output: string
+  galleryImages: PortfolioProjectImage[]
 }
 
 export const portfolioProjects: PortfolioProject[] = [
@@ -19,6 +27,14 @@ export const portfolioProjects: PortfolioProject[] = [
     image: '/images/portfolio/bergdorf-print-install.jpg',
     summary: 'Retail-facing print production built to feel polished, premium, and installation-ready.',
     services: ['Retail graphics', 'Production', 'Finishing'],
+    output: 'Retail graphics, installation-ready print assets, finishing, and production support',
+    galleryImages: [
+      {
+        src: '/images/portfolio/bergdorf-print-install.jpg',
+        alt: 'Bergdorf Goodman retail print installation detail',
+        caption: 'Retail print system produced for premium in-store presentation.',
+      },
+    ],
   },
   {
     slug: 'vitasoy-launch-activation',
@@ -29,6 +45,14 @@ export const portfolioProjects: PortfolioProject[] = [
     image: '/images/portfolio/vitasoy-activation.jpg',
     summary: 'Event collateral and physical touchpoints for a high-energy brand activation.',
     services: ['Event print', 'Collateral', 'Activation support'],
+    output: 'Event collateral, launch materials, activation support, and photo-ready touchpoints',
+    galleryImages: [
+      {
+        src: '/images/portfolio/vitasoy-activation.jpg',
+        alt: 'Vitasoy launch activation collateral and event touchpoints',
+        caption: 'Launch collateral built for a high-energy activation environment.',
+      },
+    ],
   },
   {
     slug: 'claudine-farms-labels',
@@ -39,6 +63,14 @@ export const portfolioProjects: PortfolioProject[] = [
     image: '/images/portfolio/claudine-farms-labels.jpeg',
     summary: 'Cannabis packaging labels produced for shelf presence, compliance clarity, and batch consistency.',
     services: ['Roll labels', 'Packaging', 'Production'],
+    output: 'Roll labels, packaging production, compliance-forward layout support, and batch consistency',
+    galleryImages: [
+      {
+        src: '/images/portfolio/claudine-farms-labels.jpeg',
+        alt: 'Claudine Farms cannabis label production detail',
+        caption: 'Label production balancing shelf presence with compliance clarity.',
+      },
+    ],
   },
   {
     slug: 'seagate-lightbox-display',
@@ -49,6 +81,14 @@ export const portfolioProjects: PortfolioProject[] = [
     image: '/images/portfolio/lightbox-display.png',
     summary: 'Large-format display graphics designed to hold color and detail under backlit conditions.',
     services: ['Large format', 'Display graphics', 'Mockups'],
+    output: 'Backlit display graphics, large-format production, color handling, and mockup support',
+    galleryImages: [
+      {
+        src: '/images/portfolio/lightbox-display.png',
+        alt: 'Seagate backlit display graphic',
+        caption: 'Large-format graphics prepared for backlit display conditions.',
+      },
+    ],
   },
   {
     slug: 'business-card-system',
@@ -59,6 +99,14 @@ export const portfolioProjects: PortfolioProject[] = [
     image: '/images/portfolio/business-card-system.png',
     summary: 'A clean business card system showing how tactility, paper, and finish create a stronger handoff.',
     services: ['Business cards', 'Finishing', 'Brand system'],
+    output: 'Business cards, paper/finish exploration, production samples, and brand handoff system',
+    galleryImages: [
+      {
+        src: '/images/portfolio/business-card-system.png',
+        alt: 'Lettuce Print business card system',
+        caption: 'A tactile business card system focused on paper, finish, and handoff quality.',
+      },
+    ],
   },
   {
     slug: 'sticker-label-kit',
@@ -69,6 +117,14 @@ export const portfolioProjects: PortfolioProject[] = [
     image: '/images/portfolio/sticker-labels.png',
     summary: 'Sticker and label samples built around bright color, edge detail, and product flexibility.',
     services: ['Die-cut stickers', 'Labels', 'Sample kit'],
+    output: 'Die-cut stickers, label samples, color testing, edge detail, and sample kit production',
+    galleryImages: [
+      {
+        src: '/images/portfolio/sticker-labels.png',
+        alt: 'Lettuce Print sticker and label sample kit',
+        caption: 'Sticker and label samples built to show color, edge detail, and format flexibility.',
+      },
+    ],
   },
   {
     slug: 'mylar-packaging-system',
@@ -79,6 +135,14 @@ export const portfolioProjects: PortfolioProject[] = [
     image: '/images/portfolio/mylar-packaging.png',
     summary: 'Flexible packaging concepts for brands that need shelf-ready structure and bold surface design.',
     services: ['Mylar bags', 'Packaging', 'Mockups'],
+    output: 'Mylar packaging concepts, shelf-ready mockups, flexible packaging layouts, and production direction',
+    galleryImages: [
+      {
+        src: '/images/portfolio/mylar-packaging.png',
+        alt: 'Lettuce Print mylar packaging mockup',
+        caption: 'Flexible packaging concepts designed for bold shelf presence.',
+      },
+    ],
   },
   {
     slug: 'poster-suite',
@@ -89,6 +153,14 @@ export const portfolioProjects: PortfolioProject[] = [
     image: '/images/portfolio/poster-suite.png',
     summary: 'Poster production with rich coverage, crisp type, and campaign-ready sizing.',
     services: ['Posters', 'Marketing materials', 'Production'],
+    output: 'Poster production, campaign-ready sizing, color coverage, and marketing material support',
+    galleryImages: [
+      {
+        src: '/images/portfolio/poster-suite.png',
+        alt: 'Lettuce Print poster suite',
+        caption: 'Poster production with rich color coverage and campaign-ready sizing.',
+      },
+    ],
   },
   {
     slug: 'farmers-brand-system',
@@ -99,6 +171,14 @@ export const portfolioProjects: PortfolioProject[] = [
     image: '/images/portfolio/farmers-brand-system.jpg',
     summary: 'A physical brand system translating identity into packaging, print, and campaign assets.',
     services: ['Identity', 'Packaging', 'Print system'],
+    output: 'Identity-to-print translation, packaging applications, campaign assets, and physical brand system',
+    galleryImages: [
+      {
+        src: '/images/portfolio/farmers-brand-system.jpg',
+        alt: 'Farmers NY physical brand system',
+        caption: 'A physical brand system connecting identity, packaging, and campaign assets.',
+      },
+    ],
   },
 ]
 
