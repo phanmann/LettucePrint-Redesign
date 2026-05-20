@@ -32,7 +32,7 @@ const categories: Category[] = [
       {
         name: 'Custom Die-Cut Stickers',
         href: '/shop/stickers',
-        image: '/images/products/stickers/sticker-single.png',
+        image: '/images/products/stickers/holo-stickers.png',
         features: ['Die-cut to shape', 'Waterproof & UV resistant', '3–5 day turnaround', 'Standard & holographic vinyl'],
         badge: 'Order Online',
       },

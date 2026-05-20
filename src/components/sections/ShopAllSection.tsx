@@ -6,7 +6,7 @@ const products = [
   {
     name: 'Custom Stickers',
     href: '/shop/stickers',
-    image: '/images/products/stickers/sticker-single.png',
+    image: '/images/products/stickers/holo-stickers.png',
     description: 'Die-cut, kiss-cut, holographic, clear, and durable vinyl stickers made for brands that need sharp details.',
     features: ['Order online', 'Waterproof vinyl', 'Fast turnaround'],
     badge: 'Best Seller',
