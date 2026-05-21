@@ -11,13 +11,6 @@ export const metadata: Metadata = {
 }
 
 const marqueeProjects = [...portfolioProjects, ...portfolioProjects]
-const cardStaggerClasses = [
-  'translate-y-0',
-  'translate-y-6',
-  '-translate-y-4',
-  'translate-y-10',
-  '-translate-y-2',
-]
 
 function Header() {
   return (
@@ -46,7 +39,7 @@ function Header() {
 
 function ProjectMarquee() {
   return (
-    <section className="relative -mx-4 mt-10 overflow-hidden py-12 sm:-mx-8 sm:mt-14 sm:py-16 lg:mt-16">
+    <section className="relative -mx-4 mt-10 overflow-hidden py-6 sm:-mx-8 sm:mt-14 lg:mt-16">
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-[#080808] to-transparent sm:w-40" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-[#080808] to-transparent sm:w-40" />
       <div className="flex w-max gap-4 animate-portfolio-strip hover:[animation-play-state:paused] sm:gap-6">
@@ -54,7 +47,7 @@ function ProjectMarquee() {
           <Link
             key={`${project.slug}-${index}`}
             href={`/portfolio/${project.slug}`}
-            className={`group relative h-[300px] w-[220px] shrink-0 overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/30 transition-transform duration-500 sm:h-[440px] sm:w-[320px] sm:rounded-[32px] lg:h-[520px] lg:w-[380px] ${cardStaggerClasses[index % cardStaggerClasses.length]}`}
+            className="group relative h-[300px] w-[220px] shrink-0 overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/30 sm:h-[440px] sm:w-[320px] sm:rounded-[32px] lg:h-[520px] lg:w-[380px]"
           >
             <Image
               src={project.image}
