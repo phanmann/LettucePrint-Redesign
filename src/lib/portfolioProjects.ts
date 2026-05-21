@@ -56,9 +56,9 @@ export const portfolioProjects: PortfolioProject[] = [
         caption: 'Custom paper bag packaging carrying the County Road Cannabis identity into retail handoff.',
       },
       {
-        src: '/images/portfolio/county-road-cannabis/store-sign.jpg',
-        alt: 'County Road Cannabis storefront signage',
-        caption: 'Storefront signage application for a clean, recognizable retail presence.',
+        src: '/images/portfolio/county-road-cannabis/hero.jpg',
+        alt: 'County Road Cannabis branded t-shirt cover image',
+        caption: 'Branded apparel artwork showing the County Road Cannabis identity in use.',
       },
       {
         src: '/images/portfolio/county-road-cannabis/tote.jpg',
