@@ -2,6 +2,9 @@ export type PortfolioProjectImage = {
   src: string
   alt: string
   caption?: string
+  width?: number
+  height?: number
+  layout?: 'full' | 'half'
 }
 
 export type PortfolioProject = {
@@ -12,6 +15,8 @@ export type PortfolioProject = {
   category: string
   year: string
   image: string
+  coverWidth?: number
+  coverHeight?: number
   summary: string
   services: string[]
   output: string
@@ -46,24 +51,41 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'Cannabis / Brand System',
     year: '2026',
     image: '/images/portfolio/county-road-cannabis/Paperbag_V1.jpg',
+    coverWidth: 2400,
+    coverHeight: 1600,
     summary: 'Cannabis brand applications translated across apparel, retail signage, packaging, and carryout materials.',
     services: ['Cannabis branding', 'Retail signage', 'Packaging'],
     output: 'Apparel graphics, storefront signage, custom tote artwork, paper bag packaging, and retail brand applications',
     galleryImages: [
       {
-        src: '/images/portfolio/county-road-cannabis/paper-bag.jpg',
-        alt: 'County Road Cannabis branded paper bag packaging',
-        caption: 'Custom paper bag packaging carrying the County Road Cannabis identity into retail handoff.',
+        src: '/images/portfolio/county-road-cannabis/store-sign-red.jpg',
+        alt: 'County Road Cannabis storefront sign',
+        caption: 'Storefront signage application for a clean, recognizable retail presence.',
+        width: 1600,
+        height: 1066,
       },
       {
-        src: '/images/portfolio/county-road-cannabis/hero.jpg',
-        alt: 'County Road Cannabis branded t-shirt cover image',
+        src: '/images/portfolio/county-road-cannabis/lifestyle-white-tee-arch-red.jpg',
+        alt: 'County Road Cannabis white t-shirt with red arch artwork',
         caption: 'Branded apparel artwork showing the County Road Cannabis identity in use.',
+        width: 5184,
+        height: 3456,
       },
       {
-        src: '/images/portfolio/county-road-cannabis/tote.jpg',
+        src: '/images/portfolio/county-road-cannabis/logooptions.jpg',
+        alt: 'County Road Cannabis logo option sheet',
+        caption: 'Logo option sheet showing the mark system and brand direction.',
+        width: 1128,
+        height: 1920,
+        layout: 'half',
+      },
+      {
+        src: '/images/portfolio/county-road-cannabis/tote_red2.jpg',
         alt: 'County Road Cannabis red branded tote bag',
         caption: 'Branded tote artwork extending the identity into reusable merchandise.',
+        width: 1080,
+        height: 1080,
+        layout: 'half',
       },
     ],
   },

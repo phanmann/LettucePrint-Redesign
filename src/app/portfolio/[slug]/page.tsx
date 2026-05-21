@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { getPortfolioProject, portfolioProjects } from '@/lib/portfolioProjects'
+import type { PortfolioProjectImage } from '@/lib/portfolioProjects'
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -26,6 +27,81 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: project.summary,
     alternates: { canonical: `https://lettuceprint.com/portfolio/${project.slug}` },
   }
+}
+
+
+function GalleryFigure({ image, imageIndex, className = '' }: { image: PortfolioProjectImage; imageIndex: number; className?: string }) {
+  const label = imageIndex === 0 ? 'Production Detail' : `Gallery ${imageIndex + 1}`
+
+  if (image.width && image.height) {
+    return (
+      <figure key={`${image.src}-${imageIndex}`} className={`relative overflow-hidden bg-[#1b1b1b] ${className}`}>
+        <Image
+          src={image.src}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
+          className="h-auto w-full opacity-95"
+          sizes={image.layout === 'half' ? '(max-width: 640px) 100vw, 31vw' : '(max-width: 1024px) 100vw, 63vw'}
+        />
+        <div className="absolute inset-0 bg-black/10" />
+        <figcaption className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75 sm:bottom-6 sm:left-6 sm:right-6">
+          <span>{label}</span>
+          {image.caption ? <span className="max-w-xs text-right normal-case tracking-[-0.01em] text-white/55">{image.caption}</span> : null}
+        </figcaption>
+      </figure>
+    )
+  }
+
+  return (
+    <figure
+      key={`${image.src}-${imageIndex}`}
+      className={`${imageIndex === 0 ? 'relative aspect-[16/10]' : 'relative aspect-[4/5] sm:aspect-[16/10]'} overflow-hidden bg-[#1b1b1b] ${className}`}
+    >
+      <Image
+        src={image.src}
+        alt={image.alt}
+        fill
+        className="object-cover opacity-95"
+        sizes="(max-width: 1024px) 100vw, 63vw"
+      />
+      <div className="absolute inset-0 bg-black/10" />
+      <figcaption className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75 sm:bottom-6 sm:left-6 sm:right-6">
+        <span>{label}</span>
+        {image.caption ? <span className="max-w-xs text-right normal-case tracking-[-0.01em] text-white/55">{image.caption}</span> : null}
+      </figcaption>
+    </figure>
+  )
+}
+
+function renderGalleryImages(galleryImages: PortfolioProjectImage[]) {
+  const rendered = []
+
+  for (let imageIndex = 0; imageIndex < galleryImages.length; imageIndex += 1) {
+    const image = galleryImages[imageIndex]
+
+    if (image.layout === 'half') {
+      const pair = galleryImages.slice(imageIndex, imageIndex + 2).filter((item) => item.layout === 'half')
+      rendered.push(
+        <div key={`collage-${image.src}`} className="grid items-start gap-5 sm:grid-cols-2 sm:gap-6 lg:gap-8">
+          {pair.map((pairImage, pairIndex) => (
+            <GalleryFigure
+              key={`${pairImage.src}-${imageIndex + pairIndex}`}
+              image={pairImage}
+              imageIndex={imageIndex + pairIndex}
+              className={pairIndex === 1 ? 'sm:mt-16 lg:mt-24' : ''}
+            />
+          ))}
+        </div>
+      )
+      imageIndex += pair.length - 1
+      continue
+    }
+
+    rendered.push(<GalleryFigure key={`${image.src}-${imageIndex}`} image={image} imageIndex={imageIndex} />)
+  }
+
+  return rendered
 }
 
 export default async function PortfolioProjectPage({ params }: PageProps) {
@@ -102,15 +178,27 @@ export default async function PortfolioProjectPage({ params }: PageProps) {
 
       {/* Scrolling visual case study column */}
       <section className="min-w-0 bg-[#0b0b0b]">
-        <div className="relative min-h-screen overflow-hidden bg-[#171717]">
-          <Image
-            src={project.image}
-            alt={`${project.client} — ${project.title}`}
-            fill
-            className="object-cover"
-            priority
-            sizes="(max-width: 1024px) 100vw, 63vw"
-          />
+        <div className={`relative overflow-hidden bg-[#171717] ${project.coverWidth && project.coverHeight ? '' : 'min-h-screen'}`}>
+          {project.coverWidth && project.coverHeight ? (
+            <Image
+              src={project.image}
+              alt={`${project.client} — ${project.title}`}
+              width={project.coverWidth}
+              height={project.coverHeight}
+              className="h-auto w-full"
+              priority
+              sizes="(max-width: 1024px) 100vw, 63vw"
+            />
+          ) : (
+            <Image
+              src={project.image}
+              alt={`${project.client} — ${project.title}`}
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 1024px) 100vw, 63vw"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
           <div className="absolute right-5 top-5 text-right text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75 sm:right-8 sm:top-8">
             <p>Lettuce Print</p>
@@ -120,25 +208,7 @@ export default async function PortfolioProjectPage({ params }: PageProps) {
 
 
         <div className="space-y-5 bg-[#111] p-5 sm:space-y-8 sm:p-8 lg:p-10">
-          {galleryImages.map((image, imageIndex) => (
-            <figure
-              key={`${image.src}-${imageIndex}`}
-              className={imageIndex === 0 ? 'relative aspect-[16/10] overflow-hidden bg-[#1b1b1b]' : 'relative aspect-[4/5] overflow-hidden bg-[#1b1b1b] sm:aspect-[16/10]'}
-            >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                className="object-cover opacity-95"
-                sizes="(max-width: 1024px) 100vw, 63vw"
-              />
-              <div className="absolute inset-0 bg-black/10" />
-              <figcaption className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75 sm:bottom-6 sm:left-6 sm:right-6">
-                <span>{imageIndex === 0 ? 'Production Detail' : `Gallery ${imageIndex + 1}`}</span>
-                {image.caption ? <span className="max-w-xs text-right normal-case tracking-[-0.01em] text-white/55">{image.caption}</span> : null}
-              </figcaption>
-            </figure>
-          ))}
+          {renderGalleryImages(galleryImages)}
 
           <div className="flex min-h-[360px] flex-col justify-between bg-[#eee9df] p-6 text-black sm:min-h-[420px] sm:p-8">
             <div>
