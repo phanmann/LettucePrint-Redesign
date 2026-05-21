@@ -103,7 +103,7 @@ export const portfolioProjects: PortfolioProject[] = [
     client: 'Lucky Sun Farms',
     category: 'Cannabis / Brand System',
     year: '2026',
-    image: '/images/portfolio/lucky-sun-farms/wood-engrave-2.png',
+    image: '/images/portfolio/lucky-sun-farms/wood-platform-set-2.jpg',
     summary: 'Cannabis packaging and branded display materials built around a bright, farm-forward product identity.',
     services: ['Cannabis packaging', 'Wood engraving', 'Product display'],
     output: 'Cannabis product packaging, engraved wood signage, branded display photography, and shelf-ready presentation',
