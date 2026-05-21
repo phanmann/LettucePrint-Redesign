@@ -45,7 +45,7 @@ export const portfolioProjects: PortfolioProject[] = [
     client: 'County Road Cannabis',
     category: 'Cannabis / Brand System',
     year: '2026',
-    image: '/images/portfolio/county-road-cannabis/hero.jpg',
+    image: '/images/portfolio/county-road-cannabis/store-sign-red.jpg',
     summary: 'Cannabis brand applications translated across apparel, retail signage, packaging, and carryout materials.',
     services: ['Cannabis branding', 'Retail signage', 'Packaging'],
     output: 'Apparel graphics, storefront signage, custom tote artwork, paper bag packaging, and retail brand applications',
