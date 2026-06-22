@@ -22,16 +22,21 @@ const LAMINATE_ROLL_COST = 33800     // $338 / roll
 // ─── Ink Cost ──────────────────────────────────────────────────────────────
 const INK_COST_PER_SQ_IN = 0.017    // $ per sq in (fixed per Steven)
 
-// ─── Markup & Volume Discounts ─────────────────────────────────────────────
-const BASE_MARKUP = 2.2             // 2.2× cost = ~55% gross margin
-
-const VOLUME_DISCOUNTS: Array<{ minQty: number; discount: number; label: string }> = [
-  { minQty: 25000, discount: 0.18, label: 'Maximum discount' },
-  { minQty: 10000, discount: 0.12, label: 'Popular choice' },
-  { minQty: 5000,  discount: 0.07, label: 'Standard volume' },
-  { minQty: 1000,  discount: 0.03, label: 'Entry tier' },
-  { minQty: 0,     discount: 0,    label: 'Base price' },
+// ─── Markup Tiers (replacing flat 2.2× + volume discounts) ──────────────────
+// These markups are applied to the proportional roll cost + ink cost
+const MARKUP_TIERS: Array<{ minQty: number; markup: number }> = [
+  { minQty: 10000, markup: 1.18 },  // 18% markup
+  { minQty: 5000,  markup: 1.20 },  // 20% markup
+  { minQty: 2500,  markup: 1.40 },  // 40% markup
+  { minQty: 1000,  markup: 1.60 },  // 60% markup
+  { minQty: 500,   markup: 2.20 },  // 120% markup
+  { minQty: 250,   markup: 2.52 },  // 152% markup
 ]
+
+function getMarkupForQty(quantity: number): number {
+  const tier = MARKUP_TIERS.find(t => quantity >= t.minQty)
+  return tier?.markup ?? 2.52
+}
 
 // ─── Preset Sizes ──────────────────────────────────────────────────────────
 export interface PresetSize {
@@ -64,8 +69,8 @@ export interface RollLabelPriceResult {
   unitFormatted: string
   costCents: number          // internal cost (not shown to customer)
   markupMultiplier: number
-  volumeDiscount: number
-  volumeLabel: string
+  volumeDiscount: number     // kept for UI compatibility (shows as 0 now)
+  volumeLabel: string        // kept for UI compatibility
   // Roll math (not shown to customer)
   labelsAcross: number
   labelsPerFacestockRoll: number
@@ -87,12 +92,11 @@ export function calculateRollLabelPrice(
   )
   const labelsPerFacestockRoll = labelsAcross * labelsAroundPerFacestockRoll
 
-  const facestockRollsNeeded = Math.ceil(quantity / labelsPerFacestockRoll)
+  // ── Proportional facestock cost (NOT whole rolls) ──
+  const facestockCostPerLabel = FACESTOCK_ROLL_COST[material] / labelsPerFacestockRoll
+  const facestockCostCents = Math.round(facestockCostPerLabel * quantity)
 
-  // ── Facestock cost ──
-  const facestockCostCents = facestockRollsNeeded * FACESTOCK_ROLL_COST[material]
-
-  // ── Laminate cost (matte and gloss always laminated; 'laminate' is an upgrade option) ──
+  // ── Laminate cost (proportional, NOT whole rolls) ──
   let laminateRollsNeeded: number | null = null
   let laminateCostCents = 0
 
@@ -101,8 +105,10 @@ export function calculateRollLabelPrice(
       LAMINATE_ROLL_LENGTH_IN / (heightIn + GAP_AROUND_IN)
     )
     const labelsPerLaminateRoll = labelsAcross * labelsAroundPerLaminateRoll
+    const laminateCostPerLabel = LAMINATE_ROLL_COST / labelsPerLaminateRoll
+    laminateCostCents = Math.round(laminateCostPerLabel * quantity)
+    // Calculate whole rolls needed for display only
     laminateRollsNeeded = Math.ceil(quantity / labelsPerLaminateRoll)
-    laminateCostCents = laminateRollsNeeded * LAMINATE_ROLL_COST
   }
 
   // ── Ink cost ──
@@ -112,25 +118,24 @@ export function calculateRollLabelPrice(
   // ── Total cost ──
   const totalCostCents = facestockCostCents + laminateCostCents + inkCostCents
 
-  // ── Volume discount ──
-  const volumeTier = VOLUME_DISCOUNTS.find(t => quantity >= t.minQty)!
-  const discount = volumeTier.discount
+  // ── Sell price with tiered markup ──
+  const markup = getMarkupForQty(quantity)
+  const sellPriceCents = Math.round(totalCostCents * markup)
 
-  // ── Sell price ──
-  const basePrice = Math.round(totalCostCents * BASE_MARKUP)
-  const discountedPrice = Math.round(basePrice * (1 - discount))
+  const unitCents = Math.round(sellPriceCents / quantity)
 
-  const unitCents = Math.round(discountedPrice / quantity)
+  // Calculate whole rolls needed for display only
+  const facestockRollsNeeded = Math.ceil(quantity / labelsPerFacestockRoll)
 
   return {
-    totalCents: discountedPrice,
+    totalCents: sellPriceCents,
     unitCents,
-    totalFormatted: formatCents(discountedPrice),
+    totalFormatted: formatCents(sellPriceCents),
     unitFormatted: formatCents(unitCents),
     costCents: totalCostCents,
-    markupMultiplier: BASE_MARKUP,
-    volumeDiscount: discount,
-    volumeLabel: volumeTier.label,
+    markupMultiplier: markup,
+    volumeDiscount: 0,  // No longer using volume discounts
+    volumeLabel: 'Volume pricing',
     labelsAcross,
     labelsPerFacestockRoll,
     facestockRollsNeeded,
