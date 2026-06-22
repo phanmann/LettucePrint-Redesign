@@ -32,9 +32,9 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'Packaging / Cannabis',
     year: '2024',
     image: '/images/portfolio/rolling-green-cannabis/hero.jpg',
-    summary: 'Cannabis packaging photography and production details built around premium shelf presence.',
+    summary: 'Rolling Green Cannabis is a premium, farmer-forward cannabis brand focused on delivering high-quality, organically grown products. The goal of this project was to design a cohesive, eye-catching line of jar labels for their best-selling flower. The packaging needed to honor the brand’s connection to nature while providing a sophisticated, modern shelf presence that immediately communicates product variety to the consumer.',
     services: ['Cannabis packaging', 'Label production', 'Packaging design'],
-    output: 'Cannabis packaging visuals, label production support',
+    year: '2024',
     galleryImages: [
       {
         src: '/images/portfolio/rolling-green-cannabis/detail-01.jpg',
