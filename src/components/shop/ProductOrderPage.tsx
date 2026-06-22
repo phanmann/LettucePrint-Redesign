@@ -9,7 +9,8 @@ import Badge from '@/components/ui/Badge'
 import { Disclosure } from '@/components/shop/ProductDisclosure'
 import { ArrowRight, CheckCircle, FileText, Layers, Zap } from 'lucide-react'
 import ProductImageGallery from '@/components/shop/ProductImageGallery'
-import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
+import { useCart } from '@/context/CartContext'
 
 export interface OptionGroup {
   label: string
@@ -75,9 +76,6 @@ function CtaBlock({
   isRush: boolean
   pricingNote?: string
 }) {
-  const subtext = displayPrice != null
-    ? 'Upload artwork · Proof before production · Pickup or ship'
-    : "We'll confirm pricing + turnaround within a few hours."
   return (
     <>
       {displayPrice != null && (
@@ -90,17 +88,25 @@ function CtaBlock({
           )}
         </div>
       )}
-      <Button
-        onClick={onClick}
-        size="lg"
-        className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl"
-      >
-        Order Now <ArrowRight size={16} className="ml-2" />
-      </Button>
-      <p className="text-xs text-gray-400 text-center mt-3">{subtext}</p>
+      <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-3">
+        <Button
+          onClick={onClick}
+          size="lg"
+          className="w-full min-h-[64px] !bg-lp-green hover:!bg-lp-green-dark text-white text-base sm:text-lg font-extrabold py-4 rounded-xl"
+        >
+          Add to Cart
+        </Button>
+        <Link
+          href="/cart"
+          className="inline-flex min-h-[64px] items-center justify-center rounded-xl border-2 border-gray-300 bg-white px-8 text-base sm:text-lg font-extrabold uppercase tracking-wider text-gray-800 transition-all duration-200 hover:border-gray-400 hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lp-green focus-visible:ring-offset-2"
+        >
+          View Cart
+        </Link>
+      </div>
+      <p className="text-xs text-gray-400 text-center mt-3">Upload artwork · Proof before production · Shipping at checkout</p>
       {pricingNote && <p className="text-xs text-gray-500 text-center mt-2">{pricingNote}</p>}
       <p className="text-xs text-center mt-2">
-        <span className="text-gray-500">Questions? Call us: </span>
+        <span className="text-gray-500">Need rush? Call us: </span>
         <a href="tel:3476030557" className="font-semibold text-lp-green hover:underline">347.603.0557</a>
       </p>
     </>
@@ -273,7 +279,8 @@ export default function ProductOrderPage({
   showQuantity,
   images,
 }: ProductOrderPageProps) {
-  const router = useRouter()
+  const pathname = usePathname()
+  const { addItem } = useCart()
 
   // ── Lifted configurator state ──────────────────────────────────────────────
   const [selections, setSelections] = useState<Record<string, string>>(() =>
@@ -294,18 +301,37 @@ export default function ProductOrderPage({
     ? effectiveIsRush && currentRow.rushPrice ? currentRow.rushPrice : currentRow.standardPrice
     : null
 
-  const handleOrderNow = () => {
-    const details = optionGroups
-      .map(g => {
-        const sel = g.options.find(o => o.id === selections[g.label])
-        return `${g.label}: ${sel?.label ?? selections[g.label]}`
-      })
-      .join(', ')
-    const qtyStr = showQuantity ? `, Qty: ${quantity}` : currentRow ? `, Qty: ${currentRow.qty}` : ''
-    const rushStr = effectiveIsRush ? ', Rush' : ''
-    router.push(
-      `/get-quote?product=${encodeURIComponent(name)}&details=${encodeURIComponent(details + qtyStr + rushStr)}`
-    )
+  const selectedOptionLabels = optionGroups.map(group => ({
+    group: group.label,
+    label: group.options.find(option => option.id === selections[group.label])?.label ?? selections[group.label],
+  }))
+  const getSelectedLabel = (labels: string[]) =>
+    selectedOptionLabels.find(option =>
+      labels.some(label => option.group.toLowerCase().includes(label))
+    )?.label ?? ''
+
+  const handleAddToCart = () => {
+    const itemQty = showQuantity
+      ? quantity
+      : typeof currentRow?.qty === 'number'
+        ? currentRow.qty
+        : parseInt(String(currentRow?.qty ?? 1), 10) || 1
+    const material = getSelectedLabel(['material', 'stock', 'paper']) || selectedOptionLabels[0]?.label || 'Standard'
+    const finish = getSelectedLabel(['finish', 'hardware', 'coating', 'lamination']) || selectedOptionLabels[1]?.label || 'Standard'
+    const size = getSelectedLabel(['size', 'dimension']) || 'Configured product'
+    const price = displayPrice ?? 0
+
+    addItem({
+      product: name,
+      size,
+      qty: itemQty,
+      material,
+      finish,
+      rush: effectiveIsRush ? '24hr' : 'standard',
+      totalCents: Math.round(price * 100),
+      totalFormatted: fmt(price),
+      productPath: pathname,
+    })
   }
 
   return (
@@ -352,7 +378,7 @@ export default function ProductOrderPage({
                 />
                 <div className={activePricingTable ? 'pt-5' : 'border-t border-gray-200 pt-5'}>
                   <CtaBlock
-                    onClick={handleOrderNow}
+                    onClick={handleAddToCart}
                     displayPrice={displayPrice}
                     isRush={effectiveIsRush}
                     pricingNote={pricingNote}
@@ -408,7 +434,7 @@ export default function ProductOrderPage({
                   />
                   <div className={activePricingTable ? 'pt-5' : 'border-t border-gray-200 pt-5'}>
                     <CtaBlock
-                      onClick={handleOrderNow}
+                      onClick={handleAddToCart}
                       displayPrice={displayPrice}
                       isRush={effectiveIsRush}
                       pricingNote={pricingNote}
