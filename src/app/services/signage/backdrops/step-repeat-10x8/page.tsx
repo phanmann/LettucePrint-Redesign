@@ -35,7 +35,6 @@ export default function Page() {
           pricingTable: [{ qty: 1, standardPrice: 234.91 }],
         },
       ]}
-      pricingNote="Select print + hardware, hardware only, or graphic only. Rush = next-day production where available. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
       breadcrumb={[
         { label: "Backdrops", href: "/services/signage/backdrops" },
         { label: "Step and Repeat Backdrop 10 x 8 ft.", href: "" },
