@@ -69,12 +69,10 @@ function CtaBlock({
   onClick,
   displayPrice,
   isRush,
-  pricingNote,
 }: {
   onClick: () => void
   displayPrice: number | null
   isRush: boolean
-  pricingNote?: string
 }) {
   return (
     <>
@@ -104,7 +102,6 @@ function CtaBlock({
         </Link>
       </div>
       <p className="text-xs text-gray-400 text-center mt-3">Upload artwork · Proof before production · Shipping at checkout</p>
-      {pricingNote && <p className="text-xs text-gray-500 text-center mt-2">{pricingNote}</p>}
       <p className="text-xs text-center mt-2">
         <span className="text-gray-500">Need rush? Call us: </span>
         <a href="tel:3476030557" className="font-semibold text-lp-green hover:underline">347.603.0557</a>
@@ -270,7 +267,6 @@ export default function ProductOrderPage({
   optionGroups,
   pricingTable,
   pricingRules,
-  pricingNote,
   specs,
   artworkRequirements,
   included,
@@ -381,7 +377,6 @@ export default function ProductOrderPage({
                     onClick={handleAddToCart}
                     displayPrice={displayPrice}
                     isRush={effectiveIsRush}
-                    pricingNote={pricingNote}
                   />
                 </div>
               </div>
@@ -437,7 +432,6 @@ export default function ProductOrderPage({
                       onClick={handleAddToCart}
                       displayPrice={displayPrice}
                       isRush={effectiveIsRush}
-                      pricingNote={pricingNote}
                     />
                   </div>
                 </div>
