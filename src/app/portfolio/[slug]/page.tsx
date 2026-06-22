@@ -140,9 +140,6 @@ export default async function PortfolioProjectPage({ params }: PageProps) {
 
         <div className="flex-1 px-5 pb-8 sm:px-8 lg:flex lg:flex-col lg:px-10 lg:pb-10">
           <div className="pt-6 lg:pt-8 xl:pt-10">
-            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-lp-green">
-              {project.category} / {project.year}
-            </p>
             <h1 className="max-w-[12ch] text-[clamp(3.1rem,5.9vw,6.9rem)] font-normal uppercase leading-[0.86] tracking-[-0.075em] text-white">
               {project.title}
             </h1>
