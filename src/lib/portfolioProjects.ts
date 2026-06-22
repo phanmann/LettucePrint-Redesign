@@ -55,7 +55,7 @@ export const portfolioProjects: PortfolioProject[] = [
     coverHeight: 1600,
     summary: 'County Road Cannabis is a boutique retail dispensary rooted in community, heritage, and a down-to-earth approach to cannabis wellness. The goal of this comprehensive branding project was to build a full identity system from the ground up. Taking inspiration from the dispensary’s physical architecture—a beautifully repurposed, rural barnyard aesthetic—the brand identity balances a nostalgic, country-roads charm with the polished, welcoming vibe of a modern retail space.',
     services: ['Cannabis branding', 'Retail signage', 'Packaging'],
-    output: 'Apparel graphics, storefront signage, custom tote artwork, paper bag packaging, and retail brand applications',
+    output: 'Brand Identity, Logo Design, Apparel, Signage',
     galleryImages: [
       {
         src: '/images/portfolio/county-road-cannabis/store-sign-red.jpg',
@@ -97,9 +97,9 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'Cannabis / Packaging',
     year: '2025',
     image: '/images/portfolio/noizey/noizey-paint2.jpg',
-    summary: 'Cannabis packaging and product photography built around bold color, label clarity, and shelf-ready presentation.',
+    summary: 'noizey (itsnoizey.com) is an edgy, high-energy cannabis brand designed to cut through market static with an attitude heavily inspired by underground music culture, urban nightlife, and creative subcultures. Built around the ethos "Make Noize. Not Excuses," the objective of this project was to establish a fully integrated brand identity and packaging system. The visual landscape needed to radiate "coolness," effortlessly connecting with music lovers, creators, and everyday enthusiasts who view cannabis as a fuel for their lifestyle, flow, and self-expression.',
     services: ['Cannabis packaging', 'Label production', 'Product photography'],
-    output: 'Jar label production, cannabis packaging visuals, product photography, and shelf-ready brand presentation',
+    output: 'Brand Identity, Logo Design, Packaging',
     galleryImages: [
       {
         src: '/images/portfolio/noizey/3-jars-dark.png',
@@ -120,7 +120,7 @@ export const portfolioProjects: PortfolioProject[] = [
   },
   {
     slug: 'lucky-sun-farms',
-    aliases: ['seagate-lightbox-display'],
+    aliases: ['lucky-sun-farms-branding'],
     title: 'Lucky Sun Farms',
     client: 'Lucky Sun Farms',
     category: 'Cannabis / Brand System',
@@ -128,7 +128,7 @@ export const portfolioProjects: PortfolioProject[] = [
     image: '/images/portfolio/lucky-sun-farms/wood-platform-set-2.jpg',
     summary: 'Cannabis packaging and branded display materials built around a bright, farm-forward product identity.',
     services: ['Cannabis packaging', 'Wood engraving', 'Product display'],
-    output: 'Cannabis product packaging, engraved wood signage, branded display photography, and shelf-ready presentation',
+    output: 'Branding, Logo Design, Packaging',
     galleryImages: [
       {
         src: '/images/portfolio/lucky-sun-farms/wood-platform-set.jpg',
