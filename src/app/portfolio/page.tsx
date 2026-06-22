@@ -96,11 +96,6 @@ export default function PortfolioMicrositePage() {
         </div>
 
         <ProjectMarquee />
-
-
-        <div className="pointer-events-none absolute -bottom-[0.18em] left-1/2 -z-0 hidden w-[140vw] -translate-x-1/2 text-center text-[clamp(7rem,22vw,23rem)] font-normal uppercase leading-none tracking-[-0.12em] text-white/[0.035] sm:block">
-          Portfolio
-        </div>
       </section>
     </main>
   )
