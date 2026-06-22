@@ -3,3 +3,14 @@ node_modules
 .env.local
 .DS_Store
 .vercel
+
+# OpenClaw workspace files
+.openclaw/
+AGENTS.md
+CLAUDE.md
+HEARTBEAT.md
+IDENTITY.md
+MEMORY.md
+SOUL.md
+TOOLS.md
+USER.md
