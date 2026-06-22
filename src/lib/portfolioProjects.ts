@@ -26,15 +26,15 @@ export type PortfolioProject = {
 export const portfolioProjects: PortfolioProject[] = [
   {
     slug: 'rolling-green-cannabis',
-    aliases: ['bergdorf-retail-print-system'],
+    aliases: ['rolling-green-cannabis-packaging'],
     title: 'Rolling Green Cannabis',
     client: 'Rolling Green Cannabis',
     category: 'Packaging / Cannabis',
-    year: '2026',
+    year: '2024',
     image: '/images/portfolio/rolling-green-cannabis/hero.jpg',
     summary: 'Cannabis packaging photography and production details built around premium shelf presence.',
-    services: ['Cannabis packaging', 'Label production', 'Product photography'],
-    output: 'Cannabis packaging visuals, label production support, product photography, and shelf-ready presentation',
+    services: ['Cannabis packaging', 'Label production', 'Packaging design'],
+    output: 'Cannabis packaging visuals, label production support',
     galleryImages: [
       {
         src: '/images/portfolio/rolling-green-cannabis/detail-01.jpg',
