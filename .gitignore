@@ -16,5 +16,5 @@ TOOLS.md
 USER.md
 
 # Secrets
-secrets/*.json
+secrets/
 .env.local
