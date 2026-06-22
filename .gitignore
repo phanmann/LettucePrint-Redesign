@@ -14,3 +14,7 @@ MEMORY.md
 SOUL.md
 TOOLS.md
 USER.md
+
+# Secrets
+secrets/*.json
+.env.local
