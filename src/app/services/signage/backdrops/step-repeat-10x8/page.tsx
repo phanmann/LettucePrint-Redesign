@@ -12,13 +12,30 @@ export default function Page() {
       parentHref="/services/signage/backdrops"
       pricingTable={[
         { qty: 1, standardPrice: 374.4, rushPrice: 524.16 },
-        { qty: 5, standardPrice: 1864.0, rushPrice: 2609.6 },
-        { qty: 10, standardPrice: 3712.0, rushPrice: 5196.8 },
-        { qty: 25, standardPrice: 9240.0, rushPrice: 12936.0 },
-        { qty: 50, standardPrice: 18400.0, rushPrice: 25760.0 },
-        { qty: 100, standardPrice: 36640.0, rushPrice: 51296.0 },
       ]}
-      pricingNote="Prices include hardware + full-color print. Rush = next-day production. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
+      pricingRules={[
+        {
+          selections: { Material: "fabric", Hardware: "frame-included" },
+          pricingTable: [{ qty: 1, standardPrice: 374.4, rushPrice: 524.16 }],
+        },
+        {
+          selections: { Material: "vinyl", Hardware: "frame-included" },
+          pricingTable: [{ qty: 1, standardPrice: 329.94, rushPrice: 461.92 }],
+        },
+        {
+          selections: { Hardware: "hardware-only" },
+          pricingTable: [{ qty: 1, standardPrice: 190.35 }],
+        },
+        {
+          selections: { Material: "fabric", Hardware: "graphic-only" },
+          pricingTable: [{ qty: 1, standardPrice: 310.2 }],
+        },
+        {
+          selections: { Material: "vinyl", Hardware: "graphic-only" },
+          pricingTable: [{ qty: 1, standardPrice: 234.91 }],
+        },
+      ]}
+      pricingNote="Select print + hardware, hardware only, or graphic only. Rush = next-day production where available. Pickup available at Orlando FL or Hollywood FL. Shipping via customer UPS label."
       breadcrumb={[
         { label: "Backdrops", href: "/services/signage/backdrops" },
         { label: "Step and Repeat Backdrop 10 x 8 ft.", href: "" },
@@ -33,6 +50,7 @@ export default function Page() {
         { label: "Hardware", options: [
           { id: "frame-included", label: "Frame Included", description: "Complete kit with frame and carry case." },
           { id: "graphic-only", label: "Graphic Only", description: "Print only, no hardware." },
+          { id: "hardware-only", label: "Hardware Only", description: "Frame and carry case only, no printed graphic." },
         ] },
       ]}
       specs={[
@@ -51,7 +69,7 @@ export default function Page() {
       included={[
         "Digital proof before production",
         "Full-color dye-sub or CMYK print",
-        "Hardware and carry case included",
+        "Hardware and carry case included when selected",
         "Quality check before ship",
       ]}
       relatedProducts={[

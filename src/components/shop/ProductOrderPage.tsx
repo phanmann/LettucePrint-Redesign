@@ -23,6 +23,11 @@ export interface PricingRow {
   note?: string
 }
 
+export interface PricingRule {
+  selections: Record<string, string>
+  pricingTable: PricingRow[]
+}
+
 export interface ProductOrderPageProps {
   name: string
   tagline: string
@@ -31,6 +36,7 @@ export interface ProductOrderPageProps {
   color: string
   optionGroups: OptionGroup[]
   pricingTable?: PricingRow[]
+  pricingRules?: PricingRule[]
   pricingNote?: string
   specs: { label: string; value: string }[]
   artworkRequirements: { label: string; value: string }[]
@@ -257,6 +263,7 @@ export default function ProductOrderPage({
   color,
   optionGroups,
   pricingTable,
+  pricingRules,
   pricingNote,
   specs,
   artworkRequirements,
@@ -276,9 +283,15 @@ export default function ProductOrderPage({
   const [isRush, setIsRush] = useState(false)
   const [quantity, setQuantity] = useState(1)
 
-  const currentRow = pricingTable?.[selectedRowIdx]
+  const matchedPricingRule = pricingRules?.find(rule =>
+    Object.entries(rule.selections).every(([group, option]) => selections[group] === option)
+  )
+  const activePricingTable = matchedPricingRule?.pricingTable ?? pricingTable
+  const activeRowIdx = Math.min(selectedRowIdx, Math.max((activePricingTable?.length ?? 1) - 1, 0))
+  const currentRow = activePricingTable?.[activeRowIdx]
+  const effectiveIsRush = isRush && Boolean(currentRow?.rushPrice)
   const displayPrice = currentRow
-    ? isRush && currentRow.rushPrice ? currentRow.rushPrice : currentRow.standardPrice
+    ? effectiveIsRush && currentRow.rushPrice ? currentRow.rushPrice : currentRow.standardPrice
     : null
 
   const handleOrderNow = () => {
@@ -289,7 +302,7 @@ export default function ProductOrderPage({
       })
       .join(', ')
     const qtyStr = showQuantity ? `, Qty: ${quantity}` : currentRow ? `, Qty: ${currentRow.qty}` : ''
-    const rushStr = isRush ? ', Rush' : ''
+    const rushStr = effectiveIsRush ? ', Rush' : ''
     router.push(
       `/get-quote?product=${encodeURIComponent(name)}&details=${encodeURIComponent(details + qtyStr + rushStr)}`
     )
@@ -326,22 +339,22 @@ export default function ProductOrderPage({
               <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24">
                 <ConfiguratorOptions
                   optionGroups={optionGroups}
-                  pricingTable={pricingTable}
+                  pricingTable={activePricingTable}
                   showQuantity={showQuantity}
                   selections={selections}
                   setSelections={setSelections}
-                  selectedRowIdx={selectedRowIdx}
+                  selectedRowIdx={activeRowIdx}
                   setSelectedRowIdx={setSelectedRowIdx}
                   isRush={isRush}
                   setIsRush={setIsRush}
                   quantity={quantity}
                   setQuantity={setQuantity}
                 />
-                <div className={pricingTable ? 'pt-5' : 'border-t border-gray-200 pt-5'}>
+                <div className={activePricingTable ? 'pt-5' : 'border-t border-gray-200 pt-5'}>
                   <CtaBlock
                     onClick={handleOrderNow}
                     displayPrice={displayPrice}
-                    isRush={isRush}
+                    isRush={effectiveIsRush}
                     pricingNote={pricingNote}
                   />
                 </div>
@@ -382,22 +395,22 @@ export default function ProductOrderPage({
                 <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
                   <ConfiguratorOptions
                     optionGroups={optionGroups}
-                    pricingTable={pricingTable}
+                    pricingTable={activePricingTable}
                     showQuantity={showQuantity}
                     selections={selections}
                     setSelections={setSelections}
-                    selectedRowIdx={selectedRowIdx}
+                    selectedRowIdx={activeRowIdx}
                     setSelectedRowIdx={setSelectedRowIdx}
                     isRush={isRush}
                     setIsRush={setIsRush}
                     quantity={quantity}
                     setQuantity={setQuantity}
                   />
-                  <div className={pricingTable ? 'pt-5' : 'border-t border-gray-200 pt-5'}>
+                  <div className={activePricingTable ? 'pt-5' : 'border-t border-gray-200 pt-5'}>
                     <CtaBlock
                       onClick={handleOrderNow}
                       displayPrice={displayPrice}
-                      isRush={isRush}
+                      isRush={effectiveIsRush}
                       pricingNote={pricingNote}
                     />
                   </div>
