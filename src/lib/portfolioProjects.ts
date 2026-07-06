@@ -126,7 +126,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'Cannabis / Brand System',
     year: '2026',
     image: '/images/portfolio/lucky-sun-farms/wood-platform-set-2.jpg',
-    summary: 'Cannabis packaging and branded display materials built around a bright, farm-forward product identity.',
+    summary: 'Lucky Sun Farms is a New York-based craft cannabis brand built on an authentic, extensive legacy of sun-grown cultivation. Owned and operated by farmers who have dedicated many decades to masterfully farming the plant, the brand represents the gold standard of legacy agriculture. The objective of this project was to design a comprehensive brand identity and multi-SKU packaging system. The visual strategy centers on translating their immense tenure, honesty, and deep-rooted heritage into a clean, modern aesthetic.',
     services: ['Cannabis packaging', 'Wood engraving', 'Product display'],
     output: 'Branding, Logo Design, Packaging',
     galleryImages: [
@@ -157,7 +157,8 @@ export const portfolioProjects: PortfolioProject[] = [
     image: '/images/portfolio/jamaica-smooth/3bags.jpg',
     summary: 'Cannabis packaging and merchandise visuals built around a bold tropical brand system.',
     services: ['Cannabis packaging', 'Merchandise', 'Product photography'],
-    output: 'Cannabis bag packaging, billboard-style product visuals, apparel graphics, tote artwork, and branded merchandise photography',
+    output: 'Jamaica Smooth is an authentic, Jamaican-owned cannabis brand specializing in premium, culture-forward infused gummies. The objective of this project was to establish a vibrant, complete brand identity system and packaging ecosystem from the ground up. Grounded in the core positioning line, "Paradise Packed Into a Gummy," the visual identity aims to blend the rich, energetic spirit of Jamaican culture with a playful, high-contrast, modern retail presence. 
+',
     galleryImages: [
       {
         src: '/images/portfolio/jamaica-smooth/3bags-billboard.jpg',
