@@ -155,10 +155,9 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'Cannabis / Brand System',
     year: '2026',
     image: '/images/portfolio/jamaica-smooth/3bags.jpg',
-    summary: 'Cannabis packaging and merchandise visuals built around a bold tropical brand system.',
+    summary: 'Jamaica Smooth is an authentic, Jamaican-owned cannabis brand specializing in premium, culture-forward infused gummies. The objective of this project was to establish a vibrant, complete brand identity system and packaging ecosystem from the ground up. Grounded in the core positioning line, "Paradise Packed Into a Gummy," the visual identity aims to blend the rich, energetic spirit of Jamaican culture with a playful, high-contrast, modern retail presence.',
     services: ['Cannabis packaging', 'Merchandise', 'Product photography'],
-    output: 'Jamaica Smooth is an authentic, Jamaican-owned cannabis brand specializing in premium, culture-forward infused gummies. The objective of this project was to establish a vibrant, complete brand identity system and packaging ecosystem from the ground up. Grounded in the core positioning line, "Paradise Packed Into a Gummy," the visual identity aims to blend the rich, energetic spirit of Jamaican culture with a playful, high-contrast, modern retail presence. 
-',
+    output: 'Cannabis bag packaging, billboard-style product visuals, apparel graphics, tote artwork, and branded merchandise photography',
     galleryImages: [
       {
         src: '/images/portfolio/jamaica-smooth/3bags-billboard.jpg',
