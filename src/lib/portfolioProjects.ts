@@ -218,24 +218,6 @@ export const portfolioProjects: PortfolioProject[] = [
       },
     ],
   },
-  {
-    slug: 'farmers-brand-system',
-    title: 'Farmers brand system',
-    client: 'Farmers NY',
-    category: 'Identity',
-    year: '2026',
-    image: '/images/portfolio/farmers-brand-system/hero.jpg',
-    summary: 'A physical brand system translating identity into packaging, print, and campaign assets.',
-    services: ['Identity', 'Packaging', 'Print system'],
-    output: 'Identity-to-print translation, packaging applications, campaign assets, and physical brand system',
-    galleryImages: [
-      {
-        src: '/images/portfolio/farmers-brand-system/hero.jpg',
-        alt: 'Farmers NY physical brand system',
-        caption: 'A physical brand system connecting identity, packaging, and campaign assets.',
-      },
-    ],
-  },
 ]
 
 export function getPortfolioProject(slug: string) {
