@@ -118,7 +118,7 @@ export default async function PortfolioProjectPage({ params }: PageProps) {
   return (
     <main className="min-h-screen bg-[#0b0b0b] text-white selection:bg-lp-green selection:text-white lg:grid lg:grid-cols-[40vw_1fr] xl:grid-cols-[38vw_1fr]">
       {/* Sticky project dossier — modeled after the reference's left information column */}
-      <aside className="bg-[#050505] text-white lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:overflow-y-auto">
+      <aside className="bg-[#303030] text-white lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:overflow-y-auto">
         <div className="flex items-start justify-between gap-6 p-5 sm:p-8 lg:p-10">
           <Link href="/portfolio" aria-label="Back to portfolio index" className="block transition-opacity hover:opacity-60">
             <Image
