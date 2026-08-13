@@ -31,8 +31,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 
 function GalleryFigure({ image, imageIndex, className = '' }: { image: PortfolioProjectImage; imageIndex: number; className?: string }) {
-  const label = imageIndex === 0 ? 'Production Detail' : `Gallery ${imageIndex + 1}`
-
   if (image.width && image.height) {
     return (
       <figure key={`${image.src}-${imageIndex}`} className={`relative overflow-hidden bg-[#1b1b1b] ${className}`}>
@@ -45,10 +43,6 @@ function GalleryFigure({ image, imageIndex, className = '' }: { image: Portfolio
           sizes={image.layout === 'half' ? '(max-width: 640px) 100vw, 31vw' : '(max-width: 1024px) 100vw, 63vw'}
         />
         <div className="absolute inset-0 bg-black/10" />
-        <figcaption className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75 sm:bottom-6 sm:left-6 sm:right-6">
-          <span>{label}</span>
-          {image.caption ? <span className="max-w-xs text-right normal-case tracking-[-0.01em] text-white/55">{image.caption}</span> : null}
-        </figcaption>
       </figure>
     )
   }
@@ -66,10 +60,6 @@ function GalleryFigure({ image, imageIndex, className = '' }: { image: Portfolio
         sizes="(max-width: 1024px) 100vw, 63vw"
       />
       <div className="absolute inset-0 bg-black/10" />
-      <figcaption className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75 sm:bottom-6 sm:left-6 sm:right-6">
-        <span>{label}</span>
-        {image.caption ? <span className="max-w-xs text-right normal-case tracking-[-0.01em] text-white/55">{image.caption}</span> : null}
-      </figcaption>
     </figure>
   )
 }
@@ -200,20 +190,6 @@ export default async function PortfolioProjectPage({ params }: PageProps) {
 
         <div className="space-y-5 bg-[#111] p-5 sm:space-y-8 sm:p-8 lg:p-10">
           {renderGalleryImages(galleryImages)}
-
-          <div className="flex min-h-[360px] flex-col justify-between bg-[#eee9df] p-6 text-black sm:min-h-[420px] sm:p-8">
-            <div>
-              <p className="mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-black/35">Project Notes</p>
-              <p className="max-w-3xl text-3xl font-normal leading-[0.95] tracking-[-0.06em] sm:text-5xl">
-                Built for brands that need the physical touchpoint to match the visual identity.
-              </p>
-            </div>
-            <div className="mt-8 grid gap-3 border-t border-black/15 pt-5 text-sm text-black/65 sm:grid-cols-3">
-              <p><span className="text-black">Client:</span> {project.client}</p>
-              <p><span className="text-black">Category:</span> {project.category}</p>
-              <p><span className="text-black">Year:</span> {project.year}</p>
-            </div>
-          </div>
         </div>
 
         <Link href={`/portfolio/${nextProject.slug}`} className="group block bg-[#eee9df] px-5 py-6 text-black transition hover:bg-white sm:px-10 sm:py-8">
