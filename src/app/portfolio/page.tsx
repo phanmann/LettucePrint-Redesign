@@ -26,10 +26,9 @@ function Header() {
           />
         </Link>
         <nav className="flex shrink-0 items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/62 sm:text-[11px] sm:tracking-[0.16em]">
-          <Link href="/shop" className="hidden rounded-full border border-white/10 bg-black/35 px-4 py-2 backdrop-blur-xl transition hover:bg-white hover:text-black sm:block">Shop</Link>
-          <Link href="/get-quote" className="whitespace-nowrap rounded-full border border-lp-green bg-lp-green px-3 py-2.5 text-white backdrop-blur-xl transition hover:border-lp-green-dark hover:bg-lp-green-dark sm:px-4 sm:py-2">
-            Start a Project
-          </Link>
+          <a href="mailto:info@lettuceprint?cc=sean@lettuceprint" className="whitespace-nowrap rounded-full border border-lp-green bg-lp-green px-3 py-2.5 text-white backdrop-blur-xl transition hover:border-lp-green-dark hover:bg-lp-green-dark sm:px-4 sm:py-2">
+            Let Us Work
+          </a>
         </nav>
       </div>
     </header>
