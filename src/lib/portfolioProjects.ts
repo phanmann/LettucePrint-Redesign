@@ -149,7 +149,7 @@ export const portfolioProjects: PortfolioProject[] = [
   },
   {
     slug: 'jamaica-smooth',
-    aliases: ['sticker-label-kit'],
+    aliases: ['jamaica-smooth-brand-identity'],
     title: 'Jamaica Smooth',
     client: 'Jamaica Smooth',
     category: 'Cannabis / Brand System',
@@ -183,16 +183,16 @@ export const portfolioProjects: PortfolioProject[] = [
   },
   {
     slug: 'orange-county-cannabis',
-    aliases: ['mylar-packaging-system'],
+    aliases: ['orange-county-cannabis-brand-identity'],
     title: 'Orange County Cannabis',
     client: 'Orange County Cannabis',
     category: 'Cannabis / Brand System',
-    year: '2026',
+    year: '2024',
     image: '/images/portfolio/orange-county-cannabis/store2.jpg',
     coverWidth: 2000,
     coverHeight: 3000,
-    summary: 'Cannabis retail brand applications translated across storefront visuals, outdoor advertising, and identity systems.',
-    services: ['Cannabis branding', 'Retail signage', 'Outdoor advertising'],
+    summary: 'Orange County Cannabis was one of the first dispensaries to open up in Middletown, New York in 2024. When they reached out to us to design their brand, we wanted to create something that felt bold, modern, and approachable. We created a visual system that stands out in the cannabis space while still feeling connected to the local Orange County community. The identity balances a strong, recognizable personality with an inviting and inclusive feel, supporting the company’s emphasis on community and a more welcoming dispensary experience.',
+    services: ['Cannabis branding', 'Retail signage', 'Logo design'],
     output: 'Storefront visuals, logo system presentation, bus stop advertising, and cannabis retail brand applications',
     galleryImages: [
       {
