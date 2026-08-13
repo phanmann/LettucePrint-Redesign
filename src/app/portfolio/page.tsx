@@ -57,10 +57,10 @@ function ProjectMarquee() {
               priority={index < 3}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-90 group-focus-visible:opacity-90" />
-            <div className="absolute left-4 top-4 translate-y-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/65 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
-              <span className="rounded-full border border-white/15 bg-black/25 px-3 py-1.5 backdrop-blur-md">{project.category}</span>
-            </div>
             <div className="absolute bottom-0 left-0 right-0 translate-y-3 p-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 sm:p-6">
+              <span className="mb-3 inline-block rounded-full border border-white/15 bg-black/25 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/65 backdrop-blur-md">
+                {project.category}
+              </span>
               <h2 className="max-w-[12rem] text-2xl font-semibold leading-[0.9] tracking-[-0.07em] text-white sm:max-w-[15rem] sm:text-4xl">{project.title}</h2>
             </div>
           </Link>
