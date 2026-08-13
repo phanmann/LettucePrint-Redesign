@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { getPortfolioProject, portfolioProjects } from '@/lib/portfolioProjects'
 import type { PortfolioProjectImage } from '@/lib/portfolioProjects'
@@ -130,12 +130,6 @@ export default async function PortfolioProjectPage({ params }: PageProps) {
               priority
             />
           </Link>
-          <nav className="flex flex-col items-end gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/50">
-            <Link href="/portfolio" className="inline-flex items-center gap-1 transition hover:text-white">
-              <ArrowLeft size={12} /> Index
-            </Link>
-            <Link href="/get-quote" className="transition hover:text-lp-green">Start a Project</Link>
-          </nav>
         </div>
 
         <div className="flex-1 px-5 pb-8 sm:px-8 lg:flex lg:flex-col lg:px-10 lg:pb-10">
