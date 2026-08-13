@@ -65,7 +65,7 @@ function ProjectMarquee() {
               </span>
             </div>
             <div className="absolute bottom-0 left-0 right-0 translate-y-3 p-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 sm:p-6">
-              <p className="mb-1 text-xs uppercase tracking-[0.16em] text-[#f2ff70]/80">{project.client}</p>
+              <p className="mb-1 text-xs uppercase tracking-[0.16em] text-white">{project.client}</p>
               <h2 className="max-w-[12rem] text-2xl font-semibold leading-[0.9] tracking-[-0.07em] text-white sm:max-w-[15rem] sm:text-4xl">{project.title}</h2>
             </div>
           </Link>
