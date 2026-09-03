@@ -10,35 +10,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const CATEGORIES = [
   {
-    id: 'tri-fold',
-    label: 'Tri-Fold Brochures',
-    description: 'The classic 6-panel brochure — compact, organized, and works for nearly any industry.',
-    products: [
-      {
-        id: 'brochure-trifold-letter',
-        href: '/services/marketing-materials/brochures/tri-fold-letter',
-        name: 'Tri-Fold Brochure',
-        subtitle: '8.5" × 11" folded to 3.67" × 8.5"',
-        description: 'The most universally recognized brochure format. Perfect for service menus, product overviews, real estate, and event guides.',
-        features: ['100 lb. gloss or matte text', 'Full-color both sides', 'Scored & folded', 'Bulk pricing available'],
-        turnaround: '3–5 business days',
-        color: '#E8F5F1',
-        image: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view',
-      },
-      {
-        id: 'brochure-trifold-legal',
-        href: '/services/marketing-materials/brochures/tri-fold-legal',
-        name: 'Tri-Fold Brochure — Legal',
-        subtitle: '8.5" × 14" folded to 4.67" × 8.5"',
-        description: 'Wider panel gives you more breathing room for copy-heavy content, photo layouts, or multi-column designs.',
-        features: ['100 lb. gloss or matte text', 'Full-color both sides', 'Scored & folded', 'Legal-size extra panel space'],
-        turnaround: '3–5 business days',
-        color: '#F5F0E8',
-        image: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view',
-      },
-    ],
-  },
-  {
     id: 'bi-fold',
     label: 'Bi-Fold Brochures',
     description: 'Four-panel bi-fold brochures — clean, minimal, and easy to design for.',
@@ -68,30 +39,30 @@ const CATEGORIES = [
     ],
   },
   {
-    id: 'premium',
-    label: 'Premium Brochures',
-    description: 'Upgraded stocks and finishes for brands that need their collateral to feel as good as it looks.',
+    id: 'tri-fold',
+    label: 'Tri-Fold Brochures',
+    description: 'The classic 6-panel brochure — compact, organized, and works for nearly any industry.',
     products: [
       {
-        id: 'brochure-soft-touch',
-        href: '/services/marketing-materials/brochures/soft-touch',
-        name: 'Soft Touch Brochure',
-        subtitle: 'Custom sizes available',
-        description: 'Soft-touch laminated cover with offset-quality interior. Leaves a lasting impression at sales meetings, events, and pitch decks.',
-        features: ['100 lb. cover stock', 'Soft-touch matte laminate', 'Full-color printing', 'Spot UV available on cover'],
-        turnaround: '5–7 business days',
-        color: '#E8F5EF',
-        image: 'https://drive.usercontent.google.com/download?id=1t0H52pTZPlm1sxpTlC5uSaiYK1Ud-PMg&export=view',
+        id: 'brochure-trifold-letter',
+        href: '/services/marketing-materials/brochures/tri-fold-letter',
+        name: 'Tri-Fold Brochure',
+        subtitle: '8.5" × 11" folded to 3.67" × 8.5"',
+        description: 'The most universally recognized brochure format. Perfect for service menus, product overviews, real estate, and event guides.',
+        features: ['100 lb. gloss or matte text', 'Full-color both sides', 'Scored & folded', 'Bulk pricing available'],
+        turnaround: '3–5 business days',
+        color: '#E8F5F1',
+        image: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view',
       },
       {
-        id: 'brochure-uncoated',
-        href: '/services/marketing-materials/brochures/uncoated',
-        name: 'Uncoated Brochure',
-        subtitle: 'Custom sizes available',
-        description: 'Natural, tactile paper with rich ink absorption — great for a more editorial or artisan brand feel.',
-        features: ['100 lb. uncoated text', 'Full-color printing', 'Writable surface', 'Eco-friendly paper options'],
+        id: 'brochure-trifold-legal',
+        href: '/services/marketing-materials/brochures/tri-fold-legal',
+        name: 'Tri-Fold Brochure — Legal',
+        subtitle: '8.5" × 14" folded to 4.67" × 8.5"',
+        description: 'Wider panel gives you more breathing room for copy-heavy content, photo layouts, or multi-column designs.',
+        features: ['100 lb. gloss or matte text', 'Full-color both sides', 'Scored & folded', 'Legal-size extra panel space'],
         turnaround: '3–5 business days',
-        color: '#F5E8E8',
+        color: '#F5F0E8',
         image: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view',
       },
     ],
@@ -114,7 +85,7 @@ export default function BrochuresPage() {
               Brochures that do the selling.
             </h1>
             <p className="text-body-lg text-gray-500 max-w-xl mb-8">
-              Tri-fold, bi-fold, premium laminated — full-color brochures that make your pitch in the hands of the right person.
+              Bi-fold and tri-fold — full-color brochures that make your pitch in the hands of the right person.
             </p>
             <div className="flex flex-wrap gap-2">
               <button onClick={() => setActiveCategory('all')} className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-150 ${activeCategory === 'all' ? 'bg-lp-green text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>All Brochures</button>
