@@ -78,24 +78,6 @@ const CATEGORIES = [
       },
     ],
   },
-  {
-    id: 'premium',
-    label: 'Premium Booklets',
-    description: 'Elevated production for brands that need their printed collateral to match the quality of their product.',
-    products: [
-      {
-        id: 'booklet-soft-touch',
-        href: '/services/marketing-materials/booklets/soft-touch-cover',
-        name: 'Soft Touch Cover Booklet',
-        subtitle: 'Custom sizes available',
-        description: 'Saddle-stitch or perfect-bound booklet with a soft-touch laminated cover. The finish that separates a premium brand from everyone else.',
-        features: ['Soft-touch laminated cover', '100 lb. interior text', 'Full-color throughout', 'Spot UV on cover available'],
-        turnaround: '7–10 business days',
-        color: '#F5E8E8',
-        image: '/images/products/posters/poster-soft-touch.jpg',
-      },
-    ],
-  },
 ]
 
 
