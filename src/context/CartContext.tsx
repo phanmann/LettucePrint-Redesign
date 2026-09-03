@@ -17,7 +17,8 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null)
 
-const STORAGE_KEY = 'lp_cart'
+// Bump when authoritative pricing changes so stale browser totals cannot linger.
+const STORAGE_KEY = 'lp_cart_v2'
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])

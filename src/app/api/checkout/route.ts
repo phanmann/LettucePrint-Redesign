@@ -1,5 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getStripe } from '@/lib/stripe'
+import {
+  calculateCustomStickerPrice,
+  calculateCustomSpotUVPrice,
+  type StickerFinish,
+  type StickerMaterial,
+  type SpotUVHits,
+} from '@/lib/pricing'
 
 // ── Single-item checkout (legacy, still used by direct checkout flow) ─────────
 interface SingleItemBody {
@@ -46,6 +53,58 @@ const RUSH_LABELS: Record<string, string> = {
   '24hr': '24-hour rush',
 }
 
+function parseDimensions(size: string): { width: number; height: number } {
+  const match = size.match(/([0-9]+(?:\.[0-9]+)?)\s*(?:"|in)?\s*[×x]\s*([0-9]+(?:\.[0-9]+)?)/i)
+  if (!match) throw new Error('Invalid sticker dimensions')
+  return { width: Number(match[1]), height: Number(match[2]) }
+}
+
+function authoritativeStickerPrice(item: {
+  product: string
+  size: string
+  qty: number
+  material: string
+  finish: string
+  rush: string
+}): number | null {
+  const rush = item.rush === '48hr' || item.rush === '24hr' ? item.rush : 'standard'
+
+  if (item.product === 'Custom Die-Cut Stickers') {
+    const { width, height } = parseDimensions(item.size)
+    if (!['standard', 'holographic'].includes(item.material)) {
+      throw new Error('Invalid sticker material')
+    }
+    if (!['matte', 'gloss', 'laminate'].includes(item.finish)) {
+      throw new Error('Invalid sticker finish')
+    }
+    return calculateCustomStickerPrice(
+      width,
+      height,
+      item.qty,
+      item.material as StickerMaterial,
+      item.finish as StickerFinish,
+      rush
+    ).totalCents
+  }
+
+  if (item.product === 'Spot UV Stickers') {
+    const { width, height } = parseDimensions(item.size)
+    const hitsMatch = item.finish.match(/^([123])\s+Clear UV Hit(?:s)?$/)
+    if (!['Spot UV', 'spot-uv'].includes(item.material) || !hitsMatch) {
+      throw new Error('Invalid Spot UV configuration')
+    }
+    return calculateCustomSpotUVPrice(
+      width,
+      height,
+      item.qty,
+      Number(hitsMatch[1]) as SpotUVHits,
+      rush
+    ).totalCents
+  }
+
+  return null
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -58,7 +117,13 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Cart is empty' }, { status: 400 })
       }
 
-      const lineItems = items.map((item) => ({
+      const lineItems = items.map((item) => {
+        const secureStickerPrice = authoritativeStickerPrice(item)
+        const unitAmount = secureStickerPrice ?? item.totalCents
+        if (!Number.isInteger(unitAmount) || unitAmount <= 0) {
+          throw new Error('Invalid item price')
+        }
+        return {
         price_data: {
           currency: 'usd',
           product_data: {
@@ -80,10 +145,10 @@ export async function POST(req: NextRequest) {
               ...(item.artworkUrl && { artworkUrl: item.artworkUrl }),
             },
           },
-          unit_amount: item.totalCents,
+          unit_amount: unitAmount,
         },
         quantity: 1,
-      }))
+      }})
 
       // Build metadata for webhook — encode artwork info per item
       const artworkMeta: Record<string, string> = {}
@@ -128,6 +193,16 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'overridePriceCents required' }, { status: 400 })
       }
 
+      const secureStickerPrice = authoritativeStickerPrice({
+        product: productName,
+        size,
+        qty: quantity,
+        material,
+        finish,
+        rush,
+      })
+      const unitAmount = secureStickerPrice ?? overridePriceCents
+
       const session = await getStripe().checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: [
@@ -145,7 +220,7 @@ export async function POST(req: NextRequest) {
                 ].join(' · '),
                 metadata: { size, quantity: String(quantity), material, finish, rush },
               },
-              unit_amount: overridePriceCents,
+              unit_amount: unitAmount,
             },
             quantity: 1,
           },

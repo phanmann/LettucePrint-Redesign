@@ -4,25 +4,7 @@ import { redirect } from 'next/navigation'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import CheckoutFlow from '@/components/shop/CheckoutFlow'
-import { QUANTITY_TIERS, formatCents, type RushOption, type EmbossingLayers } from '@/lib/pricing'
-
-// Custom size pricing — mirrors SpotUVCalculator
-const REF_PRICES_3x3_CENTS: Record<number, number> = {
-  50: 7500, 100: 9800, 250: 19500, 500: 30000, 1000: 45000, 2500: 86200,
-}
-const REF_SQ_IN = 9
-const SPOT_UV_MULT = 1.60
-const EMBOSSING_EXTRA_RATE_CENTS = 0.008
-
-function calcCustomSpotUVPrice(sqIn: number, quantity: number, layers: EmbossingLayers) {
-  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
-  const ref = REF_PRICES_3x3_CENTS[tier]
-  const base = Math.round(ref * (sqIn / REF_SQ_IN))
-  const spotBase = Math.round(base * SPOT_UV_MULT)
-  const embossing = layers > 0 ? Math.round(EMBOSSING_EXTRA_RATE_CENTS * sqIn * tier * layers) : 0
-  const total = spotBase + embossing
-  return { totalCents: total, totalFormatted: formatCents(total) }
-}
+import { calculateCustomSpotUVPrice, SPOT_UV_HIT_LABELS, type RushOption, type SpotUVHits } from '@/lib/pricing'
 
 export const metadata: Metadata = {
   title: 'Upload Artwork & Checkout — Spot UV Stickers | Lettuce Print',
@@ -36,7 +18,8 @@ interface PageProps {
     height?: string
     size?: string
     qty?: string
-    layers?: string
+    hits?: string
+    layers?: string // legacy URL support
     rush?: string
     product?: string
   }>
@@ -51,8 +34,12 @@ export default async function SpotUVCheckoutPage({ searchParams }: PageProps) {
   const height = params.height ? parseFloat(params.height) : null
   const sizeLabel = params.size ?? (width && height ? `${width}" × ${height}"` : null)
   const qty = params.qty ? parseInt(params.qty, 10) : null
-  const layersRaw = params.layers ? parseInt(params.layers, 10) : 0
-  const layers = ([0,1,2,3,4].includes(layersRaw) ? layersRaw : 0) as EmbossingLayers
+  const hitsRaw = params.hits
+    ? parseInt(params.hits, 10)
+    : params.layers
+      ? Math.min(3, parseInt(params.layers, 10) + 1)
+      : 1
+  const hits = ([1, 2, 3].includes(hitsRaw) ? hitsRaw : 1) as SpotUVHits
   const rush = VALID_RUSH.includes(params.rush as RushOption) ? params.rush as RushOption : 'standard' as RushOption
   const product = params.product ?? 'Spot UV Stickers'
 
@@ -60,14 +47,13 @@ export default async function SpotUVCheckoutPage({ searchParams }: PageProps) {
     redirect('/shop/spot-uv')
   }
 
-  const sqIn = width * height
-  const price = calcCustomSpotUVPrice(sqIn, qty, layers)
+  const price = calculateCustomSpotUVPrice(width, height, qty, hits, rush)
 
   const config = {
     size: sizeLabel as string,
     qty,
     material: 'spot-uv',
-    finish: layers === 0 ? 'Standard (1 layer)' : `+${layers} extra layer${layers > 1 ? 's' : ''}`,
+    finish: SPOT_UV_HIT_LABELS[hits],
     rush,
     product,
     totalFormatted: price.totalFormatted,
@@ -104,7 +90,7 @@ export default async function SpotUVCheckoutPage({ searchParams }: PageProps) {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <h1 className="text-h2 font-semibold text-gray-900 mb-1">Upload your artwork</h1>
             <p className="text-small text-gray-500">
-              Upload your file, preview it, then proceed to payment. We'll send a proof before anything goes to print.
+              Upload your file, preview it, then proceed to payment. We&apos;ll send a proof before anything goes to print.
             </p>
             <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-lg">
               <span className="text-xs font-medium text-amber-700">

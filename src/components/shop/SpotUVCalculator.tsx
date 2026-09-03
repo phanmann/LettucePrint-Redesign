@@ -6,94 +6,55 @@ import { useCart } from '@/context/CartContext'
 import Button from '@/components/ui/Button'
 import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import {
-  calculateSpotUVPrice,
+  calculateCustomSpotUVPrice,
   QUANTITY_TIERS,
   TIER_DISCOUNTS,
-  SIZE_LABELS,
-  SIZE_SQ_IN,
-  EMBOSSING_LAYER_OPTIONS,
-  EMBOSSING_LAYER_LABELS,
-  EMBOSSING_EXTRA_RATE_CENTS,
-  formatCents,
-  type StickerSize,
+  SPOT_UV_HIT_OPTIONS,
+  SPOT_UV_HIT_LABELS,
   type RushOption,
-  type EmbossingLayers,
+  type SpotUVHits,
 } from '@/lib/pricing'
-
-// Tier table for custom Spot UV pricing (must match pricing.ts)
-const REF_PRICES_3x3_CENTS: Record<number, number> = {
-  50:   7500,
-  100:  9800,
-  250:  19500,
-  500:  30000,
-  1000: 45000,
-  2500: 86200,
-}
-const REF_SQ_IN = 9
-const SPOT_UV_MULT = 1.60
-
-function calcCustomSpotUVPrice(
-  sqIn: number,
-  quantity: number,
-  layers: EmbossingLayers
-): { totalCents: number; unitCents: number; totalFormatted: string; unitFormatted: string } {
-  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
-  const ref = REF_PRICES_3x3_CENTS[tier]
-  const base = Math.round(ref * (sqIn / REF_SQ_IN))
-  const spotBase = Math.round(base * SPOT_UV_MULT)
-  const embossing = layers > 0 ? Math.round(EMBOSSING_EXTRA_RATE_CENTS * sqIn * tier * layers) : 0
-  const total = spotBase + embossing
-  const unit = Math.round(total / tier)
-  return { totalCents: total, unitCents: unit, totalFormatted: formatCents(total), unitFormatted: formatCents(unit) }
-}
 
 interface Props { productName: string }
 
 export default function SpotUVCalculator({ productName }: Props) {
-  const [selectedPreset] = useState<StickerSize | 'custom'>('custom')
   const [customWidth, setCustomWidth] = useState('')
   const [customHeight, setCustomHeight] = useState('')
-  const [layers, setLayers] = useState<EmbossingLayers>(0)
+  const [hits, setHits] = useState<SpotUVHits>(1)
   const [quantity, setQuantity] = useState<number>(100)
   const [customQty, setCustomQty] = useState('')
   const [showCustomQty, setShowCustomQty] = useState(false)
   const router = useRouter()
 
-  const isCustomSize = selectedPreset === 'custom'
   const cw = parseFloat(customWidth) || 0
   const ch = parseFloat(customHeight) || 0
-  const validSize = isCustomSize ? (cw > 0 && ch > 0) : true
-  const priceSize: StickerSize = isCustomSize ? '2x2' : selectedPreset
-  const customSqIn = cw * ch
+  const validSize = cw >= 0.5 && cw <= 12 && ch >= 0.5 && ch <= 12
   const rush: RushOption = 'standard'
 
   const price = useMemo(() => {
-    if (isCustomSize && validSize) {
-      return calcCustomSpotUVPrice(customSqIn, quantity, layers)
-    }
-    return calculateSpotUVPrice(priceSize, quantity, layers, rush)
-  }, [priceSize, quantity, layers, isCustomSize, validSize, customSqIn])
+    if (!validSize) return null
+    return calculateCustomSpotUVPrice(cw, ch, quantity, hits, rush)
+  }, [cw, ch, quantity, hits, validSize, rush])
 
   const qtyRows = useMemo(() => {
+    if (!validSize) return []
     return QUANTITY_TIERS.map(qty => {
-      const p = isCustomSize && validSize
-        ? calcCustomSpotUVPrice(customSqIn, qty, layers)
-        : calculateSpotUVPrice(priceSize, qty, layers, rush)
+      const p = calculateCustomSpotUVPrice(cw, ch, qty, hits, rush)
       return { qty, total: p.totalCents, totalFmt: p.totalFormatted, save: TIER_DISCOUNTS[qty] ?? 0 }
     })
-  }, [priceSize, layers, isCustomSize, validSize, customSqIn])
+  }, [cw, ch, hits, validSize, rush])
 
   const { addItem } = useCart()
   const [added, setAdded] = useState(false)
 
   const handleOrder = () => {
-    if (!validSize) return
+    if (!validSize || !price) return
     addItem({
       product: productName,
       size: `${cw}" × ${ch}"`,
       qty: quantity,
       material: 'Spot UV',
-      finish: layers === 0 ? 'Standard (1 layer)' : `+${layers} extra layer${layers > 1 ? 's' : ''}`,
+      finish: SPOT_UV_HIT_LABELS[hits],
       rush,
       totalCents: price.totalCents,
       totalFormatted: price.totalFormatted,
@@ -113,12 +74,10 @@ export default function SpotUVCalculator({ productName }: Props) {
       active ? 'border-lp-green bg-lp-green' : 'border-gray-300 bg-white'
     }`
 
-  const layerDescriptions: Record<EmbossingLayers, string> = {
-    0: 'Single UV pass — clean, crisp gloss',
-    1: 'Two passes — slightly raised texture',
-    2: 'Three passes — noticeably raised',
-    3: 'Four passes — premium deep emboss',
-    4: 'Five passes — maximum tactile effect',
+  const hitDescriptions: Record<SpotUVHits, string> = {
+    1: 'One clear UV pass for crisp gloss contrast',
+    2: 'Two clear UV passes for a more raised effect',
+    3: 'Three clear UV passes for maximum available depth',
   }
 
   return (
@@ -147,28 +106,28 @@ export default function SpotUVCalculator({ productName }: Props) {
             />
           </div>
         </div>
-        <p className="text-xs text-gray-400 mt-2">Pricing is estimated — we&apos;ll confirm any unusual sizes before production.</p>
+        <p className="text-xs text-gray-400 mt-2">Live customer pricing based on your dimensions and quantity.</p>
       </div>
 
       <div className="border-t border-gray-100 mb-6" />
 
-      {/* ── Embossing Layers ── */}
+      {/* ── Clear UV hits ── */}
       <div className="mb-6">
-        <p className={sectionLabel}>Additional embossing layers</p>
-        <p className="text-xs text-gray-500 mb-3">1 UV layer included. More layers = deeper raised texture.</p>
+        <p className={sectionLabel}>Clear UV coating</p>
+        <p className="text-xs text-gray-500 mb-3">More UV hits create a deeper raised texture.</p>
         <div className="space-y-2">
-          {EMBOSSING_LAYER_OPTIONS.map(l => (
-            <label key={l} className={radioRow(layers === l)} onClick={() => setLayers(l)}>
+          {SPOT_UV_HIT_OPTIONS.map(hit => (
+            <label key={hit} className={radioRow(hits === hit)} onClick={() => setHits(hit)}>
               <div className="flex items-center gap-3">
-                <div className={radioCircle(layers === l)} />
+                <div className={radioCircle(hits === hit)} />
                 <div>
-                  <p className={`text-sm font-medium leading-tight ${layers === l ? 'text-gray-900' : 'text-gray-700'}`}>
-                    {EMBOSSING_LAYER_LABELS[l]}
-                    {l === 0 && (
+                  <p className={`text-sm font-medium leading-tight ${hits === hit ? 'text-gray-900' : 'text-gray-700'}`}>
+                    {SPOT_UV_HIT_LABELS[hit]}
+                    {hit === 1 && (
                       <span className="ml-2 text-xs font-semibold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded-full">Included</span>
                     )}
                   </p>
-                  <p className="text-xs text-gray-400 mt-0.5">{layerDescriptions[l]}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{hitDescriptions[hit]}</p>
                 </div>
               </div>
             </label>
@@ -203,7 +162,7 @@ export default function SpotUVCalculator({ productName }: Props) {
       </div>
 
       {/* ── Price Footer + CTA ── */}
-      {validSize && (
+      {validSize && price && (
         <>
           <div className="border-t border-gray-200 pt-5 mb-4 flex items-end justify-between">
             <p className="text-4xl font-bold text-gray-900 leading-none">{price.totalFormatted}</p>

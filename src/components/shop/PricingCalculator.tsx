@@ -12,48 +12,13 @@ import {
   MATERIAL_DESCRIPTIONS,
   FINISH_LABELS,
   FINISH_DESCRIPTIONS,
-  FINISH_ADDON_PER_SQIN,
-  MATERIAL_MULTIPLIERS,
-  formatCents,
+  calculateCustomStickerPrice,
   type StickerMaterial,
   type StickerFinish,
 } from '@/lib/pricing'
 
 const MATERIALS: StickerMaterial[] = ['standard', 'holographic']
 const FINISHES: StickerFinish[] = ['matte', 'gloss', 'laminate']
-
-// Reference tier prices for 3×3" @ each tier (cents) — must match pricing.ts
-const REF_PRICES_3x3_CENTS: Record<number, number> = {
-  50:   7500,
-  100:  9800,
-  250:  19500,
-  500:  30000,
-  1000: 45000,
-  2500: 86200,
-}
-const REF_SQ_IN = 9
-
-// Compute total sell price in cents for custom dimensions using tier table
-function calcCustomPrice(
-  sqIn: number,
-  quantity: number,
-  material: StickerMaterial,
-  finish: StickerFinish
-): { totalCents: number; unitCents: number; totalFormatted: string; unitFormatted: string } {
-  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
-  const ref = REF_PRICES_3x3_CENTS[tier]
-  const base = Math.round(ref * (sqIn / REF_SQ_IN))
-  const materialAdj = Math.round(base * MATERIAL_MULTIPLIERS[material])
-  const finishAddon = FINISH_ADDON_PER_SQIN[finish] * sqIn * tier
-  const total = materialAdj + finishAddon
-  const unit = Math.round(total / tier)
-  return {
-    totalCents: total,
-    unitCents: unit,
-    totalFormatted: formatCents(total),
-    unitFormatted: formatCents(unit),
-  }
-}
 
 interface Props { productName: string }
 
@@ -69,23 +34,21 @@ export default function PricingCalculator({ productName }: Props) {
 
   const cw = parseFloat(customWidth) || 0
   const ch = parseFloat(customHeight) || 0
-  const validSize = cw > 0 && ch > 0
-  const sqIn = cw * ch
-
+  const validSize = cw >= 0.5 && cw <= 52 && ch >= 0.5 && ch <= 240
   // Compute price for current selection
   const price = useMemo(() => {
     if (!validSize) return null
-    return calcCustomPrice(sqIn, quantity, material, finish)
-  }, [sqIn, quantity, material, finish, validSize])
+    return calculateCustomStickerPrice(cw, ch, quantity, material, finish)
+  }, [cw, ch, quantity, material, finish, validSize])
 
   // Quantity rows
   const qtyRows = useMemo(() => {
     if (!validSize) return []
     return QUANTITY_TIERS.map(qty => {
-      const p = calcCustomPrice(sqIn, qty, material, finish)
+      const p = calculateCustomStickerPrice(cw, ch, qty, material, finish)
       return { qty, total: p.totalCents, totalFmt: p.totalFormatted, save: TIER_DISCOUNTS[qty] ?? 0 }
     })
-  }, [sqIn, material, finish, validSize])
+  }, [cw, ch, material, finish, validSize])
 
   const { addItem } = useCart()
   const [added, setAdded] = useState(false)
@@ -127,7 +90,7 @@ export default function PricingCalculator({ productName }: Props) {
           <div>
             <label className="block text-xs text-gray-500 mb-1">Width (W)</label>
             <input
-              type="number" min="0.5" max="60" step="0.25"
+              type="number" min="0.5" max="52" step="0.25"
               value={customWidth} onChange={e => setCustomWidth(e.target.value)}
               placeholder="e.g. 3.5"
               className="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-lp-green"
@@ -136,14 +99,14 @@ export default function PricingCalculator({ productName }: Props) {
           <div>
             <label className="block text-xs text-gray-500 mb-1">Length (L)</label>
             <input
-              type="number" min="0.5" max="60" step="0.25"
+              type="number" min="0.5" max="240" step="0.25"
               value={customHeight} onChange={e => setCustomHeight(e.target.value)}
               placeholder="e.g. 2.5"
               className="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-lp-green"
             />
           </div>
         </div>
-        <p className="text-xs text-gray-400 mt-2">Pricing is estimated — we'll confirm any unusual sizes before production.</p>
+        <p className="text-xs text-gray-400 mt-2">Live customer pricing based on your dimensions and quantity.</p>
       </div>
 
       <div className="border-t border-gray-100 mb-6" />

@@ -10,7 +10,7 @@ import ProductImageGallery from '@/components/shop/ProductImageGallery'
 
 export const metadata: Metadata = {
   title: 'Custom Stickers & Labels',
-  description: 'Die-cut custom stickers printed in Brooklyn. Standard, holographic, and spot UV finishes. Fast turnaround, starting at $38 for 50 stickers.',
+  description: 'Die-cut custom stickers printed in Brooklyn. Standard, holographic, and spot UV finishes. Fast turnaround, starting at $70 for 50 stickers.',
   alternates: { canonical: 'https://lettuceprint.com/shop/stickers' },
 }
 

@@ -5,35 +5,11 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import CheckoutFlow from '@/components/shop/CheckoutFlow'
 import {
-  QUANTITY_TIERS,
-  MATERIAL_MULTIPLIERS,
-  FINISH_ADDON_PER_SQIN,
-  formatCents,
+  calculateCustomStickerPrice,
   type StickerMaterial,
   type StickerFinish,
   type RushOption,
 } from '@/lib/pricing'
-
-// Custom size pricing — mirrors PricingCalculator.tsx
-const REF_PRICES_3x3_CENTS: Record<number, number> = {
-  50: 7500, 100: 9800, 250: 19500, 500: 30000, 1000: 45000, 2500: 86200,
-}
-const REF_SQ_IN = 9
-
-function calcCustomPrice(
-  sqIn: number,
-  quantity: number,
-  material: StickerMaterial,
-  finish: StickerFinish
-) {
-  const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 2500
-  const ref = REF_PRICES_3x3_CENTS[tier]
-  const base = Math.round(ref * (sqIn / REF_SQ_IN))
-  const materialAdj = Math.round(base * MATERIAL_MULTIPLIERS[material])
-  const finishAddon = FINISH_ADDON_PER_SQIN[finish] * sqIn * tier
-  const total = materialAdj + finishAddon
-  return { totalCents: total, totalFormatted: formatCents(total) }
-}
 
 export const metadata: Metadata = {
   title: 'Upload Artwork & Checkout — Lettuce Print',
@@ -74,8 +50,7 @@ export default async function StickerCheckoutPage({ searchParams }: PageProps) {
     redirect('/shop/stickers')
   }
 
-  const sqIn = width * height
-  const price = calcCustomPrice(sqIn, qty, material, finish)
+  const price = calculateCustomStickerPrice(width, height, qty, material, finish, rush)
 
   const config = {
     size: sizeLabel as string,
@@ -115,7 +90,7 @@ export default async function StickerCheckoutPage({ searchParams }: PageProps) {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <h1 className="text-h2 font-semibold text-gray-900 mb-1">Upload your artwork</h1>
             <p className="text-small text-gray-500">
-              Upload your file, preview it, then proceed to payment. We'll send a proof before anything goes to print.
+              Upload your file, preview it, then proceed to payment. We&apos;ll send a proof before anything goes to print.
             </p>
           </div>
         </div>
