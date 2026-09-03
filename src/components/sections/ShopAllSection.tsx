@@ -36,10 +36,10 @@ const products = [
     badge: 'Classic',
   },
   {
-    name: 'Flyers',
+    name: 'Flyers & Posters',
     href: '/services/marketing-materials/flyers',
     image: '/images/products/flyers/flyer-full-page-card.jpg',
-    description: 'Full-color flyers for launches, menus, promos, handouts, and campaigns that need to move fast.',
+    description: 'Full-color flyers and standard posters for launches, menus, promotions, events, and retail displays.',
     features: ['Multiple sizes', 'Gloss or matte', 'Event ready'],
     badge: 'Fast Print',
   },

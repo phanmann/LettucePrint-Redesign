@@ -90,6 +90,54 @@ const CATEGORIES = [
       turnaround: '2–3 business days',
     },
   },
+  {
+    id: 'poster-11x17',
+    label: '11" × 17" Poster',
+    description: 'The classic concert-bill size for bulletin boards, windows, retail counters, and event walls.',
+    href: '/services/marketing-materials/posters/small',
+    card: {
+      id: 'poster-11x17',
+      name: 'Small Poster',
+      subtitle: '11" × 17"',
+      description: 'The classic concert bill size. Works everywhere — bulletin boards, windows, retail counters, and bar walls.',
+      features: ['80 lb. gloss or matte text', 'Full-color printing', 'Crisp edge-to-edge coverage', 'Bulk pricing available'],
+      turnaround: '1–2 business days',
+      color: '#E8F5F1',
+      image: '/images/products/posters/poster-1.jpg',
+    },
+  },
+  {
+    id: 'poster-18x24',
+    label: '18" × 24" Poster',
+    description: 'A versatile standard poster size for retail displays, promotions, events, and gallery prints.',
+    href: '/services/marketing-materials/posters/medium',
+    card: {
+      id: 'poster-18x24',
+      name: 'Medium Poster',
+      subtitle: '18" × 24"',
+      description: 'Standard poster size for retail displays, in-store promotions, event signage, and gallery prints.',
+      features: ['80 lb. gloss or matte text', 'Full-color printing', 'Vivid, accurate color reproduction', 'Optional lamination'],
+      turnaround: '2–3 business days',
+      color: '#F5F0E8',
+      image: '/images/products/posters/poster-1.jpg',
+    },
+  },
+  {
+    id: 'poster-24x36',
+    label: '24" × 36" Poster',
+    description: 'Movie-poster scale for high-impact storefronts, events, trade shows, and gallery spaces.',
+    href: '/services/marketing-materials/posters/large',
+    card: {
+      id: 'poster-24x36',
+      name: 'Large Poster',
+      subtitle: '24" × 36"',
+      description: 'Movie-poster size. Maximum impact for storefronts, events, trade shows, and gallery spaces.',
+      features: ['80 lb. or 100 lb. stock', 'Full-color printing', 'Matte or gloss finish', 'Optional tube rolling'],
+      turnaround: '2–3 business days',
+      color: '#E8F0F5',
+      image: '/images/products/posters/poster-2.jpg',
+    },
+  },
 ]
 
 export default function FlyersPage() {
@@ -108,10 +156,10 @@ export default function FlyersPage() {
               Marketing Materials
             </p>
             <h1 className="text-display font-semibold text-gray-900 mb-4 max-w-2xl">
-              Flyers that move fast.
+              Flyers &amp; Posters that move fast.
             </h1>
             <p className="text-body-lg text-gray-500 max-w-xl mb-8">
-              Half-sheet handouts to tabloid-sized showstoppers — high-volume flyer printing with quick turnaround.
+              From half-sheet handouts to large-format posters — full-color printing with quick turnaround.
             </p>
             <div className="flex flex-wrap gap-2">
               <button
@@ -122,7 +170,7 @@ export default function FlyersPage() {
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                All Flyers
+                All Flyers &amp; Posters
               </button>
               {CATEGORIES.map(cat => (
                 <button

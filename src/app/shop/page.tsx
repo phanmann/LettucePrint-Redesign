@@ -62,22 +62,16 @@ const categories: Category[] = [
         features: ['Standard & premium stock', 'Soft touch & gloss options', 'Spot UV available', 'Fast turnaround'],
       },
       {
-        name: 'Flyers',
+        name: 'Flyers & Posters',
         href: '/services/marketing-materials/flyers',
         image: '/images/products/flyers/flyer-full-page-card.jpg',
-        features: ['Full page, half page & tabloid', 'Gloss or matte coating', 'Full-color printing', '3–5 day turnaround'],
+        features: ['Flyers and standard posters', 'Sizes from 5.5×8.5 to 24×36', 'Full-color printing', 'Fast turnaround'],
       },
       {
         name: 'Postcards',
         href: '/services/marketing-materials/postcards',
         image: '/images/products/flyers/flyer-2.jpg',
         features: ['Standard & premium stock', 'Single or double-sided', 'Rounded corners available', 'Great for direct mail'],
-      },
-      {
-        name: 'Posters',
-        href: '/services/marketing-materials/posters',
-        image: '/images/products/posters/poster-1.jpg',
-        features: ['Multiple sizes available', 'Soft touch & art print options', 'UV-coated or matte', 'Event & retail ready'],
       },
       {
         name: 'Brochures',

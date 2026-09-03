@@ -18,7 +18,7 @@ const allProducts = [
   { label: 'Flyers – Full Page',           href: '/services/marketing-materials/flyers/full-page',          tags: ['flyers', 'print'] },
   { label: 'Flyers – Half Page',           href: '/services/marketing-materials/flyers/half-page',          tags: ['flyers', 'print'] },
   { label: 'Flyers – Tabloid',             href: '/services/marketing-materials/flyers/tabloid',            tags: ['flyers', 'print', 'large'] },
-  { label: 'Posters',                      href: '/services/marketing-materials/posters',                   tags: ['posters', 'print', 'large format'] },
+  { label: 'Flyers & Posters',             href: '/services/marketing-materials/flyers',                    tags: ['flyers', 'posters', 'print', 'large format'] },
   { label: 'Soft Touch Posters',           href: '/services/marketing-materials/posters/soft-touch',        tags: ['posters', 'soft touch', 'premium'] },
   { label: 'Art Print Posters',            href: '/services/marketing-materials/posters/art-print',         tags: ['posters', 'art print'] },
   { label: 'Brochures – Tri-Fold Letter',  href: '/services/marketing-materials/brochures/tri-fold-letter', tags: ['brochures', 'tri-fold'] },
@@ -49,8 +49,7 @@ const navLinks: NavLink[] = [
   { label: 'Marketing Materials', href: '/services/marketing-materials', children: [
     { label: 'Business Cards', href: '/services/marketing-materials/business-cards' },
     { label: 'Postcards', href: '/services/marketing-materials/postcards' },
-    { label: 'Flyers', href: '/services/marketing-materials/flyers' },
-    { label: 'Posters', href: '/services/marketing-materials/posters' },
+    { label: 'Flyers & Posters', href: '/services/marketing-materials/flyers' },
     { label: 'Brochures', href: '/services/marketing-materials/brochures' },
     { label: 'Booklets', href: '/services/marketing-materials/booklets' },
   ]},

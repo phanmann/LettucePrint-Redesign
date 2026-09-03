@@ -13,9 +13,8 @@ export const metadata: Metadata = {
 
 const products = [
   { title: 'Business Cards', href: '/services/marketing-materials/business-cards', note: 'Standard, premium, soft-touch, foil, and spot UV.' },
-  { title: 'Flyers', href: '/services/marketing-materials/flyers', note: 'Full-page, half-page, and tabloid formats.' },
+  { title: 'Flyers & Posters', href: '/services/marketing-materials/flyers', note: 'Flyers plus standard 11×17, 18×24, and 24×36 posters.' },
   { title: 'Postcards', href: '/services/marketing-materials/postcards', note: 'Direct mail, event handouts, and retail inserts.' },
-  { title: 'Posters', href: '/services/marketing-materials/posters', note: 'Small, medium, large, art print, and soft-touch options.' },
   { title: 'Brochures', href: '/services/marketing-materials/brochures', note: 'Tri-fold, bi-fold, tabloid, soft-touch, and uncoated.' },
   { title: 'Booklets', href: '/services/marketing-materials/booklets', note: 'Saddle-stitch and perfect-bound catalogs, zines, and menus.' },
 ]

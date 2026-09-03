@@ -10,7 +10,7 @@ const allProducts = [
   { label: 'Flyers – Full Page', href: '/services/marketing-materials/flyers/full-page', tags: ['flyers', 'marketing', 'print'] },
   { label: 'Flyers – Half Page', href: '/services/marketing-materials/flyers/half-page', tags: ['flyers', 'marketing', 'print'] },
   { label: 'Flyers – Tabloid', href: '/services/marketing-materials/flyers/tabloid', tags: ['flyers', 'marketing', 'print', 'large'] },
-  { label: 'Posters', href: '/services/marketing-materials/posters', tags: ['posters', 'marketing', 'print', 'large format'] },
+  { label: 'Flyers & Posters', href: '/services/marketing-materials/flyers', tags: ['flyers', 'posters', 'marketing', 'print', 'large format'] },
   { label: 'Brochures – Tri-Fold Letter', href: '/services/marketing-materials/brochures/tri-fold-letter', tags: ['brochures', 'tri-fold', 'marketing'] },
   { label: 'Brochures – Bi-Fold Letter', href: '/services/marketing-materials/brochures/bi-fold-letter', tags: ['brochures', 'bi-fold', 'marketing'] },
   { label: 'Booklets', href: '/services/marketing-materials/booklets', tags: ['booklets', 'catalogs', 'marketing'] },
