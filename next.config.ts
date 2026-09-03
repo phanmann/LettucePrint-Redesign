@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         destination: '/services/marketing-materials/flyers',
         permanent: true,
       },
+      {
+        source: '/services/packaging/boxes',
+        destination: '/services/packaging',
+        permanent: true,
+      },
     ]
   },
   images: {

@@ -29,7 +29,6 @@ const allProducts = [
   { label: 'Stickers',                     href: '/shop/stickers',                                          tags: ['stickers', 'die cut', 'custom stickers'] },
   { label: 'Spot UV Stickers',             href: '/shop/spot-uv',                                           tags: ['stickers', 'spot uv', 'premium stickers'] },
   { label: 'Roll Labels',                  href: '/shop/roll-labels',                                       tags: ['labels', 'roll labels', 'stickers', 'packaging'] },
-  { label: 'Boxes',                        href: '/services/packaging/boxes',                               tags: ['boxes', 'packaging', 'custom boxes'] },
   { label: 'Mylar Bags',                   href: '/services/packaging/mylar-bags',                          tags: ['mylar', 'bags', 'packaging', 'cannabis'] },
   { label: 'Custom Packaging',             href: '/services/packaging/custom-packaging',                    tags: ['packaging', 'custom', 'boxes'] },
   { label: 'Vinyl Banners',               href: '/services/signage/banners/vinyl-banner',                  tags: ['banners', 'vinyl', 'signage', 'outdoor'] },
@@ -59,7 +58,6 @@ const navLinks: NavLink[] = [
     { label: 'Roll Labels', href: '/shop/roll-labels' },
   ]},
   { label: 'Boxes & Packaging', href: '/services/packaging', children: [
-    { label: 'Boxes', href: '/services/packaging/boxes' },
     { label: 'Mylar Bags', href: '/services/packaging/mylar-bags' },
     { label: 'Custom Packaging', href: '/services/packaging/custom-packaging' },
   ]},

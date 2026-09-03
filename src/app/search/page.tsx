@@ -17,7 +17,6 @@ const allProducts = [
   { label: 'Stickers', href: '/shop/stickers', tags: ['stickers', 'labels', 'custom stickers'] },
   { label: 'Spot UV Stickers', href: '/shop/spot-uv', tags: ['stickers', 'spot uv', 'premium', 'labels'] },
   { label: 'Roll Labels', href: '/shop/roll-labels', tags: ['roll labels', 'labels', 'stickers', 'packaging'] },
-  { label: 'Boxes', href: '/services/packaging/boxes', tags: ['boxes', 'packaging', 'custom boxes'] },
   { label: 'Mylar Bags', href: '/services/packaging/mylar-bags', tags: ['mylar', 'bags', 'packaging', 'cannabis'] },
   { label: 'Custom Packaging', href: '/services/packaging/custom-packaging', tags: ['packaging', 'custom', 'boxes'] },
   { label: 'Banners', href: '/services/signage/banners', tags: ['banners', 'signage', 'large format'] },

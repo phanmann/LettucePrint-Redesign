@@ -91,12 +91,6 @@ const categories: Category[] = [
     label: 'Boxes & Packaging',
     products: [
       {
-        name: 'Custom Boxes',
-        href: '/services/packaging/boxes',
-        image: '/images/products/boxes/box-mailer.jpg',
-        features: ['Mailer, folding carton & rigid', 'Full-color printing', 'Magnetic closure available', 'Low minimums'],
-      },
-      {
         name: 'Mylar Bags',
         href: '/services/packaging/mylar-bags',
         image: '/images/hero-cards/packaging.jpg',

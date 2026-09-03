@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 }
 
 const products = [
-  { title: 'Boxes', href: '/services/packaging/boxes', note: 'Mailer boxes, folding cartons, rigid boxes, sleeves, and RSC shipping boxes.' },
   { title: 'Mylar Bags', href: '/services/packaging/mylar-bags', note: 'Standard and die-cut mylar bags with high-barrier material and custom print.' },
   { title: 'Custom Packaging', href: '/services/packaging/custom-packaging', note: 'Built-from-scratch structures, sampling, specialty finishes, and launch support.' },
 ]
