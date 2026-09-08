@@ -85,13 +85,13 @@ export default function PortfolioMicrositePage() {
             </span>
           </h1>
           <p className="mx-auto mt-12 max-w-2xl text-balance text-center text-sm leading-[1.45] tracking-[-0.02em] text-white/55 sm:mt-16">
-            We are Lettuce Print&apos;s creative studio, specializing in crafting cohesive{' '}
+            We are Lettuce Print&apos;s creative studio, specializing in crafting{' '}
             <br className="hidden sm:block" />
-            brand identities and striking packaging. Our portfolio showcases dynamic brand{' '}
+            cohesive brand identities and striking packaging. Our portfolio showcases{' '}
             <br className="hidden sm:block" />
-            transformations, particularly for clients within the cannabis industry. Our{' '}
+            dynamic brand transformations, particularly for clients within the cannabis{' '}
             <br className="hidden sm:block" />
-            mission is to elevate your brand through thoughtful design.
+            industry. We help turn your ideas into memorable brands.
           </p>
         </div>
 
