@@ -84,7 +84,7 @@ export default function PortfolioMicrositePage() {
               Design
             </span>
           </h1>
-          <p className="mx-auto mt-12 max-w-2xl text-balance text-center text-[19px] leading-[1.45] tracking-[-0.02em] text-white/55 sm:mt-16">
+          <p className="mx-auto mt-12 max-w-3xl text-balance text-center text-[19px] leading-[1.45] tracking-[-0.02em] text-white/55 sm:mt-16">
             We are Lettuce Print&apos;s creative studio, specializing in crafting{' '}
             <br className="hidden sm:block" />
             cohesive brand identities and striking packaging. Our portfolio showcases{' '}
