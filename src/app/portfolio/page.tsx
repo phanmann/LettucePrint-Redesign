@@ -85,7 +85,7 @@ export default function PortfolioMicrositePage() {
             </span>
           </h1>
           <p className="mx-auto mt-12 max-w-2xl text-balance text-center text-lg leading-[1.25] tracking-[-0.035em] text-white/55 sm:mt-16 sm:text-2xl">
-            A multi-disciplinary design studio crafting cohesive brand identities with a specialized expertise in print.
+            We are Lettuce Print&apos;s creative studio, specializing in crafting cohesive brand identities and striking print packaging. Our portfolio showcases dynamic brand transformations, particularly for clients within the cannabis industry. Through thoughtful design, we elevate modern brands and give them a distinct physical presence.
           </p>
         </div>
 
