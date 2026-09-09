@@ -10,8 +10,11 @@ const cases = [
   ['standard laminate rate', calculateCustomStickerPrice(3, 3, 1000, 'standard', 'laminate').totalCents, 29988],
   ['holographic rate', calculateCustomStickerPrice(3, 3, 1000, 'holographic', 'matte').totalCents, 94500],
   ['Spot UV 1 hit', calculateCustomSpotUVPrice(3, 3, 1000, 1).totalCents, 51660],
-  ['Spot UV 2 hits', calculateCustomSpotUVPrice(3, 3, 1000, 2).totalCents, 69300],
-  ['Spot UV 3 hits', calculateCustomSpotUVPrice(3, 3, 1000, 3).totalCents, 86940],
+  ['Spot UV 2 hits', calculateCustomSpotUVPrice(3, 3, 1000, 2).totalCents, 75960],
+  ['Spot UV 3 hits', calculateCustomSpotUVPrice(3, 3, 1000, 3).totalCents, 100260],
+  ['Spot UV 2-hit supplier cost', calculateCustomSpotUVPrice(3, 3, 1000, 2).supplierCostCents, 49050],
+  ['Spot UV 3-hit supplier cost', calculateCustomSpotUVPrice(3, 3, 1000, 3).supplierCostCents, 61200],
+  ['Spot UV customer minimum', calculateCustomSpotUVPrice(1, 1, 50, 3).totalCents, 7000],
 ]
 
 let failures = 0

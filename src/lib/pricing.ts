@@ -1,7 +1,8 @@
 // Lettuce Print — customer-facing sticker pricing
 // Source: authenticated Paper Strategies "Lettuce | Stickers" calculator,
 // validated 2026-09-03. Portal amounts are supplier cost.
-// Approved sell rule: supplier cost × 1.40 (40% markup).
+// Approved sell rule: supplier cost × 1.40 (40% markup), except each
+// additional Spot UV hit uses the separately approved $0.027/sq. in. sell rate.
 
 export type StickerSize = '1x1' | '2x2' | '3x3' | '4x4' | '5x5'
 export type StickerMaterial = 'standard' | 'holographic'
@@ -65,6 +66,7 @@ export const SPOT_UV_HIT_LABELS: Record<SpotUVHits, string> = {
 // Paper Strategies calculator rates, in cents per square inch per sticker.
 // The portal rounds supplier cost to cents, with a $50.00 minimum.
 const SUPPLIER_MINIMUM_CENTS = 5000
+const CUSTOMER_MINIMUM_CENTS = 7000
 const CUSTOMER_MARKUP_NUMERATOR = 140
 const CUSTOMER_MARKUP_DENOMINATOR = 100
 const SUPPLIER_RATE_CENTS = {
@@ -72,9 +74,13 @@ const SUPPLIER_RATE_CENTS = {
   standardLaminate: 2.38,
   holographic: 7.5,
   spotUv1: 4.1,
-  spotUv2: 5.5,
-  spotUv3: 6.9,
 } as const
+
+// Each UV pass after the first adds $0.0135/sq. in. to supplier cost and
+// $0.027/sq. in. to the customer price.
+const SPOT_UV_ADDITIONAL_HIT_COST_CENTS = 1.35
+const SPOT_UV_1_HIT_SELL_RATE_CENTS = 5.74
+const SPOT_UV_ADDITIONAL_HIT_SELL_CENTS = 2.7
 
 // Paper Strategies' separate "Lamination Required" option adds $0.006/unit.
 // This applies when holographic is paired with our laminate finish. Standard
@@ -147,6 +153,38 @@ function resultFromSupplierCost(costCents: number, quantity: number, rush: RushO
   }
 }
 
+function spotUvResult(
+  width: number,
+  height: number,
+  quantity: number,
+  hits: SpotUVHits,
+  rush: RushOption
+): PriceResult {
+  const additionalHits = hits - 1
+  const supplierRate = SUPPLIER_RATE_CENTS.spotUv1
+    + additionalHits * SPOT_UV_ADDITIONAL_HIT_COST_CENTS
+  const sellRate = SPOT_UV_1_HIT_SELL_RATE_CENTS
+    + additionalHits * SPOT_UV_ADDITIONAL_HIT_SELL_CENTS
+  const costCents = supplierCostCents(width, height, quantity, supplierRate)
+  const baseBeforeRush = Math.max(
+    CUSTOMER_MINIMUM_CENTS,
+    Math.round(width * height * quantity * sellRate)
+  )
+  const rushFeeCents = RUSH_FEES[rush]
+  const totalCents = baseBeforeRush + rushFeeCents
+  const unitCents = Math.round(totalCents / quantity)
+
+  return {
+    supplierCostCents: costCents,
+    totalCents,
+    unitCents,
+    totalFormatted: formatCents(totalCents),
+    unitFormatted: formatCents(unitCents),
+    rushFeeCents,
+    baseBeforeRush,
+  }
+}
+
 export function calculateCustomStickerPrice(
   width: number,
   height: number,
@@ -185,13 +223,7 @@ export function calculateCustomSpotUVPrice(
   hits: SpotUVHits,
   rush: RushOption = 'standard'
 ): PriceResult {
-  const rate = hits === 1
-    ? SUPPLIER_RATE_CENTS.spotUv1
-    : hits === 2
-      ? SUPPLIER_RATE_CENTS.spotUv2
-      : SUPPLIER_RATE_CENTS.spotUv3
-  const cost = supplierCostCents(width, height, quantity, rate)
-  return resultFromSupplierCost(cost, quantity, rush)
+  return spotUvResult(width, height, quantity, hits, rush)
 }
 
 export function calculateSpotUVPrice(
