@@ -206,7 +206,7 @@ export default function ShopPage() {
                         </ul>
 
                         <Link href={product.href}>
-                          <Button size="md" className="w-full">
+                          <Button variant="secondary" size="md" className="w-full bg-white">
                             {product.badge ? 'Order Now' : 'Get a Quote'}
                           </Button>
                         </Link>
