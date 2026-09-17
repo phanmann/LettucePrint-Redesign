@@ -64,7 +64,7 @@ export default async function PortfolioStrip() {
       <div className="relative">
         <div className="flex gap-4 animate-portfolio-strip hover:[animation-play-state:paused] w-max px-4">
           {doubled.map((project, i) => {
-            const imageUrl = project.coverImage ? urlFor(project.coverImage).width(560).height(400).url() : null
+            const imageUrl = project.coverImage ? urlFor(project.coverImage).width(1200).height(800).url() : null
             const bgColor = CARD_COLORS[i % CARD_COLORS.length]
             const isLight = ['#FFCA66', '#acf2f9', '#f5a8c8'].includes(bgColor)
 
@@ -72,7 +72,7 @@ export default async function PortfolioStrip() {
               <Link
                 key={`${project._id}-${i}`}
                 href={`/projects/${project.slug.current}`}
-                className="group flex-shrink-0 w-[260px] sm:w-[300px] rounded-card overflow-hidden flex flex-col justify-end p-5 h-[200px] relative transition-transform duration-300 hover:-translate-y-1.5"
+                className="group flex-shrink-0 w-[520px] sm:w-[600px] rounded-card overflow-hidden flex flex-col justify-end p-5 h-[400px] relative transition-transform duration-300 hover:-translate-y-1.5"
                 style={{ backgroundColor: bgColor }}
               >
                 {imageUrl && (
@@ -81,6 +81,7 @@ export default async function PortfolioStrip() {
                     alt={project.title}
                     fill
                     className="object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500"
+                    sizes="(max-width: 639px) 520px, 600px"
                   />
                 )}
                 {/* Gradient overlay */}
