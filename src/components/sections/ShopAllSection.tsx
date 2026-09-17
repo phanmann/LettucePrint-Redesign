@@ -110,7 +110,7 @@ export default function ShopAllSection() {
                   ))}
                 </ul>
 
-                <div className="inline-flex w-full items-center justify-center gap-1.5 sm:gap-2 rounded-button border-2 border-lp-green bg-lp-green px-3 sm:px-7 py-3 sm:py-3.5 text-[10px] sm:text-small font-semibold uppercase tracking-wider text-white transition-all duration-200 group-hover:bg-lp-green-dark group-hover:border-lp-green-dark">
+                <div className="inline-flex w-full items-center justify-center gap-1.5 sm:gap-2 rounded-button border-2 border-lp-green bg-white px-3 sm:px-7 py-3 sm:py-3.5 text-[10px] sm:text-small font-semibold uppercase tracking-wider text-lp-green transition-all duration-200 group-hover:bg-lp-green group-hover:text-white">
                   Shop Product <ArrowRight size={14} />
                 </div>
               </div>

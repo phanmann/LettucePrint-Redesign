@@ -131,7 +131,7 @@ export default function ProductCard({
           <Link
             href={href ?? `/get-quote?product=${encodeURIComponent(name)}&category=${encodeURIComponent(categoryLabel)}`}
           >
-            <Button size="sm" className="w-full">
+            <Button variant="secondary" size="sm" className="w-full bg-white">
               Order Now <ArrowRight size={14} className="ml-1" />
             </Button>
           </Link>

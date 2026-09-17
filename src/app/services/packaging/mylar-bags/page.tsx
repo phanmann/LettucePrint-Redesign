@@ -102,7 +102,7 @@ export default function MylarBagsPage() {
                       )}
                     </AnimatePresence>
                     <Link href={product.href}>
-                      <Button size="sm" className="w-full">Order Now <ArrowRight size={14} className="ml-1" /></Button>
+                      <Button variant="secondary" size="sm" className="w-full bg-white">Order Now <ArrowRight size={14} className="ml-1" /></Button>
                     </Link>
                   </div>
                 </div>
@@ -114,7 +114,7 @@ export default function MylarBagsPage() {
         <section className="py-16 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-h2 font-semibold text-gray-900 mb-4">Need compliance packaging?</h2>
-            <p className="text-body text-gray-500 mb-8">We understand cannabis compliance requirements. Tell us your state and product type and we'll make sure your bags meet the rules.</p>
+            <p className="text-body text-gray-500 mb-8">We understand cannabis compliance requirements. Tell us your state and product type and we&apos;ll make sure your bags meet the rules.</p>
             <Link href="/get-quote"><Button size="lg">Talk to Us</Button></Link>
           </div>
         </section>
