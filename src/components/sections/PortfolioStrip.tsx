@@ -69,10 +69,9 @@ export default async function PortfolioStrip() {
             const isLight = ['#FFCA66', '#acf2f9', '#f5a8c8'].includes(bgColor)
 
             return (
-              <Link
+              <article
                 key={`${project._id}-${i}`}
-                href={`/projects/${project.slug.current}`}
-                className="group flex-shrink-0 w-[520px] sm:w-[600px] rounded-card overflow-hidden flex flex-col justify-end p-5 h-[400px] relative transition-transform duration-300 hover:-translate-y-1.5"
+                className="flex-shrink-0 w-[520px] sm:w-[600px] rounded-card overflow-hidden flex flex-col justify-end p-5 h-[400px] relative"
                 style={{ backgroundColor: bgColor }}
               >
                 {imageUrl && (
@@ -80,7 +79,7 @@ export default async function PortfolioStrip() {
                     src={imageUrl}
                     alt={project.title}
                     fill
-                    className="object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500"
+                    className="object-cover opacity-80"
                     sizes="(max-width: 639px) 520px, 600px"
                   />
                 )}
@@ -94,7 +93,7 @@ export default async function PortfolioStrip() {
                     {project.title}
                   </p>
                 </div>
-              </Link>
+              </article>
             )
           })}
         </div>
