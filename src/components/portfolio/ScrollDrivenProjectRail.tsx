@@ -7,13 +7,26 @@ interface ScrollDrivenProjectRailProps {
   className?: string
 }
 
-const SCROLL_MULTIPLIER = 0.45
+const WHEEL_IMPULSE = 0.0022
+const TOUCH_MULTIPLIER = 0.45
+const DECAY_PER_FRAME = 0.9
+const MIN_VELOCITY = 0.005
+const MAX_VELOCITY = 0.9
+const FRAME_DURATION = 1000 / 60
+
+interface TouchState {
+  y: number
+  time: number
+}
 
 export default function ScrollDrivenProjectRail({ children, className }: ScrollDrivenProjectRailProps) {
   const trackRef = useRef<HTMLDivElement>(null)
   const offsetRef = useRef(0)
   const cycleWidthRef = useRef(0)
-  const touchYRef = useRef<number | null>(null)
+  const velocityRef = useRef(0)
+  const animationFrameRef = useRef<number | null>(null)
+  const previousFrameRef = useRef<number | null>(null)
+  const touchRef = useRef<TouchState | null>(null)
 
   useEffect(() => {
     const track = trackRef.current
@@ -27,9 +40,42 @@ export default function ScrollDrivenProjectRail({ children, className }: ScrollD
       return remainder === 0 ? 0 : remainder - cycleWidth
     }
 
-    const renderOffset = (deltaY: number) => {
-      offsetRef.current = wrapOffset(offsetRef.current - deltaY * SCROLL_MULTIPLIER)
+    const renderOffset = () => {
       track.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`
+    }
+
+    const stopGlide = () => {
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
+      animationFrameRef.current = null
+      previousFrameRef.current = null
+    }
+
+    const glide = (timestamp: number) => {
+      if (previousFrameRef.current === null) {
+        previousFrameRef.current = timestamp
+      }
+
+      const elapsed = Math.min(timestamp - previousFrameRef.current, 32)
+      previousFrameRef.current = timestamp
+      offsetRef.current = wrapOffset(offsetRef.current + velocityRef.current * elapsed)
+      velocityRef.current *= Math.pow(DECAY_PER_FRAME, elapsed / FRAME_DURATION)
+      renderOffset()
+
+      if (Math.abs(velocityRef.current) > MIN_VELOCITY) {
+        animationFrameRef.current = requestAnimationFrame(glide)
+      } else {
+        velocityRef.current = 0
+        animationFrameRef.current = null
+        previousFrameRef.current = null
+      }
+    }
+
+    const startGlide = () => {
+      if (animationFrameRef.current === null && Math.abs(velocityRef.current) > MIN_VELOCITY) {
+        animationFrameRef.current = requestAnimationFrame(glide)
+      }
     }
 
     const measure = () => {
@@ -37,7 +83,7 @@ export default function ScrollDrivenProjectRail({ children, className }: ScrollD
       const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0
       cycleWidthRef.current = (track.scrollWidth + gap) / 2
       offsetRef.current = wrapOffset(offsetRef.current)
-      track.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`
+      renderOffset()
     }
 
     const handleWheel = (event: WheelEvent) => {
@@ -46,23 +92,41 @@ export default function ScrollDrivenProjectRail({ children, className }: ScrollD
         : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
           ? window.innerHeight
           : 1
-      renderOffset(event.deltaY * unit)
+      const impulse = -event.deltaY * unit * WHEEL_IMPULSE
+
+      velocityRef.current = Math.sign(velocityRef.current) === Math.sign(impulse)
+        ? velocityRef.current + impulse
+        : impulse
+      velocityRef.current = Math.max(-MAX_VELOCITY, Math.min(MAX_VELOCITY, velocityRef.current))
+      startGlide()
     }
 
     const handleTouchStart = (event: TouchEvent) => {
-      touchYRef.current = event.touches[0]?.clientY ?? null
+      const y = event.touches[0]?.clientY
+      if (y === undefined) return
+
+      stopGlide()
+      velocityRef.current = 0
+      touchRef.current = { y, time: performance.now() }
     }
 
     const handleTouchMove = (event: TouchEvent) => {
       const currentY = event.touches[0]?.clientY
-      if (currentY === undefined || touchYRef.current === null) return
+      const previousTouch = touchRef.current
+      if (currentY === undefined || previousTouch === null) return
 
-      renderOffset(touchYRef.current - currentY)
-      touchYRef.current = currentY
+      const now = performance.now()
+      const elapsed = Math.max(now - previousTouch.time, 1)
+      const movement = -(previousTouch.y - currentY) * TOUCH_MULTIPLIER
+      offsetRef.current = wrapOffset(offsetRef.current + movement)
+      velocityRef.current = Math.max(-MAX_VELOCITY, Math.min(MAX_VELOCITY, movement / elapsed))
+      touchRef.current = { y: currentY, time: now }
+      renderOffset()
     }
 
     const clearTouch = () => {
-      touchYRef.current = null
+      touchRef.current = null
+      startGlide()
     }
 
     measure()
@@ -75,6 +139,7 @@ export default function ScrollDrivenProjectRail({ children, className }: ScrollD
     window.addEventListener('touchcancel', clearTouch, { passive: true })
 
     return () => {
+      stopGlide()
       resizeObserver.disconnect()
       window.removeEventListener('wheel', handleWheel)
       window.removeEventListener('touchstart', handleTouchStart)
