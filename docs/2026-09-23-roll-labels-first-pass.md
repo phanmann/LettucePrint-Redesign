@@ -47,6 +47,12 @@ The `Help me choose` route now consumes only the recognized `service=stickers-la
 
 No analytics vendor, tracking script, hidden form, or new PII collection was added. The implementation uses the existing cart and quote architectures.
 
+The existing root layout conditionally loads Google Analytics 4 only when `NEXT_PUBLIC_GA_ID` is present and issues the default `gtag('config', ...)` page-view configuration. A production network audit of `/lp/roll-labels` on 2026-09-23 found requests only to `lettuceprint.vercel.app`: no Google Analytics request, Vercel Insights request, third-party collector, page-view event, or custom conversion event was observed. The landing-page CTA, quote, and cart interactions therefore are not currently measured by an active collector.
+
 ## Launch status
 
-Implementation, CRO review corrections, focused regressions, production build, and local Playwright QA are complete in the isolated worktree. Production deployment was authorized on 2026-09-23 and is pending the release steps recorded below.
+Deployed to production on 2026-09-23 at `https://lettuceprint.vercel.app/lp/roll-labels`. The application release is commit `dff123f91e3ca643ae0cc0340a3114fac46622ca`; Vercel deployment `dpl_E8sotDgcX86cyWWFwiP5R4hC8X81` was verified Ready and its Git metadata matched that commit on `main`.
+
+Focused lint, roll-label pricing/configuration, machine-direction, sticker-pricing regression, production build, and local Playwright QA passed. Live Playwright QA passed at 1440, 1280, 768, 390, and 360 CSS pixels with no horizontal overflow, console errors, or page errors. It verified the exact artwork timing copy, pricing anchor, contextual quote prefill, hand/machine direction gating, the `$728.48` total and cart display for 5,000 3×2 standard matte labels, the cart artwork upload/payment gate, and the FAQ content. Live screenshots are stored in `/Users/phanman/.openclaw/workspace/artifacts/roll-labels-live/`.
+
+The remaining operational warning is unchanged: no authorized live Stripe transaction was placed, so payment-provider completion is outside this release's verified scope.
