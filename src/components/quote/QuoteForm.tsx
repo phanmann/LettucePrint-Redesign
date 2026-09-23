@@ -15,6 +15,16 @@ type ServiceType =
   | 'Large Format'
   | 'Other'
 
+export interface QuoteFormInitialValues {
+  service: ServiceType
+  projectDetails: Record<string, string>
+  contextLabel?: string
+}
+
+interface QuoteFormProps {
+  initialValues?: QuoteFormInitialValues
+}
+
 interface FormState {
   service: ServiceType | ''
   projectDetails: Record<string, string>
@@ -104,7 +114,7 @@ function getProjectFields(service: ServiceType): {
 
 // ─── Step indicator ─────────────────────────────────────────────────────────
 
-function StepIndicator({ current, total }: { current: number; total: number }) {
+function StepIndicator({ current }: { current: number }) {
   const steps = ['Service', 'Details', 'Timeline', 'Your Info']
   return (
     <div className="mb-10">
@@ -135,7 +145,7 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
 
 // ─── Main form ──────────────────────────────────────────────────────────────
 
-export default function QuoteForm() {
+export default function QuoteForm({ initialValues }: QuoteFormProps) {
   const [step, setStep] = useState(0)
   const [direction, setDirection] = useState(1)
   const [submitted, setSubmitted] = useState(false)
@@ -143,8 +153,8 @@ export default function QuoteForm() {
   const [error, setError] = useState('')
 
   const [form, setForm] = useState<FormState>({
-    service: '',
-    projectDetails: {},
+    service: initialValues?.service ?? '',
+    projectDetails: initialValues?.projectDetails ?? {},
     timeline: '',
     contact: { name: '', company: '', email: '', phone: '' },
   })
@@ -226,7 +236,14 @@ export default function QuoteForm() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <StepIndicator current={step} total={4} />
+      <StepIndicator current={step} />
+
+      {initialValues?.contextLabel && form.service === initialValues.service && (
+        <div className="mb-6 rounded-card border border-lp-green/30 bg-lp-green/5 px-4 py-3 text-small text-gray-700" role="status">
+          <span className="font-semibold text-lp-green">Roll labels selected.</span>{' '}
+          {initialValues.contextLabel}
+        </div>
+      )}
 
       <div className="relative overflow-hidden">
         <AnimatePresence custom={direction} mode="wait">
@@ -249,6 +266,7 @@ export default function QuoteForm() {
                   {SERVICES.map(s => (
                     <button
                       key={s.id}
+                      aria-pressed={form.service === s.id}
                       onClick={() => {
                         setForm(f => ({ ...f, service: s.id, projectDetails: {} }))
                       }}

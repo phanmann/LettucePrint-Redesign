@@ -19,13 +19,14 @@ interface Props {
   onSelectCustom: () => void
   onCustomChange: (val: string) => void
   minCustom?: number
+  maxCustom?: number
   stepCustom?: number
 }
 
 export default function QuantityDropdown({
   rows, value, showCustom, customValue,
   onSelect, onSelectCustom, onCustomChange,
-  minCustom = 50, stepCustom = 50,
+  minCustom = 50, maxCustom, stepCustom = 50,
 }: Props) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -143,6 +144,7 @@ export default function QuantityDropdown({
             <input
               type="number"
               min={minCustom}
+              max={maxCustom}
               step={stepCustom}
               value={customValue}
               onChange={e => onCustomChange(e.target.value)}

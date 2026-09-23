@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test:sticker-pricing": "node --experimental-strip-types scripts/check-sticker-pricing.mjs",
-    "test:roll-label-direction": "node --experimental-strip-types scripts/check-roll-label-direction.mjs"
+    "test:roll-label-direction": "node --experimental-strip-types scripts/check-roll-label-direction.mjs",
+    "test:roll-label-pricing": "tsx scripts/check-roll-label-pricing.ts"
   },
   "dependencies": {
     "@sanity/client": "^7.21.0",
@@ -40,6 +41,7 @@
     "eslint-config-next": "16.2.4",
     "playwright": "^1.59.1",
     "tailwindcss": "^4",
+    "tsx": "4.21.0",
     "typescript": "^5"
   }
 }

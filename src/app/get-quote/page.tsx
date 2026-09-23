@@ -9,7 +9,23 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://lettuceprint.com/get-quote' },
 }
 
-export default function GetQuotePage() {
+interface GetQuotePageProps {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}
+
+export default async function GetQuotePage({ searchParams }: GetQuotePageProps) {
+  const params = await searchParams
+  const isRollLabelHelp = params.service === 'stickers-labels' && params.product === 'roll-labels'
+  const initialValues = isRollLabelHelp
+    ? {
+        service: 'Stickers & Labels' as const,
+        projectDetails: {
+          material: 'Not sure',
+          details: 'Custom roll labels — help choosing size, material, finish, and application direction.',
+        },
+        contextLabel: 'Custom roll-label help is preselected. Continue to add your size and quantity.',
+      }
+    : undefined
   return (
     <>
       <Navbar />
@@ -34,7 +50,7 @@ export default function GetQuotePage() {
 
             {/* Left — Form */}
             <div className="lg:col-span-2">
-              <QuoteForm />
+              <QuoteForm initialValues={initialValues} />
             </div>
 
             {/* Right — Sidebar */}

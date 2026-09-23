@@ -13,6 +13,7 @@ import {
   QUANTITY_TIERS,
   MATERIAL_LABELS,
   MATERIAL_DESCRIPTIONS,
+  ROLL_LABEL_LIMITS,
   FINISH_LABELS,
   FINISH_DESCRIPTIONS,
   formatCents,
@@ -23,9 +24,12 @@ import {
 const MATERIALS: LabelMaterial[] = ['standard', 'bopp']
 const FINISHES: LabelFinish[] = ['matte', 'gloss']
 
-interface Props { productName: string }
+interface Props {
+  productName: string
+  purchaseCtaStyle?: 'solid' | 'outline'
+}
 
-export default function RollLabelCalculator({ productName }: Props) {
+export default function RollLabelCalculator({ productName, purchaseCtaStyle = 'solid' }: Props) {
   const [selectedPreset] = useState('custom')
   const [customWidth, setCustomWidth] = useState('')
   const [customHeight, setCustomHeight] = useState('')
@@ -43,14 +47,18 @@ export default function RollLabelCalculator({ productName }: Props) {
   const preset = PRESET_SIZES.find(p => p.id === selectedPreset)
   const width = isCustomSize ? cw : (preset?.width ?? 0)
   const height = isCustomSize ? ch : (preset?.height ?? 0)
-  const validSize = width > 0 && height > 0
+  const validSize = width >= ROLL_LABEL_LIMITS.minDimension && width <= ROLL_LABEL_LIMITS.maxDimension
+    && height >= ROLL_LABEL_LIMITS.minDimension && height <= ROLL_LABEL_LIMITS.maxDimension
+  const validQuantity = Number.isInteger(quantity)
+    && quantity >= ROLL_LABEL_LIMITS.minQuantity
+    && quantity <= ROLL_LABEL_LIMITS.maxQuantity
 
   const fmt = (cents: number) => formatCents(cents)
 
   const price = useMemo(() => {
-    if (!validSize) return null
+    if (!validSize || !validQuantity) return null
     return calculateRollLabelPrice(width, height, quantity, material, finish)
-  }, [width, height, quantity, material, finish, validSize])
+  }, [width, height, quantity, material, finish, validSize, validQuantity])
 
   const qtyRows = useMemo(() => {
     if (!validSize) return []
@@ -106,18 +114,18 @@ export default function RollLabelCalculator({ productName }: Props) {
         <p className={sectionLabel}>Size (inches)</p>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs text-gray-500 mb-1">Width (W)</label>
+            <label htmlFor="roll-label-width" className="block text-xs text-gray-500 mb-1">Width (W)</label>
             <input
-              type="number" min="0.5" max="12" step="0.125"
+              id="roll-label-width" type="number" min="0.5" max="12" step="0.125"
               value={customWidth} onChange={e => setCustomWidth(e.target.value)}
               placeholder="e.g. 3.5"
               className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-lp-green"
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">Length (L)</label>
+            <label htmlFor="roll-label-length" className="block text-xs text-gray-500 mb-1">Length (L)</label>
             <input
-              type="number" min="0.5" max="12" step="0.125"
+              id="roll-label-length" type="number" min="0.5" max="12" step="0.125"
               value={customHeight} onChange={e => setCustomHeight(e.target.value)}
               placeholder="e.g. 2.5"
               className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-lp-green"
@@ -190,15 +198,20 @@ export default function RollLabelCalculator({ productName }: Props) {
             onCustomChange={val => {
               setCustomQty(val)
               const n = parseInt(val)
-              if (n >= 250) setQuantity(n)
+              setQuantity(n)
             }}
-            minCustom={250}
+            minCustom={ROLL_LABEL_LIMITS.minQuantity}
+            maxCustom={ROLL_LABEL_LIMITS.maxQuantity}
             stepCustom={250}
           />
         ) : (
-          <p className="text-sm text-gray-400 py-4 text-center">Enter dimensions above to see pricing</p>
+          <p className="text-sm text-gray-400 py-4 text-center">Enter dimensions from 0.5&Prime; to 12&Prime; to see pricing</p>
         )}
       </div>
+
+      {showCustomQty && !validQuantity && (
+        <p className="-mt-4 mb-5 text-xs text-amber-600">Enter a whole-number quantity from 250 to 100,000.</p>
+      )}
 
       <div className="border-t border-gray-100 mb-6" />
 
@@ -219,7 +232,12 @@ export default function RollLabelCalculator({ productName }: Props) {
               onClick={handleOrder}
               disabled={labelDirection.applicationMethod === 'machine' && !labelDirection.unwindEdge}
               size="lg"
-              className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
+              variant={purchaseCtaStyle === 'outline' ? 'secondary' : 'primary'}
+              className={`flex-1 text-base font-semibold py-4 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed ${
+                purchaseCtaStyle === 'outline'
+                  ? '!bg-white !text-lp-green !border-lp-green hover:!bg-lp-green hover:!text-white'
+                  : '!bg-lp-green hover:!bg-lp-green-dark text-white'
+              }`}
             >
               {added ? '✓ Added to cart' : 'Add to cart'}
             </Button>

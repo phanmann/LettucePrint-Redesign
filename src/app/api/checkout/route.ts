@@ -7,6 +7,7 @@ import {
   type StickerMaterial,
   type SpotUVHits,
 } from '@/lib/pricing'
+import { authoritativeRollLabelPrice } from '@/lib/roll-label-checkout'
 import {
   encodeRollLabelDirection,
   formatRollLabelDirection,
@@ -147,8 +148,17 @@ export async function POST(req: NextRequest) {
 
       const lineItems = items.map((item) => {
         const secureStickerPrice = authoritativeStickerPrice(item)
+        let secureRollLabelPrice: number | null
+        try {
+          secureRollLabelPrice = authoritativeRollLabelPrice(item)
+        } catch (error) {
+          throw new InvalidCheckoutConfigurationError(error instanceof Error ? error.message : 'Invalid roll label configuration')
+        }
         const rollLabelDirection = rollLabelDirectionForItem(item)
-        const unitAmount = secureStickerPrice ?? item.totalCents
+        const unitAmount = secureStickerPrice ?? secureRollLabelPrice ?? item.totalCents
+        const productionLabel = secureRollLabelPrice !== null
+          ? 'Standard production — timing confirmed after proof approval'
+          : (RUSH_LABELS[item.rush] ?? item.rush)
         if (!Number.isInteger(unitAmount) || unitAmount <= 0) {
           throw new Error('Invalid item price')
         }
@@ -161,7 +171,7 @@ export async function POST(req: NextRequest) {
               `Size: ${item.size}`,
               `Material: ${item.material}`,
               `Finish: ${item.finish}`,
-              `Production: ${RUSH_LABELS[item.rush] ?? item.rush}`,
+              `Production: ${productionLabel}`,
               `Qty: ${item.qty}`,
               ...(rollLabelDirection ? [`Application: ${formatRollLabelDirection(rollLabelDirection)}`] : []),
             ].join(' · '),
@@ -240,7 +250,23 @@ export async function POST(req: NextRequest) {
         finish,
         rush,
       })
-      const unitAmount = secureStickerPrice ?? overridePriceCents
+      let secureRollLabelPrice: number | null
+      try {
+        secureRollLabelPrice = authoritativeRollLabelPrice({
+          product: productName,
+          size,
+          qty: quantity,
+          material,
+          finish,
+          rush,
+        })
+      } catch (error) {
+        throw new InvalidCheckoutConfigurationError(error instanceof Error ? error.message : 'Invalid roll label configuration')
+      }
+      const unitAmount = secureStickerPrice ?? secureRollLabelPrice ?? overridePriceCents
+      const productionLabel = secureRollLabelPrice !== null
+        ? 'Standard production — timing confirmed after proof approval'
+        : (RUSH_LABELS[rush] ?? rush)
 
       const session = await getStripe().checkout.sessions.create({
         payment_method_types: ['card'],
@@ -254,7 +280,7 @@ export async function POST(req: NextRequest) {
                   `Size: ${size}`,
                   `Material: ${material}`,
                   `Finish: ${finish}`,
-                  `Production: ${RUSH_LABELS[rush] ?? rush}`,
+                  `Production: ${productionLabel}`,
                   `Quantity: ${quantity}`,
                 ].join(' · '),
                 metadata: { size, quantity: String(quantity), material, finish, rush },

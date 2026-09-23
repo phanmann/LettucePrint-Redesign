@@ -5,6 +5,41 @@
 export type LabelMaterial = 'standard' | 'bopp'
 export type LabelFinish = 'matte' | 'gloss'
 
+export const ROLL_LABEL_LIMITS = {
+  minDimension: 0.5,
+  maxDimension: 12,
+  minQuantity: 250,
+  maxQuantity: 100000,
+} as const
+
+export function isLabelMaterial(value: unknown): value is LabelMaterial {
+  return value === 'standard' || value === 'bopp'
+}
+
+export function isLabelFinish(value: unknown): value is LabelFinish {
+  return value === 'matte' || value === 'gloss'
+}
+
+export function validateRollLabelConfiguration(
+  widthIn: number,
+  heightIn: number,
+  quantity: number,
+  material: unknown,
+  finish: unknown
+): asserts material is LabelMaterial {
+  if (!Number.isFinite(widthIn) || widthIn < ROLL_LABEL_LIMITS.minDimension || widthIn > ROLL_LABEL_LIMITS.maxDimension) {
+    throw new Error('Roll label width must be between 0.5 and 12 inches')
+  }
+  if (!Number.isFinite(heightIn) || heightIn < ROLL_LABEL_LIMITS.minDimension || heightIn > ROLL_LABEL_LIMITS.maxDimension) {
+    throw new Error('Roll label height must be between 0.5 and 12 inches')
+  }
+  if (!Number.isInteger(quantity) || quantity < ROLL_LABEL_LIMITS.minQuantity || quantity > ROLL_LABEL_LIMITS.maxQuantity) {
+    throw new Error('Roll label quantity must be a whole number between 250 and 100000')
+  }
+  if (!isLabelMaterial(material)) throw new Error('Invalid roll label material')
+  if (!isLabelFinish(finish)) throw new Error('Invalid roll label finish')
+}
+
 // ─── Press Constants ───────────────────────────────────────────────────────
 const ROLL_WIDTH_IN = 12.25          // inches across
 const GAP_ACROSS_IN = 0.25          // gap between labels across
@@ -85,6 +120,8 @@ export function calculateRollLabelPrice(
   material: LabelMaterial,
   finish: LabelFinish
 ): RollLabelPriceResult {
+  validateRollLabelConfiguration(widthIn, heightIn, quantity, material, finish)
+
   // ── Roll math ──
   const labelsAcross = Math.floor(ROLL_WIDTH_IN / (widthIn + GAP_ACROSS_IN))
   const labelsAroundPerFacestockRoll = Math.floor(
