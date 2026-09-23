@@ -98,7 +98,7 @@ export default function RollLabelsPage() {
               <ProductImageGallery
                 images={[
                   { src: '/images/products/roll-labels/roll-labels-1.png', alt: 'Custom roll labels' },
-                  { src: '/images/products/roll-labels/roll-labels-2.jpg', alt: 'Roll labels on roll' },
+                  { src: '/images/products/roll-labels/roll-labels-bk-jani-white-shop.webp', alt: 'BK JANI custom labels on a roll' },
                   { src: '/images/products/roll-labels/roll-labels-3.jpg', alt: 'Custom product labels' },
                 ]}
               />
