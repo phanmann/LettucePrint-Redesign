@@ -1,3 +1,5 @@
+import type { LabelApplicationMethod, UnwindEdge, UnwindFace } from '@/lib/roll-label-direction'
+
 // Cart types shared across the app
 export interface CartItem {
   id: string           // uuid — stable across sessions
@@ -7,6 +9,9 @@ export interface CartItem {
   material: string
   finish: string
   rush: string
+  applicationMethod?: LabelApplicationMethod
+  unwindEdge?: UnwindEdge
+  unwindFace?: UnwindFace
   totalCents: number
   totalFormatted: string
   // Artwork — optional at add-to-cart time, required before checkout

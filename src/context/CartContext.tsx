@@ -18,7 +18,7 @@ interface CartContextValue {
 const CartContext = createContext<CartContextValue | null>(null)
 
 // Bump when authoritative pricing changes so stale browser totals cannot linger.
-const STORAGE_KEY = 'lp_cart_v2'
+const STORAGE_KEY = 'lp_cart_v3'
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
@@ -28,6 +28,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time localStorage hydration
       if (raw) setItems(JSON.parse(raw))
     } catch {
       // ignore parse errors

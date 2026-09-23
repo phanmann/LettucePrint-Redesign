@@ -63,6 +63,38 @@ export const order = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'rollLabelDirections',
+      title: 'Roll Label Application & Direction',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({ name: 'product', title: 'Product', type: 'string', readOnly: true }),
+            defineField({
+              name: 'applicationMethod',
+              title: 'Application Method',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Hand applied', value: 'hand' },
+                  { title: 'Machine applied', value: 'machine' },
+                ],
+              },
+              readOnly: true,
+            }),
+            defineField({ name: 'unwindEdge', title: 'Leading Edge', type: 'string', readOnly: true }),
+            defineField({ name: 'unwindFace', title: 'Printed Face', type: 'string', readOnly: true }),
+            defineField({ name: 'summary', title: 'Production Summary', type: 'string', readOnly: true }),
+          ],
+          preview: {
+            select: { title: 'product', subtitle: 'summary' },
+          },
+        },
+      ],
+      readOnly: true,
+    }),
+    defineField({
       name: 'amountPaidCents',
       title: 'Amount Paid (cents)',
       type: 'number',

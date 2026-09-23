@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useCart } from '@/context/CartContext'
 import Button from '@/components/ui/Button'
 import QuantityDropdown from '@/components/shop/QuantityDropdown'
+import RollLabelDirectionSelector from '@/components/shop/RollLabelDirectionSelector'
+import type { RollLabelDirection } from '@/lib/roll-label-direction'
 import {
   calculateRollLabelPrice,
   PRESET_SIZES,
@@ -32,6 +34,7 @@ export default function RollLabelCalculator({ productName }: Props) {
   const [quantity, setQuantity] = useState<number>(1000)
   const [customQty, setCustomQty] = useState('')
   const [showCustomQty, setShowCustomQty] = useState(false)
+  const [labelDirection, setLabelDirection] = useState<RollLabelDirection>({ applicationMethod: 'hand' })
   const router = useRouter()
 
   const isCustomSize = selectedPreset === 'custom'
@@ -74,6 +77,9 @@ export default function RollLabelCalculator({ productName }: Props) {
       material,
       finish,
       rush: 'standard',
+      applicationMethod: labelDirection.applicationMethod,
+      unwindEdge: labelDirection.unwindEdge,
+      unwindFace: labelDirection.unwindFace,
       totalCents: price.totalCents,
       totalFormatted: price.totalFormatted,
       productPath: '/shop/roll-labels',
@@ -194,6 +200,13 @@ export default function RollLabelCalculator({ productName }: Props) {
         )}
       </div>
 
+      <div className="border-t border-gray-100 mb-6" />
+
+      {/* ── Application + unwind direction ── */}
+      <div className="mb-6">
+        <RollLabelDirectionSelector value={labelDirection} onChange={setLabelDirection} />
+      </div>
+
       {/* ── Price Footer + CTA ── */}
       {validSize && price && (
         <>
@@ -202,7 +215,12 @@ export default function RollLabelCalculator({ productName }: Props) {
             <p className="text-sm text-gray-500 pb-1">{price.unitFormatted} / label</p>
           </div>
           <div className="flex gap-2">
-            <Button onClick={handleOrder} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
+            <Button
+              onClick={handleOrder}
+              disabled={labelDirection.applicationMethod === 'machine' && !labelDirection.unwindEdge}
+              size="lg"
+              className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            >
               {added ? '✓ Added to cart' : 'Add to cart'}
             </Button>
             <Button onClick={() => router.push('/cart')} size="lg" variant="secondary" className="px-4 py-4 rounded-xl border-gray-300 text-gray-700 hover:border-lp-green hover:text-lp-green">

@@ -3,11 +3,11 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { Trash2, Upload, CheckCircle, AlertCircle, Loader2, ShoppingBag, ArrowRight, Plus, FileText } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import { useUploadThing } from '@/lib/uploadthingClient'
 import type { CartItem } from '@/lib/cart'
+import { formatRollLabelDirection } from '@/lib/roll-label-direction'
 import Button from '@/components/ui/Button'
 
 // ── Product thumbnail map ─────────────────────────────────────────────────────
@@ -224,6 +224,15 @@ function CartItemRow({ item }: { item: CartItem }) {
             <p className="text-xs text-gray-500 mt-0.5">
               {item.size} · Qty {item.qty} · {item.material} · {item.finish}
             </p>
+            {item.applicationMethod && (
+              <p className="text-xs text-lp-green mt-1 font-medium">
+                {formatRollLabelDirection({
+                  applicationMethod: item.applicationMethod,
+                  unwindEdge: item.unwindEdge,
+                  unwindFace: item.unwindFace,
+                })}
+              </p>
+            )}
             {item.rush !== 'standard' && (
               <span className="inline-block mt-1 text-xs bg-amber-50 text-amber-700 border border-amber-200 rounded px-2 py-0.5">
                 {item.rush === '48hr' ? '48-hour rush' : '24-hour rush'}
@@ -267,7 +276,6 @@ function CartItemRow({ item }: { item: CartItem }) {
 
 // ── Main cart page ────────────────────────────────────────────────────────────
 export default function CartPage() {
-  const router = useRouter()
   const { items, count } = useCart()
   const [checkingOut, setCheckingOut] = useState(false)
   const [checkoutError, setCheckoutError] = useState<string | null>(null)
@@ -306,7 +314,7 @@ export default function CartPage() {
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-24 text-center">
         <ShoppingBag size={48} className="mx-auto text-gray-200 mb-4" />
         <h1 className="text-2xl font-semibold text-gray-900 mb-2">Your cart is empty</h1>
-        <p className="text-gray-500 mb-8">Add products from any product page and they'll show up here.</p>
+        <p className="text-gray-500 mb-8">Add products from any product page and they&apos;ll show up here.</p>
         <Link href="/shop/stickers">
           <Button size="lg">Browse products</Button>
         </Link>

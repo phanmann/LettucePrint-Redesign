@@ -3,6 +3,7 @@ import Stripe from 'stripe'
 import { getStripe } from '@/lib/stripe'
 import { writeClient } from '@/sanity/client'
 import { getResend } from '@/lib/resend'
+import { decodeRollLabelDirection, formatRollLabelDirection } from '@/lib/roll-label-direction'
 
 export const runtime = 'nodejs'
 
@@ -59,6 +60,22 @@ export async function POST(req: NextRequest) {
       const artworkUrl = meta.artworkUrl || existingOrder?.artworkUrl || null
       const artworkFilename = meta.artworkFilename || existingOrder?.artworkFilename || null
       const hasArtwork = Boolean(artworkUrl)
+      const itemCount = Number.parseInt(meta.itemCount ?? '0', 10)
+      const rollLabelDirections = Number.isFinite(itemCount)
+        ? Array.from({ length: itemCount }, (_, index) => {
+            const encoded = meta[`item_${index}_unwind`]
+            const direction = encoded ? decodeRollLabelDirection(encoded) : null
+            if (!direction) return null
+            return {
+              _key: `roll-label-${index}`,
+              product: meta[`item_${index}_product`] ?? 'Roll Labels',
+              applicationMethod: direction.applicationMethod,
+              unwindEdge: direction.unwindEdge ?? null,
+              unwindFace: direction.unwindFace ?? null,
+              summary: formatRollLabelDirection(direction),
+            }
+          }).filter((item): item is NonNullable<typeof item> => item !== null)
+        : []
 
       await writeClient.createOrReplace({
         _type: 'order',
@@ -86,6 +103,7 @@ export async function POST(req: NextRequest) {
         orderStatus: hasArtwork ? 'artwork_received' : 'paid',
         proofStatus: 'pending',
         paidAt: new Date().toISOString(),
+        ...(rollLabelDirections.length > 0 && { rollLabelDirections }),
         ...(artworkUrl && {
           artworkUrl,
           artworkFilename,

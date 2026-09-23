@@ -7,6 +7,15 @@ import {
   type StickerMaterial,
   type SpotUVHits,
 } from '@/lib/pricing'
+import {
+  encodeRollLabelDirection,
+  formatRollLabelDirection,
+  isValidRollLabelDirection,
+  type LabelApplicationMethod,
+  type RollLabelDirection,
+  type UnwindEdge,
+  type UnwindFace,
+} from '@/lib/roll-label-direction'
 
 // ── Single-item checkout (legacy, still used by direct checkout flow) ─────────
 interface SingleItemBody {
@@ -30,6 +39,9 @@ interface CartItemBody {
   material: string
   finish: string
   rush: string
+  applicationMethod?: LabelApplicationMethod
+  unwindEdge?: UnwindEdge
+  unwindFace?: UnwindFace
   totalCents: number
   artworkUrl?: string
   artworkFilename?: string
@@ -37,6 +49,22 @@ interface CartItemBody {
 
 interface CartCheckoutBody {
   items: CartItemBody[]
+}
+
+class InvalidCheckoutConfigurationError extends Error {}
+
+function rollLabelDirectionForItem(item: CartItemBody): RollLabelDirection | null {
+  if (!['Custom Roll Labels', 'Roll Labels'].includes(item.product)) return null
+
+  const direction: RollLabelDirection = {
+    applicationMethod: item.applicationMethod as LabelApplicationMethod,
+    unwindEdge: item.unwindEdge,
+    unwindFace: item.unwindFace,
+  }
+  if (!isValidRollLabelDirection(direction)) {
+    throw new InvalidCheckoutConfigurationError('Invalid roll label application or unwind direction')
+  }
+  return direction
 }
 
 function isSingleItem(body: unknown): body is SingleItemBody {
@@ -119,6 +147,7 @@ export async function POST(req: NextRequest) {
 
       const lineItems = items.map((item) => {
         const secureStickerPrice = authoritativeStickerPrice(item)
+        const rollLabelDirection = rollLabelDirectionForItem(item)
         const unitAmount = secureStickerPrice ?? item.totalCents
         if (!Number.isInteger(unitAmount) || unitAmount <= 0) {
           throw new Error('Invalid item price')
@@ -134,6 +163,7 @@ export async function POST(req: NextRequest) {
               `Finish: ${item.finish}`,
               `Production: ${RUSH_LABELS[item.rush] ?? item.rush}`,
               `Qty: ${item.qty}`,
+              ...(rollLabelDirection ? [`Application: ${formatRollLabelDirection(rollLabelDirection)}`] : []),
             ].join(' · '),
             metadata: {
               cartItemId: item.id,
@@ -142,6 +172,11 @@ export async function POST(req: NextRequest) {
               material: item.material,
               finish: item.finish,
               rush: item.rush,
+              ...(rollLabelDirection && {
+                applicationMethod: rollLabelDirection.applicationMethod,
+                ...(rollLabelDirection.unwindEdge && { unwindEdge: rollLabelDirection.unwindEdge }),
+                ...(rollLabelDirection.unwindFace && { unwindFace: rollLabelDirection.unwindFace }),
+              }),
               ...(item.artworkUrl && { artworkUrl: item.artworkUrl }),
             },
           },
@@ -157,6 +192,10 @@ export async function POST(req: NextRequest) {
         if (item.artworkFilename) artworkMeta[`artwork_${idx}_name`] = item.artworkFilename
         artworkMeta[`item_${idx}_product`] = item.product
         artworkMeta[`item_${idx}_qty`] = String(item.qty)
+        const rollLabelDirection = rollLabelDirectionForItem(item)
+        if (rollLabelDirection) {
+          artworkMeta[`item_${idx}_unwind`] = encodeRollLabelDirection(rollLabelDirection)
+        }
       })
 
       const session = await getStripe().checkout.sessions.create({
@@ -254,6 +293,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
     }
   } catch (error) {
+    if (error instanceof InvalidCheckoutConfigurationError) {
+      return NextResponse.json({ error: error.message }, { status: 400 })
+    }
     console.error('Checkout error:', error)
     return NextResponse.json({ error: 'Failed to create checkout session' }, { status: 500 })
   }
