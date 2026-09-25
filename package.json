@@ -10,6 +10,8 @@
     "test:packaging-hero": "playwright test tests/custom-packaging-hero.spec.ts",
     "test:custom-packaging": "npm run test:packaging-hero",
     "test:custom-packaging-contract": "tsx scripts/check-custom-packaging-consultation.ts",
+    "test:mylar-bags-contract": "tsx scripts/check-mylar-bags.ts",
+    "test:mylar-bags-types": "tsc --noEmit --project tsconfig.mylar.json",
     "test:sticker-pricing": "node --experimental-strip-types scripts/check-sticker-pricing.mjs",
     "test:roll-label-direction": "node --experimental-strip-types scripts/check-roll-label-direction.mjs",
     "test:roll-label-pricing": "tsx scripts/check-roll-label-pricing.ts"

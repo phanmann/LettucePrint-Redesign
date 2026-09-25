@@ -10,11 +10,12 @@ export const SPOT_FINISHES = [
   'Spot Glitter',
 ] as const
 export const ENCLOSURES = [
-  'Common Zipper',
+  'Standard Zipper',
   'Child-Resistant Zipper',
   'Tear Notch',
   'Hang Hole',
 ] as const
+const LEGACY_MYLAR_ENCLOSURE = 'Common Zipper'
 export const BEST_CONTACT_OPTIONS = ['Email', 'Text', 'Call'] as const
 export const ARTWORK_OPTIONS = ['Yes', 'No'] as const
 
@@ -23,6 +24,7 @@ export type SpotFinish = (typeof SPOT_FINISHES)[number]
 export type Enclosure = (typeof ENCLOSURES)[number]
 export type BestContact = (typeof BEST_CONTACT_OPTIONS)[number]
 export type ArtworkPrintReady = (typeof ARTWORK_OPTIONS)[number]
+export const GUSSET_VALIDATION_ERROR = 'Enter a positive gusset or leave it blank.'
 
 export const PACKAGING_QUOTE_CONFIGS = {
   'custom-packaging': {
@@ -47,8 +49,12 @@ export interface BagSize {
   unit: 'in'
 }
 
-interface PackagingQuoteDetails {
-  bagSizes: BagSize[]
+export interface MylarBagSize extends BagSize {
+  gusset?: number
+}
+
+interface PackagingQuoteDetails<T extends PackagingQuoteType> {
+  bagSizes: T extends 'mylar-bags' ? MylarBagSize[] : BagSize[]
   printFinish: PrintFinish
   spotFinish: SpotFinish
   enclosures: Enclosure[]
@@ -65,7 +71,7 @@ export interface PackagingQuotePayload<T extends PackagingQuoteType = PackagingQ
     email: string
     phone: string
   }
-  projectDetails: PackagingQuoteDetails
+  projectDetails: PackagingQuoteDetails<T>
 }
 
 export type CustomPackagingQuotePayload = PackagingQuotePayload<'custom-packaging'>
@@ -117,18 +123,25 @@ export function validatePackagingQuote<T extends PackagingQuoteType>(
   const rawBagSizes = Array.isArray(detailsValue.bagSizes) ? detailsValue.bagSizes : []
   const bagSizes = rawBagSizes.map(size => {
     const item = size && typeof size === 'object' ? size as Record<string, unknown> : {}
-    return {
+    const baseSize = {
       width: typeof item.width === 'number' ? item.width : Number(item.width),
       length: typeof item.length === 'number' ? item.length : Number(item.length),
       unit: item.unit,
     }
+    return expectedQuoteType === 'mylar-bags' && Object.hasOwn(item, 'gusset')
+      ? { ...baseSize, gusset: item.gusset }
+      : baseSize
   })
   const printFinish = detailsValue.printFinish
   const spotFinish = detailsValue.spotFinish
   const artworkPrintReady = detailsValue.artworkPrintReady
   const rawEnclosures = Array.isArray(detailsValue.enclosures) ? detailsValue.enclosures : []
   const rawBestContact = Array.isArray(detailsValue.bestContact) ? detailsValue.bestContact : []
-  const enclosures = rawEnclosures as Enclosure[]
+  const enclosures = [...new Set(rawEnclosures.map(item => (
+    expectedQuoteType === 'mylar-bags' && item === LEGACY_MYLAR_ENCLOSURE
+      ? 'Standard Zipper'
+      : item
+  )))] as Enclosure[]
   const bestContact = rawBestContact as BestContact[]
   const config = PACKAGING_QUOTE_CONFIGS[expectedQuoteType]
 
@@ -145,10 +158,22 @@ export function validatePackagingQuote<T extends PackagingQuoteType>(
     || bagSizes.some(size => !Number.isFinite(size.width) || size.width <= 0 || !Number.isFinite(size.length) || size.length <= 0 || size.unit !== 'in')
   ) {
     errors.bagSizes = 'Enter a positive width and length for every bag size.'
+  } else if (
+    expectedQuoteType === 'mylar-bags'
+    && bagSizes.some(size => 'gusset' in size && (
+      typeof size.gusset !== 'number'
+      || !Number.isFinite(size.gusset)
+      || size.gusset <= 0
+    ))
+  ) {
+    errors.bagSizes = GUSSET_VALIDATION_ERROR
   }
   if (!includesValue(PRINT_FINISHES, printFinish)) errors.printFinish = 'Choose a print finish.'
   if (!includesValue(SPOT_FINISHES, spotFinish)) errors.spotFinish = 'Choose a spot finish, including None if applicable.'
-  if (rawEnclosures.some(item => !includesValue(ENCLOSURES, item))) errors.enclosures = 'Choose only supported enclosure types.'
+  if (rawEnclosures.some(item => (
+    !includesValue(ENCLOSURES, item)
+    && !(expectedQuoteType === 'mylar-bags' && item === LEGACY_MYLAR_ENCLOSURE)
+  ))) errors.enclosures = 'Choose only supported enclosure types.'
   if (!includesValue(ARTWORK_OPTIONS, artworkPrintReady)) errors.artworkPrintReady = 'Tell us whether your artwork is print ready.'
   if (bestContact.length === 0) errors.bestContact = 'Choose at least one way to contact you.'
   else if (rawBestContact.some(item => !includesValue(BEST_CONTACT_OPTIONS, item))) {
@@ -171,7 +196,7 @@ export function validatePackagingQuote<T extends PackagingQuoteType>(
       source: config.source,
       contact: { name, email, phone },
       projectDetails: {
-        bagSizes: bagSizes as BagSize[],
+        bagSizes: bagSizes as PackagingQuoteDetails<T>['bagSizes'],
         printFinish: printFinish as PrintFinish,
         spotFinish: spotFinish as SpotFinish,
         enclosures,

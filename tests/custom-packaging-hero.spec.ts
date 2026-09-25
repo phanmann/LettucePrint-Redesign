@@ -19,8 +19,10 @@ async function fillRequiredQuote(page: Page) {
   const sizeRows = page.getByTestId('bag-size-row')
   await sizeRows.nth(0).getByLabel('Width').fill('4')
   await sizeRows.nth(0).getByLabel('Length').fill('6.5')
+  await sizeRows.nth(0).getByLabel('Gusset').fill('2')
   await page.getByLabel('Print Finish *').selectOption('Soft-Touch')
   await page.getByLabel('Spot Finish *').selectOption('Spot Gold Foil')
+  await page.getByLabel('Standard Zipper').check()
   await page.getByLabel('Child-Resistant Zipper').check()
   await page.getByLabel('Tear Notch').check()
   await page.getByLabel('Yes').check()
@@ -29,7 +31,7 @@ async function fillRequiredQuote(page: Page) {
 }
 
 for (const routeConfig of routes) {
-  test(`${routeConfig.name}: repeats sizes and submits the complete route-specific payload`, async ({ page }) => {
+  test(`${routeConfig.name}: repeats sizes and submits the complete route-specific payload`, async ({ page }, testInfo) => {
     let submittedPayload: unknown
     await page.route('**/api/quote', async route => {
       submittedPayload = route.request().postDataJSON()
@@ -64,6 +66,11 @@ for (const routeConfig of routes) {
     await sizeRows.nth(1).getByLabel('Length').fill('10')
     await page.getByLabel('Hang Hole').check()
 
+    await page.screenshot({
+      path: testInfo.outputPath(`mylar-gusset-${testInfo.project.name}.png`),
+      fullPage: true,
+    })
+
     await form.getByRole('button', { name: 'Get a Quote' }).click()
     await expect(form.getByRole('button', { name: 'Sending quote…' })).toBeDisabled()
     await expect(page.getByRole('heading', { name: routeConfig.successHeading })).toBeVisible()
@@ -79,12 +86,12 @@ for (const routeConfig of routes) {
       },
       projectDetails: {
         bagSizes: [
-          { width: 4, length: 6.5, unit: 'in' },
+          { width: 4, length: 6.5, gusset: 2, unit: 'in' },
           { width: 8, length: 10, unit: 'in' },
         ],
         printFinish: 'Soft-Touch',
         spotFinish: 'Spot Gold Foil',
-        enclosures: ['Child-Resistant Zipper', 'Tear Notch', 'Hang Hole'],
+        enclosures: ['Standard Zipper', 'Child-Resistant Zipper', 'Tear Notch', 'Hang Hole'],
         artworkPrintReady: 'Yes',
         bestContact: ['Email', 'Text'],
       },
@@ -137,7 +144,7 @@ for (const routeConfig of routes) {
           bagSizes: [{ width: 4, length: 6, unit: 'cm' }],
           printFinish: 'Matte',
           spotFinish: 'None',
-          enclosures: ['Common Zipper'],
+          enclosures: ['Standard Zipper'],
           artworkPrintReady: 'No',
           bestContact: ['Call'],
         },
@@ -152,6 +159,96 @@ for (const routeConfig of routes) {
         bagSizes: expect.any(String),
       },
     })
+  })
+
+  test(`${routeConfig.name}: rejects invalid optional gussets client-side and server-side`, async ({ page, request }) => {
+    let requestCount = 0
+    await page.route('**/api/quote', async route => {
+      requestCount += 1
+      await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ success: true }) })
+    })
+    await page.goto(routeConfig.path)
+    await fillRequiredQuote(page)
+    await page.getByTestId('bag-size-row').getByLabel('Gusset').fill('0')
+    await page.locator('main form').getByRole('button', { name: 'Get a Quote' }).click()
+    await expect(page.getByText('Enter a positive gusset or leave it blank.')).toBeVisible()
+    await expect(page.getByTestId('bag-size-row').getByLabel('Gusset')).toBeFocused()
+    expect(requestCount).toBe(0)
+
+    const validPayload = {
+      quoteType: routeConfig.quoteType,
+      service: routeConfig.service,
+      source: routeConfig.path,
+      contact: { name: 'Schema Test', email: '', phone: '(917) 555-0198' },
+      projectDetails: {
+        bagSizes: [{ width: 4, length: 6, unit: 'in' }],
+        printFinish: 'Matte',
+        spotFinish: 'None',
+        enclosures: [],
+        artworkPrintReady: 'No',
+        bestContact: ['Call'],
+      },
+    }
+    for (const gusset of [0, -1, '2', null]) {
+      const payload = structuredClone(validPayload)
+      Object.assign(payload.projectDetails.bagSizes[0], { gusset })
+      const response = await request.post('/api/quote', { data: payload })
+      expect(response.status(), `gusset ${String(gusset)}`).toBe(400)
+      await expect(response.json()).resolves.toMatchObject({ fields: { bagSizes: expect.any(String) } })
+    }
+  })
+
+  test(`${routeConfig.name}: uses Standard Zipper and rejects unrelated enclosure values server-side`, async ({ page, request }) => {
+    await page.goto(routeConfig.path)
+    const standardZipper = page.getByLabel('Standard Zipper')
+    await expect(standardZipper).toHaveAttribute('value', 'Standard Zipper')
+    await expect(page.getByLabel('Common Zipper')).toHaveCount(0)
+
+    const invalidPayload = {
+      quoteType: routeConfig.quoteType,
+      service: routeConfig.service,
+      source: routeConfig.path,
+      contact: { name: 'Schema Test', email: '', phone: '(917) 555-0198' },
+      projectDetails: {
+        bagSizes: [{ width: 4, length: 6, unit: 'in' }],
+        printFinish: 'Matte',
+        spotFinish: 'None',
+        enclosures: ['Unsupported Zipper'],
+        artworkPrintReady: 'No',
+        bestContact: ['Call'],
+      },
+    }
+    const invalidResponse = await request.post('/api/quote', { data: invalidPayload })
+    expect(invalidResponse.status()).toBe(400)
+    await expect(invalidResponse.json()).resolves.toMatchObject({
+      fields: { enclosures: 'Choose only supported enclosure types.' },
+    })
+  })
+
+  test(`${routeConfig.name}: preserves labels, focus order, and responsive bag-size layout`, async ({ page }, testInfo) => {
+    await page.goto(routeConfig.path)
+    const row = page.getByTestId('bag-size-row')
+    const width = row.getByLabel('Width')
+    const length = row.getByLabel('Length')
+    const gusset = row.getByLabel('Gusset')
+    await expect(width).toHaveAttribute('id', 'bag-width-1')
+    await expect(length).toHaveAttribute('id', 'bag-length-1')
+    await expect(gusset).toHaveAttribute('id', 'bag-gusset-1')
+    await width.focus()
+    await page.keyboard.press('Tab')
+    await expect(length).toBeFocused()
+    await page.keyboard.press('Tab')
+    await expect(gusset).toBeFocused()
+
+    const boxes = await Promise.all([width, length, gusset].map(locator => locator.boundingBox()))
+    expect(boxes.every(Boolean)).toBe(true)
+    if (testInfo.project.name === 'mobile-chromium') {
+      expect(boxes[0]!.y).toBeLessThan(boxes[1]!.y)
+      expect(boxes[1]!.y).toBeLessThan(boxes[2]!.y)
+    } else {
+      expect(Math.abs(boxes[0]!.y - boxes[1]!.y)).toBeLessThan(2)
+      expect(Math.abs(boxes[1]!.y - boxes[2]!.y)).toBeLessThan(2)
+    }
   })
 
   test(`${routeConfig.name}: has no horizontal overflow or browser errors`, async ({ page }) => {

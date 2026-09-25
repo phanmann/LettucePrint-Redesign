@@ -7,6 +7,7 @@ import {
   ARTWORK_OPTIONS,
   BEST_CONTACT_OPTIONS,
   ENCLOSURES,
+  GUSSET_VALIDATION_ERROR,
   PRINT_FINISHES,
   SPOT_FINISHES,
   PACKAGING_QUOTE_CONFIGS,
@@ -24,6 +25,7 @@ interface EditableBagSize {
   id: number
   width: string
   length: string
+  gusset: string
 }
 
 const inputClass = 'w-full rounded-input border border-gray-300 bg-white px-3 py-3 text-small text-gray-900 outline-none transition focus:border-lp-green focus:ring-2 focus:ring-lp-green/15 aria-[invalid=true]:border-red-500 aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-red-100'
@@ -38,7 +40,7 @@ export default function CustomPackagingHeroForm({ quoteType = 'custom-packaging'
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [bagSizes, setBagSizes] = useState<EditableBagSize[]>([{ id: 1, width: '', length: '' }])
+  const [bagSizes, setBagSizes] = useState<EditableBagSize[]>([{ id: 1, width: '', length: '', gusset: '' }])
   const [nextSizeId, setNextSizeId] = useState(2)
   const [printFinish, setPrintFinish] = useState<PrintFinish | ''>('')
   const [spotFinish, setSpotFinish] = useState<SpotFinish | ''>('')
@@ -55,7 +57,7 @@ export default function CustomPackagingHeroForm({ quoteType = 'custom-packaging'
   }
 
   const addBagSize = () => {
-    setBagSizes(items => [...items, { id: nextSizeId, width: '', length: '' }])
+    setBagSizes(items => [...items, { id: nextSizeId, width: '', length: '', gusset: '' }])
     setNextSizeId(value => value + 1)
   }
 
@@ -63,7 +65,7 @@ export default function CustomPackagingHeroForm({ quoteType = 'custom-packaging'
     setBagSizes(items => items.filter(item => item.id !== id))
   }
 
-  const updateBagSize = (id: number, field: 'width' | 'length', value: string) => {
+  const updateBagSize = (id: number, field: 'width' | 'length' | 'gusset', value: string) => {
     setBagSizes(items => items.map(item => item.id === id ? { ...item, [field]: value } : item))
   }
 
@@ -80,7 +82,10 @@ export default function CustomPackagingHeroForm({ quoteType = 'custom-packaging'
         bagSizes: bagSizes.map(size => ({
           width: Number(size.width),
           length: Number(size.length),
-          unit: 'in',
+          ...(quoteType === 'mylar-bags' && size.gusset.trim() !== ''
+            ? { gusset: Number(size.gusset) }
+            : {}),
+          unit: 'in' as const,
         })),
         printFinish,
         spotFinish,
@@ -149,23 +154,35 @@ export default function CustomPackagingHeroForm({ quoteType = 'custom-packaging'
         <legend className="text-small font-semibold text-gray-800">Bag Size (inches) <span aria-hidden="true" className="text-lp-green">*</span></legend>
         <div className="mt-3 space-y-3">
           {bagSizes.map((size, index) => (
-            <div key={size.id} className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto] items-end gap-2" data-testid="bag-size-row">
+            <div key={size.id} className={quoteType === 'mylar-bags'
+              ? 'grid grid-cols-1 items-end gap-2 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto]'
+              : 'grid grid-cols-1 items-end gap-2 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto]'} data-testid="bag-size-row">
               <div>
                 <label htmlFor={`bag-width-${size.id}`} className="mb-1 block text-xs text-gray-600">Width</label>
                 <div className="relative">
-                  <input id={`bag-width-${size.id}`} name={`bagSizes[${index}].width`} type="number" min="0.01" step="any" inputMode="decimal" value={size.width} onChange={event => updateBagSize(size.id, 'width', event.target.value)} className={`${inputClass} pr-9`} aria-invalid={Boolean(errors.bagSizes)} />
+                  <input id={`bag-width-${size.id}`} name={`bagSizes[${index}].width`} type="number" min="0.01" step="any" inputMode="decimal" value={size.width} onChange={event => updateBagSize(size.id, 'width', event.target.value)} className={`${inputClass} pr-9`} aria-invalid={Boolean(errors.bagSizes && errors.bagSizes !== GUSSET_VALIDATION_ERROR)} />
                   <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs text-gray-500">in</span>
                 </div>
               </div>
-              <span className="pb-3 text-gray-400" aria-hidden="true">×</span>
+              <span className="hidden pb-3 text-gray-400 sm:block" aria-hidden="true">×</span>
               <div>
                 <label htmlFor={`bag-length-${size.id}`} className="mb-1 block text-xs text-gray-600">Length</label>
                 <div className="relative">
-                  <input id={`bag-length-${size.id}`} name={`bagSizes[${index}].length`} type="number" min="0.01" step="any" inputMode="decimal" value={size.length} onChange={event => updateBagSize(size.id, 'length', event.target.value)} className={`${inputClass} pr-9`} aria-invalid={Boolean(errors.bagSizes)} />
+                  <input id={`bag-length-${size.id}`} name={`bagSizes[${index}].length`} type="number" min="0.01" step="any" inputMode="decimal" value={size.length} onChange={event => updateBagSize(size.id, 'length', event.target.value)} className={`${inputClass} pr-9`} aria-invalid={Boolean(errors.bagSizes && errors.bagSizes !== GUSSET_VALIDATION_ERROR)} />
                   <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs text-gray-500">in</span>
                 </div>
               </div>
-              <button type="button" onClick={() => removeBagSize(size.id)} disabled={bagSizes.length === 1} className="mb-1 flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition hover:bg-gray-200 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lp-green disabled:cursor-not-allowed disabled:opacity-30" aria-label={`Remove bag size ${index + 1}`}>
+              {quoteType === 'mylar-bags' && <>
+                <span className="hidden pb-3 text-gray-400 sm:block" aria-hidden="true">×</span>
+                <div>
+                  <label htmlFor={`bag-gusset-${size.id}`} className="mb-1 block text-xs text-gray-600">Gusset <span className="font-normal text-gray-400">(optional)</span></label>
+                  <div className="relative">
+                    <input id={`bag-gusset-${size.id}`} name={`bagSizes[${index}].gusset`} type="number" min="0.01" step="any" inputMode="decimal" value={size.gusset} onChange={event => updateBagSize(size.id, 'gusset', event.target.value)} className={`${inputClass} pr-9`} aria-invalid={errors.bagSizes === GUSSET_VALIDATION_ERROR && size.gusset !== ''} />
+                    <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs text-gray-500">in</span>
+                  </div>
+                </div>
+              </>}
+              <button type="button" onClick={() => removeBagSize(size.id)} disabled={bagSizes.length === 1} className="flex h-10 w-10 items-center justify-center self-end rounded-full text-gray-500 transition hover:bg-gray-200 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lp-green disabled:cursor-not-allowed disabled:opacity-30 sm:mb-1" aria-label={`Remove bag size ${index + 1}`}>
                 <Minus size={17} aria-hidden="true" />
               </button>
             </div>

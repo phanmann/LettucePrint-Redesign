@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getResend } from '@/lib/resend'
 import {
   PACKAGING_QUOTE_CONFIGS,
+  type MylarBagsQuotePayload,
   type PackagingQuotePayload,
   type PackagingQuoteType,
   validatePackagingQuote,
@@ -16,6 +17,7 @@ import {
   type ValidatedConsultationFile,
   validateConsultationFiles,
 } from '@/lib/custom-packaging-consultation-server'
+import { buildPackagingInternalEmail } from '@/lib/packaging-quote-email'
 
 interface LegacyQuotePayload {
   service: string
@@ -57,15 +59,14 @@ export async function POST(req: NextRequest) {
     const service = quote.service
     const company = 'company' in contact ? contact.company : ''
     const source = 'quoteType' in quote && quote.quoteType ? quote.source : '/get-quote'
-    const detailsRows = !consultation && 'quoteType' in quote && quote.quoteType
-      ? customPackagingRows(quote as PackagingQuotePayload)
-      : !consultation
-        ? legacyDetailRows(quote as LegacyQuotePayload)
-        : ''
+    const mylarQuote = !consultation && 'quoteType' in quote && quote.quoteType === 'mylar-bags'
+    const detailsRows = !consultation && !mylarQuote ? legacyDetailRows(quote as LegacyQuotePayload) : ''
 
     const internalEmail = consultation
       ? null
-      : {
+      : mylarQuote
+        ? buildPackagingInternalEmail(quote as MylarBagsQuotePayload)
+        : {
           from: 'Lettuce Print Website <onboarding@resend.dev>',
           to: 'info@lettuceprint.com',
           subject: `New Quote Request — ${service}${company ? ` · ${company}` : ''} · ${contact.name}`,
@@ -222,18 +223,6 @@ function isCustomPackagingConsultation(quote: QuotePayload): quote is CustomPack
   return 'quoteType' in quote
     && quote.quoteType === 'custom-packaging'
     && 'packagingTypes' in quote.projectDetails
-}
-
-function customPackagingRows(quote: PackagingQuotePayload): string {
-  const details = quote.projectDetails
-  return [
-    row('Bag Sizes', details.bagSizes.map(size => `${size.width} × ${size.length} ${size.unit}`).join(', ')),
-    row('Print Finish', details.printFinish),
-    row('Spot Finish', details.spotFinish),
-    row('Enclosures', details.enclosures.length ? details.enclosures.join(', ') : 'None selected'),
-    row('Artwork Print Ready', details.artworkPrintReady),
-    row('Best Contact', details.bestContact.join(', ')),
-  ].join('')
 }
 
 function legacyDetailRows(quote: LegacyQuotePayload): string {
