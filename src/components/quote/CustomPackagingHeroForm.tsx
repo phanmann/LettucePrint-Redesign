@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { CheckCircle, Loader2, Minus, Plus } from 'lucide-react'
+import { CheckCircle, Loader2, Minus } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import {
   ARTWORK_OPTIONS,
@@ -146,7 +146,7 @@ export default function CustomPackagingHeroForm() {
               <div>
                 <label htmlFor={`bag-width-${size.id}`} className="mb-1 block text-xs text-gray-600">Width</label>
                 <div className="relative">
-                  <input id={`bag-width-${size.id}`} name={`bagSizes[${index}].width`} type="number" min="0" step="any" inputMode="decimal" value={size.width} onChange={event => updateBagSize(size.id, 'width', event.target.value)} className={`${inputClass} pr-9`} aria-invalid={Boolean(errors.bagSizes)} />
+                  <input id={`bag-width-${size.id}`} name={`bagSizes[${index}].width`} type="number" min="0.01" step="any" inputMode="decimal" value={size.width} onChange={event => updateBagSize(size.id, 'width', event.target.value)} className={`${inputClass} pr-9`} aria-invalid={Boolean(errors.bagSizes)} />
                   <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs text-gray-500">in</span>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function CustomPackagingHeroForm() {
               <div>
                 <label htmlFor={`bag-length-${size.id}`} className="mb-1 block text-xs text-gray-600">Length</label>
                 <div className="relative">
-                  <input id={`bag-length-${size.id}`} name={`bagSizes[${index}].length`} type="number" min="0" step="any" inputMode="decimal" value={size.length} onChange={event => updateBagSize(size.id, 'length', event.target.value)} className={`${inputClass} pr-9`} aria-invalid={Boolean(errors.bagSizes)} />
+                  <input id={`bag-length-${size.id}`} name={`bagSizes[${index}].length`} type="number" min="0.01" step="any" inputMode="decimal" value={size.length} onChange={event => updateBagSize(size.id, 'length', event.target.value)} className={`${inputClass} pr-9`} aria-invalid={Boolean(errors.bagSizes)} />
                   <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs text-gray-500">in</span>
                 </div>
               </div>
@@ -166,7 +166,7 @@ export default function CustomPackagingHeroForm() {
         </div>
         {errors.bagSizes && <p id="bag-sizes-error" className="mt-1.5 text-xs text-red-600">{errors.bagSizes}</p>}
         <button type="button" onClick={addBagSize} className="mt-3 inline-flex items-center gap-1.5 text-small font-semibold text-lp-green hover:text-lp-green-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lp-green focus-visible:ring-offset-2">
-          <Plus size={16} aria-hidden="true" /> Add another size
+          + Additional Sizes Needed
         </button>
       </fieldset>
 

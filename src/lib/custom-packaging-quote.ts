@@ -56,6 +56,7 @@ export type CustomPackagingFieldErrors = Partial<Record<
   | 'bagSizes'
   | 'printFinish'
   | 'spotFinish'
+  | 'enclosures'
   | 'artworkPrintReady'
   | 'bestContact',
   string
@@ -96,18 +97,16 @@ export function validateCustomPackagingQuote(
     return {
       width: typeof item.width === 'number' ? item.width : Number(item.width),
       length: typeof item.length === 'number' ? item.length : Number(item.length),
-      unit: 'in' as const,
+      unit: item.unit,
     }
   })
   const printFinish = detailsValue.printFinish
   const spotFinish = detailsValue.spotFinish
   const artworkPrintReady = detailsValue.artworkPrintReady
-  const enclosures = Array.isArray(detailsValue.enclosures)
-    ? detailsValue.enclosures.filter((item): item is Enclosure => includesValue(ENCLOSURES, item))
-    : []
-  const bestContact = Array.isArray(detailsValue.bestContact)
-    ? detailsValue.bestContact.filter((item): item is BestContact => includesValue(BEST_CONTACT_OPTIONS, item))
-    : []
+  const rawEnclosures = Array.isArray(detailsValue.enclosures) ? detailsValue.enclosures : []
+  const rawBestContact = Array.isArray(detailsValue.bestContact) ? detailsValue.bestContact : []
+  const enclosures = rawEnclosures as Enclosure[]
+  const bestContact = rawBestContact as BestContact[]
 
   const errors: CustomPackagingFieldErrors = {}
   if (value.quoteType !== 'custom-packaging' || value.service !== 'Packaging' || value.source !== '/services/packaging/custom-packaging') {
@@ -119,14 +118,18 @@ export function validateCustomPackagingQuote(
   if (phone && !isValidPhone(phone)) errors.phone = 'Enter a valid phone number.'
   if (
     bagSizes.length === 0
-    || bagSizes.some(size => !Number.isFinite(size.width) || size.width <= 0 || !Number.isFinite(size.length) || size.length <= 0)
+    || bagSizes.some(size => !Number.isFinite(size.width) || size.width <= 0 || !Number.isFinite(size.length) || size.length <= 0 || size.unit !== 'in')
   ) {
     errors.bagSizes = 'Enter a positive width and length for every bag size.'
   }
   if (!includesValue(PRINT_FINISHES, printFinish)) errors.printFinish = 'Choose a print finish.'
   if (!includesValue(SPOT_FINISHES, spotFinish)) errors.spotFinish = 'Choose a spot finish, including None if applicable.'
+  if (rawEnclosures.some(item => !includesValue(ENCLOSURES, item))) errors.enclosures = 'Choose only supported enclosure types.'
   if (!includesValue(ARTWORK_OPTIONS, artworkPrintReady)) errors.artworkPrintReady = 'Tell us whether your artwork is print ready.'
   if (bestContact.length === 0) errors.bestContact = 'Choose at least one way to contact you.'
+  else if (rawBestContact.some(item => !includesValue(BEST_CONTACT_OPTIONS, item))) {
+    errors.bestContact = 'Choose only supported ways to contact you.'
+  }
   if (bestContact.includes('Email') && !isValidEmail(email)) {
     errors.email = 'A valid email is required when Email is a preferred contact method.'
   }
@@ -144,7 +147,7 @@ export function validateCustomPackagingQuote(
       source: '/services/packaging/custom-packaging',
       contact: { name, email, phone },
       projectDetails: {
-        bagSizes,
+        bagSizes: bagSizes as BagSize[],
         printFinish: printFinish as PrintFinish,
         spotFinish: spotFinish as SpotFinish,
         enclosures,

@@ -42,8 +42,8 @@ test('adds/removes bag sizes, validates, and submits every field to the real end
   await expect(page.locator(':focus')).toHaveAttribute('name', 'name')
 
   const sizeRows = page.getByTestId('bag-size-row')
-  await page.getByRole('button', { name: 'Add another size' }).click()
-  await page.getByRole('button', { name: 'Add another size' }).click()
+  await page.getByRole('button', { name: '+ Additional Sizes Needed' }).click()
+  await page.getByRole('button', { name: '+ Additional Sizes Needed' }).click()
   await expect(sizeRows).toHaveCount(3)
   await page.getByRole('button', { name: 'Remove bag size 2' }).click()
   await expect(sizeRows).toHaveCount(2)
@@ -101,10 +101,44 @@ test('blocks invalid channel details and recovers from a server error without fa
   expect(requestCount).toBe(0)
 
   await page.getByRole('textbox', { name: 'Email' }).fill('alex@example.com')
+  await page.getByLabel('Phone Number').fill('555')
+  await form.getByRole('button', { name: 'Get a Quote' }).click()
+  await expect(page.getByText('A valid phone number is required for Text or Call.')).toBeVisible()
+  expect(requestCount).toBe(0)
+
+  await page.getByLabel('Phone Number').fill('(917) 555-0198')
   await form.getByRole('button', { name: 'Get a Quote' }).click()
   await expect(form.getByRole('button', { name: 'Sending quote…' })).toBeDisabled()
   await expect(form.getByRole('alert')).toContainText('Something went wrong.')
   await expect(page.getByRole('heading', { name: 'We got your packaging request.' })).toHaveCount(0)
   await expect(form.getByRole('button', { name: 'Get a Quote' })).toBeEnabled()
   expect(requestCount).toBe(1)
+})
+
+test('the actual endpoint rejects unsupported values instead of silently dropping them', async ({ request }) => {
+  const response = await request.post('/api/quote', {
+    data: {
+      quoteType: 'custom-packaging',
+      service: 'Packaging',
+      source: '/services/packaging/custom-packaging',
+      contact: { name: 'Schema Test', email: '', phone: '(917) 555-0198' },
+      projectDetails: {
+        bagSizes: [{ width: 4, length: 6, unit: 'cm' }],
+        printFinish: 'Matte',
+        spotFinish: 'None',
+        enclosures: ['Unsupported Closure'],
+        artworkPrintReady: 'No',
+        bestContact: ['Call'],
+      },
+    },
+  })
+
+  expect(response.status()).toBe(400)
+  await expect(response.json()).resolves.toMatchObject({
+    error: 'Invalid quote request',
+    fields: {
+      bagSizes: expect.any(String),
+      enclosures: expect.any(String),
+    },
+  })
 })
