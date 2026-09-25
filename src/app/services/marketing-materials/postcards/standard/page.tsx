@@ -220,7 +220,6 @@ export default function StandardPostcardsPage() {
 
               <ProductImageGallery
                 images={[
-                  { src: 'https://drive.usercontent.google.com/download?id=16GP_uv16UVWwZyO_WAvAZDfCMoMRsCoE&export=view', alt: 'Postcard print samples' },
                   { src: 'https://drive.usercontent.google.com/download?id=1C-8AXzKw1umGCMhR2T03yzFlOZXMBdoX&export=view', alt: 'Custom postcards' },
                   { src: 'https://drive.usercontent.google.com/download?id=1_To7GcDYNA3b28ywoo0S8Ev4H5uct3O6&export=view', alt: 'Large format postcard' },
                   { src: 'https://drive.usercontent.google.com/download?id=1qt5HNfk394sSSzs9teHR1T5eh5dtwZAc&export=view', alt: 'Postcard stack' },
