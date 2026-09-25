@@ -4,8 +4,8 @@ export default function Page() {
   return (
     <ProductOrderPage
       images={[
-        { src: '/images/products/booklets/booklet-closed.jpg', alt: 'Square saddle-stitch booklet' },
-        { src: '/images/products/booklets/booklet-open.jpg', alt: 'Booklet interior spreads' },
+        { src: '/images/products/booklets/saddle-stitch-square/booklet-set.webp', alt: 'Assorted square saddle-stitch booklet set' },
+        { src: '/images/products/booklets/saddle-stitch-square/booklet-stack.webp', alt: 'Stacked booklet samples' },
       ]}
       name="Square Saddle-Stitch Booklet"
       tagline="Eye-catching square format for portfolios, lookbooks, and brand books."

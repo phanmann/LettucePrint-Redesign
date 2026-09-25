@@ -4,8 +4,8 @@ export default function Page() {
   return (
     <ProductOrderPage
       images={[
-        { src: '/images/products/booklets/booklet-open.jpg', alt: 'Saddle-stitch booklet open' },
-        { src: '/images/products/booklets/booklet-closed.jpg', alt: 'Saddle-stitch booklet' },
+        { src: '/images/products/booklets/saddle-stitch-85x11/booklet-set.webp', alt: 'Assorted saddle-stitch booklet set' },
+        { src: '/images/products/booklets/saddle-stitch-85x11/booklet-stack.webp', alt: 'Stacked booklet samples' },
       ]}
       name="Saddle-Stitch Booklet"
       tagline="Standard letter-size saddle-stitch. The go-to for catalogs, annual reports, and event programs."

@@ -4,8 +4,8 @@ export default function Page() {
   return (
     <ProductOrderPage
       images={[
-        { src: '/images/products/booklets/booklet-closed.jpg', alt: 'Perfect-bound booklet' },
-        { src: '/images/products/booklets/booklet-open.jpg', alt: 'Perfect-bound interior' },
+        { src: '/images/products/booklets/perfect-bound-85x11/booklet-stack.webp', alt: 'Stacked perfect-bound booklet set' },
+        { src: '/images/products/booklets/perfect-bound-85x11/booklet-set.webp', alt: 'Assorted booklet samples' },
       ]}
       name="Perfect Bound Booklet"
       tagline="Square-spine perfect binding for a professional book-like finish. Ideal for thick catalogs and reports."
