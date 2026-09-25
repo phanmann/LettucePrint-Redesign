@@ -22,6 +22,8 @@ export interface ProductCardProps {
   href?: string
   /** Optional product image — replaces the color swatch */
   image?: string
+  /** Target-specific image fit. Defaults to the existing cover treatment. */
+  imageFit?: 'cover' | 'contain'
 }
 
 export default function ProductCard({
@@ -35,6 +37,7 @@ export default function ProductCard({
   options,
   href,
   image,
+  imageFit = 'cover',
 }: ProductCardProps) {
   const [expanded, setExpanded] = useState(false)
 
@@ -42,12 +45,12 @@ export default function ProductCard({
     <div className="flex flex-col bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200">
       {/* ── Image or swatch ── */}
       {image ? (
-        <div className="relative w-full h-44 flex-shrink-0 overflow-hidden">
+        <div className="relative w-full h-44 flex-shrink-0 overflow-hidden bg-white">
           <Image
             src={image}
             alt={name}
             fill
-            className="object-cover"
+            className={imageFit === 'contain' ? 'object-contain p-2' : 'object-cover'}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>

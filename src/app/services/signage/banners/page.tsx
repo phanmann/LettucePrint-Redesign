@@ -37,7 +37,8 @@ const CATEGORIES = [
         features: ['Heavy-duty base', 'Premium banner material', 'Carrying bag included', 'Enhanced stability'],
         turnaround: '3–5 business days',
         color: '#E8F0F5',
-        image: 'https://drive.usercontent.google.com/download?id=1lkdgvN3wjRMfftKmeu5X47ZwHyor7dzB&export=view',
+        image: '/images/products/banners/retractable-luxury-33/luxury-base-retractable.webp',
+        imageFit: 'contain' as const,
       },
       {
         id: 'retractable-tabletop',

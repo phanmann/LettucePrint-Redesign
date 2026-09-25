@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 interface ProductImageGalleryProps {
-  images: { src: string; alt: string }[]
+  images: { src: string; alt: string; fit?: 'cover' | 'contain' }[]
 }
 
 export default function ProductImageGallery({ images }: ProductImageGalleryProps) {
@@ -20,7 +20,7 @@ export default function ProductImageGallery({ images }: ProductImageGalleryProps
           src={images[active].src}
           alt={images[active].alt}
           fill
-          className="object-cover transition-opacity duration-200"
+          className={`${images[active].fit === 'contain' ? 'object-contain p-4' : 'object-cover'} transition-opacity duration-200`}
           sizes="(max-width: 1024px) 100vw, 50vw"
           priority
         />
@@ -45,7 +45,7 @@ export default function ProductImageGallery({ images }: ProductImageGalleryProps
                 src={img.src}
                 alt={img.alt}
                 fill
-                className="object-cover"
+                className={img.fit === 'contain' ? 'object-contain p-1' : 'object-cover'}
                 sizes="64px"
               />
             </button>

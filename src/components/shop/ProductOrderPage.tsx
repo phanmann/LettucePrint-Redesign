@@ -46,7 +46,7 @@ export interface ProductOrderPageProps {
   relatedProducts?: { href: string; name: string; description: string; dark?: boolean }[]
   customNote?: string
   showQuantity?: boolean
-  images?: { src: string; alt: string }[]
+  images?: { src: string; alt: string; fit?: 'cover' | 'contain' }[]
 }
 
 function fmt(n: number) {
