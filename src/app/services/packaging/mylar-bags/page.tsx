@@ -6,6 +6,7 @@ import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
 import Button from '@/components/ui/Button'
+import CustomPackagingHeroForm from '@/components/quote/CustomPackagingHeroForm'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -57,11 +58,14 @@ export default function MylarBagsPage() {
     <>
       <Navbar />
       <main>
-        <section className="pt-[calc(72px+4rem)] pb-12 bg-white border-b border-gray-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-4">Boxes & Packaging</p>
-            <h1 className="text-display font-semibold text-gray-900 mb-4 max-w-2xl">Custom Mylar Bags</h1>
-            <p className="text-body-lg text-gray-500 max-w-xl">Smell-proof, heat-sealable, and fully custom printed. Built for cannabis brands, food products, supplements, and specialty retail.</p>
+        <section className="bg-white pb-20 pt-[calc(72px+4rem)] border-b border-gray-100">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-16 lg:px-8">
+            <div className="lg:sticky lg:top-28">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-lp-green">Boxes & Packaging</p>
+              <h1 className="text-display max-w-2xl font-semibold text-gray-900">Custom Mylar Bags</h1>
+              <p className="text-body-lg mt-6 max-w-xl text-gray-500">Smell-proof, heat-sealable, and fully custom printed. Built for cannabis brands, food products, supplements, and specialty retail.</p>
+            </div>
+            <CustomPackagingHeroForm quoteType="mylar-bags" />
           </div>
         </section>
 

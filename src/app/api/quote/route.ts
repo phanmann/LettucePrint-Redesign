@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getResend } from '@/lib/resend'
 import {
-  type CustomPackagingQuotePayload,
-  validateCustomPackagingQuote,
+  PACKAGING_QUOTE_CONFIGS,
+  type PackagingQuotePayload,
+  type PackagingQuoteType,
+  validatePackagingQuote,
 } from '@/lib/custom-packaging-quote'
 
 interface LegacyQuotePayload {
@@ -35,12 +37,11 @@ export async function POST(req: NextRequest) {
 
     const resend = getResend()
     const quote = parsed.data
-    const isCustomPackaging = quote.quoteType === 'custom-packaging'
     const contact = quote.contact
     const service = quote.service
     const company = 'company' in contact ? contact.company : ''
-    const source = isCustomPackaging ? quote.source : '/get-quote'
-    const detailsRows = isCustomPackaging
+    const source = quote.quoteType ? quote.source : '/get-quote'
+    const detailsRows = quote.quoteType
       ? customPackagingRows(quote)
       : legacyDetailRows(quote)
 
@@ -113,10 +114,14 @@ export async function POST(req: NextRequest) {
 }
 
 function parseQuote(input: unknown):
-  | { success: true; data: CustomPackagingQuotePayload | (LegacyQuotePayload & { quoteType?: undefined }) }
+  | { success: true; data: PackagingQuotePayload | (LegacyQuotePayload & { quoteType?: undefined }) }
   | { success: false; errors: Record<string, string> } {
-  if (input && typeof input === 'object' && (input as Record<string, unknown>).quoteType === 'custom-packaging') {
-    return validateCustomPackagingQuote(input)
+  if (input && typeof input === 'object' && 'quoteType' in input) {
+    const quoteType = (input as Record<string, unknown>).quoteType
+    if (typeof quoteType === 'string' && quoteType in PACKAGING_QUOTE_CONFIGS) {
+      return validatePackagingQuote(input, quoteType as PackagingQuoteType)
+    }
+    return { success: false, errors: { request: 'Unsupported quote type.' } }
   }
 
   const value = input && typeof input === 'object' ? input as Record<string, unknown> : {}
@@ -155,7 +160,7 @@ function parseQuote(input: unknown):
   }
 }
 
-function customPackagingRows(quote: CustomPackagingQuotePayload): string {
+function customPackagingRows(quote: PackagingQuotePayload): string {
   const details = quote.projectDetails
   return [
     row('Bag Sizes', details.bagSizes.map(size => `${size.width} × ${size.length} ${size.unit}`).join(', ')),

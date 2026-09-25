@@ -24,30 +24,52 @@ export type Enclosure = (typeof ENCLOSURES)[number]
 export type BestContact = (typeof BEST_CONTACT_OPTIONS)[number]
 export type ArtworkPrintReady = (typeof ARTWORK_OPTIONS)[number]
 
+export const PACKAGING_QUOTE_CONFIGS = {
+  'custom-packaging': {
+    quoteType: 'custom-packaging',
+    service: 'Packaging',
+    source: '/services/packaging/custom-packaging',
+    successHeading: 'We got your packaging request.',
+  },
+  'mylar-bags': {
+    quoteType: 'mylar-bags',
+    service: 'Mylar Bags',
+    source: '/services/packaging/mylar-bags',
+    successHeading: 'We got your Mylar Bags request.',
+  },
+} as const
+
+export type PackagingQuoteType = keyof typeof PACKAGING_QUOTE_CONFIGS
+
 export interface BagSize {
   width: number
   length: number
   unit: 'in'
 }
 
-export interface CustomPackagingQuotePayload {
-  quoteType: 'custom-packaging'
-  service: 'Packaging'
-  source: '/services/packaging/custom-packaging'
+interface PackagingQuoteDetails {
+  bagSizes: BagSize[]
+  printFinish: PrintFinish
+  spotFinish: SpotFinish
+  enclosures: Enclosure[]
+  artworkPrintReady: ArtworkPrintReady
+  bestContact: BestContact[]
+}
+
+export interface PackagingQuotePayload<T extends PackagingQuoteType = PackagingQuoteType> {
+  quoteType: (typeof PACKAGING_QUOTE_CONFIGS)[T]['quoteType']
+  service: (typeof PACKAGING_QUOTE_CONFIGS)[T]['service']
+  source: (typeof PACKAGING_QUOTE_CONFIGS)[T]['source']
   contact: {
     name: string
     email: string
     phone: string
   }
-  projectDetails: {
-    bagSizes: BagSize[]
-    printFinish: PrintFinish
-    spotFinish: SpotFinish
-    enclosures: Enclosure[]
-    artworkPrintReady: ArtworkPrintReady
-    bestContact: BestContact[]
-  }
+  projectDetails: PackagingQuoteDetails
 }
+
+export type CustomPackagingQuotePayload = PackagingQuotePayload<'custom-packaging'>
+export type MylarBagsQuotePayload = PackagingQuotePayload<'mylar-bags'>
 
 export type CustomPackagingFieldErrors = Partial<Record<
   | 'name'
@@ -77,9 +99,10 @@ function includesValue<T extends string>(options: readonly T[], value: unknown):
   return typeof value === 'string' && options.includes(value as T)
 }
 
-export function validateCustomPackagingQuote(
+export function validatePackagingQuote<T extends PackagingQuoteType>(
   input: unknown,
-): { success: true; data: CustomPackagingQuotePayload } | { success: false; errors: CustomPackagingFieldErrors } {
+  expectedQuoteType: T,
+): { success: true; data: PackagingQuotePayload<T> } | { success: false; errors: CustomPackagingFieldErrors } {
   const value = input && typeof input === 'object' ? input as Record<string, unknown> : {}
   const contactValue = value.contact && typeof value.contact === 'object'
     ? value.contact as Record<string, unknown>
@@ -107,9 +130,10 @@ export function validateCustomPackagingQuote(
   const rawBestContact = Array.isArray(detailsValue.bestContact) ? detailsValue.bestContact : []
   const enclosures = rawEnclosures as Enclosure[]
   const bestContact = rawBestContact as BestContact[]
+  const config = PACKAGING_QUOTE_CONFIGS[expectedQuoteType]
 
   const errors: CustomPackagingFieldErrors = {}
-  if (value.quoteType !== 'custom-packaging' || value.service !== 'Packaging' || value.source !== '/services/packaging/custom-packaging') {
+  if (value.quoteType !== config.quoteType || value.service !== config.service || value.source !== config.source) {
     errors.name = 'This quote request is not in the expected format.'
   } else if (!name) {
     errors.name = 'Enter your name.'
@@ -142,9 +166,9 @@ export function validateCustomPackagingQuote(
   return {
     success: true,
     data: {
-      quoteType: 'custom-packaging',
-      service: 'Packaging',
-      source: '/services/packaging/custom-packaging',
+      quoteType: config.quoteType,
+      service: config.service,
+      source: config.source,
       contact: { name, email, phone },
       projectDetails: {
         bagSizes: bagSizes as BagSize[],
@@ -154,6 +178,12 @@ export function validateCustomPackagingQuote(
         artworkPrintReady: artworkPrintReady as ArtworkPrintReady,
         bestContact,
       },
-    },
+    } as PackagingQuotePayload<T>,
   }
+}
+
+export function validateCustomPackagingQuote(
+  input: unknown,
+): { success: true; data: CustomPackagingQuotePayload } | { success: false; errors: CustomPackagingFieldErrors } {
+  return validatePackagingQuote(input, 'custom-packaging')
 }

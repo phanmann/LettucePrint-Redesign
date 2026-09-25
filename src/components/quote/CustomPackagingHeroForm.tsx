@@ -9,13 +9,15 @@ import {
   ENCLOSURES,
   PRINT_FINISHES,
   SPOT_FINISHES,
+  PACKAGING_QUOTE_CONFIGS,
   type ArtworkPrintReady,
   type BestContact,
   type CustomPackagingFieldErrors,
   type Enclosure,
   type PrintFinish,
+  type PackagingQuoteType,
   type SpotFinish,
-  validateCustomPackagingQuote,
+  validatePackagingQuote,
 } from '@/lib/custom-packaging-quote'
 
 interface EditableBagSize {
@@ -27,7 +29,12 @@ interface EditableBagSize {
 const inputClass = 'w-full rounded-input border border-gray-300 bg-white px-3 py-3 text-small text-gray-900 outline-none transition focus:border-lp-green focus:ring-2 focus:ring-lp-green/15 aria-[invalid=true]:border-red-500 aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-red-100'
 const checkboxClass = 'h-4 w-4 rounded border-gray-300 text-lp-green accent-lp-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lp-green focus-visible:ring-offset-2'
 
-export default function CustomPackagingHeroForm() {
+interface CustomPackagingHeroFormProps {
+  quoteType?: PackagingQuoteType
+}
+
+export default function CustomPackagingHeroForm({ quoteType = 'custom-packaging' }: CustomPackagingHeroFormProps) {
+  const config = PACKAGING_QUOTE_CONFIGS[quoteType]
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -65,9 +72,9 @@ export default function CustomPackagingHeroForm() {
     setServerError('')
 
     const candidate = {
-      quoteType: 'custom-packaging',
-      service: 'Packaging',
-      source: '/services/packaging/custom-packaging',
+      quoteType: config.quoteType,
+      service: config.service,
+      source: config.source,
       contact: { name, email, phone },
       projectDetails: {
         bagSizes: bagSizes.map(size => ({
@@ -82,7 +89,7 @@ export default function CustomPackagingHeroForm() {
         bestContact,
       },
     }
-    const result = validateCustomPackagingQuote(candidate)
+    const result = validatePackagingQuote(candidate, quoteType)
     if (!result.success) {
       setErrors(result.errors)
       requestAnimationFrame(() => {
@@ -112,7 +119,7 @@ export default function CustomPackagingHeroForm() {
     return (
       <div className="rounded-2xl border border-lp-green/30 bg-white p-6 shadow-card sm:p-8" role="status" aria-live="polite">
         <CheckCircle className="mb-4 text-lp-green" size={40} aria-hidden="true" />
-        <h2 className="text-h3 font-semibold text-gray-900">We got your packaging request.</h2>
+        <h2 className="text-h3 font-semibold text-gray-900">{config.successHeading}</h2>
         <p className="mt-3 text-body text-gray-600">Our team will review the specs and follow up within 1 business day.</p>
       </div>
     )
