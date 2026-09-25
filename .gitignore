@@ -3,6 +3,9 @@ node_modules
 .env.local
 .DS_Store
 .vercel
+/artifacts/
+/playwright-report/
+/test-results/
 
 # OpenClaw workspace files
 .openclaw/

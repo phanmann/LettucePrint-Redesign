@@ -2,6 +2,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
+import CustomPackagingHeroForm from '@/components/quote/CustomPackagingHeroForm'
 
 const CAPABILITIES = [
   { label: 'Custom Structures', desc: 'Unique box shapes, unusual openings, multi-piece sets — we build from your dieline or create one from scratch.' },
@@ -18,16 +19,16 @@ export default function CustomPackagingPage() {
       <Navbar />
       <main>
         {/* Hero */}
-        <section className="pt-[calc(72px+4rem)] pb-20 bg-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-4">Boxes & Packaging</p>
-            <h1 className="text-display font-semibold text-gray-900 mb-6 max-w-2xl">Custom packaging, built around your brand.</h1>
-            <p className="text-body-lg text-gray-500 max-w-2xl mb-10">
-              Got something that doesn't fit a template? Good. We do custom from scratch — unique structures, premium finishes, low minimums. Tell us what you're building and we'll figure it out together.
-            </p>
-            <Link href="/get-quote?category=Custom+Packaging">
-              <Button size="lg">Get a Quote</Button>
-            </Link>
+        <section className="bg-white pb-20 pt-[calc(72px+4rem)]">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-16 lg:px-8">
+            <div className="lg:sticky lg:top-28">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-lp-green">Boxes & Packaging</p>
+              <h1 className="text-display max-w-2xl font-semibold text-gray-900">Custom packaging, built around your brand.</h1>
+              <p className="text-body-lg mt-6 max-w-2xl text-gray-500">
+                Got something that doesn&apos;t fit a template? Good. We do custom from scratch — unique structures, premium finishes, low minimums. Tell us what you&apos;re building and we&apos;ll figure it out together.
+              </p>
+            </div>
+            <CustomPackagingHeroForm />
           </div>
         </section>
 
@@ -51,7 +52,7 @@ export default function CustomPackagingPage() {
         <section className="py-20 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-h2 font-semibold text-gray-900 mb-4">Ready to build something?</h2>
-            <p className="text-body text-gray-500 mb-8">Share your product dimensions, quantity, and any finish ideas — we'll come back with options and pricing.</p>
+            <p className="text-body text-gray-500 mb-8">Share your product dimensions, quantity, and any finish ideas — we&apos;ll come back with options and pricing.</p>
             <Link href="/get-quote?category=Custom+Packaging">
               <Button size="lg">Start a Project</Button>
             </Link>
