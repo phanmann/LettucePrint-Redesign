@@ -2,7 +2,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
-import CustomPackagingHeroForm from '@/components/quote/CustomPackagingHeroForm'
+import CustomPackagingConsultationForm from '@/components/quote/CustomPackagingConsultationForm'
 
 const CAPABILITIES = [
   { label: 'Custom Structures', desc: 'Unique box shapes, unusual openings, multi-piece sets — we build from your dieline or create one from scratch.' },
@@ -28,7 +28,7 @@ export default function CustomPackagingPage() {
                 Got something that doesn&apos;t fit a template? Good. We do custom from scratch — unique structures, premium finishes, low minimums. Tell us what you&apos;re building and we&apos;ll figure it out together.
               </p>
             </div>
-            <CustomPackagingHeroForm />
+            <CustomPackagingConsultationForm />
           </div>
         </section>
 

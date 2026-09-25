@@ -6,6 +6,16 @@ import {
   type PackagingQuoteType,
   validatePackagingQuote,
 } from '@/lib/custom-packaging-quote'
+import {
+  type CustomPackagingConsultationErrors,
+  type CustomPackagingConsultationPayload,
+  validateCustomPackagingConsultation,
+} from '@/lib/custom-packaging-consultation'
+import {
+  sendCustomPackagingInternalEmail,
+  type ValidatedConsultationFile,
+  validateConsultationFiles,
+} from '@/lib/custom-packaging-consultation-server'
 
 interface LegacyQuotePayload {
   service: string
@@ -19,6 +29,11 @@ interface LegacyQuotePayload {
   }
 }
 
+type QuotePayload = CustomPackagingConsultationPayload | PackagingQuotePayload | (LegacyQuotePayload & { quoteType?: undefined })
+type ParsedQuote =
+  | { success: true; data: QuotePayload }
+  | { success: false; errors: CustomPackagingConsultationErrors | Record<string, string> }
+
 const timelineLabel: Record<string, string> = {
   'asap': 'ASAP',
   '1-2weeks': '1–2 weeks',
@@ -29,56 +44,65 @@ const timelineLabel: Record<string, string> = {
 
 export async function POST(req: NextRequest) {
   try {
-    const body: unknown = await req.json()
-    const parsed = parseQuote(body)
+    const incoming = await parseIncomingQuote(req)
+    const parsed = incoming.parsed
     if (!parsed.success) {
       return NextResponse.json({ error: 'Invalid quote request', fields: parsed.errors }, { status: 400 })
     }
 
     const resend = getResend()
     const quote = parsed.data
+    const consultation = isCustomPackagingConsultation(quote)
     const contact = quote.contact
     const service = quote.service
     const company = 'company' in contact ? contact.company : ''
-    const source = quote.quoteType ? quote.source : '/get-quote'
-    const detailsRows = quote.quoteType
-      ? customPackagingRows(quote)
-      : legacyDetailRows(quote)
+    const source = 'quoteType' in quote && quote.quoteType ? quote.source : '/get-quote'
+    const detailsRows = !consultation && 'quoteType' in quote && quote.quoteType
+      ? customPackagingRows(quote as PackagingQuotePayload)
+      : !consultation
+        ? legacyDetailRows(quote as LegacyQuotePayload)
+        : ''
 
-    await resend.emails.send({
-      from: 'Lettuce Print Website <onboarding@resend.dev>',
-      to: 'info@lettuceprint.com',
-      subject: `New Quote Request — ${service}${company ? ` · ${company}` : ''} · ${contact.name}`,
-      html: `
-        <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
-          <div style="background:#00a175;padding:24px 32px;border-radius:8px 8px 0 0">
-            <h1 style="color:white;margin:0;font-size:20px">💸 New Quote Request</h1>
-            <p style="color:rgba(255,255,255,.8);margin:6px 0 0;font-size:14px">${escapeHtml(service)}</p>
-          </div>
-          <div style="background:#f9fafb;padding:32px;border-radius:0 0 8px 8px;border:1px solid #e5e7eb;border-top:none">
-            <h3 style="margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af">Contact</h3>
-            <table style="width:100%;border-collapse:collapse;margin-bottom:24px">
-              ${row('Name', contact.name, true)}
-              ${company ? row('Company', company) : ''}
-              ${contact.email ? row('Email', contact.email) : ''}
-              ${contact.phone ? row('Phone', contact.phone) : ''}
-            </table>
-            <h3 style="margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af">Project Details</h3>
-            <table style="width:100%;border-collapse:collapse;margin-bottom:24px">
-              ${detailsRows}
-            </table>
-            ${contact.email
-              ? `<a href="mailto:${escapeAttribute(contact.email)}" style="background:#00a175;color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:600">Reply to ${escapeHtml(contact.name)}</a>`
-              : ''}
-          </div>
-          <p style="color:#9ca3af;font-size:12px;text-align:center;margin-top:16px">Submitted via lettuceprint.com${escapeHtml(source)}</p>
-        </div>
-      `,
-    })
+    const internalEmail = consultation
+      ? null
+      : {
+          from: 'Lettuce Print Website <onboarding@resend.dev>',
+          to: 'info@lettuceprint.com',
+          subject: `New Quote Request — ${service}${company ? ` · ${company}` : ''} · ${contact.name}`,
+          html: `
+            <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
+              <div style="background:#00a175;padding:24px 32px;border-radius:8px 8px 0 0">
+                <h1 style="color:white;margin:0;font-size:20px">💸 New Quote Request</h1>
+                <p style="color:rgba(255,255,255,.8);margin:6px 0 0;font-size:14px">${escapeHtml(service)}</p>
+              </div>
+              <div style="background:#f9fafb;padding:32px;border-radius:0 0 8px 8px;border:1px solid #e5e7eb;border-top:none">
+                <h3 style="margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af">Contact</h3>
+                <table style="width:100%;border-collapse:collapse;margin-bottom:24px">
+                  ${row('Name', contact.name, true)}
+                  ${company ? row('Company', company) : ''}
+                  ${contact.email ? row('Email', contact.email) : ''}
+                  ${contact.phone ? row('Phone', contact.phone) : ''}
+                </table>
+                <h3 style="margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af">Project Details</h3>
+                <table style="width:100%;border-collapse:collapse;margin-bottom:24px">${detailsRows}</table>
+                ${contact.email
+                  ? `<a href="mailto:${escapeAttribute(contact.email)}" style="background:#00a175;color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:600">Reply to ${escapeHtml(contact.name)}</a>`
+                  : ''}
+              </div>
+              <p style="color:#9ca3af;font-size:12px;text-align:center;margin-top:16px">Submitted via lettuceprint.com${escapeHtml(source)}</p>
+            </div>
+          `,
+        }
+
+    if (consultation) {
+      await sendCustomPackagingInternalEmail(email => resend.emails.send(email), quote, incoming.files)
+    } else if (internalEmail) {
+      await resend.emails.send(internalEmail)
+    }
 
     if (contact.email) {
       const firstName = contact.name.split(/\s+/)[0]
-      await resend.emails.send({
+      const confirmationResult = await resend.emails.send({
         from: 'Lettuce Print <onboarding@resend.dev>',
         to: contact.email,
         subject: `Got your quote request, ${firstName}!`,
@@ -104,6 +128,9 @@ export async function POST(req: NextRequest) {
           </div>
         `,
       })
+      if (consultation && confirmationResult.error) {
+        throw new Error(`Consultation confirmation email failed: ${confirmationResult.error.message}`)
+      }
     }
 
     return NextResponse.json({ success: true })
@@ -113,11 +140,46 @@ export async function POST(req: NextRequest) {
   }
 }
 
-function parseQuote(input: unknown):
-  | { success: true; data: PackagingQuotePayload | (LegacyQuotePayload & { quoteType?: undefined }) }
-  | { success: false; errors: Record<string, string> } {
+async function parseIncomingQuote(req: NextRequest): Promise<{ parsed: ParsedQuote; files: ValidatedConsultationFile[] }> {
+  const contentType = req.headers.get('content-type') ?? ''
+  if (!contentType.toLowerCase().startsWith('multipart/form-data')) {
+    const body: unknown = await req.json()
+    return { parsed: parseQuote(body), files: [] }
+  }
+
+  const formData = await req.formData()
+  if ([...formData.keys()].some(key => key !== 'payload' && key !== 'files')) {
+    return { parsed: { success: false, errors: { request: 'Unexpected multipart field.' } }, files: [] }
+  }
+  const rawPayload = formData.get('payload')
+  if (typeof rawPayload !== 'string') {
+    return { parsed: { success: false, errors: { request: 'Missing custom packaging payload.' } }, files: [] }
+  }
+
+  let body: unknown
+  try {
+    body = JSON.parse(rawPayload)
+  } catch {
+    return { parsed: { success: false, errors: { request: 'Invalid custom packaging payload.' } }, files: [] }
+  }
+  const parsed = validateCustomPackagingConsultation(body)
+  if (!parsed.success) return { parsed, files: [] }
+
+  const rawFiles = formData.getAll('files')
+  if (rawFiles.some(item => !(item instanceof File))) {
+    return { parsed: { success: false, errors: { files: 'Invalid uploaded file.' } }, files: [] }
+  }
+  const uploadResult = await validateConsultationFiles(rawFiles as File[])
+  if (!uploadResult.success) {
+    return { parsed: { success: false, errors: { files: uploadResult.error } }, files: [] }
+  }
+  return { parsed, files: uploadResult.files }
+}
+
+function parseQuote(input: unknown): ParsedQuote {
   if (input && typeof input === 'object' && 'quoteType' in input) {
     const quoteType = (input as Record<string, unknown>).quoteType
+    if (quoteType === 'custom-packaging') return validateCustomPackagingConsultation(input)
     if (typeof quoteType === 'string' && quoteType in PACKAGING_QUOTE_CONFIGS) {
       return validatePackagingQuote(input, quoteType as PackagingQuoteType)
     }
@@ -125,12 +187,8 @@ function parseQuote(input: unknown):
   }
 
   const value = input && typeof input === 'object' ? input as Record<string, unknown> : {}
-  const contact = value.contact && typeof value.contact === 'object'
-    ? value.contact as Record<string, unknown>
-    : {}
-  const projectDetails = value.projectDetails && typeof value.projectDetails === 'object'
-    ? value.projectDetails as Record<string, unknown>
-    : {}
+  const contact = value.contact && typeof value.contact === 'object' ? value.contact as Record<string, unknown> : {}
+  const projectDetails = value.projectDetails && typeof value.projectDetails === 'object' ? value.projectDetails as Record<string, unknown> : {}
 
   if (
     typeof value.service !== 'string'
@@ -160,6 +218,12 @@ function parseQuote(input: unknown):
   }
 }
 
+function isCustomPackagingConsultation(quote: QuotePayload): quote is CustomPackagingConsultationPayload {
+  return 'quoteType' in quote
+    && quote.quoteType === 'custom-packaging'
+    && 'packagingTypes' in quote.projectDetails
+}
+
 function customPackagingRows(quote: PackagingQuotePayload): string {
   const details = quote.projectDetails
   return [
@@ -185,10 +249,7 @@ function row(label: string, value: string, strong = false): string {
 }
 
 function formatKey(key: string): string {
-  return key
-    .replace(/([A-Z])/g, ' $1')
-    .replace(/^./, character => character.toUpperCase())
-    .trim()
+  return key.replace(/([A-Z])/g, ' $1').replace(/^./, character => character.toUpperCase()).trim()
 }
 
 function escapeHtml(value: string): string {

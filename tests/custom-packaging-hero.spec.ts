@@ -2,15 +2,6 @@ import { expect, test, type Page } from '@playwright/test'
 
 const routes = [
   {
-    name: 'custom packaging',
-    path: '/services/packaging/custom-packaging',
-    heading: 'Custom packaging, built around your brand.',
-    successHeading: 'We got your packaging request.',
-    quoteType: 'custom-packaging',
-    service: 'Packaging',
-    preservedText: 'What we bring to the table',
-  },
-  {
     name: 'Mylar Bags',
     path: '/services/packaging/mylar-bags',
     heading: 'Custom Mylar Bags',
@@ -140,7 +131,7 @@ for (const routeConfig of routes) {
       data: {
         quoteType: routeConfig.quoteType,
         service: routeConfig.service,
-        source: routeConfig.path === routes[0].path ? routes[1].path : routes[0].path,
+        source: '/services/packaging/custom-packaging',
         contact: { name: 'Schema Test', email: '', phone: '(917) 555-0198' },
         projectDetails: {
           bagSizes: [{ width: 4, length: 6, unit: 'cm' }],
