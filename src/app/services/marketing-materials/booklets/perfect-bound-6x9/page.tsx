@@ -4,8 +4,8 @@ export default function Page() {
   return (
     <ProductOrderPage
       images={[
-        { src: '/images/products/booklets/perfect-bound-6x9/booklet-stack.webp', alt: 'Stacked perfect-bound 6 x 9 booklet set' },
-        { src: '/images/products/booklets/perfect-bound-6x9/booklet-set.webp', alt: 'Assorted booklet samples' },
+        { src: '/images/products/booklets/booklet-closed.jpg', alt: 'Green Lettuce Print perfect-bound 6 x 9 booklet' },
+        { src: '/images/products/booklets/booklet-open.jpg', alt: 'Green Lettuce Print perfect-bound booklet interior' },
       ]}
       name="Perfect Bound Booklet"
       tagline="Trim digest size with a perfect bound spine. Elegant for books, journals, and brand narratives."

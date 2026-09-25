@@ -6,8 +6,8 @@ const products = [
   { pageName: 'Saddle-Stitch Booklet', path: `${listingPath}/saddle-stitch-55x85`, card: '/images/products/booklets/saddle-stitch-55x85/card.webp', primary: '/images/products/booklets/saddle-stitch-55x85/booklet-set.webp' },
   { pageName: 'Saddle-Stitch Booklet', path: `${listingPath}/saddle-stitch-85x11`, card: '/images/products/booklets/saddle-stitch-85x11/card.webp', primary: '/images/products/booklets/saddle-stitch-85x11/booklet-set.webp' },
   { pageName: 'Square Saddle-Stitch Booklet', path: `${listingPath}/saddle-stitch-square`, card: '/images/products/booklets/saddle-stitch-square/card.webp', primary: '/images/products/booklets/saddle-stitch-square/booklet-set.webp' },
-  { pageName: 'Perfect Bound Booklet', path: `${listingPath}/perfect-bound-85x11`, card: '/images/products/booklets/perfect-bound-85x11/card.webp', primary: '/images/products/booklets/perfect-bound-85x11/booklet-stack.webp' },
-  { pageName: 'Perfect Bound Booklet', path: `${listingPath}/perfect-bound-6x9`, card: '/images/products/booklets/perfect-bound-6x9/card.webp', primary: '/images/products/booklets/perfect-bound-6x9/booklet-stack.webp' },
+  { pageName: 'Perfect Bound Booklet', path: `${listingPath}/perfect-bound-85x11`, card: '/images/products/booklets/booklet-closed.jpg', primary: '/images/products/booklets/booklet-closed.jpg' },
+  { pageName: 'Perfect Bound Booklet', path: `${listingPath}/perfect-bound-6x9`, card: '/images/products/booklets/booklet-closed.jpg', primary: '/images/products/booklets/booklet-closed.jpg' },
 ] as const
 
 function collectPageFailures(page: Page) {

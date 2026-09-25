@@ -63,7 +63,7 @@ const CATEGORIES = [
         features: ['100 lb. cover stock', '80 lb. interior text', 'Perfect bind (glued spine)', 'Full-color throughout', '48+ pages'],
         turnaround: '7–10 business days',
         color: '#F0E8F5',
-        image: '/images/products/booklets/perfect-bound-85x11/card.webp',
+        image: '/images/products/booklets/booklet-closed.jpg',
       },
       {
         id: 'booklet-pb-6x9',
@@ -74,7 +74,7 @@ const CATEGORIES = [
         features: ['100 lb. cover stock', '80 lb. interior text', 'Perfect bind (glued spine)', 'Full-color throughout', '48+ pages'],
         turnaround: '7–10 business days',
         color: '#E8F5EF',
-        image: '/images/products/booklets/perfect-bound-6x9/card.webp',
+        image: '/images/products/booklets/booklet-closed.jpg',
       },
     ],
   },
@@ -130,7 +130,7 @@ export default function BookletsPage() {
         <section className="py-16 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-h2 font-semibold text-gray-900 mb-4">Have a specific page count or binding in mind?</h2>
-            <p className="text-body text-gray-500 mb-8">We'll spec it out for you — page count, paper, binding, finish. Just tell us what it's for.</p>
+            <p className="text-body text-gray-500 mb-8">We&apos;ll spec it out for you — page count, paper, binding, finish. Just tell us what it&apos;s for.</p>
             <Link href="/get-quote"><Button size="lg">Talk to Us</Button></Link>
           </div>
         </section>
