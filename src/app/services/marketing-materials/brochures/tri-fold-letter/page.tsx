@@ -4,9 +4,10 @@ export default function Page() {
   return (
     <ProductOrderPage
       images={[
-        { src: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view', alt: 'Brochure print sample' },
-        { src: 'https://drive.usercontent.google.com/download?id=1_pNzHBcCwVT_F3rvdcMUWz76DQh77Wvm&export=view', alt: 'Custom brochure' },
-        { src: 'https://drive.usercontent.google.com/download?id=1t0H52pTZPlm1sxpTlC5uSaiYK1Ud-PMg&export=view', alt: 'Brochure detail' },
+        { src: '/images/products/brochures/tri-fold-letter/top-left.webp', alt: 'Lettuce Print tri-fold brochure mockup from the front-left' },
+        { src: '/images/products/brochures/tri-fold-letter/top-right.webp', alt: 'Lettuce Print tri-fold brochure mockup from the front-right' },
+        { src: '/images/products/brochures/tri-fold-letter/bottom-left.webp', alt: 'Alternate left-side view of the Lettuce Print tri-fold brochure' },
+        { src: '/images/products/brochures/tri-fold-letter/bottom-right.webp', alt: 'Alternate right-side view of the Lettuce Print tri-fold brochure' },
       ]}
       name="Tri-Fold Brochure"
       tagline="The most universally recognized brochure format. Perfect for service menus, product overviews, and event guides."

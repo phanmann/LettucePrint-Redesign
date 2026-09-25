@@ -4,8 +4,10 @@ export default function Page() {
   return (
     <ProductOrderPage
       images={[
-        { src: 'https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view', alt: 'Brochure print sample' },
-        { src: 'https://drive.usercontent.google.com/download?id=1_pNzHBcCwVT_F3rvdcMUWz76DQh77Wvm&export=view', alt: 'Custom brochure' },
+        { src: '/images/products/brochures/tri-fold-legal/top-right.webp', alt: 'Lettuce Print tri-fold brochure mockup from the front-right' },
+        { src: '/images/products/brochures/tri-fold-legal/top-left.webp', alt: 'Lettuce Print tri-fold brochure mockup from the front-left' },
+        { src: '/images/products/brochures/tri-fold-legal/bottom-right.webp', alt: 'Alternate right-side view of the Lettuce Print tri-fold brochure' },
+        { src: '/images/products/brochures/tri-fold-legal/bottom-left.webp', alt: 'Alternate left-side view of the Lettuce Print tri-fold brochure' },
       ]}
       name="Tri-Fold Brochure - Legal"
       tagline="Wider panel for copy-heavy content, photo layouts, or multi-column designs."
