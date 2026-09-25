@@ -4,8 +4,8 @@ export default function Page() {
   return (
     <ProductOrderPage
       images={[
-        { src: '/images/products/posters/poster-1.jpg', alt: 'Medium poster print' },
-        { src: '/images/products/posters/poster-2.jpg', alt: 'Custom printed poster' },
+        { src: '/images/products/posters/medium-poster-pilates.webp', alt: 'Pilates studio design printed as a medium poster' },
+        { src: '/images/products/posters/medium-poster-pilates-on-wall.webp', alt: 'Medium Pilates poster displayed on a wall' },
       ]}
       name="Medium Poster"
       tagline="The classic event poster size. Big enough to command attention, manageable to hang."

@@ -103,7 +103,7 @@ const CATEGORIES = [
       features: ['80 lb. gloss or matte text', 'Full-color printing', 'Crisp edge-to-edge coverage', 'Bulk pricing available'],
       turnaround: '1–2 business days',
       color: '#E8F5F1',
-      image: '/images/products/posters/poster-1.jpg',
+      image: '/images/products/posters/small-poster-family-fun.webp',
     },
   },
   {
@@ -119,7 +119,7 @@ const CATEGORIES = [
       features: ['80 lb. gloss or matte text', 'Full-color printing', 'Vivid, accurate color reproduction', 'Optional lamination'],
       turnaround: '2–3 business days',
       color: '#F5F0E8',
-      image: '/images/products/posters/poster-1.jpg',
+      image: '/images/products/posters/medium-poster-pilates.webp',
     },
   },
   {
@@ -135,7 +135,7 @@ const CATEGORIES = [
       features: ['80 lb. or 100 lb. stock', 'Full-color printing', 'Matte or gloss finish', 'Optional tube rolling'],
       turnaround: '2–3 business days',
       color: '#E8F0F5',
-      image: '/images/products/posters/poster-2.jpg',
+      image: '/images/products/posters/large-poster-crab-blaze.webp',
     },
   },
 ]

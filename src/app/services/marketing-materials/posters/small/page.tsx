@@ -4,8 +4,7 @@ export default function Page() {
   return (
     <ProductOrderPage
       images={[
-        { src: '/images/products/posters/poster-1.jpg', alt: 'Small poster print' },
-        { src: '/images/products/posters/poster-2.jpg', alt: 'Custom printed poster' },
+        { src: '/images/products/posters/small-poster-family-fun.webp', alt: 'Family fun event design printed as a small poster' },
       ]}
       name="Small Poster"
       tagline="Tabloid-size poster for retail displays, event announcements, and point-of-sale."
