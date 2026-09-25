@@ -17,7 +17,7 @@ export default function Page() {
       badges={["Fast Turnaround"]}
       color="#F5F0E8"
       images={[
-        { src: 'https://drive.usercontent.google.com/download?id=1lkdgvN3wjRMfftKmeu5X47ZwHyor7dzB&export=view', alt: 'Retractable banner display' },
+        { src: '/images/products/banners/retractable-tabletop/tabletop-retractable.webp', alt: 'Table top retractable banner display', fit: 'contain' },
         { src: 'https://drive.usercontent.google.com/download?id=1p_mlXivZBXkObui0RQPrmVH8uhVf9WNl&export=view', alt: 'Retractable banner setup' },
       ]}
       showQuantity={true}
