@@ -37,12 +37,12 @@ function searchProducts(q: string) {
   )
 }
 
-export default function SearchPage({
+export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: { q?: string }
+  searchParams: Promise<{ q?: string }>
 }) {
-  const query = searchParams.q ?? ''
+  const query = (await searchParams).q ?? ''
   const results = searchProducts(query)
 
   return (
