@@ -5,7 +5,8 @@ import {medusa} from '@/lib/medusa'
 import {attachUploadedArtwork} from '@/lib/medusa-recovery'
 export default function MedusaArtwork({cartId,lineId,filename,onBusy,onSaved}:{cartId:string;lineId:string;filename?:string;onBusy:(busy:boolean)=>void;onSaved:()=>Promise<void>}){
  const [error,setError]=useState(''),[uploaded,setUploaded]=useState<{ufsUrl:string;name:string}|undefined>(),[saving,setSaving]=useState(false)
- const enabled=process.env.NEXT_PUBLIC_MEDUSA_ARTWORK_UPLOAD==='enabled'
+ // Public URL callbacks are not ownership proof. Keep closed until private owner-bound upload exists.
+ const enabled=false
  async function attach(file:{ufsUrl:string;name:string}|undefined){setSaving(true);onBusy(true);try{await attachUploadedArtwork(file,body=>medusa.client.fetch(`/store/carts/${cartId}/line-items/${lineId}/artwork`,{method:'POST',body}));setUploaded(undefined);setError('');await onSaved()}catch{setUploaded(file);setError('File was uploaded but could not be attached. Retry attachment before payment; do not upload again.')}finally{setSaving(false);onBusy(false)}}
  const {startUpload,isUploading}=useUploadThing('artworkUploader',{
   headers:{'x-session-id':`medusa:${cartId}:${lineId}`},
