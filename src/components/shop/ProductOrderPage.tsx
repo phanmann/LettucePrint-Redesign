@@ -46,6 +46,7 @@ export interface ProductOrderPageProps {
   relatedProducts?: { href: string; name: string; description: string; dark?: boolean }[]
   customNote?: string
   showQuantity?: boolean
+  galleryBackground?: 'white' | 'muted'
   images?: { src: string; alt: string; fit?: 'cover' | 'contain' }[]
 }
 
@@ -274,6 +275,7 @@ export default function ProductOrderPage({
   customNote,
   showQuantity,
   images,
+  galleryBackground,
 }: ProductOrderPageProps) {
   const pathname = usePathname()
   const { addItem } = useCart()
@@ -399,7 +401,7 @@ export default function ProductOrderPage({
               </div>
 
               {/* Image gallery */}
-              {images && images.length > 0 && <ProductImageGallery images={images} />}
+              {images && images.length > 0 && <ProductImageGallery images={images} background={galleryBackground} />}
 
               {/* Color swatch fallback */}
               {(!images || images.length === 0) && (

@@ -4,10 +4,11 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 interface ProductImageGalleryProps {
+  background?: 'white' | 'muted'
   images: { src: string; alt: string; fit?: 'cover' | 'contain' }[]
 }
 
-export default function ProductImageGallery({ images }: ProductImageGalleryProps) {
+export default function ProductImageGallery({ images, background = 'muted' }: ProductImageGalleryProps) {
   const [active, setActive] = useState(0)
 
   if (!images || images.length === 0) return null
@@ -15,7 +16,7 @@ export default function ProductImageGallery({ images }: ProductImageGalleryProps
   return (
     <div className="mb-8">
       {/* Main image */}
-      <div className="relative w-full aspect-square rounded-card overflow-hidden bg-gray-50 border border-gray-100 mb-3">
+      <div className={`relative w-full aspect-square rounded-card overflow-hidden ${background === 'white' ? 'bg-white' : 'bg-gray-50'} border border-gray-100 mb-3`}>
         <Image
           src={images[active].src}
           alt={images[active].alt}
@@ -34,7 +35,7 @@ export default function ProductImageGallery({ images }: ProductImageGalleryProps
               key={i}
               type="button"
               onClick={() => setActive(i)}
-              className={`relative w-16 h-16 rounded-md overflow-hidden border-2 flex-shrink-0 transition-all duration-150 ${
+              className={`relative w-16 h-16 rounded-md overflow-hidden border-2 flex-shrink-0 transition-all duration-150 ${background === 'white' ? 'bg-white' : ''} ${
                 i === active
                   ? 'border-lp-green ring-1 ring-lp-green'
                   : 'border-gray-200 hover:border-gray-400'
