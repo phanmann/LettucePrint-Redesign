@@ -27,6 +27,13 @@ Product-detail galleries can be managed without editing code through Lettuce Pri
 
 Open the product's gallery entry, open the image row, replace its image file, and publish.
 
+## Product preview images
+
+- Product cards that link directly to a product page automatically use the first published image in that product's Sanity gallery.
+- Reordering the gallery and publishing makes the new first image the product-page default and the listing-card preview.
+- Preview cards inherit the first image's cover/contain treatment, padding, alternative text, and white/muted background.
+- Aggregate category cards without their own Product Gallery entry retain their built-in fallback image.
+
 ## Revert safely
 
 - Turn off **Use this gallery on the website** and publish to restore the gallery built into the website.
@@ -52,4 +59,5 @@ The reusable migration command is `npm run migrate:product-galleries`. It is a d
 - Installed versions: Sanity `5.21.0`, Next.js `16.2.4`, `next-sanity` `12.2.2`, `@sanity/client` `7.21.0`, and `@sanity/image-url` `2.1.1`.
 - Embedded Studio API: the installed `next-sanity/studio` types export `NextStudio`, matching the existing `/studio` implementation. Official reference: <https://www.sanity.io/docs/studio/embedding-sanity-studio>.
 - Gallery schema: Sanity image fields and reorderable arrays are supported by the installed `defineType`, `defineField`, and `defineArrayMember` APIs. Official references: <https://www.sanity.io/docs/studio/image-type> and <https://www.sanity.io/docs/studio/array-type>.
-- Verification: production Next build and TypeScript passed for all 115 routes; focused ESLint and `git diff --check` passed; browser tests proved both the built-in fallback and a mocked published CMS override with background, fit, and padding controls.
+- Preview image API: installed Next.js `16.2.4` image types define `ImageProps` as intrinsic image attributes plus `fill`, so the reusable card image can preserve responsive `sizes` and safe `data-*` QA markers. Local evidence: `node_modules/next/dist/shared/lib/get-img-props.d.ts`.
+- Verification: production Next build and TypeScript passed for all 115 routes; focused ESLint and `git diff --check` passed; browser tests proved both the built-in fallback and published CMS overrides with background, fit, and padding controls. Preview synchronization QA compared each direct product card's rendered Sanity asset with image #1 in its linked gallery across desktop and mobile.
