@@ -12,7 +12,7 @@ Product-detail galleries can be managed without editing code through Lettuce Pri
 
 1. Click **Create** and choose **Product Galleries**.
 2. Enter the product name for the Studio list.
-3. Copy the product page URL and paste only the path beginning with `/services/` into **Product page path**.
+3. Copy the product page URL and paste only the path beginning with `/services/` or `/shop/` into **Product page path**.
 4. Leave **Use this gallery on the website** enabled.
 5. Choose a white or light-gray gallery background.
 6. Upload images under **Gallery images**.
@@ -36,10 +36,16 @@ Open the product's gallery entry, open the image row, replace its image file, an
 ## Guardrails
 
 - Maximum 12 images per product gallery.
-- Product paths must begin with `/services/`.
+- Product paths must begin with `/services/` or `/shop/`.
 - Alternative text is required.
 - Styling is limited to safe background, fit, and padding controls; arbitrary CSS is not exposed.
 - If duplicate published entries use the same product path, the most recently updated entry wins.
+
+## Baseline migration
+
+The initial migration on September 28, 2026 created 51 enabled product-gallery documents with 109 ordered image rows. Sanity deduplicated the source set to 52 unique uploaded assets. The migration includes shared product-order pages plus the custom business-card, flyer, postcard, sticker, roll-label, and Spot UV galleries.
+
+The reusable migration command is `npm run migrate:product-galleries`. It is a dry run by default. `--apply` requires protected Sanity write access, and existing product paths are skipped unless `--overwrite-existing` is supplied deliberately.
 
 ## Documentation evidence
 

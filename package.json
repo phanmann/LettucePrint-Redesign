@@ -14,7 +14,8 @@
     "test:mylar-bags-types": "tsc --noEmit --project tsconfig.mylar.json",
     "test:sticker-pricing": "node --experimental-strip-types scripts/check-sticker-pricing.mjs",
     "test:roll-label-direction": "node --experimental-strip-types scripts/check-roll-label-direction.mjs",
-    "test:roll-label-pricing": "tsx scripts/check-roll-label-pricing.ts"
+    "test:roll-label-pricing": "tsx scripts/check-roll-label-pricing.ts",
+    "migrate:product-galleries": "tsx scripts/migrate-product-galleries-to-sanity.ts"
   },
   "dependencies": {
     "@sanity/client": "^7.21.0",

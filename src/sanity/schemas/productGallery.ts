@@ -1,6 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
-const productPathPattern = /^\/services\/[a-z0-9-/]+$/
+const productPathPattern = /^\/(services|shop)\/[a-z0-9-/]+$/
 
 export const productGallery = defineType({
   name: 'productGallery',
@@ -18,7 +18,7 @@ export const productGallery = defineType({
       name: 'productPath',
       title: 'Product page path',
       type: 'string',
-      description: 'Copy the part of the product URL beginning with /services/. Example: /services/signage/banners/retractable-tabletop',
+      description: 'Copy the product URL path beginning with /services/ or /shop/. Example: /services/signage/banners/retractable-tabletop',
       validation: Rule => Rule.required().regex(productPathPattern, {
         name: 'product page path',
         invert: false,

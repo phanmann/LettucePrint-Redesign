@@ -8,6 +8,15 @@ export const client = createClient({
   useCdn: true, // cached reads for public content
 })
 
+// Gallery edits should appear immediately after publishing in Studio. Using the
+// live API also avoids caching a previous null result for a newly created path.
+export const freshClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
+})
+
 export const previewClient = createClient({
   projectId,
   dataset,
