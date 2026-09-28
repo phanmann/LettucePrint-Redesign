@@ -33,3 +33,12 @@ test('failed attachment preserves error for retry; missing or insecure file cann
  await assert.rejects(attachUploadedArtwork({ufsUrl:'https://utfs.io/f/local.pdf',name:'local.pdf'},async()=>{throw Error('offline')}))
  for(const file of [undefined,{ufsUrl:'http://evil.example/file',name:'file'}])await assert.rejects(attachUploadedArtwork(file,async()=>{throw Error('must not attach')}))
 })
+
+import {createCartId} from '../src/lib/cart-id'
+test('cart IDs work without secure-context randomUUID using cryptographic random values',()=>{
+ assert.equal(createCartId({randomUUID:()=> 'native-id',getRandomValues:crypto.getRandomValues.bind(crypto)}),'native-id')
+ const fallback={getRandomValues:crypto.getRandomValues.bind(crypto)}
+ const first=createCartId(fallback),second=createCartId(fallback)
+ assert.match(first,/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/)
+ assert.notEqual(first,second)
+})

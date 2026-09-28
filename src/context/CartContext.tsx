@@ -4,6 +4,7 @@ import {
   createContext, useContext, useEffect, useState, useCallback,
   type ReactNode,
 } from 'react'
+import {createCartId} from '@/lib/cart-id'
 import type { CartItem } from '@/lib/cart'
 
 interface CartContextValue {
@@ -45,7 +46,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addItem = useCallback((item: Omit<CartItem, 'id' | 'addedAt'>) => {
     const newItem: CartItem = {
       ...item,
-      id: crypto.randomUUID(),
+      id: createCartId(),
       addedAt: Date.now(),
     }
     setItems(prev => [...prev, newItem])

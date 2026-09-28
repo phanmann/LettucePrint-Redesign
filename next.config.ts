@@ -1,6 +1,10 @@
+import {isIP} from 'node:net'
 import type { NextConfig } from "next";
 
+const previewHost=process.env.LP_SANDBOX_HOST
+if(previewHost&&(isIP(previewHost)!==4||!(/^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(previewHost))))throw Error('LP_SANDBOX_HOST must be one exact private IPv4 address')
 const nextConfig: NextConfig = {
+  ...(previewHost?{allowedDevOrigins:[previewHost]}:{}),
   async redirects() {
     return [
       {

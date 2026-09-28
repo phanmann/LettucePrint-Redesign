@@ -32,11 +32,12 @@ function Pay({cart,secret,onComplete}:{cart:HttpTypes.StoreCart;secret:string;on
   }catch(e){setError(e instanceof Error?e.message:'Unable to verify payment. Check status before trying again.')}
   finally{lock.current=false;setBusy(false)}
  }
- return <div className="space-y-4">{!checking&&<PaymentElement/>}{error&&<p role="alert">{error}</p>}{checking?<button disabled={busy||!stripe} onClick={()=>{setBusy(true);void check().catch(e=>setError(e instanceof Error?e.message:'Unable to verify payment')).finally(()=>setBusy(false))}}>Check payment / finish order</button>:<button disabled={busy||!stripe} onClick={()=>void pay()} className="bg-black text-white rounded p-3">{busy?'Processing…':'Pay and place order'}</button>}</div>
+ return <div className="space-y-4"><PaymentElement/>{error&&<p role="alert">{error}</p>}{checking?<button disabled={busy||!stripe} onClick={()=>{setBusy(true);void check().catch(e=>setError(e instanceof Error?e.message:'Unable to verify payment')).finally(()=>setBusy(false))}}>Check payment / finish order</button>:<button disabled={busy||!stripe} onClick={()=>void pay()} className="bg-black text-white rounded p-3">{busy?'Processing…':'Pay and place order'}</button>}</div>
 }
 export default function MedusaCart(){
  const [cart,setCart]=useState<HttpTypes.StoreCart|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[clientSecret,setClientSecret]=useState(''),[order,setOrder]=useState(''),[uploads,setUploads]=useState<Record<string,boolean>>({})
  const [address,setAddress]=useState({email:'',first_name:'',last_name:'',address_1:'',city:'',province:'',postal_code:''})
+ const finishOrder=useCallback((id:string)=>{setOrder(id);window.scrollTo(0,0)},[])
  const uploadBusy=Object.values(uploads).some(Boolean),locked=Boolean(cart?.payment_collection?.id)
  const accept=useCallback((updated:HttpTypes.StoreCart)=>{
   setCart(updated);publishPrintCart(updated)
@@ -45,10 +46,11 @@ export default function MedusaCart(){
   if(typeof secret==='string')setClientSecret(secret)
  },[])
  const load=useCallback(async()=>{
-  try{setError('');const updated=await getPrintCart();accept(updated)
-   if(updated.completed_at){const result=await medusa.store.cart.complete(updated.id);if(result.type==='order'){clearPrintCart();setOrder(result.order.id)}}
+  try{setError('');const updated=await getPrintCart()
+   if(updated.completed_at){const result=await medusa.store.cart.complete(updated.id);if(result.type==='order'){clearPrintCart();finishOrder(result.order.id);return}throw Error('Completed cart requires order recovery')}
+   accept(updated)
   }catch{setError('Unable to load your saved cart. It has not been deleted. Retry when the connection is available.')}
- },[accept])
+ },[accept,finishOrder])
  useEffect(()=>{void load()},[load])
  async function refresh(){if(cart)accept(await retrievePrintCart(cart.id))}
  async function checkout(){
@@ -75,6 +77,6 @@ export default function MedusaCart(){
  return <section className="max-w-3xl mx-auto p-8 space-y-5"><h1 className="text-2xl font-semibold">Your sticker cart</h1>{error&&<p role="alert">{error}</p>}{!cart?<><p>{error?'Saved cart unavailable.':'Loading…'}</p><button onClick={()=>void load()}>Reload saved cart</button></>:<>
  {cart.items?.map(item=><article key={item.id} className="border rounded p-4"><h2>{item.title}</h2><p>{String((item.metadata?.display as {summary?:string})?.summary||'Configured print job')}</p><p>${Number(item.unit_price).toFixed(2)}</p>{!locked&&!clientSecret&&<><button disabled={busy||uploadBusy} onClick={()=>void remove(item.id)}>Remove</button><MedusaArtwork cartId={cart.id} lineId={item.id} filename={(item.metadata?.artwork as {filename?:string}|null)?.filename} onBusy={value=>setUploads(prev=>({...prev,[item.id]:value}))} onSaved={refresh}/></>}</article>)}
  <p>Total: ${Number(cart.total).toFixed(2)}</p>
- {!cart.items?.length?<a href="/shop/stickers">Configure stickers</a>:clientSecret&&stripePromise?<Elements stripe={stripePromise} options={{clientSecret}}><Pay cart={cart} secret={clientSecret} onComplete={setOrder}/></Elements>:locked?<><p>Checkout has already been prepared. Items and artwork are locked to preserve the payment amount.</p><button disabled={busy} onClick={()=>void load()}>Reload payment status</button>{!cart.payment_collection?.payment_sessions?.length&&<button disabled={busy} onClick={()=>void checkout()}>Resume prepared checkout</button>}</>:<form className="space-y-3" onSubmit={e=>{e.preventDefault();void checkout()}}><h2>Delivery address</h2>{Object.keys(address).map(key=><label key={key} className="block capitalize">{key.replaceAll('_',' ')}<input className="border rounded block p-2 w-full" required type={key==='email'?'email':'text'} value={address[key as keyof typeof address]} onChange={e=>setAddress({...address,[key]:e.target.value})}/></label>)}<p>United States · shipping $10; tax placeholder 0%. Review artwork before continuing; items lock when payment is prepared.</p><button disabled={busy||uploadBusy||!stripePromise} className="bg-black text-white rounded p-3">{busy?'Preparing…':'Continue to payment'}</button>{!stripePromise&&<p>Payments are unavailable in this preview.</p>}</form>}
+ {!cart.items?.length?<a href="/shop/stickers">Configure stickers</a>:clientSecret&&stripePromise?<Elements stripe={stripePromise} options={{clientSecret}}><Pay cart={cart} secret={clientSecret} onComplete={finishOrder}/></Elements>:locked?<><p>Checkout has already been prepared. Items and artwork are locked to preserve the payment amount.</p><button disabled={busy} onClick={()=>void load()}>Reload payment status</button>{!cart.payment_collection?.payment_sessions?.length&&<button disabled={busy} onClick={()=>void checkout()}>Resume prepared checkout</button>}</>:<form className="space-y-3" onSubmit={e=>{e.preventDefault();void checkout()}}><h2>Delivery address</h2>{Object.keys(address).map(key=><label key={key} className="block capitalize">{key.replaceAll('_',' ')}<input className="border rounded block p-2 w-full" required type={key==='email'?'email':'text'} value={address[key as keyof typeof address]} onChange={e=>setAddress({...address,[key]:e.target.value})}/></label>)}<p>United States · shipping $10; tax placeholder 0%. Review artwork before continuing; items lock when payment is prepared.</p><button disabled={busy||uploadBusy||!stripePromise} className="bg-black text-white rounded p-3">{busy?'Preparing…':'Continue to payment'}</button>{!stripePromise&&<p>Payments are unavailable in this preview.</p>}</form>}
  </>}</section>
 }
