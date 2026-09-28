@@ -307,7 +307,7 @@ export default function RollLabelCheckoutFlow({ config }: { config: Config }) {
               </p>
               <p className="text-xs text-gray-400 mb-6">
                 Not sure? Check your label applicator manual, or{' '}
-                <a href="mailto:steve@lettuceprint.com" className="text-lp-green underline">email us</a> — we'll confirm before printing.
+                <a href="mailto:steve@lettuceprint.com" className="text-lp-green underline">email us</a> — we&apos;ll confirm before printing.
               </p>
 
               <div className="grid grid-cols-4 gap-3 mb-6">

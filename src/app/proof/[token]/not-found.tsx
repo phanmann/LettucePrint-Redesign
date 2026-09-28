@@ -13,7 +13,7 @@ export default function ProofNotFound() {
           </div>
           <h1 className="text-h2 font-semibold text-gray-900 mb-3">Link not found</h1>
           <p className="text-small text-gray-500 mb-8">
-            This proof link may have expired or is invalid. Please check your email for the correct link, or contact us and we'll resend it.
+            This proof link may have expired or is invalid. Please check your email for the correct link, or contact us and we&apos;ll resend it.
           </p>
           <a
             href="mailto:steve@lettuceprint.com?subject=Resend my proof link"

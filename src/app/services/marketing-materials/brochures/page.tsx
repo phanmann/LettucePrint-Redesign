@@ -119,7 +119,7 @@ export default function BrochuresPage() {
         <section className="py-16 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-h2 font-semibold text-gray-900 mb-4">Need a custom fold or format?</h2>
-            <p className="text-body text-gray-500 mb-8">We do z-folds, gate folds, roll folds — if it folds, we can print it. Tell us what you're going for.</p>
+            <p className="text-body text-gray-500 mb-8">We do z-folds, gate folds, roll folds — if it folds, we can print it. Tell us what you&apos;re going for.</p>
             <Link href="/get-quote"><Button size="lg">Talk to Us</Button></Link>
           </div>
         </section>

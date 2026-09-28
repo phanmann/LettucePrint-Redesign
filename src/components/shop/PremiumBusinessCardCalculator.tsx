@@ -39,12 +39,6 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
   // Update weight when finish changes
   const availableWeights = useMemo(() => getWeightsForFinish(finish), [finish])
 
-  // Reset weight to first available when finish changes
-  useMemo(() => {
-    if (!availableWeights.includes(weight)) {
-      setWeight(availableWeights[0])
-    }
-  }, [finish, availableWeights, weight])
 
   // Compute price
   const price = useMemo(() => {
@@ -97,7 +91,7 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
         <p className={sectionLabel}>Premium finish</p>
         <div className="space-y-2">
           {FINISHES.map(f => (
-            <label key={f} className={radioRow(finish === f)} onClick={() => setFinish(f)}>
+            <label key={f} className={radioRow(finish === f)} onClick={() => { setFinish(f); const weights = getWeightsForFinish(f); if (!weights.includes(weight)) setWeight(weights[0]) }}>
               <div className="flex items-center gap-3">
                 <div className={radioCircle(finish === f)} />
                 <div>

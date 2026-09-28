@@ -72,7 +72,7 @@ export default function StandardBusinessCardsPage() {
                 </div>
                 <h1 className="text-h1 font-semibold text-gray-900 mb-4">Standard Business Cards</h1>
                 <p className="text-body-lg text-gray-600 leading-relaxed">
-                  Classic 3.5″ × 2″ business cards with crisp full-color printing. Choose your finish — matte, gloss, or uncoated — and we'll handle the rest. Printed in Brooklyn.
+                  Classic 3.5″ × 2″ business cards with crisp full-color printing. Choose your finish — matte, gloss, or uncoated — and we&apos;ll handle the rest. Printed in Brooklyn.
                 </p>
               </div>
 
@@ -137,7 +137,7 @@ export default function StandardBusinessCardsPage() {
                     ))}
                   </div>
                   <p className="text-xs text-gray-500 mt-4 pt-4 border-t border-gray-100">
-                    Don't have print-ready files? Our design team can help.{' '}
+                    Don&apos;t have print-ready files? Our design team can help.{' '}
                     <Link href="/get-quote" className="text-lp-green font-semibold hover:underline">Ask about design services →</Link>
                   </p>
                 </Disclosure>

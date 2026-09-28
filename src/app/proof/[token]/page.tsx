@@ -183,7 +183,7 @@ export default async function ProofPage({ params }: PageProps) {
                       {statusBadge.label}
                     </span>
                     <p className="text-xs text-gray-500 mt-3">
-                      You've already responded to this proof.{' '}
+                      You&apos;ve already responded to this proof.{' '}
                       <a href="mailto:steve@lettuceprint.com" className="text-lp-green hover:underline">Email us</a> if you need to make changes.
                     </p>
                   </div>

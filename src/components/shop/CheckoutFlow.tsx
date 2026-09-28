@@ -149,7 +149,7 @@ export default function CheckoutFlow({ config }: { config: CheckoutFlowConfig })
               <h2 className={`text-h3 font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Upload your artwork</h2>
             </div>
             <p className={`text-small mb-6 ml-11 ${isDark ? 'text-white/50' : 'text-gray-500'}`}>
-              We'll review your file and send a proof before anything goes to print.
+              We&apos;ll review your file and send a proof before anything goes to print.
             </p>
 
             {/* Specs */}
@@ -215,9 +215,9 @@ export default function CheckoutFlow({ config }: { config: CheckoutFlowConfig })
             )}
 
             <p className={`text-xs mt-4 text-center ${isDark ? 'text-white/30' : 'text-gray-400'}`}>
-              Can't upload right now?{' '}
+              Can&apos;t upload right now?{' '}
               <a href="mailto:steve@lettuceprint.com" className="text-lp-green hover:underline">Email us your file</a>
-              {' '}and we'll set you up manually.
+              {' '}and we&apos;ll set you up manually.
             </p>
           </div>
         )}
@@ -298,13 +298,13 @@ export default function CheckoutFlow({ config }: { config: CheckoutFlowConfig })
                   </div>
                   <p className={`text-sm font-semibold mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>{uploadedFile.name}</p>
                   <p className={`text-xs mb-4 ${isDark ? 'text-white/50' : 'text-gray-500'}`}>
-                    Browser previews aren't available for {uploadedFile.name.split('.').pop()?.toUpperCase()} files — but your file uploaded successfully.
+                    Browser previews aren&apos;t available for {uploadedFile.name.split('.').pop()?.toUpperCase()} files — but your file uploaded successfully.
                   </p>
                   <a href={uploadedFile.url} target="_blank" rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 px-4 py-2 bg-white border border-gray-200 rounded-lg text-xs font-semibold text-lp-green hover:border-lp-green transition-colors">
                     Open in new tab to verify →
                   </a>
-                  <p className={`text-xs mt-4 ${isDark ? 'text-white/30' : 'text-gray-400'}`}>If this is the wrong file, use "Upload different file" below.</p>
+                  <p className={`text-xs mt-4 ${isDark ? 'text-white/30' : 'text-gray-400'}`}>If this is the wrong file, use &quot;Upload different file&quot; below.</p>
                 </div>
               )}
             </div>

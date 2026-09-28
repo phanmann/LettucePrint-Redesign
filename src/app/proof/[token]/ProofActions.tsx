@@ -63,7 +63,7 @@ export default function ProofActions({ token }: ProofActionsProps) {
         </div>
         <h2 className="text-h3 font-semibold text-green-900 mb-2">Proof approved!</h2>
         <p className="text-sm text-green-700 max-w-sm mx-auto">
-          We've got your approval. We'll send you a final proof before anything goes to print. Keep an eye on your inbox.
+          We&apos;ve got your approval. We&apos;ll send you a final proof before anything goes to print. Keep an eye on your inbox.
         </p>
       </div>
     )
@@ -77,7 +77,7 @@ export default function ProofActions({ token }: ProofActionsProps) {
         </div>
         <h2 className="text-h3 font-semibold text-amber-900 mb-2">Changes noted!</h2>
         <p className="text-sm text-amber-700 max-w-sm mx-auto">
-          We've received your feedback and will prepare a revised proof. We'll be in touch shortly.
+          We&apos;ve received your feedback and will prepare a revised proof. We&apos;ll be in touch shortly.
         </p>
       </div>
     )
@@ -88,7 +88,7 @@ export default function ProofActions({ token }: ProofActionsProps) {
       <div className="rounded-card border border-gray-200 bg-gray-50 p-8 text-center">
         <p className="text-sm font-semibold text-gray-700 mb-1">Already responded</p>
         <p className="text-sm text-gray-500">
-          You've already submitted a response for this proof. Questions?{' '}
+          You&apos;ve already submitted a response for this proof. Questions?{' '}
           <a href="mailto:steve@lettuceprint.com" className="text-lp-green hover:underline">Email us</a>.
         </p>
       </div>
@@ -170,7 +170,7 @@ export default function ProofActions({ token }: ProofActionsProps) {
       </div>
 
       <p className="text-xs text-gray-400 text-center pt-1">
-        By approving, you confirm the proof is correct. We'll send a final proof before production starts.
+        By approving, you confirm the proof is correct. We&apos;ll send a final proof before production starts.
       </p>
     </div>
   )
