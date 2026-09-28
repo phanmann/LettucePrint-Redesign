@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test'
 
 const listingPath = '/services/marketing-materials/brochures'
 
-const products = [
+const products: ReadonlyArray<{name:string;pageName?:string;path:string;card:string;galleryCount:number}> = [
   {
     name: 'Bi-Fold Brochure',
     path: `${listingPath}/bi-fold-letter`,

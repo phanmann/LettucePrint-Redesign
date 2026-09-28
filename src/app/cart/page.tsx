@@ -1,9 +1,7 @@
-import MedusaCart from '@/components/shop/MedusaCart'
-import { commerceBackend } from '@/lib/medusa'
+import CommerceCart from '@/components/shop/CommerceCart'
 import type { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import CartPage from './CartPage'
 
 export const metadata: Metadata = {
   title: 'Your Cart',
@@ -15,7 +13,7 @@ export default function Cart() {
     <>
       <Navbar />
       <main className="pt-[72px] min-h-screen bg-gray-50">
-        {commerceBackend === 'medusa' ? <MedusaCart /> : <CartPage />}
+        <CommerceCart />
       </main>
       <Footer />
     </>

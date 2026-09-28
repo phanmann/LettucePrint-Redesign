@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect, useRef, useMemo } from 'react'
+import {commerceBackend,retrievePrintCart} from '@/lib/medusa'
+import {cartSeparation} from '@/lib/medusa-recovery'
 import { useCart } from '@/context/CartContext'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -75,7 +77,16 @@ const navLinks: NavLink[] = [
 ]
 
 function CartBadge() {
-  const { count } = useCart()
+  const { count:legacyCount } = useCart()
+  const [pilotCount,setPilotCount]=useState(0)
+  useEffect(()=>{
+    if(commerceBackend!=='medusa')return
+    const refresh=()=>{const id=localStorage.getItem('lp_medusa_cart');if(id)retrievePrintCart(id).then(c=>setPilotCount(c.items?.length||0)).catch(()=>{});else setPilotCount(0)}
+    const update=(event:Event)=>setPilotCount((event as CustomEvent<number>).detail)
+    refresh();window.addEventListener('lp-medusa-cart',update);window.addEventListener('storage',refresh);window.addEventListener('focus',refresh)
+    return()=>{window.removeEventListener('lp-medusa-cart',update);window.removeEventListener('storage',refresh);window.removeEventListener('focus',refresh)}
+  },[])
+  const {count}=cartSeparation(legacyCount,pilotCount)
   if (count === 0) return null
   return (
     <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full bg-lp-green text-white text-[10px] font-bold leading-none">
