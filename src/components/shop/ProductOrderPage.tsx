@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
@@ -11,6 +11,9 @@ import { ArrowRight, CheckCircle, FileText, Layers, Zap } from 'lucide-react'
 import ProductImageGallery from '@/components/shop/ProductImageGallery'
 import { usePathname } from 'next/navigation'
 import { useCart } from '@/context/CartContext'
+import { client } from '@/sanity/client'
+import { urlFor } from '@/sanity/image'
+import { productGalleryByPathQuery } from '@/sanity/queries'
 
 export interface OptionGroup {
   label: string
@@ -47,7 +50,19 @@ export interface ProductOrderPageProps {
   customNote?: string
   showQuantity?: boolean
   galleryBackground?: 'white' | 'muted'
-  images?: { src: string; alt: string; fit?: 'cover' | 'contain' }[]
+  images?: { src: string; alt: string; fit?: 'cover' | 'contain'; padding?: number }[]
+}
+
+interface CmsProductGalleryImage {
+  image?: unknown
+  alt?: string
+  fit?: 'cover' | 'contain'
+  padding?: number
+}
+
+interface CmsProductGallery {
+  galleryBackground?: 'white' | 'muted'
+  images?: CmsProductGalleryImage[]
 }
 
 function fmt(n: number) {
@@ -279,6 +294,49 @@ export default function ProductOrderPage({
 }: ProductOrderPageProps) {
   const pathname = usePathname()
   const { addItem } = useCart()
+  const [cmsGallery, setCmsGallery] = useState<CmsProductGallery | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+
+    client
+      .fetch<CmsProductGallery | null>(productGalleryByPathQuery, { productPath: pathname })
+      .then(gallery => {
+        if (!cancelled) setCmsGallery(gallery)
+      })
+      .catch(() => {
+        if (!cancelled) setCmsGallery(null)
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [pathname])
+
+  const cmsImages = useMemo(() => {
+    if (!cmsGallery?.images?.length) return []
+
+    return cmsGallery.images.flatMap(item => {
+      if (!item.image || !item.alt) return []
+
+      const fit: 'cover' | 'contain' = item.fit === 'cover' ? 'cover' : 'contain'
+      const builder = fit === 'cover'
+        ? urlFor(item.image).width(1600).height(1600).fit('crop')
+        : urlFor(item.image).width(1600).fit('max')
+
+      return [{
+        src: builder.auto('format').quality(90).url(),
+        alt: item.alt,
+        fit,
+        padding: fit === 'contain' ? (item.padding ?? 16) : 0,
+      }]
+    })
+  }, [cmsGallery])
+
+  const resolvedImages = cmsImages.length > 0 ? cmsImages : images
+  const resolvedGalleryBackground = cmsImages.length > 0
+    ? (cmsGallery?.galleryBackground ?? galleryBackground)
+    : galleryBackground
 
   // ── Lifted configurator state ──────────────────────────────────────────────
   const [selections, setSelections] = useState<Record<string, string>>(() =>
@@ -401,10 +459,12 @@ export default function ProductOrderPage({
               </div>
 
               {/* Image gallery */}
-              {images && images.length > 0 && <ProductImageGallery images={images} background={galleryBackground} />}
+              {resolvedImages && resolvedImages.length > 0 && (
+                <ProductImageGallery images={resolvedImages} background={resolvedGalleryBackground} />
+              )}
 
               {/* Color swatch fallback */}
-              {(!images || images.length === 0) && (
+              {(!resolvedImages || resolvedImages.length === 0) && (
                 <div
                   className="w-full h-36 rounded-2xl flex items-center justify-center mb-8"
                   style={{ backgroundColor: color }}

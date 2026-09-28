@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 interface ProductImageGalleryProps {
   background?: 'white' | 'muted'
-  images: { src: string; alt: string; fit?: 'cover' | 'contain' }[]
+  images: { src: string; alt: string; fit?: 'cover' | 'contain'; padding?: number }[]
 }
 
 export default function ProductImageGallery({ images, background = 'muted' }: ProductImageGalleryProps) {
@@ -21,7 +21,8 @@ export default function ProductImageGallery({ images, background = 'muted' }: Pr
           src={images[active].src}
           alt={images[active].alt}
           fill
-          className={`${images[active].fit === 'contain' ? 'object-contain p-4' : 'object-cover'} transition-opacity duration-200`}
+          className={`${images[active].fit === 'contain' ? 'object-contain' : 'object-cover'} transition-opacity duration-200`}
+          style={{ padding: images[active].fit === 'contain' ? (images[active].padding ?? 16) : 0 }}
           sizes="(max-width: 1024px) 100vw, 50vw"
           priority
         />
@@ -46,7 +47,8 @@ export default function ProductImageGallery({ images, background = 'muted' }: Pr
                 src={img.src}
                 alt={img.alt}
                 fill
-                className={img.fit === 'contain' ? 'object-contain p-1' : 'object-cover'}
+                className={img.fit === 'contain' ? 'object-contain' : 'object-cover'}
+                style={{ padding: img.fit === 'contain' ? 4 : 0 }}
                 sizes="64px"
               />
             </button>
