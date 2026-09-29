@@ -5,9 +5,6 @@ import { useUploadThing } from '@/lib/uploadthingClient'
 import { CheckCircle, Upload, Eye, CreditCard, RotateCcw } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import { MATERIAL_LABELS, FINISH_LABELS, type LabelMaterial, type LabelFinish } from '@/lib/roll-label-pricing'
-import { loadStripe } from '@stripe/stripe-js'
-
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 // ── Unwind directions ────────────────────────────────────────────────────────
 // Industry standard 1–8. Label face shown as rectangle, roll core shown as circle.

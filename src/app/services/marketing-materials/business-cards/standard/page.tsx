@@ -3,7 +3,6 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
-import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
 import { Disclosure } from '@/components/shop/ProductDisclosure'
 import { ArrowRight, CheckCircle, FileText, Layers } from 'lucide-react'

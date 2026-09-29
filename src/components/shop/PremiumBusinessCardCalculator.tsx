@@ -6,7 +6,6 @@ import { useCart } from '@/context/CartContext'
 import Button from '@/components/ui/Button'
 import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import {
-  QUANTITY_TIERS,
   FINISH_LABELS,
   FINISH_DESCRIPTIONS,
   WEIGHT_LABELS,
