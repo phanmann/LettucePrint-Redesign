@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
 
 export interface ProductCardProps {
   id: string
@@ -46,11 +46,11 @@ export default function ProductCard({
       {/* ── Image or swatch ── */}
       {image ? (
         <div className="relative w-full h-44 flex-shrink-0 overflow-hidden bg-white">
-          <Image
-            src={image}
+          <ProductPreviewImage
+            productPath={href ?? ''}
+            fallbackSrc={image}
             alt={name}
-            fill
-            className={imageFit === 'contain' ? 'object-contain p-2' : 'object-cover'}
+            fallbackFit={imageFit}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>

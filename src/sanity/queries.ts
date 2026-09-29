@@ -59,3 +59,19 @@ export const portfolioBySlugQuery = groq`
     tags,
   }
 `
+
+export const productGalleryByPathQuery = groq`
+  *[
+    _type == "productGallery" &&
+    productPath == $productPath &&
+    enabled != false
+  ] | order(_updatedAt desc)[0] {
+    galleryBackground,
+    images[] {
+      image,
+      alt,
+      fit,
+      padding,
+    },
+  }
+`

@@ -4,11 +4,11 @@ import { useState } from 'react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
-import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import CustomPackagingHeroForm from '@/components/quote/CustomPackagingHeroForm'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
 
 const PRODUCTS = [
   {
@@ -75,11 +75,10 @@ export default function MylarBagsPage() {
               {PRODUCTS.map(product => (
                 <div key={product.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200">
                   <div className="relative w-full h-48 overflow-hidden" style={{ backgroundColor: product.color }}>
-                    <Image
-                      src={product.image}
+                    <ProductPreviewImage
+                      productPath={product.href}
+                      fallbackSrc={product.image}
                       alt={product.imageAlt ?? product.name}
-                      fill
-                      className="object-cover"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   </div>

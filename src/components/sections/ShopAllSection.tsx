@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
+import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
 
 const products = [
   {
@@ -81,11 +81,11 @@ export default function ShopAllSection() {
               className="group bg-white rounded-card shadow-card border border-gray-100 overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
             >
               <div className="relative h-32 sm:h-48 lg:h-56 w-full overflow-hidden bg-gray-100">
-                <Image
-                  src={product.image}
+                <ProductPreviewImage
+                  productPath={product.href}
+                  fallbackSrc={product.image}
                   alt={product.name}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 1024px) 50vw, 33vw"
                 />
                 <span className="absolute top-3 left-3 bg-lp-green text-white text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-2 sm:px-3 py-1 sm:py-1.5 rounded-full">

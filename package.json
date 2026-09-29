@@ -15,7 +15,8 @@
     "test:sticker-pricing": "node --experimental-strip-types scripts/check-sticker-pricing.mjs",
     "test:roll-label-direction": "node --experimental-strip-types scripts/check-roll-label-direction.mjs",
     "test:roll-label-pricing": "tsx scripts/check-roll-label-pricing.ts",
-    "test:medusa-recovery": "tsx --test scripts/check-medusa-recovery.ts"
+    "test:medusa-recovery": "tsx --test scripts/check-medusa-recovery.ts",
+    "migrate:product-galleries": "tsx scripts/migrate-product-galleries-to-sanity.ts"
   },
   "dependencies": {
     "@medusajs/js-sdk": "2.21.1",

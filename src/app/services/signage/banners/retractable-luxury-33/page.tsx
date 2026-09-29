@@ -16,13 +16,14 @@ export default function Page() {
       ]}
       badges={["Fast Turnaround"]}
       color="#E8F0F5"
+      galleryBackground="white"
       images={[
         {
           src: '/images/products/banners/retractable-luxury-33/luxury-base-retractable.webp',
           alt: 'Luxury base retractable banner display',
           fit: 'contain',
         },
-        { src: 'https://drive.usercontent.google.com/download?id=1p_mlXivZBXkObui0RQPrmVH8uhVf9WNl&export=view', alt: 'Retractable banner setup' },
+        { src: 'https://drive.usercontent.google.com/download?id=1p_mlXivZBXkObui0RQPrmVH8uhVf9WNl&export=view', alt: 'Retractable banner setup', fit: 'contain' },
       ]}
       showQuantity={true}
       optionGroups={[

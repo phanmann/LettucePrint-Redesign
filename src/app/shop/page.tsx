@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Button from '@/components/ui/Button'
+import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
 
 export const metadata: Metadata = {
   title: 'Shop - Custom Print Products',
@@ -179,11 +179,10 @@ export default function ShopPage() {
                     >
                       {/* Product image */}
                       <div className="relative h-44 w-full overflow-hidden bg-gray-100">
-                        <Image
-                          src={product.image}
+                        <ProductPreviewImage
+                          productPath={product.href}
+                          fallbackSrc={product.image}
                           alt={product.name}
-                          fill
-                          className="object-cover"
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                         {product.badge && (
