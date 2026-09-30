@@ -52,7 +52,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="https://instagram.com/lettuceprint"
+                href="https://instagram.com/lettuce.print"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-lp-green hover:border-lp-green transition-all duration-200"
@@ -61,7 +61,7 @@ export default function Footer() {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
               </a>
               <a
-                href="https://linkedin.com/company/lettuceprint"
+                href="https://linkedin.com/company/lettuce-print/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-lp-green hover:border-lp-green transition-all duration-200"
