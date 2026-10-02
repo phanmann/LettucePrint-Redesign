@@ -118,6 +118,7 @@ export function calculatePrice(
   sides: 'single' | 'double',
   spotSide?: SpotSide
 ): PriceResult {
+  void spotSide
   const tier = QUANTITY_TIERS.find(t => t >= quantity) ?? 1000
 
   let priceCents: number

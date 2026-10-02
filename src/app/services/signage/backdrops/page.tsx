@@ -199,7 +199,7 @@ export default function BackdropsPage() {
         <section className="py-16 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-h2 font-semibold text-gray-900 mb-4">Got an event coming up?</h2>
-            <p className="text-body text-gray-500 mb-8">Tell us the venue, setup, and vibe — we'll recommend the right backdrop and make sure it arrives on time.</p>
+            <p className="text-body text-gray-500 mb-8">Tell us the venue, setup, and vibe — we&apos;ll recommend the right backdrop and make sure it arrives on time.</p>
             <Link href="/get-quote"><Button size="lg">Talk to Us</Button></Link>
           </div>
         </section>

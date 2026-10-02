@@ -5,9 +5,6 @@ import { useUploadThing } from '@/lib/uploadthingClient'
 import { CheckCircle, Upload, Eye, CreditCard, RotateCcw } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import { MATERIAL_LABELS, FINISH_LABELS, type LabelMaterial, type LabelFinish } from '@/lib/roll-label-pricing'
-import { loadStripe } from '@stripe/stripe-js'
-
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 // ── Unwind directions ────────────────────────────────────────────────────────
 // Industry standard 1–8. Label face shown as rectangle, roll core shown as circle.
@@ -307,7 +304,7 @@ export default function RollLabelCheckoutFlow({ config }: { config: Config }) {
               </p>
               <p className="text-xs text-gray-400 mb-6">
                 Not sure? Check your label applicator manual, or{' '}
-                <a href="mailto:steve@lettuceprint.com" className="text-lp-green underline">email us</a> — we'll confirm before printing.
+                <a href="mailto:steve@lettuceprint.com" className="text-lp-green underline">email us</a> — we&apos;ll confirm before printing.
               </p>
 
               <div className="grid grid-cols-4 gap-3 mb-6">

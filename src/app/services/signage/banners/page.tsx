@@ -186,7 +186,7 @@ export default function BannersPage() {
         <section className="py-16 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-h2 font-semibold text-gray-900 mb-4">Not sure what you need?</h2>
-            <p className="text-body text-gray-500 mb-8">Tell us about your event or space and we'll recommend the right banner for the job.</p>
+            <p className="text-body text-gray-500 mb-8">Tell us about your event or space and we&apos;ll recommend the right banner for the job.</p>
             <Link href="/get-quote">
               <Button size="lg">Talk to Us</Button>
             </Link>

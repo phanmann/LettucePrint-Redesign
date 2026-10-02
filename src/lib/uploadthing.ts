@@ -13,6 +13,8 @@ export const ourFileRouter = {
       // Pull sessionId from custom header set by the client
       const sessionId = req.headers.get('x-session-id')
       if (!sessionId) throw new Error('Missing sessionId')
+      // Do not let the Medusa pilot bypass its closed private-artwork gate through this legacy uploader.
+      if (sessionId.startsWith('medusa:')) throw new Error('Medusa artwork upload is unavailable')
       return { sessionId }
     })
     .onUploadComplete(async ({ metadata, file }) => {

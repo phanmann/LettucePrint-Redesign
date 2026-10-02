@@ -1,0 +1,69 @@
+name: Storefront CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: storefront-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Lint, test, and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      CI: true
+      # CI is intentionally isolated from Railway and cannot create carts or orders.
+      NEXT_PUBLIC_COMMERCE_BACKEND: legacy
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run contract and unit tests
+        run: |
+          npm run test:custom-packaging-contract
+          npm run test:mylar-bags-contract
+          npm run test:mylar-bags-types
+          npm run test:sticker-pricing
+          npm run test:roll-label-direction
+          npm run test:roll-label-pricing
+          npm run test:medusa-recovery
+
+      - name: Build legacy commerce path
+        run: npm run build
+
+      - name: Build Medusa commerce path
+        env:
+          NEXT_PUBLIC_COMMERCE_BACKEND: medusa
+          # Build-only placeholders. CI has no Railway credentials and makes no live requests.
+          NEXT_PUBLIC_MEDUSA_BACKEND_URL: http://127.0.0.1:9000
+          NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY: pk_ci_build_only
+        run: npm run build
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run browser contract tests
+        run: npm run test:packaging-hero

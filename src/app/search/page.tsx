@@ -37,12 +37,12 @@ function searchProducts(q: string) {
   )
 }
 
-export default function SearchPage({
+export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: { q?: string }
+  searchParams: Promise<{ q?: string }>
 }) {
-  const query = searchParams.q ?? ''
+  const query = (await searchParams).q ?? ''
   const results = searchProducts(query)
 
   return (
@@ -85,7 +85,7 @@ export default function SearchPage({
         {/* No results */}
         {query && results.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-gray-400 mb-6">Try "stickers", "banners", or "business cards"</p>
+            <p className="text-gray-400 mb-6">Try &quot;stickers&quot;, &quot;banners&quot;, or &quot;business cards&quot;</p>
             <Link
               href="/get-quote"
               className="inline-flex items-center gap-2 bg-lp-green text-white text-sm font-semibold px-6 py-3 rounded-full hover:bg-lp-green-dark transition-colors"

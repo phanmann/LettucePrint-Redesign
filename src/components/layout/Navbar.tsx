@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect, useRef, useMemo } from 'react'
+import {commerceBackend,retrievePrintCart} from '@/lib/medusa'
+import {cartSeparation} from '@/lib/medusa-recovery'
 import { useCart } from '@/context/CartContext'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -75,7 +77,16 @@ const navLinks: NavLink[] = [
 ]
 
 function CartBadge() {
-  const { count } = useCart()
+  const { count:legacyCount } = useCart()
+  const [pilotCount,setPilotCount]=useState(0)
+  useEffect(()=>{
+    if(commerceBackend!=='medusa')return
+    const refresh=()=>{const id=localStorage.getItem('lp_medusa_cart');if(id)retrievePrintCart(id).then(c=>setPilotCount(c.items?.length||0)).catch(()=>{});else setPilotCount(0)}
+    const update=(event:Event)=>setPilotCount((event as CustomEvent<number>).detail)
+    refresh();window.addEventListener('lp-medusa-cart',update);window.addEventListener('storage',refresh);window.addEventListener('focus',refresh)
+    return()=>{window.removeEventListener('lp-medusa-cart',update);window.removeEventListener('storage',refresh);window.removeEventListener('focus',refresh)}
+  },[])
+  const {count}=cartSeparation(legacyCount,pilotCount)
   if (count === 0) return null
   return (
     <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full bg-lp-green text-white text-[10px] font-bold leading-none">
@@ -115,17 +126,15 @@ export default function Navbar() {
   useEffect(() => {
     if (searchOpen) {
       setTimeout(() => searchInputRef.current?.focus(), 50)
-    } else {
-      setSearchQuery('')
     }
   }, [searchOpen])
 
   // Close on outside click or Escape
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSearchOpen(false) }
+    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { setSearchOpen(false); setSearchQuery('') } }
     const handleClick = (e: MouseEvent) => {
       if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
-        setSearchOpen(false)
+        { setSearchOpen(false); setSearchQuery('') }
       }
     }
     document.addEventListener('keydown', handleKey)
@@ -148,7 +157,7 @@ export default function Navbar() {
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (searchResults.length === 1) {
-      setSearchOpen(false)
+      { setSearchOpen(false); setSearchQuery('') }
       router.push(searchResults[0].href)
     }
   }
@@ -240,7 +249,7 @@ export default function Navbar() {
               {/* Search */}
               <div ref={searchContainerRef} className="relative">
                 <button
-                  onClick={() => setSearchOpen((o) => !o)}
+                  onClick={() => { setSearchQuery(''); setSearchOpen((o) => !o) }}
                   className={cn(
                     'w-11 h-11 flex items-center justify-center rounded-full transition-all duration-150',
                     searchOpen
@@ -285,7 +294,7 @@ export default function Navbar() {
                           <Link
                             key={r.href}
                             href={r.href}
-                            onClick={() => setSearchOpen(false)}
+                            onClick={() => { setSearchOpen(false); setSearchQuery('') }}
                             className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 group transition-colors"
                           >
                             <Search size={13} className="text-gray-300 group-hover:text-lp-green flex-shrink-0 transition-colors" />

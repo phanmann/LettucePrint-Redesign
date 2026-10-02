@@ -1,3 +1,5 @@
+import MedusaStickerCalculator from '@/components/shop/MedusaStickerCalculator'
+import { commerceBackend } from '@/lib/medusa'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { CheckCircle, FileText, ArrowRight, Layers } from 'lucide-react'
@@ -63,7 +65,7 @@ export default function StickersPage() {
 
             {/* Right — Pricing Calculator (desktop only) */}
             <div className="hidden lg:block lg:order-last lg:sticky lg:top-24">
-              <PricingCalculator productName="Custom Die-Cut Stickers" />
+              {commerceBackend === 'medusa' ? <MedusaStickerCalculator /> : <PricingCalculator productName="Custom Die-Cut Stickers" />}
             </div>
 
             {/* Left — Product Info */}
@@ -95,7 +97,7 @@ export default function StickersPage() {
 
               {/* Mobile-only calculator — inline after gallery */}
               <div className="lg:hidden mb-8">
-                <PricingCalculator productName="Custom Die-Cut Stickers" />
+                {commerceBackend === 'medusa' ? <MedusaStickerCalculator /> : <PricingCalculator productName="Custom Die-Cut Stickers" />}
               </div>
 
               {/* What's included */}

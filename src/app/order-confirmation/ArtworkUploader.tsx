@@ -92,7 +92,7 @@ export default function ArtworkUploader({ stripeSessionId, onConfirmed }: Artwor
         <div>
           <p className="font-semibold text-green-900 mb-1">Artwork submitted!</p>
           <p className="text-sm text-green-700">
-            <span className="font-medium">{uploadedFile?.name}</span> is in. We'll review it and send you a proof shortly.
+            <span className="font-medium">{uploadedFile?.name}</span> is in. We&apos;ll review it and send you a proof shortly.
           </p>
         </div>
       </div>
@@ -162,7 +162,7 @@ export default function ArtworkUploader({ stripeSessionId, onConfirmed }: Artwor
 
         {/* Call to action */}
         <p className="text-sm text-gray-600 mb-5 text-center">
-          Does this look right? Make sure it's the correct file before confirming.
+          Does this look right? Make sure it&apos;s the correct file before confirming.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3">
@@ -200,7 +200,7 @@ export default function ArtworkUploader({ stripeSessionId, onConfirmed }: Artwor
         <h2 className="text-h3 font-semibold text-gray-900">Upload your artwork</h2>
       </div>
       <p className="text-small text-gray-500 mb-6 ml-11">
-        Upload now to get your proof faster. We'll review it and send you a proof before anything goes to print.
+        Upload now to get your proof faster. We&apos;ll review it and send you a proof before anything goes to print.
       </p>
 
       {/* Spec callout */}

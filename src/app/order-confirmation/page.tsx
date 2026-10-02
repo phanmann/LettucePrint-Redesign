@@ -121,8 +121,8 @@ export default async function OrderConfirmationPage({ searchParams }: PageProps)
                   <CheckCircle size={20} className="text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-white text-base mb-1">Artwork received — you're all set!</p>
-                  <p className="text-sm text-white/80 mb-2">We'll review your file and email you a digital proof within 1 business day. Nothing goes to print until you approve it.</p>
+                  <p className="font-semibold text-white text-base mb-1">Artwork received — you&apos;re all set!</p>
+                  <p className="text-sm text-white/80 mb-2">We&apos;ll review your file and email you a digital proof within 1 business day. Nothing goes to print until you approve it.</p>
                   <div className="flex items-center gap-2 text-xs font-medium text-white/70">
                     <span className="w-1.5 h-1.5 rounded-full bg-white/70 animate-pulse" />
                     Next: proof sent to {order.customerEmail ?? 'your email'}
