@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getResend } from '@/lib/resend'
+import { validateSignageDetails } from '@/lib/signage-quote'
 import {
   PACKAGING_QUOTE_CONFIGS,
   type MylarBagsQuotePayload,
@@ -31,7 +32,8 @@ interface LegacyQuotePayload {
   }
 }
 
-type QuotePayload = CustomPackagingConsultationPayload | PackagingQuotePayload | (LegacyQuotePayload & { quoteType?: undefined })
+type SignageQuotePayload = LegacyQuotePayload & { formType: 'signage-booth'; quoteType?: undefined }
+type QuotePayload = CustomPackagingConsultationPayload | PackagingQuotePayload | SignageQuotePayload | (LegacyQuotePayload & { quoteType?: undefined })
 type ParsedQuote =
   | { success: true; data: QuotePayload }
   | { success: false; errors: CustomPackagingConsultationErrors | Record<string, string> }
@@ -58,7 +60,8 @@ export async function POST(req: NextRequest) {
     const contact = quote.contact
     const service = quote.service
     const company = 'company' in contact ? contact.company : ''
-    const source = 'quoteType' in quote && quote.quoteType ? quote.source : '/get-quote'
+    const signageQuote = 'formType' in quote && quote.formType === 'signage-booth'
+    const source = signageQuote ? '/services/signage/quote' : 'quoteType' in quote && quote.quoteType ? quote.source : '/get-quote'
     const mylarQuote = !consultation && 'quoteType' in quote && quote.quoteType === 'mylar-bags'
     const detailsRows = !consultation && !mylarQuote ? legacyDetailRows(quote as LegacyQuotePayload) : ''
 
@@ -98,12 +101,17 @@ export async function POST(req: NextRequest) {
     if (consultation) {
       await sendCustomPackagingInternalEmail(email => resend.emails.send(email), quote, incoming.files)
     } else if (internalEmail) {
-      await resend.emails.send(internalEmail)
+      const result = await resend.emails.send(internalEmail)
+      if (signageQuote && result.error) {
+        return NextResponse.json({ error: 'Unable to deliver quote request.' }, { status: 502 })
+      }
     }
 
     if (contact.email) {
       const firstName = contact.name.split(/\s+/)[0]
-      const confirmationResult = await resend.emails.send({
+      let confirmationResult: Awaited<ReturnType<typeof resend.emails.send>> | undefined
+      try {
+        confirmationResult = await resend.emails.send({
         from: 'Lettuce Print <onboarding@resend.dev>',
         to: contact.email,
         subject: `Got your quote request, ${firstName}!`,
@@ -129,7 +137,12 @@ export async function POST(req: NextRequest) {
           </div>
         `,
       })
-      if (consultation && confirmationResult.error) {
+      } catch (error) {
+        if (!signageQuote) throw error
+        console.error('Quote confirmation delivery failed')
+      }
+      if (signageQuote && confirmationResult?.error) console.error('Quote confirmation delivery failed')
+      if (consultation && confirmationResult?.error) {
         throw new Error(`Consultation confirmation email failed: ${confirmationResult.error.message}`)
       }
     }
@@ -178,6 +191,9 @@ async function parseIncomingQuote(req: NextRequest): Promise<{ parsed: ParsedQuo
 }
 
 function parseQuote(input: unknown): ParsedQuote {
+  if (input && typeof input === 'object' && 'formType' in input && (input as Record<string, unknown>).formType === 'signage-booth') {
+    return parseSignageQuote(input as Record<string, unknown>)
+  }
   if (input && typeof input === 'object' && 'quoteType' in input) {
     const quoteType = (input as Record<string, unknown>).quoteType
     if (quoteType === 'custom-packaging') return validateCustomPackagingConsultation(input)
@@ -217,6 +233,29 @@ function parseQuote(input: unknown): ParsedQuote {
       },
     },
   }
+}
+
+function parseSignageQuote(value: Record<string, unknown>): ParsedQuote {
+  const contact = value.contact && typeof value.contact === 'object' && !Array.isArray(value.contact) ? value.contact as Record<string, unknown> : {}
+  const details = value.projectDetails && typeof value.projectDetails === 'object' && !Array.isArray(value.projectDetails) ? value.projectDetails as Record<string, unknown> : {}
+  if (typeof value.service !== 'string' || !value.service.trim() || value.service.length > 200
+    || typeof value.timeline !== 'string' || value.timeline.length > 300
+    || typeof contact.name !== 'string' || !contact.name.trim()
+    || typeof contact.email !== 'string' || !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(contact.email)
+    || !['name', 'email', 'company', 'phone'].every(key => contact[key] === undefined || (typeof contact[key] === 'string' && contact[key].length <= 300))
+    || Object.keys(details).length > 40
+    || !Object.entries(details).every(([key, item]) => key.length <= 100 && typeof item === 'string' && item.length <= 4000)) {
+    return { success: false, errors: { request: 'Please check your contact and project details.' } }
+  }
+  const validationError = validateSignageDetails(details as Record<string, string>)
+  if (validationError) return { success: false, errors: { request: validationError } }
+  return { success: true, data: {
+    formType: 'signage-booth', service: value.service, timeline: value.timeline,
+    projectDetails: details as Record<string, string>,
+    contact: { name: contact.name.trim(), email: contact.email.trim(),
+      company: typeof contact.company === 'string' ? contact.company.trim() : '',
+      phone: typeof contact.phone === 'string' ? contact.phone.trim() : '' },
+  } }
 }
 
 function isCustomPackagingConsultation(quote: QuotePayload): quote is CustomPackagingConsultationPayload {

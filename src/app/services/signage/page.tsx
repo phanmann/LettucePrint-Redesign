@@ -41,9 +41,9 @@ export default function SignagePage() {
         </section>
         <section className="py-16 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-h2 font-semibold text-gray-900 mb-4">Need the hardware too?</h2>
+            <h2 className="text-h2 font-semibold text-gray-900 mb-4">Need help with your booth design?</h2>
             <p className="text-body text-gray-500 mb-8">Send us the event date, booth specs, and venue requirements. We’ll quote the print, hardware, and timeline together.</p>
-            <Link href="/get-quote"><Button size="lg">Request a Signage Quote</Button></Link>
+            <Link href="/services/signage/quote"><Button size="lg">Request a Signage Quote</Button></Link>
           </div>
         </section>
       </main>
