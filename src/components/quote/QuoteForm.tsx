@@ -24,6 +24,7 @@ export interface QuoteFormInitialValues {
 
 interface QuoteFormProps {
   initialValues?: QuoteFormInitialValues
+  lockService?: boolean
 }
 
 interface FormState {
@@ -145,8 +146,9 @@ function StepIndicator({ current }: { current: number }) {
 
 // ─── Main form ──────────────────────────────────────────────────────────────
 
-export default function QuoteForm({ initialValues }: QuoteFormProps) {
-  const [step, setStep] = useState(0)
+export default function QuoteForm({ initialValues, lockService = false }: QuoteFormProps) {
+  const firstStep = lockService && initialValues?.service ? 1 : 0
+  const [step, setStep] = useState(firstStep)
   const [direction, setDirection] = useState(1)
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -485,8 +487,8 @@ export default function QuoteForm({ initialValues }: QuoteFormProps) {
       )}
 
       {/* Navigation */}
-      <div className={`flex mt-10 gap-4 ${step === 0 ? 'justify-end' : 'justify-between'}`}>
-        {step > 0 && (
+      <div className={`flex mt-10 gap-4 ${step === firstStep ? 'justify-end' : 'justify-between'}`}>
+        {step > firstStep && (
           <Button variant="secondary" size="lg" onClick={goBack}>
             <ArrowLeft size={16} /> Back
           </Button>
