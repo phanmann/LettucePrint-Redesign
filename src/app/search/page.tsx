@@ -21,6 +21,8 @@ const allProducts = [
   { label: 'Custom Packaging', href: '/services/packaging/custom-packaging', tags: ['packaging', 'custom', 'boxes'] },
   { label: 'Banners', href: '/services/signage/banners', tags: ['banners', 'signage', 'large format'] },
   { label: 'Double-Sided Banners', href: '/services/signage/banners/double-sided-banner', tags: ['banners', 'double-sided', 'blockout', 'pole', 'signage'] },
+  { label: 'Retractable Banners', href: '/services/signage/banners/retractable-standard', tags: ['banners', 'retractable', 'pull-up', 'signage', 'events'] },
+  { label: 'X-Stand Banners', href: '/services/signage/banners/x-stand-24x63', tags: ['banners', 'x-stand', 'x-banner', 'signage', 'events'] },
   { label: 'Backdrops', href: '/services/signage/backdrops', tags: ['backdrops', 'signage', 'large format', 'events'] },
   { label: 'Screenprint', href: '/services/apparel/screenprint', tags: ['screen print', 'apparel', 't-shirts', 'clothing'] },
   { label: 'Embroidery', href: '/services/apparel/embroidery', tags: ['embroidery', 'apparel', 'hats', 'clothing'] },
