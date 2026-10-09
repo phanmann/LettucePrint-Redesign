@@ -6,6 +6,7 @@ import Footer from '@/components/layout/Footer'
 import Button from '@/components/ui/Button'
 import QuoteForm from '@/components/quote/QuoteForm'
 import EmbroideryQuoteForm from '@/components/quote/EmbroideryQuoteForm'
+import DtgQuoteForm from '@/components/quote/DtgQuoteForm'
 
 type ApparelService = {
   slug: string
@@ -105,12 +106,14 @@ export default async function ApparelServicePage({ params }: { params: Promise<{
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
               <h2 className="text-h2 font-semibold text-gray-900 mb-4">Ready to price it?</h2>
-              <p className="text-body text-gray-500">{service.slug === 'embroidery' ? 'Tell us about your garments, embroidery placements, artwork, and in-hands date. We’ll review the details and prepare a quote.' : 'Send garment type, quantity, print locations, artwork, and deadline. We’ll recommend the cleanest production route.'}</p>
+              <p className="text-body text-gray-500">{service.slug === 'embroidery' ? 'Tell us about your garments, embroidery placements, artwork, and in-hands date. We’ll review the details and prepare a quote.' : service.slug === 'dtg' ? 'Tell us about your garments, print placements, artwork, and in-hands date. We’ll review the details and prepare a quote.' : 'Send garment type, quantity, print locations, artwork, and deadline. We’ll recommend the cleanest production route.'}</p>
             </div>
             {service.slug === 'screenprint' ? (
               <QuoteForm initialValues={{ service: 'Screen Printing', projectDetails: {} }} lockService />
             ) : service.slug === 'embroidery' ? (
               <EmbroideryQuoteForm />
+            ) : service.slug === 'dtg' ? (
+              <DtgQuoteForm />
             ) : (
               <div className="text-center"><Link href="/get-quote"><Button size="lg">Request a Quote</Button></Link></div>
             )}
