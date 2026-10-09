@@ -75,10 +75,12 @@ function CtaBlock({
   onClick,
   displayPrice,
   isRush,
+  quoteShipping = false,
 }: {
   onClick: () => void
   displayPrice: number | null
   isRush: boolean
+  quoteShipping?: boolean
 }) {
   return (
     <>
@@ -107,7 +109,7 @@ function CtaBlock({
           View Cart
         </Link>
       </div>
-      <p className="text-xs text-gray-400 text-center mt-3">Upload artwork · Proof before production · Shipping at checkout</p>
+      <p className="text-xs text-gray-400 text-center mt-3">Upload artwork · Proof before production · {quoteShipping ? 'UPS shipping quoted to your address' : 'Shipping at checkout'}</p>
       <p className="text-xs text-center mt-2">
         <span className="text-gray-500">Need rush? Call us: </span>
         <a href="tel:3476030557" className="font-semibold text-lp-green hover:underline">347.603.0557</a>
@@ -398,6 +400,7 @@ export default function ProductOrderPage({
                   <CtaBlock
                     onClick={handleAddToCart}
                     displayPrice={displayPrice}
+                    quoteShipping={backdrop}
                     isRush={effectiveIsRush}
                   />
                 </div>
@@ -419,7 +422,7 @@ export default function ProductOrderPage({
                 )}
                 <h1 className="text-h1 font-semibold text-gray-900 mb-4">{name}</h1>
                 <p className="text-body-lg text-gray-600 leading-relaxed">{tagline}</p>
-                {backdrop && <p className="mt-4 text-sm text-gray-600">Ships direct to you via UPS. Shipping address required; UPS rate calculated at checkout. Shipping is always charged. Standard: production 3 business days after proof approval + UPS transit. Rush: next-day production +40% including add-ons; proof approved before noon ET; expedited shipping required.</p>}
+                {backdrop && <p className="mt-4 text-sm text-gray-600">Ships direct to you via UPS. Shipping address required; we confirm the UPS rate with your quote. Shipping is always charged. Standard: production 3 business days after proof approval + UPS transit. Rush: next-day production +40% including add-ons; proof approved before noon ET; expedited shipping required.</p>}
               </div>
 
               {/* Image gallery */}
@@ -456,6 +459,7 @@ export default function ProductOrderPage({
                     <CtaBlock
                       onClick={handleAddToCart}
                       displayPrice={displayPrice}
+                    quoteShipping={backdrop}
                       isRush={effectiveIsRush}
                     />
                   </div>
