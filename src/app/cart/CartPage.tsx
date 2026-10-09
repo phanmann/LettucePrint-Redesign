@@ -283,24 +283,26 @@ export default function CartPage() {
 
   const subtotalCents = items.reduce((sum, i) => sum + i.totalCents, 0)
   const subtotalFormatted = `$${(subtotalCents / 100).toFixed(2)}`
-  // Banners ship by UPS quote until destination-rated shipping is connected,
-  // so carts with banners go to a prefilled quote request instead of Stripe.
-  const bannerItems = items.filter(i => i.bannerConfiguration)
-  const bannerQuoteHref = `/get-quote?${new URLSearchParams({
+  // Banners and backdrops require a paid UPS quote until live rates are connected.
+  const quoteItems = items.filter(i => i.bannerConfiguration || i.productPath?.startsWith('/services/signage/backdrops/'))
+  const hasBanners = quoteItems.some(i => i.bannerConfiguration)
+  const hasBackdrops = quoteItems.some(i => i.productPath?.startsWith('/services/signage/backdrops/'))
+  const quoteProduct = hasBanners && hasBackdrops ? 'banners-backdrops' : hasBackdrops ? 'backdrops' : 'banners'
+  const quoteLabel = hasBanners && hasBackdrops ? 'banners and backdrops' : hasBackdrops ? 'backdrops' : 'banners'
+  const shippingQuoteHref = `/get-quote?${new URLSearchParams({
     service: 'signage',
-    product: 'banners',
-    size: bannerItems.map(i => i.size).join('; '),
-    qty: bannerItems.map(i => String(i.qty)).join('; '),
-    details: bannerItems
+    product: quoteProduct,
+    size: quoteItems.map(i => i.size).join('; '),
+    qty: quoteItems.map(i => String(i.qty)).join('; '),
+    details: quoteItems
       .map(i => [i.product, i.size, i.material, i.finish, `Qty ${i.qty}`, i.rush, `${i.totalFormatted} before shipping`].filter(Boolean).join(' · '))
       .join('\n'),
   }).toString()}`
-  const hasBackdrops = items.some(i => i.productPath?.startsWith('/services/signage/backdrops/'))
   const missingArtwork = items.filter(i => !i.artworkUrl && i.configuration?.Package !== 'Hardware only (frame, no print)')
 
   const handleCheckout = async () => {
-    if (items.some(item => item.productPath.startsWith('/services/signage/backdrops/'))) {
-      setCheckoutError('Backdrop checkout is awaiting destination-based UPS rates. Please contact us for a shipping quote.')
+    if (quoteItems.length > 0) {
+      setCheckoutError('Please use the quote request to confirm paid UPS shipping to your address.')
       return
     }
     if (missingArtwork.length > 0) return
@@ -394,7 +396,7 @@ export default function CartPage() {
             <div className="border-t border-gray-100 pt-4 mb-2">
               <div className="flex justify-between text-sm text-gray-500">
                 <span>Shipping</span>
-                <span className="italic">{bannerItems.length > 0 ? 'UPS, quoted to your address' : 'Calculated at checkout'}</span>
+                <span className="italic">{quoteItems.length > 0 ? 'UPS, quoted to your address' : 'Calculated at checkout'}</span>
               </div>
             </div>
 
@@ -403,22 +405,22 @@ export default function CartPage() {
               <span>{subtotalFormatted}</span>
             </div>
 
-            {bannerItems.length > 0 ? (
+            {quoteItems.length > 0 ? (
               <>
                 <div className="flex items-start gap-2 bg-gray-50 border border-gray-200 rounded-lg p-3 mb-4 text-xs text-gray-700">
                   <AlertCircle size={14} className="flex-shrink-0 mt-0.5" />
                   <span>
-                    Banners ship by UPS to your address, so we confirm shipping with a quick quote. Your banner configuration is filled in for you.
-                    {bannerItems.length < items.length && ' To pay for your other items now, remove the banners from your cart.'}
+                    Your {quoteLabel} ship direct to your address via UPS. Shipping is always charged. Your configuration is filled in; we will confirm shipping and send a final quote.
+                    {quoteItems.length < items.length && ' To pay for your other items now, remove the quoted signage items from your cart.'}
                   </span>
                 </div>
-                <Link href={bannerQuoteHref}>
+                <Link href={shippingQuoteHref}>
                   <Button
                     size="lg"
                     className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white"
                   >
                     <span className="flex items-center justify-center gap-2">
-                      Request a quote for your banners <ArrowRight size={16} />
+                      Request a quote for your {quoteLabel} <ArrowRight size={16} />
                     </span>
                   </Button>
                 </Link>
@@ -426,7 +428,6 @@ export default function CartPage() {
               </>
             ) : (
             <>
-            {hasBackdrops && <p className="text-sm text-amber-800 bg-amber-50 p-3 rounded-lg mb-4">Backdrop payment is not yet available: destination-based UPS rates must be connected. Shipping is always charged; contact us for a shipping quote.</p>}
             {/* Missing artwork warning */}
             {missingArtwork.length > 0 && (
               <div className="flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4 text-xs text-amber-700">
@@ -443,7 +444,7 @@ export default function CartPage() {
 
             <Button
               onClick={handleCheckout}
-              disabled={hasBackdrops || missingArtwork.length > 0 || checkingOut}
+              disabled={missingArtwork.length > 0 || checkingOut}
               size="lg"
               className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white disabled:opacity-50 disabled:cursor-not-allowed"
             >

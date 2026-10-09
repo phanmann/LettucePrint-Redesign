@@ -17,6 +17,8 @@ export default async function GetQuotePage({ searchParams }: GetQuotePageProps) 
   const params = await searchParams
   const isRollLabelHelp = params.service === 'stickers-labels' && params.product === 'roll-labels'
   const isBannerCartQuote = params.service === 'signage' && params.product === 'banners'
+  const isBackdropCartQuote = params.service === 'signage' && (params.product === 'backdrops' || params.product === 'banners-backdrops')
+  const quoteLabel = params.product === 'banners-backdrops' ? 'Banners and backdrops' : isBackdropCartQuote ? 'Backdrops' : 'Banners'
   const param = (key: string, max: number) => {
     const value = params[key]
     return (Array.isArray(value) ? value[0] : value ?? '').slice(0, max)
@@ -30,17 +32,17 @@ export default async function GetQuotePage({ searchParams }: GetQuotePageProps) 
         },
         contextLabel: 'Custom roll-label help is preselected. Continue to add your size and quantity.',
       }
-    : isBannerCartQuote
+    : isBannerCartQuote || isBackdropCartQuote
       ? {
           service: 'Signage & Displays' as const,
           projectDetails: {
-            signageType: 'Banner',
+            signageType: isBackdropCartQuote ? (params.product === 'banners-backdrops' ? 'Other' : 'Backdrop') : 'Banner',
             size: param('size', 200),
             quantity: param('qty', 50),
             details: param('details', 2000),
           },
-          contextTitle: 'Banners selected.',
-          contextLabel: 'Your banner configuration from the cart is filled in. We’ll confirm UPS shipping to your address and send a final quote.',
+          contextTitle: quoteLabel + ' selected.',
+          contextLabel: 'Your configuration from the cart is filled in. Shipping is always charged; we’ll confirm UPS shipping to your address and send a final quote.',
         }
       : undefined
   return (

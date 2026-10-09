@@ -86,7 +86,7 @@ function getProjectFields(service: ServiceType): {
       ]
     case 'Signage & Displays':
       return [
-        { key: 'signageType', label: 'Type of signage', type: 'select',   options: ['Banner', 'Foam board', 'Retractable display', 'Window graphic', 'Step & repeat', 'Other'], required: true },
+        { key: 'signageType', label: 'Type of signage', type: 'select',   options: ['Banner', 'Backdrop', 'Foam board', 'Retractable display', 'Window graphic', 'Step & repeat', 'Other'], required: true },
         { key: 'size',        label: 'Size',            type: 'text',     placeholder: 'e.g. 4ft × 8ft', required: true },
         { key: 'quantity',    label: 'Quantity',        type: 'text',     placeholder: 'e.g. 2', required: true },
         { key: 'details',     label: 'Anything else',   type: 'textarea', placeholder: 'Indoor/outdoor, mounting, double-sided…' },
