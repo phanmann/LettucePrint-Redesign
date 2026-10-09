@@ -283,7 +283,6 @@ export default function CartPage() {
 
   const subtotalCents = items.reduce((sum, i) => sum + i.totalCents, 0)
   const subtotalFormatted = `$${(subtotalCents / 100).toFixed(2)}`
-  const missingArtwork = items.filter(i => !i.artworkUrl)
   // Banners ship by UPS quote until destination-rated shipping is connected,
   // so carts with banners go to a prefilled quote request instead of Stripe.
   const bannerItems = items.filter(i => i.bannerConfiguration)
@@ -296,8 +295,14 @@ export default function CartPage() {
       .map(i => [i.product, i.size, i.material, i.finish, `Qty ${i.qty}`, i.rush, `${i.totalFormatted} before shipping`].filter(Boolean).join(' · '))
       .join('\n'),
   }).toString()}`
+  const hasBackdrops = items.some(i => i.productPath?.startsWith('/services/signage/backdrops/'))
+  const missingArtwork = items.filter(i => !i.artworkUrl && i.configuration?.Package !== 'Hardware only (frame, no print)')
 
   const handleCheckout = async () => {
+    if (items.some(item => item.productPath.startsWith('/services/signage/backdrops/'))) {
+      setCheckoutError('Backdrop checkout is awaiting destination-based UPS rates. Please contact us for a shipping quote.')
+      return
+    }
     if (missingArtwork.length > 0) return
     setCheckingOut(true)
     setCheckoutError(null)
@@ -421,6 +426,7 @@ export default function CartPage() {
               </>
             ) : (
             <>
+            {hasBackdrops && <p className="text-sm text-amber-800 bg-amber-50 p-3 rounded-lg mb-4">Backdrop payment is not yet available: destination-based UPS rates must be connected. Shipping is always charged; contact us for a shipping quote.</p>}
             {/* Missing artwork warning */}
             {missingArtwork.length > 0 && (
               <div className="flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4 text-xs text-amber-700">
@@ -437,7 +443,7 @@ export default function CartPage() {
 
             <Button
               onClick={handleCheckout}
-              disabled={missingArtwork.length > 0 || checkingOut}
+              disabled={hasBackdrops || missingArtwork.length > 0 || checkingOut}
               size="lg"
               className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white disabled:opacity-50 disabled:cursor-not-allowed"
             >

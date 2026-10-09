@@ -11,28 +11,28 @@ import { motion, AnimatePresence } from 'framer-motion'
 const CATEGORIES = [
   {
     id: 'step-repeat',
-    label: 'Step & Repeat Backdrops',
+    label: 'Premium Step and Repeat',
     description: 'The classic branded photo backdrop — tiled logos on fabric or vinyl for red carpets, press walls, events, and activations.',
     products: [
       {
         id: 'sr-8x8',
         href: '/services/signage/backdrops/step-repeat-8x8',
-        name: 'Step & Repeat Backdrop',
+        name: 'Premium Step and Repeat',
         subtitle: '8ft x 8ft',
-        description: 'Standard step & repeat size for most events. Full-color dye-sublimation on wrinkle-resistant fabric with aluminum frame system.',
-        features: ['Dye-sublimation fabric print', 'Wrinkle-resistant polyester', 'Aluminum frame included', 'Carry bag included', 'Tool-free assembly'],
-        turnaround: '5–7 business days',
+        description: 'Premium event backdrop with a luxury adjustable telescopic stand. Choose 13 oz vinyl or wrinkle-resistant Oxford fabric; our team checks every proof.',
+        features: ['13 oz vinyl or Oxford fabric', 'Wrinkle-resistant fabric option', 'Luxury adjustable telescopic stand', 'Team-reviewed proof', 'Kit, graphic or hardware only'],
+        turnaround: '3 business days after proof + UPS transit',
         color: '#E8F5F1',
         image: '/images/products/backdrops/step-repeat.jpg',
       },
       {
         id: 'sr-10x8',
         href: '/services/signage/backdrops/step-repeat-10x8',
-        name: 'Step & Repeat Backdrop',
+        name: 'Premium Step and Repeat',
         subtitle: '10ft x 8ft',
         description: 'Wider format for larger press walls, red carpets, and branded activations with more visual real estate.',
-        features: ['Dye-sublimation fabric print', 'Wrinkle-resistant polyester', 'Aluminum frame included', 'Carry bag included', 'Tool-free assembly'],
-        turnaround: '5–7 business days',
+        features: ['13 oz vinyl or Oxford fabric', 'Wrinkle-resistant fabric option', 'Luxury adjustable telescopic stand', 'Team-reviewed proof', 'Kit, graphic or hardware only'],
+        turnaround: '3 business days after proof + UPS transit',
         color: '#F5F0E8',
         image: '/images/products/backdrops/step-repeat.jpg',
       },
@@ -50,7 +50,7 @@ const CATEGORIES = [
         subtitle: '8ft x 8ft',
         description: 'Stretch-fit fabric graphic slides over the aluminum extrusion frame for a taut, seamless display. Clean and professional.',
         features: ['Stretch dye-sublimation fabric', 'Pillow-case edge fit', 'Aluminum extrusion frame', 'No visible hardware', 'Carry bag included'],
-        turnaround: '5–7 business days',
+        turnaround: '3 business days after proof + UPS transit',
         color: '#E8F0F5',
         image: '/images/products/backdrops/seg-lightbox.jpg',
       },
@@ -61,7 +61,7 @@ const CATEGORIES = [
         subtitle: '10ft x 8ft',
         description: 'Wider Eurofit configuration for larger event footprints — same seamless finish, more coverage.',
         features: ['Stretch dye-sublimation fabric', 'Pillow-case edge fit', 'Aluminum extrusion frame', 'No visible hardware', 'Carry bag included'],
-        turnaround: '5–7 business days',
+        turnaround: '3 business days after proof + UPS transit',
         color: '#F0E8F5',
         image: '/images/products/backdrops/seg-lightbox.jpg',
       },
@@ -70,7 +70,7 @@ const CATEGORIES = [
   {
     id: 'popup',
     label: 'Pop Up Displays',
-    description: 'Curved or straight pop-up frame systems with full-color fabric or graphic panels — fast setup, big presence.',
+    description: 'Straight or wrap pop-up frame systems with dye-sublimated fabric — fast setup, big presence.',
     products: [
       {
         id: 'popup-8x8',
@@ -78,8 +78,8 @@ const CATEGORIES = [
         name: 'Pop Up Display',
         subtitle: '8ft x 8ft',
         description: 'Compact pop-up backdrop ideal for smaller booths, photo ops, and press setups. Collapses into a carry case in minutes.',
-        features: ['Full-color fabric or vinyl graphic', 'Spring-loaded frame', 'Collapses to carry case', 'Reusable graphic panels', 'Setup under 10 minutes'],
-        turnaround: '5–7 business days',
+        features: ['Dye-sublimated fabric graphic', 'Spring-loaded frame', 'Collapses to carry case', 'Reusable graphic panels', 'Setup under 10 minutes'],
+        turnaround: '3 business days after proof + UPS transit',
         color: '#E8F5EF',
         image: '/images/products/backdrops/popup.jpg',
       },
@@ -89,8 +89,8 @@ const CATEGORIES = [
         name: 'Pop Up Display',
         subtitle: '10ft x 8ft',
         description: 'Mid-size pop-up for standard trade show booths and event backdrops. Maximum visual impact with minimal setup time.',
-        features: ['Full-color fabric or vinyl graphic', 'Spring-loaded frame', 'Collapses to carry case', 'Reusable graphic panels', 'Setup under 10 minutes'],
-        turnaround: '5–7 business days',
+        features: ['Dye-sublimated fabric graphic', 'Spring-loaded frame', 'Collapses to carry case', 'Reusable graphic panels', 'Setup under 10 minutes'],
+        turnaround: '3 business days after proof + UPS transit',
         color: '#F5E8E8',
         image: '/images/products/backdrops/popup.jpg',
       },
@@ -100,8 +100,8 @@ const CATEGORIES = [
         name: 'Pop Up Display',
         subtitle: '20ft x 8ft',
         description: 'Full-width trade show wall — commands the back of any 20-foot booth. Multiple frame sections connect seamlessly.',
-        features: ['Full-color fabric or vinyl graphic', 'Multi-section frame system', 'Collapses to carry cases', 'Continuous seamless graphic', 'Setup under 20 minutes'],
-        turnaround: '7–10 business days',
+        features: ['Dye-sublimated fabric graphic', 'Multi-section frame system', 'Collapses to carry cases', 'Continuous seamless graphic', 'Setup under 20 minutes'],
+        turnaround: '3 business days after proof + UPS transit',
         color: '#E8F5F5',
         image: '/images/products/backdrops/popup.jpg',
       },
@@ -119,7 +119,7 @@ const CATEGORIES = [
         subtitle: '10ft x 8ft',
         description: 'SEG fabric graphic with a silicone bead edge pressed into an aluminum frame channel. Zero hardware visible, perfectly flat print.',
         features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Aluminum extrusion frame', 'Tool-free graphic swap', 'Carry bag included'],
-        turnaround: '7–10 business days',
+        turnaround: '3 business days after proof + UPS transit',
         color: '#F0E8F5',
         image: '/images/products/backdrops/seg-lightbox.jpg',
       },
@@ -130,7 +130,7 @@ const CATEGORIES = [
         subtitle: '8ft x 10ft',
         description: 'Taller SEG configuration — great for double-deck activations, stage backdrops, and high-ceiling venues.',
         features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Aluminum extrusion frame', 'Tool-free graphic swap', 'Carry bag included'],
-        turnaround: '7–10 business days',
+        turnaround: '3 business days after proof + UPS transit',
         color: '#E8F0F5',
         image: '/images/products/backdrops/seg-lightbox.jpg',
       },
@@ -141,7 +141,7 @@ const CATEGORIES = [
         subtitle: '20ft x 8ft',
         description: 'Full 20-foot SEG wall for large activations, keynote stages, and trade show island booths. Maximum presence, seamless execution.',
         features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Multi-section aluminum frame', 'Continuous seamless graphic', 'Carry bags included'],
-        turnaround: '7–10 business days',
+        turnaround: '3 business days after proof + UPS transit',
         color: '#E8F5F1',
         image: '/images/products/backdrops/seg-lightbox.jpg',
       },
@@ -165,7 +165,7 @@ export default function BackdropsPage() {
               Backdrops that set the scene.
             </h1>
             <p className="text-body-lg text-gray-500 max-w-xl mb-8">
-              Step & repeats, Eurofit fabric walls, pop-up displays, and SEG stands — full-color backdrops for events, trade shows, and brand activations.
+              Premium Step and Repeat, Eurofit fabric walls, pop-up displays, and SEG stands — full-color backdrops for events, trade shows, and brand activations.
             </p>
             <div className="flex flex-wrap gap-2">
               <button onClick={() => setActiveCategory('all')} className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-150 ${activeCategory === 'all' ? 'bg-lp-green text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>All Backdrops</button>
@@ -199,7 +199,7 @@ export default function BackdropsPage() {
         <section className="py-16 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-h2 font-semibold text-gray-900 mb-4">Got an event coming up?</h2>
-            <p className="text-body text-gray-500 mb-8">Tell us the venue, setup, and vibe — we'll recommend the right backdrop and make sure it arrives on time.</p>
+            <p className="text-body text-gray-500 mb-8">Tell us the venue, setup, and vibe — we&apos;ll recommend the right backdrop and make sure it arrives on time.</p>
             <Link href="/get-quote"><Button size="lg">Talk to Us</Button></Link>
           </div>
         </section>

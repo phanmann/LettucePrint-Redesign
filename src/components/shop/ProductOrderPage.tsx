@@ -16,6 +16,7 @@ import { useCart } from '@/context/CartContext'
 
 export interface OptionGroup {
   label: string
+  packages?: string[]
   options: { id: string; label: string; description: string; badge?: string }[]
 }
 
@@ -33,6 +34,7 @@ export interface PricingRule {
 
 export interface ProductOrderPageProps {
   bannerKind?: BannerKind
+  backdrop?: boolean
   name: string
   tagline: string
   breadcrumb: { label: string; href: string }[]
@@ -152,6 +154,7 @@ function ConfiguratorOptions({
           <p className={sectionLabel}>Quantity</p>
           <input
             type="number"
+            aria-label="Quantity"
             min={1}
             value={quantity}
             onChange={e => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
@@ -170,6 +173,11 @@ function ConfiguratorOptions({
               {group.options.map(opt => (
                 <label
                   key={opt.id}
+                  role="radio"
+                  aria-label={opt.label}
+                  aria-checked={selections[group.label] === opt.id}
+                  tabIndex={0}
+                  onKeyDown={e => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); setSelections({ ...selections, [group.label]: opt.id }) } }}
                   className={radioRow(selections[group.label] === opt.id)}
                   onClick={() => setSelections({ ...selections, [group.label]: opt.id })}
                 >
@@ -216,7 +224,7 @@ function ConfiguratorOptions({
             ))}
           </select>
           {hasRush && (
-            <label className={`mt-2 ${radioRow(isRush)}`} onClick={() => setIsRush(!isRush)}>
+            <label role="checkbox" aria-checked={isRush} tabIndex={0} onKeyDown={e => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); setIsRush(!isRush) } }} className={`mt-2 ${radioRow(isRush)}`} onClick={() => setIsRush(!isRush)}>
               <div className={radioCircle(isRush)} />
               <div className="flex-1">
                 <div className="flex items-center gap-2">
@@ -239,7 +247,7 @@ function ConfiguratorOptions({
       {/* Single-unit rush toggle */}
       {pricingTable && pricingTable.length === 1 && hasRush && (
         <div className="mb-6">
-          <label className={`mb-3 ${radioRow(isRush)}`} onClick={() => setIsRush(!isRush)}>
+          <label role="checkbox" aria-checked={isRush} tabIndex={0} onKeyDown={e => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); setIsRush(!isRush) } }} className={`mb-3 ${radioRow(isRush)}`} onClick={() => setIsRush(!isRush)}>
             <div className={radioCircle(isRush)} />
             <div className="flex-1">
               <div className="flex items-center gap-2">
@@ -263,6 +271,7 @@ function ConfiguratorOptions({
 
 // ─── Main page ────────────────────────────────────────────────────────────────
 export default function ProductOrderPage({
+  backdrop = false,
   name,
   tagline,
   breadcrumb,
@@ -293,6 +302,8 @@ export default function ProductOrderPage({
   const [isRush, setIsRush] = useState(false)
   const [quantity, setQuantity] = useState(1)
 
+  const visibleGroups = optionGroups.filter(g => !g.packages || g.packages.includes(selections.Package))
+
   const matchedPricingRule = pricingRules?.find(rule =>
     Object.entries(rule.selections).every(([group, option]) => selections[group] === option)
   )
@@ -300,11 +311,13 @@ export default function ProductOrderPage({
   const activeRowIdx = Math.min(selectedRowIdx, Math.max((activePricingTable?.length ?? 1) - 1, 0))
   const currentRow = activePricingTable?.[activeRowIdx]
   const effectiveIsRush = isRush && Boolean(currentRow?.rushPrice)
-  const displayPrice = currentRow
+  const unitPrice = currentRow
     ? effectiveIsRush && currentRow.rushPrice ? currentRow.rushPrice : currentRow.standardPrice
     : null
 
-  const selectedOptionLabels = optionGroups.map(group => ({
+  const displayPrice = unitPrice == null ? null : Math.round(unitPrice * 100) * (backdrop ? quantity : 1) / 100
+
+  const selectedOptionLabels = visibleGroups.map(group => ({
     group: group.label,
     label: group.options.find(option => option.id === selections[group.label])?.label ?? selections[group.label],
   }))
@@ -326,10 +339,11 @@ export default function ProductOrderPage({
 
     addItem({
       product: name,
-      size,
+      size: backdrop ? specs.find(s => s.label === 'Size')?.value ?? size : size,
+      ...(backdrop ? { configuration: Object.fromEntries(selectedOptionLabels.map(o => [o.group, o.label])), unitPriceCents: Math.round((unitPrice ?? 0) * 100) } : {}),
       qty: itemQty,
       material,
-      finish,
+      finish: backdrop ? selectedOptionLabels.map(o => o.group + ': ' + o.label).join(' · ') : finish,
       rush: effectiveIsRush ? '24hr' : 'standard',
       totalCents: Math.round(price * 100),
       totalFormatted: fmt(price),
@@ -368,7 +382,7 @@ export default function ProductOrderPage({
               <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24">
                 {bannerKind ? <BannerConfigurator kind={bannerKind} configuration={bannerConfiguration} onConfigurationChange={setBannerConfiguration} /> : <>
                 <ConfiguratorOptions
-                  optionGroups={optionGroups}
+                  optionGroups={visibleGroups}
                   pricingTable={activePricingTable}
                   showQuantity={showQuantity}
                   selections={selections}
@@ -405,6 +419,7 @@ export default function ProductOrderPage({
                 )}
                 <h1 className="text-h1 font-semibold text-gray-900 mb-4">{name}</h1>
                 <p className="text-body-lg text-gray-600 leading-relaxed">{tagline}</p>
+                {backdrop && <p className="mt-4 text-sm text-gray-600">Ships direct to you via UPS. Shipping address required; UPS rate calculated at checkout. Shipping is always charged. Standard: production 3 business days after proof approval + UPS transit. Rush: next-day production +40% including add-ons; proof approved before noon ET; expedited shipping required.</p>}
               </div>
 
               {/* Image gallery */}
@@ -425,7 +440,7 @@ export default function ProductOrderPage({
                 <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
                   {bannerKind ? <BannerConfigurator kind={bannerKind} configuration={bannerConfiguration} onConfigurationChange={setBannerConfiguration} /> : <>
                   <ConfiguratorOptions
-                    optionGroups={optionGroups}
+                    optionGroups={visibleGroups}
                     pricingTable={activePricingTable}
                     showQuantity={showQuantity}
                     selections={selections}

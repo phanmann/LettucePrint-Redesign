@@ -15,6 +15,8 @@ export interface CartItem {
   unwindEdge?: UnwindEdge
   unwindFace?: UnwindFace
   bannerConfiguration?: BannerConfiguration
+  configuration?: Record<string, string>
+  unitPriceCents?: number
   totalCents: number
   totalFormatted: string
   // Artwork — optional at add-to-cart time, required before checkout

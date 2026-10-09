@@ -144,6 +144,9 @@ export async function POST(req: NextRequest) {
     if (isCartCheckout(body)) {
       // ── Multi-item cart checkout ──────────────────────────────────────────
       const { items } = body
+      if (items.some(item => /^(Premium Step and Repeat|EuroFit Backdrop|Pop-Up Display|SEG Pop-Up Stand) /.test(item.product))) {
+        return NextResponse.json({ error: 'Backdrop checkout is awaiting destination-based UPS rates. Please contact us for a shipping quote.' }, { status: 409 })
+      }
 
       if (!items.length) {
         return NextResponse.json({ error: 'Cart is empty' }, { status: 400 })
