@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getResend } from '@/lib/resend'
 import { validateSignageDetails } from '@/lib/signage-quote'
+import { printLocationCount, validateScreenprintDetails } from '@/lib/screenprint-quote'
 import {
   PACKAGING_QUOTE_CONFIGS,
   type MylarBagsQuotePayload,
@@ -102,7 +103,7 @@ export async function POST(req: NextRequest) {
       await sendCustomPackagingInternalEmail(email => resend.emails.send(email), quote, incoming.files)
     } else if (internalEmail) {
       const result = await resend.emails.send(internalEmail)
-      if (signageQuote && result.error) {
+      if ((signageQuote || service === 'Screen Printing') && result.error) {
         return NextResponse.json({ error: 'Unable to deliver quote request.' }, { status: 502 })
       }
     }
@@ -138,10 +139,10 @@ export async function POST(req: NextRequest) {
         `,
       })
       } catch (error) {
-        if (!signageQuote) throw error
+        if (!signageQuote && service !== 'Screen Printing') throw error
         console.error('Quote confirmation delivery failed')
       }
-      if (signageQuote && confirmationResult?.error) console.error('Quote confirmation delivery failed')
+      if ((signageQuote || service === 'Screen Printing') && confirmationResult?.error) console.error('Quote confirmation delivery failed')
       if (consultation && confirmationResult?.error) {
         throw new Error(`Consultation confirmation email failed: ${confirmationResult.error.message}`)
       }
@@ -219,6 +220,11 @@ function parseQuote(input: unknown): ParsedQuote {
     return { success: false, errors: { request: 'Missing or invalid quote fields.' } }
   }
 
+  if (value.service === 'Screen Printing') {
+    const validationError = validateScreenprintDetails(projectDetails as Record<string, string>)
+    if (validationError) return { success: false, errors: { projectDetails: validationError } }
+  }
+
   return {
     success: true,
     data: {
@@ -265,11 +271,18 @@ function isCustomPackagingConsultation(quote: QuotePayload): quote is CustomPack
 }
 
 function legacyDetailRows(quote: LegacyQuotePayload): string {
+  const count = quote.service === 'Screen Printing' ? printLocationCount(quote.projectDetails.printLocations) : 0
   const details = Object.entries(quote.projectDetails)
-    .filter(([, value]) => value)
+    .filter(([key, value]) => value && (quote.service !== 'Screen Printing' || !/^location\d+(Name|Colors)$/.test(key)))
     .map(([key, value]) => row(formatKey(key), value))
     .join('')
-  return `${details}${row('Timeline', timelineLabel[quote.timeline] ?? quote.timeline)}`
+  const locations = Array.from({ length: count }, (_, index) => {
+    const number = index + 1
+    const name = quote.projectDetails[`location${number}Name`]?.trim()
+    const colors = quote.projectDetails[`location${number}Colors`]
+    return row(`Location ${number}${name ? ` (${name})` : ''} — ink colors`, colors === '5+' ? '5+ colors' : `${colors} ${colors === '1' ? 'color' : 'colors'}`)
+  }).join('')
+  return `${details}${locations}${row('Timeline', timelineLabel[quote.timeline] ?? quote.timeline)}`
 }
 
 function row(label: string, value: string, strong = false): string {

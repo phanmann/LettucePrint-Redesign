@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ArrowLeft, CheckCircle, Loader2, Tag, Package, PanelTop, Shirt, Expand, Sparkles, type LucideIcon } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import { INK_COLOR_OPTIONS, MAX_PRINT_LOCATIONS, printLocationCount, validateScreenprintDetails } from '@/lib/screenprint-quote'
 
 // ─── Types ─────────────────────────────────────────────────────────────────
 
@@ -92,8 +93,7 @@ function getProjectFields(service: ServiceType): {
       return [
         { key: 'garmentType',       label: 'Garment type',          type: 'select',   options: ['T-shirt', 'Hoodie', 'Long sleeve', 'Tote bag', 'Hat', 'Other'], required: true },
         { key: 'quantity',          label: 'Quantity',              type: 'text',     placeholder: 'e.g. 48', required: true },
-        { key: 'colors',            label: 'Number of ink colors',  type: 'select',   options: ['1', '2', '3', '4', '5+'], required: true },
-        { key: 'printLocations',    label: 'Print locations',       type: 'select',   options: ['1 (front or back)', '2 (front + back)', '3+', 'Not sure'], required: true },
+        { key: 'printLocations',    label: 'Print locations',       type: 'select',   options: Array.from({ length: MAX_PRINT_LOCATIONS }, (_, index) => String(index + 1)), required: true },
         { key: 'details',           label: 'Anything else',         type: 'textarea', placeholder: 'Garment brand preference, sizes breakdown, special inks…' },
       ]
     case 'Large Format':
@@ -163,7 +163,17 @@ export default function QuoteForm({ initialValues }: QuoteFormProps) {
   const goBack = () => { setDirection(-1); setStep(s => s - 1) }
 
   const setDetail = (key: string, value: string) =>
-    setForm(f => ({ ...f, projectDetails: { ...f.projectDetails, [key]: value } }))
+    setForm(f => {
+      const projectDetails = { ...f.projectDetails, [key]: value }
+      if (f.service === 'Screen Printing' && key === 'printLocations') {
+        const count = printLocationCount(value)
+        for (const detailKey of Object.keys(projectDetails)) {
+          const match = /^location(\d+)(Colors|Name)$/.exec(detailKey)
+          if (match && Number(match[1]) > count) delete projectDetails[detailKey]
+        }
+      }
+      return { ...f, projectDetails }
+    })
 
   const setContact = (key: string, value: string) =>
     setForm(f => ({ ...f, contact: { ...f.contact, [key]: value } }))
@@ -175,6 +185,7 @@ export default function QuoteForm({ initialValues }: QuoteFormProps) {
       if (!form.service) return false
       const fields = getProjectFields(form.service)
       return fields.filter(f => f.required).every(f => !!form.projectDetails[f.key]?.trim())
+        && (form.service !== 'Screen Printing' || !validateScreenprintDetails(form.projectDetails))
     }
     if (step === 2) return !!form.timeline
     if (step === 3) return !!(form.contact.name.trim() && form.contact.email.trim())
@@ -299,12 +310,13 @@ export default function QuoteForm({ initialValues }: QuoteFormProps) {
                 <div className="space-y-5">
                   {getProjectFields(form.service).map(field => (
                     <div key={field.key}>
-                      <label className="block text-small font-semibold text-gray-700 mb-2">
+                      <label htmlFor={`detail-${field.key}`} className="block text-small font-semibold text-gray-700 mb-2">
                         {field.label}
                         {field.required && <span className="text-lp-green ml-1">*</span>}
                       </label>
                       {field.type === 'textarea' ? (
                         <textarea
+                          id={`detail-${field.key}`}
                           rows={4}
                           value={form.projectDetails[field.key] ?? ''}
                           onChange={e => setDetail(field.key, e.target.value)}
@@ -313,6 +325,7 @@ export default function QuoteForm({ initialValues }: QuoteFormProps) {
                         />
                       ) : field.type === 'select' ? (
                         <select
+                          id={`detail-${field.key}`}
                           value={form.projectDetails[field.key] ?? ''}
                           onChange={e => setDetail(field.key, e.target.value)}
                           className="w-full px-4 py-3 rounded-input border border-gray-200 text-small focus:outline-none focus:border-lp-green focus:ring-2 focus:ring-lp-green/10 bg-white"
@@ -322,6 +335,7 @@ export default function QuoteForm({ initialValues }: QuoteFormProps) {
                         </select>
                       ) : (
                         <input
+                          id={`detail-${field.key}`}
                           type="text"
                           value={form.projectDetails[field.key] ?? ''}
                           onChange={e => setDetail(field.key, e.target.value)}
@@ -329,6 +343,39 @@ export default function QuoteForm({ initialValues }: QuoteFormProps) {
                           className="w-full px-4 py-3 rounded-input border border-gray-200 text-small focus:outline-none focus:border-lp-green focus:ring-2 focus:ring-lp-green/10 bg-white"
                         />
                       )}
+                      {form.service === 'Screen Printing' && field.key === 'printLocations' &&
+                        Array.from({ length: printLocationCount(form.projectDetails.printLocations) }, (_, index) => {
+                          const number = index + 1
+                          return (
+                            <fieldset key={number} className="mt-5 rounded-card border border-gray-200 bg-gray-50 p-4 sm:p-5">
+                              <legend className="px-1 text-small font-semibold text-gray-900">Location {number}</legend>
+                              <div className="space-y-4">
+                                <div>
+                                  <label htmlFor={`location${number}Name`} className="block text-small font-semibold text-gray-700 mb-2">
+                                    Placement <span className="text-gray-400 font-normal">(optional)</span>
+                                  </label>
+                                  <input id={`location${number}Name`} type="text" maxLength={100}
+                                    value={form.projectDetails[`location${number}Name`] ?? ''}
+                                    onChange={e => setDetail(`location${number}Name`, e.target.value)}
+                                    placeholder="e.g. Front chest, back, sleeve"
+                                    className="w-full px-4 py-3 rounded-input border border-gray-200 text-small focus:outline-none focus:border-lp-green focus:ring-2 focus:ring-lp-green/10 bg-white" />
+                                </div>
+                                <div>
+                                  <label htmlFor={`location${number}Colors`} className="block text-small font-semibold text-gray-700 mb-2">
+                                    Number of ink colors <span className="text-lp-green">*</span>
+                                  </label>
+                                  <select id={`location${number}Colors`} required
+                                    value={form.projectDetails[`location${number}Colors`] ?? ''}
+                                    onChange={e => setDetail(`location${number}Colors`, e.target.value)}
+                                    className="w-full px-4 py-3 rounded-input border border-gray-200 text-small focus:outline-none focus:border-lp-green focus:ring-2 focus:ring-lp-green/10 bg-white">
+                                    <option value="">Select…</option>
+                                    {INK_COLOR_OPTIONS.map(option => <option key={option} value={option}>{option}</option>)}
+                                  </select>
+                                </div>
+                              </div>
+                            </fieldset>
+                          )
+                        })}
                     </div>
                   ))}
                 </div>
