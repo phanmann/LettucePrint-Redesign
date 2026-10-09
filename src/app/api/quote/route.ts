@@ -20,6 +20,8 @@ import {
   validateConsultationFiles,
 } from '@/lib/custom-packaging-consultation-server'
 import { buildPackagingInternalEmail } from '@/lib/packaging-quote-email'
+import { validateEmbroideryQuote, type EmbroideryQuotePayload, MAX_EMBROIDERY_LOCATIONS } from '@/lib/embroidery-quote'
+import { buildEmbroideryInternalEmail } from '@/lib/embroidery-quote-server'
 
 interface LegacyQuotePayload {
   service: string
@@ -34,7 +36,7 @@ interface LegacyQuotePayload {
 }
 
 type SignageQuotePayload = LegacyQuotePayload & { formType: 'signage-booth'; quoteType?: undefined }
-type QuotePayload = CustomPackagingConsultationPayload | PackagingQuotePayload | SignageQuotePayload | (LegacyQuotePayload & { quoteType?: undefined })
+type QuotePayload = CustomPackagingConsultationPayload | PackagingQuotePayload | SignageQuotePayload | EmbroideryQuotePayload | (LegacyQuotePayload & { quoteType?: undefined })
 type ParsedQuote =
   | { success: true; data: QuotePayload }
   | { success: false; errors: CustomPackagingConsultationErrors | Record<string, string> }
@@ -62,12 +64,15 @@ export async function POST(req: NextRequest) {
     const service = quote.service
     const company = 'company' in contact ? contact.company : ''
     const signageQuote = 'formType' in quote && quote.formType === 'signage-booth'
-    const source = signageQuote ? '/services/signage/quote' : 'quoteType' in quote && quote.quoteType ? quote.source : '/get-quote'
+    const embroideryQuote = 'formType' in quote && quote.formType === 'embroidery'
+    const source = embroideryQuote ? '/services/apparel/embroidery' : signageQuote ? '/services/signage/quote' : 'quoteType' in quote && quote.quoteType ? quote.source : '/get-quote'
     const mylarQuote = !consultation && 'quoteType' in quote && quote.quoteType === 'mylar-bags'
-    const detailsRows = !consultation && !mylarQuote ? legacyDetailRows(quote as LegacyQuotePayload) : ''
+    const detailsRows = !consultation && !mylarQuote && !embroideryQuote ? legacyDetailRows(quote as LegacyQuotePayload) : ''
 
     const internalEmail = consultation
       ? null
+      : embroideryQuote
+        ? buildEmbroideryInternalEmail(quote as EmbroideryQuotePayload, incoming.files)
       : mylarQuote
         ? buildPackagingInternalEmail(quote as MylarBagsQuotePayload)
         : {
@@ -103,7 +108,7 @@ export async function POST(req: NextRequest) {
       await sendCustomPackagingInternalEmail(email => resend.emails.send(email), quote, incoming.files)
     } else if (internalEmail) {
       const result = await resend.emails.send(internalEmail)
-      if ((signageQuote || service === 'Screen Printing') && result.error) {
+      if ((signageQuote || embroideryQuote || service === 'Screen Printing') && result.error) {
         return NextResponse.json({ error: 'Unable to deliver quote request.' }, { status: 502 })
       }
     }
@@ -139,10 +144,10 @@ export async function POST(req: NextRequest) {
         `,
       })
       } catch (error) {
-        if (!signageQuote && service !== 'Screen Printing') throw error
+        if (!signageQuote && !embroideryQuote && service !== 'Screen Printing') throw error
         console.error('Quote confirmation delivery failed')
       }
-      if ((signageQuote || service === 'Screen Printing') && confirmationResult?.error) console.error('Quote confirmation delivery failed')
+      if ((signageQuote || embroideryQuote || service === 'Screen Printing') && confirmationResult?.error) console.error('Quote confirmation delivery failed')
       if (consultation && confirmationResult?.error) {
         throw new Error(`Consultation confirmation email failed: ${confirmationResult.error.message}`)
       }
@@ -168,14 +173,25 @@ async function parseIncomingQuote(req: NextRequest): Promise<{ parsed: ParsedQuo
   }
   const rawPayload = formData.get('payload')
   if (typeof rawPayload !== 'string') {
-    return { parsed: { success: false, errors: { request: 'Missing custom packaging payload.' } }, files: [] }
+    return { parsed: { success: false, errors: { request: 'Missing quote payload.' } }, files: [] }
   }
 
   let body: unknown
   try {
     body = JSON.parse(rawPayload)
   } catch {
-    return { parsed: { success: false, errors: { request: 'Invalid custom packaging payload.' } }, files: [] }
+    return { parsed: { success: false, errors: { request: 'Invalid quote payload.' } }, files: [] }
+  }
+  if (body && typeof body === 'object' && 'formType' in body && body.formType === 'embroidery') {
+    const parsed = validateEmbroideryQuote(body)
+    if (!parsed.success) return { parsed: { success: false, errors: { request: parsed.error } }, files: [] }
+    const rawFiles = formData.getAll('files')
+    if (rawFiles.some(item => !(item instanceof File)) || rawFiles.length !== parsed.data.artworkLocations.length) {
+      return { parsed: { success: false, errors: { files: 'Artwork files do not match embroidery locations.' } }, files: [] }
+    }
+    const uploadResult = await validateConsultationFiles(rawFiles as File[], { maxFiles: MAX_EMBROIDERY_LOCATIONS, maxFileBytes: 10 * 1024 * 1024, maxTotalBytes: 20 * 1024 * 1024 })
+    if (!uploadResult.success) return { parsed: { success: false, errors: { files: uploadResult.error } }, files: [] }
+    return { parsed, files: uploadResult.files }
   }
   const parsed = validateCustomPackagingConsultation(body)
   if (!parsed.success) return { parsed, files: [] }
@@ -192,6 +208,9 @@ async function parseIncomingQuote(req: NextRequest): Promise<{ parsed: ParsedQuo
 }
 
 function parseQuote(input: unknown): ParsedQuote {
+  if (input && typeof input === 'object' && 'formType' in input && (input as Record<string, unknown>).formType === 'embroidery') {
+    return { success: false, errors: { request: 'Embroidery artwork requests must use multipart form data.' } }
+  }
   if (input && typeof input === 'object' && 'formType' in input && (input as Record<string, unknown>).formType === 'signage-booth') {
     return parseSignageQuote(input as Record<string, unknown>)
   }

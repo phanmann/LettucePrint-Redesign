@@ -44,9 +44,9 @@ function matchesMagicBytes(mimeType: string, bytes: Uint8Array): boolean {
   return false
 }
 
-export async function validateConsultationFiles(files: File[]): Promise<ConsultationUploadResult> {
-  if (files.length > CUSTOM_PACKAGING_UPLOAD_LIMITS.maxFiles) {
-    return { success: false, error: `Upload up to ${CUSTOM_PACKAGING_UPLOAD_LIMITS.maxFiles} files.` }
+export async function validateConsultationFiles(files: File[], limits: { maxFiles: number; maxFileBytes: number; maxTotalBytes: number } = CUSTOM_PACKAGING_UPLOAD_LIMITS): Promise<ConsultationUploadResult> {
+  if (files.length > limits.maxFiles) {
+    return { success: false, error: `Upload up to ${limits.maxFiles} files.` }
   }
 
   let totalBytes = 0
@@ -55,11 +55,11 @@ export async function validateConsultationFiles(files: File[]): Promise<Consulta
     if (!MIME_TYPES.has(file.type)) {
       return { success: false, error: 'Files must be PDF, JPG, PNG, or WebP.' }
     }
-    if (file.size <= 0 || file.size > CUSTOM_PACKAGING_UPLOAD_LIMITS.maxFileBytes) {
+    if (file.size <= 0 || file.size > limits.maxFileBytes) {
       return { success: false, error: 'Each file must be larger than 0 bytes and no more than 10 MB.' }
     }
     totalBytes += file.size
-    if (totalBytes > CUSTOM_PACKAGING_UPLOAD_LIMITS.maxTotalBytes) {
+    if (totalBytes > limits.maxTotalBytes) {
       return { success: false, error: 'Combined uploads must be no more than 20 MB.' }
     }
     const bytes = new Uint8Array(await file.arrayBuffer())

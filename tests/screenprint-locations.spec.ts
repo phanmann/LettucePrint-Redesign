@@ -130,7 +130,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 
 }
 
 test('other apparel service keeps generic quote CTA', async ({ page }) => {
-  await page.goto('/services/apparel/embroidery')
+  await page.goto('/services/apparel/dtg')
   await expect(page.getByRole('link', { name: 'Request a Quote' })).toHaveAttribute('href', '/get-quote')
   await expect(page.getByRole('heading', { name: 'Tell us about the project' })).toHaveCount(0)
 })
