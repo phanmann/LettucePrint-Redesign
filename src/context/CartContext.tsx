@@ -45,7 +45,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addItem = useCallback((item: Omit<CartItem, 'id' | 'addedAt'>) => {
     const newItem: CartItem = {
       ...item,
-      id: crypto.randomUUID(),
+      // getRandomValues also works on private HTTP previews; randomUUID requires HTTPS.
+      id: typeof crypto.randomUUID === 'function' ? crypto.randomUUID() :
+        Array.from(crypto.getRandomValues(new Uint8Array(16)), byte => byte.toString(16).padStart(2, '0')).join(''),
       addedAt: Date.now(),
     }
     setItems(prev => [...prev, newItem])

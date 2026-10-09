@@ -27,6 +27,7 @@ const THUMBNAILS: Record<string, string> = {
   'Standard Postcards':          '/images/products/flyers/flyer-2.jpg',
   'Premium Postcards':           '/images/products/flyers/flyer-2.jpg',
   // Signage
+  'Double-Sided Banner': '/images/products/banners/double-sided-placeholder.svg',
   'Vinyl Banner':                '/images/products/banners/vinyl-banner.jpg',
   'Fabric Banner':               '/images/products/banners/fabric-banner.jpg',
   'Mesh Banner':                 '/images/products/banners/mesh-banner.jpg',
@@ -235,7 +236,7 @@ function CartItemRow({ item }: { item: CartItem }) {
             )}
             {item.rush !== 'standard' && (
               <span className="inline-block mt-1 text-xs bg-amber-50 text-amber-700 border border-amber-200 rounded px-2 py-0.5">
-                {item.rush === '48hr' ? '48-hour rush' : '24-hour rush'}
+                {item.bannerConfiguration ? item.rush : item.rush === '48hr' ? '48-hour rush' : '24-hour rush'}
               </span>
             )}
           </div>
@@ -283,6 +284,18 @@ export default function CartPage() {
   const subtotalCents = items.reduce((sum, i) => sum + i.totalCents, 0)
   const subtotalFormatted = `$${(subtotalCents / 100).toFixed(2)}`
   const missingArtwork = items.filter(i => !i.artworkUrl)
+  // Banners ship by UPS quote until destination-rated shipping is connected,
+  // so carts with banners go to a prefilled quote request instead of Stripe.
+  const bannerItems = items.filter(i => i.bannerConfiguration)
+  const bannerQuoteHref = `/get-quote?${new URLSearchParams({
+    service: 'signage',
+    product: 'banners',
+    size: bannerItems.map(i => i.size).join('; '),
+    qty: bannerItems.map(i => String(i.qty)).join('; '),
+    details: bannerItems
+      .map(i => [i.product, i.size, i.material, i.finish, `Qty ${i.qty}`, i.rush, `${i.totalFormatted} before shipping`].filter(Boolean).join(' · '))
+      .join('\n'),
+  }).toString()}`
 
   const handleCheckout = async () => {
     if (missingArtwork.length > 0) return
@@ -376,7 +389,7 @@ export default function CartPage() {
             <div className="border-t border-gray-100 pt-4 mb-2">
               <div className="flex justify-between text-sm text-gray-500">
                 <span>Shipping</span>
-                <span className="italic">Calculated at checkout</span>
+                <span className="italic">{bannerItems.length > 0 ? 'UPS, quoted to your address' : 'Calculated at checkout'}</span>
               </div>
             </div>
 
@@ -385,6 +398,29 @@ export default function CartPage() {
               <span>{subtotalFormatted}</span>
             </div>
 
+            {bannerItems.length > 0 ? (
+              <>
+                <div className="flex items-start gap-2 bg-gray-50 border border-gray-200 rounded-lg p-3 mb-4 text-xs text-gray-700">
+                  <AlertCircle size={14} className="flex-shrink-0 mt-0.5" />
+                  <span>
+                    Banners ship by UPS to your address, so we confirm shipping with a quick quote. Your banner configuration is filled in for you.
+                    {bannerItems.length < items.length && ' To pay for your other items now, remove the banners from your cart.'}
+                  </span>
+                </div>
+                <Link href={bannerQuoteHref}>
+                  <Button
+                    size="lg"
+                    className="w-full !bg-lp-green hover:!bg-lp-green-dark text-white"
+                  >
+                    <span className="flex items-center justify-center gap-2">
+                      Request a quote for your banners <ArrowRight size={16} />
+                    </span>
+                  </Button>
+                </Link>
+                <p className="text-xs text-gray-400 text-center mt-3">We reply within 1 business day</p>
+              </>
+            ) : (
+            <>
             {/* Missing artwork warning */}
             {missingArtwork.length > 0 && (
               <div className="flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4 text-xs text-amber-700">
@@ -417,6 +453,8 @@ export default function CartPage() {
             </Button>
 
             <p className="text-xs text-gray-400 text-center mt-3">Secure checkout via Stripe</p>
+            </>
+            )}
           </div>
         </div>
 

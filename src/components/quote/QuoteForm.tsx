@@ -20,6 +20,7 @@ export interface QuoteFormInitialValues {
   service: ServiceType
   projectDetails: Record<string, string>
   contextLabel?: string
+  contextTitle?: string
 }
 
 interface QuoteFormProps {
@@ -253,7 +254,7 @@ export default function QuoteForm({ initialValues, lockService = false }: QuoteF
 
       {initialValues?.contextLabel && form.service === initialValues.service && (
         <div className="mb-6 rounded-card border border-lp-green/30 bg-lp-green/5 px-4 py-3 text-small text-gray-700" role="status">
-          <span className="font-semibold text-lp-green">Roll labels selected.</span>{' '}
+          <span className="font-semibold text-lp-green">{initialValues.contextTitle ?? 'Roll labels selected.'}</span>{' '}
           {initialValues.contextLabel}
         </div>
       )}

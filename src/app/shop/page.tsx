@@ -114,6 +114,12 @@ const categories: Category[] = [
         features: ['Vinyl, mesh & fabric options', 'Retractable banner stands', 'Indoor & outdoor use', 'Fast turnaround'],
       },
       {
+        name: 'Double-Sided Banner',
+        href: '/services/signage/banners/double-sided-banner',
+        image: '/images/products/banners/double-sided-placeholder.svg',
+        features: ['18 oz blockout vinyl', 'Matte both sides', 'From $59', 'Placeholder illustration'],
+      },
+      {
         name: 'Backdrops & Step-Repeats',
         href: '/services/signage/backdrops',
         image: '/images/hero-cards/large-format.png',

@@ -1,3 +1,5 @@
+import { authoritativeBannerPrice } from '@/lib/banner-checkout'
+import type { BannerConfiguration } from '@/lib/banner-pricing'
 import { NextRequest, NextResponse } from 'next/server'
 import { getStripe } from '@/lib/stripe'
 import {
@@ -43,6 +45,7 @@ interface CartItemBody {
   applicationMethod?: LabelApplicationMethod
   unwindEdge?: UnwindEdge
   unwindFace?: UnwindFace
+  bannerConfiguration?: BannerConfiguration
   totalCents: number
   artworkUrl?: string
   artworkFilename?: string
@@ -146,6 +149,21 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Cart is empty' }, { status: 400 })
       }
 
+      // The current Stripe flow only has a fixed shipping rate, not a UPS quote.
+      // Fail closed for these banners until destination-rated UPS checkout exists.
+      // Do not silently charge the generic rate or make shipping free.
+      let containsBanner = false
+      for (const item of items) {
+        try {
+          if (authoritativeBannerPrice(item) !== null) containsBanner = true
+        } catch (error) {
+          throw new InvalidCheckoutConfigurationError(error instanceof Error ? error.message : 'Invalid banner configuration')
+        }
+      }
+      if (containsBanner) {
+        return NextResponse.json({ error: 'UPS shipping rates for banners are not available yet. Please request a quote to arrange shipping.', code: 'BANNER_UPS_UNAVAILABLE' }, { status: 503 })
+      }
+
       const lineItems = items.map((item) => {
         const secureStickerPrice = authoritativeStickerPrice(item)
         let secureRollLabelPrice: number | null
@@ -237,6 +255,10 @@ export async function POST(req: NextRequest) {
         size, quantity, material, finish, rush,
         productName, overridePriceCents, artworkUrl, artworkFilename,
       } = body
+
+      if (['Vinyl Banner', 'Double-Sided Banner'].includes(productName)) {
+        return NextResponse.json({ error: 'Please configure your banner and request a quote for UPS shipping.', code: 'BANNER_UPS_UNAVAILABLE' }, { status: 503 })
+      }
 
       if (!overridePriceCents) {
         return NextResponse.json({ error: 'overridePriceCents required' }, { status: 400 })

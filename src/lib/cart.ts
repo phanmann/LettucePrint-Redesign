@@ -1,5 +1,7 @@
 import type { LabelApplicationMethod, UnwindEdge, UnwindFace } from '@/lib/roll-label-direction'
 
+import type { BannerConfiguration } from '@/lib/banner-pricing'
+
 // Cart types shared across the app
 export interface CartItem {
   id: string           // uuid — stable across sessions
@@ -12,6 +14,7 @@ export interface CartItem {
   applicationMethod?: LabelApplicationMethod
   unwindEdge?: UnwindEdge
   unwindFace?: UnwindFace
+  bannerConfiguration?: BannerConfiguration
   totalCents: number
   totalFormatted: string
   // Artwork — optional at add-to-cart time, required before checkout

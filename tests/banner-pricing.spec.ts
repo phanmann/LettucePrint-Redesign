@@ -1,0 +1,63 @@
+import { expect, test } from '@playwright/test'
+
+for (const kind of ['vinyl', 'double-sided']) {
+  test(`${kind} live pricing, cart persistence and quote gates`, async ({ page }) => {
+    await page.goto(`/services/signage/banners/${kind}-banner`)
+    const form = page.locator('section[aria-label="Banner configurator"]:visible')
+    await expect(form.getByTestId('banner-total')).toHaveText(kind === 'vinyl' ? '$39.00' : '$59.00')
+    await form.getByLabel('Size preset (feet)').selectOption('4x8')
+    await expect(form.getByTestId('banner-total')).toHaveText(kind === 'vinyl' ? '$98.00' : '$189.00')
+    await form.getByLabel('Quantity', { exact: true }).fill('5')
+    await expect(form.getByTestId('banner-total')).toHaveText(kind === 'vinyl' ? '$441.00' : '$850.50')
+    await form.getByLabel('Grommets', { exact: true }).selectOption('12')
+    await form.getByLabel('Turnaround', { exact: true }).selectOption('rush')
+    await form.getByLabel('Wind slits', { exact: false }).check()
+    await expect(form.getByTestId('banner-total')).toHaveText(kind === 'vinyl' ? '$743.40' : '$1,316.70')
+    await form.getByRole('button', { name: 'Add to Cart', exact: true }).click()
+    await expect(form.getByRole('status')).toHaveText('Added to cart.')
+    const item = await page.evaluate(() => JSON.parse(localStorage.getItem('lp_cart_v3')!)[0])
+    expect(item.bannerConfiguration).toMatchObject({ width:48, height:96, quantity:5, grommets:'12', turnaround:'rush', windSlits:true })
+    expect(item.totalCents).toBe(kind === 'vinyl' ? 74340 : 131670)
+    await form.getByRole('link', { name: 'View Cart' }).click()
+    await expect(page.getByText(/Rush: next-day production after proof approval/)).toBeVisible()
+    await page.reload()
+    await expect(page.getByText(/48 × 96 in · Qty 5/)).toBeVisible()
+    await page.goto(`/services/signage/banners/${kind}-banner`)
+    await form.getByLabel('Width (inches)').fill('127')
+    await expect(form.getByRole('link', { name:'Request a quote', exact:true })).toBeVisible()
+    await expect(form.getByRole('button', { name:'Add to Cart', exact:true })).toHaveCount(0)
+    await form.getByLabel('Width (inches)').fill('24')
+    await form.getByLabel('Quantity', {exact:true}).fill('50')
+    await expect(form.getByRole('link', {name:'Request a quote',exact:true})).toBeVisible()
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
+  })
+}
+test('double-sided kit enforces width, pockets and included pocket price', async ({page}) => {
+  await page.goto('/services/signage/banners/double-sided-banner')
+  const form=page.locator('section[aria-label="Banner configurator"]:visible')
+  await form.getByLabel('Width (inches)').fill('18')
+  await form.getByLabel('Pole-mount kit', {exact:false}).check()
+  await expect(form.getByTestId('banner-total')).toHaveText('$178.00')
+  await expect(form.getByLabel('Pole pockets', {exact:true})).toHaveValue('instead')
+  await expect(form.getByLabel('Pocket size (top & bottom)')).toHaveValue('3')
+  await expect(form.getByLabel('Pocket size (top & bottom)')).toBeDisabled()
+  await expect(form.getByLabel('Edge finishing').locator('option[value="rope"]')).toHaveCount(0)
+  await form.getByLabel('Width (inches)').fill('37')
+  await expect(form.getByLabel('Pole-mount kit',{exact:false})).not.toBeChecked()
+  await expect(form.getByLabel('Pole-mount kit',{exact:false})).toBeDisabled()
+})
+test('new listing exists in banners, Shop All and navbar',async({page})=>{
+  for(const path of ['/services/signage/banners','/shop']){
+    await page.goto(path)
+    await expect(page.getByRole('heading',{name:'Double-Sided Banner',exact:true})).toBeVisible()
+    expect(await page.locator('a[href="/services/signage/banners/double-sided-banner"]').count()).toBeGreaterThan(0)
+  }
+})
+test('banner checkout refuses generic shipping and validates configuration',async({request})=>{
+  const c={kind:'vinyl',width:24,height:36,quantity:1,grommets:'24',pockets:'none',pocketSize:3,edge:'hem',windSlits:false,poleKit:false,turnaround:'standard'}
+  const response=await request.post('/api/checkout',{data:{items:[{product:'Vinyl Banner',qty:1,totalCents:1,bannerConfiguration:c}]}})
+  expect(response.status()).toBe(503)
+  expect((await response.json()).code).toBe('BANNER_UPS_UNAVAILABLE')
+  const bad=await request.post('/api/checkout',{data:{items:[{product:'Vinyl Banner',qty:50,totalCents:1,bannerConfiguration:{...c,quantity:50}}]}})
+  expect(bad.status()).toBe(400)
+})

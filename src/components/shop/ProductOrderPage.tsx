@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import BannerConfigurator from './BannerConfigurator'
+import { defaultBannerConfiguration, type BannerKind } from '@/lib/banner-pricing'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
@@ -30,6 +32,7 @@ export interface PricingRule {
 }
 
 export interface ProductOrderPageProps {
+  bannerKind?: BannerKind
   name: string
   tagline: string
   breadcrumb: { label: string; href: string }[]
@@ -276,7 +279,9 @@ export default function ProductOrderPage({
   showQuantity,
   images,
   galleryBackground,
+  bannerKind,
 }: ProductOrderPageProps) {
+  const [bannerConfiguration, setBannerConfiguration] = useState(() => defaultBannerConfiguration(bannerKind ?? 'vinyl'))
   const pathname = usePathname()
   const { addItem } = useCart()
 
@@ -361,6 +366,7 @@ export default function ProductOrderPage({
             {/* Right — Configurator panel: desktop only (hidden on mobile, rendered inline in left col) */}
             <div className="hidden lg:block lg:order-last">
               <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24">
+                {bannerKind ? <BannerConfigurator kind={bannerKind} configuration={bannerConfiguration} onConfigurationChange={setBannerConfiguration} /> : <>
                 <ConfiguratorOptions
                   optionGroups={optionGroups}
                   pricingTable={activePricingTable}
@@ -381,6 +387,7 @@ export default function ProductOrderPage({
                     isRush={effectiveIsRush}
                   />
                 </div>
+                </>}
               </div>
             </div>
 
@@ -416,6 +423,7 @@ export default function ProductOrderPage({
               {/* Mobile-only configurator — inline after gallery, hidden on desktop */}
               <div className="lg:hidden mb-8">
                 <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+                  {bannerKind ? <BannerConfigurator kind={bannerKind} configuration={bannerConfiguration} onConfigurationChange={setBannerConfiguration} /> : <>
                   <ConfiguratorOptions
                     optionGroups={optionGroups}
                     pricingTable={activePricingTable}
@@ -436,6 +444,7 @@ export default function ProductOrderPage({
                       isRush={effectiveIsRush}
                     />
                   </div>
+                  </>}
                 </div>
               </div>
 

@@ -82,10 +82,10 @@ test('brochure listing uses four distinct route-matched cards and exact links', 
 })
 
 for (const product of products) {
-  test(`${product.pageName ?? product.name} gallery and configurator smoke`, async ({ page }, testInfo) => {
+  test(`${('pageName' in product ? product.pageName : product.name)} gallery and configurator smoke`, async ({ page }, testInfo) => {
     const failures = collectPageFailures(page)
     await page.goto(product.path, { waitUntil: 'networkidle' })
-    await expect(page.getByRole('heading', { name: product.pageName ?? product.name, exact: true })).toBeVisible()
+    await expect(page.getByRole('heading', { name: ('pageName' in product ? product.pageName : product.name), exact: true })).toBeVisible()
 
     const thumbnails = page.locator('button[aria-label^="View "]')
     await expect(thumbnails).toHaveCount(product.galleryCount)
@@ -107,7 +107,7 @@ for (const product of products) {
     await page.locator('button:visible').filter({ hasText: 'Add to Cart' }).click()
     await page.locator('a:visible').filter({ hasText: 'View Cart' }).click()
     await expect(page).toHaveURL(/\/cart$/)
-    await expect(page.getByText(product.pageName ?? product.name, { exact: true }).first()).toBeVisible()
+    await expect(page.getByText(('pageName' in product ? product.pageName : product.name), { exact: true }).first()).toBeVisible()
     expect(failures).toEqual([])
   })
 }
