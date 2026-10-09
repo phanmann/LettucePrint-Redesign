@@ -282,7 +282,7 @@ export default function CartPage() {
   const [checkoutError, setCheckoutError] = useState<string | null>(null)
 
   const subtotalCents = items.reduce((sum, i) => sum + i.totalCents, 0)
-  const subtotalFormatted = `$${(subtotalCents / 100).toFixed(2)}`
+  const subtotalFormatted = `$${(subtotalCents / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
   // Banners and backdrops require a paid UPS quote until live rates are connected.
   const quoteItems = items.filter(i => i.bannerConfiguration || i.productPath?.startsWith('/services/signage/backdrops/'))
   const hasBanners = quoteItems.some(i => i.bannerConfiguration)

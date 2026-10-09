@@ -31,10 +31,9 @@ for(const [quantity,discount] of [[1,0],[2,.05],[4,.05],[5,.1],[9,.1],[10,.15],[
   assert.equal(p.discount,discount)
   assert.equal(p.totalCents,Math.round(49*quantity*(1-discount)*100))
 }
-assert.equal(calc({...base('vinyl'),turnaround:'economy'}).totalCents,3705)
+assert.ok(calc({...base('vinyl'),turnaround:'economy' as never}).quoteReason)
 assert.equal(calc({...base('vinyl'),turnaround:'rush'}).totalCents,6400)
 assert.equal(calc({...base('vinyl'),quantity:2,grommets:'12',turnaround:'rush'}).totalCents,13034)
-assert.equal(calc({...base('vinyl'),quantity:2,grommets:'12',turnaround:'economy'}).totalCents,8845)
 for (const patch of [{width:127},{width:120,height:121},{quantity:50},{quantity:1.5},{width:0},{width:NaN},{height:0},{quantity:Infinity}]) assert.ok(calc({...base('vinyl'),...patch}).quoteReason)
 assert.equal(calc({...base('vinyl'),width:120,height:120}).quoteReason,null)
 assert.equal(calc({...base('vinyl'),width:126}).quoteReason,null)

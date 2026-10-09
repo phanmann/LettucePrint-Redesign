@@ -167,10 +167,10 @@ export default async function OrderConfirmationPage({ searchParams }: PageProps)
                   { label: 'Material',   value: MATERIAL_LABELS[order.material] ?? order.material },
                   { label: 'Finish',     value: FINISH_LABELS[order.finish] ?? order.finish },
                   { label: 'Production', value: RUSH_LABELS[order.rush] ?? order.rush },
-                  { label: 'Subtotal',    value: `$${((order.amount - (order.shippingCost ?? 0)) / 100).toFixed(2)}` },
+                  { label: 'Subtotal',    value: `$${((order.amount - (order.shippingCost ?? 0)) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` },
                   ...(order.shippingMethod ? [{ label: 'Shipping', value: `${order.shippingMethod} — $${((order.shippingCost ?? 0) / 100).toFixed(2)}` }] : []),
                   ...(order.shippingAddress ? [{ label: 'Ship to', value: order.shippingName ? `${order.shippingName}, ${order.shippingAddress}` : order.shippingAddress }] : []),
-                  { label: 'Total paid', value: `$${(order.amount / 100).toFixed(2)}`, highlight: true },
+                  { label: 'Total paid', value: `$${(order.amount / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, highlight: true },
                 ].map(row => (
                   <div key={row.label} className="flex justify-between py-3">
                     <span className="text-small text-gray-500 font-medium">{row.label}</span>

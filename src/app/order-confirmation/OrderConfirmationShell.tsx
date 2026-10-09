@@ -64,7 +64,7 @@ export default function OrderConfirmationShell({ order }: { order: OrderDetails 
                 { label: 'Material',   value: order.material },
                 { label: 'Finish',     value: order.finish },
                 { label: 'Production', value: RUSH_LABELS[order.rush] ?? order.rush },
-                { label: 'Total paid', value: `$${(order.amount / 100).toFixed(2)}`, highlight: true },
+                { label: 'Total paid', value: `$${(order.amount / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, highlight: true },
               ].map(row => (
                 <div key={row.label} className="flex justify-between py-3">
                   <span className="text-small text-gray-500 font-medium">{row.label}</span>

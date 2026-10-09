@@ -68,7 +68,7 @@ export default function BannerConfigurator({ kind, configuration: c, onConfigura
     </select></label>
     <label className="flex gap-3 text-sm"><input type="checkbox" checked={c.windSlits} onChange={e => update({ windSlits: e.target.checked })} />Wind slits — free on request</label>
     <label className="block text-sm font-semibold">Turnaround<select className={inputClass} value={c.turnaround} onChange={e => update({ turnaround: e.target.value as BannerConfiguration['turnaround'] })}>
-      <option value="standard">Standard — list price</option><option value="economy">Economy 7-day — save 5%</option><option value="rush">Rush next-day production +40% (minimum +$25 per line)</option>
+      <option value="standard">Standard — list price</option><option value="rush">Rush next-day production +40% (minimum +$25 per line)</option>
     </select></label>
     <p className="text-xs text-gray-600">{bannerTurnarounds[c.turnaround]}. Production timing starts after proof approval.</p>
     <div aria-live="polite" aria-atomic="true" className="border-t border-gray-200 pt-4">

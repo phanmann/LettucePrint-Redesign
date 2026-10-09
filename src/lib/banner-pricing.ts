@@ -11,7 +11,7 @@ export interface BannerConfiguration {
   edge: 'hem' | 'webbing' | 'rings' | 'rope'
   windSlits: boolean
   poleKit: boolean
-  turnaround: 'standard' | 'economy' | 'rush'
+  turnaround: 'standard' | 'rush'
 }
 export const defaultBannerConfiguration = (kind: BannerKind): BannerConfiguration => ({
   kind, width: 24, height: 36, quantity: 1, grommets: '24', pockets: 'none', pocketSize: 3,
@@ -21,7 +21,6 @@ export const bannerNames = { vinyl: 'Vinyl Banner', 'double-sided': 'Double-Side
 export const bannerMaterials = { vinyl: '13 oz matte vinyl (indoor/outdoor)', 'double-sided': '18 oz blockout vinyl, matte both sides' }
 export const bannerTurnarounds = {
   standard: 'Ships 3 business days after proof approval + UPS transit',
-  economy: 'Economy: 7 business days after proof approval + UPS transit',
   rush: 'Rush: next-day production after proof approval; requires expedited shipping',
 }
 const money = (n: number) => Math.round((n + Number.EPSILON) * 100) / 100
@@ -31,7 +30,7 @@ export function calculateBannerPrice(c: BannerConfiguration) {
     !Number.isInteger(c.quantity) || c.quantity < 1 ||
     !['24', 'corners', '12'].includes(c.grommets) || !['none', 'instead', 'with'].includes(c.pockets) ||
     ![2, 3, 4].includes(c.pocketSize) || !['hem', 'webbing', 'rings', 'rope'].includes(c.edge) ||
-    !['standard', 'economy', 'rush'].includes(c.turnaround) ||
+    !['standard', 'rush'].includes(c.turnaround) ||
     typeof c.windSlits !== 'boolean' || typeof c.poleKit !== 'boolean' ||
     (c.kind === 'double-sided' && c.edge === 'rope') ||
     (c.poleKit && (c.kind !== 'double-sided' || c.width > 36 || c.pockets !== 'instead' || c.pocketSize !== 3))
@@ -52,7 +51,7 @@ export function calculateBannerPrice(c: BannerConfiguration) {
   const discount = c.quantity >= 25 ? .2 : c.quantity >= 10 ? .15 : c.quantity >= 5 ? .1 : c.quantity >= 2 ? .05 : 0
   const subtotal = money((baseUnit + addons) * c.quantity * (1 - discount))
   const subtotalCents = Math.round(subtotal * 100)
-  const totalCents = c.turnaround === 'economy' ? Math.round(subtotalCents * 95 / 100) : c.turnaround === 'rush' ? subtotalCents + Math.max(2500, Math.round(subtotalCents * 40 / 100)) : subtotalCents
+  const totalCents = c.turnaround === 'rush' ? subtotalCents + Math.max(2500, Math.round(subtotalCents * 40 / 100)) : subtotalCents
   const adjustment = (totalCents - subtotalCents) / 100
   return { quoteReason: null, sqft, baseUnit, addons, discount, subtotal, adjustment, totalCents }
 }
