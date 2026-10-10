@@ -3,6 +3,7 @@ export const MYLAR_SIZE = '4 x 5 in. (eighth)'
 export const MYLAR_REGULAR = 'Standard zipper'
 export const MYLAR_CR = 'Child-resistant zipper'
 export const MYLAR_GLOSS = 'Gloss'
+export const MYLAR_MATTE = 'Matte'
 export const MYLAR_SOFT_TOUCH = 'Soft-Touch'
 
 const BASE_PRICE_CENTS: Record<number, number> = {
@@ -22,7 +23,7 @@ export function mylarPriceCents(config: {
   if (
     !base || config.size !== MYLAR_SIZE ||
     ![MYLAR_REGULAR, MYLAR_CR].includes(config.material) ||
-    ![MYLAR_GLOSS, MYLAR_SOFT_TOUCH].includes(config.finish) ||
+    ![MYLAR_GLOSS, MYLAR_MATTE, MYLAR_SOFT_TOUCH].includes(config.finish) ||
     config.rush !== 'standard'
   ) {
     throw new Error('Invalid Mylar bag configuration')

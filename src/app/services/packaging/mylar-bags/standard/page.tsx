@@ -1,6 +1,6 @@
 import ProductOrderPage from '@/components/shop/ProductOrderPage'
 import {
-  MYLAR_CR, MYLAR_GLOSS, MYLAR_REGULAR, MYLAR_SOFT_TOUCH, MYLAR_SIZE,
+  MYLAR_CR, MYLAR_GLOSS, MYLAR_MATTE, MYLAR_REGULAR, MYLAR_SOFT_TOUCH, MYLAR_SIZE,
   mylarPriceCents,
 } from '@/lib/mylar-pricing'
 
@@ -8,6 +8,8 @@ const quantities = [1000, 3000, 5000]
 const pricingRules = [
   { Seal: 'regular', Finish: 'gloss', material: MYLAR_REGULAR, finish: MYLAR_GLOSS },
   { Seal: 'cr', Finish: 'gloss', material: MYLAR_CR, finish: MYLAR_GLOSS },
+  { Seal: 'regular', Finish: 'matte', material: MYLAR_REGULAR, finish: MYLAR_MATTE },
+  { Seal: 'cr', Finish: 'matte', material: MYLAR_CR, finish: MYLAR_MATTE },
   { Seal: 'regular', Finish: 'soft-touch', material: MYLAR_REGULAR, finish: MYLAR_SOFT_TOUCH },
   { Seal: 'cr', Finish: 'soft-touch', material: MYLAR_CR, finish: MYLAR_SOFT_TOUCH },
 ].map(({ Seal, Finish, material, finish }) => ({
@@ -38,7 +40,8 @@ export default function Page() {
           { id: 'cr', label: MYLAR_CR, description: '+$75 per order; select if required for your product.', badge: '+$75' },
         ] },
         { label: 'Finish', options: [
-          { id: 'gloss', label: MYLAR_GLOSS, description: 'Standard printed finish. Included.' },
+          { id: 'gloss', label: MYLAR_GLOSS, description: 'Standard glossy finish. Included.' },
+          { id: 'matte', label: MYLAR_MATTE, description: 'Standard matte finish. Included.' },
           { id: 'soft-touch', label: MYLAR_SOFT_TOUCH, description: '+$50 per order.', badge: '+$50' },
         ] },
       ]}
