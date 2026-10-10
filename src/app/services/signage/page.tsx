@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -12,8 +13,8 @@ export const metadata: Metadata = {
 }
 
 const products = [
-  { title: 'Banners', href: '/services/signage/banners', note: 'Vinyl, mesh, fabric, retractable, luxury retractable, tabletop, and oversized banners.' },
-  { title: 'Backdrops', href: '/services/signage/backdrops', note: 'Pop-up, eurofit, SEG, and step-and-repeat backdrops for events and retail spaces.' },
+  { title: 'Banners', image: '/images/products/banners/vinyl-banner.jpg', alt: 'Lettuce Print vinyl banner secured with grommets on an exterior wall', href: '/services/signage/banners', note: 'Vinyl, mesh, fabric, retractable, luxury retractable, tabletop, and oversized banners.' },
+  { title: 'Backdrops', image: '/images/products/backdrops/step-repeat.jpg', alt: 'Green Lettuce Print step-and-repeat backdrop on a freestanding event display', href: '/services/signage/backdrops', note: 'Pop-up, eurofit, SEG, and step-and-repeat backdrops for events and retail spaces.' },
 ]
 
 export default function SignagePage() {
@@ -31,7 +32,16 @@ export default function SignagePage() {
         <section className="py-16 bg-gray-50">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-5">
             {products.map((product) => (
-              <Link key={product.href} href={product.href} className="group bg-white border border-gray-100 rounded-card p-7 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all">
+              <Link key={product.href} href={product.href} className="group bg-white border border-gray-100 rounded-card p-7 min-w-0 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all">
+                <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-50 mb-6">
+                  <Image
+                    src={product.image}
+                    alt={product.alt}
+                    fill
+                    sizes="(min-width: 1024px) 412px, (min-width: 768px) calc((100vw - 184px) / 2), (min-width: 640px) calc(100vw - 106px), calc(100vw - 90px)"
+                    className="object-cover"
+                  />
+                </div>
                 <h2 className="text-h3 font-semibold text-gray-900 mb-3">{product.title}</h2>
                 <p className="text-small text-gray-600 mb-6">{product.note}</p>
                 <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-lp-green">View options <ArrowRight size={13} /></span>
