@@ -12,10 +12,21 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://lettuceprint.com/services/signage' },
 }
 
+// Category summaries reflect the linked catalogs; options vary by product.
 const products = [
-  { title: 'Banners', image: '/images/products/banners/vinyl-banner.jpg', alt: 'Lettuce Print vinyl banner secured with grommets on an exterior wall', href: '/services/signage/banners', note: 'Vinyl, mesh, fabric, retractable, luxury retractable, tabletop, and oversized banners.' },
-  { title: 'Backdrops', image: '/images/products/backdrops/step-repeat.jpg', alt: 'Green Lettuce Print step-and-repeat backdrop on a freestanding event display', href: '/services/signage/backdrops', note: 'Pop-up, eurofit, SEG, and step-and-repeat backdrops for events and retail spaces.' },
-  { title: 'Canopy Tents', image: '/images/products/tents/20x10.svg', alt: 'Original illustration of a custom canopy tent', href: '/services/signage/tents/10x10', note: '10×10 and 20×10 full printed canopy tents with frames, from $789. Shipping and tax excluded.' },
+  { title: 'Banners', image: '/images/products/banners/vinyl-banner.jpg', alt: 'Lettuce Print vinyl banner secured with grommets on an exterior wall', href: '/services/signage/banners', note: 'Vinyl, mesh, fabric, retractable, luxury retractable, tabletop, and oversized banners.', options: [
+    { label: 'Styles', values: ['Retractable', 'X-Stand', 'Hanging'] },
+    { label: 'Materials', values: ['Vinyl', 'Mesh', 'Fabric'] },
+  ] },
+  { title: 'Backdrops', image: '/images/products/backdrops/step-repeat.jpg', alt: 'Green Lettuce Print step-and-repeat backdrop on a freestanding event display', href: '/services/signage/backdrops', note: 'Pop-up, eurofit, SEG, and step-and-repeat backdrops for events and retail spaces.', options: [
+    { label: 'Styles', values: ['Step & Repeat', 'Eurofit', 'Pop-up', 'SEG'] },
+    { label: 'Sizes', values: ['8×8 ft', '10×8 ft', '20×8 ft', '8×10 ft'] },
+  ] },
+  { title: 'Canopy Tents', image: '/images/products/tents/20x10.svg', alt: 'Original illustration of a custom canopy tent', href: '/services/signage/tents/10x10', note: '10×10 and 20×10 full printed canopy tents with frames, from $789. Shipping and tax excluded.', options: [
+    { label: 'Sizes', values: ['10×10 ft', '20×10 ft'] },
+    { label: 'Packages', values: ['Full Kit', 'Top Only', 'Frame Only'] },
+    { label: 'Add-ons', values: ['Backwall', 'Sidewalls', 'Flag Holders', 'Wheel Bag'] },
+  ] },
 ]
 
 export default function SignagePage() {
@@ -33,7 +44,7 @@ export default function SignagePage() {
         <section className="py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-5">
             {products.map((product) => (
-              <Link key={product.href} href={product.href} className="group bg-white border border-gray-100 rounded-card p-7 min-w-0 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all">
+              <Link key={product.href} href={product.href} className="group flex flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lp-green bg-white border border-gray-100 rounded-card p-7 min-w-0 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all">
                 <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-50 mb-6">
                   <Image
                     src={product.image}
@@ -45,7 +56,20 @@ export default function SignagePage() {
                 </div>
                 <h2 className="text-h3 font-semibold text-gray-900 mb-3">{product.title}</h2>
                 <p className="text-small text-gray-600 mb-6">{product.note}</p>
-                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-lp-green">View options <ArrowRight size={13} /></span>
+                <dl className="space-y-2 mb-3">
+                  {product.options.map((group) => (
+                    <div key={group.label} className="flex flex-wrap items-start gap-2">
+                      <dt className="text-xs font-semibold text-gray-500 w-16 shrink-0 pt-0.5">{group.label}:</dt>
+                      <dd className="flex min-w-0 flex-1 flex-wrap gap-1.5">
+                        {group.values.map((value) => (
+                          <span key={value} className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">{value}</span>
+                        ))}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                <p className="text-xs text-gray-500 mb-6">{product.title === 'Canopy Tents' ? 'Add-ons available with full kits.' : 'Options vary by product.'}</p>
+                <span className="mt-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-lp-green">View options <ArrowRight size={13} /></span>
               </Link>
             ))}
           </div>
