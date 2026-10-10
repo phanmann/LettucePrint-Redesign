@@ -44,6 +44,7 @@ export interface ProductOrderPageProps {
   pricingTable?: PricingRow[]
   pricingRules?: PricingRule[]
   pricingNote?: string
+  quoteOnlyAddOns?: { name: string; description: string }[]
   specs: { label: string; value: string }[]
   artworkRequirements: { label: string; value: string }[]
   included: string[]
@@ -122,6 +123,7 @@ function CtaBlock({
 function ConfiguratorOptions({
   optionGroups,
   pricingTable,
+  pricingNote,
   showQuantity,
   selections,
   setSelections,
@@ -134,6 +136,7 @@ function ConfiguratorOptions({
 }: {
   optionGroups: OptionGroup[]
   pricingTable?: PricingRow[]
+  pricingNote?: string
   showQuantity?: boolean
   selections: Record<string, string>
   setSelections: (s: Record<string, string>) => void
@@ -225,6 +228,7 @@ function ConfiguratorOptions({
               </option>
             ))}
           </select>
+          {pricingNote && <p className="text-xs text-gray-500 mt-2 leading-relaxed">{pricingNote}</p>}
           {hasRush && (
             <label role="checkbox" aria-checked={isRush} tabIndex={0} onKeyDown={e => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); setIsRush(!isRush) } }} className={`mt-2 ${radioRow(isRush)}`} onClick={() => setIsRush(!isRush)}>
               <div className={radioCircle(isRush)} />
@@ -282,6 +286,8 @@ export default function ProductOrderPage({
   optionGroups,
   pricingTable,
   pricingRules,
+  pricingNote,
+  quoteOnlyAddOns,
   specs,
   artworkRequirements,
   included,
@@ -334,7 +340,7 @@ export default function ProductOrderPage({
       : typeof currentRow?.qty === 'number'
         ? currentRow.qty
         : parseInt(String(currentRow?.qty ?? 1), 10) || 1
-    const material = getSelectedLabel(['material', 'stock', 'paper']) || selectedOptionLabels[0]?.label || 'Standard'
+    const material = getSelectedLabel(['material', 'stock', 'paper', 'seal']) || selectedOptionLabels[0]?.label || 'Standard'
     const finish = getSelectedLabel(['finish', 'hardware', 'coating', 'lamination']) || selectedOptionLabels[1]?.label || 'Standard'
     const size = getSelectedLabel(['size', 'dimension']) || 'Configured product'
     const price = displayPrice ?? 0
@@ -386,6 +392,7 @@ export default function ProductOrderPage({
                 <ConfiguratorOptions
                   optionGroups={visibleGroups}
                   pricingTable={activePricingTable}
+                  pricingNote={pricingNote}
                   showQuantity={showQuantity}
                   selections={selections}
                   setSelections={setSelections}
@@ -445,6 +452,7 @@ export default function ProductOrderPage({
                   <ConfiguratorOptions
                     optionGroups={visibleGroups}
                     pricingTable={activePricingTable}
+                    pricingNote={pricingNote}
                     showQuantity={showQuantity}
                     selections={selections}
                     setSelections={setSelections}
@@ -533,6 +541,24 @@ export default function ProductOrderPage({
                       </Link>
                     </p>
                   </Disclosure>
+                </div>
+              )}
+
+              {quoteOnlyAddOns && quoteOnlyAddOns.length > 0 && (
+                <div className="mb-8 rounded-card border border-gray-200 bg-gray-50 p-6">
+                  <h3 className="text-h4 font-semibold text-gray-900 mb-3">Specialty finishes</h3>
+                  <p className="text-small text-gray-600 mb-4">Available by custom quote; not included in the online prices above.</p>
+                  <div className="space-y-3">
+                    {quoteOnlyAddOns.map(addOn => (
+                      <div key={addOn.name} className="flex items-start justify-between gap-3 rounded-lg border border-gray-200 bg-white p-3">
+                        <div>
+                          <p className="text-sm font-semibold text-gray-900">{addOn.name}</p>
+                          <p className="text-xs text-gray-500 mt-1">{addOn.description}</p>
+                        </div>
+                        <Link href="/get-quote" className="shrink-0 text-xs font-semibold text-lp-green hover:underline">Get a quote</Link>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
 

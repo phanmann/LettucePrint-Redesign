@@ -15,17 +15,17 @@ const PRODUCTS = [
     id: 'mylar-standard',
         href: '/services/packaging/mylar-bags/standard',
     name: 'Standard Mylar Bag',
-    subtitle: 'Custom sizes available',
-    description: 'Heat-sealable, smell-proof, and child-resistant mylar bags for cannabis, food, supplements, and general retail. Full-color custom print.',
+    subtitle: '4 × 5 in. eighth size · from $1,200 / 1,000',
+    description: 'Custom-printed 4 × 5 in. eighth-size bags. Choose standard or child-resistant zipper and gloss or Soft-Touch finish. Metallic and Holographic available by quote.',
     features: [
       'Smell-proof barrier',
       'Heat-sealable top',
       'Child-resistant zipper option',
       'Full-color custom print',
-      'Available in multiple sizes',
-      'Matte or gloss finish',
+      '4 × 5 in. online pricing · 1,000 minimum',
+      'Gloss or Soft-Touch finish',
     ],
-    turnaround: '10–14 business days',
+    turnaround: 'Confirmed after proof approval',
     color: '#E8F5F1',
         image: 'https://drive.usercontent.google.com/download?id=1tnUvh9Y9jYsoOKPUbS9g0-NWdt_CR0KV&export=view',
     imageAlt: 'Standard mylar bag printed with custom design',
@@ -63,7 +63,7 @@ export default function MylarBagsPage() {
             <div className="lg:sticky lg:top-28">
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-lp-green">Boxes & Packaging</p>
               <h1 className="text-display max-w-2xl font-semibold text-gray-900">Custom Mylar Bags</h1>
-              <p className="text-body-lg mt-6 max-w-xl text-gray-500">Smell-proof, heat-sealable, and fully custom printed. Built for cannabis brands, food products, supplements, and specialty retail.</p>
+              <p className="text-body-lg mt-6 max-w-xl text-gray-500">Custom-printed packaging for cannabis brands, food products, supplements, and specialty retail. Shop 4 × 5 in. eighth-size standard bags online; request a quote for other sizes and specialty finishes.</p>
             </div>
             <CustomPackagingHeroForm quoteType="mylar-bags" />
           </div>
@@ -100,7 +100,7 @@ export default function MylarBagsPage() {
                               </li>
                             ))}
                           </ul>
-                          <p className="text-xs text-gray-400 mb-4">Turnaround: {product.turnaround}</p>
+                          <p className="text-xs text-gray-400 mb-4">Production: {product.turnaround}</p>
                         </motion.div>
                       )}
                     </AnimatePresence>

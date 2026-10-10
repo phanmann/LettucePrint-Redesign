@@ -10,6 +10,7 @@ import {
   type SpotUVHits,
 } from '@/lib/pricing'
 import { authoritativeRollLabelPrice } from '@/lib/roll-label-checkout'
+import { authoritativeMylarPrice } from '@/lib/mylar-pricing'
 import {
   encodeRollLabelDirection,
   formatRollLabelDirection,
@@ -175,9 +176,15 @@ export async function POST(req: NextRequest) {
         } catch (error) {
           throw new InvalidCheckoutConfigurationError(error instanceof Error ? error.message : 'Invalid roll label configuration')
         }
+        let secureMylarPrice: number | null
+        try {
+          secureMylarPrice = authoritativeMylarPrice(item)
+        } catch (error) {
+          throw new InvalidCheckoutConfigurationError(error instanceof Error ? error.message : 'Invalid Mylar bag configuration')
+        }
         const rollLabelDirection = rollLabelDirectionForItem(item)
-        const unitAmount = secureStickerPrice ?? secureRollLabelPrice ?? item.totalCents
-        const productionLabel = secureRollLabelPrice !== null
+        const unitAmount = secureStickerPrice ?? secureRollLabelPrice ?? secureMylarPrice ?? item.totalCents
+        const productionLabel = secureRollLabelPrice !== null || secureMylarPrice !== null
           ? 'Standard production — timing confirmed after proof approval'
           : (RUSH_LABELS[item.rush] ?? item.rush)
         if (!Number.isInteger(unitAmount) || unitAmount <= 0) {
@@ -288,8 +295,14 @@ export async function POST(req: NextRequest) {
       } catch (error) {
         throw new InvalidCheckoutConfigurationError(error instanceof Error ? error.message : 'Invalid roll label configuration')
       }
-      const unitAmount = secureStickerPrice ?? secureRollLabelPrice ?? overridePriceCents
-      const productionLabel = secureRollLabelPrice !== null
+      let secureMylarPrice: number | null
+      try {
+        secureMylarPrice = authoritativeMylarPrice({ product: productName, size, qty: quantity, material, finish, rush })
+      } catch (error) {
+        throw new InvalidCheckoutConfigurationError(error instanceof Error ? error.message : 'Invalid Mylar bag configuration')
+      }
+      const unitAmount = secureStickerPrice ?? secureRollLabelPrice ?? secureMylarPrice ?? overridePriceCents
+      const productionLabel = secureRollLabelPrice !== null || secureMylarPrice !== null
         ? 'Standard production — timing confirmed after proof approval'
         : (RUSH_LABELS[rush] ?? rush)
 
