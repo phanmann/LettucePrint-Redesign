@@ -179,9 +179,9 @@ function CatalogSection({ id, title, description, items }: {
           <h2 id={`${id}-heading`} className="text-h2 font-semibold text-gray-900">{title}</h2>
           <p className="mt-2 max-w-2xl text-body text-gray-500">{description}</p>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {items.map(item => (
-            <div key={item.id} id={item.id} className="scroll-mt-24">
+            <div key={item.id} id={item.id} className="scroll-mt-24 [&>div]:h-full">
               <ProductCard {...item.card} />
             </div>
           ))}
