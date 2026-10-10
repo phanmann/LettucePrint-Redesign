@@ -156,6 +156,11 @@ const amplify: CatalogItem[] = [
       id: 'booklets', name: 'Booklets', subtitle: 'Three binding styles',
       description: 'Saddle-stitched, Wire-O, or soft-cover perfect-bound booklets. Choose the construction, size, paper, and page count.',
       color: '#E8F5F1', image: '/images/products/booklets/booklet-open.jpg',
+      optionImagePreviews: { groupLabel: 'Binding', images: {
+        'Saddle Stitch': '/images/products/booklets/binding-saddle-stitch-placeholder.svg',
+        'Wire-O': '/images/products/booklets/binding-wire-o-placeholder.svg',
+        'Soft-Cover Perfect Bound': '/images/products/booklets/binding-perfect-bound-placeholder.svg',
+      } },
       options: [
         { label: 'Binding', values: ['Saddle Stitch', 'Wire-O', 'Soft-Cover Perfect Bound'] },
         { label: 'Cover', values: ['Gloss', 'Matte', 'Soft-touch'] },
