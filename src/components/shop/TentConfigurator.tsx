@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
-import { calculateTentPrice, tentDefaults, tentDescription, tentNames, type TentConfiguration, type TentSize } from '@/lib/tent-pricing'
+import { calculateTentPrice, tentDefaults, tentMaterial, tentDescription, tentNames, type TentConfiguration, type TentSize } from '@/lib/tent-pricing'
 const money = (cents: number) => (cents / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
 export default function TentConfigurator({ size }: { size: TentSize }) {
   const [config, setConfig] = useState<TentConfiguration>({ ...tentDefaults, size })
@@ -15,8 +15,14 @@ export default function TentConfigurator({ size }: { size: TentSize }) {
   try { price = calculateTentPrice(config, Number(quantity)) } catch { /* Invalid input cannot enter cart. */ }
   const selectClass = 'block w-full mt-2 border border-gray-300 rounded-lg p-3 bg-white'
   return <section aria-label="Tent configurator" className="bg-white rounded-2xl border border-gray-200 p-6 space-y-5">
-    <h2 className="text-2xl font-semibold">Build your full tent kit</h2>
-    <p>Full printed canopy with frame included. All add-ons are priced per tent.</p>
+    <h2 className="text-2xl font-semibold">Choose your tent package</h2>
+    <label className="block">Package<select className={selectClass} value={config.package ?? 'full-kit'} onChange={e => update({ ...tentDefaults, package: e.target.value as TentConfiguration['package'] })}>
+      <option value="full-kit">Full printed canopy with frame ({large ? '$1,419' : '$789'})</option>
+      <option value="top-only">Replacement fabric top only ({large ? '$849' : '$429'})</option>
+      <option value="frame-only">Replacement frame only ({large ? '$859' : '$429'})</option>
+    </select></label>
+    <p>{tentDescription(config)}</p>
+    {config.package === 'full-kit' && <>
     <label className="block">Backwall<select className={selectClass} value={config.backwall} onChange={e => update({ backwall: e.target.value as TentConfiguration['backwall'] })}>
       <option value="none">None</option><option value="single">Single-sided (+${large ? 579 : 289})</option><option value="double">Double-sided (+${large ? 1149 : 579})</option>
     </select></label>
@@ -31,12 +37,14 @@ export default function TentConfigurator({ size }: { size: TentSize }) {
       <option value="standard">Standard production</option><option value="next-day">Next-day production (+{large ? 30 : 40}%, rounded up to a price ending in 9)</option>
     </select></label>
     <p className="text-sm text-gray-600">Production starts after proof approval. Standard timing is confirmed after approval. Next-day production is not next-day delivery.</p>
+    </>}
+    {config.package !== 'full-kit' && <p className="text-sm text-gray-600">Standard production only. No accessories included. {config.package === 'frame-only' ? 'No artwork required. Fulfillment timing confirmed after order.' : 'Artwork required; timing confirmed after proof approval.'}</p>}
     <label className="block">Quantity<input className={selectClass} type="number" min="1" step="1" value={quantity} onChange={e => { setQuantity(e.target.value); setAdded(false) }} /></label>
-    <div aria-live="polite"><p>Per tent: {price ? money(price.unitPriceCents) : '—'}</p><p className="text-3xl font-semibold" data-testid="tent-total">{price ? money(price.totalCents) : 'Enter a valid quantity'}</p></div>
+    <div aria-live="polite"><p>Per package: {price ? money(price.unitPriceCents) : '—'}</p><p className="text-3xl font-semibold" data-testid="tent-total">{price ? money(price.totalCents) : 'Enter a valid quantity'}</p></div>
     <p className="text-sm text-gray-600">Merchandise only. Shipping and tax excluded. No quantity discount.</p>
     <button type="button" disabled={!price} className="w-full rounded-lg bg-lp-green text-white font-semibold py-4 disabled:opacity-50" onClick={() => {
       if (!price) return
-      addItem({ product: tentNames[size], size, qty: Number(quantity), material: 'Printed canopy with frame', finish: tentDescription(config), rush: config.production, tentConfiguration: { ...config }, ...price, totalFormatted: money(price.totalCents), productPath: `/services/signage/tents/${size}` })
+      addItem({ product: tentNames[size], size, qty: Number(quantity), material: tentMaterial(config), finish: tentDescription(config), rush: config.production, tentConfiguration: { ...config }, ...price, totalFormatted: money(price.totalCents), productPath: `/services/signage/tents/${size}` })
       setAdded(true)
     }}>Add to Cart</button>
     <p role="status">{added ? 'Added to cart.' : ''}</p>

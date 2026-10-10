@@ -26,6 +26,27 @@ const fs = require('node:fs');
    await page.reload();
    assert.equal(await page.getByText('Next-day production after proof approval (not delivery)',{exact:false}).count()>0,true);
   }
+
+  for (const size of ['10x10','20x10']) {
+   for (const pkg of ['frame-only','top-only']) {
+    await page.goto(`http://127.0.0.1:3109/services/signage/tents/${size}`);
+    await page.evaluate(()=>localStorage.clear());
+    await page.reload();
+    await page.getByLabel('Backwall',{exact:true}).selectOption('double');
+    await page.getByLabel('Premium wheel bag',{exact:false}).check();
+    await page.getByLabel('Package',{exact:true}).selectOption(pkg);
+    assert.equal(await page.getByLabel('Backwall',{exact:true}).count(),0);
+    const expected=size==='10x10'?'$429.00':pkg==='frame-only'?'$859.00':'$849.00';
+    assert.equal(await page.getByTestId('tent-total').innerText(),expected);
+    await page.getByRole('button',{name:'Add to Cart',exact:true}).click();
+    await page.getByRole('link',{name:'View Cart',exact:true}).click();
+    await page.reload();
+    assert.equal(await page.getByRole('button',{name:'Proceed to payment',exact:true}).isEnabled(),pkg==='frame-only');
+    assert.equal(await page.getByText('Frame only — no artwork required.',{exact:true}).count(),pkg==='frame-only'?1:0);
+    assert.equal(await page.getByText('Upload artwork',{exact:true}).count(),pkg==='top-only'?1:0);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+   }
+  }
   await page.goto('http://127.0.0.1:3109/services/signage');
   for(const name of ['Canopy Tents','Banners','Backdrops']) assert.equal(await page.getByRole('heading',{name,exact:true}).count(),1);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth),true);

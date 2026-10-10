@@ -1,1 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800"><rect width="800" height="800" fill="#edf5ef"/><ellipse cx="400" cy="670" rx="310" ry="35" fill="#d4e4d8"/><g stroke="#344d40" stroke-width="12" fill="none"><path d="M125 355v300m550-300v300M220 310v290m360-290v290"/></g><path d="M100 345 400 140 700 345 675 405H125Z" fill="#267747"/><path d="M400 140 675 405H125Z" fill="#32945b"/><path d="M100 345h600l-25 60H125Z" fill="#195a34"/><text x="400" y="382" fill="white" font-family="sans-serif" font-size="28" text-anchor="middle">YOUR BRAND</text><text x="400" y="720" fill="#344d40" font-family="sans-serif" font-size="24" text-anchor="middle">10 × 10 • ORIGINAL PLACEHOLDER ART</text><text x="400" y="755" fill="#344d40" font-family="sans-serif" font-size="18" text-anchor="middle">Illustrative only — not a product photograph</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+<title id="title">10x10 branded canopy tent illustration</title><desc id="desc">Original three-quarter illustration of a green printed canopy on a silver frame. Illustrative, not a product photograph.</desc>
+<rect width="800" height="800" rx="32" fill="#f3f6f3"/>
+<ellipse cx="400" cy="650" rx="270" ry="32" fill="#dce5dd"/>
+<g fill="#b6c3be" stroke="#748c80" stroke-width="2">
+<path d="M240 356h10v245h-10zM633 345h10v250h-10z"/>
+</g>
+<g fill="none" stroke="#9cadA3" stroke-width="6" stroke-linejoin="round">
+<path d="M181 400L580 490L181 490L580 400M580 400l62-40v105z"/>
+</g>
+<path d="M157 370L370 190H370L663 320L595 375Z" fill="#438e5d"/>
+<path d="M157 370L370 190H370L595 375Z" fill="#257546"/>
+<path d="M370 190L595 375L663 320Z" fill="#185b36"/>
+<g fill="none" stroke="#63a778" stroke-width="2" opacity=".7">
+<path d="M370 190L270 372M370 190L495 373"/>
+</g>
+<path d="M157 370L595 375V427L157 422Z" fill="#174e30"/>
+<path d="M595 375l68-55v53l-68 54Z" fill="#103f27"/>
+<g fill="#d3dcd7" stroke="#748c80" stroke-width="2">
+<path d="M175 422h12v223h-12zM575 427h12v223h-12z"/>
+<path d="M168 642h26v8h-26zM568 647h26v8h-26z"/>
+</g>
+<g fill="#789184"><rect x="173" y="495" width="16" height="18" rx="2"/><rect x="573" y="500" width="16" height="18" rx="2"/></g>
+<text x="375" y="408" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="21" letter-spacing="5">YOUR BRAND</text>
+<text x="400" y="725" text-anchor="middle" fill="#234b34" font-family="Arial,sans-serif" font-size="24" letter-spacing="4">10 × 10 CANOPY</text>
+</svg>

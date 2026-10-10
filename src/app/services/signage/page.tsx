@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 }
 
 const products = [
-  { title: 'Canopy Tents', image: '/images/products/tents/20x10.svg', alt: 'Original placeholder illustration of a custom canopy tent', href: '/services/signage/tents/10x10', note: '10×10 and 20×10 full printed canopy tents with frames, from $789. Shipping and tax excluded. Original placeholder art.' },
+  { title: 'Canopy Tents', image: '/images/products/tents/20x10.svg', alt: 'Original illustration of a custom canopy tent', href: '/services/signage/tents/10x10', note: '10×10 and 20×10 full printed canopy tents with frames, from $789. Shipping and tax excluded.' },
   { title: 'Banners', image: '/images/products/banners/vinyl-banner.jpg', alt: 'Lettuce Print vinyl banner secured with grommets on an exterior wall', href: '/services/signage/banners', note: 'Vinyl, mesh, fabric, retractable, luxury retractable, tabletop, and oversized banners.' },
   { title: 'Backdrops', image: '/images/products/backdrops/step-repeat.jpg', alt: 'Green Lettuce Print step-and-repeat backdrop on a freestanding event display', href: '/services/signage/backdrops', note: 'Pop-up, eurofit, SEG, and step-and-repeat backdrops for events and retail spaces.' },
 ]

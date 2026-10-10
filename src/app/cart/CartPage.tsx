@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { Trash2, Upload, CheckCircle, AlertCircle, Loader2, ShoppingBag, ArrowRight, Plus, FileText } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import { useUploadThing } from '@/lib/uploadthingClient'
+import { isValidatedTentFrame } from '@/lib/tent-pricing'
 import type { CartItem } from '@/lib/cart'
 import { formatRollLabelDirection } from '@/lib/roll-label-direction'
 import Button from '@/components/ui/Button'
@@ -251,10 +252,10 @@ function CartItemRow({ item }: { item: CartItem }) {
 
         {/* Artwork */}
         <div className="mt-3">
-          <ArtworkUploader
+          {isValidatedTentFrame(item) ? <p className="text-sm text-gray-600">Frame only — no artwork required.</p> : <ArtworkUploader
             item={item}
             onUploaded={(url, filename) => updateArtwork(item.id, url, filename)}
-          />
+          />}
         </div>
 
         {/* Edit link */}
@@ -298,7 +299,7 @@ export default function CartPage() {
       .map(i => [i.product, i.size, i.material, i.finish, `Qty ${i.qty}`, i.rush, `${i.totalFormatted} before shipping`].filter(Boolean).join(' · '))
       .join('\n'),
   }).toString()}`
-  const missingArtwork = items.filter(i => !i.artworkUrl && i.configuration?.Package !== 'Hardware only (frame, no print)')
+  const missingArtwork = items.filter(i => !i.artworkUrl && !isValidatedTentFrame(i) && i.configuration?.Package !== 'Hardware only (frame, no print)')
 
   const handleCheckout = async () => {
     if (quoteItems.length > 0) {

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { calculateTentPrice, authoritativeTentPrice, tentDefaults, tentNames, type TentConfiguration } from '../src/lib/tent-pricing'
+import { calculateTentPrice, authoritativeTentPrice, tentDefaults, tentNames, isValidatedTentFrame, type TentConfiguration } from '../src/lib/tent-pricing'
 let cases = 0
 for (const size of ['10x10', '20x10'] as const) {
   const large = size === '20x10'
@@ -24,7 +24,21 @@ for (const size of ['10x10', '20x10'] as const) {
     cases++
   }
   assert.equal(calculateTentPrice({ ...tentDefaults, size, production: 'next-day' }, 1).unitPriceCents, large ? 184900 : 110900)
-  for (const patch of [{ package: 'frame-only' }, { backwall: 'bogus' }, { sides: 'bad' }, { production: 'economy' }, { flagHolders: 2 }, { wheelBag: 'yes' }]) assert.throws(() => calculateTentPrice({ ...tentDefaults, size, ...patch }, 1))
+  for (const patch of [{ package: 'invalid' }, { backwall: 'bogus' }, { sides: 'bad' }, { production: 'economy' }, { flagHolders: 2 }, { wheelBag: 'yes' }]) assert.throws(() => calculateTentPrice({ ...tentDefaults, size, ...patch }, 1))
   for (const qty of [0, -1, 1.5, NaN, Infinity, Number.MAX_SAFE_INTEGER]) assert.throws(() => calculateTentPrice({ ...tentDefaults, size }, qty))
 }
 console.log(`PASS: ${cases} complete configurations, quantity multiplication, rush boundaries and tamper rejection`)
+
+for (const size of ['10x10', '20x10'] as const) for (const pkg of ['top-only', 'frame-only'] as const) {
+  const c = { ...tentDefaults, size, package: pkg }
+  const expected = size === '10x10' ? 42900 : pkg === 'top-only' ? 84900 : 85900
+  const price = calculateTentPrice(c, 2)
+  assert.deepEqual(price, { unitPriceCents: expected, totalCents: expected * 2 })
+  const item = { product: tentNames[size], size, qty: 2, rush: 'standard', ...price, tentConfiguration: c }
+  assert.equal(authoritativeTentPrice(item)?.totalCents, expected * 2)
+  assert.equal(isValidatedTentFrame(item), pkg === 'frame-only')
+  assert.equal(isValidatedTentFrame({ ...item, totalCents: 1 }), false)
+  for (const patch of [{ backwall: 'single' }, { sides: 'half-single' }, { flagHolders: '1' }, { wheelBag: true }, { production: 'next-day' }]) assert.throws(() => calculateTentPrice({ ...c, ...patch }, 1))
+  assert.throws(() => authoritativeTentPrice({ ...item, tentConfiguration: { ...c, package: 'full-kit' } }))
+}
+console.log('PASS: four replacement packages, exact totals, accessory/rush rejection, frame artwork exemption and tamper rejection')

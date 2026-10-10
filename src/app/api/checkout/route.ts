@@ -205,7 +205,7 @@ export async function POST(req: NextRequest) {
             name: item.product,
             description: [
               `Size: ${item.size}`,
-              `Material: ${item.material}`,
+              `Material: ${secureTentPrice?.material ?? item.material}`,
               `Finish: ${secureTentPrice?.description ?? item.finish}`,
               `Production: ${productionLabel}`,
               `Qty: ${item.qty}`,
@@ -215,8 +215,8 @@ export async function POST(req: NextRequest) {
               cartItemId: item.id,
               size: item.size,
               qty: String(item.qty),
-              material: item.material,
-              finish: item.finish,
+              material: secureTentPrice?.material ?? item.material,
+              finish: secureTentPrice?.description ?? item.finish,
               rush: item.rush,
               ...(secureTentPrice && { tentConfiguration: JSON.stringify(item.tentConfiguration), tentUnitPriceCents: String(secureTentPrice.unitPriceCents) }),
               ...(rollLabelDirection && {

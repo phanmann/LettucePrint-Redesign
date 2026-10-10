@@ -25,6 +25,21 @@ async function run() {
   assert.equal((await send({items:[{ product:'EuroFit Backdrop 8x8' }]})).status,409)
   assert.equal((await send({items:[{ product:'Vinyl Banner', qty:1, bannerConfiguration:{kind:'vinyl',width:24,height:36,quantity:1,grommets:'24',pockets:'none',pocketSize:3,edge:'hem',windSlits:false,poleKit:false,turnaround:'standard'}}]})).status,503)
   assert.equal(calls,1)
+  for (const size of ['10x10', '20x10']) for (const pkg of ['top-only', 'frame-only']) {
+    const unitPriceCents = size === '10x10' ? 42900 : pkg === 'top-only' ? 84900 : 85900
+    const replacement = { ...item, product: size === '10x10' ? '10×10 Canopy Tent' : '20×10 Canopy Tent', size, unitPriceCents, totalCents: unitPriceCents * 2, material: 'tampered material', finish: 'tampered finish', tentConfiguration: { ...tentDefaults, size, package: pkg } }
+    assert.equal((await send({ items: [replacement] })).status, 200)
+    const payload = captured as typeof params
+    assert.equal(payload.line_items[0].price_data.unit_amount, unitPriceCents * 2)
+    const meta = payload.line_items[0].price_data.product_data.metadata
+    assert.equal(JSON.parse(meta.tentConfiguration).package, pkg)
+    assert.equal(meta.material, pkg === 'frame-only' ? 'Frame only (no print)' : 'Printed fabric top only')
+    assert.notEqual(meta.finish, 'tampered finish')
+    for (const patch of [{ wheelBag: true }, { backwall: 'single' }, { sides: 'half-single' }, { flagHolders: '1' }, { production: 'next-day' }]) {
+      assert.equal((await send({ items: [{ ...replacement, tentConfiguration: { ...replacement.tentConfiguration, ...patch } }] })).status, 400)
+    }
+  }
+  assert.equal(calls, 5)
   console.log('PASS: mocked Stripe payload, authoritative totals, config metadata, invalid/legacy requests, unchanged banner/backdrop gates; zero network requests')
 }
 run().catch(error => { console.error(error); process.exitCode = 1 })
