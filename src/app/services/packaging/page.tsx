@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -12,8 +13,8 @@ export const metadata: Metadata = {
 }
 
 const products = [
-  { title: 'Mylar Bags', href: '/services/packaging/mylar-bags', note: 'Standard and die-cut mylar bags with high-barrier material and custom print.' },
-  { title: 'Custom Packaging', href: '/services/packaging/custom-packaging', note: 'Built-from-scratch structures, sampling, specialty finishes, and launch support.' },
+  { image: '/images/portfolio/mylar-packaging-system/hero.png', imageAlt: 'Two green mylar bags with Lettuce Print branding', title: 'Mylar Bags', href: '/services/packaging/mylar-bags', note: 'Standard and die-cut mylar bags with high-barrier material and custom print.' },
+  { image: '/images/products/boxes/box-mailer.jpg', imageAlt: 'Green custom-printed Lettuce Print mailer box', title: 'Custom Packaging', href: '/services/packaging/custom-packaging', note: 'Built-from-scratch structures, sampling, specialty finishes, and launch support.' },
 ]
 
 export default function PackagingPage() {
@@ -31,10 +32,21 @@ export default function PackagingPage() {
         <section className="py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-5">
             {products.map((product) => (
-              <Link key={product.href} href={product.href} className="group bg-white border border-gray-100 rounded-card p-6 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all">
-                <h2 className="text-h3 font-semibold text-gray-900 mb-3">{product.title}</h2>
-                <p className="text-small text-gray-600 mb-6">{product.note}</p>
-                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-lp-green">View options <ArrowRight size={13} /></span>
+              <Link key={product.href} href={product.href} className="group bg-white border border-gray-100 rounded-card overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all">
+                <div className="relative aspect-[4/3] bg-white overflow-hidden">
+                  <Image
+                    src={product.image}
+                    alt={product.imageAlt}
+                    fill
+                    sizes="(min-width: 1280px) 390px, (min-width: 768px) 33vw, 100vw"
+                    className="object-contain p-4"
+                  />
+                </div>
+                <div className="p-6">
+                  <h2 className="text-h3 font-semibold text-gray-900 mb-3">{product.title}</h2>
+                  <p className="text-small text-gray-600 mb-6">{product.note}</p>
+                  <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-lp-green">View options <ArrowRight size={13} /></span>
+                </div>
               </Link>
             ))}
           </div>
