@@ -95,7 +95,7 @@ const essentials: CatalogItem[] = [
       ],
       features: ['Four-panel scored and folded format', 'Letter and tabloid flat sizes', 'Gloss or matte finish', 'Soft-touch lamination available'],
       turnaround: 'Confirmed with quote', categoryLabel: 'Bi-Fold Brochures',
-      href: '/services/marketing-materials/brochures#bi-fold',
+      href: '/services/marketing-materials/brochures/bi-fold',
     },
   },
   {
@@ -111,7 +111,7 @@ const essentials: CatalogItem[] = [
       ],
       features: ['Six-panel folded format', 'Letter and legal flat sizes', 'Gloss or matte finish', 'Soft-touch lamination available'],
       turnaround: 'Confirmed with quote', categoryLabel: 'Tri-Fold Brochures',
-      href: '/services/marketing-materials/brochures#tri-fold',
+      href: '/services/marketing-materials/brochures/tri-fold',
     },
   },
 ]
@@ -147,7 +147,7 @@ const amplify: CatalogItem[] = [
       ],
       features: ['Full-color printing', 'Three poster sizes', 'Gloss or matte finish', 'Single or double-sided'],
       turnaround: 'Confirmed with quote', categoryLabel: 'Posters',
-      href: '/services/marketing-materials/flyers#posters',
+      href: '/services/marketing-materials/posters',
     },
   },
   {
