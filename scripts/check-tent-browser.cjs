@@ -52,7 +52,9 @@ const fs = require('node:fs');
    }
   }
   await page.goto('http://127.0.0.1:3109/services/signage');
-  for(const name of ['Canopy Tents','Banners','Backdrops']) assert.equal(await page.getByRole('heading',{name,exact:true}).count(),1);
+  assert.deepEqual(await page.locator('section a.group h2').allTextContents(),['Banners','Backdrops','Canopy Tents']);
+  const cardY=await page.locator('section a.group').evaluateAll(xs=>xs.map(x=>Math.round(x.getBoundingClientRect().y)));
+  assert.equal(viewport.width===1440?new Set(cardY).size===1:cardY[0]<cardY[1]&&cardY[1]<cardY[2],true);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth),true);
   await page.screenshot({path:`${output}/signage-${viewport.width}.png`,fullPage:true});
   assert.deepEqual(errors,[]);await page.close();
