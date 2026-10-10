@@ -11,9 +11,9 @@ const fs = require('node:fs');
   for(const [size,base,rush] of [['10x10','$789.00','$1,109.00'],['20x10','$1,419.00','$1,849.00']]) {
    await page.goto(`http://127.0.0.1:3109/services/signage/tents/${size}`);
    await page.getByTestId('tent-total').waitFor();assert.equal(await page.getByTestId('tent-total').innerText(),base);
-   await page.getByLabel('Production',{exact:true}).selectOption('next-day');assert.equal(await page.getByTestId('tent-total').innerText(),rush);
-   await page.getByLabel('Backwall',{exact:true}).selectOption('double');
-   await page.getByLabel('Sidewalls (pair)',{exact:true}).selectOption('full-double');
+   await page.getByLabel('Production',{exact:false}).selectOption('next-day');assert.equal(await page.getByTestId('tent-total').innerText(),rush);
+   await page.getByLabel('Backwall',{exact:false}).selectOption('double');
+   await page.getByLabel('Sidewalls (pair)',{exact:false}).selectOption('full-double');
    await page.getByLabel('Flag holder hardware',{exact:false}).selectOption('2');
    await page.getByLabel('Premium wheel bag',{exact:false}).check();
    await page.getByLabel('Quantity',{exact:true}).fill('2');
@@ -23,28 +23,32 @@ const fs = require('node:fs');
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth),true);
    await page.screenshot({path:`${output}/${size}-${viewport.width}.png`,fullPage:true});
    await page.getByRole('link',{name:'View Cart',exact:true}).click();
+   await page.waitForURL('**/cart');
    await page.reload();
-   assert.equal(await page.getByText('Next-day production after proof approval (not delivery)',{exact:false}).count()>0,true);
+   await page.getByText('Next-day production after proof approval (not delivery)',{exact:false}).first().waitFor();
   }
 
   for (const size of ['10x10','20x10']) {
    for (const pkg of ['frame-only','top-only']) {
-    await page.goto(`http://127.0.0.1:3109/services/signage/tents/${size}`);
-    await page.evaluate(()=>localStorage.clear());
-    await page.reload();
-    await page.getByLabel('Backwall',{exact:true}).selectOption('double');
-    await page.getByLabel('Premium wheel bag',{exact:false}).check();
-    await page.getByLabel('Package',{exact:true}).selectOption(pkg);
-    assert.equal(await page.getByLabel('Backwall',{exact:true}).count(),0);
+    const checkPage=await browser.newPage({viewport});checkPage.on('pageerror',e=>errors.push(e.message));
+    await checkPage.route('**/*',route=>{const url=new URL(route.request().url());return ['localhost','127.0.0.1'].includes(url.hostname)?route.continue():route.abort()});
+    await checkPage.goto(`http://127.0.0.1:3109/services/signage/tents/${size}`);
+    await checkPage.getByLabel('Backwall',{exact:false}).selectOption('double');
+    await checkPage.getByLabel('Premium wheel bag',{exact:false}).check();
+    await checkPage.getByLabel('Package',{exact:false}).selectOption(pkg);
+    assert.equal(await checkPage.getByLabel('Backwall',{exact:false}).count(),0);
     const expected=size==='10x10'?'$429.00':pkg==='frame-only'?'$859.00':'$849.00';
-    assert.equal(await page.getByTestId('tent-total').innerText(),expected);
-    await page.getByRole('button',{name:'Add to Cart',exact:true}).click();
-    await page.getByRole('link',{name:'View Cart',exact:true}).click();
-    await page.reload();
-    assert.equal(await page.getByRole('button',{name:'Proceed to payment',exact:true}).isEnabled(),pkg==='frame-only');
-    assert.equal(await page.getByText('Frame only — no artwork required.',{exact:true}).count(),pkg==='frame-only'?1:0);
-    assert.equal(await page.getByText('Upload artwork',{exact:true}).count(),pkg==='top-only'?1:0);
-    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+    assert.equal(await checkPage.getByTestId('tent-total').innerText(),expected);
+    await checkPage.getByRole('button',{name:'Add to Cart',exact:true}).click();
+    await checkPage.getByRole('link',{name:'View Cart',exact:true}).click();
+    await checkPage.waitForURL('**/cart');
+    await checkPage.reload();
+    await checkPage.getByText(pkg==='frame-only'?'Frame only — no artwork required.':'Upload artwork',{exact:true}).first().waitFor();
+    assert.equal(await checkPage.getByRole('button',{name:'Proceed to payment',exact:true}).isEnabled(),pkg==='frame-only');
+    assert.equal(await checkPage.getByText('Frame only — no artwork required.',{exact:true}).count(),pkg==='frame-only'?1:0);
+    assert.equal(await checkPage.getByText('Upload artwork',{exact:true}).count(),pkg==='top-only'?1:0);
+    assert.equal(await checkPage.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+    await checkPage.close();
    }
   }
   await page.goto('http://127.0.0.1:3109/services/signage');
