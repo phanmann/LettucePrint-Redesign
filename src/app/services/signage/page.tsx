@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 }
 
 const products = [
+  { title: 'Canopy Tents', image: '/images/products/tents/20x10.svg', alt: 'Original placeholder illustration of a custom canopy tent', href: '/services/signage/tents/10x10', note: '10×10 and 20×10 full printed canopy tents with frames, from $789. Shipping and tax excluded. Original placeholder art.' },
   { title: 'Banners', image: '/images/products/banners/vinyl-banner.jpg', alt: 'Lettuce Print vinyl banner secured with grommets on an exterior wall', href: '/services/signage/banners', note: 'Vinyl, mesh, fabric, retractable, luxury retractable, tabletop, and oversized banners.' },
   { title: 'Backdrops', image: '/images/products/backdrops/step-repeat.jpg', alt: 'Green Lettuce Print step-and-repeat backdrop on a freestanding event display', href: '/services/signage/backdrops', note: 'Pop-up, eurofit, SEG, and step-and-repeat backdrops for events and retail spaces.' },
 ]
@@ -30,7 +31,7 @@ export default function SignagePage() {
           </div>
         </section>
         <section className="py-16 bg-gray-50">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-5">
             {products.map((product) => (
               <Link key={product.href} href={product.href} className="group bg-white border border-gray-100 rounded-card p-7 min-w-0 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all">
                 <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-50 mb-6">
@@ -38,7 +39,7 @@ export default function SignagePage() {
                     src={product.image}
                     alt={product.alt}
                     fill
-                    sizes="(min-width: 1024px) 412px, (min-width: 768px) calc((100vw - 184px) / 2), (min-width: 640px) calc(100vw - 106px), calc(100vw - 90px)"
+                    sizes="(min-width: 1280px) 344px, (min-width: 768px) calc((100vw - 240px) / 3), (min-width: 640px) calc(100vw - 106px), calc(100vw - 90px)"
                     className="object-cover"
                   />
                 </div>

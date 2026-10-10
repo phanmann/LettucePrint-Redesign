@@ -1,3 +1,4 @@
+import { authoritativeTentPrice, isTentItem } from '@/lib/tent-pricing'
 import { authoritativeBannerPrice } from '@/lib/banner-checkout'
 import type { BannerConfiguration } from '@/lib/banner-pricing'
 import { NextRequest, NextResponse } from 'next/server'
@@ -47,6 +48,9 @@ interface CartItemBody {
   unwindEdge?: UnwindEdge
   unwindFace?: UnwindFace
   bannerConfiguration?: BannerConfiguration
+  productPath?: string
+  tentConfiguration?: unknown
+  unitPriceCents?: number
   totalCents: number
   artworkUrl?: string
   artworkFilename?: string
@@ -169,6 +173,10 @@ export async function POST(req: NextRequest) {
       }
 
       const lineItems = items.map((item) => {
+        let secureTentPrice: ReturnType<typeof authoritativeTentPrice>
+        try { secureTentPrice = authoritativeTentPrice(item) } catch (error) {
+          throw new InvalidCheckoutConfigurationError(error instanceof Error ? error.message : 'Invalid tent configuration')
+        }
         const secureStickerPrice = authoritativeStickerPrice(item)
         let secureRollLabelPrice: number | null
         try {
@@ -183,10 +191,10 @@ export async function POST(req: NextRequest) {
           throw new InvalidCheckoutConfigurationError(error instanceof Error ? error.message : 'Invalid Mylar bag configuration')
         }
         const rollLabelDirection = rollLabelDirectionForItem(item)
-        const unitAmount = secureStickerPrice ?? secureRollLabelPrice ?? secureMylarPrice ?? item.totalCents
-        const productionLabel = secureRollLabelPrice !== null || secureMylarPrice !== null
+        const unitAmount = secureTentPrice?.totalCents ?? secureStickerPrice ?? secureRollLabelPrice ?? secureMylarPrice ?? item.totalCents
+        const productionLabel = secureTentPrice?.productionLabel ?? (secureRollLabelPrice !== null || secureMylarPrice !== null
           ? 'Standard production — timing confirmed after proof approval'
-          : (RUSH_LABELS[item.rush] ?? item.rush)
+          : (RUSH_LABELS[item.rush] ?? item.rush))
         if (!Number.isInteger(unitAmount) || unitAmount <= 0) {
           throw new Error('Invalid item price')
         }
@@ -198,7 +206,7 @@ export async function POST(req: NextRequest) {
             description: [
               `Size: ${item.size}`,
               `Material: ${item.material}`,
-              `Finish: ${item.finish}`,
+              `Finish: ${secureTentPrice?.description ?? item.finish}`,
               `Production: ${productionLabel}`,
               `Qty: ${item.qty}`,
               ...(rollLabelDirection ? [`Application: ${formatRollLabelDirection(rollLabelDirection)}`] : []),
@@ -210,6 +218,7 @@ export async function POST(req: NextRequest) {
               material: item.material,
               finish: item.finish,
               rush: item.rush,
+              ...(secureTentPrice && { tentConfiguration: JSON.stringify(item.tentConfiguration), tentUnitPriceCents: String(secureTentPrice.unitPriceCents) }),
               ...(rollLabelDirection && {
                 applicationMethod: rollLabelDirection.applicationMethod,
                 ...(rollLabelDirection.unwindEdge && { unwindEdge: rollLabelDirection.unwindEdge }),
@@ -265,6 +274,10 @@ export async function POST(req: NextRequest) {
         size, quantity, material, finish, rush,
         productName, overridePriceCents, artworkUrl, artworkFilename,
       } = body
+
+      if (isTentItem({ product: productName })) {
+        throw new InvalidCheckoutConfigurationError('Please configure your tent and use cart checkout.')
+      }
 
       if (['Vinyl Banner', 'Double-Sided Banner'].includes(productName)) {
         return NextResponse.json({ error: 'Please configure your banner and request a quote for UPS shipping.', code: 'BANNER_UPS_UNAVAILABLE' }, { status: 503 })

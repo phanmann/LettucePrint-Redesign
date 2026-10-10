@@ -236,7 +236,7 @@ function CartItemRow({ item }: { item: CartItem }) {
             )}
             {item.rush !== 'standard' && (
               <span className="inline-block mt-1 text-xs bg-amber-50 text-amber-700 border border-amber-200 rounded px-2 py-0.5">
-                {item.bannerConfiguration ? item.rush : item.rush === '48hr' ? '48-hour rush' : '24-hour rush'}
+                {item.tentConfiguration ? 'Next-day production after proof approval (not delivery)' : item.bannerConfiguration ? item.rush : item.rush === '48hr' ? '48-hour rush' : '24-hour rush'}
               </span>
             )}
           </div>

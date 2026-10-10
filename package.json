@@ -15,7 +15,10 @@
     "test:sticker-pricing": "node --experimental-strip-types scripts/check-sticker-pricing.mjs",
     "test:roll-label-direction": "node --experimental-strip-types scripts/check-roll-label-direction.mjs",
     "test:roll-label-pricing": "tsx scripts/check-roll-label-pricing.ts",
-    "migrate:product-galleries": "tsx scripts/migrate-product-galleries-to-sanity.ts"
+    "migrate:product-galleries": "tsx scripts/migrate-product-galleries-to-sanity.ts",
+    "test:tent-pricing": "tsx scripts/check-tent-pricing.ts",
+    "test:tent-checkout": "tsx scripts/check-tent-checkout.ts",
+    "test:tent-browser": "node scripts/check-tent-browser.cjs"
   },
   "dependencies": {
     "@sanity/client": "^7.21.0",

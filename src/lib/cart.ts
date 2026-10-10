@@ -1,3 +1,4 @@
+import type { TentConfiguration } from '@/lib/tent-pricing'
 import type { LabelApplicationMethod, UnwindEdge, UnwindFace } from '@/lib/roll-label-direction'
 
 import type { BannerConfiguration } from '@/lib/banner-pricing'
@@ -14,6 +15,7 @@ export interface CartItem {
   applicationMethod?: LabelApplicationMethod
   unwindEdge?: UnwindEdge
   unwindFace?: UnwindFace
+  tentConfiguration?: TentConfiguration
   bannerConfiguration?: BannerConfiguration
   configuration?: Record<string, string>
   unitPriceCents?: number
