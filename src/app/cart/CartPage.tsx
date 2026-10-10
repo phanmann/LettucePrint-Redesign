@@ -370,8 +370,8 @@ export default function CartPage() {
             <Link href="/services/marketing-materials/business-cards/standard" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-lp-green transition-colors">
               <Plus size={14} /> Add business cards
             </Link>
-            <Link href="/services/marketing-materials/flyers/full-page" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-lp-green transition-colors">
-              <Plus size={14} /> Add flyers
+            <Link href="/services/marketing-materials/flyers" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-lp-green transition-colors">
+              <Plus size={14} /> Request flyer quote
             </Link>
             <Link href="/services/marketing-materials/postcards/standard" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-lp-green transition-colors">
               <Plus size={14} /> Add postcards

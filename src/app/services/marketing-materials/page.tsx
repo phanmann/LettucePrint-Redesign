@@ -13,10 +13,12 @@ export const metadata: Metadata = {
 
 const products = [
   { title: 'Business Cards', href: '/services/marketing-materials/business-cards', note: 'Standard, premium, soft-touch, foil, and spot UV.' },
-  { title: 'Flyers & Posters', href: '/services/marketing-materials/flyers', note: 'Flyers plus standard 11×17, 18×24, and 24×36 posters.' },
+  { title: 'Flyers', href: '/services/marketing-materials/flyers', note: 'Choose a size, paper, finish, and print sides.' },
+  { title: 'Posters', href: '/services/marketing-materials/posters', note: 'Choose 11×17, 18×24, or 24×36 posters.' },
   { title: 'Postcards', href: '/services/marketing-materials/postcards', note: 'Direct mail, event handouts, and retail inserts.' },
-  { title: 'Brochures', href: '/services/marketing-materials/brochures', note: 'Tri-fold, bi-fold, tabloid, soft-touch, and uncoated.' },
-  { title: 'Booklets', href: '/services/marketing-materials/booklets', note: 'Saddle-stitch and perfect-bound catalogs, zines, and menus.' },
+  { title: 'Bi-Fold Brochures', href: '/services/marketing-materials/brochures#bi-fold', note: 'Choose letter or tabloid flat and finished sizes.' },
+  { title: 'Tri-Fold Brochures', href: '/services/marketing-materials/brochures#tri-fold', note: 'Choose letter or legal flat and finished sizes.' },
+  { title: 'Booklets', href: '/services/marketing-materials/booklets', note: 'Saddle stitch, Wire-O, and soft-cover perfect bound.' },
 ]
 
 export default function MarketingMaterialsPage() {

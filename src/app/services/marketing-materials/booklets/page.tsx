@@ -1,141 +1,48 @@
-'use client'
-
-import { useState } from 'react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
-import ProductCard from '@/components/shop/ProductCard'
-import { motion, AnimatePresence } from 'framer-motion'
+import ConsolidatedQuoteCard from '@/components/marketing/ConsolidatedQuoteCard'
 
-const CATEGORIES = [
-  {
-    id: 'saddle-stitch',
-    label: 'Saddle-Stitched Booklets',
-    description: 'Staple-bound booklets for catalogs, lookbooks, event programs, and product guides — the most cost-effective multi-page format.',
-    products: [
-      {
-        id: 'booklet-ss-55x85',
-        href: '/services/marketing-materials/booklets/saddle-stitch-55x85',
-        name: 'Saddle-Stitch Booklet',
-        subtitle: '5.5" × 8.5"',
-        description: 'Half-size booklet — compact, easy to carry, and perfect for menus, mini-catalogs, and pocket guides.',
-        features: ['80 lb. gloss or matte text', 'Full-color cover & interior', 'Saddle-stitch binding', '8–64 page range'],
-        turnaround: '5–7 business days',
-        color: '#E8F5F1',
-        image: '/images/products/booklets/saddle-stitch-55x85/card.webp',
-      },
-      {
-        id: 'booklet-ss-85x11',
-        href: '/services/marketing-materials/booklets/saddle-stitch-85x11',
-        name: 'Saddle-Stitch Booklet',
-        subtitle: '8.5" × 11"',
-        description: 'Full letter-size booklet — the standard for lookbooks, product catalogs, annual reports, and event programs.',
-        features: ['80 lb. gloss or matte text', 'Full-color cover & interior', 'Saddle-stitch binding', '8–80 page range'],
-        turnaround: '5–7 business days',
-        color: '#F5F0E8',
-        image: '/images/products/booklets/saddle-stitch-85x11/card.webp',
-      },
-      {
-        id: 'booklet-ss-square',
-        href: '/services/marketing-materials/booklets/saddle-stitch-square',
-        name: 'Square Saddle-Stitch Booklet',
-        subtitle: '8.5" × 8.5"',
-        description: 'Square format for a modern, editorial feel. Stands out on a shelf and works especially well for photo-heavy content.',
-        features: ['80 lb. gloss or matte text', 'Full-color throughout', 'Saddle-stitch binding', '8–48 page range'],
-        turnaround: '5–7 business days',
-        color: '#E8F0F5',
-        image: '/images/products/booklets/saddle-stitch-square/card.webp',
-      },
-    ],
-  },
-  {
-    id: 'perfect-bound',
-    label: 'Perfect Bound Booklets',
-    description: 'Glue-bound with a flat spine — the format for catalogs, magazines, and any booklet you want to look and feel like a real publication.',
-    products: [
-      {
-        id: 'booklet-pb-85x11',
-        href: '/services/marketing-materials/booklets/perfect-bound-85x11',
-        name: 'Perfect Bound Booklet',
-        subtitle: '8.5" × 11"',
-        description: 'Flat spine, square edges, and a substantial feel. The go-to for product catalogs, brand books, and trade publications.',
-        features: ['100 lb. cover stock', '80 lb. interior text', 'Perfect bind (glued spine)', 'Full-color throughout', '48+ pages'],
-        turnaround: '7–10 business days',
-        color: '#F0E8F5',
-        image: '/images/products/booklets/booklet-closed.jpg',
-      },
-      {
-        id: 'booklet-pb-6x9',
-        href: '/services/marketing-materials/booklets/perfect-bound-6x9',
-        name: 'Perfect Bound Booklet',
-        subtitle: '6" × 9"',
-        description: 'Compact trade-book format. Clean and professional for B2B collateral, directories, and editorial-style publications.',
-        features: ['100 lb. cover stock', '80 lb. interior text', 'Perfect bind (glued spine)', 'Full-color throughout', '48+ pages'],
-        turnaround: '7–10 business days',
-        color: '#E8F5EF',
-        image: '/images/products/booklets/booklet-closed.jpg',
-      },
-    ],
-  },
-]
-
+const saddleSizes = { label: 'Size', choices: [
+  { value: '55x85', label: '5.5" × 8.5"' },
+  { value: '85x11', label: '8.5" × 11"' },
+  { value: 'square', label: '8.5" × 8.5" square' },
+] }
+const perfectSizes = { label: 'Size', choices: [
+  { value: '6x9', label: '6" × 9"' },
+  { value: '85x11', label: '8.5" × 11"' },
+] }
+const cover = { label: 'Cover finish', choices: [
+  { value: 'gloss', label: 'Gloss' }, { value: 'matte', label: 'Matte' },
+  { value: 'soft-touch', label: 'Soft-touch (quote required)' },
+] }
+const interior = { label: 'Interior paper', choices: [
+  { value: '60-uncoated', label: '60 lb. uncoated' },
+  { value: '70-text', label: '70 lb. text' },
+] }
 
 export default function BookletsPage() {
-  const [activeCategory, setActiveCategory] = useState('all')
-  const filtered = activeCategory === 'all' ? CATEGORIES : CATEGORIES.filter(c => c.id === activeCategory)
-
-  return (
-    <>
-      <Navbar />
-      <main>
-        <section className="pt-[calc(72px+4rem)] pb-12 bg-white border-b border-gray-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-4">Marketing Materials</p>
-            <h1 className="text-display font-semibold text-gray-900 mb-4 max-w-2xl">
-              Booklets built to be read.
-            </h1>
-            <p className="text-body-lg text-gray-500 max-w-xl mb-8">
-              Saddle-stitched or perfect-bound — we print product catalogs, lookbooks, event programs, and brand books that hold up.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              <button onClick={() => setActiveCategory('all')} className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-150 ${activeCategory === 'all' ? 'bg-lp-green text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>All Booklets</button>
-              {CATEGORIES.map(cat => (
-                <button key={cat.id} onClick={() => setActiveCategory(cat.id)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-150 ${activeCategory === cat.id ? 'bg-lp-green text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>{cat.label}</button>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-            <AnimatePresence mode="wait">
-              {filtered.map(category => (
-                <motion.div key={category.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.2 }}>
-                  <div className="mb-8">
-                    <h2 className="text-h2 font-semibold text-gray-900 mb-2">{category.label}</h2>
-                    <p className="text-body text-gray-500 max-w-2xl">{category.description}</p>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {category.products.map(product => (
-                      <ProductCard key={product.id} {...product} categoryLabel={category.label} href={product.href} />
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-        </section>
-
-        <section className="py-16 bg-white border-t border-gray-100">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-h2 font-semibold text-gray-900 mb-4">Have a specific page count or binding in mind?</h2>
-            <p className="text-body text-gray-500 mb-8">We&apos;ll spec it out for you — page count, paper, binding, finish. Just tell us what it&apos;s for.</p>
-            <Link href="/get-quote"><Button size="lg">Talk to Us</Button></Link>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
-  )
+  return <><Navbar /><main className="pt-[72px]">
+    <section className="border-b border-gray-100 bg-white py-16"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-lp-green">Marketing Materials</p>
+      <h1 className="text-display font-semibold text-gray-900">Booklets built to be read.</h1>
+      <p className="mt-4 max-w-2xl text-body-lg text-gray-500">One booklet listing, with binding, size, paper, and page count selected for your project.</p>
+    </div></section>
+    <section className="bg-gray-50 py-16"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <ConsolidatedQuoteCard product="Booklets" description="Saddle-stitched, Wire-O, or soft-cover perfect-bound booklets. Choose the construction that fits your project." image="/images/products/booklets/booklet-open.jpg"
+        variants={[
+          { label: 'Saddle Stitch', fields: [saddleSizes, { label: 'Page count', choices: [
+            { value: '8', label: '8 pages' }, { value: '16', label: '16 pages' }, { value: '24', label: '24 pages' }, { value: '32', label: '32 pages' }, { value: 'custom', label: 'Custom page count' },
+          ] }], note: 'Saddle-stitch page counts must be in multiples of four; we will confirm the final count.' },
+          { label: 'Wire-O', fields: [saddleSizes, { label: 'Page count', choices: [
+            { value: '16', label: '16 pages' }, { value: '24', label: '24 pages' }, { value: '32', label: '32 pages' }, { value: '48', label: '48 pages' }, { value: 'custom', label: 'Custom page count' },
+          ] }], note: 'Wire-O capacity depends on paper thickness; we will confirm the final specification.' },
+          { label: 'Soft-Cover Perfect Bound', fields: [perfectSizes, { label: 'Page count', choices: [
+            { value: '48', label: '48 pages' }, { value: '64', label: '64 pages' }, { value: '96', label: '96 pages' }, { value: 'custom', label: 'Custom page count (48+)' },
+          ] }], note: 'Perfect binding starts at 48 pages; spine and paper specifications are confirmed in your quote.' },
+        ]} commonFields={[cover, interior]} />
+    </div></section>
+    <section className="border-t border-gray-100 bg-white py-16 text-center"><h2 className="mb-4 text-h2 font-semibold text-gray-900">Need a specialty binding?</h2><Link href="/get-quote"><Button size="lg">Talk to Us</Button></Link></section>
+  </main><Footer /></>
 }

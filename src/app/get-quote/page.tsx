@@ -15,6 +15,7 @@ interface GetQuotePageProps {
 
 export default async function GetQuotePage({ searchParams }: GetQuotePageProps) {
   const params = await searchParams
+  const marketingDetails = typeof params.marketingDetails === 'string' ? params.marketingDetails.slice(0, 1200) : ''
   const isRollLabelHelp = params.service === 'stickers-labels' && params.product === 'roll-labels'
   const isBannerCartQuote = params.service === 'signage' && params.product === 'banners'
   const isBackdropCartQuote = params.service === 'signage' && (params.product === 'backdrops' || params.product === 'banners-backdrops')
@@ -23,7 +24,14 @@ export default async function GetQuotePage({ searchParams }: GetQuotePageProps) 
     const value = params[key]
     return (Array.isArray(value) ? value[0] : value ?? '').slice(0, max)
   }
-  const initialValues: QuoteFormInitialValues | undefined = isRollLabelHelp
+  const initialValues: QuoteFormInitialValues | undefined = marketingDetails
+    ? {
+        service: 'Other',
+        projectDetails: { details: marketingDetails },
+        contextTitle: 'Marketing materials selected.',
+        contextLabel: 'Your print options are filled in. Add your timeline and contact details to request a quote.',
+      }
+    : isRollLabelHelp
     ? {
         service: 'Stickers & Labels' as const,
         projectDetails: {
@@ -69,7 +77,7 @@ export default async function GetQuotePage({ searchParams }: GetQuotePageProps) 
 
             {/* Left — Form */}
             <div className="lg:col-span-2">
-              <QuoteForm initialValues={initialValues} />
+              <QuoteForm initialValues={initialValues} lockService={Boolean(marketingDetails)} />
             </div>
 
             {/* Right — Sidebar */}
