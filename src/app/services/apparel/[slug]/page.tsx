@@ -5,7 +5,6 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Button from '@/components/ui/Button'
 import QuoteForm from '@/components/quote/QuoteForm'
-import DtgQuoteForm from '@/components/quote/DtgQuoteForm'
 
 type ApparelService = {
   slug: string
@@ -112,7 +111,7 @@ export default async function ApparelServicePage({ params }: { params: Promise<{
             ) : service.slug === 'embroidery' ? (
               <QuoteForm initialValues={{ service: 'Embroidery', projectDetails: {} }} lockService />
             ) : service.slug === 'dtg' ? (
-              <DtgQuoteForm />
+              <QuoteForm initialValues={{ service: 'DTG Printing', projectDetails: {} }} lockService />
             ) : (
               <div className="text-center"><Link href="/get-quote"><Button size="lg">Request a Quote</Button></Link></div>
             )}
