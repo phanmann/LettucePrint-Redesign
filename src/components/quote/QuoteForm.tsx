@@ -13,6 +13,7 @@ type ServiceType =
   | 'Packaging'
   | 'Signage & Displays'
   | 'Screen Printing'
+  | 'Embroidery'
   | 'Large Format'
   | 'Other'
 
@@ -92,11 +93,12 @@ function getProjectFields(service: ServiceType): {
         { key: 'details',     label: 'Anything else',   type: 'textarea', placeholder: 'Indoor/outdoor, mounting, double-sided…' },
       ]
     case 'Screen Printing':
+    case 'Embroidery':
       return [
         { key: 'garmentType',       label: 'Garment type',          type: 'select',   options: ['T-shirt', 'Hoodie', 'Long sleeve', 'Tote bag', 'Hat', 'Other'], required: true },
         { key: 'quantity',          label: 'Quantity',              type: 'text',     placeholder: 'e.g. 48', required: true },
-        { key: 'printLocations',    label: 'Print locations',       type: 'select',   options: Array.from({ length: MAX_PRINT_LOCATIONS }, (_, index) => String(index + 1)), required: true },
-        { key: 'details',           label: 'Anything else',         type: 'textarea', placeholder: 'Garment brand preference, sizes breakdown, special inks…' },
+        { key: 'printLocations',    label: service === 'Embroidery' ? 'Embroidery locations' : 'Print locations',       type: 'select',   options: Array.from({ length: MAX_PRINT_LOCATIONS }, (_, index) => String(index + 1)), required: true },
+        { key: 'details',           label: 'Anything else',         type: 'textarea', placeholder: service === 'Embroidery' ? 'Garment brand preference, sizes breakdown, thread preferences…' : 'Garment brand preference, sizes breakdown, special inks…' },
       ]
     case 'Large Format':
       return [
@@ -168,7 +170,7 @@ export default function QuoteForm({ initialValues, lockService = false }: QuoteF
   const setDetail = (key: string, value: string) =>
     setForm(f => {
       const projectDetails = { ...f.projectDetails, [key]: value }
-      if (f.service === 'Screen Printing' && key === 'printLocations') {
+      if ((f.service === 'Screen Printing' || f.service === 'Embroidery') && key === 'printLocations') {
         const count = printLocationCount(value)
         for (const detailKey of Object.keys(projectDetails)) {
           const match = /^location(\d+)(Colors|Name)$/.exec(detailKey)
@@ -188,7 +190,7 @@ export default function QuoteForm({ initialValues, lockService = false }: QuoteF
       if (!form.service) return false
       const fields = getProjectFields(form.service)
       return fields.filter(f => f.required).every(f => !!form.projectDetails[f.key]?.trim())
-        && (form.service !== 'Screen Printing' || !validateScreenprintDetails(form.projectDetails))
+        && ((form.service !== 'Screen Printing' && form.service !== 'Embroidery') || !validateScreenprintDetails(form.projectDetails, form.service === 'Embroidery' ? 'thread' : 'ink'))
     }
     if (step === 2) return !!form.timeline
     if (step === 3) return !!(form.contact.name.trim() && form.contact.email.trim())
@@ -346,7 +348,7 @@ export default function QuoteForm({ initialValues, lockService = false }: QuoteF
                           className="w-full px-4 py-3 rounded-input border border-gray-200 text-small focus:outline-none focus:border-lp-green focus:ring-2 focus:ring-lp-green/10 bg-white"
                         />
                       )}
-                      {form.service === 'Screen Printing' && field.key === 'printLocations' &&
+                      {(form.service === 'Screen Printing' || form.service === 'Embroidery') && field.key === 'printLocations' &&
                         Array.from({ length: printLocationCount(form.projectDetails.printLocations) }, (_, index) => {
                           const number = index + 1
                           return (
@@ -365,7 +367,7 @@ export default function QuoteForm({ initialValues, lockService = false }: QuoteF
                                 </div>
                                 <div>
                                   <label htmlFor={`location${number}Colors`} className="block text-small font-semibold text-gray-700 mb-2">
-                                    Number of ink colors <span className="text-lp-green">*</span>
+                                    Number of {form.service === 'Embroidery' ? 'thread' : 'ink'} colors <span className="text-lp-green">*</span>
                                   </label>
                                   <select id={`location${number}Colors`} required
                                     value={form.projectDetails[`location${number}Colors`] ?? ''}
