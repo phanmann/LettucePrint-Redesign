@@ -28,22 +28,6 @@ const products = [
     badge: 'Bulk Ready',
   },
   {
-    name: 'Business Cards',
-    href: '/services/marketing-materials/business-cards',
-    image: 'https://drive.usercontent.google.com/download?id=1LYzqKl5GRanrRWxBdsn_tnLxmp2dau-D&export=view',
-    description: 'Premium business cards with clean stocks, sharp color, and finishing options that make intros feel polished.',
-    features: ['Premium stocks', 'Soft touch options', 'Fast reorders'],
-    badge: 'Classic',
-  },
-  {
-    name: 'Flyers & Posters',
-    href: '/services/marketing-materials/flyers',
-    image: '/images/products/flyers/flyer-full-page-card.jpg',
-    description: 'Full-color flyers and standard posters for launches, menus, promotions, events, and retail displays.',
-    features: ['Multiple sizes', 'Gloss or matte', 'Event ready'],
-    badge: 'Fast Print',
-  },
-  {
     name: 'Banners',
     href: '/services/signage/banners',
     image: '/images/products/banners/vinyl-banner.jpg',
