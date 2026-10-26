@@ -11,7 +11,7 @@ import CTABanner from '@/components/sections/CTABanner'
 export default function HomePage() {
   return (
     <>
-      <Navbar />
+      <Navbar dropdownOnlyCategories />
       <main>
         <Hero />
         <TrustBar />

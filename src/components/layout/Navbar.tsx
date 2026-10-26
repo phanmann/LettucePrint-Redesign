@@ -75,11 +75,15 @@ function CartBadge() {
   )
 }
 
-export default function Navbar() {
+export default function Navbar({ dropdownOnlyCategories = false }: { dropdownOnlyCategories?: boolean }) {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [mobileCategory, setMobileCategory] = useState<string | null>(null)
+  const desktopNavRef = useRef<HTMLElement>(null)
+  const desktopTriggerRefs = useRef<Record<string, HTMLButtonElement | null>>({})
+  const mobileTriggerRefs = useRef<Record<string, HTMLButtonElement | null>>({})
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const searchInputRef = useRef<HTMLInputElement>(null)
@@ -101,6 +105,15 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (!dropdownOnlyCategories) return
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      if (!desktopNavRef.current?.contains(event.target as Node)) setActiveDropdown(null)
+    }
+    document.addEventListener('pointerdown', closeOnOutsidePointer)
+    return () => document.removeEventListener('pointerdown', closeOnOutsidePointer)
+  }, [dropdownOnlyCategories])
 
   // Auto-focus input when search opens
   useEffect(() => {
@@ -168,8 +181,8 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-6">
-              {navLinks.map((link) => {
+            <nav ref={desktopNavRef} className="hidden lg:flex items-center gap-6">
+              {navLinks.map((link, index) => {
                 const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
                 return (
                 <div
@@ -177,7 +190,37 @@ export default function Navbar() {
                   className="relative"
                   onMouseEnter={() => link.children && openDropdown(link.label)}
                   onMouseLeave={closeDropdown}
+                  onBlur={(event) => {
+                    if (dropdownOnlyCategories && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                      setActiveDropdown(null)
+                    }
+                  }}
+                  onKeyDown={(event) => {
+                    if (dropdownOnlyCategories && event.key === 'Escape') {
+                      event.preventDefault()
+                      setActiveDropdown(null)
+                      desktopTriggerRefs.current[link.label]?.focus()
+                    }
+                  }}
                 >
+                  {dropdownOnlyCategories ? (
+                    <button
+                      type="button"
+                      ref={(element) => { desktopTriggerRefs.current[link.label] = element }}
+                      aria-expanded={activeDropdown === link.label}
+                      aria-controls={`desktop-category-${index}`}
+                      onClick={() => openDropdown(link.label)}
+                      className={cn(
+                        'text-[11px] font-medium transition-colors duration-200 tracking-wide pb-0.5 cursor-pointer',
+                        'relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:rounded-full after:transition-all after:duration-200',
+                        isActive
+                          ? 'text-lp-green after:bg-lp-green after:opacity-100'
+                          : 'text-gray-700 hover:text-lp-green after:bg-lp-green after:opacity-0 hover:after:opacity-100'
+                      )}
+                    >
+                      {link.label}
+                    </button>
+                  ) : (
                   <Link
                     href={link.href}
                     className={cn(
@@ -190,16 +233,19 @@ export default function Navbar() {
                   >
                     {link.label}
                   </Link>
+                  )}
 
                   {/* Dropdown */}
-                  {link.children && activeDropdown === link.label && (
+                  {link.children && (dropdownOnlyCategories || activeDropdown === link.label) && (
                     <div
+                      id={`desktop-category-${index}`}
+                      hidden={activeDropdown !== link.label}
                       className="absolute top-full left-0 w-52 bg-white rounded-card shadow-nav border border-gray-100 py-2 z-50"
                       onMouseEnter={() => openDropdown(link.label)}
                       onMouseLeave={closeDropdown}
                     >
                       {/* Invisible bridge covers the gap between trigger and menu */}
-                      <div className="absolute -top-3 left-0 right-0 h-3" />
+                      <div className={cn("absolute -top-3 left-0 right-0 h-3", dropdownOnlyCategories && "pointer-events-none")} />
                       {link.children.map((child) => {
                         const isChildActive = pathname === child.href
                         return (
@@ -326,8 +372,27 @@ export default function Navbar() {
               </button>
             </div>
             <nav className="flex-1 overflow-y-auto py-4">
-              {navLinks.map((link) => (
+              {navLinks.map((link, index) => (
                 <div key={link.label}>
+                  {dropdownOnlyCategories ? (
+                    <button
+                      type="button"
+                      ref={(element) => { mobileTriggerRefs.current[link.label] = element }}
+                      aria-expanded={mobileCategory === link.label}
+                      aria-controls={`mobile-category-${index}`}
+                      onClick={() => setMobileCategory((current) => current === link.label ? null : link.label)}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Escape') {
+                          event.preventDefault()
+                          setMobileCategory(null)
+                          mobileTriggerRefs.current[link.label]?.focus()
+                        }
+                      }}
+                      className="block w-full text-left px-6 py-4 text-h4 font-semibold text-gray-900 border-b border-gray-50 hover:text-lp-green transition-colors"
+                    >
+                      {link.label}
+                    </button>
+                  ) : (
                   <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
@@ -335,8 +400,9 @@ export default function Navbar() {
                   >
                     {link.label}
                   </Link>
+                  )}
                   {link.children && (
-                    <div className="bg-gray-50">
+                    <div id={`mobile-category-${index}`} hidden={dropdownOnlyCategories && mobileCategory !== link.label} className="bg-gray-50">
                       {link.children.map((child) => (
                         <Link
                           key={child.href}
