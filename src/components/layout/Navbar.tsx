@@ -26,7 +26,6 @@ const allProducts = [
   { label: 'Mylar Bags',                   href: '/services/packaging/mylar-bags',                          tags: ['mylar', 'bags', 'packaging', 'cannabis'] },
   { label: 'Custom Packaging',             href: '/services/packaging/custom-packaging',                    tags: ['packaging', 'custom', 'boxes'] },
   { label: 'Vinyl Banners',               href: '/services/signage/banners/vinyl-banner',                  tags: ['banners', 'vinyl', 'signage', 'outdoor'] },
-  { label: 'Double-Sided Banners', href: '/services/signage/banners/double-sided-banner', tags: ['banners', 'double-sided', 'blockout', 'pole', 'signage'] },
   { label: 'Mesh Banners',                href: '/services/signage/banners/mesh-banner',                   tags: ['banners', 'mesh', 'signage', 'outdoor'] },
   { label: 'Fabric Banners',              href: '/services/signage/banners/fabric-banner',                 tags: ['banners', 'fabric', 'signage'] },
   { label: 'Retractable Banners',         href: '/services/signage/banners/retractable-standard',          tags: ['banners', 'retractable', 'signage', 'events'] },
@@ -53,7 +52,6 @@ const navLinks: NavLink[] = [
   ]},
   { label: 'Signs & Banners', href: '/services/signage', children: [
     { label: 'Banners', href: '/services/signage/banners' },
-    { label: 'Double-Sided Banners', href: '/services/signage/banners/double-sided-banner' },
     { label: 'Backdrops', href: '/services/signage/backdrops' },
     { label: 'SEG Light Displays', href: '/services/signage/backdrops' },
   ]},

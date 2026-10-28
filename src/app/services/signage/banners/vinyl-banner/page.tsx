@@ -26,7 +26,6 @@ export default function Page() {
     ]}
     included={['Digital proof before production', 'Full-color CMYK printing', 'Hemmed edges + grommets every 24 in', 'Quality check before ship']}
     relatedProducts={[
-      { href: '/services/signage/banners/double-sided-banner', name: 'Double-Sided Banner', description: 'Blockout vinyl printed on both sides.' },
       { href: '/services/signage/banners', name: 'All Banners', description: 'Explore the banner lineup.' },
     ]}
   />

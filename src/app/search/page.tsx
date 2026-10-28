@@ -18,7 +18,6 @@ const allProducts = [
   { label: 'Mylar Bags', href: '/services/packaging/mylar-bags', tags: ['mylar', 'bags', 'packaging', 'cannabis'] },
   { label: 'Custom Packaging', href: '/services/packaging/custom-packaging', tags: ['packaging', 'custom', 'boxes'] },
   { label: 'Banners', href: '/services/signage/banners', tags: ['banners', 'signage', 'large format'] },
-  { label: 'Double-Sided Banners', href: '/services/signage/banners/double-sided-banner', tags: ['banners', 'double-sided', 'blockout', 'pole', 'signage'] },
   { label: 'Retractable Banners', href: '/services/signage/banners/retractable-standard', tags: ['banners', 'retractable', 'pull-up', 'signage', 'events'] },
   { label: 'X-Stand Banners', href: '/services/signage/banners/x-stand-24x63', tags: ['banners', 'x-stand', 'x-banner', 'signage', 'events'] },
   { label: 'Backdrops', href: '/services/signage/backdrops', tags: ['backdrops', 'signage', 'large format', 'events'] },

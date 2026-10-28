@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/services/signage/banners/double-sided-banner',
+        destination: '/services/signage/banners',
+        permanent: true,
+      },
+      {
         source: '/services/packaging/boxes',
         destination: '/services/packaging',
         permanent: true,

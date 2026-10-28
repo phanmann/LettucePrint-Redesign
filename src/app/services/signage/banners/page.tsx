@@ -82,17 +82,6 @@ const CATEGORIES = [
         image: '/images/products/banners/vinyl-banner.jpg',
       },
       {
-        id: 'hanging-double-sided',
-        href: '/services/signage/banners/double-sided-banner',
-        name: 'Double-Sided Banner',
-        subtitle: 'Custom widths 12–126 in',
-        description: '18 oz blockout vinyl, matte both sides. No show-through. Placeholder illustration shown.',
-        features: ['Indoor & outdoor use', 'Hem + grommets every 24 in', 'Pole pockets available', 'From $59'],
-        turnaround: 'Ships 3 business days after proof approval + UPS transit',
-        color: '#E8F5F1',
-        image: '/images/products/banners/double-sided-placeholder.svg',
-      },
-      {
         id: 'hanging-fabric',
         href: '/services/signage/banners/fabric-banner',
         name: 'Fabric Banner',
