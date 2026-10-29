@@ -4,28 +4,21 @@ import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { urlFor } from '@/sanity/image'
+import { useInitialProductGallery, type CmsProductGallery } from './ProductGalleryProvider'
 
 interface ProductImageGalleryProps {
   background?: 'white' | 'muted'
   images: { src: string; alt: string; fit?: 'cover' | 'contain'; padding?: number }[]
 }
 
-interface CmsProductGalleryImage {
-  image?: unknown
-  alt?: string
-  fit?: 'cover' | 'contain'
-  padding?: number
-}
-
-interface CmsProductGallery {
-  galleryBackground?: 'white' | 'muted'
-  images?: CmsProductGalleryImage[]
-}
-
-export default function ProductImageGallery({ images, background = 'muted' }: ProductImageGalleryProps) {
+export default function ProductImageGallery(props: ProductImageGalleryProps) {
   const pathname = usePathname()
+  return <ProductImageGalleryForPath key={pathname} pathname={pathname} {...props} />
+}
+
+function ProductImageGalleryForPath({ images, background = 'muted', pathname }: ProductImageGalleryProps & { pathname: string }) {
   const [active, setActive] = useState(0)
-  const [cmsGallery, setCmsGallery] = useState<CmsProductGallery | null>(null)
+  const [cmsGallery, setCmsGallery] = useState<CmsProductGallery | null>(useInitialProductGallery(pathname))
 
   useEffect(() => {
     let cancelled = false
@@ -41,7 +34,7 @@ export default function ProductImageGallery({ images, background = 'muted' }: Pr
         if (!cancelled) setCmsGallery(gallery)
       })
       .catch(() => {
-        if (!cancelled) setCmsGallery(null)
+        // Keep the server-resolved gallery on a transient refresh failure.
       })
 
     return () => {
@@ -78,7 +71,7 @@ export default function ProductImageGallery({ images, background = 'muted' }: Pr
   const activeIndex = Math.min(active, resolvedImages.length - 1)
 
   return (
-    <div className="mb-8">
+    <div className="mb-8" data-product-gallery={pathname} data-gallery-source={cmsImages.length > 0 ? 'sanity' : 'fallback'}>
       {/* Main image */}
       <div className={`relative w-full aspect-square rounded-card overflow-hidden ${resolvedBackground === 'white' ? 'bg-white' : 'bg-gray-50'} border border-gray-100 mb-3`}>
         <Image

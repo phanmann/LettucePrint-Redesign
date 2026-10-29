@@ -3,16 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/image'
-
-interface CmsProductPreview {
-  galleryBackground?: 'white' | 'muted'
-  images?: {
-    image?: unknown
-    alt?: string
-    fit?: 'cover' | 'contain'
-    padding?: number
-  }[]
-}
+import { useInitialProductGallery, type CmsProductGallery } from './ProductGalleryProvider'
 
 interface ProductPreviewImageProps {
   productPath: string
@@ -24,7 +15,11 @@ interface ProductPreviewImageProps {
   priority?: boolean
 }
 
-export default function ProductPreviewImage({
+export default function ProductPreviewImage(props: ProductPreviewImageProps) {
+  return <ProductPreviewImageForPath key={props.productPath} {...props} />
+}
+
+function ProductPreviewImageForPath({
   productPath,
   fallbackSrc,
   alt,
@@ -33,7 +28,7 @@ export default function ProductPreviewImage({
   sizes,
   priority = false,
 }: ProductPreviewImageProps) {
-  const [cmsPreview, setCmsPreview] = useState<CmsProductPreview | null>(null)
+  const [cmsPreview, setCmsPreview] = useState<CmsProductGallery | null>(useInitialProductGallery(productPath))
 
   useEffect(() => {
     let cancelled = false
@@ -44,13 +39,13 @@ export default function ProductPreviewImage({
     })
       .then(response => {
         if (!response.ok) throw new Error(`Product preview request failed: ${response.status}`)
-        return response.json() as Promise<CmsProductPreview | null>
+        return response.json() as Promise<CmsProductGallery | null>
       })
       .then(preview => {
         if (!cancelled) setCmsPreview(preview)
       })
       .catch(() => {
-        if (!cancelled) setCmsPreview(null)
+        // Keep the server-resolved image on a transient refresh failure.
       })
 
     return () => {
