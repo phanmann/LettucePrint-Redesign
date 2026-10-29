@@ -94,7 +94,7 @@ export default function ShopAllSection() {
               </div>
 
               <div className="p-4 sm:p-6 flex flex-col flex-1">
-                <h3 className="text-base sm:text-h4 leading-tight font-semibold text-gray-900 mb-3 group-hover:text-lp-green transition-colors">
+                <h3 className="text-base sm:text-[20px] sm:leading-[1.1] leading-tight font-semibold text-gray-900 mb-3 group-hover:text-lp-green transition-colors">
                   {product.name}
                 </h3>
                 <p className="hidden sm:block text-small text-gray-600 leading-relaxed mb-5">
