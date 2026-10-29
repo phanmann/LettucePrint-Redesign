@@ -212,10 +212,6 @@ export default function PremiumPostcardsPage() {
               </div>
 
               <ProductImageGallery
-                images={[
-                  { src: 'https://drive.usercontent.google.com/download?id=1wnC7cM8WjOAV5H2gx3DK3u9gr5WLmx4A&export=view', alt: 'Soft touch postcards' },
-                  { src: 'https://drive.usercontent.google.com/download?id=16GP_uv16UVWwZyO_WAvAZDfCMoMRsCoE&export=view', alt: 'Spot UV postcard sample' },
-                ]}
               />
               {/* Mobile-only configurator — inline after gallery */}
               <div className="lg:hidden mb-8">

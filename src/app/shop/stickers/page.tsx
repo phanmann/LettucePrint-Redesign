@@ -87,10 +87,6 @@ export default function StickersPage() {
 
               {/* Product Image Gallery */}
               <ProductImageGallery
-                images={[
-                  { src: '/images/products/stickers/lettuce-stickers.png', alt: 'Lettuce Print custom stickers' },
-                  { src: '/images/products/stickers/holo-stickers.png', alt: 'Holographic stickers' },
-                ]}
               />
 
               {/* Mobile-only calculator — inline after gallery */}

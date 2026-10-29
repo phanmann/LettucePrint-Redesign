@@ -23,7 +23,6 @@ const CATEGORIES = [
         features: ['13 oz vinyl or Oxford fabric', 'Wrinkle-resistant fabric option', 'Luxury adjustable telescopic stand', 'Team-reviewed proof', 'Kit, graphic or hardware only'],
         turnaround: '3 business days after proof + UPS transit',
         color: '#E8F5F1',
-        image: '/images/products/backdrops/step-repeat.jpg',
       },
       {
         id: 'sr-10x8',
@@ -34,7 +33,6 @@ const CATEGORIES = [
         features: ['13 oz vinyl or Oxford fabric', 'Wrinkle-resistant fabric option', 'Luxury adjustable telescopic stand', 'Team-reviewed proof', 'Kit, graphic or hardware only'],
         turnaround: '3 business days after proof + UPS transit',
         color: '#F5F0E8',
-        image: '/images/products/backdrops/step-repeat.jpg',
       },
     ],
   },
@@ -52,7 +50,6 @@ const CATEGORIES = [
         features: ['Stretch dye-sublimation fabric', 'Pillow-case edge fit', 'Aluminum extrusion frame', 'No visible hardware', 'Carry bag included'],
         turnaround: '3 business days after proof + UPS transit',
         color: '#E8F0F5',
-        image: '/images/products/backdrops/seg-lightbox.jpg',
       },
       {
         id: 'eurofit-10x8',
@@ -63,7 +60,6 @@ const CATEGORIES = [
         features: ['Stretch dye-sublimation fabric', 'Pillow-case edge fit', 'Aluminum extrusion frame', 'No visible hardware', 'Carry bag included'],
         turnaround: '3 business days after proof + UPS transit',
         color: '#F0E8F5',
-        image: '/images/products/backdrops/seg-lightbox.jpg',
       },
     ],
   },
@@ -81,7 +77,6 @@ const CATEGORIES = [
         features: ['Dye-sublimated fabric graphic', 'Spring-loaded frame', 'Collapses to carry case', 'Reusable graphic panels', 'Setup under 10 minutes'],
         turnaround: '3 business days after proof + UPS transit',
         color: '#E8F5EF',
-        image: '/images/products/backdrops/popup.jpg',
       },
       {
         id: 'popup-10x8',
@@ -92,7 +87,6 @@ const CATEGORIES = [
         features: ['Dye-sublimated fabric graphic', 'Spring-loaded frame', 'Collapses to carry case', 'Reusable graphic panels', 'Setup under 10 minutes'],
         turnaround: '3 business days after proof + UPS transit',
         color: '#F5E8E8',
-        image: '/images/products/backdrops/popup.jpg',
       },
       {
         id: 'popup-20x8',
@@ -103,7 +97,6 @@ const CATEGORIES = [
         features: ['Dye-sublimated fabric graphic', 'Multi-section frame system', 'Collapses to carry cases', 'Continuous seamless graphic', 'Setup under 20 minutes'],
         turnaround: '3 business days after proof + UPS transit',
         color: '#E8F5F5',
-        image: '/images/products/backdrops/popup.jpg',
       },
     ],
   },
@@ -121,7 +114,6 @@ const CATEGORIES = [
         features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Aluminum extrusion frame', 'Tool-free graphic swap', 'Carry bag included'],
         turnaround: '3 business days after proof + UPS transit',
         color: '#F0E8F5',
-        image: '/images/products/backdrops/seg-lightbox.jpg',
       },
       {
         id: 'seg-8x10',
@@ -132,7 +124,6 @@ const CATEGORIES = [
         features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Aluminum extrusion frame', 'Tool-free graphic swap', 'Carry bag included'],
         turnaround: '3 business days after proof + UPS transit',
         color: '#E8F0F5',
-        image: '/images/products/backdrops/seg-lightbox.jpg',
       },
       {
         id: 'seg-20x8',
@@ -143,7 +134,6 @@ const CATEGORIES = [
         features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Multi-section aluminum frame', 'Continuous seamless graphic', 'Carry bags included'],
         turnaround: '3 business days after proof + UPS transit',
         color: '#E8F5F1',
-        image: '/images/products/backdrops/seg-lightbox.jpg',
       },
     ],
   },

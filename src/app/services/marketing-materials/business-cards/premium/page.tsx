@@ -77,10 +77,6 @@ export default function PremiumBusinessCardsPage() {
               </div>
 
               <ProductImageGallery
-                images={[
-                  { src: 'https://drive.usercontent.google.com/download?id=1MHeRH5jLNMqM58gLeg9xmIsKEn791F7K&export=view', alt: 'Premium business cards' },
-                  { src: 'https://drive.usercontent.google.com/download?id=1LYzqKl5GRanrRWxBdsn_tnLxmp2dau-D&export=view', alt: 'Business card finishes' },
-                ]}
               />
 
               {/* Mobile-only calculator — inline after gallery */}

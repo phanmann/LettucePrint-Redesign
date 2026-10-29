@@ -32,7 +32,7 @@ const essentials: CatalogItem[] = [
     card: {
       id: 'bc-standard', name: 'Standard Business Cards', subtitle: '3.5" × 2"',
       description: 'Full-color printing on your choice of finish — matte, gloss, or uncoated. Clean, professional, and fast.',
-      color: '#E8F5F1', image: 'https://drive.usercontent.google.com/download?id=1LYzqKl5GRanrRWxBdsn_tnLxmp2dau-D&export=view',
+      color: '#E8F5F1',
       options: [
         { label: 'Finishes', values: ['Matte', 'Gloss', 'Uncoated'] },
         { label: 'Stock', values: ['14 pt', '16 pt'] },
@@ -48,7 +48,7 @@ const essentials: CatalogItem[] = [
     card: {
       id: 'bc-premium', name: 'Premium Business Cards', subtitle: '3.5" × 2"',
       description: 'Stand-out finishes for brands that want to leave an impression. Soft-touch, spot UV, foil, and extra-thick options.',
-      color: '#F0E8F5', image: 'https://drive.usercontent.google.com/download?id=1MHeRH5jLNMqM58gLeg9xmIsKEn791F7K&export=view',
+      color: '#F0E8F5',
       options: [
         { label: 'Finishes', values: ['Soft Touch', 'Spot UV', 'Foil Stamped', 'Extra Thick 32pt'] },
         { label: 'Stock', values: ['18 pt', '32 pt'] },
@@ -64,7 +64,7 @@ const essentials: CatalogItem[] = [
     card: {
       id: 'pc-standard', name: 'Standard Postcards', subtitle: '4×6 · 5×7 · 6×9 · 6×11',
       description: 'Full-color printing on 100 lb. gloss or matte stock. Available in all standard mailer sizes — USPS compliant, bulk pricing available.',
-      color: '#E8F5F1', image: 'https://drive.usercontent.google.com/download?id=16GP_uv16UVWwZyO_WAvAZDfCMoMRsCoE&export=view',
+      color: '#E8F5F1',
       options: [
         { label: 'Sizes', values: ['4" × 6"', '5" × 7"', '6" × 9"', '6" × 11"'] },
         { label: 'Stock', values: ['100 lb. Gloss', '100 lb. Matte'] },
@@ -80,7 +80,7 @@ const essentials: CatalogItem[] = [
     card: {
       id: 'pc-premium', name: 'Premium Postcards', subtitle: 'Custom sizes available',
       description: 'Stand-out finishes for mailers that demand attention. Soft-touch laminate or raised spot UV on heavy 18 pt stock.',
-      color: '#F0E8F5', image: 'https://drive.usercontent.google.com/download?id=1wnC7cM8WjOAV5H2gx3DK3u9gr5WLmx4A&export=view',
+      color: '#F0E8F5',
       options: [
         { label: 'Finishes', values: ['Soft Touch', 'Spot UV'] },
         { label: 'Stock', values: ['18 pt'] },
@@ -96,7 +96,7 @@ const essentials: CatalogItem[] = [
     card: {
       id: 'brochure-bi-fold', name: 'Bi-Fold Brochures', subtitle: 'Four panels · two flat/finished sizes',
       description: 'Four-panel brochures, scored and folded. Select a letter or tabloid flat size, then paper stock and finish.',
-      color: '#E8F5F1', image: '/images/products/brochures/bi-fold-letter/card.webp',
+      color: '#E8F5F1',
       options: [
         { label: 'Sizes', values: ['8.5" × 11" flat / 5.5" × 8.5" finished', '11" × 17" flat / 8.5" × 11" finished'] },
         { label: 'Stock', values: ['100 lb. text', '100 lb. cover'] },
@@ -112,7 +112,7 @@ const essentials: CatalogItem[] = [
     card: {
       id: 'brochure-tri-fold', name: 'Tri-Fold Brochures', subtitle: 'Six panels · two flat/finished sizes',
       description: 'Six-panel brochures for menus, mailers, and handouts. Select a letter or legal flat size, then paper stock and finish.',
-      color: '#E8F5F1', image: '/images/products/brochures/tri-fold-letter/card.webp',
+      color: '#E8F5F1',
       options: [
         { label: 'Sizes', values: ['8.5" × 11" flat / ~3.67" × 8.5" finished', '8.5" × 14" flat / ~4.67" × 8.5" finished'] },
         { label: 'Stock', values: ['100 lb. text', '100 lb. cover'] },
@@ -131,7 +131,7 @@ const amplify: CatalogItem[] = [
     card: {
       id: 'flyers', name: 'Flyers', subtitle: 'Half page · full page · tabloid',
       description: 'Full-color flyers for handouts, menus, launches, and promotions. Choose your size, paper, finish, and printed sides.',
-      color: '#E8F5F1', image: '/images/products/flyers/flyer-full-page-card.jpg',
+      color: '#E8F5F1',
       options: [
         { label: 'Sizes', values: ['5.5" × 8.5"', '8.5" × 11"', '11" × 17"'] },
         { label: 'Stock', values: ['80 lb. text', '100 lb. cover'] },
@@ -148,7 +148,7 @@ const amplify: CatalogItem[] = [
     card: {
       id: 'posters', name: 'Posters', subtitle: '11" × 17" · 18" × 24" · 24" × 36"',
       description: 'Full-color posters for events, retail, and displays. Select your size, stock, finish, and printed sides.',
-      color: '#E8F5F1', image: '/images/products/posters/poster-1.jpg',
+      color: '#E8F5F1',
       options: [
         { label: 'Sizes', values: ['11" × 17"', '18" × 24"', '24" × 36"'] },
         { label: 'Stock', values: ['100 lb. text', '100 lb. cover'] },
@@ -164,12 +164,7 @@ const amplify: CatalogItem[] = [
     card: {
       id: 'booklets', name: 'Booklets', subtitle: 'Three binding styles',
       description: 'Saddle-stitched, Wire-O, or soft-cover perfect-bound booklets. Choose the construction, size, paper, and page count.',
-      color: '#E8F5F1', image: '/images/products/booklets/booklet-open.jpg',
-      optionImagePreviews: { groupLabel: 'Binding', images: {
-        'Saddle Stitch': '/images/products/booklets/binding-saddle-stitch-placeholder.svg',
-        'Wire-O': '/images/products/booklets/binding-wire-o-placeholder.svg',
-        'Soft-Cover Perfect Bound': '/images/products/booklets/binding-perfect-bound-placeholder.svg',
-      } },
+      color: '#E8F5F1',
       options: [
         { label: 'Binding', values: ['Saddle Stitch', 'Wire-O', 'Soft-Cover Perfect Bound'] },
         { label: 'Cover', values: ['Gloss', 'Matte', 'Soft-touch'] },

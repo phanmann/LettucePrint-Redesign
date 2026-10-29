@@ -1,0 +1,514 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "cmsImages": 26,
+    "placeholders": 4,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/shop",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 13,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage",
+    "status": 200,
+    "cmsImages": 0,
+    "placeholders": 3,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/banners",
+    "status": 200,
+    "cmsImages": 5,
+    "placeholders": 2,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/backdrops",
+    "status": 200,
+    "cmsImages": 10,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/packaging",
+    "status": 200,
+    "cmsImages": 0,
+    "placeholders": 2,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/apparel",
+    "status": 200,
+    "cmsImages": 0,
+    "placeholders": 4,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials",
+    "status": 200,
+    "cmsImages": 4,
+    "placeholders": 5,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/booklets",
+    "status": 200,
+    "cmsImages": 0,
+    "placeholders": 1,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/flyers",
+    "status": 200,
+    "cmsImages": 0,
+    "placeholders": 1,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/lp/roll-labels",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/tents/10x10",
+    "status": 200,
+    "cmsImages": 0,
+    "placeholders": 1,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/tents/20x10",
+    "status": 200,
+    "cmsImages": 0,
+    "placeholders": 1,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/brochures/tri-fold-legal",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/backdrops/popup-10x8",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/backdrops/popup-20x8",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/backdrops/popup-8x8",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/backdrops/seg-10x8",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/backdrops/seg-20x8",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/backdrops/seg-8x10",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/backdrops/eurofit-8x8",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/backdrops/eurofit-10x8",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/backdrops/step-repeat-10x8",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/backdrops/step-repeat-8x8",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/shop/stickers",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/brochures/tri-fold-letter",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/booklets/perfect-bound-6x9",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/booklets/perfect-bound-85x11",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/business-cards/standard",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/business-cards/premium",
+    "status": 200,
+    "cmsImages": 4,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/banners/retractable-luxury-33",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/banners/fabric-banner",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/banners/vinyl-banner",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/banners/mesh-banner",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/booklets/saddle-stitch-55x85",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/booklets/saddle-stitch-85x11",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/booklets/saddle-stitch-square",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/booklets/soft-touch-cover",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/brochures/bi-fold-letter",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/brochures/bi-fold-tabloid",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/brochures/soft-touch",
+    "status": 200,
+    "cmsImages": 4,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/brochures/uncoated",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/flyers/full-page",
+    "status": 200,
+    "cmsImages": 4,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/flyers/half-page",
+    "status": 200,
+    "cmsImages": 4,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/flyers/tabloid",
+    "status": 200,
+    "cmsImages": 4,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/postcards/premium",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/postcards/standard",
+    "status": 200,
+    "cmsImages": 4,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/posters/art-print",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/posters/large",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/posters/medium",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/posters/small",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/marketing-materials/posters/soft-touch",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/packaging/boxes/box-sleeve",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/packaging/boxes/folding-carton",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/packaging/boxes/lid-base-box",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/packaging/boxes/magnetic-closure-box",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/packaging/boxes/mailer-box",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/packaging/boxes/rsc-box",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/packaging/mylar-bags/die-cut",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/packaging/mylar-bags/standard",
+    "status": 200,
+    "cmsImages": 1,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/banners/retractable-standard",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/services/signage/banners/retractable-tabletop",
+    "status": 200,
+    "cmsImages": 5,
+    "placeholders": 2,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/shop/roll-labels",
+    "status": 200,
+    "cmsImages": 4,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  },
+  {
+    "path": "/shop/spot-uv",
+    "status": 200,
+    "cmsImages": 3,
+    "placeholders": 0,
+    "localProductImages": 0,
+    "pass": true
+  }
+]

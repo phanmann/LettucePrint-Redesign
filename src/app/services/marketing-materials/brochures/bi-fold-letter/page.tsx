@@ -3,10 +3,6 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
-      images={[
-        { src: '/images/products/brochures/bi-fold-letter/snoozy-folded.webp', alt: 'Snoozy bi-fold brochure mockup with the cover visible' },
-        { src: '/images/products/brochures/bi-fold-letter/snoozy-open.webp', alt: 'Snoozy bi-fold brochure mockup showing the open spread' },
-      ]}
       name="Bi-Fold Brochure"
       tagline="Simple, elegant two-fold. Natural fit for lookbooks, service guides, and menus."
       parentHref="/services/marketing-materials/brochures"

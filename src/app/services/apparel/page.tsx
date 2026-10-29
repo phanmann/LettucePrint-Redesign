@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
+import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
 import { ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 }
 
 const products = [
-  { title: 'Screen Printing', image: '/images/hero-cards/screen-printing.jpg', alt: 'Green Lettuce Print T-shirt and matching printed tote bag', href: '/services/apparel/screenprint', note: 'T-shirts, hoodies, totes, and bulk apparel with durable ink and clean registration.' },
-  { title: 'Embroidery', image: '/images/portfolio/jamaica-smooth/hat-logo-2.jpg', alt: 'Black cap with a light blue embroidered Jamaica Smooth logo', href: '/services/apparel/embroidery', note: 'Hats, polos, jackets, bags, and uniforms with stitched logos and thread matching.' },
-  { title: 'DTG Printing', image: '/images/portfolio/jamaica-smooth/tshirt-blank-design-1.jpg', alt: 'Black Jamaica Smooth T-shirt with yellow and green graphic artwork', href: '/services/apparel/dtg', note: 'Full-color, low-minimum garment prints for short runs and detailed artwork.' },
-  { title: 'Custom Promo Items', image: '/images/portfolio/jamaica-smooth/black-tote-yellow-print-beach.jpg', alt: 'Black Jamaica Smooth promotional tote with a yellow logo on a beach', href: '/services/apparel/custom-items', note: 'Totes, drinkware, giveaway kits, staff merch, and sourced branded products.' },
+  { title: 'Screen Printing', alt: 'Green Lettuce Print T-shirt and matching printed tote bag', href: '/services/apparel/screenprint', note: 'T-shirts, hoodies, totes, and bulk apparel with durable ink and clean registration.' },
+  { title: 'Embroidery', alt: 'Black cap with a light blue embroidered Jamaica Smooth logo', href: '/services/apparel/embroidery', note: 'Hats, polos, jackets, bags, and uniforms with stitched logos and thread matching.' },
+  { title: 'DTG Printing', alt: 'Black Jamaica Smooth T-shirt with yellow and green graphic artwork', href: '/services/apparel/dtg', note: 'Full-color, low-minimum garment prints for short runs and detailed artwork.' },
+  { title: 'Custom Promo Items', alt: 'Black Jamaica Smooth promotional tote with a yellow logo on a beach', href: '/services/apparel/custom-items', note: 'Totes, drinkware, giveaway kits, staff merch, and sourced branded products.' },
 ]
 
 export default function ApparelPage() {
@@ -36,10 +36,9 @@ export default function ApparelPage() {
             {products.map((product) => (
               <Link key={product.href} href={product.href} className="group flex flex-col min-w-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lp-green bg-white border border-gray-100 rounded-card p-6 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all">
                 <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-50 mb-6">
-                  <Image
-                    src={product.image}
+                  <ProductPreviewImage
+                    productPath={product.href}
                     alt={product.alt}
-                    fill
                     sizes="(min-width: 1280px) 240px, (min-width: 1024px) calc((100vw - 324px) / 4), (min-width: 640px) calc((100vw - 168px) / 2), calc(100vw - 82px)"
                     className="object-cover"
                   />

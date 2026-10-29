@@ -4,28 +4,20 @@ import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { urlFor } from '@/sanity/image'
+import { useInitialProductGallery, type CmsProductGallery } from './ProductGalleryProvider'
 
 interface ProductImageGalleryProps {
   background?: 'white' | 'muted'
-  images: { src: string; alt: string; fit?: 'cover' | 'contain'; padding?: number }[]
 }
 
-interface CmsProductGalleryImage {
-  image?: unknown
-  alt?: string
-  fit?: 'cover' | 'contain'
-  padding?: number
-}
-
-interface CmsProductGallery {
-  galleryBackground?: 'white' | 'muted'
-  images?: CmsProductGalleryImage[]
-}
-
-export default function ProductImageGallery({ images, background = 'muted' }: ProductImageGalleryProps) {
+export default function ProductImageGallery(props: ProductImageGalleryProps) {
   const pathname = usePathname()
+  return <ProductImageGalleryForPath key={pathname} pathname={pathname} {...props} />
+}
+
+function ProductImageGalleryForPath({ background = 'muted', pathname }: ProductImageGalleryProps & { pathname: string }) {
   const [active, setActive] = useState(0)
-  const [cmsGallery, setCmsGallery] = useState<CmsProductGallery | null>(null)
+  const [cmsGallery, setCmsGallery] = useState<CmsProductGallery | null>(useInitialProductGallery(pathname))
 
   useEffect(() => {
     let cancelled = false
@@ -41,7 +33,7 @@ export default function ProductImageGallery({ images, background = 'muted' }: Pr
         if (!cancelled) setCmsGallery(gallery)
       })
       .catch(() => {
-        if (!cancelled) setCmsGallery(null)
+        // Keep the server-resolved gallery on a transient refresh failure.
       })
 
     return () => {
@@ -53,7 +45,7 @@ export default function ProductImageGallery({ images, background = 'muted' }: Pr
     if (!cmsGallery?.images?.length) return []
 
     return cmsGallery.images.flatMap(item => {
-      if (!item.image || !item.alt) return []
+      if (!item.image) return []
 
       const fit: 'cover' | 'contain' = item.fit === 'cover' ? 'cover' : 'contain'
       const builder = fit === 'cover'
@@ -62,23 +54,23 @@ export default function ProductImageGallery({ images, background = 'muted' }: Pr
 
       return [{
         src: builder.auto('format').quality(90).url(),
-        alt: item.alt,
+        alt: item.alt || 'Product image',
         fit,
         padding: fit === 'contain' ? (item.padding ?? 16) : 0,
       }]
     })
   }, [cmsGallery])
 
-  const resolvedImages = cmsImages.length > 0 ? cmsImages : images
+  const resolvedImages = cmsImages
   const resolvedBackground = cmsImages.length > 0
     ? (cmsGallery?.galleryBackground ?? background)
     : background
 
-  if (!resolvedImages || resolvedImages.length === 0) return null
+  if (resolvedImages.length === 0) return <div data-product-gallery={pathname} data-gallery-source="empty" role="img" aria-label="Product image unavailable" className="mb-8 aspect-square rounded-card bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-500">Image coming soon</div>
   const activeIndex = Math.min(active, resolvedImages.length - 1)
 
   return (
-    <div className="mb-8">
+    <div className="mb-8" data-product-gallery={pathname} data-gallery-source={cmsImages.length > 0 ? 'sanity' : 'empty'}>
       {/* Main image */}
       <div className={`relative w-full aspect-square rounded-card overflow-hidden ${resolvedBackground === 'white' ? 'bg-white' : 'bg-gray-50'} border border-gray-100 mb-3`}>
         <Image

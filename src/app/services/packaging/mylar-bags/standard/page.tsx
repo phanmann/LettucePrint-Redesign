@@ -23,7 +23,6 @@ const pricingRules = [
 export default function Page() {
   return (
     <ProductOrderPage
-      images={[{ src: 'https://drive.usercontent.google.com/download?id=1tnUvh9Y9jYsoOKPUbS9g0-NWdt_CR0KV&export=view', alt: 'Custom mylar bags' }]}
       name="Standard Mylar Bag"
       tagline="Custom-printed 4 × 5 in. eighth-size bags. Select your quantity, zipper, and finish."
       parentHref="/services/packaging/mylar-bags"

@@ -3,37 +3,28 @@
 import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/image'
-
-interface CmsProductPreview {
-  galleryBackground?: 'white' | 'muted'
-  images?: {
-    image?: unknown
-    alt?: string
-    fit?: 'cover' | 'contain'
-    padding?: number
-  }[]
-}
+import { useInitialProductGallery, type CmsProductGallery } from './ProductGalleryProvider'
 
 interface ProductPreviewImageProps {
   productPath: string
-  fallbackSrc: string
   alt: string
-  fallbackFit?: 'cover' | 'contain'
   className?: string
   sizes: string
   priority?: boolean
 }
 
-export default function ProductPreviewImage({
+export default function ProductPreviewImage(props: ProductPreviewImageProps) {
+  return <ProductPreviewImageForPath key={props.productPath} {...props} />
+}
+
+function ProductPreviewImageForPath({
   productPath,
-  fallbackSrc,
   alt,
-  fallbackFit = 'cover',
   className = '',
   sizes,
   priority = false,
 }: ProductPreviewImageProps) {
-  const [cmsPreview, setCmsPreview] = useState<CmsProductPreview | null>(null)
+  const [cmsPreview, setCmsPreview] = useState<CmsProductGallery | null>(useInitialProductGallery(productPath))
 
   useEffect(() => {
     let cancelled = false
@@ -44,13 +35,13 @@ export default function ProductPreviewImage({
     })
       .then(response => {
         if (!response.ok) throw new Error(`Product preview request failed: ${response.status}`)
-        return response.json() as Promise<CmsProductPreview | null>
+        return response.json() as Promise<CmsProductGallery | null>
       })
       .then(preview => {
         if (!cancelled) setCmsPreview(preview)
       })
       .catch(() => {
-        if (!cancelled) setCmsPreview(null)
+        // Keep the server-resolved image on a transient refresh failure.
       })
 
     return () => {
@@ -61,14 +52,7 @@ export default function ProductPreviewImage({
   const resolved = useMemo(() => {
     const first = cmsPreview?.images?.[0]
     if (!first?.image) {
-      return {
-        src: fallbackSrc,
-        alt,
-        fit: fallbackFit,
-        padding: fallbackFit === 'contain' ? 8 : 0,
-        background: 'muted' as const,
-        source: 'fallback' as const,
-      }
+      return null
     }
 
     const fit: 'cover' | 'contain' = first.fit === 'contain' ? 'contain' : 'cover'
@@ -84,7 +68,9 @@ export default function ProductPreviewImage({
       background: cmsPreview?.galleryBackground === 'white' ? 'white' as const : 'muted' as const,
       source: 'sanity' as const,
     }
-  }, [alt, cmsPreview, fallbackFit, fallbackSrc])
+  }, [alt, cmsPreview])
+
+  if (!resolved) return <div role="img" aria-label={`${alt}: image unavailable`} data-product-preview={productPath} data-preview-source="empty" className="absolute inset-0 flex items-center justify-center bg-gray-50 text-sm text-gray-500">Image coming soon</div>
 
   return (
     <Image

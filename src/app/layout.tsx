@@ -3,6 +3,7 @@ import Script from 'next/script'
 import { sharpGrotesk } from '@/lib/fonts'
 import { CartProvider } from '@/context/CartContext'
 import './globals.css'
+import PreloadedProductGalleries from '@/components/shop/PreloadedProductGalleries'
 
 const BASE_URL = 'https://lettuceprint.com'
 
@@ -153,7 +154,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <CartProvider>
-          {children}
+          <PreloadedProductGalleries>{children}</PreloadedProductGalleries>
         </CartProvider>
       </body>
     </html>

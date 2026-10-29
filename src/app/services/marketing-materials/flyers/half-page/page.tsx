@@ -217,11 +217,6 @@ export default function HalfPageFlyerPage() {
               </div>
 
               <ProductImageGallery
-                images={[
-                  { src: '/images/products/flyers/flyer-half-page-flourish.jpg', alt: 'Half page promotional flyer with QR code' },
-                  { src: '/images/products/flyers/flyer-half-page-leflora.jpg', alt: 'Grand opening flyer stack' },
-                  { src: '/images/products/flyers/flyer-full-page-fanned.jpg', alt: 'Printed flyer stack' },
-                ]}
               />
               {/* Mobile-only configurator — inline after gallery */}
               <div className="lg:hidden mb-8">

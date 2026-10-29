@@ -42,7 +42,6 @@ function product(p: {
   prices: PackagePrices
   kitDescription: string
   specs: { label: string; value: string }[]
-  images: ProductOrderPageProps['images']
   color: string
   related: ProductOrderPageProps['relatedProducts']
 }): ProductOrderPageProps {
@@ -57,7 +56,6 @@ function product(p: {
     badges: ['Fast Turnaround'],
     color: p.color,
     galleryBackground: 'white',
-    images: p.images,
     showQuantity: true,
     optionGroups: [packageGroup(p.kitDescription)],
     pricingTable: [{ qty: 1, standardPrice: p.prices.kit, rushPrice: rush(p.prices.kit) }],
@@ -70,7 +68,6 @@ function product(p: {
   }
 }
 
-const xStandImage = { src: '/images/products/banners/x-stand-placeholder.svg', alt: 'X-stand banner illustration (product photo coming soon)', fit: 'contain' as const }
 
 export const retractableProducts = {
   'retractable-standard': product({
@@ -82,10 +79,6 @@ export const retractableProducts = {
     specs: [
       { label: 'Size', value: '33 × 80 in.' },
       { label: 'Hardware', value: 'Anodized aluminum roll-up base with carry bag' },
-    ],
-    images: [
-      { src: 'https://drive.usercontent.google.com/download?id=1lkdgvN3wjRMfftKmeu5X47ZwHyor7dzB&export=view', alt: 'Standard retractable banner display' },
-      { src: 'https://drive.usercontent.google.com/download?id=1p_mlXivZBXkObui0RQPrmVH8uhVf9WNl&export=view', alt: 'Retractable banner setup' },
     ],
     color: '#E8F5F1',
     related: [
@@ -103,10 +96,6 @@ export const retractableProducts = {
       { label: 'Size', value: '33 × 80 in.' },
       { label: 'Hardware', value: 'Luxury teardrop aluminum base with carry bag' },
     ],
-    images: [
-      { src: '/images/products/banners/retractable-luxury-33/luxury-base-retractable.webp', alt: 'Luxury base retractable banner display', fit: 'contain' },
-      { src: 'https://drive.usercontent.google.com/download?id=1p_mlXivZBXkObui0RQPrmVH8uhVf9WNl&export=view', alt: 'Retractable banner setup', fit: 'contain' },
-    ],
     color: '#E8F0F5',
     related: [
       { href: '/services/signage/banners/retractable-standard', name: 'Standard Retractable Banner', description: 'Lightweight aluminum pull-up banner.' },
@@ -123,7 +112,6 @@ export const retractableProducts = {
       { label: 'Size', value: '24 × 63 in.' },
       { label: 'Hardware', value: 'Lightweight fiberglass X-frame with carry bag' },
     ],
-    images: [xStandImage],
     color: '#F5F0E8',
     related: [
       { href: '/services/signage/banners/x-stand-32x71', name: 'X-Stand Banner 32" × 71"', description: 'Larger X-stand for more presence.' },
@@ -140,7 +128,6 @@ export const retractableProducts = {
       { label: 'Size', value: '32 × 71 in.' },
       { label: 'Hardware', value: 'Lightweight fiberglass X-frame with carry bag' },
     ],
-    images: [xStandImage],
     color: '#F5F0E8',
     related: [
       { href: '/services/signage/banners/x-stand-24x63', name: 'X-Stand Banner 24" × 63"', description: 'Compact budget X-stand.' },

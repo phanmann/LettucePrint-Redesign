@@ -20,7 +20,6 @@ const CATEGORIES = [
       subtitle: '4×6 · 5×7 · 6×9 · 6×11',
       description: 'Full-color printing on 100 lb. gloss or matte stock. Available in all standard mailer sizes — USPS compliant, bulk pricing available.',
       color: '#E8F5F1',
-      image: 'https://drive.usercontent.google.com/download?id=16GP_uv16UVWwZyO_WAvAZDfCMoMRsCoE&export=view',
       options: [
         { label: 'Sizes',    values: ['4" × 6"', '5" × 7"', '6" × 9"', '6" × 11"'] },
         { label: 'Stock',    values: ['100 lb. Gloss', '100 lb. Matte'] },
@@ -47,7 +46,6 @@ const CATEGORIES = [
       subtitle: 'Custom sizes available',
       description: 'Stand-out finishes for mailers that demand attention. Soft-touch laminate or raised spot UV on heavy 18 pt stock.',
       color: '#F0E8F5',
-      image: 'https://drive.usercontent.google.com/download?id=1wnC7cM8WjOAV5H2gx3DK3u9gr5WLmx4A&export=view',
       options: [
         { label: 'Finishes', values: ['Soft Touch', 'Spot UV'] },
         { label: 'Stock',    values: ['18 pt'] },

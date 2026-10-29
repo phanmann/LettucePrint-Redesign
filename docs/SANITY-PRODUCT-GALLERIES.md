@@ -32,7 +32,9 @@ Open the product's gallery entry, open the image row, replace its image file, an
 - Product cards that link directly to a product page automatically use the first published image in that product's Sanity gallery.
 - Reordering the gallery and publishing makes the new first image the product-page default and the listing-card preview.
 - Preview cards inherit the first image's cover/contain treatment, padding, alternative text, and white/muted background.
-- Aggregate category cards without their own Product Gallery entry retain their built-in fallback image.
+- All product surfaces use only published Sanity galleries. Aggregate category cards need a gallery at their own linked path; without one they show a neutral “Image coming soon” placeholder.
+- The server loads enabled published galleries for the initial render. Client refreshes retain published-edit updates; request failure retains the last resolved CMS image, never a bundled image.
+- Product artwork uploaded by customers, portfolio photography, logos and editorial assets are separate and unchanged.
 
 ## Revert safely
 
@@ -61,3 +63,8 @@ The reusable migration command is `npm run migrate:product-galleries`. It is a d
 - Gallery schema: Sanity image fields and reorderable arrays are supported by the installed `defineType`, `defineField`, and `defineArrayMember` APIs. Official references: <https://www.sanity.io/docs/studio/image-type> and <https://www.sanity.io/docs/studio/array-type>.
 - Preview image API: installed Next.js `16.2.4` image types define `ImageProps` as intrinsic image attributes plus `fill`, so the reusable card image can preserve responsive `sizes` and safe `data-*` QA markers. Local evidence: `node_modules/next/dist/shared/lib/get-img-props.d.ts`.
 - Verification: production Next build and TypeScript passed for all 115 routes; focused ESLint and `git diff --check` passed; browser tests proved both the built-in fallback and published CMS overrides with background, fit, and padding controls. Preview synchronization QA compared each direct product card's rendered Sanity asset with image #1 in its linked gallery across desktop and mobile.
+
+## CMS-only rollout — 2026-10-29
+Bundled product-image props and fallback data are removed from product pages/cards, homepage product imagery, category cards, consolidated quote cards, tents, roll-label landing imagery and cart product thumbnails. Disabled or missing galleries show a neutral placeholder. Asset files are retained where they may be shared with portfolio/editorial content, but product components do not load them.
+
+The root server provider makes routes dynamic and reads all enabled galleries once per server render; this favors fresh published images over static-page caching. There are 51 published galleries in the release inventory. Category cards and products without their own matching gallery must be populated in Studio to replace placeholders. No CMS content was modified by this release.

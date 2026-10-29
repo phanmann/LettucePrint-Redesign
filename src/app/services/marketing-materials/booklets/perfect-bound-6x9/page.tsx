@@ -3,10 +3,6 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
-      images={[
-        { src: '/images/products/booklets/booklet-closed.jpg', alt: 'Green Lettuce Print perfect-bound 6 x 9 booklet' },
-        { src: '/images/products/booklets/booklet-open.jpg', alt: 'Green Lettuce Print perfect-bound booklet interior' },
-      ]}
       name="Perfect Bound Booklet"
       tagline="Trim digest size with a perfect bound spine. Elegant for books, journals, and brand narratives."
       parentHref="/services/marketing-materials/booklets"

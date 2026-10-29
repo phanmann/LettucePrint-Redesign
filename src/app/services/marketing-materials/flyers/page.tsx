@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function FlyersPage() {
   return <OrderingPageLayout title="Flyers that move fast." introduction="Choose your flyer specifications and request a quote." customPrompt="Need a custom size or large run?">
-    <ConsolidatedQuoteCard product="Flyers" description="Full-color flyers for handouts, menus, launches, and promotions. Select your size, paper, finish, and printed sides." image="/images/products/flyers/flyer-full-page-card.jpg"
+    <ConsolidatedQuoteCard product="Flyers" description="Full-color flyers for handouts, menus, launches, and promotions. Select your size, paper, finish, and printed sides."
       variantLabel="Type" variants={[{ label: 'Flyer', fields: [{ label: 'Size', choices: [
         { value: 'half', label: '5.5" × 8.5" (half page)' },
         { value: 'letter', label: '8.5" × 11" (full page)' },

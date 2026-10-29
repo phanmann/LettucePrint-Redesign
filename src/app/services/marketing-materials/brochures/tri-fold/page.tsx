@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function TriFoldBrochuresPage() {
   return <OrderingPageLayout title="Tri-Fold Brochures" introduction="Six-panel brochures for menus, mailers, and handouts. Select your specifications and request a quote." customPrompt="Need a custom fold or format?">
-    <ConsolidatedQuoteCard product="Tri-Fold Brochures" description="Six-panel brochures for menus, mailers, and handouts. Choose the flat and finished size, stock, and finish." image="https://drive.usercontent.google.com/download?id=16MXaFyl5PkM53NeawAHF2MZp831_eeTs&export=view"
+    <ConsolidatedQuoteCard product="Tri-Fold Brochures" description="Six-panel brochures for menus, mailers, and handouts. Choose the flat and finished size, stock, and finish."
       variantLabel="Type" variants={[{ label: 'Tri-fold', fields: [{ label: 'Flat size / finished size', choices: [
         { value: 'letter', label: '8.5" × 11" / approximately 3.67" × 8.5"' },
         { value: 'legal', label: '8.5" × 14" / approximately 4.67" × 8.5"' },

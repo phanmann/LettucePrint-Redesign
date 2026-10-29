@@ -53,7 +53,6 @@ export interface ProductOrderPageProps {
   customNote?: string
   showQuantity?: boolean
   galleryBackground?: 'white' | 'muted'
-  images?: { src: string; alt: string; fit?: 'cover' | 'contain'; padding?: number }[]
 }
 
 function fmt(n: number) {
@@ -282,7 +281,6 @@ export default function ProductOrderPage({
   tagline,
   breadcrumb,
   badges = [],
-  color,
   optionGroups,
   pricingTable,
   pricingRules,
@@ -294,7 +292,6 @@ export default function ProductOrderPage({
   relatedProducts = [],
   customNote,
   showQuantity,
-  images,
   galleryBackground,
   bannerKind,
 }: ProductOrderPageProps) {
@@ -433,17 +430,7 @@ export default function ProductOrderPage({
               </div>
 
               {/* Image gallery */}
-              {images && images.length > 0 && <ProductImageGallery images={images} background={galleryBackground} />}
-
-              {/* Color swatch fallback */}
-              {(!images || images.length === 0) && (
-                <div
-                  className="w-full h-36 rounded-2xl flex items-center justify-center mb-8"
-                  style={{ backgroundColor: color }}
-                >
-                  <p className="text-sm font-semibold text-gray-500">{name}</p>
-                </div>
-              )}
+              <ProductImageGallery background={galleryBackground} />
 
               {/* Mobile-only configurator — inline after gallery, hidden on desktop */}
               <div className="lg:hidden mb-8">

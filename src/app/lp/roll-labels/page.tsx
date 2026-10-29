@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
 import Link from 'next/link'
 import { ArrowDown, ArrowRight, Check, FileCheck2, HelpCircle, PackageCheck, SlidersHorizontal } from 'lucide-react'
 import RollLabelCalculator from '@/components/shop/RollLabelCalculator'
@@ -81,10 +82,9 @@ export default function RollLabelsLandingPage() {
             </div>
 
             <div className="relative mt-10 aspect-[4/3] overflow-hidden rounded-[2rem] bg-[#e5e5dc]">
-              <Image
-                src="/images/products/roll-labels/roll-labels-2.jpg"
+              <ProductPreviewImage
+                productPath="/shop/roll-labels"
                 alt="Printed custom labels arranged on rolls"
-                fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 44vw"
                 className="object-cover"

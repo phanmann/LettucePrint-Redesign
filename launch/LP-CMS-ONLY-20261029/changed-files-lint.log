@@ -1,0 +1,18 @@
+
+/workspace/worktrees/lp-image-initial-render-20261029/src/app/services/marketing-materials/business-cards/page.tsx
+  169:17  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/workspace/worktrees/lp-image-initial-render-20261029/src/app/services/marketing-materials/business-cards/premium/page.tsx
+    6:8   warning  'Button' is defined but never used                               @typescript-eslint/no-unused-vars
+  136:24  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/workspace/worktrees/lp-image-initial-render-20261029/src/app/services/marketing-materials/business-cards/standard/page.tsx
+    6:8    warning  'Button' is defined but never used                               @typescript-eslint/no-unused-vars
+   75:139  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  136:24   error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/workspace/worktrees/lp-image-initial-render-20261029/src/components/shop/ProductOrderPage.tsx
+  284:3  warning  'color' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 7 problems (4 errors, 3 warnings)
+

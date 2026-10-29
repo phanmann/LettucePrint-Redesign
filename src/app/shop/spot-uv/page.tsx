@@ -104,10 +104,6 @@ export default function SpotUVPage() {
 
               {/* Product Image Gallery */}
               <ProductImageGallery
-                images={[
-                  { src: '/images/products/spot-uv/spot-uv-1.png', alt: 'Spot UV sticker close-up' },
-                  { src: '/images/products/spot-uv/spot-uv-2.jpg', alt: 'Spot UV stickers lifestyle' },
-                ]}
               />
 
               {/* Mobile-only calculator — inline after gallery */}

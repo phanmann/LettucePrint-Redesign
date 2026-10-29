@@ -3,12 +3,6 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
-      images={[
-        { src: '/images/products/brochures/tri-fold-legal/top-right.webp', alt: 'Lettuce Print tri-fold brochure mockup from the front-right' },
-        { src: '/images/products/brochures/tri-fold-legal/top-left.webp', alt: 'Lettuce Print tri-fold brochure mockup from the front-left' },
-        { src: '/images/products/brochures/tri-fold-legal/bottom-right.webp', alt: 'Alternate right-side view of the Lettuce Print tri-fold brochure' },
-        { src: '/images/products/brochures/tri-fold-legal/bottom-left.webp', alt: 'Alternate left-side view of the Lettuce Print tri-fold brochure' },
-      ]}
       name="Tri-Fold Brochure - Legal"
       tagline="Wider panel for copy-heavy content, photo layouts, or multi-column designs."
       parentHref="/services/marketing-materials/brochures"

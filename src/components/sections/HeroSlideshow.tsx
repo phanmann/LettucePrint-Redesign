@@ -1,15 +1,12 @@
 'use client'
 
-import Image from 'next/image'
+import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
 import { useEffect, useState } from 'react'
 
 const slides = [
-  { src: '/images/hero/hero-1.jpg', alt: 'Lettuce Print roll labels' },
-  { src: '/images/hero/hero-7.jpg', alt: 'Lettuce Print label printing' },
-  { src: '/images/hero/hero-2.jpg', alt: 'Lettuce Print holographic stickers' },
-  { src: '/images/hero/hero-5.jpg', alt: 'Lettuce Print custom print' },
-  { src: '/images/hero/hero-3.jpg', alt: 'Lettuce Print print production' },
-  { src: '/images/hero/hero-4.jpg', alt: 'Lettuce Print studio work' },
+  { path: '/shop/roll-labels', alt: 'Lettuce Print roll labels' },
+  { path: '/shop/stickers', alt: 'Lettuce Print custom stickers' },
+  { path: '/shop/spot-uv', alt: 'Lettuce Print Spot UV stickers' },
 ]
 
 export default function HeroSlideshow() {
@@ -33,17 +30,16 @@ export default function HeroSlideshow() {
       {/* Slides */}
       {slides.map((slide, i) => (
         <div
-          key={slide.src}
+          key={slide.path}
           className="absolute inset-0 transition-opacity duration-400"
           style={{
             opacity: i === current ? (fading ? 0 : 1) : 0,
             transition: 'opacity 400ms ease-in-out',
           }}
         >
-          <Image
-            src={slide.src}
+          <ProductPreviewImage
+            productPath={slide.path}
             alt={slide.alt}
-            fill
             className="object-cover"
             priority={i === 0}
             sizes="(max-width: 1024px) 100vw, 420px"

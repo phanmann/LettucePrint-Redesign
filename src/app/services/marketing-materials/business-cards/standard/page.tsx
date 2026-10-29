@@ -77,10 +77,6 @@ export default function StandardBusinessCardsPage() {
               </div>
 
               <ProductImageGallery
-                images={[
-                  { src: 'https://drive.usercontent.google.com/download?id=1LYzqKl5GRanrRWxBdsn_tnLxmp2dau-D&export=view', alt: 'Business card print samples' },
-                  { src: 'https://drive.usercontent.google.com/download?id=1MHeRH5jLNMqM58gLeg9xmIsKEn791F7K&export=view', alt: 'Custom business cards' },
-                ]}
               />
 
               {/* Mobile-only calculator — inline after gallery */}

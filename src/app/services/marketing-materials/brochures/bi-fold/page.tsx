@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function BiFoldBrochuresPage() {
   return <OrderingPageLayout title="Bi-Fold Brochures" introduction="Four-panel brochures, scored and folded. Select your specifications and request a quote." customPrompt="Need a custom fold or format?">
-    <ConsolidatedQuoteCard product="Bi-Fold Brochures" description="Four-panel brochures, scored and folded. Choose the flat and finished size, stock, and finish." image="https://drive.usercontent.google.com/download?id=1_pNzHBcCwVT_F3rvdcMUWz76DQh77Wvm&export=view"
+    <ConsolidatedQuoteCard product="Bi-Fold Brochures" description="Four-panel brochures, scored and folded. Choose the flat and finished size, stock, and finish."
       variantLabel="Type" variants={[{ label: 'Bi-fold', fields: [{ label: 'Flat size / finished size', choices: [
         { value: 'letter', label: '8.5" × 11" / 5.5" × 8.5"' },
         { value: 'tabloid', label: '11" × 17" / 8.5" × 11"' },
