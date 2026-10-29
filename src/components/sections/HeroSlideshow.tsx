@@ -7,6 +7,9 @@ const slides = [
   { path: '/shop/roll-labels', alt: 'Lettuce Print roll labels' },
   { path: '/shop/stickers', alt: 'Lettuce Print custom stickers' },
   { path: '/shop/spot-uv', alt: 'Lettuce Print Spot UV stickers' },
+  { path: '/services/packaging/mylar-bags/standard', alt: 'Lettuce Print custom Mylar bags' },
+  { path: '/services/signage/banners/retractable-standard', alt: 'Lettuce Print retractable banners' },
+  { path: '/services/signage/backdrops/seg-10x8', alt: 'Lettuce Print SEG backdrops' },
 ]
 
 export default function HeroSlideshow() {
