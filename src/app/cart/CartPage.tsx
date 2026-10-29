@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
 import { Trash2, Upload, CheckCircle, AlertCircle, Loader2, ShoppingBag, ArrowRight, Plus, FileText } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import { useUploadThing } from '@/lib/uploadthingClient'
@@ -10,42 +10,6 @@ import { isValidatedTentFrame } from '@/lib/tent-pricing'
 import type { CartItem } from '@/lib/cart'
 import { formatRollLabelDirection } from '@/lib/roll-label-direction'
 import Button from '@/components/ui/Button'
-
-// ── Product thumbnail map ─────────────────────────────────────────────────────
-const THUMBNAILS: Record<string, string> = {
-  // Stickers & labels
-  'Custom Die-Cut Stickers':     '/images/products/stickers/lettuce-stickers.png',
-  'Holographic Stickers':        '/images/products/stickers/holo-stickers.png',
-  'Spot UV Stickers':            '/images/products/spot-uv/spot-uv-1.png',
-  'Roll Labels':                 '/images/products/roll-labels/roll-labels-1.png',
-  'Custom Roll Labels':          '/images/products/roll-labels/roll-labels-1.png',
-  // Marketing materials
-  'Standard Business Cards':     '/images/hero-cards/packaging.jpg',
-  'Premium Business Cards':      '/images/hero-cards/packaging.jpg',
-  'Full Page Flyers':            '/images/products/flyers/flyer-full-page-card.jpg',
-  'Half Page Flyers':            '/images/products/flyers/flyer-half-page-card.jpg',
-  'Tabloid Flyers':              '/images/products/flyers/flyer-tabloid-card.jpg',
-  'Standard Postcards':          '/images/products/flyers/flyer-2.jpg',
-  'Premium Postcards':           '/images/products/flyers/flyer-2.jpg',
-  // Signage
-  'Double-Sided Banner': '/images/products/banners/double-sided-placeholder.svg',
-  'Vinyl Banner':                '/images/products/banners/vinyl-banner.jpg',
-  'Fabric Banner':               '/images/products/banners/fabric-banner.jpg',
-  'Mesh Banner':                 '/images/products/banners/mesh-banner.jpg',
-  'Posters':                     '/images/products/posters/poster-1.jpg',
-  'Booklets':                    '/images/products/booklets/booklet-closed.jpg',
-}
-
-function getThumb(product: string): string | null {
-  // Exact match first
-  if (THUMBNAILS[product]) return THUMBNAILS[product]
-  // Fuzzy — first key that appears in the product name
-  const key = Object.keys(THUMBNAILS).find(k =>
-    product.toLowerCase().includes(k.toLowerCase()) ||
-    k.toLowerCase().includes(product.toLowerCase())
-  )
-  return key ? THUMBNAILS[key] : null
-}
 
 function getFileExt(filenameOrUrl?: string): string {
   if (!filenameOrUrl) return ''
@@ -61,7 +25,7 @@ function isPreviewablePdf(filenameOrUrl?: string): boolean {
   return getFileExt(filenameOrUrl) === 'pdf'
 }
 
-function CartThumbnail({ item, thumb }: { item: CartItem; thumb: string | null }) {
+function CartThumbnail({ item }: { item: CartItem }) {
   if (item.artworkUrl) {
     const previewName = item.artworkFilename ?? item.artworkUrl
 
@@ -122,25 +86,8 @@ function CartThumbnail({ item, thumb }: { item: CartItem; thumb: string | null }
     )
   }
 
-  if (thumb) {
-    return (
-      <div className="w-16 h-16 rounded-lg overflow-hidden border border-gray-100 bg-gray-50">
-        <Image
-          src={thumb}
-          alt={item.product}
-          width={64}
-          height={64}
-          className="w-full h-full object-cover"
-        />
-      </div>
-    )
-  }
+  return <div className="relative w-16 h-16 rounded-lg overflow-hidden border border-gray-100 bg-gray-50"><ProductPreviewImage productPath={item.productPath} alt={item.product} sizes="64px" /></div>
 
-  return (
-    <div className="w-16 h-16 rounded-lg border border-gray-100 bg-gray-100 flex items-center justify-center">
-      <span className="text-xl">🖴</span>
-    </div>
-  )
 }
 
 // ── Per-item artwork uploader ─────────────────────────────────────────────────
@@ -209,13 +156,12 @@ function ArtworkUploader({ item, onUploaded }: {
 // ── Cart item row ─────────────────────────────────────────────────────────────
 function CartItemRow({ item }: { item: CartItem }) {
   const { removeItem, updateArtwork } = useCart()
-  const thumb = getThumb(item.product)
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col sm:flex-row sm:items-start gap-4">
       {/* Thumbnail — uploaded artwork takes priority over product default */}
       <div className="flex-shrink-0">
-        <CartThumbnail item={item} thumb={thumb} />
+        <CartThumbnail item={item} />
       </div>
 
       {/* Product info */}

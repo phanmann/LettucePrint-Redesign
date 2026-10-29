@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
+import ProductImageGallery from '@/components/shop/ProductImageGallery'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/layout/Navbar'
@@ -19,6 +19,6 @@ export default async function TentPage({ params }: { params: Promise<{ size: str
     <h1 className="text-4xl font-semibold mt-6 mb-4">{tentNames[size]}</h1>
     <p className="text-lg text-gray-600 mb-8">Make room for your brand. A full printed canopy and frame, with the walls and accessories your event needs. Replacement fabric tops and frames are also available separately.</p>
     <nav aria-label="Tent size" className="flex flex-wrap gap-3 mb-6">{(['10x10', '20x10'] as const).map(option => <Link key={option} href={`/services/signage/tents/${option}`} aria-current={size === option ? 'page' : undefined} className={`rounded-lg border px-5 py-3 font-semibold ${size === option ? 'bg-lp-green text-white' : 'bg-white text-gray-900'}`}>{tentNames[option]}</Link>)}</nav>
-    <div className="grid lg:grid-cols-2 gap-8 items-start"><div><Image src={`/images/products/tents/${size}.svg`} width={800} height={800} alt={`Original illustration of a ${size} canopy tent; not a product photograph`} className="w-full rounded-2xl" priority /><p className="text-sm text-gray-600 mt-3">Illustration shown. Choose a full kit, replacement fabric top, or frame below. Accessories available with full kits.</p></div><TentConfigurator key={size} size={size} /></div>
+    <div className="grid lg:grid-cols-2 gap-8 items-start"><div><ProductImageGallery /><p className="text-sm text-gray-600 mt-3">Choose a full kit, replacement fabric top, or frame below. Accessories available with full kits.</p></div><TentConfigurator key={size} size={size} /></div>
   </div></main><Footer /></>
 }

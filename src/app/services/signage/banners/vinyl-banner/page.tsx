@@ -9,7 +9,6 @@ export default function Page() {
     breadcrumb={[{ label: 'Banners', href: '/services/signage/banners' }, { label: 'Vinyl Banner', href: '' }]}
     color="#E8F5F1"
     optionGroups={[]}
-    images={[{ src: '/images/products/banners/vinyl-banner.jpg', alt: 'Custom matte vinyl banner' }]}
     specs={[
       { label: 'Material', value: '13 oz matte vinyl (indoor/outdoor)' },
       { label: 'Size', value: 'Custom, 12 in to 126 in wide' },

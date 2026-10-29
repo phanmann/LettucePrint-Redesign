@@ -3,12 +3,6 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
-      images={[
-        { src: '/images/products/brochures/tri-fold-letter/top-left.webp', alt: 'Lettuce Print tri-fold brochure mockup from the front-left' },
-        { src: '/images/products/brochures/tri-fold-letter/top-right.webp', alt: 'Lettuce Print tri-fold brochure mockup from the front-right' },
-        { src: '/images/products/brochures/tri-fold-letter/bottom-left.webp', alt: 'Alternate left-side view of the Lettuce Print tri-fold brochure' },
-        { src: '/images/products/brochures/tri-fold-letter/bottom-right.webp', alt: 'Alternate right-side view of the Lettuce Print tri-fold brochure' },
-      ]}
       name="Tri-Fold Brochure"
       tagline="The most universally recognized brochure format. Perfect for service menus, product overviews, and event guides."
       parentHref="/services/marketing-materials/brochures"

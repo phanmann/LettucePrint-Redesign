@@ -27,7 +27,6 @@ const PRODUCTS = [
     ],
     turnaround: 'Confirmed after proof approval',
     color: '#E8F5F1',
-        image: 'https://drive.usercontent.google.com/download?id=1tnUvh9Y9jYsoOKPUbS9g0-NWdt_CR0KV&export=view',
     imageAlt: 'Standard mylar bag printed with custom design',
   },
   {
@@ -46,7 +45,6 @@ const PRODUCTS = [
     ],
     turnaround: '14–21 business days',
     color: '#F5F0E8',
-        image: 'https://drive.usercontent.google.com/download?id=1tnUvh9Y9jYsoOKPUbS9g0-NWdt_CR0KV&export=view',
     imageAlt: 'Die-cut mylar bag with custom shape',
   },
 ]
@@ -77,7 +75,6 @@ export default function MylarBagsPage() {
                   <div className="relative w-full h-48 overflow-hidden" style={{ backgroundColor: product.color }}>
                     <ProductPreviewImage
                       productPath={product.href}
-                      fallbackSrc={product.image}
                       alt={product.imageAlt ?? product.name}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />

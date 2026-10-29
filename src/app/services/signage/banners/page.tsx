@@ -25,7 +25,6 @@ const CATEGORIES = [
         features: ['Aluminum base', 'Curl-free blockout print', 'Carrying bag included', 'Setup in under 60 seconds'],
         turnaround: 'Production 3 business days after proof approval',
         color: '#E8F5F1',
-        image: 'https://drive.usercontent.google.com/download?id=1lkdgvN3wjRMfftKmeu5X47ZwHyor7dzB&export=view',
       },
       {
         id: 'retractable-luxury-33',
@@ -36,7 +35,6 @@ const CATEGORIES = [
         features: ['Luxury teardrop base', 'Curl-free blockout print', 'Carrying bag included', 'Enhanced stability'],
         turnaround: 'Production 3 business days after proof approval',
         color: '#E8F0F5',
-        image: '/images/products/banners/retractable-luxury-33/luxury-base-retractable.webp',
         imageFit: 'contain' as const,
       },
       {
@@ -48,7 +46,6 @@ const CATEGORIES = [
         features: ['Fiberglass X-frame', 'Curl-free blockout print', 'Carrying bag included', 'Lightweight'],
         turnaround: 'Production 3 business days after proof approval',
         color: '#F5F0E8',
-        image: '/images/products/banners/x-stand-placeholder.svg',
         imageFit: 'contain' as const,
       },
       {
@@ -60,7 +57,6 @@ const CATEGORIES = [
         features: ['Fiberglass X-frame', 'Curl-free blockout print', 'Carrying bag included', 'Lightweight'],
         turnaround: 'Production 3 business days after proof approval',
         color: '#F5F0E8',
-        image: '/images/products/banners/x-stand-placeholder.svg',
         imageFit: 'contain' as const,
       },
     ],
@@ -79,7 +75,6 @@ const CATEGORIES = [
         features: ['13 oz matte vinyl', 'Hem + grommets every 24 in', 'Indoor & outdoor use', 'Custom sizes'],
         turnaround: 'Ships 3 business days after proof approval + UPS transit',
         color: '#E8F5F1',
-        image: '/images/products/banners/vinyl-banner.jpg',
       },
       {
         id: 'hanging-fabric',
@@ -90,7 +85,6 @@ const CATEGORIES = [
         features: ['Dye-sublimation print', 'Wrinkle resistant', 'Lightweight fabric', 'Machine washable'],
         turnaround: '3–5 business days',
         color: '#F5F0E8',
-        image: '/images/products/banners/fabric-banner.jpg',
       },
       {
         id: 'hanging-mesh',
@@ -101,7 +95,6 @@ const CATEGORIES = [
         features: ['Wind-permeable mesh', 'Outdoor rated', 'Grommets included', 'UV resistant inks'],
         turnaround: '3–5 business days',
         color: '#E8F0F5',
-        image: '/images/products/banners/mesh-banner.jpg',
       },
     ],
   },

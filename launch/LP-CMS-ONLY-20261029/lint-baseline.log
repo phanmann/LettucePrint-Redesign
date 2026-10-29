@@ -1,0 +1,21 @@
+
+/workspace/worktrees/lp-image-initial-render-20261029/src/app/services/marketing-materials/business-cards/page.tsx
+  171:17  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+✖ 1 problem (1 error, 0 warnings)
+
+
+/workspace/worktrees/lp-image-initial-render-20261029/src/app/services/marketing-materials/business-cards/premium/page.tsx
+    6:8   warning  'Button' is defined but never used                               @typescript-eslint/no-unused-vars
+  140:24  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+✖ 2 problems (1 error, 1 warning)
+
+
+/workspace/worktrees/lp-image-initial-render-20261029/src/app/services/marketing-materials/business-cards/standard/page.tsx
+    6:8    warning  'Button' is defined but never used                               @typescript-eslint/no-unused-vars
+   75:139  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  140:24   error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+✖ 3 problems (2 errors, 1 warning)
+

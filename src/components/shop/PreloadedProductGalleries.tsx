@@ -1,26 +1,18 @@
 import { freshClient } from '@/sanity/client'
-import { productGalleryByPathQuery } from '@/sanity/queries'
 import { ProductGalleryProvider, type CmsProductGallery } from './ProductGalleryProvider'
 
-// Read on each server render, so Studio edits do not require a site rebuild.
-export default async function PreloadedProductGalleries({ paths, children }: {
-  paths: string[]
-  children: React.ReactNode
-}) {
-  const entries = await Promise.all(paths.map(async productPath => {
-    try {
-      const gallery = await freshClient.fetch<CmsProductGallery | null>(
-        productGalleryByPathQuery, { productPath }, { cache: 'no-store' },
-      )
-      return [productPath, gallery] as const
-    } catch {
-      // Preserve the bundled fallback during a CMS outage; the client can retry.
-      return [productPath, null] as const
-    }
-  }))
-  return (
-    <ProductGalleryProvider galleries={Object.fromEntries(entries)}>
-      {children}
-    </ProductGalleryProvider>
-  )
+// One published-content read supplies every product surface on the initial render.
+export default async function PreloadedProductGalleries({ children }: { children: React.ReactNode }) {
+  let galleries: Record<string, CmsProductGallery> = {}
+  try {
+    const rows = await freshClient.fetch<(CmsProductGallery & { productPath: string })[]>(
+      '*[_type == "productGallery" && enabled != false] | order(_updatedAt desc) { productPath, galleryBackground, images[]{image, alt, fit, padding} }',
+      {}, { cache: 'no-store' },
+    )
+    for (const row of rows) if (row.productPath && !galleries[row.productPath]) galleries[row.productPath] = row
+  } catch {
+    // No bundled fallback: client refresh may recover after a CMS outage.
+    galleries = {}
+  }
+  return <ProductGalleryProvider galleries={galleries}>{children}</ProductGalleryProvider>
 }

@@ -3,9 +3,6 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
-      images={[
-        { src: '/images/products/posters/small-poster-family-fun.webp', alt: 'Family fun event design printed as a small poster' },
-      ]}
       name="Small Poster"
       tagline="Tabloid-size poster for retail displays, event announcements, and point-of-sale."
       parentHref="/services/marketing-materials/posters"

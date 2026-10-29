@@ -28,7 +28,7 @@ export const productGallery = defineType({
       name: 'enabled',
       title: 'Use this gallery on the website',
       type: 'boolean',
-      description: 'Turn this off and publish to return the page to its built-in gallery.',
+      description: 'Turn this off and publish to show an image-unavailable placeholder. Product images come only from Sanity.',
       initialValue: true,
     }),
     defineField({

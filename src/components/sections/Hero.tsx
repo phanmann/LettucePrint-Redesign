@@ -1,18 +1,18 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
+import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
 import { motion } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import HeroSlideshow from './HeroSlideshow'
 import Button from '@/components/ui/Button'
 
 const heroCards = [
-  { label: 'Packaging', href: '/services/packaging', bg: '#00A175', img: '/images/hero-cards/packaging.jpg' },
-  { label: 'Screen Printing', href: '/services/apparel/screenprint', bg: '#7E6AAE', img: '/images/hero-cards/screen-printing.jpg' },
-  { label: 'Signage', href: '/services/signage', bg: '#ffffff', img: '/images/hero-cards/signage.png' },
-  { label: 'Stickers', href: '/shop/stickers', bg: '#acf2f9', img: '/images/hero-cards/stickers.png' },
-  { label: 'Large Format', href: '/services/signage/backdrops', bg: '#0a0a0a', img: '/images/hero-cards/large-format.png' },
+  { label: 'Packaging', href: '/services/packaging', bg: '#00A175', },
+  { label: 'Screen Printing', href: '/services/apparel/screenprint', bg: '#7E6AAE', },
+  { label: 'Signage', href: '/services/signage', bg: '#ffffff', },
+  { label: 'Stickers', href: '/shop/stickers', bg: '#acf2f9', },
+  { label: 'Large Format', href: '/services/signage/backdrops', bg: '#0a0a0a', },
 ]
 
 export default function Hero() {
@@ -148,7 +148,7 @@ export default function Hero() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex gap-3">
             {heroCards.map((card) => card.label === 'Large Format' ? (
               <Link href={card.href} key={card.label} className="hidden lg:block lg:flex-1 rounded-card flex items-end justify-start p-4 relative overflow-hidden transition-transform duration-300 hover:-translate-y-1 group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lp-green" style={{ backgroundColor: card.bg, height: '140px' }}>
-                <Image src={card.img} alt={card.label} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="240px" />
+                <ProductPreviewImage productPath={card.href} alt={card.label} className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="240px" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 <span className="absolute bottom-4 left-4 z-10 text-[10px] font-bold uppercase tracking-[0.12em] bg-white/90 text-gray-900 px-3 py-1.5 rounded-full whitespace-nowrap">{card.label}</span>
               </Link>
@@ -160,10 +160,9 @@ export default function Hero() {
                 style={{ backgroundColor: card.bg, height: '140px' }}
               >
                 {/* Photo */}
-                <Image
-                  src={card.img}
+                <ProductPreviewImage
+                  productPath={card.href}
                   alt={card.label}
-                  fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 240px"
                 />

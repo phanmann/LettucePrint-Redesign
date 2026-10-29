@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
+import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 
 type Choice = { value: string; label: string }
@@ -8,16 +10,16 @@ type Field = { label: string; choices: Choice[] }
 type Variant = { label: string; fields: Field[]; note?: string }
 
 export default function ConsolidatedQuoteCard({
-  product, description, image, variants, commonFields = [], variantLabel = 'Binding',
+  product, description, variants, commonFields = [], variantLabel = 'Binding',
 }: {
   product: string
   description: string
-  image: string
   variants: Variant[]
   commonFields?: Field[]
   variantLabel?: string
 }) {
   const router = useRouter()
+  const pathname = usePathname()
   const [variantIndex, setVariantIndex] = useState(0)
   const [values, setValues] = useState<Record<string, string>>({})
   const [quantity, setQuantity] = useState('')
@@ -40,9 +42,8 @@ export default function ConsolidatedQuoteCard({
 
   return (
     <article className="overflow-hidden rounded-card border border-gray-200 bg-white shadow-card lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-      <div className="bg-gray-100">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={image} alt="" className="h-56 w-full object-cover lg:h-full" />
+      <div className="relative min-h-56 bg-gray-100">
+        <ProductPreviewImage productPath={pathname} alt={product} sizes="(max-width: 1024px) 100vw, 50vw" />
       </div>
       <div className="p-6 sm:p-8">
         <h2 className="text-h2 font-semibold text-gray-900">{product}</h2>

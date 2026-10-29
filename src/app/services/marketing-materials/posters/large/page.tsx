@@ -3,10 +3,6 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
-      images={[
-        { src: '/images/products/posters/large-poster-crab-blaze.webp', alt: 'Crab Blaze event design printed as a large poster' },
-        { src: '/images/products/posters/large-poster-crab-blaze-mock.webp', alt: 'Large Crab Blaze poster displayed in a room' },
-      ]}
       name="Large Poster"
       tagline="Large-format poster for maximum visual presence at concerts, retail, and exhibitions."
       parentHref="/services/marketing-materials/posters"

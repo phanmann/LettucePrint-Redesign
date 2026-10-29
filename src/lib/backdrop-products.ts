@@ -157,12 +157,6 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
       "Quality check before shipping",
       "Frame and/or graphic as selected"
     ],
-    "images": [
-      {
-        "src": "/images/products/backdrops/step-repeat.jpg",
-        "alt": "Premium Step and Repeat 8 × 8 ft."
-      }
-    ]
   },
   "step-repeat-10x8": {
     "backdrop": true,
@@ -320,12 +314,6 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
       "Quality check before shipping",
       "Frame and/or graphic as selected"
     ],
-    "images": [
-      {
-        "src": "/images/products/backdrops/step-repeat.jpg",
-        "alt": "Premium Step and Repeat 10 × 8 ft."
-      }
-    ]
   },
   "eurofit-8x8": {
     "backdrop": true,
@@ -737,12 +725,6 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
       "Quality check before shipping",
       "Frame and/or graphic as selected"
     ],
-    "images": [
-      {
-        "src": "/images/products/backdrops/seg-lightbox.jpg",
-        "alt": "EuroFit Backdrop 8 × 8 ft."
-      }
-    ]
   },
   "eurofit-10x8": {
     "backdrop": true,
@@ -1154,12 +1136,6 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
       "Quality check before shipping",
       "Frame and/or graphic as selected"
     ],
-    "images": [
-      {
-        "src": "/images/products/backdrops/seg-lightbox.jpg",
-        "alt": "EuroFit Backdrop 10 × 8 ft."
-      }
-    ]
   },
   "popup-8x8": {
     "backdrop": true,
@@ -1493,12 +1469,6 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
       "Quality check before shipping",
       "Frame and/or graphic as selected"
     ],
-    "images": [
-      {
-        "src": "/images/products/backdrops/popup.jpg",
-        "alt": "Pop-Up Display 8 × 8 ft."
-      }
-    ]
   },
   "popup-10x8": {
     "backdrop": true,
@@ -1832,12 +1802,6 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
       "Quality check before shipping",
       "Frame and/or graphic as selected"
     ],
-    "images": [
-      {
-        "src": "/images/products/backdrops/popup.jpg",
-        "alt": "Pop-Up Display 10 × 8 ft."
-      }
-    ]
   },
   "popup-20x8": {
     "backdrop": true,
@@ -2327,12 +2291,6 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
       "Quality check before shipping",
       "Frame and/or graphic as selected"
     ],
-    "images": [
-      {
-        "src": "/images/products/backdrops/popup.jpg",
-        "alt": "Pop-Up Display 20 × 8 ft."
-      }
-    ]
   },
   "seg-10x8": {
     "backdrop": true,
@@ -2490,12 +2448,6 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
       "Quality check before shipping",
       "Frame and/or graphic as selected"
     ],
-    "images": [
-      {
-        "src": "/images/products/backdrops/seg-lightbox.jpg",
-        "alt": "SEG Pop-Up Stand 10 × 8 ft."
-      }
-    ]
   },
   "seg-8x10": {
     "backdrop": true,
@@ -2653,12 +2605,6 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
       "Quality check before shipping",
       "Frame and/or graphic as selected"
     ],
-    "images": [
-      {
-        "src": "/images/products/backdrops/seg-lightbox.jpg",
-        "alt": "SEG Pop-Up Stand 8 × 10 ft."
-      }
-    ]
   },
   "seg-20x8": {
     "backdrop": true,
@@ -2816,11 +2762,5 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
       "Quality check before shipping",
       "Frame and/or graphic as selected"
     ],
-    "images": [
-      {
-        "src": "/images/products/backdrops/seg-lightbox.jpg",
-        "alt": "SEG Pop-Up Stand 20 × 8 ft."
-      }
-    ]
   }
 }

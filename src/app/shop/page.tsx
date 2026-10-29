@@ -15,7 +15,6 @@ export const metadata: Metadata = {
 type Product = {
   name: string
   href: string
-  image: string
   features: string[]
   badge?: string
 }
@@ -32,21 +31,18 @@ const categories: Category[] = [
       {
         name: 'Custom Die-Cut Stickers',
         href: '/shop/stickers',
-        image: '/images/products/stickers/holo-stickers.png',
         features: ['Die-cut to shape', 'Waterproof & UV resistant', '3–5 day turnaround', 'Standard & holographic vinyl'],
         badge: 'Order Online',
       },
       {
         name: 'Spot UV Stickers',
         href: '/shop/spot-uv',
-        image: '/images/products/spot-uv/spot-uv-1.png',
         features: ['Gloss-on-matte effect', 'Premium tactile finish', 'Die-cut to shape', '3–5 day turnaround'],
         badge: 'Order Online',
       },
       {
         name: 'Roll Labels',
         href: '/shop/roll-labels',
-        image: '/images/products/roll-labels/roll-labels-1.png',
         features: ['Kiss-cut on roll', 'High-volume ready', 'Food-safe options', 'Custom sizes'],
         badge: 'Order Online',
       },
@@ -58,31 +54,26 @@ const categories: Category[] = [
       {
         name: 'Business Cards',
         href: '/services/marketing-materials/business-cards',
-        image: 'https://drive.usercontent.google.com/download?id=1LYzqKl5GRanrRWxBdsn_tnLxmp2dau-D&export=view',
         features: ['Standard & premium stock', 'Soft touch & gloss options', 'Spot UV available', 'Fast turnaround'],
       },
       {
         name: 'Flyers & Posters',
         href: '/services/marketing-materials/flyers',
-        image: '/images/products/flyers/flyer-full-page-card.jpg',
         features: ['Flyers and standard posters', 'Sizes from 5.5×8.5 to 24×36', 'Full-color printing', 'Fast turnaround'],
       },
       {
         name: 'Postcards',
         href: '/services/marketing-materials/postcards',
-        image: '/images/products/flyers/flyer-2.jpg',
         features: ['Standard & premium stock', 'Single or double-sided', 'Rounded corners available', 'Great for direct mail'],
       },
       {
         name: 'Brochures',
         href: '/services/marketing-materials/brochures',
-        image: '/images/products/posters/poster-2.jpg',
         features: ['Tri-fold & bi-fold options', 'Letter & tabloid sizes', 'Uncoated & soft touch', 'Premium presentation'],
       },
       {
         name: 'Booklets',
         href: '/services/marketing-materials/booklets',
-        image: '/images/products/booklets/booklet-closed.jpg',
         features: ['Saddle-stitch & perfect bound', 'Catalog & magazine format', 'Soft touch cover option', 'Custom sizes'],
       },
     ],
@@ -93,13 +84,11 @@ const categories: Category[] = [
       {
         name: 'Mylar Bags',
         href: '/services/packaging/mylar-bags',
-        image: '/images/hero-cards/packaging.jpg',
         features: ['Standard & die-cut shapes', 'Child-resistant options', 'High-barrier material', 'Custom print'],
       },
       {
         name: 'Custom Packaging',
         href: '/services/packaging/custom-packaging',
-        image: '/images/products/boxes/box-magnetic.jpg',
         features: ['Fully custom structures', 'Full-color & specialty finishes', 'Sampling available', 'Retail-ready'],
       },
     ],
@@ -110,13 +99,11 @@ const categories: Category[] = [
       {
         name: 'Banners',
         href: '/services/signage/banners',
-        image: '/images/hero-cards/signage.png',
         features: ['Vinyl, mesh & fabric options', 'Retractable banner stands', 'Indoor & outdoor use', 'Fast turnaround'],
       },
       {
         name: 'Backdrops & Step-Repeats',
         href: '/services/signage/backdrops',
-        image: '/images/hero-cards/large-format.png',
         features: ['Pop-up, euro & SEG frames', 'Multiple sizes available', 'Event-ready hardware', 'Custom graphics'],
       },
     ],
@@ -127,25 +114,21 @@ const categories: Category[] = [
       {
         name: 'Screen Printing',
         href: '/services/apparel/screenprint',
-        image: '/images/hero-cards/screen-printing.jpg',
         features: ['T-shirts, hoodies & totes', 'Pantone color matching', 'Bulk discounts', 'Minimum 12 pcs'],
       },
       {
         name: 'Embroidery',
         href: '/services/apparel/embroidery',
-        image: '/images/hero/hero-3.jpg',
         features: ['Hats, polos & more', 'Thread color matching', 'Digitizing included', 'Premium finish'],
       },
       {
         name: 'DTG Printing',
         href: '/services/apparel/dtg',
-        image: '/images/hero/hero-4.jpg',
         features: ['Full-color direct to garment', 'No minimums', 'Photo-quality prints', 'Quick turnaround'],
       },
       {
         name: 'Custom Promo Items',
         href: '/services/apparel/custom-items',
-        image: '/images/hero/hero-5.jpg',
         features: ['Totes, drinkware & more', "Logo'd merch & swag", 'Event giveaways', 'Custom sourcing'],
       },
     ],
@@ -181,7 +164,6 @@ export default function ShopPage() {
                       <div className="relative h-44 w-full overflow-hidden bg-gray-100">
                         <ProductPreviewImage
                           productPath={product.href}
-                          fallbackSrc={product.image}
                           alt={product.name}
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />

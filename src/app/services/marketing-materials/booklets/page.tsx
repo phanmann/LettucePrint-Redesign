@@ -30,7 +30,7 @@ export default function BookletsPage() {
       <p className="mt-4 max-w-2xl text-body-lg text-gray-500">One booklet listing, with binding, size, paper, and page count selected for your project.</p>
     </div></section>
     <section className="bg-gray-50 py-16"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <ConsolidatedQuoteCard product="Booklets" description="Saddle-stitched, Wire-O, or soft-cover perfect-bound booklets. Choose the construction that fits your project." image="/images/products/booklets/booklet-open.jpg"
+      <ConsolidatedQuoteCard product="Booklets" description="Saddle-stitched, Wire-O, or soft-cover perfect-bound booklets. Choose the construction that fits your project."
         variants={[
           { label: 'Saddle Stitch', fields: [saddleSizes, { label: 'Page count', choices: [
             { value: '8', label: '8 pages' }, { value: '16', label: '16 pages' }, { value: '24', label: '24 pages' }, { value: '32', label: '32 pages' }, { value: 'custom', label: 'Custom page count' },

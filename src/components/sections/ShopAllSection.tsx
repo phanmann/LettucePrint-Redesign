@@ -6,7 +6,6 @@ const products = [
   {
     name: 'Custom Stickers',
     href: '/shop/stickers',
-    image: '/images/products/stickers/holo-stickers.png',
     description: 'Die-cut, kiss-cut, holographic, clear, and durable vinyl stickers made for brands that need sharp details.',
     features: ['Order online', 'Waterproof vinyl', 'Fast turnaround'],
     badge: 'Best Seller',
@@ -14,7 +13,6 @@ const products = [
   {
     name: 'Spot UV Stickers',
     href: '/shop/spot-uv',
-    image: '/images/products/spot-uv/spot-uv-1.png',
     description: 'Premium gloss-on-matte stickers with a tactile finish that catches light and makes packaging feel elevated.',
     features: ['Premium finish', 'Gloss detail', 'Die-cut shapes'],
     badge: 'Premium',
@@ -22,7 +20,6 @@ const products = [
   {
     name: 'Roll Labels',
     href: '/shop/roll-labels',
-    image: '/images/products/roll-labels/roll-labels-1.png',
     description: 'High-volume labels for jars, bottles, bags, boxes, and anything headed to shelves or fulfillment.',
     features: ['Bulk friendly', 'Custom sizes', 'Machine-ready rolls'],
     badge: 'Bulk Ready',
@@ -30,7 +27,6 @@ const products = [
   {
     name: 'Standard Retractable Banner',
     href: '/services/signage/banners/retractable-standard',
-    image: 'https://drive.usercontent.google.com/download?id=1lkdgvN3wjRMfftKmeu5X47ZwHyor7dzB&export=view',
     description: 'A lightweight 33 × 80 in. pull-up banner with an aluminum stand and carry bag.',
     features: ['Fast setup', 'Print or full kit', 'Carry bag included'],
     badge: 'Event Ready',
@@ -38,7 +34,6 @@ const products = [
   {
     name: 'Standard Mylar Bag',
     href: '/services/packaging/mylar-bags/standard',
-    image: 'https://drive.usercontent.google.com/download?id=1tnUvh9Y9jYsoOKPUbS9g0-NWdt_CR0KV&export=view',
     description: 'Custom-printed 4 × 5 in. eighth-size bags with zipper and finish options.',
     features: ['Full-color print', 'Zipper options', '1,000 minimum'],
     badge: 'Packaging',
@@ -46,7 +41,6 @@ const products = [
   {
     name: 'Premium Step and Repeat (10 × 8 ft)',
     href: '/services/signage/backdrops/step-repeat-10x8',
-    image: '/images/products/backdrops/step-repeat.jpg',
     description: 'A 10 × 8 ft event backdrop with an adjustable telescopic stand and proof review.',
     features: ['Event backdrop', 'Frame or graphic', 'Proof reviewed'],
     badge: 'Large Format',
@@ -83,7 +77,6 @@ export default function ShopAllSection() {
               <div className="relative h-32 sm:h-48 lg:h-56 w-full overflow-hidden bg-gray-100">
                 <ProductPreviewImage
                   productPath={product.href}
-                  fallbackSrc={product.image}
                   alt={product.name}
                   className="group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 1024px) 50vw, 33vw"

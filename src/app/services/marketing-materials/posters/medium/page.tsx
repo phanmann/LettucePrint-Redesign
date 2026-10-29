@@ -3,10 +3,6 @@ import ProductOrderPage from '@/components/shop/ProductOrderPage'
 export default function Page() {
   return (
     <ProductOrderPage
-      images={[
-        { src: '/images/products/posters/medium-poster-pilates.webp', alt: 'Pilates studio design printed as a medium poster' },
-        { src: '/images/products/posters/medium-poster-pilates-on-wall.webp', alt: 'Medium Pilates poster displayed on a wall' },
-      ]}
       name="Medium Poster"
       tagline="The classic event poster size. Big enough to command attention, manageable to hang."
       parentHref="/services/marketing-materials/posters"

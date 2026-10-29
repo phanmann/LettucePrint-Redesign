@@ -7,9 +7,7 @@ import { useInitialProductGallery, type CmsProductGallery } from './ProductGalle
 
 interface ProductPreviewImageProps {
   productPath: string
-  fallbackSrc: string
   alt: string
-  fallbackFit?: 'cover' | 'contain'
   className?: string
   sizes: string
   priority?: boolean
@@ -21,9 +19,7 @@ export default function ProductPreviewImage(props: ProductPreviewImageProps) {
 
 function ProductPreviewImageForPath({
   productPath,
-  fallbackSrc,
   alt,
-  fallbackFit = 'cover',
   className = '',
   sizes,
   priority = false,
@@ -56,14 +52,7 @@ function ProductPreviewImageForPath({
   const resolved = useMemo(() => {
     const first = cmsPreview?.images?.[0]
     if (!first?.image) {
-      return {
-        src: fallbackSrc,
-        alt,
-        fit: fallbackFit,
-        padding: fallbackFit === 'contain' ? 8 : 0,
-        background: 'muted' as const,
-        source: 'fallback' as const,
-      }
+      return null
     }
 
     const fit: 'cover' | 'contain' = first.fit === 'contain' ? 'contain' : 'cover'
@@ -79,7 +68,9 @@ function ProductPreviewImageForPath({
       background: cmsPreview?.galleryBackground === 'white' ? 'white' as const : 'muted' as const,
       source: 'sanity' as const,
     }
-  }, [alt, cmsPreview, fallbackFit, fallbackSrc])
+  }, [alt, cmsPreview])
+
+  if (!resolved) return <div role="img" aria-label={`${alt}: image unavailable`} data-product-preview={productPath} data-preview-source="empty" className="absolute inset-0 flex items-center justify-center bg-gray-50 text-sm text-gray-500">Image coming soon</div>
 
   return (
     <Image

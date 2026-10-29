@@ -217,11 +217,6 @@ export default function TabloidFlyerPage() {
               </div>
 
               <ProductImageGallery
-                images={[
-                  { src: '/images/products/flyers/flyer-full-page-fanned.jpg', alt: 'Large flyer stack with event schedule' },
-                  { src: '/images/products/flyers/flyer-half-page-leflora.jpg', alt: 'High-impact launch flyer stack' },
-                  { src: '/images/products/flyers/flyer-half-page-flourish.jpg', alt: 'Printed promotional flyer sample' },
-                ]}
               />
               {/* Mobile-only configurator — inline after gallery */}
               <div className="lg:hidden mb-8">

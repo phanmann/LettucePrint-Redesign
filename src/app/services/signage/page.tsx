@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
+import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
 import { ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -14,15 +14,15 @@ export const metadata: Metadata = {
 
 // Category summaries reflect the linked catalogs; options vary by product.
 const products = [
-  { title: 'Banners', image: '/images/products/banners/vinyl-banner.jpg', alt: 'Lettuce Print vinyl banner secured with grommets on an exterior wall', href: '/services/signage/banners', note: 'Vinyl, mesh, fabric, retractable, luxury retractable, tabletop, and oversized banners.', options: [
+  { title: 'Banners', alt: 'Lettuce Print vinyl banner secured with grommets on an exterior wall', href: '/services/signage/banners', note: 'Vinyl, mesh, fabric, retractable, luxury retractable, tabletop, and oversized banners.', options: [
     { label: 'Styles', values: ['Retractable', 'X-Stand', 'Hanging'] },
     { label: 'Materials', values: ['Vinyl', 'Mesh', 'Fabric'] },
   ] },
-  { title: 'Backdrops', image: '/images/products/backdrops/step-repeat.jpg', alt: 'Green Lettuce Print step-and-repeat backdrop on a freestanding event display', href: '/services/signage/backdrops', note: 'Pop-up, eurofit, SEG, and step-and-repeat backdrops for events and retail spaces.', options: [
+  { title: 'Backdrops', alt: 'Green Lettuce Print step-and-repeat backdrop on a freestanding event display', href: '/services/signage/backdrops', note: 'Pop-up, eurofit, SEG, and step-and-repeat backdrops for events and retail spaces.', options: [
     { label: 'Styles', values: ['Step & Repeat', 'Eurofit', 'Pop-up', 'SEG'] },
     { label: 'Sizes', values: ['8×8 ft', '10×8 ft', '20×8 ft', '8×10 ft'] },
   ] },
-  { title: 'Canopy Tents', image: '/images/products/tents/20x10.svg', alt: 'Original illustration of a custom canopy tent', href: '/services/signage/tents/10x10', note: '10×10 and 20×10 full printed canopy tents with frames, from $789. Shipping and tax excluded.', options: [
+  { title: 'Canopy Tents', alt: 'Original illustration of a custom canopy tent', href: '/services/signage/tents/10x10', note: '10×10 and 20×10 full printed canopy tents with frames, from $789. Shipping and tax excluded.', options: [
     { label: 'Sizes', values: ['10×10 ft', '20×10 ft'] },
     { label: 'Packages', values: ['Full Kit', 'Top Only', 'Frame Only'] },
     { label: 'Add-ons', values: ['Backwall', 'Sidewalls', 'Flag Holders', 'Wheel Bag'] },
@@ -46,10 +46,9 @@ export default function SignagePage() {
             {products.map((product) => (
               <Link key={product.href} href={product.href} className="group flex flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lp-green bg-white border border-gray-100 rounded-card p-7 min-w-0 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all">
                 <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-50 mb-6">
-                  <Image
-                    src={product.image}
+                  <ProductPreviewImage
+                    productPath={product.href}
                     alt={product.alt}
-                    fill
                     sizes="(min-width: 1280px) 344px, (min-width: 768px) calc((100vw - 240px) / 3), (min-width: 640px) calc(100vw - 106px), calc(100vw - 90px)"
                     className="object-cover"
                   />

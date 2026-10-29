@@ -1,0 +1,135 @@
+
+> lettuceprint-web@0.1.0 build
+> next build
+
+▲ Next.js 16.2.4 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 22.6s
+  Running TypeScript ...
+  Finished TypeScript in 8.5s ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/124) ...
+  Generating static pages using 3 workers (31/124) 
+  Generating static pages using 3 workers (62/124) 
+  Generating static pages using 3 workers (93/124) 
+✓ Generating static pages using 3 workers (124/124) in 21.3s
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /about-us
+├ ƒ /api/artwork
+├ ƒ /api/checkout
+├ ƒ /api/contact
+├ ƒ /api/embroidery-quote
+├ ƒ /api/product-gallery
+├ ƒ /api/proof/respond
+├ ƒ /api/proof/send
+├ ƒ /api/quote
+├ ƒ /api/uploadthing
+├ ƒ /api/webhook/stripe
+├ ƒ /cart
+├ ƒ /contact-us
+├ ƒ /get-quote
+├ ƒ /lp/roll-labels
+├ ƒ /order-confirmation
+├ ƒ /portfolio
+├ ƒ /portfolio/[slug]
+├ ƒ /privacy-policy
+├ ƒ /projects
+├ ƒ /proof/[token]
+├ ○ /robots.txt
+├ ƒ /search
+├ ƒ /services
+├ ƒ /services/apparel
+├ ƒ /services/apparel/[slug]
+├ ƒ /services/graphic-design
+├ ƒ /services/marketing-materials
+├ ƒ /services/marketing-materials/booklets
+├ ƒ /services/marketing-materials/booklets/perfect-bound-6x9
+├ ƒ /services/marketing-materials/booklets/perfect-bound-85x11
+├ ƒ /services/marketing-materials/booklets/saddle-stitch-55x85
+├ ƒ /services/marketing-materials/booklets/saddle-stitch-85x11
+├ ƒ /services/marketing-materials/booklets/saddle-stitch-square
+├ ƒ /services/marketing-materials/booklets/soft-touch-cover
+├ ƒ /services/marketing-materials/brochures
+├ ƒ /services/marketing-materials/brochures/bi-fold
+├ ƒ /services/marketing-materials/brochures/bi-fold-letter
+├ ƒ /services/marketing-materials/brochures/bi-fold-tabloid
+├ ƒ /services/marketing-materials/brochures/soft-touch
+├ ƒ /services/marketing-materials/brochures/tri-fold
+├ ƒ /services/marketing-materials/brochures/tri-fold-legal
+├ ƒ /services/marketing-materials/brochures/tri-fold-letter
+├ ƒ /services/marketing-materials/brochures/uncoated
+├ ƒ /services/marketing-materials/business-cards
+├ ƒ /services/marketing-materials/business-cards/premium
+├ ƒ /services/marketing-materials/business-cards/standard
+├ ƒ /services/marketing-materials/checkout
+├ ƒ /services/marketing-materials/flyers
+├ ƒ /services/marketing-materials/flyers/full-page
+├ ƒ /services/marketing-materials/flyers/half-page
+├ ƒ /services/marketing-materials/flyers/tabloid
+├ ƒ /services/marketing-materials/postcards
+├ ƒ /services/marketing-materials/postcards/premium
+├ ƒ /services/marketing-materials/postcards/standard
+├ ƒ /services/marketing-materials/posters
+├ ƒ /services/marketing-materials/posters/art-print
+├ ƒ /services/marketing-materials/posters/large
+├ ƒ /services/marketing-materials/posters/medium
+├ ƒ /services/marketing-materials/posters/small
+├ ƒ /services/marketing-materials/posters/soft-touch
+├ ƒ /services/packaging
+├ ƒ /services/packaging/boxes/box-sleeve
+├ ƒ /services/packaging/boxes/folding-carton
+├ ƒ /services/packaging/boxes/lid-base-box
+├ ƒ /services/packaging/boxes/magnetic-closure-box
+├ ƒ /services/packaging/boxes/mailer-box
+├ ƒ /services/packaging/boxes/rsc-box
+├ ƒ /services/packaging/custom-packaging
+├ ƒ /services/packaging/mylar-bags
+├ ƒ /services/packaging/mylar-bags/die-cut
+├ ƒ /services/packaging/mylar-bags/standard
+├ ƒ /services/signage
+├ ƒ /services/signage/backdrops
+├ ƒ /services/signage/backdrops/eurofit-10x8
+├ ƒ /services/signage/backdrops/eurofit-8x8
+├ ƒ /services/signage/backdrops/popup-10x8
+├ ƒ /services/signage/backdrops/popup-20x8
+├ ƒ /services/signage/backdrops/popup-8x8
+├ ƒ /services/signage/backdrops/seg-10x8
+├ ƒ /services/signage/backdrops/seg-20x8
+├ ƒ /services/signage/backdrops/seg-8x10
+├ ƒ /services/signage/backdrops/step-repeat-10x8
+├ ƒ /services/signage/backdrops/step-repeat-8x8
+├ ƒ /services/signage/banners
+├ ƒ /services/signage/banners/fabric-banner
+├ ƒ /services/signage/banners/mesh-banner
+├ ƒ /services/signage/banners/retractable-33
+├ ƒ /services/signage/banners/retractable-48
+├ ƒ /services/signage/banners/retractable-60
+├ ƒ /services/signage/banners/retractable-luxury-33
+├ ƒ /services/signage/banners/retractable-standard
+├ ƒ /services/signage/banners/retractable-tabletop
+├ ƒ /services/signage/banners/vinyl-banner
+├ ƒ /services/signage/banners/x-stand-24x63
+├ ƒ /services/signage/banners/x-stand-32x71
+├ ƒ /services/signage/quote
+├ ƒ /services/signage/tents/[size]
+├ ƒ /shipping-policy
+├ ƒ /shop
+├ ƒ /shop/roll-labels
+├ ƒ /shop/roll-labels/checkout
+├ ƒ /shop/spot-uv
+├ ƒ /shop/spot-uv/checkout
+├ ƒ /shop/stickers
+├ ƒ /shop/stickers/checkout
+├ ○ /sitemap.xml
+├ ƒ /studio/[[...tool]]
+└ ƒ /terms
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
