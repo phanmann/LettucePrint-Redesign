@@ -17,7 +17,27 @@ const sources = [
   { path: '/services/packaging', alt: 'Lettuce Print packaging', all: true },
 ]
 
+// Deterministic shuffle so a per-load seed keeps one stable order through rotation and gallery refreshes.
+function shuffleWithSeed<T>(items: T[], seed: number) {
+  const result = [...items]
+  let state = seed >>> 0
+  const random = () => {
+    state = (state + 0x6d2b79f5) >>> 0
+    let t = state
+    t = Math.imul(t ^ (t >>> 15), t | 1)
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1))
+    ;[result[i], result[j]] = [result[j], result[i]]
+  }
+  return result
+}
+
 export default function HeroSlideshow() {
+  const [current, setCurrent] = useState(0)
+  const [fading, setFading] = useState(false)
   const initial = useInitialProductGalleries()
   const [galleries, setGalleries] = useState(initial)
   useEffect(() => {
@@ -33,7 +53,13 @@ export default function HeroSlideshow() {
     })).then(entries => { if (!cancelled) setGalleries(Object.fromEntries(entries)) })
     return () => { cancelled = true }
   }, [initial])
-  const slides = useMemo(() => {
+  // Server render and hydration use source order; the shuffle happens once after mount.
+  const [seed, setSeed] = useState<number | null>(null)
+  useEffect(() => {
+    setSeed(Math.floor(Math.random() * 4294967296))
+    setCurrent(0)
+  }, [])
+  const orderedSlides = useMemo(() => {
     const seen = new Set<string>()
     return sources.flatMap(source => {
       const gallery = galleries[source.path]
@@ -50,8 +76,7 @@ export default function HeroSlideshow() {
       })
     })
   }, [galleries])
-  const [current, setCurrent] = useState(0)
-  const [fading, setFading] = useState(false)
+  const slides = useMemo(() => (seed === null ? orderedSlides : shuffleWithSeed(orderedSlides, seed)), [orderedSlides, seed])
 
   useEffect(() => {
     if (slides.length < 2) return
