@@ -19,3 +19,7 @@ export function ProductGalleryProvider({ galleries, children }: {
 export function useInitialProductGallery(productPath: string) {
   return useContext(GalleryContext)[productPath] ?? null
 }
+
+export function useInitialProductGalleries() {
+  return useContext(GalleryContext)
+}
