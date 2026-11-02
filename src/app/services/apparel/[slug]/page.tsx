@@ -76,10 +76,10 @@ export default async function ApparelServicePage({ params }: { params: Promise<{
       <Navbar />
       <main className="pt-[72px]">
         <section className="bg-white border-b border-gray-100 py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-4">{service.eyebrow}</p>
-            <h1 className="text-display font-semibold text-gray-900 mb-5 max-w-3xl">{service.title}</h1>
-            <p className="text-body-lg text-gray-500 max-w-2xl">{service.description}</p>
+            <h1 className="text-display font-semibold text-gray-900 mb-5 max-w-3xl mx-auto">{service.title}</h1>
+            <p className="text-body-lg text-gray-500 max-w-2xl mx-auto">{service.description}</p>
           </div>
         </section>
 
