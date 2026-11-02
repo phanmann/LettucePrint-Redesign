@@ -5,7 +5,7 @@ import Image from 'next/image'
 const footerLinks = {
   'Shop': [
     { label: 'Shop Products', href: '/shop' },
-    { label: 'Our Services', href: '/services' },
+    { label: 'Our Services', href: '/#what-we-do' },
   ],
   'Explore': [
     { label: 'Portfolio', href: '/portfolio' },

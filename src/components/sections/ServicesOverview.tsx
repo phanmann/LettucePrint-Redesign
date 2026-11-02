@@ -56,7 +56,7 @@ const services: {
 
 export default function ServicesOverview() {
   return (
-    <section className="py-24 bg-white">
+    <section id="what-we-do" className="py-24 bg-white scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
