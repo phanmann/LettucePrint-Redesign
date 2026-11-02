@@ -3,6 +3,7 @@ import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import CustomPackagingConsultationForm from '@/components/quote/CustomPackagingConsultationForm'
+import CollectionGallery from '@/components/shop/CollectionGallery'
 
 const CAPABILITIES = [
   { label: 'Custom Structures', desc: 'Unique box shapes, unusual openings, multi-piece sets — we build from your dieline or create one from scratch.' },
@@ -27,6 +28,17 @@ export default function CustomPackagingPage() {
               <p className="text-body-lg mt-6 max-w-2xl text-gray-500">
                 Got something that doesn&apos;t fit a template? Good. We do custom from scratch — unique structures, premium finishes, low minimums. Tell us what you&apos;re building and we&apos;ll figure it out together.
               </p>
+              <CollectionGallery
+                label="Custom packaging"
+                sources={[
+                  '/services/packaging/custom-packaging',
+                  '/services/packaging',
+                  '/services/packaging/boxes/mailer-box',
+                  '/services/packaging/boxes/magnetic-closure-box',
+                  '/services/packaging/boxes/rsc-box',
+                  '/services/packaging/boxes/box-sleeve',
+                ]}
+              />
             </div>
             <CustomPackagingConsultationForm />
           </div>
