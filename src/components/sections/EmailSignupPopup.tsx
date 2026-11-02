@@ -66,6 +66,8 @@ export default function EmailSignupPopup() {
       if (response.ok) {
         setStatus('success')
         setMessage("Thanks! We'll be in touch about our monthly deals and offers.")
+        // Keep the panel open to show confirmation; later visits start minimized.
+        setOpen(true)
         window.localStorage.setItem(STORAGE_KEY, 'subscribed')
         return
       }
