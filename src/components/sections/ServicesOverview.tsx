@@ -10,7 +10,6 @@ const services: {
   num: string
   title: string
   description: string
-  href: string
   bg: string
 }[] = [
   {
@@ -19,7 +18,6 @@ const services: {
     num: '01',
     title: 'Packaging',
     description: 'Custom boxes, bags, tissue paper, and branded packaging that makes unboxing unforgettable.',
-    href: '/services/packaging',
     bg: 'bg-lp-green/10',
   },
   {
@@ -28,7 +26,6 @@ const services: {
     num: '02',
     title: 'Graphic Design',
     description: 'Brand identity, marketing collateral, and print-ready artwork from our in-house design team.',
-    href: '/services/graphic-design',
     bg: 'bg-lp-yellow/40',
   },
   {
@@ -37,7 +34,6 @@ const services: {
     num: '03',
     title: 'Signage & Displays',
     description: 'Banners, foam boards, window graphics, and trade show displays that command attention.',
-    href: '/services/signage',
     bg: 'bg-lp-blue/50',
   },
   {
@@ -46,7 +42,6 @@ const services: {
     num: '04',
     title: 'Screen Printing',
     description: 'Premium apparel printing for brands, events, and merch drops. No minimum on select styles.',
-    href: '/services/screen-printing',
     bg: 'bg-lp-purple/20',
   },
   {
@@ -55,7 +50,6 @@ const services: {
     num: '05',
     title: 'Large Format',
     description: 'Murals, vehicle wraps, backdrops, and anything that needs to go big. We go big.',
-    href: '/services/large-format',
     bg: 'bg-gray-100',
   },
 ]
@@ -93,28 +87,25 @@ export default function ServicesOverview() {
         <div className="divide-y divide-gray-100 border-t border-gray-100">
           {services.map((service, i) => (
             <motion.div
-              key={service.href}
+              key={service.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
             >
-              <Link
-                href={service.href}
-                className="group flex items-center gap-5 sm:gap-8 py-6 sm:py-7 hover:pl-3 transition-all duration-300"
-              >
+              <div className="flex items-center gap-5 sm:gap-8 py-6 sm:py-7">
                 {/* Number */}
                 <span className="font-mono text-xs tracking-widest text-gray-300 flex-shrink-0 w-6 hidden sm:block">
                   {service.num}
                 </span>
 
                 {/* Icon bubble */}
-                <div className={`w-12 h-12 rounded-full ${service.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300`}>
+                <div className={`w-12 h-12 rounded-full ${service.bg} flex items-center justify-center flex-shrink-0`}>
                   <service.icon size={20} strokeWidth={1.75} className={service.iconColor} />
                 </div>
 
                 {/* Name */}
-                <h3 className="text-h3 font-semibold text-gray-900 group-hover:text-lp-green transition-colors duration-200 flex-1 min-w-0">
+                <h3 className="text-h3 font-semibold text-gray-900 flex-1 min-w-0">
                   {service.title}
                 </h3>
 
@@ -122,14 +113,7 @@ export default function ServicesOverview() {
                 <p className="hidden lg:block text-small text-gray-500 leading-relaxed max-w-sm flex-shrink-0">
                   {service.description}
                 </p>
-
-                {/* Arrow */}
-                <div className="w-10 h-10 rounded-full border-2 border-gray-200 flex items-center justify-center text-gray-400 flex-shrink-0 group-hover:bg-lp-green group-hover:border-lp-green group-hover:text-white group-hover:rotate-45 transition-all duration-300">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M7 17L17 7M17 7H7M17 7v10" />
-                  </svg>
-                </div>
-              </Link>
+              </div>
             </motion.div>
           ))}
         </div>
