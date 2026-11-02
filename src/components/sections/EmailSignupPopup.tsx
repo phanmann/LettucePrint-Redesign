@@ -7,13 +7,22 @@ type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 const noopSubscribe = () => () => {}
 const readStored = () => window.localStorage.getItem(STORAGE_KEY)
+const WIDE_QUERY = '(min-width: 640px)'
+const subscribeWide = (onChange: () => void) => {
+  const query = window.matchMedia(WIDE_QUERY)
+  query.addEventListener('change', onChange)
+  return () => query.removeEventListener('change', onChange)
+}
+const readWide = () => window.matchMedia(WIDE_QUERY).matches
 
 export default function EmailSignupPopup() {
   // Client-only snapshots keep the server render empty, so hydration never mismatches.
   const mounted = useSyncExternalStore(noopSubscribe, () => true, () => false)
   const stored = useSyncExternalStore(noopSubscribe, readStored, () => null)
   const [openOverride, setOpen] = useState<boolean | null>(null)
-  const open = openOverride ?? !(stored === 'minimized' || stored === 'subscribed')
+  // Phones start minimized so the panel never covers hero calls to action; visitors can open it.
+  const wide = useSyncExternalStore(subscribeWide, readWide, () => false)
+  const open = openOverride ?? (wide && !(stored === 'minimized' || stored === 'subscribed'))
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<Status>('idle')
   const [message, setMessage] = useState('')
