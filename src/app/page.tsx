@@ -7,6 +7,7 @@ import ServicesOverview from '@/components/sections/ServicesOverview'
 import PortfolioStrip from '@/components/sections/PortfolioStrip'
 import Testimonials from '@/components/sections/Testimonials'
 import CTABanner from '@/components/sections/CTABanner'
+import EmailSignupPopup from '@/components/sections/EmailSignupPopup'
 
 export default function HomePage() {
   return (
@@ -22,6 +23,7 @@ export default function HomePage() {
         <CTABanner />
       </main>
       <Footer />
+      <EmailSignupPopup />
     </>
   )
 }
