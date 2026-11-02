@@ -76,27 +76,10 @@ export default async function ApparelServicePage({ params }: { params: Promise<{
       <Navbar />
       <main className="pt-[72px]">
         <section className="bg-white border-b border-gray-100 py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-4">{service.eyebrow}</p>
-            <h1 className="text-display font-semibold text-gray-900 mb-5 max-w-3xl">{service.title}</h1>
-            <p className="text-body-lg text-gray-500 max-w-2xl">{service.description}</p>
-          </div>
-        </section>
-
-        <section className="py-16 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-6">
-            <div className="bg-white border border-gray-100 rounded-card p-7 shadow-card">
-              <h2 className="text-h3 font-semibold text-gray-900 mb-5">Best for</h2>
-              <ul className="grid sm:grid-cols-2 gap-3">
-                {service.bestFor.map((item) => <li key={item} className="rounded-card bg-lp-green/5 border border-lp-green/15 px-4 py-3 text-small text-gray-700">{item}</li>)}
-              </ul>
-            </div>
-            <div className="bg-white border border-gray-100 rounded-card p-7 shadow-card">
-              <h2 className="text-h3 font-semibold text-gray-900 mb-5">Production notes</h2>
-              <ul className="space-y-3">
-                {service.details.map((item) => <li key={item} className="flex items-start gap-3 text-small text-gray-600"><span className="mt-2 h-1.5 w-1.5 rounded-full bg-lp-green flex-shrink-0" />{item}</li>)}
-              </ul>
-            </div>
+            <h1 className="text-display font-semibold text-gray-900 mb-5 max-w-3xl mx-auto">{service.title}</h1>
+            <p className="text-body-lg text-gray-500 max-w-2xl mx-auto">{service.description}</p>
           </div>
         </section>
 
@@ -115,6 +98,23 @@ export default async function ApparelServicePage({ params }: { params: Promise<{
             ) : (
               <div className="text-center"><Link href="/get-quote"><Button size="lg">Request a Quote</Button></Link></div>
             )}
+          </div>
+        </section>
+
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-6">
+            <div className="bg-white border border-gray-100 rounded-card p-7 shadow-card">
+              <h2 className="text-h3 font-semibold text-gray-900 mb-5">Best for</h2>
+              <ul className="grid sm:grid-cols-2 gap-3">
+                {service.bestFor.map((item) => <li key={item} className="rounded-card bg-lp-green/5 border border-lp-green/15 px-4 py-3 text-small text-gray-700">{item}</li>)}
+              </ul>
+            </div>
+            <div className="bg-white border border-gray-100 rounded-card p-7 shadow-card">
+              <h2 className="text-h3 font-semibold text-gray-900 mb-5">Production notes</h2>
+              <ul className="space-y-3">
+                {service.details.map((item) => <li key={item} className="flex items-start gap-3 text-small text-gray-600"><span className="mt-2 h-1.5 w-1.5 rounded-full bg-lp-green flex-shrink-0" />{item}</li>)}
+              </ul>
+            </div>
           </div>
         </section>
       </main>
