@@ -1,26 +1,20 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import FooterLink from './FooterLink'
 
+// Quick Links are split across three columns; Support stays in the fourth.
 const footerLinks = {
-  'Quick Links': [
+  'Shop': [
     { label: 'Shop Products', href: '/shop' },
-    { label: 'Our Services', href: '/services' },
+    { label: 'Our Services', href: '/#what-we-do' },
+  ],
+  'Explore': [
     { label: 'Portfolio', href: '/portfolio' },
     { label: 'About Us', href: '/about-us' },
+  ],
+  'Get in Touch': [
     { label: 'Contact Us', href: '/contact-us' },
     { label: 'Get a Quote', href: '/get-quote' },
-  ],
-  'Services': [
-    { label: 'Marketing Materials', href: '/services/marketing-materials' },
-    { label: 'Stickers & Labels', href: '/shop/stickers' },
-    { label: 'Boxes & Packaging', href: '/services/packaging' },
-    { label: 'Signs & Banners', href: '/services/signage' },
-    { label: 'Apparel & Promo', href: '/services/apparel' },
-  ],
-  'Shop': [
-    { label: 'Custom Stickers', href: '/shop/stickers' },
-    { label: 'Roll Labels', href: '/shop/roll-labels' },
-    { label: 'All Products', href: '/shop' },
   ],
   'Support': [
     { label: 'Shipping & Delivery', href: '/shipping-policy' },
@@ -81,12 +75,12 @@ export default function Footer() {
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.href}>
-                    <Link
+                    <FooterLink
                       href={link.href}
                       className="text-small text-white/70 hover:text-white hover:text-lp-green transition-colors duration-150"
                     >
                       {link.label}
-                    </Link>
+                    </FooterLink>
                   </li>
                 ))}
               </ul>
