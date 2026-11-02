@@ -3,10 +3,12 @@
 import { useId, useRef, useState, useSyncExternalStore } from 'react'
 
 const STORAGE_KEY = 'lp-email-signup'
+const DISMISS_KEY = 'lp-email-signup-dismissed'
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 const noopSubscribe = () => () => {}
 const readStored = () => window.localStorage.getItem(STORAGE_KEY)
+const readDismissed = () => window.sessionStorage.getItem(DISMISS_KEY) === '1'
 const WIDE_QUERY = '(min-width: 640px)'
 const subscribeWide = (onChange: () => void) => {
   const query = window.matchMedia(WIDE_QUERY)
@@ -23,6 +25,9 @@ export default function EmailSignupPopup() {
   // Phones start minimized so the panel never covers hero calls to action; visitors can open it.
   const wide = useSyncExternalStore(subscribeWide, readWide, () => false)
   const open = openOverride ?? (wide && !(stored === 'minimized' || stored === 'subscribed'))
+  // Dismissal hides the whole widget for the rest of this browser session.
+  const storedDismissed = useSyncExternalStore(noopSubscribe, readDismissed, () => false)
+  const [dismissedNow, setDismissedNow] = useState(false)
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<Status>('idle')
   const [message, setMessage] = useState('')
@@ -35,6 +40,11 @@ export default function EmailSignupPopup() {
     setOpen(next)
     if (status !== 'success') window.localStorage.setItem(STORAGE_KEY, next ? 'open' : 'minimized')
     requestAnimationFrame(() => (next ? minimizeRef.current : reopenRef.current)?.focus())
+  }
+
+  function dismiss() {
+    window.sessionStorage.setItem(DISMISS_KEY, '1')
+    setDismissedNow(true)
   }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -69,19 +79,29 @@ export default function EmailSignupPopup() {
     }
   }
 
-  if (!mounted) return null
+  if (!mounted || storedDismissed || dismissedNow) return null
 
   if (!open) {
     return (
-      <button
-        ref={reopenRef}
-        type="button"
-        onClick={() => setPanel(true)}
-        aria-label="Open monthly deals email signup"
-        className="fixed bottom-4 right-4 z-30 rounded-full bg-[#00a175] px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition hover:bg-[#008a64] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00a175] focus-visible:ring-offset-2"
-      >
-        ✉ Monthly deals
-      </button>
+      <div className="fixed bottom-4 right-4 z-30">
+        <button
+          ref={reopenRef}
+          type="button"
+          onClick={() => setPanel(true)}
+          aria-label="Open monthly deals email signup"
+          className="rounded-full bg-[#00a175] px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition hover:bg-[#008a64] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00a175] focus-visible:ring-offset-2"
+        >
+          ✉ Monthly deals
+        </button>
+        <button
+          type="button"
+          onClick={dismiss}
+          aria-label="Dismiss monthly deals signup"
+          className="absolute -left-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-black/10 bg-white text-xs font-bold text-gray-600 shadow transition hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00a175]"
+        >
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
     )
   }
 
