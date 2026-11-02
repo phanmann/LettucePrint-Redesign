@@ -9,6 +9,7 @@ import CustomPackagingHeroForm from '@/components/quote/CustomPackagingHeroForm'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
+import CollectionGallery from '@/components/shop/CollectionGallery'
 
 const PRODUCTS = [
   {
@@ -62,6 +63,10 @@ export default function MylarBagsPage() {
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-lp-green">Boxes & Packaging</p>
               <h1 className="text-display max-w-2xl font-semibold text-gray-900">Custom Mylar Bags</h1>
               <p className="text-body-lg mt-6 max-w-xl text-gray-500">Custom-printed packaging for cannabis brands, food products, supplements, and specialty retail. Shop 4 × 5 in. eighth-size standard bags online; request a quote for other sizes and specialty finishes.</p>
+              <CollectionGallery
+                label="Custom Mylar Bags"
+                sources={['/services/packaging/mylar-bags', '/services/packaging/mylar-bags/standard', '/services/packaging/mylar-bags/die-cut']}
+              />
             </div>
             <CustomPackagingHeroForm quoteType="mylar-bags" />
           </div>
