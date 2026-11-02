@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import FooterLink from './FooterLink'
 
 // Quick Links are split across three columns; Support stays in the fourth.
 const footerLinks = {
@@ -74,12 +75,12 @@ export default function Footer() {
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.href}>
-                    <Link
+                    <FooterLink
                       href={link.href}
                       className="text-small text-white/70 hover:text-white hover:text-lp-green transition-colors duration-150"
                     >
                       {link.label}
-                    </Link>
+                    </FooterLink>
                   </li>
                 ))}
               </ul>
