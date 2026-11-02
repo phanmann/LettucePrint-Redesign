@@ -65,7 +65,7 @@ export default function EmailSignupPopup() {
       })
       if (response.ok) {
         setStatus('success')
-        setMessage("You're on the list! Watch your inbox for our monthly deals.")
+        setMessage("Thanks! We'll be in touch about our monthly deals and offers.")
         window.localStorage.setItem(STORAGE_KEY, 'subscribed')
         return
       }
