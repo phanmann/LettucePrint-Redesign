@@ -28,7 +28,7 @@ function Header() {
         </Link>
         <nav className="flex shrink-0 items-center gap-1.5 sm:gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/62 sm:text-[11px] sm:tracking-[0.16em]">
           <Link href="/" className="whitespace-nowrap rounded-full border border-lp-green bg-transparent px-2 py-2.5 text-[9px] tracking-[0.04em] text-lp-green min-[390px]:text-[10px] transition hover:bg-lp-green/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-lp-green focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:px-4 sm:py-2 sm:text-[11px] sm:tracking-[0.16em]">
-            I Want to Print
+            Let Us Print
           </Link>
           <a href="mailto:info@lettuceprint?cc=sean@lettuceprint" className="whitespace-nowrap rounded-full border border-lp-green bg-lp-green px-3 py-2.5 text-white backdrop-blur-xl transition hover:border-lp-green-dark hover:bg-lp-green-dark sm:px-4 sm:py-2">
             Let Us Work
