@@ -65,15 +65,16 @@ const TIMELINE_OPTIONS = [
 
 // Apparel artwork uploads reuse the server-side quote attachment limits.
 const APPAREL_SERVICES: ServiceType[] = ['Screen Printing', 'Embroidery', 'DTG Printing']
-const ARTWORK_ACCEPT = '.pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/jpeg,image/png,image/webp'
-const ARTWORK_TYPES = new Set(['application/pdf', 'image/jpeg', 'image/png', 'image/webp'])
+const ARTWORK_ACCEPT = '.pdf,.jpg,.jpeg,.png,.webp,.ai,.eps,.svg'
+// Checked by extension: browsers report inconsistent MIME types for AI/EPS files.
+const ARTWORK_EXTENSIONS = new Set(['pdf', 'jpg', 'jpeg', 'png', 'webp', 'ai', 'eps', 'svg'])
 const ARTWORK_MAX_FILES = 3
 const ARTWORK_MAX_FILE_BYTES = 10 * 1024 * 1024
 const ARTWORK_MAX_TOTAL_BYTES = 20 * 1024 * 1024
 
 function artworkError(files: File[]): string {
   if (files.length > ARTWORK_MAX_FILES) return `Upload up to ${ARTWORK_MAX_FILES} files.`
-  if (files.some(file => !ARTWORK_TYPES.has(file.type))) return 'Files must be PDF, JPG, PNG, or WebP.'
+  if (files.some(file => !ARTWORK_EXTENSIONS.has(file.name.toLowerCase().split('.').pop() ?? ''))) return 'Files must be PDF, JPG, PNG, WebP, AI, EPS, or SVG.'
   if (files.some(file => file.size <= 0 || file.size > ARTWORK_MAX_FILE_BYTES)) return 'Each file must be no more than 10 MB.'
   if (files.reduce((total, file) => total + file.size, 0) > ARTWORK_MAX_TOTAL_BYTES) return 'Combined uploads must be no more than 20 MB.'
   return ''
@@ -454,7 +455,7 @@ export default function QuoteForm({ initialValues, lockService = false, allowArt
                           aria-invalid={Boolean(artworkMessage)}
                         />
                       </label>
-                      <p id="quote-artwork-help" className="mt-1.5 text-xs text-gray-500">PDF, JPG, PNG, or WebP. 10 MB each; 20 MB combined.</p>
+                      <p id="quote-artwork-help" className="mt-1.5 text-xs text-gray-500">PDF, JPG, PNG, WebP, AI, EPS, or SVG. 10 MB each; 20 MB combined.</p>
                       <p id="quote-artwork-error" role="alert" className="mt-1.5 text-xs text-red-600">{artworkMessage}</p>
                       {artwork.length > 0 && (
                         <ul className="mt-3 space-y-2" aria-label="Selected artwork">

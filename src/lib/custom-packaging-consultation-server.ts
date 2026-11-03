@@ -44,16 +44,37 @@ function matchesMagicBytes(mimeType: string, bytes: Uint8Array): boolean {
   return false
 }
 
-export async function validateConsultationFiles(files: File[], limits: { maxFiles: number; maxFileBytes: number; maxTotalBytes: number } = CUSTOM_PACKAGING_UPLOAD_LIMITS): Promise<ConsultationUploadResult> {
+// Vector artwork (opt-in): identified by extension plus file signature, since browsers report
+// inconsistent MIME types for .ai/.eps. SVG is only ever sent as an attachment, never rendered.
+const VECTOR_EXTENSIONS = new Map([
+  ['ai', 'application/postscript'],
+  ['eps', 'application/postscript'],
+  ['svg', 'image/svg+xml'],
+])
+
+function vectorMimeType(filename: string, bytes: Uint8Array): string | null {
+  const extension = filename.toLowerCase().split('.').pop() ?? ''
+  const mimeType = VECTOR_EXTENSIONS.get(extension)
+  if (!mimeType) return null
+  const head = new TextDecoder('latin1').decode(bytes.slice(0, 1024))
+  if (extension === 'ai' && (head.startsWith('%PDF-') || head.startsWith('%!PS-Adobe'))) return mimeType
+  if (extension === 'eps' && (head.startsWith('%!PS-Adobe') || (bytes[0] === 0xc5 && bytes[1] === 0xd0 && bytes[2] === 0xd3 && bytes[3] === 0xc6))) return mimeType
+  if (extension === 'svg' && /^(\uFEFF|\xEF\xBB\xBF)?\s*(<\?xml[^>]*>\s*)?(<!--[\s\S]*?-->\s*)*(<!DOCTYPE[^>]*>\s*)?<svg[\s>]/i.test(head)) return mimeType
+  return null
+}
+
+export async function validateConsultationFiles(files: File[], limits: { maxFiles: number; maxFileBytes: number; maxTotalBytes: number; allowVector?: boolean } = CUSTOM_PACKAGING_UPLOAD_LIMITS): Promise<ConsultationUploadResult> {
   if (files.length > limits.maxFiles) {
     return { success: false, error: `Upload up to ${limits.maxFiles} files.` }
   }
 
   let totalBytes = 0
   const validated: ValidatedConsultationFile[] = []
+  const typeError = limits.allowVector ? 'Files must be PDF, JPG, PNG, WebP, AI, EPS, or SVG.' : 'Files must be PDF, JPG, PNG, or WebP.'
   for (const [index, file] of files.entries()) {
-    if (!MIME_TYPES.has(file.type)) {
-      return { success: false, error: 'Files must be PDF, JPG, PNG, or WebP.' }
+    const vectorExtension = limits.allowVector && VECTOR_EXTENSIONS.has(file.name.toLowerCase().split('.').pop() ?? '')
+    if (!vectorExtension && !MIME_TYPES.has(file.type)) {
+      return { success: false, error: typeError }
     }
     if (file.size <= 0 || file.size > limits.maxFileBytes) {
       return { success: false, error: 'Each file must be larger than 0 bytes and no more than 10 MB.' }
@@ -63,13 +84,14 @@ export async function validateConsultationFiles(files: File[], limits: { maxFile
       return { success: false, error: 'Combined uploads must be no more than 20 MB.' }
     }
     const bytes = new Uint8Array(await file.arrayBuffer())
-    if (!matchesMagicBytes(file.type, bytes)) {
+    const mimeType = vectorExtension ? vectorMimeType(file.name, bytes) : (matchesMagicBytes(file.type, bytes) ? file.type : null)
+    if (!mimeType) {
       return { success: false, error: `The contents of ${sanitizeAttachmentFilename(file.name, index)} do not match its file type.` }
     }
     validated.push({
       originalName: file.name,
       filename: sanitizeAttachmentFilename(file.name, index),
-      mimeType: file.type,
+      mimeType,
       size: file.size,
       content: Buffer.from(bytes),
     })

@@ -15,6 +15,7 @@ import {
   validateCustomPackagingConsultation,
 } from '@/lib/custom-packaging-consultation'
 import {
+  CUSTOM_PACKAGING_UPLOAD_LIMITS,
   sendCustomPackagingInternalEmail,
   type ValidatedConsultationFile,
   validateConsultationFiles,
@@ -211,7 +212,7 @@ async function parseIncomingQuote(req: NextRequest): Promise<{ parsed: ParsedQuo
     if (rawFiles.some(item => !(item instanceof File))) {
       return { parsed: { success: false, errors: { files: 'Invalid uploaded file.' } }, files: [] }
     }
-    const uploadResult = await validateConsultationFiles(rawFiles as File[])
+    const uploadResult = await validateConsultationFiles(rawFiles as File[], { ...CUSTOM_PACKAGING_UPLOAD_LIMITS, allowVector: true })
     if (!uploadResult.success) return { parsed: { success: false, errors: { files: uploadResult.error } }, files: [] }
     return { parsed, files: uploadResult.files }
   }
