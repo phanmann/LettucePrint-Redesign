@@ -14,8 +14,8 @@ const marqueeProjects = [...portfolioProjects, ...portfolioProjects]
 
 function Header() {
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 bg-gradient-to-b from-black/80 to-transparent px-4 py-3 sm:px-8 sm:py-5">
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-4">
+    <header className="fixed left-0 right-0 top-0 z-50 bg-gradient-to-b from-black/80 to-transparent px-3 min-[390px]:px-4 py-3 sm:px-8 sm:py-5">
+      <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-2 min-[390px]:gap-4">
         <Link href="/portfolio" aria-label="Lettuce Print portfolio home" className="relative block h-10 w-28 shrink-0 overflow-hidden transition-opacity hover:opacity-75 sm:h-[52px] sm:w-[145px]">
           <Image
             src="/images/logos/lp-wordmark-white.svg"
@@ -26,7 +26,10 @@ function Header() {
             priority
           />
         </Link>
-        <nav className="flex shrink-0 items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/62 sm:text-[11px] sm:tracking-[0.16em]">
+        <nav className="flex shrink-0 items-center gap-1.5 sm:gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/62 sm:text-[11px] sm:tracking-[0.16em]">
+          <Link href="/" className="whitespace-nowrap rounded-full border border-lp-green bg-transparent px-2 py-2.5 text-[9px] tracking-[0.04em] text-lp-green min-[390px]:text-[10px] transition hover:bg-lp-green/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-lp-green focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:px-4 sm:py-2 sm:text-[11px] sm:tracking-[0.16em]">
+            Let Us Print
+          </Link>
           <a href="mailto:info@lettuceprint?cc=sean@lettuceprint" className="whitespace-nowrap rounded-full border border-lp-green bg-lp-green px-3 py-2.5 text-white backdrop-blur-xl transition hover:border-lp-green-dark hover:bg-lp-green-dark sm:px-4 sm:py-2">
             Let Us Work
           </a>
