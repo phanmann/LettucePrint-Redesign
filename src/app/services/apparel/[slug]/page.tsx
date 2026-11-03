@@ -90,11 +90,11 @@ export default async function ApparelServicePage({ params }: { params: Promise<{
               <p className="text-body text-gray-500">{service.slug === 'embroidery' ? 'Send garment type, quantity, embroidery locations, thread colors, and deadline. We’ll prepare a quote.' : service.slug === 'dtg' ? 'Tell us about your garments, print placements, artwork, and in-hands date. We’ll review the details and prepare a quote.' : 'Send garment type, quantity, print locations, artwork, and deadline. We’ll recommend the cleanest production route.'}</p>
             </div>
             {service.slug === 'screenprint' ? (
-              <QuoteForm initialValues={{ service: 'Screen Printing', projectDetails: {} }} lockService />
+              <QuoteForm initialValues={{ service: 'Screen Printing', projectDetails: {} }} lockService allowArtwork />
             ) : service.slug === 'embroidery' ? (
-              <QuoteForm initialValues={{ service: 'Embroidery', projectDetails: {} }} lockService />
+              <QuoteForm initialValues={{ service: 'Embroidery', projectDetails: {} }} lockService allowArtwork />
             ) : service.slug === 'dtg' ? (
-              <QuoteForm initialValues={{ service: 'DTG Printing', projectDetails: {} }} lockService />
+              <QuoteForm initialValues={{ service: 'DTG Printing', projectDetails: {} }} lockService allowArtwork />
             ) : (
               <div className="text-center"><Link href="/get-quote"><Button size="lg">Request a Quote</Button></Link></div>
             )}
