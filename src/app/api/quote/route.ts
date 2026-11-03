@@ -43,6 +43,11 @@ type ParsedQuote =
   | { success: true; data: QuotePayload }
   | { success: false; errors: CustomPackagingConsultationErrors | Record<string, string> }
 
+// Apparel quote pages may attach artwork to the general quote form.
+const APPAREL_LEGACY_SERVICES = new Set(['Screen Printing', 'Embroidery', 'DTG Printing'])
+// Vercel rejects request bodies over ~4.5 MB, so apparel artwork is capped at 4 MB combined.
+const APPAREL_ARTWORK_LIMITS = { maxFiles: 3, maxFileBytes: 4 * 1024 * 1024, maxTotalBytes: 4 * 1024 * 1024, allowVector: true }
+
 const timelineLabel: Record<string, string> = {
   'asap': 'ASAP',
   '1-2weeks': '1–2 weeks',
@@ -100,6 +105,7 @@ export async function POST(req: NextRequest) {
                 </table>
                 <h3 style="margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af">Project Details</h3>
                 <table style="width:100%;border-collapse:collapse;margin-bottom:24px">${detailsRows}</table>
+                ${incoming.files.length ? `<h3 style="margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af">Artwork (attached)</h3><table style="width:100%;border-collapse:collapse;margin-bottom:24px">${incoming.files.map(file => row(file.filename, `${(file.size / 1024 / 1024).toFixed(1)} MB`)).join('')}</table>` : ''}
                 ${contact.email
                   ? `<a href="mailto:${escapeAttribute(contact.email)}" style="background:#00a175;color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:600">Reply to ${escapeHtml(contact.name)}</a>`
                   : ''}
@@ -107,6 +113,7 @@ export async function POST(req: NextRequest) {
               <p style="color:#9ca3af;font-size:12px;text-align:center;margin-top:16px">Submitted via lettuceprint.com${escapeHtml(source)}</p>
             </div>
           `,
+          ...(incoming.files.length ? { attachments: incoming.files.map(file => ({ filename: file.filename, content: file.content })) } : {}),
         }
 
     if (consultation) {
@@ -198,6 +205,19 @@ async function parseIncomingQuote(req: NextRequest): Promise<{ parsed: ParsedQuo
     if (!uploadResult.success) return { parsed: { success: false, errors: { files: uploadResult.error } }, files: [] }
     return { parsed, files: uploadResult.files }
   }
+  if (body && typeof body === 'object' && !('quoteType' in body) && !('formType' in body)
+    && 'service' in body && APPAREL_LEGACY_SERVICES.has((body as Record<string, unknown>).service as string)) {
+    const parsed = parseQuote(body)
+    if (!parsed.success) return { parsed, files: [] }
+    const rawFiles = formData.getAll('files')
+    if (rawFiles.some(item => !(item instanceof File))) {
+      return { parsed: { success: false, errors: { files: 'Invalid uploaded file.' } }, files: [] }
+    }
+    const uploadResult = await validateConsultationFiles(rawFiles as File[], APPAREL_ARTWORK_LIMITS)
+    if (!uploadResult.success) return { parsed: { success: false, errors: { files: uploadResult.error } }, files: [] }
+    return { parsed, files: uploadResult.files }
+  }
+
   const parsed = validateCustomPackagingConsultation(body)
   if (!parsed.success) return { parsed, files: [] }
 

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, ArrowLeft, CheckCircle, Loader2, Tag, Package, PanelTop, Shirt, Expand, Sparkles, type LucideIcon } from 'lucide-react'
+import { ArrowRight, ArrowLeft, CheckCircle, Loader2, Tag, Package, PanelTop, Shirt, Expand, Sparkles, Upload, X, type LucideIcon } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import { INK_COLOR_OPTIONS, MAX_PRINT_LOCATIONS, printLocationCount, validateScreenprintDetails } from '@/lib/screenprint-quote'
 
@@ -28,6 +28,8 @@ export interface QuoteFormInitialValues {
 interface QuoteFormProps {
   initialValues?: QuoteFormInitialValues
   lockService?: boolean
+  // Shows the optional artwork upload on apparel service pages.
+  allowArtwork?: boolean
 }
 
 interface FormState {
@@ -60,6 +62,23 @@ const TIMELINE_OPTIONS = [
   { value: '1-2months', label: '1–2 months',   desc: 'Planning ahead' },
   { value: 'flexible',  label: 'Flexible',     desc: 'No hard deadline' },
 ]
+
+// Apparel artwork uploads reuse the server-side quote attachment limits.
+const APPAREL_SERVICES: ServiceType[] = ['Screen Printing', 'Embroidery', 'DTG Printing']
+const ARTWORK_ACCEPT = '.pdf,.jpg,.jpeg,.png,.webp,.ai,.eps,.svg'
+// Checked by extension: browsers report inconsistent MIME types for AI/EPS files.
+const ARTWORK_EXTENSIONS = new Set(['pdf', 'jpg', 'jpeg', 'png', 'webp', 'ai', 'eps', 'svg'])
+const ARTWORK_MAX_FILES = 3
+// Vercel functions reject request bodies over ~4.5 MB, so artwork is capped at 4 MB combined.
+const ARTWORK_MAX_TOTAL_BYTES = 4 * 1024 * 1024
+
+function artworkError(files: File[]): string {
+  if (files.length > ARTWORK_MAX_FILES) return `Upload up to ${ARTWORK_MAX_FILES} files.`
+  if (files.some(file => !ARTWORK_EXTENSIONS.has(file.name.toLowerCase().split('.').pop() ?? ''))) return 'Files must be PDF, JPG, PNG, WebP, AI, EPS, or SVG.'
+  if (files.some(file => file.size <= 0)) return 'Files cannot be empty.'
+  if (files.reduce((total, file) => total + file.size, 0) > ARTWORK_MAX_TOTAL_BYTES) return 'Artwork must be no more than 4 MB total. For larger files, email info@lettuceprint.com.'
+  return ''
+}
 
 // ─── Project detail fields by service ──────────────────────────────────────
 
@@ -151,13 +170,15 @@ function StepIndicator({ current }: { current: number }) {
 
 // ─── Main form ──────────────────────────────────────────────────────────────
 
-export default function QuoteForm({ initialValues, lockService = false }: QuoteFormProps) {
+export default function QuoteForm({ initialValues, lockService = false, allowArtwork = false }: QuoteFormProps) {
   const firstStep = lockService && initialValues?.service ? 1 : 0
   const [step, setStep] = useState(firstStep)
   const [direction, setDirection] = useState(1)
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
+  const [artwork, setArtwork] = useState<File[]>([])
+  const [artworkMessage, setArtworkMessage] = useState('')
 
   const [form, setForm] = useState<FormState>({
     service: initialValues?.service ?? '',
@@ -186,6 +207,18 @@ export default function QuoteForm({ initialValues, lockService = false }: QuoteF
     setForm(f => ({ ...f, contact: { ...f.contact, [key]: value } }))
 
   // Validation
+  const addArtwork = (selected: FileList | null) => {
+    const next = [...artwork, ...Array.from(selected ?? [])].slice(0, ARTWORK_MAX_FILES + 1)
+    const problem = artworkError(next)
+    setArtworkMessage(problem)
+    if (!problem) setArtwork(next)
+  }
+
+  const removeArtwork = (index: number) => {
+    setArtwork(files => files.filter((_, i) => i !== index))
+    setArtworkMessage('')
+  }
+
   const canProceed = () => {
     if (step === 0) return !!form.service
     if (step === 1) {
@@ -203,16 +236,33 @@ export default function QuoteForm({ initialValues, lockService = false }: QuoteF
     setSubmitting(true)
     setError('')
     try {
-      const res = await fetch('/api/quote', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          service: form.service,
-          projectDetails: form.projectDetails,
-          timeline: form.timeline,
-          contact: form.contact,
-        }),
-      })
+      const payload = {
+        service: form.service,
+        projectDetails: form.projectDetails,
+        timeline: form.timeline,
+        contact: form.contact,
+      }
+      // Artwork travels with the quote as multipart; the server re-validates and attaches it to the team email.
+      const files = allowArtwork && APPAREL_SERVICES.includes(form.service as ServiceType) ? artwork : []
+      let body: BodyInit
+      const headers: HeadersInit = {}
+      if (files.length) {
+        const data = new FormData()
+        data.append('payload', JSON.stringify(payload))
+        files.forEach(file => data.append('files', file))
+        body = data
+      } else {
+        headers['Content-Type'] = 'application/json'
+        body = JSON.stringify(payload)
+      }
+      const res = await fetch('/api/quote', { method: 'POST', headers, body })
+      if (res.status === 400 && files.length) {
+        const result = await res.json().catch(() => null) as { fields?: { files?: string } } | null
+        if (result?.fields?.files) {
+          setError(result.fields.files)
+          return
+        }
+      }
       if (!res.ok) throw new Error('Submission failed')
       setSubmitted(true)
     } catch {
@@ -385,6 +435,42 @@ export default function QuoteForm({ initialValues, lockService = false }: QuoteF
                         })}
                     </div>
                   ))}
+                  {allowArtwork && APPAREL_SERVICES.includes(form.service) && (
+                    <div>
+                      <label htmlFor="quote-artwork" className="block text-small font-semibold text-gray-700 mb-2">
+                        Artwork <span className="text-gray-400 font-normal">(optional)</span>
+                      </label>
+                      <label htmlFor="quote-artwork" className="flex cursor-pointer items-center gap-3 rounded-input border border-dashed border-gray-300 bg-white px-4 py-4 text-small text-gray-600 transition hover:border-lp-green focus-within:ring-2 focus-within:ring-lp-green">
+                        <Upload size={18} className="text-lp-green" aria-hidden="true" />
+                        <span>{artwork.length ? `Add more artwork (${artwork.length} of ${ARTWORK_MAX_FILES})` : `Upload artwork — up to ${ARTWORK_MAX_FILES} files`}</span>
+                        <input
+                          id="quote-artwork"
+                          type="file"
+                          multiple
+                          accept={ARTWORK_ACCEPT}
+                          disabled={artwork.length >= ARTWORK_MAX_FILES}
+                          className="sr-only"
+                          onChange={e => { addArtwork(e.target.files); e.target.value = '' }}
+                          aria-describedby="quote-artwork-help quote-artwork-error"
+                          aria-invalid={Boolean(artworkMessage)}
+                        />
+                      </label>
+                      <p id="quote-artwork-help" className="mt-1.5 text-xs text-gray-500">PDF, JPG, PNG, WebP, AI, EPS, or SVG. Up to 4 MB total.</p>
+                      <p id="quote-artwork-error" role="alert" className="mt-1.5 text-xs text-red-600">{artworkMessage}</p>
+                      {artwork.length > 0 && (
+                        <ul className="mt-3 space-y-2" aria-label="Selected artwork">
+                          {artwork.map((file, index) => (
+                            <li key={`${file.name}-${index}`} className="flex items-center justify-between gap-3 rounded-input border border-gray-200 bg-gray-50 px-3 py-2 text-small text-gray-700">
+                              <span className="min-w-0 truncate">{file.name} <span className="text-gray-400">({(file.size / 1024 / 1024).toFixed(1)} MB)</span></span>
+                              <button type="button" onClick={() => removeArtwork(index)} aria-label={`Remove ${file.name}`} className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-gray-500 hover:bg-gray-200 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-lp-green">
+                                <X size={14} aria-hidden="true" />
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             )}
