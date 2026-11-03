@@ -15,7 +15,6 @@ import {
   validateCustomPackagingConsultation,
 } from '@/lib/custom-packaging-consultation'
 import {
-  CUSTOM_PACKAGING_UPLOAD_LIMITS,
   sendCustomPackagingInternalEmail,
   type ValidatedConsultationFile,
   validateConsultationFiles,
@@ -46,6 +45,8 @@ type ParsedQuote =
 
 // Apparel quote pages may attach artwork to the general quote form.
 const APPAREL_LEGACY_SERVICES = new Set(['Screen Printing', 'Embroidery', 'DTG Printing'])
+// Vercel rejects request bodies over ~4.5 MB, so apparel artwork is capped at 4 MB combined.
+const APPAREL_ARTWORK_LIMITS = { maxFiles: 3, maxFileBytes: 4 * 1024 * 1024, maxTotalBytes: 4 * 1024 * 1024, allowVector: true }
 
 const timelineLabel: Record<string, string> = {
   'asap': 'ASAP',
@@ -212,7 +213,7 @@ async function parseIncomingQuote(req: NextRequest): Promise<{ parsed: ParsedQuo
     if (rawFiles.some(item => !(item instanceof File))) {
       return { parsed: { success: false, errors: { files: 'Invalid uploaded file.' } }, files: [] }
     }
-    const uploadResult = await validateConsultationFiles(rawFiles as File[], { ...CUSTOM_PACKAGING_UPLOAD_LIMITS, allowVector: true })
+    const uploadResult = await validateConsultationFiles(rawFiles as File[], APPAREL_ARTWORK_LIMITS)
     if (!uploadResult.success) return { parsed: { success: false, errors: { files: uploadResult.error } }, files: [] }
     return { parsed, files: uploadResult.files }
   }

@@ -77,11 +77,11 @@ export async function validateConsultationFiles(files: File[], limits: { maxFile
       return { success: false, error: typeError }
     }
     if (file.size <= 0 || file.size > limits.maxFileBytes) {
-      return { success: false, error: 'Each file must be larger than 0 bytes and no more than 10 MB.' }
+      return { success: false, error: `Each file must be larger than 0 bytes and no more than ${limits.maxFileBytes / 1024 / 1024} MB.` }
     }
     totalBytes += file.size
     if (totalBytes > limits.maxTotalBytes) {
-      return { success: false, error: 'Combined uploads must be no more than 20 MB.' }
+      return { success: false, error: `Combined uploads must be no more than ${limits.maxTotalBytes / 1024 / 1024} MB.` }
     }
     const bytes = new Uint8Array(await file.arrayBuffer())
     const mimeType = vectorExtension ? vectorMimeType(file.name, bytes) : (matchesMagicBytes(file.type, bytes) ? file.type : null)
