@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
@@ -186,18 +185,12 @@ export default function PortfolioGrid({ projects }: PortfolioGridProps) {
               </div>
 
               {/* Info */}
-              <div className="p-6 flex items-start justify-between gap-4">
+              <div className="p-6">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-lp-green mb-1">{focused.service}</p>
                   <h3 className="text-h4 font-semibold text-gray-900 mb-1">{focused.title}</h3>
                   <p className="text-small text-gray-500">{focused.client}</p>
                 </div>
-                <Link
-                  href={`/projects/${focused.slug.current}`}
-                  className="flex-shrink-0 px-5 py-2.5 bg-lp-green text-white text-sm font-semibold rounded-full hover:bg-lp-green-dark transition-colors"
-                >
-                  View Project →
-                </Link>
               </div>
             </motion.div>
           </motion.div>
