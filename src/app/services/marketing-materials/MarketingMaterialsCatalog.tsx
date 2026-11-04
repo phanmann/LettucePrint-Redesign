@@ -156,7 +156,7 @@ const amplify: CatalogItem[] = [
       ],
       features: ['Full-color printing', 'Three poster sizes', 'Gloss or matte finish', 'Single or double-sided'],
       turnaround: 'Confirmed with quote', categoryLabel: 'Posters',
-      href: '/services/marketing-materials/posters',
+      href: '/services/marketing-materials/flyers#posters',
     },
   },
   {
@@ -172,7 +172,7 @@ const amplify: CatalogItem[] = [
       ],
       features: ['Three binding styles', 'Multiple sizes and page counts', 'Cover and interior paper options'],
       turnaround: 'Confirmed with quote', categoryLabel: 'Booklets',
-      href: '/services/marketing-materials/booklets',
+      href: '/services/marketing-materials/brochures#booklets',
     },
   },
 ]

@@ -73,7 +73,7 @@ const categories: Category[] = [
       },
       {
         name: 'Booklets',
-        href: '/services/marketing-materials/booklets',
+        href: '/services/marketing-materials/brochures#booklets',
         features: ['Saddle-stitch & perfect bound', 'Catalog & magazine format', 'Soft touch cover option', 'Custom sizes'],
       },
     ],

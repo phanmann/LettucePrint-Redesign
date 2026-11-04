@@ -21,7 +21,6 @@ const entries: SitemapEntry[] = [
   { path: '/services/marketing-materials/flyers', changeFrequency: 'weekly', priority: 0.7 },
   { path: '/services/marketing-materials/postcards', changeFrequency: 'weekly', priority: 0.7 },
   { path: '/services/marketing-materials/brochures', changeFrequency: 'weekly', priority: 0.7 },
-  { path: '/services/marketing-materials/booklets', changeFrequency: 'weekly', priority: 0.7 },
   { path: '/services/graphic-design', changeFrequency: 'monthly', priority: 0.65 },
   { path: '/services/packaging', changeFrequency: 'weekly', priority: 0.75 },
   { path: '/services/packaging/mylar-bags', changeFrequency: 'weekly', priority: 0.7 },
