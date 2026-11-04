@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from '@/components/layout/Navbar'
@@ -17,6 +17,11 @@ export interface MarketingCategoryGroup {
   products: MarketingProduct[]
 }
 
+function subscribeToHash(onChange: () => void) {
+  window.addEventListener('hashchange', onChange)
+  return () => window.removeEventListener('hashchange', onChange)
+}
+
 // Category listing in the same layout as the Postcards page: filter pills and product cards.
 export default function MarketingCategoryPage({ title, introduction, allLabel, groups, ctaHeading, ctaText }: {
   title: string
@@ -26,7 +31,10 @@ export default function MarketingCategoryPage({ title, introduction, allLabel, g
   ctaHeading: string
   ctaText: string
 }) {
-  const [activeGroup, setActiveGroup] = useState('all')
+  // Old single-category URLs redirect here with a hash (e.g. #posters) that preselects that filter.
+  const hash = useSyncExternalStore(subscribeToHash, () => window.location.hash.slice(1), () => '')
+  const [pickedGroup, setActiveGroup] = useState<string | null>(null)
+  const activeGroup = pickedGroup ?? (groups.some(group => group.id === hash) ? hash : 'all')
   const pill = (active: boolean) => `px-4 py-2 rounded-full text-sm font-medium transition-all duration-150 ${
     active ? 'bg-lp-green text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
   }`
