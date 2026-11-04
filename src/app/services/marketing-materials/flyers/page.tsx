@@ -2,14 +2,22 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import OrderingPageLayout from '@/components/marketing/OrderingPageLayout'
 import ConsolidatedQuoteCard from '@/components/marketing/ConsolidatedQuoteCard'
+import MarketingProductLinks from '@/components/marketing/MarketingProductLinks'
 
 export const metadata: Metadata = {
   title: 'Flyer Printing | Request a Quote',
   description: 'Choose a flyer size, paper stock, finish, printed sides, and quantity for a custom quote.',
 }
 
+const products = [
+  { title: 'Half Page Flyer', href: '/services/marketing-materials/flyers/half-page', note: '5.5" × 8.5"' },
+  { title: 'Full Page Flyer', href: '/services/marketing-materials/flyers/full-page', note: '8.5" × 11"' },
+  { title: 'Tabloid Flyer', href: '/services/marketing-materials/flyers/tabloid', note: '11" × 17"' },
+]
+
 export default function FlyersPage() {
   return <OrderingPageLayout title="Flyers that move fast." introduction="Choose your flyer specifications and request a quote." customPrompt="Need a custom size or large run?">
+    <MarketingProductLinks heading="Flyer products" products={products} />
     <ConsolidatedQuoteCard product="Flyers" description="Full-color flyers for handouts, menus, launches, and promotions. Select your size, paper, finish, and printed sides."
       variantLabel="Type" variants={[{ label: 'Flyer', fields: [{ label: 'Size', choices: [
         { value: 'half', label: '5.5" × 8.5" (half page)' },

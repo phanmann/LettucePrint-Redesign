@@ -3,6 +3,7 @@ import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import ConsolidatedQuoteCard from '@/components/marketing/ConsolidatedQuoteCard'
+import MarketingProductLinks from '@/components/marketing/MarketingProductLinks'
 
 const saddleSizes = { label: 'Size', choices: [
   { value: '55x85', label: '5.5" × 8.5"' },
@@ -22,6 +23,15 @@ const interior = { label: 'Interior paper', choices: [
   { value: '70-text', label: '70 lb. text' },
 ] }
 
+const products = [
+  { title: 'Saddle-Stitch Booklet', href: '/services/marketing-materials/booklets/saddle-stitch-55x85', note: '5.5" × 8.5"' },
+  { title: 'Saddle-Stitch Booklet', href: '/services/marketing-materials/booklets/saddle-stitch-85x11', note: '8.5" × 11"' },
+  { title: 'Square Saddle-Stitch Booklet', href: '/services/marketing-materials/booklets/saddle-stitch-square' },
+  { title: 'Perfect Bound Booklet', href: '/services/marketing-materials/booklets/perfect-bound-6x9', note: '6" × 9"' },
+  { title: 'Perfect Bound Booklet', href: '/services/marketing-materials/booklets/perfect-bound-85x11', note: '8.5" × 11"' },
+  { title: 'Soft Touch Cover Booklet', href: '/services/marketing-materials/booklets/soft-touch-cover' },
+]
+
 export default function BookletsPage() {
   return <><Navbar /><main className="pt-[72px]">
     <section className="border-b border-gray-100 bg-white py-16"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -30,6 +40,7 @@ export default function BookletsPage() {
       <p className="mt-4 max-w-2xl text-body-lg text-gray-500">One booklet listing, with binding, size, paper, and page count selected for your project.</p>
     </div></section>
     <section className="bg-gray-50 py-16"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <MarketingProductLinks heading="Booklet products" products={products} />
       <ConsolidatedQuoteCard product="Booklets" description="Saddle-stitched, Wire-O, or soft-cover perfect-bound booklets. Choose the construction that fits your project."
         variants={[
           { label: 'Saddle Stitch', fields: [saddleSizes, { label: 'Page count', choices: [

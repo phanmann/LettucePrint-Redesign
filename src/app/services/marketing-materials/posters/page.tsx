@@ -1,14 +1,24 @@
 import type { Metadata } from 'next'
 import OrderingPageLayout from '@/components/marketing/OrderingPageLayout'
 import ConsolidatedQuoteCard from '@/components/marketing/ConsolidatedQuoteCard'
+import MarketingProductLinks from '@/components/marketing/MarketingProductLinks'
 
 export const metadata: Metadata = {
   title: 'Poster Printing | Request a Quote',
   description: 'Choose a poster size, paper stock, finish, printed sides, and quantity for a custom quote.',
 }
 
+const products = [
+  { title: 'Small Poster', href: '/services/marketing-materials/posters/small' },
+  { title: 'Medium Poster', href: '/services/marketing-materials/posters/medium' },
+  { title: 'Large Poster', href: '/services/marketing-materials/posters/large' },
+  { title: 'Art Print Poster', href: '/services/marketing-materials/posters/art-print' },
+  { title: 'Soft Touch Poster', href: '/services/marketing-materials/posters/soft-touch' },
+]
+
 export default function PostersPage() {
   return <OrderingPageLayout title="Posters that make an impact." introduction="Choose your poster specifications and request a quote." customPrompt="Need a custom size or large run?">
+    <MarketingProductLinks heading="Poster products" products={products} />
     <ConsolidatedQuoteCard product="Posters" description="Full-color posters for events, retail, and displays. Select a size, stock, finish, and printed sides."
       variantLabel="Type" variants={[{ label: 'Poster', fields: [{ label: 'Size', choices: [
         { value: '11x17', label: '11" × 17"' }, { value: '18x24', label: '18" × 24"' }, { value: '24x36', label: '24" × 36"' },
