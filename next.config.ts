@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/services/marketing-materials/flyers/tabloid',
-        destination: '/services/marketing-materials/flyers/full-page',
+        destination: '/services/marketing-materials/flyers/full-page?size=tabloid',
         permanent: false,
       },
       {

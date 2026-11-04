@@ -1,15 +1,5 @@
-import PrintSheetOrderPage from '@/components/marketing/PrintSheetOrderPage'
-import { FLYERS_PRODUCT } from '@/lib/print-pricing'
-
-export default function Page() {
-  return <PrintSheetOrderPage
-    product={FLYERS_PRODUCT}
-    breadcrumbLabel="Flyers"
-    fold="Flat"
-    tagline="Full-color flyers for handouts, menus, launches, and promotions. Letter, tabloid, or 12 × 18 in., on standard or premium stock."
-    relatedProducts={[
-      { href: '/services/marketing-materials/flyers', name: 'All Flyers & Posters', description: 'Flyers and posters.' },
-      { href: '/services/marketing-materials/brochures', name: 'Brochures & Booklets', description: 'Bi-fold, tri-fold, and booklets.', dark: true },
-    ]}
-  />
+import FlyersOrderPage from '@/components/marketing/FlyersOrderPage'
+export default async function Page({ searchParams }: { searchParams: Promise<{ size?: string }> }) {
+  const { size } = await searchParams
+  return <FlyersOrderPage initialSize={size === 'oversized' ? '12" × 18"' : size === 'tabloid' ? '11" × 17"' : '8.5" × 11"'} />
 }

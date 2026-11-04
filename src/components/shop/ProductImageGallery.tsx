@@ -7,12 +7,13 @@ import { urlFor } from '@/sanity/image'
 import { useInitialProductGallery, type CmsProductGallery } from './ProductGalleryProvider'
 
 interface ProductImageGalleryProps {
+  productPath?: string
   background?: 'white' | 'muted'
 }
 
 export default function ProductImageGallery(props: ProductImageGalleryProps) {
   const pathname = usePathname()
-  return <ProductImageGalleryForPath key={pathname} pathname={pathname} {...props} />
+  return <ProductImageGalleryForPath key={props.productPath ?? pathname} pathname={props.productPath ?? pathname} {...props} />
 }
 
 function ProductImageGalleryForPath({ background = 'muted', pathname }: ProductImageGalleryProps & { pathname: string }) {

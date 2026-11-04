@@ -1,73 +1,24 @@
 import type { MarketingProduct } from '@/components/marketing/MarketingCategoryPage'
 
-// Product cards for the combined marketing-materials category pages (copy from earlier site versions).
+export const FLYERS: MarketingProduct[] = [{
+  id: 'flyers', href: '/services/marketing-materials/flyers/full-page', name: 'Flyers',
+  subtitle: 'Half page, letter, tabloid & oversized',
+  description: 'Full-color flyers for handouts, menus, and promotions. Choose your size and paper options when ordering.',
+  color: '#E8F5F1',
+  options: [{ label: 'Size', values: ['5.5" × 8.5"', '8.5" × 11"', '11" × 17"', '12" × 18"'] }],
+  features: ['Full-color CMYK printing', 'Size-specific paper options', 'Online pricing for letter and larger sizes', 'Half-page pricing by quote'],
+  turnaround: 'Confirmed with your selected size',
+}]
 
-export const FLYERS: MarketingProduct[] = [
-  {
-    id: 'flyer-half',
-    href: '/services/marketing-materials/flyers/half-page',
-    name: 'Half Page Flyer',
-    subtitle: '5.5" × 8.5"',
-    description: 'The workhorse handout. Fits in bags, pockets, and racks. Great for menus, event promos, and retail inserts.',
-    color: '#E8F5F1',
-    options: [
-      { label: 'Size', values: ['5.5" × 8.5"'] },
-      {
-        label: 'Stock',
-        values: ['80 lb. Gloss', '80 lb. Matte', '100 lb. Cover'],
-      },
-      { label: 'Sides', values: ['Single-sided', 'Double-sided'] },
-    ],
-    features: ['80–100 lb. stock options', 'Full-color CMYK printing', 'Gloss or matte finish', 'Single or double-sided', 'Bulk pricing available'],
-    turnaround: '1–2 business days',
-  },
-  {
-    id: 'flyer-full',
-    href: '/services/marketing-materials/flyers/full-page',
-    name: 'Flyers',
-    subtitle: '8.5" × 11" · 11" × 17" · 12" × 18"',
-    description: 'Full-color flat flyers in three sizes on standard or premium stock. From $49 for 100.',
-    color: '#E8F0F5',
-    options: [
-      { label: 'Size', values: ['8.5" × 11"', '11" × 17"', '12" × 18"'] },
-      { label: 'Stock', values: ['Standard 80 lb.', 'Premium 100 lb.'] },
-    ],
-    features: ['80 or 100 lb. C2S gloss text', 'Full-color CMYK printing', '100 – 1,000 per order', 'Online pricing'],
-    turnaround: '5–7 business days',
-  },
-]
-
-export const POSTERS: MarketingProduct[] = [
-  {
-    id: 'poster-11x17',
-    href: '/services/marketing-materials/posters/small',
-    name: 'Small Poster',
-    subtitle: '11" × 17"',
-    description: 'The classic concert bill size. Works everywhere — bulletin boards, windows, retail counters, and bar walls.',
-    features: ['80 lb. gloss or matte text', 'Full-color printing', 'Crisp edge-to-edge coverage', 'Bulk pricing available'],
-    turnaround: '1–2 business days',
-    color: '#E8F5F1',
-  },
-  {
-    id: 'poster-18x24',
-    href: '/services/marketing-materials/posters/medium',
-    name: 'Medium Poster',
-    subtitle: '18" × 24"',
-    description: 'Standard poster size for retail displays, in-store promotions, event signage, and gallery prints.',
-    features: ['80 lb. gloss or matte text', 'Full-color printing', 'Vivid, accurate color reproduction', 'Optional lamination'],
-    turnaround: '2–3 business days',
-    color: '#F5F0E8',
-  },
-  {
-    id: 'poster-24x36',
-    href: '/services/marketing-materials/posters/large',
-    name: 'Large Poster',
-    subtitle: '24" × 36"',
-    description: 'Movie-poster size. Maximum impact for storefronts, events, trade shows, and gallery spaces.',
-    features: ['80 lb. or 100 lb. stock', 'Full-color printing', 'Matte or gloss finish', 'Optional tube rolling'],
-    turnaround: '2–3 business days',
-    color: '#E8F0F5',
-  },
+export const POSTERS: MarketingProduct[] = [{
+  id: 'posters', href: '/services/marketing-materials/posters/small', name: 'Posters',
+  subtitle: '11" × 17" · 18" × 24" · 24" × 36"',
+  description: 'Full-color posters for retail displays, events, and storefronts. Choose your size when ordering.',
+  color: '#E8F5F1',
+  options: [{ label: 'Size', values: ['11" × 17"', '18" × 24"', '24" × 36"'] }],
+  features: ['Gloss or matte finish', '100 lb. text or cover stock', 'Full-color CMYK printing', 'Pricing by quote'],
+  turnaround: '2–3 business days',
+},
   {
     id: 'poster-art-print',
     href: '/services/marketing-materials/posters/art-print',

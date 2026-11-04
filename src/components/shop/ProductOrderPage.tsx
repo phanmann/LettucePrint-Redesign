@@ -33,6 +33,14 @@ export interface PricingRule {
 }
 
 export interface ProductOrderPageProps {
+  captureConfiguration?: boolean
+  minimumQuantity?: number
+  initialQuantity?: number
+  initialSelections?: Record<string, string>
+  onSizeChange?: (size: string) => void
+  cartProductName?: string
+  cartPathsBySize?: Record<string, string>
+  galleryPath?: string
   bannerKind?: BannerKind
   backdrop?: boolean
   name: string
@@ -132,6 +140,7 @@ function ConfiguratorOptions({
   setIsRush,
   quantity,
   setQuantity,
+  minimumQuantity = 1,
 }: {
   optionGroups: OptionGroup[]
   pricingTable?: PricingRow[]
@@ -145,6 +154,7 @@ function ConfiguratorOptions({
   setIsRush: (v: boolean) => void
   quantity: number
   setQuantity: (n: number) => void
+  minimumQuantity?: number
 }) {
   const hasQtyTiers = pricingTable && pricingTable.length > 1
   const currentRow = pricingTable?.[selectedRowIdx]
@@ -159,9 +169,9 @@ function ConfiguratorOptions({
           <input
             type="number"
             aria-label="Quantity"
-            min={1}
+            min={minimumQuantity}
             value={quantity}
-            onChange={e => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+            onChange={e => setQuantity(Math.max(minimumQuantity, parseInt(e.target.value) || minimumQuantity))}
             className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm font-medium text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-lp-green/30 focus:border-lp-green"
           />
           <div className="border-t border-gray-100 mt-6" />
@@ -276,6 +286,14 @@ function ConfiguratorOptions({
 
 // ─── Main page ────────────────────────────────────────────────────────────────
 export default function ProductOrderPage({
+  captureConfiguration = false,
+  minimumQuantity = 1,
+  initialQuantity = 1,
+  initialSelections,
+  onSizeChange,
+  cartProductName,
+  galleryPath,
+  cartPathsBySize,
   backdrop = false,
   name,
   tagline,
@@ -301,11 +319,15 @@ export default function ProductOrderPage({
 
   // ── Lifted configurator state ──────────────────────────────────────────────
   const [selections, setSelections] = useState<Record<string, string>>(() =>
-    Object.fromEntries(optionGroups.map(g => [g.label, g.options[0].id]))
+    Object.fromEntries(optionGroups.map(g => [g.label, initialSelections?.[g.label] ?? g.options[0].id]))
   )
+  const updateSelections = (next: Record<string, string>) => {
+    setSelections(next)
+    if (next.Size !== selections.Size) onSizeChange?.(next.Size)
+  }
   const [selectedRowIdx, setSelectedRowIdx] = useState(0)
   const [isRush, setIsRush] = useState(false)
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(initialQuantity)
 
   const visibleGroups = optionGroups.filter(g => !g.packages || g.packages.includes(selections.Package))
 
@@ -343,16 +365,17 @@ export default function ProductOrderPage({
     const price = displayPrice ?? 0
 
     addItem({
-      product: name,
+      product: cartProductName ?? name,
       size: backdrop ? specs.find(s => s.label === 'Size')?.value ?? size : size,
+      ...(captureConfiguration ? { configuration: Object.fromEntries(selectedOptionLabels.map(o => [o.group, o.label])) } : {}),
       ...(backdrop ? { configuration: Object.fromEntries(selectedOptionLabels.map(o => [o.group, o.label])), unitPriceCents: Math.round((unitPrice ?? 0) * 100) } : {}),
       qty: itemQty,
       material,
-      finish: backdrop ? selectedOptionLabels.map(o => o.group + ': ' + o.label).join(' · ') : finish,
+      finish: (backdrop || captureConfiguration) ? selectedOptionLabels.map(o => o.group + ': ' + o.label).join(' · ') : finish,
       rush: effectiveIsRush ? '24hr' : 'standard',
       totalCents: Math.round(price * 100),
-      totalFormatted: fmt(price),
-      productPath: pathname,
+      totalFormatted: captureConfiguration && displayPrice == null ? 'Quote pending' : fmt(price),
+      productPath: cartPathsBySize?.[size] ?? pathname,
     })
   }
 
@@ -392,13 +415,14 @@ export default function ProductOrderPage({
                   pricingNote={pricingNote}
                   showQuantity={showQuantity}
                   selections={selections}
-                  setSelections={setSelections}
+                  setSelections={updateSelections}
                   selectedRowIdx={activeRowIdx}
                   setSelectedRowIdx={setSelectedRowIdx}
                   isRush={isRush}
                   setIsRush={setIsRush}
                   quantity={quantity}
                   setQuantity={setQuantity}
+                  minimumQuantity={minimumQuantity}
                 />
                 <div className={activePricingTable ? 'pt-5' : 'border-t border-gray-200 pt-5'}>
                   <CtaBlock
@@ -430,7 +454,7 @@ export default function ProductOrderPage({
               </div>
 
               {/* Image gallery */}
-              <ProductImageGallery background={galleryBackground} />
+              <ProductImageGallery background={galleryBackground} productPath={galleryPath} />
 
               {/* Mobile-only configurator — inline after gallery, hidden on desktop */}
               <div className="lg:hidden mb-8">
@@ -442,13 +466,14 @@ export default function ProductOrderPage({
                     pricingNote={pricingNote}
                     showQuantity={showQuantity}
                     selections={selections}
-                    setSelections={setSelections}
+                    setSelections={updateSelections}
                     selectedRowIdx={activeRowIdx}
                     setSelectedRowIdx={setSelectedRowIdx}
                     isRush={isRush}
                     setIsRush={setIsRush}
                     quantity={quantity}
                     setQuantity={setQuantity}
+                    minimumQuantity={minimumQuantity}
                   />
                   <div className={activePricingTable ? 'pt-5' : 'border-t border-gray-200 pt-5'}>
                     <CtaBlock
