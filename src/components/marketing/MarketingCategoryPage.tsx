@@ -22,7 +22,7 @@ function subscribeToHash(onChange: () => void) {
   return () => window.removeEventListener('hashchange', onChange)
 }
 
-// Category listing in the same layout as the Postcards page: filter pills and product cards.
+// Category listing: Postcards-style hero and product cards, with headed sections like the Banners page.
 export default function MarketingCategoryPage({ title, introduction, allLabel, groups, ctaHeading, ctaText }: {
   title: string
   introduction: string
@@ -61,29 +61,21 @@ export default function MarketingCategoryPage({ title, introduction, allLabel, g
           </div>
         </section>
 
+        {/* Product sections — same layout as the Banners page */}
         <section className="py-16 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
             <AnimatePresence mode="wait">
-              {activeGroup === 'all' ? (
-                <motion.div key="all" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.2 }}
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {groups.flatMap(group => group.products.map(product => (
-                    <ProductCard key={product.id} {...product} categoryLabel={group.label} />
-                  )))}
+              {groups.filter(group => activeGroup === 'all' || group.id === activeGroup).map(group => (
+                <motion.div key={group.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.2 }}>
+                  <div className="mb-8">
+                    <h2 className="text-h2 font-semibold text-gray-900 mb-2">{group.label}</h2>
+                    <p className="text-body text-gray-500 max-w-2xl">{group.description}</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                    {group.products.map(product => <ProductCard key={product.id} {...product} categoryLabel={group.label} />)}
+                  </div>
                 </motion.div>
-              ) : (
-                groups.filter(group => group.id === activeGroup).map(group => (
-                  <motion.div key={group.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.2 }}>
-                    <div className="mb-8">
-                      <h2 className="text-h2 font-semibold text-gray-900 mb-2">{group.label}</h2>
-                      <p className="text-body text-gray-500 max-w-2xl">{group.description}</p>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                      {group.products.map(product => <ProductCard key={product.id} {...product} categoryLabel={group.label} />)}
-                    </div>
-                  </motion.div>
-                ))
-              )}
+              ))}
             </AnimatePresence>
           </div>
         </section>
