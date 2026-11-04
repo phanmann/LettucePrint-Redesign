@@ -317,7 +317,7 @@ export default function HalfPageFlyerPage() {
                 </span>
               </Link>
               <Link
-                href="/services/marketing-materials/flyers/tabloid"
+                href="/services/marketing-materials/flyers/full-page"
                 className="group block bg-white rounded-card shadow-card hover:shadow-card-hover border border-gray-100 p-6 transition-all duration-250"
               >
                 <Badge variant="new" className="mb-4">Large Format</Badge>

@@ -18,11 +18,11 @@ const CATEGORIES = [
       id: 'pc-standard',
       name: 'Standard Postcards',
       subtitle: '4×6 · 5×7 · 6×9',
-      description: 'Full-color printing on 100 lb. gloss or matte stock. Available in all standard mailer sizes — USPS compliant, bulk pricing available.',
+      description: 'Full-color postcards on Standard 100 lb. gloss cover or Premium 16 pt stock. 4×6, 5×7, and 6×9 — from $49 for 100.',
       color: '#E8F5F1',
       options: [
         { label: 'Sizes',    values: ['4" × 6"', '5" × 7"', '6" × 9"'] },
-        { label: 'Stock',    values: ['100 lb. Gloss', '100 lb. Matte'] },
+        { label: 'Stock',    values: ['Standard 100 lb. gloss', 'Premium 16 pt'] },
         { label: 'Sides',    values: ['Single-sided', 'Double-sided'] },
       ],
       features: [

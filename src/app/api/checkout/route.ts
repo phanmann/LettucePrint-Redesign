@@ -12,6 +12,7 @@ import {
 } from '@/lib/pricing'
 import { authoritativeRollLabelPrice } from '@/lib/roll-label-checkout'
 import { authoritativeMylarPrice } from '@/lib/mylar-pricing'
+import { authoritativePrintPrice } from '@/lib/print-pricing'
 import {
   encodeRollLabelDirection,
   formatRollLabelDirection,
@@ -190,9 +191,17 @@ export async function POST(req: NextRequest) {
         } catch (error) {
           throw new InvalidCheckoutConfigurationError(error instanceof Error ? error.message : 'Invalid Mylar bag configuration')
         }
+        let securePrintPrice: number | null
+        try {
+          securePrintPrice = authoritativePrintPrice(item)
+        } catch (error) {
+          throw new InvalidCheckoutConfigurationError(error instanceof Error ? error.message : 'Invalid print configuration')
+        }
         const rollLabelDirection = rollLabelDirectionForItem(item)
-        const unitAmount = secureTentPrice?.totalCents ?? secureStickerPrice ?? secureRollLabelPrice ?? secureMylarPrice ?? item.totalCents
-        const productionLabel = secureTentPrice?.productionLabel ?? (secureRollLabelPrice !== null || secureMylarPrice !== null
+        const unitAmount = secureTentPrice?.totalCents ?? secureStickerPrice ?? secureRollLabelPrice ?? secureMylarPrice ?? securePrintPrice ?? item.totalCents
+        const productionLabel = securePrintPrice !== null
+          ? 'Standard production: 5–7 business days after proof approval'
+          : secureTentPrice?.productionLabel ?? (secureRollLabelPrice !== null || secureMylarPrice !== null
           ? 'Standard production — timing confirmed after proof approval'
           : (RUSH_LABELS[item.rush] ?? item.rush))
         if (!Number.isInteger(unitAmount) || unitAmount <= 0) {
@@ -314,8 +323,16 @@ export async function POST(req: NextRequest) {
       } catch (error) {
         throw new InvalidCheckoutConfigurationError(error instanceof Error ? error.message : 'Invalid Mylar bag configuration')
       }
-      const unitAmount = secureStickerPrice ?? secureRollLabelPrice ?? secureMylarPrice ?? overridePriceCents
-      const productionLabel = secureRollLabelPrice !== null || secureMylarPrice !== null
+      let securePrintPrice: number | null
+      try {
+        securePrintPrice = authoritativePrintPrice({ product: productName, size, qty: quantity, material, rush })
+      } catch (error) {
+        throw new InvalidCheckoutConfigurationError(error instanceof Error ? error.message : 'Invalid print configuration')
+      }
+      const unitAmount = secureStickerPrice ?? secureRollLabelPrice ?? secureMylarPrice ?? securePrintPrice ?? overridePriceCents
+      const productionLabel = securePrintPrice !== null
+        ? 'Standard production: 5–7 business days after proof approval'
+        : secureRollLabelPrice !== null || secureMylarPrice !== null
         ? 'Standard production — timing confirmed after proof approval'
         : (RUSH_LABELS[rush] ?? rush)
 

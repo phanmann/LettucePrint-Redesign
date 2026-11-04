@@ -4,6 +4,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/services/marketing-materials/flyers/tabloid',
+        destination: '/services/marketing-materials/flyers/full-page',
+        permanent: false,
+      },
+      {
+        source: '/services/marketing-materials/brochures/bi-fold-tabloid',
+        destination: '/services/marketing-materials/brochures/bi-fold-letter',
+        permanent: false,
+      },
+      {
         source: '/services/marketing-materials/posters',
         destination: '/services/marketing-materials/flyers#posters',
         permanent: false,
