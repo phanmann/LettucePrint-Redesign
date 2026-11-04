@@ -14,7 +14,8 @@ import { useCart } from '@/context/CartContext'
 
 // ─── Option data ──────────────────────────────────────────────────────────────
 
-type Size    = '4x6' | '5x7' | '6x9' | '6x11'
+type Size    = '4x6' | '5x7' | '6x9'
+type Stock   = 'standard' | 'premium'
 type Finish  = 'gloss' | 'matte'
 type Sides   = 'double' | 'single'
 
@@ -22,7 +23,11 @@ const SIZES: { id: Size; label: string; description: string }[] = [
   { id: '4x6',  label: '4" × 6"',  description: 'Classic mailer size. Cost-effective for high-volume campaigns.' },
   { id: '5x7',  label: '5" × 7"',  description: 'More visual real estate for bold imagery and event details.' },
   { id: '6x9',  label: '6" × 9"',  description: 'Large-format. Stands out in any mailbox — great for real estate and promos.' },
-  { id: '6x11', label: '6" × 11"', description: 'Maximum impact. The largest standard postcard size.' },
+]
+
+const STOCKS: { id: Stock; label: string }[] = [
+  { id: 'standard', label: 'Standard' },
+  { id: 'premium',  label: 'Premium' },
 ]
 
 const FINISHES: { id: Finish; label: string; description: string }[] = [
@@ -36,8 +41,8 @@ const SIDES: { id: Sides; label: string; description: string }[] = [
 ]
 
 const specs = [
-  { label: 'Sizes',         value: '4×6, 5×7, 6×9, 6×11' },
-  { label: 'Stock',         value: '100 lb. coated gloss or matte' },
+  { label: 'Sizes',         value: '4×6, 5×7, 6×9' },
+  { label: 'Stock',         value: 'Standard (100 lb. coated, gloss or matte) or Premium' },
   { label: 'Color mode',    value: 'Full-color CMYK' },
   { label: 'Minimum order', value: '100 postcards' },
   { label: 'Turnaround',    value: '2–3 business days after approval' },
@@ -63,11 +68,13 @@ const included = [
 
 function Configurator() {
   const [size,   setSize]   = useState<Size>('4x6')
+  const [stock,  setStock]  = useState<Stock>('standard')
   const [finish, setFinish] = useState<Finish>('gloss')
   const [sides,  setSides]  = useState<Sides>('double')
   const router = useRouter()
 
   const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
+  const selectClass = 'w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-900 focus:border-lp-green focus:outline-none focus:ring-2 focus:ring-lp-green/20'
   const radioRow = (active: boolean) =>
     `flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer transition-all duration-150 ${
       active ? 'border-lp-green bg-lp-green/5' : 'border-gray-200 bg-white hover:border-gray-300'
@@ -82,13 +89,14 @@ function Configurator() {
 
   const handleQuote = () => {
     const s  = SIZES.find(x => x.id === size)?.label ?? size
+    const st = STOCKS.find(x => x.id === stock)?.label ?? stock
     const f  = FINISHES.find(x => x.id === finish)?.label ?? finish
     const sd = SIDES.find(x => x.id === sides)?.label ?? sides
     addItem({
-      product: 'Standard Postcards',
+      product: 'Postcards',
       size: s,
       qty: 250,
-      material: sd,
+      material: `${st} stock · ${sd}`,
       finish: f,
       rush: 'standard',
       totalCents: 0,
@@ -104,18 +112,21 @@ function Configurator() {
 
       {/* ── Size ── */}
       <div className="mb-6">
-        <p className={sectionLabel}>Size</p>
-        <div className="space-y-2">
-          {SIZES.map(s => (
-            <label key={s.id} className={radioRow(size === s.id)} onClick={() => setSize(s.id)}>
-              <div className={radioCircle(size === s.id)} />
-              <div>
-                <p className={`text-sm font-medium leading-tight ${size === s.id ? 'text-gray-900' : 'text-gray-700'}`}>{s.label}</p>
-                <p className="text-xs text-gray-400 mt-0.5">{s.description}</p>
-              </div>
-            </label>
-          ))}
-        </div>
+        <label htmlFor="postcard-size" className={sectionLabel}>Size</label>
+        <select id="postcard-size" value={size} onChange={e => setSize(e.target.value as Size)} className={selectClass}>
+          {SIZES.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+        </select>
+        <p className="text-xs text-gray-400 mt-2">{SIZES.find(s => s.id === size)?.description}</p>
+      </div>
+
+      <div className="border-t border-gray-100 mb-6" />
+
+      {/* ── Stock ── */}
+      <div className="mb-6">
+        <label htmlFor="postcard-stock" className={sectionLabel}>Stock options</label>
+        <select id="postcard-stock" value={stock} onChange={e => setStock(e.target.value as Stock)} className={selectClass}>
+          {STOCKS.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+        </select>
       </div>
 
       <div className="border-t border-gray-100 mb-6" />
@@ -178,7 +189,7 @@ function Configurator() {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function StandardPostcardsPage() {
+export default function PostcardsPage() {
   return (
     <>
       <Navbar />
@@ -190,9 +201,7 @@ export default function StandardPostcardsPage() {
             <nav className="flex items-center gap-2 text-xs text-gray-500">
               <Link href="/" className="hover:text-lp-green transition-colors">Home</Link>
               <span>/</span>
-              <Link href="/services/marketing-materials/postcards" className="hover:text-lp-green transition-colors">Postcards</Link>
-              <span>/</span>
-              <span className="text-gray-900 font-medium">Standard</span>
+              <span className="text-gray-900 font-medium">Postcards</span>
             </nav>
           </div>
         </div>
@@ -212,9 +221,9 @@ export default function StandardPostcardsPage() {
                   <Badge variant="new">Fast Turnaround</Badge>
                   <Badge variant="popular">Most Popular</Badge>
                 </div>
-                <h1 className="text-h1 font-semibold text-gray-900 mb-4">Standard Postcards</h1>
+                <h1 className="text-h1 font-semibold text-gray-900 mb-4">Postcards</h1>
                 <p className="text-body-lg text-gray-600 leading-relaxed">
-                  Full-color postcards in every standard mailer size — 4×6 up to 6×11. Gloss or matte finish on 100 lb. coated stock. USPS compliant. Printed in Brooklyn.
+                  Full-color postcards in standard mailer sizes from 4×6 to 6×9. Choose Standard or Premium stock, gloss or matte finish. USPS compliant. Printed in Brooklyn.
                 </p>
               </div>
 

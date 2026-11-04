@@ -17,11 +17,11 @@ const CATEGORIES = [
     card: {
       id: 'pc-standard',
       name: 'Standard Postcards',
-      subtitle: '4×6 · 5×7 · 6×9 · 6×11',
+      subtitle: '4×6 · 5×7 · 6×9',
       description: 'Full-color printing on 100 lb. gloss or matte stock. Available in all standard mailer sizes — USPS compliant, bulk pricing available.',
       color: '#E8F5F1',
       options: [
-        { label: 'Sizes',    values: ['4" × 6"', '5" × 7"', '6" × 9"', '6" × 11"'] },
+        { label: 'Sizes',    values: ['4" × 6"', '5" × 7"', '6" × 9"'] },
         { label: 'Stock',    values: ['100 lb. Gloss', '100 lb. Matte'] },
         { label: 'Sides',    values: ['Single-sided', 'Double-sided'] },
       ],
