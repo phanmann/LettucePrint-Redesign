@@ -14,18 +14,13 @@ export const metadata: Metadata = {
 
 // Category summaries reflect the linked catalogs; options vary by product.
 const products = [
-  { title: 'Banners', alt: 'Lettuce Print vinyl banner secured with grommets on an exterior wall', href: '/services/signage/banners', note: 'Vinyl, mesh, fabric, retractable, luxury retractable, tabletop, and oversized banners.', options: [
+  { title: 'Banners', alt: 'Standard retractable banner display', href: '/services/signage/banners', note: 'Vinyl, mesh, fabric, retractable, luxury retractable, tabletop, and oversized banners.', options: [
     { label: 'Styles', values: ['Retractable', 'X-Stand', 'Hanging'] },
     { label: 'Materials', values: ['Vinyl', 'Mesh', 'Fabric'] },
   ] },
   { title: 'Backdrops', alt: 'Green Lettuce Print step-and-repeat backdrop on a freestanding event display', href: '/services/signage/backdrops', note: 'Pop-up, eurofit, SEG, and step-and-repeat backdrops for events and retail spaces.', options: [
     { label: 'Styles', values: ['Step & Repeat', 'Eurofit', 'Pop-up', 'SEG'] },
     { label: 'Sizes', values: ['8×8 ft', '10×8 ft', '20×8 ft', '8×10 ft'] },
-  ] },
-  { title: 'Canopy Tents', alt: 'Original illustration of a custom canopy tent', href: '/services/signage/tents/10x10', note: '10×10 and 20×10 full printed canopy tents with frames, from $789. Shipping and tax excluded.', options: [
-    { label: 'Sizes', values: ['10×10 ft', '20×10 ft'] },
-    { label: 'Packages', values: ['Full Kit', 'Top Only', 'Frame Only'] },
-    { label: 'Add-ons', values: ['Backwall', 'Sidewalls', 'Flag Holders', 'Wheel Bag'] },
   ] },
 ]
 
@@ -67,7 +62,7 @@ export default function SignagePage() {
                     </div>
                   ))}
                 </dl>
-                <p className="text-xs text-gray-500 mb-6">{product.title === 'Canopy Tents' ? 'Add-ons available with full kits.' : 'Options vary by product.'}</p>
+                <p className="text-xs text-gray-500 mb-6">Options vary by product.</p>
                 <span className="mt-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-lp-green">View options <ArrowRight size={13} /></span>
               </Link>
             ))}
