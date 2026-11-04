@@ -120,16 +120,19 @@ const categories: Category[] = [
       {
         name: 'Embroidery',
         href: '/services/apparel/embroidery',
+        imagePath: '/shop/cards/embroidery',
         features: ['Hats, polos & more', 'Thread color matching', 'Digitizing included', 'Premium finish'],
       },
       {
         name: 'DTG Printing',
         href: '/services/apparel/dtg',
+        imagePath: '/shop/cards/dtg',
         features: ['Full-color direct to garment', 'No minimums', 'Photo-quality prints', 'Quick turnaround'],
       },
       {
         name: 'Custom Promo Items',
         href: '/services/apparel/custom-items',
+        imagePath: '/services/packaging/custom-packaging',
         features: ['Totes, drinkware & more', "Logo'd merch & swag", 'Event giveaways', 'Custom sourcing'],
       },
     ],
