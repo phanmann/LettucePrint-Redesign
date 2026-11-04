@@ -17,6 +17,8 @@ type Product = {
   href: string
   features: string[]
   badge?: string
+  /** Product page whose CMS gallery supplies the card image, when the category page has none. */
+  imagePath?: string
 }
 
 type Category = {
@@ -54,27 +56,26 @@ const categories: Category[] = [
       {
         name: 'Business Cards',
         href: '/services/marketing-materials/business-cards',
+        imagePath: '/services/marketing-materials/business-cards/standard',
         features: ['Standard & premium stock', 'Soft touch & gloss options', 'Spot UV available', 'Fast turnaround'],
       },
       {
         name: 'Flyers & Posters',
         href: '/services/marketing-materials/flyers',
+        imagePath: '/services/marketing-materials/flyers/half-page',
         features: ['Flyers and standard posters', 'Sizes from 5.5×8.5 to 24×36', 'Full-color printing', 'Fast turnaround'],
       },
       {
         name: 'Postcards',
         href: '/services/marketing-materials/postcards',
+        imagePath: '/services/marketing-materials/postcards/standard',
         features: ['Standard & premium stock', 'Single or double-sided', 'Rounded corners available', 'Great for direct mail'],
       },
       {
-        name: 'Brochures',
+        name: 'Brochures & Booklets',
         href: '/services/marketing-materials/brochures',
-        features: ['Tri-fold & bi-fold options', 'Letter & tabloid sizes', 'Uncoated & soft touch', 'Premium presentation'],
-      },
-      {
-        name: 'Booklets',
-        href: '/services/marketing-materials/brochures#booklets',
-        features: ['Saddle-stitch & perfect bound', 'Catalog & magazine format', 'Soft touch cover option', 'Custom sizes'],
+        imagePath: '/services/marketing-materials/brochures/tri-fold-letter',
+        features: ['Tri-fold & bi-fold brochures', 'Saddle-stitch & perfect bound booklets', 'Uncoated & soft touch options', 'Custom sizes'],
       },
     ],
   },
@@ -163,7 +164,7 @@ export default function ShopPage() {
                       {/* Product image */}
                       <div className="relative h-44 w-full overflow-hidden bg-gray-100">
                         <ProductPreviewImage
-                          productPath={product.href}
+                          productPath={product.imagePath ?? product.href}
                           alt={product.name}
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
