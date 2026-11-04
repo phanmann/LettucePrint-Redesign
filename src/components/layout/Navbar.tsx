@@ -40,7 +40,14 @@ const allProducts = [
 type NavLink = { label: string; href: string; children?: { label: string; href: string }[] }
 
 const navLinks: NavLink[] = [
-  // Marketing Materials is temporarily off the menu until its pages are ready.
+  { label: 'Marketing Materials', href: '/services/marketing-materials', children: [
+    { label: 'Business Cards', href: '/services/marketing-materials/business-cards' },
+    { label: 'Postcards', href: '/services/marketing-materials/postcards' },
+    { label: 'Flyers', href: '/services/marketing-materials/flyers' },
+    { label: 'Posters', href: '/services/marketing-materials/posters' },
+    { label: 'Brochures', href: '/services/marketing-materials/brochures' },
+    { label: 'Booklets', href: '/services/marketing-materials/booklets' },
+  ]},
   { label: 'Stickers & Labels', href: '/shop/stickers', children: [
     { label: 'Stickers', href: '/shop/stickers' },
     { label: 'Spot UV Stickers', href: '/shop/spot-uv' },
