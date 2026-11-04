@@ -1,33 +1,75 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import OrderingPageLayout from '@/components/marketing/OrderingPageLayout'
-import ConsolidatedQuoteCard from '@/components/marketing/ConsolidatedQuoteCard'
-import MarketingProductLinks from '@/components/marketing/MarketingProductLinks'
+import MarketingCategoryPage, { type MarketingCategoryGroup } from '@/components/marketing/MarketingCategoryPage'
 
 export const metadata: Metadata = {
-  title: 'Flyer Printing | Request a Quote',
-  description: 'Choose a flyer size, paper stock, finish, printed sides, and quantity for a custom quote.',
+  title: 'Flyer Printing',
+  description: 'Half page, full page, and tabloid flyers printed in Brooklyn by Lettuce Print.',
 }
 
-const products = [
-  { title: 'Half Page Flyer', href: '/services/marketing-materials/flyers/half-page', note: '5.5" × 8.5"' },
-  { title: 'Full Page Flyer', href: '/services/marketing-materials/flyers/full-page', note: '8.5" × 11"' },
-  { title: 'Tabloid Flyer', href: '/services/marketing-materials/flyers/tabloid', note: '11" × 17"' },
+const GROUPS: MarketingCategoryGroup[] = [
+  {
+    id: 'half-page',
+    label: 'Half Page Flyer',
+    description: 'Compact and cost-effective — perfect for handouts, rack cards, and high-volume distribution.',
+    products: [{
+      id: 'flyer-half', href: '/services/marketing-materials/flyers/half-page',
+      name: 'Half Page Flyer', subtitle: '5.5" × 8.5"',
+      description: 'The workhorse handout. Fits in bags, pockets, and racks. Great for menus, event promos, and retail inserts.',
+      color: '#E8F5F1',
+      options: [
+        { label: 'Size', values: ['5.5" × 8.5"'] },
+        { label: 'Stock', values: ['80 lb. Gloss', '80 lb. Matte', '100 lb. Cover'] },
+        { label: 'Sides', values: ['Single-sided', 'Double-sided'] },
+      ],
+      features: ['80–100 lb. stock options', 'Full-color CMYK printing', 'Gloss or matte finish', 'Single or double-sided', 'Bulk pricing available'],
+      turnaround: '1–2 business days',
+    }],
+  },
+  {
+    id: 'full-page',
+    label: 'Full Page Flyer',
+    description: 'Standard 8.5" × 11" flyers for maximum visual impact — the format people expect.',
+    products: [{
+      id: 'flyer-full', href: '/services/marketing-materials/flyers/full-page',
+      name: 'Full Page Flyer', subtitle: '8.5" × 11"',
+      description: 'Full letter-size flyers in gloss, matte, or heavy cover stock. High-volume or premium — your call.',
+      color: '#E8F0F5',
+      options: [
+        { label: 'Size', values: ['8.5" × 11"'] },
+        { label: 'Finish', values: ['Gloss', 'Matte', 'Heavy Stock'] },
+        { label: 'Sides', values: ['Single-sided', 'Double-sided'] },
+      ],
+      features: ['80 lb. gloss or matte text', '100 lb. cover option', 'Full-color CMYK printing', 'Single or double-sided', 'Bulk pricing available'],
+      turnaround: '1–2 business days',
+    }],
+  },
+  {
+    id: 'tabloid',
+    label: 'Tabloid Flyer',
+    description: 'Tabloid-sized flyers for maximum presence — menus, posters, event sheets, and retail displays.',
+    products: [{
+      id: 'flyer-tabloid', href: '/services/marketing-materials/flyers/tabloid',
+      name: 'Tabloid Flyer', subtitle: '11" × 17"',
+      description: 'Twice the real estate of a letter flyer. Perfect for menus, in-store promotions, concert bills, and display boards.',
+      color: '#E8F5EF',
+      options: [
+        { label: 'Size', values: ['11" × 17"'] },
+        { label: 'Finish', values: ['Gloss', 'Matte'] },
+        { label: 'Sides', values: ['Single-sided', 'Double-sided'] },
+      ],
+      features: ['80 lb. gloss or matte text', 'Full-color CMYK printing', 'Single or double-sided', 'Folding available', 'Bulk pricing available'],
+      turnaround: '2–3 business days',
+    }],
+  },
 ]
 
 export default function FlyersPage() {
-  return <OrderingPageLayout title="Flyers that move fast." introduction="Choose your flyer specifications and request a quote." customPrompt="Need a custom size or large run?">
-    <MarketingProductLinks heading="Flyer products" products={products} />
-    <ConsolidatedQuoteCard product="Flyers" description="Full-color flyers for handouts, menus, launches, and promotions. Select your size, paper, finish, and printed sides."
-      variantLabel="Type" variants={[{ label: 'Flyer', fields: [{ label: 'Size', choices: [
-        { value: 'half', label: '5.5" × 8.5" (half page)' },
-        { value: 'letter', label: '8.5" × 11" (full page)' },
-        { value: 'tabloid', label: '11" × 17" (tabloid)' },
-      ] }] }]} commonFields={[
-        { label: 'Paper stock', choices: [{ value: '80-text', label: '80 lb. text' }, { value: '100-cover', label: '100 lb. cover' }] },
-        { label: 'Finish', choices: [{ value: 'gloss', label: 'Gloss' }, { value: 'matte', label: 'Matte' }] },
-        { label: 'Printed sides', choices: [{ value: 'single', label: 'Single-sided' }, { value: 'double', label: 'Double-sided' }] },
-      ]} />
-    <p id="posters" className="mt-8 scroll-mt-24 text-sm text-gray-600">Looking for posters? <Link href="/services/marketing-materials/posters" className="font-semibold text-lp-green hover:underline">Configure a poster instead →</Link></p>
-  </OrderingPageLayout>
+  return <MarketingCategoryPage
+    title="Flyers that move fast."
+    introduction="From half-sheet handouts to tabloid sheets — full-color printing with quick turnaround."
+    allLabel="All Flyers"
+    groups={GROUPS}
+    ctaHeading="Need a custom size or big quantity?"
+    ctaText="We handle large runs efficiently. Tell us the size, quantity, and deadline and we'll make it happen."
+  />
 }
