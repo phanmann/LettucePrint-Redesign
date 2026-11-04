@@ -11,6 +11,7 @@ import { ArrowRight, CheckCircle, FileText, Layers } from 'lucide-react'
 import ProductImageGallery from '@/components/shop/ProductImageGallery'
 import { useRouter } from 'next/navigation'
 import { useCart } from '@/context/CartContext'
+import { POSTCARDS_PRODUCT, PRINT_QUANTITIES, printPriceTable, type PrintQuantity } from '@/lib/print-pricing'
 
 // ─── Option data ──────────────────────────────────────────────────────────────
 
@@ -25,9 +26,9 @@ const SIZES: { id: Size; label: string; description: string }[] = [
   { id: '6x9',  label: '6" × 9"',  description: 'Large-format. Stands out in any mailbox — great for real estate and promos.' },
 ]
 
-const STOCKS: { id: Stock; label: string }[] = [
-  { id: 'standard', label: 'Standard' },
-  { id: 'premium',  label: 'Premium' },
+const STOCKS: { id: Stock; label: string; description: string }[] = [
+  { id: 'standard', label: 'Standard', description: '100 lb. gloss cover' },
+  { id: 'premium',  label: 'Premium',  description: '16 pt C2S cover' },
 ]
 
 const FINISHES: { id: Finish; label: string; description: string }[] = [
@@ -42,10 +43,10 @@ const SIDES: { id: Sides; label: string; description: string }[] = [
 
 const specs = [
   { label: 'Sizes',         value: '4×6, 5×7, 6×9' },
-  { label: 'Stock',         value: 'Standard (100 lb. coated, gloss or matte) or Premium' },
+  { label: 'Stock',         value: 'Standard (100 lb. gloss cover) or Premium (16 pt C2S cover)' },
   { label: 'Color mode',    value: 'Full-color CMYK' },
   { label: 'Minimum order', value: '100 postcards' },
-  { label: 'Turnaround',    value: '2–3 business days after approval' },
+  { label: 'Turnaround',    value: '5–7 business days after proof approval, plus shipping' },
   { label: 'USPS',          value: 'Postcard compliant sizes available' },
 ]
 
@@ -69,6 +70,7 @@ const included = [
 function Configurator() {
   const [size,   setSize]   = useState<Size>('4x6')
   const [stock,  setStock]  = useState<Stock>('standard')
+  const [qty,    setQty]    = useState<PrintQuantity>(100)
   const [finish, setFinish] = useState<Finish>('gloss')
   const [sides,  setSides]  = useState<Sides>('double')
   const router = useRouter()
@@ -87,20 +89,25 @@ function Configurator() {
   const { addItem } = useCart()
   const [added, setAdded] = useState(false)
 
+  const sizeLabel = SIZES.find(x => x.id === size)?.label ?? size
+  const price = printPriceTable(POSTCARDS_PRODUCT, sizeLabel)?.[qty] ?? null
+  const fmt = (n: number) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+
   const handleQuote = () => {
+    if (price == null) return
     const s  = SIZES.find(x => x.id === size)?.label ?? size
     const st = STOCKS.find(x => x.id === stock)?.label ?? stock
     const f  = FINISHES.find(x => x.id === finish)?.label ?? finish
     const sd = SIDES.find(x => x.id === sides)?.label ?? sides
     addItem({
-      product: 'Postcards',
+      product: POSTCARDS_PRODUCT,
       size: s,
-      qty: 250,
+      qty,
       material: `${st} stock · ${sd}`,
       finish: f,
       rush: 'standard',
-      totalCents: 0,
-      totalFormatted: 'Quote pending',
+      totalCents: price * 100,
+      totalFormatted: fmt(price),
       productPath: '/services/marketing-materials/postcards/standard',
     })
     setAdded(true)
@@ -125,7 +132,17 @@ function Configurator() {
       <div className="mb-6">
         <label htmlFor="postcard-stock" className={sectionLabel}>Stock options</label>
         <select id="postcard-stock" value={stock} onChange={e => setStock(e.target.value as Stock)} className={selectClass}>
-          {STOCKS.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+          {STOCKS.map(s => <option key={s.id} value={s.id}>{s.label} — {s.description}</option>)}
+        </select>
+      </div>
+
+      <div className="border-t border-gray-100 mb-6" />
+
+      {/* ── Quantity ── */}
+      <div className="mb-6">
+        <label htmlFor="postcard-qty" className={sectionLabel}>Quantity</label>
+        <select id="postcard-qty" value={qty} onChange={e => setQty(Number(e.target.value) as PrintQuantity)} className={selectClass}>
+          {PRINT_QUANTITIES.map(q => <option key={q} value={q}>{q.toLocaleString()} postcards — {fmt(printPriceTable(POSTCARDS_PRODUCT, sizeLabel)?.[q] ?? 0)}</option>)}
         </select>
       </div>
 
@@ -167,6 +184,12 @@ function Configurator() {
 
       {/* ── CTA ── */}
       <div className="border-t border-gray-200 pt-5">
+        {price != null && (
+          <div className="flex items-baseline justify-between mb-4">
+            <span className="text-sm text-gray-500">{qty.toLocaleString()} postcards</span>
+            <span className="text-3xl font-bold text-gray-900">{fmt(price)}</span>
+          </div>
+        )}
         <div className="flex gap-2">
           <Button onClick={handleQuote} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
             {added ? '✓ Added to cart' : 'Add to cart'}
@@ -176,7 +199,7 @@ function Configurator() {
           </Button>
         </div>
         <p className="text-xs text-gray-400 text-center mt-3">
-          We&apos;ll confirm pricing + turnaround within a few hours.
+          Upload artwork · Proof before production · Shipping at checkout
         </p>
         <p className="text-xs text-center mt-2">
           <span className="text-gray-500">Questions? Call us: </span>
