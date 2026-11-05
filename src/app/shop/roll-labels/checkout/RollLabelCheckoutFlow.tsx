@@ -143,7 +143,7 @@ interface Config {
 
 function OrderSidebar({ config, direction }: { config: Config; direction: UnwindDirection | null }) {
   return (
-    <div className="bg-white rounded-card border border-gray-100 p-6 lg:sticky lg:top-24">
+    <div className="bg-white rounded-card border border-gray-100 p-6 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
       <h3 className="text-small font-semibold text-gray-900 mb-4">Your order</h3>
       <div className="space-y-2 text-small mb-4">
         <div className="flex justify-between">

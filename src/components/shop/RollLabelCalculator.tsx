@@ -27,9 +27,10 @@ const FINISHES: LabelFinish[] = ['matte', 'gloss']
 interface Props {
   productName: string
   purchaseCtaStyle?: 'solid' | 'outline'
+  productPath?: string
 }
 
-export default function RollLabelCalculator({ productName, purchaseCtaStyle = 'solid' }: Props) {
+export default function RollLabelCalculator({ productName, purchaseCtaStyle = 'solid', productPath = '/shop/roll-labels' }: Props) {
   const [selectedPreset] = useState('custom')
   const [customWidth, setCustomWidth] = useState('')
   const [customHeight, setCustomHeight] = useState('')
@@ -90,7 +91,7 @@ export default function RollLabelCalculator({ productName, purchaseCtaStyle = 's
       unwindFace: labelDirection.unwindFace,
       totalCents: price.totalCents,
       totalFormatted: price.totalFormatted,
-      productPath: '/shop/roll-labels',
+      productPath,
     })
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
@@ -107,7 +108,7 @@ export default function RollLabelCalculator({ productName, purchaseCtaStyle = 's
     }`
 
   return (
-    <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24">
+    <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
 
       {/* ── Size ── */}
       <div className="mb-6">
@@ -225,7 +226,7 @@ export default function RollLabelCalculator({ productName, purchaseCtaStyle = 's
         <>
           <div className="border-t border-gray-200 pt-5 mb-4 flex items-end justify-between">
             <p className="text-4xl font-bold text-gray-900 leading-none">{price.totalFormatted}</p>
-            <p className="text-sm text-gray-500 pb-1">{price.unitFormatted} / label</p>
+            <p className="text-xs text-gray-400 pb-1">{price.unitFormatted} / label</p>
           </div>
           <div className="flex gap-2">
             <Button

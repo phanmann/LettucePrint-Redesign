@@ -13,6 +13,7 @@ import { ArrowRight, CheckCircle, FileText, Layers, Zap } from 'lucide-react'
 import ProductImageGallery from '@/components/shop/ProductImageGallery'
 import { usePathname } from 'next/navigation'
 import { useCart } from '@/context/CartContext'
+import JsonLd, { productJsonLd } from '@/components/seo/JsonLd'
 
 export interface OptionGroup {
   label: string
@@ -407,7 +408,7 @@ export default function ProductOrderPage({
 
             {/* Right — Configurator panel: desktop only (hidden on mobile, rendered inline in left col) */}
             <div className="hidden lg:block lg:order-last">
-              <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24">
+              <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
                 {bannerKind ? <BannerConfigurator kind={bannerKind} configuration={bannerConfiguration} onConfigurationChange={setBannerConfiguration} /> : <>
                 <ConfiguratorOptions
                   optionGroups={visibleGroups}
@@ -620,6 +621,7 @@ export default function ProductOrderPage({
             </div>
           )}
         </div>
+        <JsonLd data={productJsonLd({ name, description: tagline, path: pathname, lowPrice: [...(pricingTable ?? []), ...(pricingRules ?? []).flatMap(r => r.pricingTable)].reduce<number | undefined>((min, row) => (min === undefined || row.standardPrice < min ? row.standardPrice : min), undefined) })} />
       </main>
       <Footer />
     </>

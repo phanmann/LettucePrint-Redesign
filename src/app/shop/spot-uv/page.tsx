@@ -78,7 +78,7 @@ export default function SpotUVPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_600px] gap-12 items-start">
 
             {/* Right — Calculator (desktop only) */}
-            <div className="hidden lg:block lg:order-last lg:sticky lg:top-24">
+            <div className="hidden lg:block lg:order-last lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
               <SpotUVCalculator productName="Spot UV Stickers" />
             </div>
 

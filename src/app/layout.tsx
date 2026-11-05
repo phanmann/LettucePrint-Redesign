@@ -28,7 +28,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Lettuce Print — Brooklyn\'s Creative Print Studio',
     description: 'Premium print, design, and fulfillment studio in Brooklyn, NY. Fast turnaround, real design expertise.',
-    url: BASE_URL,
     siteName: 'Lettuce Print',
     locale: 'en_US',
     type: 'website',
@@ -58,9 +57,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  alternates: {
-    canonical: BASE_URL,
-  },
+  // Canonical URLs are set per page; a site-wide canonical would point every page at the homepage.
 }
 
 const localBusinessSchema = {

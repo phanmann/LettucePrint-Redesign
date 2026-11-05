@@ -64,7 +64,7 @@ export default function RollLabelsLandingPage() {
 
       <section className="mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 sm:pt-16 lg:px-8 lg:pb-24">
         <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(460px,1.1fr)] lg:gap-16">
-          <div className="lg:sticky lg:top-24">
+          <div className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
             <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-lp-green">Printed in Brooklyn</p>
             <h1 className="max-w-2xl text-4xl font-semibold leading-[0.98] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
               Custom roll labels. Sized for your packaging.

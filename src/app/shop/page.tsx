@@ -31,9 +31,9 @@ const categories: Category[] = [
     label: 'Stickers & Labels',
     products: [
       {
-        name: 'Custom Die-Cut Stickers',
+        name: 'Custom Stickers',
         href: '/shop/stickers',
-        features: ['Die-cut to shape', 'Waterproof & UV resistant', '3–5 day turnaround', 'Standard & holographic vinyl'],
+        features: ['Die cut, kiss cut & shaped', 'Clear & holographic vinyl', 'Waterproof & UV resistant', '3–5 day turnaround'],
         badge: 'Order Online',
       },
       {
@@ -45,7 +45,7 @@ const categories: Category[] = [
       {
         name: 'Roll Labels',
         href: '/shop/roll-labels',
-        features: ['Kiss-cut on roll', 'High-volume ready', 'Food-safe options', 'Custom sizes'],
+        features: ['Rectangle, circle, square & oval', 'Kiss-cut on roll', 'High-volume ready', 'Custom sizes'],
         badge: 'Order Online',
       },
     ],

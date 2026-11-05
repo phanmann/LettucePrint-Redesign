@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useSyncExternalStore } from 'react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
@@ -140,8 +140,16 @@ const CATEGORIES = [
 ]
 
 
+function subscribeToHash(onChange: () => void) {
+  window.addEventListener('hashchange', onChange)
+  return () => window.removeEventListener('hashchange', onChange)
+}
+
 export default function BackdropsPage() {
-  const [activeCategory, setActiveCategory] = useState('all')
+  // Links like /services/signage/backdrops#seg preselect that section.
+  const hash = useSyncExternalStore(subscribeToHash, () => window.location.hash.slice(1), () => '')
+  const [pickedCategory, setActiveCategory] = useState<string | null>(null)
+  const activeCategory = pickedCategory ?? (CATEGORIES.some(c => c.id === hash) ? hash : 'all')
   const filtered = activeCategory === 'all' ? CATEGORIES : CATEGORIES.filter(c => c.id === activeCategory)
 
   return (
