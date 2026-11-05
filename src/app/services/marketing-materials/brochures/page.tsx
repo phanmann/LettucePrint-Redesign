@@ -4,6 +4,7 @@ import { BOOKLETS, BROCHURES } from '../category-products'
 
 export const metadata: Metadata = {
   title: 'Brochure & Booklet Printing',
+  alternates: { canonical: 'https://lettuceprint.com/services/marketing-materials/brochures' },
   description: 'Bi-fold and tri-fold brochures, saddle-stitched and perfect-bound booklets, printed in Brooklyn by Lettuce Print.',
 }
 

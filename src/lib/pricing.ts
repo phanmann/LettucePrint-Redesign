@@ -5,7 +5,7 @@
 // additional Spot UV hit uses the separately approved $0.027/sq. in. sell rate.
 
 export type StickerSize = '1x1' | '2x2' | '3x3' | '4x4' | '5x5'
-export type StickerMaterial = 'standard' | 'holographic'
+export type StickerMaterial = 'standard' | 'clear' | 'holographic'
 export type StickerFinish = 'matte' | 'gloss' | 'laminate'
 export type RushOption = 'standard' | '48hr' | '24hr'
 export type SpotUVHits = 1 | 2 | 3
@@ -36,11 +36,13 @@ export const SIZE_LABELS: Record<StickerSize, string> = {
 
 export const MATERIAL_LABELS: Record<StickerMaterial, string> = {
   standard: 'Standard Vinyl',
+  clear: 'Clear Vinyl',
   holographic: 'Holographic',
 }
 
 export const MATERIAL_DESCRIPTIONS: Record<StickerMaterial, string> = {
   standard: 'Durable white permanent vinyl. Weather resistant.',
+  clear: 'Transparent vinyl so your surface shows through. Weather resistant.',
   holographic: 'Eye-catching rainbow effect on premium iridescent vinyl.',
 }
 

@@ -3,6 +3,7 @@ import {
   isLabelFinish,
   isLabelMaterial,
 } from '@/lib/roll-label-pricing'
+import { ROLL_LABEL_PRODUCT_NAMES } from '@/lib/sticker-catalog'
 
 export interface RollLabelCheckoutConfiguration {
   product: string
@@ -13,7 +14,6 @@ export interface RollLabelCheckoutConfiguration {
   rush: string
 }
 
-const ROLL_LABEL_PRODUCT_NAMES = ['Custom Roll Labels', 'Roll Labels']
 
 export function parseRollLabelDimensions(size: string): { width: number; height: number } {
   const match = size.trim().match(/^([0-9]+(?:\.[0-9]+)?)\s*(?:"|in)?\s*[×x]\s*([0-9]+(?:\.[0-9]+)?)\s*(?:"|in)?$/i)

@@ -17,15 +17,20 @@ import {
   type StickerFinish,
 } from '@/lib/pricing'
 
-const MATERIALS: StickerMaterial[] = ['standard', 'holographic']
 const FINISHES: StickerFinish[] = ['matte', 'gloss', 'laminate']
 
-interface Props { productName: string }
+interface Props {
+  productName: string
+  /** Materials offered on this page; the first is preselected. */
+  materials?: StickerMaterial[]
+  productPath?: string
+}
 
-export default function PricingCalculator({ productName }: Props) {
+export default function PricingCalculator({ productName, materials = ['standard'], productPath = '/shop/stickers' }: Props) {
+  const MATERIALS = materials
   const [customWidth, setCustomWidth] = useState('')
   const [customHeight, setCustomHeight] = useState('')
-  const [material, setMaterial] = useState<StickerMaterial>('standard')
+  const [material, setMaterial] = useState<StickerMaterial>(materials[0])
   const [finish, setFinish] = useState<StickerFinish>('matte')
   const [quantity, setQuantity] = useState<number>(100)
   const [customQty, setCustomQty] = useState('')
@@ -64,7 +69,7 @@ export default function PricingCalculator({ productName }: Props) {
       rush: 'standard',
       totalCents: price.totalCents,
       totalFormatted: price.totalFormatted,
-      productPath: '/shop/stickers',
+      productPath,
     })
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
@@ -81,7 +86,7 @@ export default function PricingCalculator({ productName }: Props) {
     }`
 
   return (
-    <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24">
+    <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
 
       {/* ── Size ── */}
       <div className="mb-6">
@@ -192,7 +197,7 @@ export default function PricingCalculator({ productName }: Props) {
             <div>
               <p className="text-4xl font-bold text-gray-900 leading-none">{price.totalFormatted}</p>
             </div>
-            <p className="text-sm text-gray-500 pb-1">{price.unitFormatted} / sticker</p>
+            <p className="text-xs text-gray-400 pb-1">{price.unitFormatted} / sticker</p>
           </div>
           <div className="flex gap-2">
             <Button onClick={handleOrder} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">

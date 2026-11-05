@@ -13,6 +13,7 @@ import {
 import { authoritativeRollLabelPrice } from '@/lib/roll-label-checkout'
 import { authoritativeMylarPrice } from '@/lib/mylar-pricing'
 import { authoritativePrintPrice } from '@/lib/print-pricing'
+import { STICKER_PRODUCT_MATERIALS } from '@/lib/sticker-catalog'
 import {
   encodeRollLabelDirection,
   formatRollLabelDirection,
@@ -107,9 +108,10 @@ function authoritativeStickerPrice(item: {
 }): number | null {
   const rush = item.rush === '48hr' || item.rush === '24hr' ? item.rush : 'standard'
 
-  if (item.product === 'Custom Die-Cut Stickers') {
+  const allowedMaterials = STICKER_PRODUCT_MATERIALS[item.product]
+  if (allowedMaterials) {
     const { width, height } = parseDimensions(item.size)
-    if (!['standard', 'holographic'].includes(item.material)) {
+    if (!(allowedMaterials as string[]).includes(item.material)) {
       throw new Error('Invalid sticker material')
     }
     if (!['matte', 'gloss', 'laminate'].includes(item.finish)) {

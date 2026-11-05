@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
+import FaqSection from '@/components/seo/FaqSection'
 import { ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -22,6 +23,10 @@ const products = [
     { label: 'Styles', values: ['Step & Repeat', 'Eurofit', 'Pop-up', 'SEG'] },
     { label: 'Sizes', values: ['8×8 ft', '10×8 ft', '20×8 ft', '8×10 ft'] },
   ] },
+  { title: 'SEG Light Displays', alt: 'SEG fabric display in an aluminum frame', href: '/services/signage/backdrops#seg', imagePath: '/services/signage/backdrops/seg-10x8', note: 'Silicone edge graphic (SEG) fabric displays in lightweight aluminum frames — seamless, tool-free graphic swaps.', options: [
+    { label: 'Sizes', values: ['10×8 ft', '8×10 ft', '20×8 ft'] },
+    { label: 'Includes', values: ['Frame', 'Fabric graphic', 'Carry bag'] },
+  ] },
 ]
 
 export default function SignagePage() {
@@ -42,7 +47,7 @@ export default function SignagePage() {
               <Link key={product.href} href={product.href} className="group flex flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lp-green bg-white border border-gray-100 rounded-card p-7 min-w-0 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all">
                 <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-50 mb-6">
                   <ProductPreviewImage
-                    productPath={product.href}
+                    productPath={'imagePath' in product && product.imagePath ? product.imagePath : product.href}
                     alt={product.alt}
                     sizes="(min-width: 1280px) 344px, (min-width: 768px) calc((100vw - 240px) / 3), (min-width: 640px) calc(100vw - 106px), calc(100vw - 90px)"
                     className="object-cover"
@@ -73,6 +78,16 @@ export default function SignagePage() {
             <h2 className="text-h2 font-semibold text-gray-900 mb-4">Need help with your booth design?</h2>
             <p className="text-body text-gray-500 mb-8">Send us the event date, booth specs, and venue requirements. We’ll quote the print, hardware, and timeline together.</p>
             <Link href="/services/signage/quote"><Button size="lg">Request a Signage Quote</Button></Link>
+          </div>
+        </section>
+        <section className="py-16 bg-white">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <FaqSection faqs={[
+              { q: 'What signage do you print?', a: 'Retractable banner stands, X-stands, vinyl, mesh and fabric banners, step and repeat backdrops, Eurofit and pop-up displays, and SEG fabric light displays.' },
+              { q: 'What is an SEG display?', a: 'SEG (silicone edge graphic) displays use a dye-sublimated fabric graphic with a silicone edge that presses into an aluminum frame — seamless, with no visible hardware and tool-free graphic swaps.' },
+              { q: 'How fast can you produce trade show signage?', a: 'Most backdrops ship 3 business days after proof approval plus UPS transit. Rush production is available on many items.' },
+              { q: 'Do I get a proof?', a: 'Yes. Every signage order includes a digital proof before production.' },
+            ]} />
           </div>
         </section>
       </main>

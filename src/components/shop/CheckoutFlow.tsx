@@ -343,7 +343,7 @@ export default function CheckoutFlow({ config }: { config: CheckoutFlowConfig })
       </div>
 
       {/* ── Right: Order summary ── */}
-      <div className={`rounded-card shadow-card border p-6 lg:sticky lg:top-24 ${isDark ? 'bg-lp-black border-white/10' : 'bg-white border-gray-100'}`}>
+      <div className={`rounded-card shadow-card border p-6 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto ${isDark ? 'bg-lp-black border-white/10' : 'bg-white border-gray-100'}`}>
         <h2 className={`text-small font-semibold mb-5 ${isDark ? 'text-white' : 'text-gray-900'}`}>Your order</h2>
 
         <div className="space-y-3 mb-6">

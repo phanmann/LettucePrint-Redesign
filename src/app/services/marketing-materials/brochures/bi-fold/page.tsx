@@ -3,6 +3,7 @@ import OrderingPageLayout from '@/components/marketing/OrderingPageLayout'
 import ConsolidatedQuoteCard from '@/components/marketing/ConsolidatedQuoteCard'
 
 export const metadata: Metadata = {
+  alternates: { canonical: 'https://lettuceprint.com/services/marketing-materials/brochures/bi-fold-letter' },
   title: 'Bi-Fold Brochure Printing | Request a Quote',
   description: 'Choose a bi-fold brochure size, paper stock, finish, lamination, and quantity for a custom quote.',
 }

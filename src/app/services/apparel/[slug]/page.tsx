@@ -5,6 +5,8 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Button from '@/components/ui/Button'
 import QuoteForm from '@/components/quote/QuoteForm'
+import FaqSection from '@/components/seo/FaqSection'
+import JsonLd, { productJsonLd } from '@/components/seo/JsonLd'
 
 type ApparelService = {
   slug: string
@@ -49,6 +51,32 @@ const services: ApparelService[] = [
     details: ['Product sourcing support', 'Multiple decoration methods', 'Kitting and fulfillment available by quote', 'Good for brand activations and pop-ups'],
   },
 ]
+
+const SERVICE_FAQS: Record<string, { q: string; a: string }[]> = {
+  screenprint: [
+    { q: 'When is screen printing the best choice?', a: 'Screen printing is best for larger runs and artwork with a limited number of solid colors. Per-piece pricing improves as quantity goes up.' },
+    { q: 'Can you match Pantone colors?', a: 'Yes. Pantone color matching is available for screen printed orders.' },
+    { q: 'What garments can you print?', a: 'Tees, hoodies, totes, uniforms and most cotton or blended garments. Send your garment list and we will confirm.' },
+    { q: 'How do I get a quote?', a: 'Use the quote form on this page with your garments, quantity, print locations, artwork and deadline. You can attach artwork up to 4 MB total.' },
+  ],
+  embroidery: [
+    { q: 'What items can be embroidered?', a: 'Hats, polos, jackets, bags and uniforms, including flat and structured garments.' },
+    { q: 'Do you digitize my logo?', a: 'Yes. Digitizing support is available so your logo stitches cleanly.' },
+    { q: 'Can you match thread colors?', a: 'Yes. Thread colors are matched to your brand as closely as possible.' },
+    { q: 'How do I get a quote?', a: 'Send garment type, quantity, embroidery locations, thread colors and your deadline through the form on this page.' },
+  ],
+  dtg: [
+    { q: 'What is DTG printing?', a: 'Direct-to-garment (DTG) printing prints full-color artwork straight onto the garment with no screens, which makes it ideal for detailed art and small batches.' },
+    { q: 'When should I choose DTG over screen printing?', a: 'Choose DTG for small runs, samples and full-color or photo-style artwork. Screen printing is usually more cost-effective for large runs with a few solid colors.' },
+    { q: 'What garments work best for DTG?', a: 'DTG works best on cotton garments and produces a soft hand feel.' },
+    { q: 'How do I get a quote?', a: 'Tell us about your garments, print placements, artwork and in-hands date using the form on this page.' },
+  ],
+  'custom-items': [
+    { q: 'What promo items can you source?', a: 'Tote bags, drinkware, giveaway kits, retail add-ons and more. We source products and recommend the right decoration method.' },
+    { q: 'Do you offer kitting and fulfillment?', a: 'Yes, kitting and fulfillment are available by quote.' },
+    { q: 'How do I get a quote?', a: 'Tell us what you need, quantities and your event or launch date, and we will put together options.' },
+  ],
+}
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }))
@@ -117,6 +145,10 @@ export default async function ApparelServicePage({ params }: { params: Promise<{
             </div>
           </div>
         </section>
+        <section className="py-16 bg-white border-t border-gray-100">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"><FaqSection faqs={SERVICE_FAQS[service.slug] ?? []} /></div>
+        </section>
+        <JsonLd data={productJsonLd({ name: service.title, description: service.description, path: `/services/apparel/${service.slug}` })} />
       </main>
       <Footer />
     </>

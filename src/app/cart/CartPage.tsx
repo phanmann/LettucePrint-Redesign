@@ -328,7 +328,7 @@ export default function CartPage() {
 
         {/* Order summary */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-xl border border-gray-200 p-6 lg:sticky lg:top-24">
+          <div className="bg-white rounded-xl border border-gray-200 p-6 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
             <h2 className="font-semibold text-gray-900 mb-4">Order summary</h2>
 
             <div className="space-y-2 mb-4">

@@ -23,6 +23,18 @@ const allProducts = [
   { label: 'Stickers',                     href: '/shop/stickers',                                          tags: ['stickers', 'die cut', 'custom stickers'] },
   { label: 'Spot UV Stickers',             href: '/shop/spot-uv',                                           tags: ['stickers', 'spot uv', 'premium stickers'] },
   { label: 'Roll Labels',                  href: '/shop/roll-labels',                                       tags: ['labels', 'roll labels', 'stickers', 'packaging'] },
+  { label: 'Die Cut Stickers', href: '/shop/stickers/die-cut', tags: ['stickers', 'die cut'] },
+  { label: 'Kiss Cut Stickers', href: '/shop/stickers/kiss-cut', tags: ['stickers', 'kiss cut'] },
+  { label: 'Circle Stickers', href: '/shop/stickers/circle', tags: ['stickers', 'circle', 'round'] },
+  { label: 'Square Stickers', href: '/shop/stickers/square', tags: ['stickers', 'square'] },
+  { label: 'Rectangle Stickers', href: '/shop/stickers/rectangle', tags: ['stickers', 'rectangle', 'bumper'] },
+  { label: 'Oval Stickers', href: '/shop/stickers/oval', tags: ['stickers', 'oval'] },
+  { label: 'Clear Stickers', href: '/shop/stickers/clear', tags: ['stickers', 'clear', 'transparent'] },
+  { label: 'Holographic Stickers', href: '/shop/stickers/holographic', tags: ['stickers', 'holographic', 'rainbow'] },
+  { label: 'Rectangle Roll Labels', href: '/shop/roll-labels/rectangle', tags: ['labels', 'roll labels', 'rectangle'] },
+  { label: 'Circle Roll Labels', href: '/shop/roll-labels/circle', tags: ['labels', 'roll labels', 'circle'] },
+  { label: 'Square Roll Labels', href: '/shop/roll-labels/square', tags: ['labels', 'roll labels', 'square'] },
+  { label: 'Oval Roll Labels', href: '/shop/roll-labels/oval', tags: ['labels', 'roll labels', 'oval'] },
   { label: 'Mylar Bags',                   href: '/services/packaging/mylar-bags',                          tags: ['mylar', 'bags', 'packaging', 'cannabis'] },
   { label: 'Custom Packaging',             href: '/services/packaging/custom-packaging',                    tags: ['packaging', 'custom', 'boxes'] },
   { label: 'Vinyl Banners',               href: '/services/signage/banners/vinyl-banner',                  tags: ['banners', 'vinyl', 'signage', 'outdoor'] },
@@ -48,7 +60,6 @@ const navLinks: NavLink[] = [
   ]},
   { label: 'Stickers & Labels', href: '/shop/stickers', children: [
     { label: 'Stickers', href: '/shop/stickers' },
-    { label: 'Spot UV Stickers', href: '/shop/spot-uv' },
     { label: 'Roll Labels', href: '/shop/roll-labels' },
   ]},
   { label: 'Boxes & Packaging', href: '/services/packaging', children: [
@@ -58,7 +69,7 @@ const navLinks: NavLink[] = [
   { label: 'Signs & Banners', href: '/services/signage', children: [
     { label: 'Banners', href: '/services/signage/banners' },
     { label: 'Backdrops', href: '/services/signage/backdrops' },
-    { label: 'SEG Light Displays', href: '/services/signage/backdrops' },
+    { label: 'SEG Light Displays', href: '/services/signage/backdrops#seg' },
   ]},
   { label: 'Apparel & Promo', href: '/services/apparel', children: [
     { label: 'Screenprint', href: '/services/apparel/screenprint' },
@@ -350,6 +361,12 @@ export default function Navbar({ dropdownOnlyCategories = false }: { dropdownOnl
                 </span>
               </Link>
             </div>
+
+            {/* Mobile cart — always visible */}
+            <Link href="/cart" aria-label="Cart" className="lg:hidden relative w-11 h-11 flex items-center justify-center rounded-full bg-gray-100 mr-2">
+              <ShoppingCart size={18} />
+              <CartBadge />
+            </Link>
 
             {/* Mobile Toggle */}
             <button

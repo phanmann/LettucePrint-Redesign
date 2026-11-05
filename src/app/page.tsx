@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/Hero'
@@ -8,6 +9,11 @@ import PortfolioStrip from '@/components/sections/PortfolioStrip'
 import Testimonials from '@/components/sections/Testimonials'
 import CTABanner from '@/components/sections/CTABanner'
 import EmailSignupPopup from '@/components/sections/EmailSignupPopup'
+
+export const metadata: Metadata = {
+  alternates: { canonical: 'https://lettuceprint.com' },
+  openGraph: { url: 'https://lettuceprint.com' },
+}
 
 export default function HomePage() {
   return (

@@ -58,7 +58,7 @@ export default function PremiumBusinessCardsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_600px] gap-12 items-start">
 
             {/* Right — Pricing Calculator (desktop only) */}
-            <div className="hidden lg:block lg:order-last lg:sticky lg:top-24">
+            <div className="hidden lg:block lg:order-last lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
               <PremiumBusinessCardCalculator productName="Premium Business Cards" />
             </div>
 
