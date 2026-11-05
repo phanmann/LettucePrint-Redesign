@@ -14,7 +14,6 @@ const allProducts = [
   { label: 'Business Cards – Standard',    href: '/services/marketing-materials/business-cards/standard',   tags: ['business cards', 'cards'] },
   { label: 'Business Cards – Premium',     href: '/services/marketing-materials/business-cards/premium',    tags: ['business cards', 'cards', 'premium'] },
   { label: 'Postcards – Standard', href: '/services/marketing-materials/postcards/standard', tags: ['postcards', 'mailers'] },
-  { label: 'Postcards – Premium', href: '/services/marketing-materials/postcards/premium', tags: ['postcards', 'mailers', 'premium'] },
   { label: 'Flyers', href: '/services/marketing-materials/flyers', tags: ['flyers', 'print'] },
   { label: 'Posters', href: '/services/marketing-materials/flyers#posters', tags: ['posters', 'large format'] },
   { label: 'Bi-Fold Brochures', href: '/services/marketing-materials/brochures/bi-fold', tags: ['brochures', 'bi-fold', 'letter', 'tabloid'] },

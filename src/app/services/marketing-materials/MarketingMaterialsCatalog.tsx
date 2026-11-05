@@ -76,22 +76,6 @@ const essentials: CatalogItem[] = [
     },
   },
   {
-    id: 'premium-postcards', category: 'postcards', navLabel: 'Premium Postcards',
-    card: {
-      id: 'pc-premium', name: 'Premium Postcards', subtitle: 'Custom sizes available',
-      description: 'Stand-out finishes for mailers that demand attention. Soft-touch laminate or raised spot UV on heavy 18 pt stock.',
-      color: '#F0E8F5',
-      options: [
-        { label: 'Finishes', values: ['Soft Touch', 'Spot UV'] },
-        { label: 'Stock', values: ['18 pt'] },
-        { label: 'Sides', values: ['Single-sided', 'Double-sided'] },
-      ],
-      features: ['18 pt card stock', 'Soft-touch matte laminate', 'Raised spot UV overlay', 'Full-color CMYK printing', 'Custom sizes available'],
-      turnaround: '3–5 business days', categoryLabel: 'Premium Postcards',
-      href: '/services/marketing-materials/postcards/premium',
-    },
-  },
-  {
     id: 'bi-fold-brochures', category: 'brochures', navLabel: 'Bi-Fold',
     card: {
       id: 'brochure-bi-fold', name: 'Bi-Fold Brochures', subtitle: 'Four panels · two flat/finished sizes',

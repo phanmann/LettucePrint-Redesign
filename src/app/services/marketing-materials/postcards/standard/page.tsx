@@ -319,19 +319,7 @@ export default function PostcardsPage() {
                 </Disclosure>
               </div>
 
-              {/* Premium upgrade */}
-              <div className="rounded-card border border-gray-200 p-6">
-                <h3 className="text-h4 font-semibold text-gray-900 mb-2">Want a premium upgrade?</h3>
-                <p className="text-small text-gray-600 mb-4">
-                  Soft-touch laminate and raised spot UV available on 18 pt stock — for mailers that demand a second look.
-                </p>
-                <Link
-                  href="/services/marketing-materials/postcards/premium"
-                  className="inline-flex items-center gap-2 text-small font-semibold text-lp-green hover:text-lp-green-dark transition-colors"
-                >
-                  See Premium Postcards <ArrowRight size={14} />
-                </Link>
-              </div>
+
             </div>
           </div>
 
@@ -339,17 +327,6 @@ export default function PostcardsPage() {
           <div className="mt-20 pt-12 border-t border-gray-100">
             <h2 className="text-h2 font-semibold text-gray-900 mb-8">You might also want</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <Link
-                href="/services/marketing-materials/postcards/premium"
-                className="group block bg-lp-black rounded-card p-6 transition-all duration-250 hover:opacity-90"
-              >
-                <Badge variant="popular" className="mb-4">Premium</Badge>
-                <h3 className="text-h4 font-semibold text-white mb-2">Premium Postcards</h3>
-                <p className="text-small text-white/70 mb-4">Soft-touch or spot UV on heavy 18 pt stock.</p>
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-lp-green">
-                  View product <ArrowRight size={12} />
-                </span>
-              </Link>
               <Link
                 href="/services/marketing-materials/business-cards"
                 className="group block bg-white rounded-card shadow-card hover:shadow-card-hover border border-gray-100 p-6 transition-all duration-250"

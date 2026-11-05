@@ -35,32 +35,7 @@ const CATEGORIES = [
       turnaround: '2–3 business days',
     },
   },
-  {
-    id: 'premium',
-    label: 'Premium Postcards',
-    description: 'Elevated stocks and finishes for brands that want their mailers to feel as good as they look.',
-    href: '/services/marketing-materials/postcards/premium',
-    card: {
-      id: 'pc-premium',
-      name: 'Premium Postcards',
-      subtitle: 'Custom sizes available',
-      description: 'Stand-out finishes for mailers that demand attention. Soft-touch laminate or raised spot UV on heavy 18 pt stock.',
-      color: '#F0E8F5',
-      options: [
-        { label: 'Finishes', values: ['Soft Touch', 'Spot UV'] },
-        { label: 'Stock',    values: ['18 pt'] },
-        { label: 'Sides',    values: ['Single-sided', 'Double-sided'] },
-      ],
-      features: [
-        '18 pt card stock',
-        'Soft-touch matte laminate',
-        'Raised spot UV overlay',
-        'Full-color CMYK printing',
-        'Custom sizes available',
-      ],
-      turnaround: '3–5 business days',
-    },
-  },
+
 ]
 
 export default function PostcardsPage() {
@@ -82,7 +57,7 @@ export default function PostcardsPage() {
               Postcards that actually get noticed.
             </h1>
             <p className="text-body-lg text-gray-500 max-w-xl mb-8">
-              Standard mailer sizes to oversized premium stock — full-color postcards for direct mail, events, and brand campaigns.
+              Standard mailer sizes with a choice of stocks — full-color postcards for direct mail, events, and brand campaigns.
             </p>
             <div className="flex flex-wrap gap-2">
               <button
