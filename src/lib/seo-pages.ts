@@ -64,5 +64,7 @@ export function pageMetadata(path: string): Metadata {
   const p = PAGES[path]
   if (!p) throw new Error(`No SEO metadata for ${path}`)
   const url = 'https://lettuceprint.com' + (p.canonical ?? path)
-  return { title: p.title, description: p.description, alternates: { canonical: url }, openGraph: { title: p.title, description: p.description, url } }
+  // Absolute title: a string title in a parent layout would otherwise drop the site-wide " | Lettuce Print" suffix.
+  const title = `${p.title} | Lettuce Print`
+  return { title: { absolute: title }, description: p.description, alternates: { canonical: url }, openGraph: { title, description: p.description, url } }
 }
