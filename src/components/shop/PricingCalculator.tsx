@@ -125,13 +125,13 @@ export default function PricingCalculator({ productName, materials = ['standard'
               <div className="flex min-w-0 items-center gap-2">
                 <div className={radioCircle(material === m)} />
                 <div>
-                  <p className={`text-sm font-medium leading-tight ${material === m ? 'text-gray-900' : 'text-gray-700'}`}>
+                  <p className={`text-sm font-bold leading-snug ${material === m ? 'text-gray-900' : 'text-gray-700'}`}>
                     {MATERIAL_LABELS[m]}
                     {m === 'holographic' && (
                       <span className="ml-2 text-xs font-semibold text-lp-green bg-lp-green/10 px-1.5 py-0.5 rounded-full">Premium</span>
                     )}
                   </p>
-                  <p className="text-xs text-gray-400 mt-0.5">{MATERIAL_DESCRIPTIONS[m]}</p>
+                  <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">{MATERIAL_DESCRIPTIONS[m]}</p>
                 </div>
               </div>
             </label>
@@ -150,13 +150,13 @@ export default function PricingCalculator({ productName, materials = ['standard'
               <div className="flex min-w-0 items-center gap-2">
                 <div className={radioCircle(finish === f)} />
                 <div>
-                  <p className={`text-sm font-medium leading-tight ${finish === f ? 'text-gray-900' : 'text-gray-700'}`}>
+                  <p className={`text-sm font-bold leading-snug ${finish === f ? 'text-gray-900' : 'text-gray-700'}`}>
                     {FINISH_LABELS[f]}
                     {f === 'laminate' && (
                       <span className="ml-2 text-xs font-semibold text-lp-green bg-lp-green/10 px-1.5 py-0.5 rounded-full">Add-on</span>
                     )}
                   </p>
-                  <p className="text-xs text-gray-400 mt-0.5">{FINISH_DESCRIPTIONS[f]}</p>
+                  <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">{FINISH_DESCRIPTIONS[f]}</p>
                 </div>
               </div>
             </label>

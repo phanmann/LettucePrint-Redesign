@@ -156,8 +156,8 @@ function Configurator() {
             <label key={f.id} className={radioRow(finish === f.id)} onClick={() => setFinish(f.id)}>
               <div className={radioCircle(finish === f.id)} />
               <div>
-                <p className={`text-sm font-medium leading-tight ${finish === f.id ? 'text-gray-900' : 'text-gray-700'}`}>{f.label}</p>
-                <p className="text-xs text-gray-400 mt-0.5">{f.description}</p>
+                <p className={`text-sm font-bold leading-snug ${finish === f.id ? 'text-gray-900' : 'text-gray-700'}`}>{f.label}</p>
+                <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">{f.description}</p>
               </div>
             </label>
           ))}
@@ -174,8 +174,8 @@ function Configurator() {
             <label key={s.id} className={radioRow(sides === s.id)} onClick={() => setSides(s.id)}>
               <div className={radioCircle(sides === s.id)} />
               <div>
-                <p className={`text-sm font-medium leading-tight ${sides === s.id ? 'text-gray-900' : 'text-gray-700'}`}>{s.label}</p>
-                <p className="text-xs text-gray-400 mt-0.5">{s.description}</p>
+                <p className={`text-sm font-bold leading-snug ${sides === s.id ? 'text-gray-900' : 'text-gray-700'}`}>{s.label}</p>
+                <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">{s.description}</p>
               </div>
             </label>
           ))}

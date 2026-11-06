@@ -68,6 +68,12 @@ function fmt(n: number) {
   return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
+function OptionLabel({ label }: { label: string }) {
+  const parts = label.match(/^(.*?)\s*\(([^()]*)\)$/)
+  if (!parts) return <>{label}</>
+  return <>{parts[1]}<span className="block mt-1 text-xs font-normal leading-relaxed text-gray-500">{parts[2]}</span></>
+}
+
 // ─── Shared radio styles ──────────────────────────────────────────────────────
 const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
 const radioRow = (active: boolean) =>
@@ -199,8 +205,8 @@ function ConfiguratorOptions({
                   <div className={radioCircle(selections[group.label] === opt.id)} />
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className={`text-sm font-medium leading-tight ${selections[group.label] === opt.id ? 'text-gray-900' : 'text-gray-700'}`}>
-                        {opt.label}
+                      <p className={`text-sm font-bold leading-snug ${selections[group.label] === opt.id ? 'text-gray-900' : 'text-gray-700'}`}>
+                        <OptionLabel label={opt.label} />
                       </p>
                       {opt.badge && (
                         <span className="text-xs font-semibold text-lp-green bg-lp-green/10 px-1.5 py-0.5 rounded-full">
@@ -208,7 +214,7 @@ function ConfiguratorOptions({
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-gray-400 mt-0.5">{opt.description}</p>
+                    <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">{opt.description}</p>
                   </div>
                 </label>
               ))}
@@ -245,10 +251,10 @@ function ConfiguratorOptions({
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   <Zap size={13} className={isRush ? 'text-amber-500' : 'text-gray-400'} />
-                  <p className="text-sm font-medium text-gray-800">Rush production</p>
+                  <p className="text-sm font-bold text-gray-900">Rush production</p>
                   <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full">Next day</span>
                 </div>
-                <p className="text-xs text-gray-400 mt-0.5">
+                <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">
                   {currentRow?.rushPrice
                     ? `Add ${fmt(currentRow.rushPrice - currentRow.standardPrice)} — total ${fmt(currentRow.rushPrice)}`
                     : 'Price on request'}
@@ -268,10 +274,10 @@ function ConfiguratorOptions({
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
                 <Zap size={13} className={isRush ? 'text-amber-500' : 'text-gray-400'} />
-                <p className="text-sm font-medium text-gray-800">Rush production</p>
+                <p className="text-sm font-bold text-gray-900">Rush production</p>
                 <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full">Next day</span>
               </div>
-              <p className="text-xs text-gray-400 mt-0.5">
+              <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">
                 {pricingTable[0].rushPrice
                   ? `+${fmt(pricingTable[0].rushPrice - pricingTable[0].standardPrice)} — total ${fmt(pricingTable[0].rushPrice)}`
                   : 'Price on request'}

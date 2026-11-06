@@ -121,13 +121,13 @@ export default function SpotUVCalculator({ productName }: Props) {
               <div className="flex min-w-0 items-center gap-2">
                 <div className={radioCircle(hits === hit)} />
                 <div>
-                  <p className={`text-sm font-medium leading-tight ${hits === hit ? 'text-gray-900' : 'text-gray-700'}`}>
+                  <p className={`text-sm font-bold leading-snug ${hits === hit ? 'text-gray-900' : 'text-gray-700'}`}>
                     {SPOT_UV_HIT_LABELS[hit]}
                     {hit === 1 && (
                       <span className="ml-2 text-xs font-semibold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded-full">Included</span>
                     )}
                   </p>
-                  <p className="text-xs text-gray-400 mt-0.5">{hitDescriptions[hit]}</p>
+                  <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">{hitDescriptions[hit]}</p>
                 </div>
               </div>
             </label>

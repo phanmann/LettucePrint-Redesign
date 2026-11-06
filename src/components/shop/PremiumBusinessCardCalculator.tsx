@@ -101,10 +101,10 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
               <div className="flex min-w-0 items-center gap-2">
                 <div className={radioCircle(finish === f)} />
                 <div>
-                  <p className={`text-sm font-medium leading-tight ${finish === f ? 'text-gray-900' : 'text-gray-700'}`}>
+                  <p className={`text-sm font-bold leading-snug ${finish === f ? 'text-gray-900' : 'text-gray-700'}`}>
                     {FINISH_LABELS[f]}
                   </p>
-                  <p className="text-xs text-gray-400 mt-0.5">{FINISH_DESCRIPTIONS[f]}</p>
+                  <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">{FINISH_DESCRIPTIONS[f]}</p>
                 </div>
               </div>
             </label>
@@ -123,10 +123,10 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
               <div className="flex min-w-0 items-center gap-2">
                 <div className={radioCircle(weight === w)} />
                 <div>
-                  <p className={`text-sm font-medium leading-tight ${weight === w ? 'text-gray-900' : 'text-gray-700'}`}>
+                  <p className={`text-sm font-bold leading-snug ${weight === w ? 'text-gray-900' : 'text-gray-700'}`}>
                     {WEIGHT_LABELS[w]}
                   </p>
-                  <p className="text-xs text-gray-400 mt-0.5">{WEIGHT_DESCRIPTIONS[w]}</p>
+                  <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">{WEIGHT_DESCRIPTIONS[w]}</p>
                 </div>
               </div>
             </label>
@@ -149,10 +149,10 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
                   <div className="flex min-w-0 items-center gap-2">
                     <div className={radioCircle(sides === s.id)} />
                     <div>
-                      <p className={`text-sm font-medium leading-tight ${sides === s.id ? 'text-gray-900' : 'text-gray-700'}`}>
+                      <p className={`text-sm font-bold leading-snug ${sides === s.id ? 'text-gray-900' : 'text-gray-700'}`}>
                         {s.label}
                       </p>
-                      <p className="text-xs text-gray-400 mt-0.5">{s.desc}</p>
+                      <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">{s.desc}</p>
                     </div>
                   </div>
                 </label>
@@ -178,10 +178,10 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
                   <div className="flex min-w-0 items-center gap-2">
                     <div className={radioCircle(spotSide === s.id)} />
                     <div>
-                      <p className={`text-sm font-medium leading-tight ${spotSide === s.id ? 'text-gray-900' : 'text-gray-700'}`}>
+                      <p className={`text-sm font-bold leading-snug ${spotSide === s.id ? 'text-gray-900' : 'text-gray-700'}`}>
                         {s.label}
                       </p>
-                      <p className="text-xs text-gray-400 mt-0.5">{s.desc}</p>
+                      <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">{s.desc}</p>
                     </div>
                   </div>
                 </label>
