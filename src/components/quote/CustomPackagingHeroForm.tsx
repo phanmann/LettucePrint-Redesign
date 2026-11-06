@@ -215,7 +215,7 @@ export default function CustomPackagingHeroForm({ quoteType = 'custom-packaging'
 
       <fieldset className="mt-7">
         <legend className="text-small font-semibold text-gray-800">Enclosure <span className="font-normal text-gray-500">(select all that apply)</span></legend>
-        <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="mt-3 grid grid-cols-2 gap-3" data-option-grid>
           {ENCLOSURES.map(option => (
             <label key={option} className="flex min-h-10 cursor-pointer items-center gap-3 rounded-input border border-gray-200 bg-white px-3 py-2 text-small text-gray-700">
               <input type="checkbox" name="enclosures" value={option} checked={enclosures.includes(option)} onChange={() => toggleValue(enclosures, option, setEnclosures)} className={checkboxClass} />
@@ -227,9 +227,9 @@ export default function CustomPackagingHeroForm({ quoteType = 'custom-packaging'
 
       <fieldset className="mt-7" aria-describedby={errors.artworkPrintReady ? 'artwork-error' : undefined} data-invalid={errors.artworkPrintReady ? 'true' : undefined}>
         <legend className="text-small font-semibold text-gray-800">Is your artwork print ready? <span aria-hidden="true" className="text-lp-green">*</span></legend>
-        <div className="mt-3 flex flex-wrap gap-3">
+        <div className="mt-3 grid grid-cols-2 gap-3" data-option-grid>
           {ARTWORK_OPTIONS.map(option => (
-            <label key={option} className="flex min-w-24 cursor-pointer items-center gap-3 rounded-input border border-gray-200 bg-white px-4 py-2.5 text-small text-gray-700">
+            <label key={option} className="flex min-w-0 [overflow-wrap:anywhere] cursor-pointer items-center gap-3 rounded-input border border-gray-200 bg-white px-4 py-2.5 text-small text-gray-700">
               <input type="radio" name="artworkPrintReady" value={option} checked={artworkPrintReady === option} onChange={() => setArtworkPrintReady(option)} className={checkboxClass} />
               {option}
             </label>
@@ -240,9 +240,9 @@ export default function CustomPackagingHeroForm({ quoteType = 'custom-packaging'
 
       <fieldset className="mt-7" aria-describedby={errors.bestContact ? 'best-contact-error' : undefined}>
         <legend className="text-small font-semibold text-gray-800">Best form of contact <span aria-hidden="true" className="text-lp-green">*</span> <span className="font-normal text-gray-500">(select all that apply)</span></legend>
-        <div className="mt-3 flex flex-wrap gap-3">
+        <div className="mt-3 grid grid-cols-2 gap-3" data-option-grid>
           {BEST_CONTACT_OPTIONS.map(option => (
-            <label key={option} className="flex min-w-28 cursor-pointer items-center gap-3 rounded-input border border-gray-200 bg-white px-4 py-2.5 text-small text-gray-700">
+            <label key={option} className="flex min-w-0 [overflow-wrap:anywhere] cursor-pointer items-center gap-3 rounded-input border border-gray-200 bg-white px-4 py-2.5 text-small text-gray-700">
               <input type="checkbox" name="bestContact" value={option} checked={bestContact.includes(option)} onChange={() => toggleValue(bestContact, option, setBestContact)} className={checkboxClass} aria-invalid={Boolean(errors.bestContact)} />
               {option}
             </label>

@@ -77,7 +77,7 @@ export default function PricingCalculator({ productName, materials = ['standard'
 
   const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
   const radioRow = (active: boolean) =>
-    `flex items-center justify-between px-4 py-3 rounded-lg border cursor-pointer transition-all duration-150 ${
+    `min-w-0 [overflow-wrap:anywhere] flex items-center justify-between px-3 py-3 rounded-lg border cursor-pointer transition-all duration-150 ${
       active ? 'border-lp-green bg-lp-green/5' : 'border-gray-200 bg-white hover:border-gray-300'
     }`
   const radioCircle = (active: boolean) =>
@@ -119,10 +119,10 @@ export default function PricingCalculator({ productName, materials = ['standard'
       {/* ── Material ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Select a material</p>
-        <div className="space-y-2">
+        <div className="grid grid-cols-2 gap-2" data-option-grid>
           {MATERIALS.map(m => (
             <label key={m} className={radioRow(material === m)} onClick={() => setMaterial(m)}>
-              <div className="flex items-center gap-3">
+              <div className="flex min-w-0 items-center gap-2">
                 <div className={radioCircle(material === m)} />
                 <div>
                   <p className={`text-sm font-medium leading-tight ${material === m ? 'text-gray-900' : 'text-gray-700'}`}>
@@ -144,10 +144,10 @@ export default function PricingCalculator({ productName, materials = ['standard'
       {/* ── Finish ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Select a finish</p>
-        <div className="space-y-2">
+        <div className="grid grid-cols-2 gap-2" data-option-grid>
           {FINISHES.map(f => (
             <label key={f} className={radioRow(finish === f)} onClick={() => setFinish(f)}>
-              <div className="flex items-center gap-3">
+              <div className="flex min-w-0 items-center gap-2">
                 <div className={radioCircle(finish === f)} />
                 <div>
                   <p className={`text-sm font-medium leading-tight ${finish === f ? 'text-gray-900' : 'text-gray-700'}`}>

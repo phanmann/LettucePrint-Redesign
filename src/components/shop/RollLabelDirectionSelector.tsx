@@ -77,7 +77,7 @@ export default function RollLabelDirectionSelector({ value, onChange }: Props) {
       {machineApplied && (
         <div className="mt-4 rounded-xl border border-gray-200 bg-gray-50 p-4">
           <p className="text-xs font-semibold text-gray-900 mb-2">Which edge should come off the roll first?</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 gap-2">
             {UNWIND_EDGES.map((edge) => {
               const { label, icon: Icon } = EDGE_OPTIONS[edge]
               const active = value.unwindEdge === edge

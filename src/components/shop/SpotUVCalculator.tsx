@@ -66,7 +66,7 @@ export default function SpotUVCalculator({ productName }: Props) {
 
   const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
   const radioRow = (active: boolean) =>
-    `flex items-center justify-between px-4 py-3 rounded-lg border cursor-pointer transition-all duration-150 ${
+    `min-w-0 [overflow-wrap:anywhere] flex items-center justify-between px-3 py-3 rounded-lg border cursor-pointer transition-all duration-150 ${
       active ? 'border-lp-green bg-lp-green/5' : 'border-gray-200 bg-white hover:border-gray-300'
     }`
   const radioCircle = (active: boolean) =>
@@ -115,10 +115,10 @@ export default function SpotUVCalculator({ productName }: Props) {
       <div className="mb-6">
         <p className={sectionLabel}>Clear UV coating</p>
         <p className="text-xs text-gray-500 mb-3">More UV hits create a deeper raised texture.</p>
-        <div className="space-y-2">
+        <div className="grid grid-cols-2 gap-2" data-option-grid>
           {SPOT_UV_HIT_OPTIONS.map(hit => (
             <label key={hit} className={radioRow(hits === hit)} onClick={() => setHits(hit)}>
-              <div className="flex items-center gap-3">
+              <div className="flex min-w-0 items-center gap-2">
                 <div className={radioCircle(hits === hit)} />
                 <div>
                   <p className={`text-sm font-medium leading-tight ${hits === hit ? 'text-gray-900' : 'text-gray-700'}`}>

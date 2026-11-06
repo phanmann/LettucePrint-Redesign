@@ -78,7 +78,7 @@ function Configurator() {
   const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
   const selectClass = 'w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-900 focus:border-lp-green focus:outline-none focus:ring-2 focus:ring-lp-green/20'
   const radioRow = (active: boolean) =>
-    `flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer transition-all duration-150 ${
+    `min-w-0 [overflow-wrap:anywhere] flex items-center gap-2 px-3 py-3 rounded-lg border cursor-pointer transition-all duration-150 ${
       active ? 'border-lp-green bg-lp-green/5' : 'border-gray-200 bg-white hover:border-gray-300'
     }`
   const radioCircle = (active: boolean) =>
@@ -151,7 +151,7 @@ function Configurator() {
       {/* ── Finish ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Paper finish</p>
-        <div className="space-y-2">
+        <div className="grid grid-cols-2 gap-2" data-option-grid>
           {FINISHES.map(f => (
             <label key={f.id} className={radioRow(finish === f.id)} onClick={() => setFinish(f.id)}>
               <div className={radioCircle(finish === f.id)} />
@@ -169,7 +169,7 @@ function Configurator() {
       {/* ── Sides ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Printing sides</p>
-        <div className="space-y-2">
+        <div className="grid grid-cols-2 gap-2" data-option-grid>
           {SIDES.map(s => (
             <label key={s.id} className={radioRow(sides === s.id)} onClick={() => setSides(s.id)}>
               <div className={radioCircle(sides === s.id)} />

@@ -71,7 +71,7 @@ function fmt(n: number) {
 // ─── Shared radio styles ──────────────────────────────────────────────────────
 const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
 const radioRow = (active: boolean) =>
-  `flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer transition-all duration-150 ${
+  `min-w-0 [overflow-wrap:anywhere] flex items-center gap-2 px-3 py-3 rounded-lg border cursor-pointer transition-all duration-150 ${
     active ? 'border-lp-green bg-lp-green/5' : 'border-gray-200 bg-white hover:border-gray-300'
   }`
 const radioCircle = (active: boolean) =>
@@ -184,7 +184,7 @@ function ConfiguratorOptions({
         <div key={group.label}>
           <div className="mb-6">
             <p className={sectionLabel}>{group.label}</p>
-            <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-2" data-option-grid>
               {group.options.map(opt => (
                 <label
                   key={opt.id}
@@ -197,8 +197,8 @@ function ConfiguratorOptions({
                   onClick={() => setSelections({ ...selections, [group.label]: opt.id })}
                 >
                   <div className={radioCircle(selections[group.label] === opt.id)} />
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
                       <p className={`text-sm font-medium leading-tight ${selections[group.label] === opt.id ? 'text-gray-900' : 'text-gray-700'}`}>
                         {opt.label}
                       </p>
@@ -242,7 +242,7 @@ function ConfiguratorOptions({
           {hasRush && (
             <label role="checkbox" aria-checked={isRush} tabIndex={0} onKeyDown={e => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); setIsRush(!isRush) } }} className={`mt-2 ${radioRow(isRush)}`} onClick={() => setIsRush(!isRush)}>
               <div className={radioCircle(isRush)} />
-              <div className="flex-1">
+              <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   <Zap size={13} className={isRush ? 'text-amber-500' : 'text-gray-400'} />
                   <p className="text-sm font-medium text-gray-800">Rush production</p>
@@ -265,7 +265,7 @@ function ConfiguratorOptions({
         <div className="mb-6">
           <label role="checkbox" aria-checked={isRush} tabIndex={0} onKeyDown={e => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); setIsRush(!isRush) } }} className={`mb-3 ${radioRow(isRush)}`} onClick={() => setIsRush(!isRush)}>
             <div className={radioCircle(isRush)} />
-            <div className="flex-1">
+            <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
                 <Zap size={13} className={isRush ? 'text-amber-500' : 'text-gray-400'} />
                 <p className="text-sm font-medium text-gray-800">Rush production</p>

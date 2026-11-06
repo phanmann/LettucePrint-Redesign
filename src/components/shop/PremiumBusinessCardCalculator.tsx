@@ -81,7 +81,7 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
 
   const sectionLabel = 'block text-sm font-bold text-gray-900 mb-3'
   const radioRow = (active: boolean) =>
-    `flex items-center justify-between px-4 py-3 rounded-lg border cursor-pointer transition-all duration-150 ${
+    `min-w-0 [overflow-wrap:anywhere] flex items-center justify-between px-3 py-3 rounded-lg border cursor-pointer transition-all duration-150 ${
       active ? 'border-lp-green bg-lp-green/5' : 'border-gray-200 bg-white hover:border-gray-300'
     }`
   const radioCircle = (active: boolean) =>
@@ -95,10 +95,10 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
       {/* ── Finish ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Premium finish</p>
-        <div className="space-y-2">
+        <div className="grid grid-cols-2 gap-2" data-option-grid>
           {FINISHES.map(f => (
             <label key={f} className={radioRow(finish === f)} onClick={() => setFinish(f)}>
-              <div className="flex items-center gap-3">
+              <div className="flex min-w-0 items-center gap-2">
                 <div className={radioCircle(finish === f)} />
                 <div>
                   <p className={`text-sm font-medium leading-tight ${finish === f ? 'text-gray-900' : 'text-gray-700'}`}>
@@ -117,10 +117,10 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
       {/* ── Weight ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Paper stock weight</p>
-        <div className="space-y-2">
+        <div className="grid grid-cols-2 gap-2" data-option-grid>
           {availableWeights.map(w => (
             <label key={w} className={radioRow(weight === w)} onClick={() => setWeight(w)}>
-              <div className="flex items-center gap-3">
+              <div className="flex min-w-0 items-center gap-2">
                 <div className={radioCircle(weight === w)} />
                 <div>
                   <p className={`text-sm font-medium leading-tight ${weight === w ? 'text-gray-900' : 'text-gray-700'}`}>
@@ -140,13 +140,13 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
           <div className="border-t border-gray-100 mb-6" />
           <div className="mb-6">
             <p className={sectionLabel}>Printing sides</p>
-            <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-2" data-option-grid>
               {[
                 { id: 'single' as const, label: 'Single-Sided', desc: 'Print on front only.' },
                 { id: 'double' as const, label: 'Double-Sided', desc: 'Print on both sides.' },
               ].map(s => (
                 <label key={s.id} className={radioRow(sides === s.id)} onClick={() => setSides(s.id)}>
-                  <div className="flex items-center gap-3">
+                  <div className="flex min-w-0 items-center gap-2">
                     <div className={radioCircle(sides === s.id)} />
                     <div>
                       <p className={`text-sm font-medium leading-tight ${sides === s.id ? 'text-gray-900' : 'text-gray-700'}`}>
@@ -169,13 +169,13 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
           <div className="mb-6">
             <p className={sectionLabel}>{FINISH_LABELS[finish]} side</p>
             <p className="text-xs text-gray-500 mb-3">The {FINISH_LABELS[finish].toLowerCase()} finish is applied to one side only.</p>
-            <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-2" data-option-grid>
               {[
                 { id: 'front' as SpotSide, label: 'Front side', desc: 'Finish on the front, standard print on back.' },
                 { id: 'back' as SpotSide, label: 'Back side', desc: 'Finish on the back, standard print on front.' },
               ].map(s => (
                 <label key={s.id} className={radioRow(spotSide === s.id)} onClick={() => setSpotSide(s.id)}>
-                  <div className="flex items-center gap-3">
+                  <div className="flex min-w-0 items-center gap-2">
                     <div className={radioCircle(spotSide === s.id)} />
                     <div>
                       <p className={`text-sm font-medium leading-tight ${spotSide === s.id ? 'text-gray-900' : 'text-gray-700'}`}>
