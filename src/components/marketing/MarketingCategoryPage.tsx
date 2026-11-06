@@ -23,13 +23,14 @@ function subscribeToHash(onChange: () => void) {
 }
 
 // Category listing: Postcards-style hero and product cards, with headed sections like the Banners page.
-export default function MarketingCategoryPage({ title, introduction, allLabel, groups, ctaHeading, ctaText }: {
+export default function MarketingCategoryPage({ title, introduction, allLabel, groups, ctaHeading, ctaText, combineGroups = false }: {
   title: string
   introduction: string
   allLabel: string
   groups: MarketingCategoryGroup[]
   ctaHeading: string
   ctaText: string
+  combineGroups?: boolean
 }) {
   // Old single-category URLs redirect here with a hash (e.g. #posters) that preselects that filter.
   const hash = useSyncExternalStore(subscribeToHash, () => window.location.hash.slice(1), () => '')
@@ -65,7 +66,11 @@ export default function MarketingCategoryPage({ title, introduction, allLabel, g
         <section className="py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
             <AnimatePresence mode="wait">
-              {groups.filter(group => activeGroup === 'all' || group.id === activeGroup).map(group => (
+              {combineGroups ? (
+                <motion.div key={activeGroup} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.2 }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                  {groups.filter(group => activeGroup === 'all' || group.id === activeGroup).flatMap(group => group.products.map(product => <ProductCard key={product.id} {...product} categoryLabel={group.label} />))}
+                </motion.div>
+              ) : groups.filter(group => activeGroup === 'all' || group.id === activeGroup).map(group => (
                 <motion.div key={group.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.2 }}>
                   <div className="mb-8">
                     <h2 className="text-h2 font-semibold text-gray-900 mb-2">{group.label}</h2>

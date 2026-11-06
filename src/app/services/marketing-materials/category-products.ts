@@ -18,28 +18,7 @@ export const POSTERS: MarketingProduct[] = [{
   options: [{ label: 'Size', values: ['11" × 17"', '18" × 24"', '24" × 36"'] }],
   features: ['Gloss or matte finish', '100 lb. text or cover stock', 'Full-color CMYK printing', 'Pricing by quote'],
   turnaround: '2–3 business days',
-},
-  {
-    id: 'poster-art-print',
-    href: '/services/marketing-materials/posters/art-print',
-    name: 'Art Print Poster',
-    subtitle: 'Custom sizes available',
-    description: 'Heavy-weight uncoated stock for a fine-art feel — rich ink absorption, matte surface, and museum-quality output.',
-    features: ['100 lb. uncoated cover', 'Fine-art quality output', 'Accurate color profiling', 'Custom sizes available'],
-    turnaround: '3–5 business days',
-    color: '#F0E8F5',
-  },
-  {
-    id: 'poster-soft-touch',
-    href: '/services/marketing-materials/posters/soft-touch',
-    name: 'Soft Touch Poster',
-    subtitle: 'Custom sizes available',
-    description: 'Velvety soft-touch laminate over a heavy stock base — tactile luxury for limited edition prints, brand activations, and retail.',
-    features: ['100 lb. cover stock', 'Soft-touch matte laminate', 'Full-color printing', 'Spot UV available'],
-    turnaround: '3–5 business days',
-    color: '#E8F5EF',
-  },
-]
+}]
 
 export const BROCHURES: MarketingProduct[] = [
   {

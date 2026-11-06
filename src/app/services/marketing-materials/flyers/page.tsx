@@ -12,9 +12,10 @@ export default function FlyersAndPostersPage() {
     title="Flyers & Posters that move fast."
     introduction="From half-sheet handouts to large-format posters — full-color printing with quick turnaround."
     allLabel="All Flyers & Posters"
+    combineGroups
     groups={[
       { id: 'flyers', label: 'Flyers', description: 'Half page, full page, and tabloid flyers for handouts, menus, and promotions.', products: FLYERS },
-      { id: 'posters', label: 'Posters', description: 'From concert bills to fine-art prints — full-color posters in standard sizes and premium finishes.', products: POSTERS },
+      { id: 'posters', label: 'Posters', description: 'Full-color posters for events, retail displays, and storefronts in three standard sizes.', products: POSTERS },
     ]}
     ctaHeading="Need a custom size or big quantity?"
     ctaText="We handle large runs efficiently. Tell us the size, quantity, and deadline and we'll make it happen."
