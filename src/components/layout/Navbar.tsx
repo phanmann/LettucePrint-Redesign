@@ -51,15 +51,15 @@ const allProducts = [
 type NavLink = { label: string; href: string; children?: { label: string; href: string }[] }
 
 const navLinks: NavLink[] = [
+  { label: 'Stickers & Labels', href: '/shop/stickers', children: [
+    { label: 'Stickers', href: '/shop/stickers' },
+    { label: 'Roll Labels', href: '/shop/roll-labels' },
+  ]},
   { label: 'Marketing Materials', href: '/services/marketing-materials', children: [
     { label: 'Business Cards', href: '/services/marketing-materials/business-cards' },
     { label: 'Postcards', href: '/services/marketing-materials/postcards' },
     { label: 'Flyers & Posters', href: '/services/marketing-materials/flyers' },
     { label: 'Brochures & Booklets', href: '/services/marketing-materials/brochures' },
-  ]},
-  { label: 'Stickers & Labels', href: '/shop/stickers', children: [
-    { label: 'Stickers', href: '/shop/stickers' },
-    { label: 'Roll Labels', href: '/shop/roll-labels' },
   ]},
   { label: 'Boxes & Packaging', href: '/services/packaging', children: [
     { label: 'Mylar Bags', href: '/services/packaging/mylar-bags' },
