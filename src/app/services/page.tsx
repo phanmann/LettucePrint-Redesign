@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, BadgeCheck, Boxes, Megaphone, Package, Shirt, Sparkles } from 'lucide-react'
+import { ArrowRight, BadgeCheck, Boxes, Megaphone, Package, Palette, Shirt, Sparkles } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Button from '@/components/ui/Button'
 
 export const metadata: Metadata = {
   title: 'Print Services',
-  description: 'Explore Lettuce Print services: marketing materials, stickers, packaging, signage, apparel, and custom promo items from our Brooklyn studio.',
+  description: 'Explore Lettuce Print services: marketing materials, stickers, packaging, signage, apparel, custom promo items, and design from our Brooklyn studio.',
   alternates: { canonical: 'https://lettuceprint.com/services' },
 }
 
@@ -46,6 +46,13 @@ const services = [
     icon: Shirt,
     description: 'Screen printing, embroidery, DTG, and promo sourcing for merch, staff uniforms, and giveaways.',
     items: ['Screen printing', 'Embroidery', 'DTG', 'Custom promo items'],
+  },
+  {
+    title: 'Design',
+    href: '/portfolio',
+    icon: Palette,
+    description: 'Brand identities, packaging, and print design that bring your ideas to life. Explore work from our design studio.',
+    items: ['Brand identity', 'Packaging design', 'Print design', 'Creative direction'],
   },
 ]
 
