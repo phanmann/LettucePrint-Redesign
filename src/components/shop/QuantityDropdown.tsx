@@ -1,5 +1,6 @@
 'use client'
 
+import { unitPriceLabel } from '@/lib/unit-price'
 import { useState, useRef, useEffect } from 'react'
 import { ChevronDown, Check } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -7,10 +8,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 export interface QtyRow {
   qty: number
   totalFmt: string
+  totalCents: number
   save: number // 0 = no badge
 }
 
 interface Props {
+  unit?: string
   rows: QtyRow[]
   value: number
   showCustom: boolean
@@ -24,7 +27,7 @@ interface Props {
 }
 
 export default function QuantityDropdown({
-  rows, value, showCustom, customValue,
+  rows, value, showCustom, customValue, unit = 'unit',
   onSelect, onSelectCustom, onCustomChange,
   minCustom = 50, maxCustom, stepCustom = 50,
 }: Props) {
@@ -46,7 +49,7 @@ export default function QuantityDropdown({
   const displayLabel = showCustom
     ? `Custom — ${customValue || '…'}`
     : selected
-      ? `${selected.qty.toLocaleString()} — ${selected.totalFmt}`
+      ? `${selected.qty.toLocaleString()} — ${selected.totalFmt} · ${unitPriceLabel(selected.totalCents, selected.qty, unit)}`
       : 'Select quantity'
 
   return (
@@ -90,7 +93,7 @@ export default function QuantityDropdown({
                       : 'hover:bg-gray-50 text-gray-700'
                   } ${i > 0 ? 'border-t border-gray-100' : ''}`}
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 shrink-0">
                     <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors ${
                       isSelected ? 'border-lp-green bg-lp-green' : 'border-gray-300'
                     }`}>
@@ -100,8 +103,8 @@ export default function QuantityDropdown({
                       {row.qty.toLocaleString()}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 flex-shrink-0">
-                    <span className="text-sm font-semibold text-gray-900">{row.totalFmt}</span>
+                  <div className="flex items-center gap-2 flex-wrap justify-end">
+                    <span className="text-sm font-semibold text-gray-900">{row.totalFmt}<span className="block text-xs font-normal text-gray-500">{unitPriceLabel(row.totalCents, row.qty, unit)}</span></span>
                     {row.save > 0 && (
                       <span className="text-[11px] font-bold text-lp-green bg-lp-green/10 px-2 py-0.5 rounded-full whitespace-nowrap">
                         Save {row.save}%

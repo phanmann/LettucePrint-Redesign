@@ -10,7 +10,8 @@ import { Disclosure } from '@/components/shop/ProductDisclosure'
 import { ArrowRight, CheckCircle, FileText, Layers } from 'lucide-react'
 import ProductImageGallery from '@/components/shop/ProductImageGallery'
 import { useRouter } from 'next/navigation'
-import { useCart } from '@/context/CartContext'
+import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
+import { unitPriceLabel } from '@/lib/unit-price'
 import { POSTCARDS_PRODUCT, PRINT_QUANTITIES, printPriceTable, type PrintQuantity } from '@/lib/print-pricing'
 
 // ─── Option data ──────────────────────────────────────────────────────────────
@@ -86,7 +87,7 @@ function Configurator() {
       active ? 'border-lp-green bg-lp-green' : 'border-gray-300 bg-white'
     }`
 
-  const { addItem } = useCart()
+  const { addItem, artwork } = useProductOrder()
   const [added, setAdded] = useState(false)
 
   const sizeLabel = SIZES.find(x => x.id === size)?.label ?? size
@@ -142,7 +143,7 @@ function Configurator() {
       <div className="mb-6">
         <label htmlFor="postcard-qty" className={sectionLabel}>Quantity</label>
         <select id="postcard-qty" value={qty} onChange={e => setQty(Number(e.target.value) as PrintQuantity)} className={selectClass}>
-          {PRINT_QUANTITIES.map(q => <option key={q} value={q}>{q.toLocaleString()} postcards — {fmt(printPriceTable(POSTCARDS_PRODUCT, sizeLabel)?.[q] ?? 0)}</option>)}
+          {PRINT_QUANTITIES.map(q => <option key={q} value={q}>{q.toLocaleString()} postcards — {fmt(printPriceTable(POSTCARDS_PRODUCT, sizeLabel)?.[q] ?? 0)} · {unitPriceLabel((printPriceTable(POSTCARDS_PRODUCT, sizeLabel)?.[q] ?? 0) * 100, q, 'card')}</option>)}
         </select>
       </div>
 
@@ -182,16 +183,17 @@ function Configurator() {
         </div>
       </div>
 
+      <ProductArtwork artwork={artwork} />
       {/* ── CTA ── */}
       <div className="border-t border-gray-200 pt-5">
         {price != null && (
-          <div className="flex items-baseline justify-between mb-4">
+          <div className="flex items-baseline justify-between flex-wrap gap-2 mb-4">
             <span className="text-sm text-gray-500">{qty.toLocaleString()} postcards</span>
-            <span className="text-3xl font-bold text-gray-900">{fmt(price)}</span>
+            <span className="text-right"><span className="block text-3xl font-bold text-gray-900">{fmt(price)}</span><span className="text-sm text-gray-500">{unitPriceLabel(price * 100, qty, 'card')}</span></span>
           </div>
         )}
         <div className="flex gap-2">
-          <Button onClick={handleQuote} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
+          <Button disabled={artwork.busy} onClick={handleQuote} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
             {added ? '✓ Added to cart' : 'Add to cart'}
           </Button>
           <Button onClick={() => router.push('/cart')} size="lg" variant="secondary" className="px-4 py-4 rounded-xl border-gray-300 text-gray-700 hover:border-lp-green hover:text-lp-green">

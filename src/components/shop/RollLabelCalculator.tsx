@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-import { useCart } from '@/context/CartContext'
+import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
+import { unitPriceLabel } from '@/lib/unit-price'
 import Button from '@/components/ui/Button'
 import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import RollLabelDirectionSelector from '@/components/shop/RollLabelDirectionSelector'
@@ -68,12 +69,13 @@ export default function RollLabelCalculator({ productName, purchaseCtaStyle = 's
       return {
         qty,
         totalFmt: fmt(result.totalCents),
+        totalCents: result.totalCents,
         discountPct: Math.round(result.volumeDiscount * 100),
       }
     })
   }, [width, height, material, finish, validSize])
 
-  const { addItem } = useCart()
+  const { addItem, artwork } = useProductOrder()
   const [added, setAdded] = useState(false)
 
   const handleOrder = () => {
@@ -189,8 +191,8 @@ export default function RollLabelCalculator({ productName, purchaseCtaStyle = 's
       <div className="mb-6">
         <p className={sectionLabel}>Select a quantity</p>
         {validSize ? (
-          <QuantityDropdown
-            rows={qtyRows.map(r => ({ qty: r.qty, totalFmt: r.totalFmt, save: r.discountPct }))}
+          <QuantityDropdown unit="label"
+            rows={qtyRows.map(r => ({ qty: r.qty, totalCents: r.totalCents, totalFmt: r.totalFmt, save: r.discountPct }))}
             value={quantity}
             showCustom={showCustomQty}
             customValue={customQty}
@@ -221,17 +223,18 @@ export default function RollLabelCalculator({ productName, purchaseCtaStyle = 's
         <RollLabelDirectionSelector value={labelDirection} onChange={setLabelDirection} />
       </div>
 
+      <ProductArtwork artwork={artwork} />
       {/* ── Price Footer + CTA ── */}
       {validSize && price && (
         <>
           <div className="border-t border-gray-200 pt-5 mb-4 flex items-end justify-between">
             <p className="text-4xl font-bold text-gray-900 leading-none">{price.totalFormatted}</p>
-            <p className="text-xs text-gray-400 pb-1">{price.unitFormatted} / label</p>
+            <p className="text-xs text-gray-400 pb-1">{unitPriceLabel(price.totalCents, quantity, 'label')}</p>
           </div>
           <div className="flex gap-2">
             <Button
               onClick={handleOrder}
-              disabled={labelDirection.applicationMethod === 'machine' && !labelDirection.unwindEdge}
+              disabled={artwork.busy || labelDirection.applicationMethod === 'machine' && !labelDirection.unwindEdge}
               size="lg"
               variant={purchaseCtaStyle === 'outline' ? 'secondary' : 'primary'}
               className={`flex-1 text-base font-semibold py-4 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed ${

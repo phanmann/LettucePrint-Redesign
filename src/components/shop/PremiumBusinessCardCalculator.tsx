@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-import { useCart } from '@/context/CartContext'
+import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
+import { unitPriceLabel } from '@/lib/unit-price'
 import Button from '@/components/ui/Button'
 import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import {
@@ -56,7 +57,7 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
     return getQuantityBreaks(finish, weight, sides, spotSide)
   }, [finish, weight, sides, spotSide])
 
-  const { addItem } = useCart()
+  const { addItem, artwork } = useProductOrder()
   const [added, setAdded] = useState(false)
 
   const handleOrder = () => {
@@ -196,7 +197,7 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
       {/* ── Quantity ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Select a quantity</p>
-        <QuantityDropdown
+        <QuantityDropdown unit="card"
           rows={qtyRows}
           value={quantity}
           showCustom={showCustomQty}
@@ -213,15 +214,16 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
         />
       </div>
 
+      <ProductArtwork artwork={artwork} />
       {/* ── Price Footer + CTA ── */}
       <div className="border-t border-gray-200 pt-5 mb-4 flex items-end justify-between">
         <div>
           <p className="text-4xl font-bold text-gray-900 leading-none">{price.totalFormatted}</p>
         </div>
-        <p className="text-sm text-gray-500 pb-1">{price.unitFormatted} / card</p>
+        <p className="text-sm text-gray-500 pb-1">{unitPriceLabel(price.totalCents, quantity, 'card')}</p>
       </div>
       <div className="flex gap-2">
-        <Button onClick={handleOrder} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
+        <Button disabled={artwork.busy} onClick={handleOrder} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
           {added ? '✓ Added to cart' : 'Add to cart'}
         </Button>
         <Button onClick={() => router.push('/cart')} size="lg" variant="secondary" className="px-4 py-4 rounded-xl border-gray-300 text-gray-700 hover:border-lp-green hover:text-lp-green">

@@ -179,6 +179,7 @@ export function getQuantityBreaks(
     return {
       qty,
       totalFmt: result.totalFormatted,
+      totalCents: result.totalCents,
       save: savingsPct,
     }
   })

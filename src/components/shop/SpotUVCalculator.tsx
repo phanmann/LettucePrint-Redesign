@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-import { useCart } from '@/context/CartContext'
+import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
+import { unitPriceLabel } from '@/lib/unit-price'
 import Button from '@/components/ui/Button'
 import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import {
@@ -40,11 +41,11 @@ export default function SpotUVCalculator({ productName }: Props) {
     if (!validSize) return []
     return QUANTITY_TIERS.map(qty => {
       const p = calculateCustomSpotUVPrice(cw, ch, qty, hits, rush)
-      return { qty, total: p.totalCents, totalFmt: p.totalFormatted, save: TIER_DISCOUNTS[qty] ?? 0 }
+      return { qty, totalCents: p.totalCents, totalFmt: p.totalFormatted, save: TIER_DISCOUNTS[qty] ?? 0 }
     })
   }, [cw, ch, hits, validSize, rush])
 
-  const { addItem } = useCart()
+  const { addItem, artwork } = useProductOrder()
   const [added, setAdded] = useState(false)
 
   const handleOrder = () => {
@@ -141,7 +142,7 @@ export default function SpotUVCalculator({ productName }: Props) {
       <div className="mb-6">
         <p className={sectionLabel}>Select a quantity</p>
         {validSize ? (
-          <QuantityDropdown
+          <QuantityDropdown unit="sticker"
             rows={qtyRows}
             value={quantity}
             showCustom={showCustomQty}
@@ -161,15 +162,16 @@ export default function SpotUVCalculator({ productName }: Props) {
         )}
       </div>
 
+      <ProductArtwork artwork={artwork} />
       {/* ── Price Footer + CTA ── */}
       {validSize && price && (
         <>
           <div className="border-t border-gray-200 pt-5 mb-4 flex items-end justify-between">
             <p className="text-4xl font-bold text-gray-900 leading-none">{price.totalFormatted}</p>
-            <p className="text-xs text-gray-400 pb-1">{price.unitFormatted} / sticker</p>
+            <p className="text-xs text-gray-400 pb-1">{unitPriceLabel(price.totalCents, quantity, 'sticker')}</p>
           </div>
           <div className="flex gap-2">
-            <Button onClick={handleOrder} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
+            <Button disabled={artwork.busy} onClick={handleOrder} size="lg" className="flex-1 !bg-lp-green hover:!bg-lp-green-dark text-white text-base font-semibold py-4 rounded-xl">
               {added ? '✓ Added to cart' : 'Add to cart'}
             </Button>
             <Button onClick={() => router.push('/cart')} size="lg" variant="secondary" className="px-4 py-4 rounded-xl border-gray-300 text-gray-700 hover:border-lp-green hover:text-lp-green">

@@ -2,16 +2,17 @@
 
 import { useId, useState } from 'react'
 import Link from 'next/link'
-import { useCart } from '@/context/CartContext'
+import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
+import { unitPriceLabel } from '@/lib/unit-price'
 import { bannerFinishing, bannerMaterials, bannerNames, bannerTurnarounds, calculateBannerPrice, type BannerConfiguration, type BannerKind } from '@/lib/banner-pricing'
 
 const usd = (value: number) => value.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
 const inputClass = 'mt-2 w-full rounded-lg border border-gray-300 bg-white px-3 py-3 text-sm text-gray-900 focus:ring-2 focus:ring-lp-green'
 const presets = [[2,3],[2,4],[2,6],[3,6],[4,6],[4,8],[4,10],[5,10]]
-export default function BannerConfigurator({ kind, configuration: c, onConfigurationChange }: { kind: BannerKind; configuration: BannerConfiguration; onConfigurationChange: (configuration: BannerConfiguration) => void }) {
+export default function BannerConfigurator({ order, kind, configuration: c, onConfigurationChange }: { order: ReturnType<typeof useProductOrder>; kind: BannerKind; configuration: BannerConfiguration; onConfigurationChange: (configuration: BannerConfiguration) => void }) {
   const [added, setAdded] = useState(false)
   const id = useId()
-  const { addItem } = useCart()
+  const { addItem, artwork } = order
   const price = calculateBannerPrice(c)
   const large = price.sqft > 24
   const update = (patch: Partial<BannerConfiguration>) => {
@@ -71,11 +72,12 @@ export default function BannerConfigurator({ kind, configuration: c, onConfigura
       <option value="standard">Standard — list price</option><option value="rush">Rush next-day production +40% (minimum +$25 per line)</option>
     </select></label>
     <p className="text-xs text-gray-600">{bannerTurnarounds[c.turnaround]}. Production timing starts after proof approval.</p>
+    <ProductArtwork artwork={artwork} />
     <div aria-live="polite" aria-atomic="true" className="border-t border-gray-200 pt-4">
       {price.quoteReason ? <><p className="text-sm mb-3">{price.quoteReason}</p><Link href="/get-quote" className="block rounded-lg bg-lp-green px-4 py-3 text-center font-bold text-white">Request a quote</Link></> : <>
-        <dl className="space-y-2 text-sm"><div className="flex justify-between"><dt>Base price / banner</dt><dd>{usd(price.baseUnit)}</dd></div><div className="flex justify-between"><dt>Add-ons / banner</dt><dd>{usd(price.addons)}</dd></div><div className="flex justify-between"><dt>Quantity discount</dt><dd>{price.discount*100}%</dd></div><div className="flex justify-between"><dt>Turnaround adjustment</dt><dd>{usd(price.adjustment)}</dd></div><div className="flex justify-between pt-2 text-xl font-bold"><dt>Line total</dt><dd data-testid="banner-total">{usd(price.totalCents/100)}</dd></div></dl>
+        <dl className="space-y-2 text-sm"><div className="flex justify-between"><dt>Base price / banner</dt><dd>{usd(price.baseUnit)}</dd></div><div className="flex justify-between"><dt>Add-ons / banner</dt><dd>{usd(price.addons)}</dd></div><div className="flex justify-between"><dt>Quantity discount</dt><dd>{price.discount*100}%</dd></div><div className="flex justify-between"><dt>Turnaround adjustment</dt><dd>{usd(price.adjustment)}</dd></div><div className="flex justify-between pt-2 text-xl font-bold"><dt>Line total</dt><dd data-testid="banner-total">{usd(price.totalCents/100)}<span className="block text-sm font-normal text-gray-500">{unitPriceLabel(price.totalCents, c.quantity, 'banner')}</span></dd></div></dl>
         <p className="mt-2 text-xs text-gray-600">Before shipping and applicable tax.</p>
-        <button type="button" onClick={add} className="mt-4 w-full rounded-lg bg-lp-green px-4 py-4 font-bold text-white hover:bg-lp-green-dark">Add to Cart</button>
+        <button type="button" disabled={artwork.busy} onClick={add} className="mt-4 w-full rounded-lg bg-lp-green px-4 py-4 font-bold text-white hover:bg-lp-green-dark">Add to Cart</button>
         <p role="status" id={`${id}-added`} className="mt-2 text-sm text-lp-green">{added ? 'Added to cart.' : ''}</p>
         <Link href="/cart" className="block text-center text-sm font-semibold underline">View Cart</Link>
       </>}

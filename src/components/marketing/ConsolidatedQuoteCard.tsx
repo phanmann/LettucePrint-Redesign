@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
 import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
@@ -18,6 +19,7 @@ export default function ConsolidatedQuoteCard({
   commonFields?: Field[]
   variantLabel?: string
 }) {
+  const { artwork } = useProductOrder()
   const router = useRouter()
   const pathname = usePathname()
   const [variantIndex, setVariantIndex] = useState(0)
@@ -30,9 +32,10 @@ export default function ConsolidatedQuoteCard({
     : field.choices[0].value
 
   function requestQuote() {
-    if (!Number.isInteger(Number(quantity)) || Number(quantity) < 1) return
+    if (artwork.busy || !Number.isInteger(Number(quantity)) || Number(quantity) < 1) return
     const details = [
       product,
+      ...(artwork.file ? [`Artwork: ${artwork.file.url}`, `File: ${artwork.file.name.slice(0, 200)}`] : []),
       `${variantLabel}: ${variant.label}`,
       ...fields.map(field => `${field.label}: ${field.choices.find(choice => choice.value === selected(field))?.label}`),
       `Quantity: ${quantity}`,
@@ -69,7 +72,8 @@ export default function ConsolidatedQuoteCard({
           </label>
         </div>
         {variant.note && <p className="mt-4 text-xs text-gray-600">{variant.note}</p>}
-        <button type="button" onClick={requestQuote} disabled={!Number.isInteger(Number(quantity)) || Number(quantity) < 1} className="mt-6 inline-flex min-h-12 items-center justify-center rounded-xl bg-lp-green px-6 text-sm font-bold text-white hover:bg-lp-green-dark disabled:cursor-not-allowed disabled:opacity-50">
+        <ProductArtwork artwork={artwork} quote />
+        <button type="button" onClick={requestQuote} disabled={artwork.busy || !Number.isInteger(Number(quantity)) || Number(quantity) < 1} className="mt-6 inline-flex min-h-12 items-center justify-center rounded-xl bg-lp-green px-6 text-sm font-bold text-white hover:bg-lp-green-dark disabled:cursor-not-allowed disabled:opacity-50">
           Request a quote with these options
         </button>
         <p className="mt-2 text-xs text-gray-500">We&apos;ll confirm pricing and production timing before you order.</p>

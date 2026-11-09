@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import { sharpGrotesk } from '@/lib/fonts'
+import { ProductOrderProvider } from '@/components/shop/ProductArtwork'
 import { CartProvider } from '@/context/CartContext'
 import './globals.css'
 import PreloadedProductGalleries from '@/components/shop/PreloadedProductGalleries'
@@ -151,7 +152,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <CartProvider>
-          <PreloadedProductGalleries>{children}</PreloadedProductGalleries>
+          <ProductOrderProvider><PreloadedProductGalleries>{children}</PreloadedProductGalleries></ProductOrderProvider>
         </CartProvider>
       </body>
     </html>

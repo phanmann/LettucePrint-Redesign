@@ -12,7 +12,8 @@ import { Disclosure } from '@/components/shop/ProductDisclosure'
 import { ArrowRight, CheckCircle, FileText, Layers, Zap } from 'lucide-react'
 import ProductImageGallery from '@/components/shop/ProductImageGallery'
 import { usePathname } from 'next/navigation'
-import { useCart } from '@/context/CartContext'
+import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
+import { unitPriceLabel } from '@/lib/unit-price'
 import JsonLd, { productJsonLd } from '@/components/seo/JsonLd'
 
 export interface OptionGroup {
@@ -89,19 +90,25 @@ const radioCircle = (active: boolean) =>
 function CtaBlock({
   onClick,
   displayPrice,
+  quantity,
+  artwork,
   isRush,
   quoteShipping = false,
 }: {
   onClick: () => void
+  quantity: number
+  artwork: ReturnType<typeof useProductOrder>['artwork']
   displayPrice: number | null
   isRush: boolean
   quoteShipping?: boolean
 }) {
   return (
     <>
+      <ProductArtwork artwork={artwork} />
       {displayPrice != null && (
-        <div className="flex items-baseline justify-between mb-4">
+        <div className="flex items-baseline justify-between flex-wrap gap-2 mb-4">
           <span className="text-3xl font-bold text-gray-900">{fmt(displayPrice)}</span>
+          <span className="text-sm text-gray-500">{unitPriceLabel(Math.round(displayPrice * 100), quantity)}</span>
           {isRush && (
             <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full flex items-center gap-1">
               <Zap size={11} /> Rush
@@ -112,6 +119,7 @@ function CtaBlock({
       <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-3">
         <Button
           onClick={onClick}
+          disabled={artwork.busy}
           size="lg"
           className="w-full min-h-[64px] !bg-lp-green hover:!bg-lp-green-dark text-white text-base sm:text-lg font-extrabold py-4 rounded-xl"
         >
@@ -239,7 +247,8 @@ function ConfiguratorOptions({
               <option key={i} value={i}>
                 {typeof row.qty === 'number' ? row.qty.toLocaleString() : row.qty} units
                 {' — '}
-                {fmt(row.standardPrice)}
+                {fmt(isRush && row.rushPrice ? row.rushPrice : row.standardPrice)}
+                {typeof row.qty === 'number' && row.qty > 0 ? ` · ${unitPriceLabel(Math.round((isRush && row.rushPrice ? row.rushPrice : row.standardPrice) * 100), row.qty)}` : ''}
                 {row.note ? ` (${row.note})` : ''}
               </option>
             ))}
@@ -322,7 +331,8 @@ export default function ProductOrderPage({
 }: ProductOrderPageProps) {
   const [bannerConfiguration, setBannerConfiguration] = useState(() => defaultBannerConfiguration(bannerKind ?? 'vinyl'))
   const pathname = usePathname()
-  const { addItem } = useCart()
+  const order = useProductOrder()
+  const { addItem, artwork } = order
 
   // ── Lifted configurator state ──────────────────────────────────────────────
   const [selections, setSelections] = useState<Record<string, string>>(() =>
@@ -349,7 +359,7 @@ export default function ProductOrderPage({
     ? effectiveIsRush && currentRow.rushPrice ? currentRow.rushPrice : currentRow.standardPrice
     : null
 
-  const displayPrice = unitPrice == null ? null : Math.round(unitPrice * 100) * (backdrop ? quantity : 1) / 100
+  const displayPrice = unitPrice == null ? null : Math.round(unitPrice * 100) * (backdrop || (showQuantity && currentRow?.qty === 1) ? quantity : 1) / 100
 
   const selectedOptionLabels = visibleGroups.map(group => ({
     group: group.label,
@@ -360,12 +370,13 @@ export default function ProductOrderPage({
       labels.some(label => option.group.toLowerCase().includes(label))
     )?.label ?? ''
 
-  const handleAddToCart = () => {
-    const itemQty = showQuantity
+  const itemQty = showQuantity
       ? quantity
       : typeof currentRow?.qty === 'number'
         ? currentRow.qty
         : parseInt(String(currentRow?.qty ?? 1), 10) || 1
+
+  const handleAddToCart = () => {
     const material = getSelectedLabel(['material', 'stock', 'paper', 'seal']) || selectedOptionLabels[0]?.label || 'Standard'
     const finish = getSelectedLabel(['finish', 'hardware', 'coating', 'lamination']) || selectedOptionLabels[1]?.label || 'Standard'
     const size = getSelectedLabel(['size', 'dimension']) || 'Configured product'
@@ -415,7 +426,7 @@ export default function ProductOrderPage({
             {/* Right — Configurator panel: desktop only (hidden on mobile, rendered inline in left col) */}
             <div className="hidden lg:block lg:order-last">
               <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
-                {bannerKind ? <BannerConfigurator kind={bannerKind} configuration={bannerConfiguration} onConfigurationChange={setBannerConfiguration} /> : <>
+                {bannerKind ? <BannerConfigurator order={order} kind={bannerKind} configuration={bannerConfiguration} onConfigurationChange={setBannerConfiguration} /> : <>
                 <ConfiguratorOptions
                   optionGroups={visibleGroups}
                   pricingTable={activePricingTable}
@@ -435,6 +446,8 @@ export default function ProductOrderPage({
                   <CtaBlock
                     onClick={handleAddToCart}
                     displayPrice={displayPrice}
+                    quantity={itemQty}
+                    artwork={artwork}
                     quoteShipping={backdrop}
                     isRush={effectiveIsRush}
                   />
@@ -466,7 +479,7 @@ export default function ProductOrderPage({
               {/* Mobile-only configurator — inline after gallery, hidden on desktop */}
               <div className="lg:hidden mb-8">
                 <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
-                  {bannerKind ? <BannerConfigurator kind={bannerKind} configuration={bannerConfiguration} onConfigurationChange={setBannerConfiguration} /> : <>
+                  {bannerKind ? <BannerConfigurator order={order} kind={bannerKind} configuration={bannerConfiguration} onConfigurationChange={setBannerConfiguration} /> : <>
                   <ConfiguratorOptions
                     optionGroups={visibleGroups}
                     pricingTable={activePricingTable}
@@ -486,6 +499,8 @@ export default function ProductOrderPage({
                     <CtaBlock
                       onClick={handleAddToCart}
                       displayPrice={displayPrice}
+                    quantity={itemQty}
+                    artwork={artwork}
                     quoteShipping={backdrop}
                       isRush={effectiveIsRush}
                     />

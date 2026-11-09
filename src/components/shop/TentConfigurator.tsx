@@ -1,14 +1,14 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
-import { useCart } from '@/context/CartContext'
+import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
 import { calculateTentPrice, tentDefaults, tentMaterial, tentDescription, tentNames, type TentConfiguration, type TentSize } from '@/lib/tent-pricing'
 const money = (cents: number) => (cents / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
 export default function TentConfigurator({ size }: { size: TentSize }) {
   const [config, setConfig] = useState<TentConfiguration>({ ...tentDefaults, size })
   const [quantity, setQuantity] = useState('1')
   const [added, setAdded] = useState(false)
-  const { addItem } = useCart()
+  const { addItem, artwork } = useProductOrder()
   const large = size === '20x10'
   const update = (patch: Partial<TentConfiguration>) => { setConfig(c => ({ ...c, ...patch })); setAdded(false) }
   let price: ReturnType<typeof calculateTentPrice> | undefined
@@ -40,9 +40,10 @@ export default function TentConfigurator({ size }: { size: TentSize }) {
     </>}
     {config.package !== 'full-kit' && <p className="text-sm text-gray-600">Standard production only. No accessories included. {config.package === 'frame-only' ? 'No artwork required. Fulfillment timing confirmed after order.' : 'Artwork required; timing confirmed after proof approval.'}</p>}
     <label className="block">Quantity<input className={selectClass} type="number" min="1" step="1" value={quantity} onChange={e => { setQuantity(e.target.value); setAdded(false) }} /></label>
+    <ProductArtwork artwork={artwork} />
     <div aria-live="polite"><p>Per package: {price ? money(price.unitPriceCents) : '—'}</p><p className="text-3xl font-semibold" data-testid="tent-total">{price ? money(price.totalCents) : 'Enter a valid quantity'}</p></div>
     <p className="text-sm text-gray-600">Merchandise only. Shipping and tax excluded. No quantity discount.</p>
-    <button type="button" disabled={!price} className="w-full rounded-lg bg-lp-green text-white font-semibold py-4 disabled:opacity-50" onClick={() => {
+    <button type="button" disabled={!price || artwork.busy} className="w-full rounded-lg bg-lp-green text-white font-semibold py-4 disabled:opacity-50" onClick={() => {
       if (!price) return
       addItem({ product: tentNames[size], size, qty: Number(quantity), material: tentMaterial(config), finish: tentDescription(config), rush: config.production, tentConfiguration: { ...config }, ...price, totalFormatted: money(price.totalCents), productPath: `/services/signage/tents/${size}` })
       setAdded(true)
