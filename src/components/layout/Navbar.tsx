@@ -68,7 +68,6 @@ const navLinks: NavLink[] = [
   { label: 'Signs & Banners', href: '/services/signage', children: [
     { label: 'Banners', href: '/services/signage/banners' },
     { label: 'Backdrops', href: '/services/signage/backdrops' },
-    { label: 'SEG Light Displays', href: '/services/signage/backdrops#seg' },
   ]},
   { label: 'Apparel & Promo', href: '/services/apparel', children: [
     { label: 'Screenprint', href: '/services/apparel/screenprint' },
