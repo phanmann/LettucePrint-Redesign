@@ -360,20 +360,23 @@ export default function Navbar({ dropdownOnlyCategories = false }: { dropdownOnl
               </Link>
             </div>
 
+            {/* Mobile actions stay together at the right edge. */}
+            <div className="flex items-center gap-2 lg:hidden">
             {/* Mobile cart — always visible */}
-            <Link href="/cart" aria-label="Cart" className="lg:hidden relative w-11 h-11 flex items-center justify-center rounded-full bg-gray-100 mr-2">
+            <Link href="/cart" aria-label="Cart" className="relative w-11 h-11 flex items-center justify-center rounded-full bg-gray-100">
               <ShoppingCart size={18} />
               <CartBadge />
             </Link>
 
             {/* Mobile Toggle */}
             <button
-              className="lg:hidden w-11 h-11 flex items-center justify-center rounded-full bg-gray-100"
+              className="w-11 h-11 flex items-center justify-center rounded-full bg-gray-100"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
+            </div>
           </div>
         </div>
       </header>
