@@ -11,6 +11,7 @@ import { ArrowRight, CheckCircle, FileText, Layers } from 'lucide-react'
 import ProductImageGallery from '@/components/shop/ProductImageGallery'
 import { useRouter } from 'next/navigation'
 import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
+import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import { unitPriceLabel } from '@/lib/unit-price'
 import { POSTCARDS_PRODUCT, PRINT_QUANTITIES, printPriceTable, type PrintQuantity } from '@/lib/print-pricing'
 
@@ -141,10 +142,12 @@ function Configurator() {
 
       {/* ── Quantity ── */}
       <div className="mb-6">
-        <label htmlFor="postcard-qty" className={sectionLabel}>Quantity</label>
-        <select id="postcard-qty" value={qty} onChange={e => setQty(Number(e.target.value) as PrintQuantity)} className={selectClass}>
-          {PRINT_QUANTITIES.map(q => <option key={q} value={q}>{q.toLocaleString()} postcards — {fmt(printPriceTable(POSTCARDS_PRODUCT, sizeLabel)?.[q] ?? 0)} · {unitPriceLabel((printPriceTable(POSTCARDS_PRODUCT, sizeLabel)?.[q] ?? 0) * 100, q, 'card')}</option>)}
-        </select>
+        <p className={sectionLabel}>Quantity</p>
+        <QuantityDropdown unit="card" value={qty} onSelect={q => setQty(q as PrintQuantity)} rows={PRINT_QUANTITIES.map(q => {
+          const total = printPriceTable(POSTCARDS_PRODUCT, sizeLabel)?.[q] ?? 0
+          const base = (printPriceTable(POSTCARDS_PRODUCT, sizeLabel)?.[PRINT_QUANTITIES[0]] ?? 0) / PRINT_QUANTITIES[0]
+          return { qty: q, totalCents: Math.round(total * 100), totalFmt: fmt(total), save: base > 0 ? Math.max(0, Math.round((1 - total / q / base) * 100)) : 0 }
+        })} />
       </div>
 
       <div className="border-t border-gray-100 mb-6" />

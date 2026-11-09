@@ -65,8 +65,10 @@ export default function ProductArtwork({ artwork, quote = false }: { artwork: Re
   return <section aria-label="Product artwork" className="my-5 rounded-xl border border-dashed border-gray-300 bg-gray-50 p-4 min-w-0">
     <p className="text-sm font-bold text-gray-900 mb-1">Artwork</p>
     <p className="text-xs text-gray-600 mb-3">{quote ? 'Upload artwork to include with your quote request.' : 'Upload for this item now, or add it in your cart later.'}</p>
-    <label htmlFor={id} className="block text-sm font-semibold text-lp-green mb-2">{artwork.file ? 'Replace artwork' : 'Upload artwork'}</label>
-    <input id={id} type="file" disabled={artwork.busy} className="block w-full min-w-0 text-xs text-gray-600 file:mr-2 file:rounded-lg file:border-0 file:bg-white file:px-3 file:py-2 file:font-semibold file:text-lp-green disabled:opacity-50" onChange={e => { const file = e.target.files?.[0]; e.target.value = ''; if (file) void artwork.upload(file) }} />
+    <div className="flex items-center gap-3 min-w-0">
+    <label htmlFor={id} className="shrink-0 text-sm font-semibold text-lp-green">{artwork.file ? 'Replace artwork' : 'Upload artwork'}</label>
+    <input id={id} type="file" disabled={artwork.busy} className="block w-0 flex-1 min-w-0 text-xs text-gray-600 file:mr-2 file:rounded-lg file:border-0 file:bg-white file:px-3 file:py-2 file:font-semibold file:text-lp-green disabled:opacity-50" onChange={e => { const file = e.target.files?.[0]; e.target.value = ''; if (file) void artwork.upload(file) }} />
+    </div>
     <p className="mt-2 text-xs text-gray-500">PDF/images up to 32 MB; other artwork files up to 64 MB.</p>
     {artwork.busy && <p role="status" className="mt-2 text-sm">{quote ? 'Uploading artwork… Please wait before continuing.' : 'Uploading artwork… Please wait before adding to cart.'}</p>}
     {artwork.file && <div className="mt-3 text-sm"><p role="status" className="break-all font-semibold text-gray-800">Uploaded: {artwork.file.name}</p><button type="button" disabled={artwork.busy} onClick={artwork.remove} className="mt-1 text-xs underline text-gray-600">Remove artwork</button></div>}

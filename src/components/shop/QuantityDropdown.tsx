@@ -6,6 +6,9 @@ import { ChevronDown, Check } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export interface QtyRow {
+  unitQuantity?: number
+  label?: string
+  note?: string
   qty: number
   totalFmt: string
   totalCents: number
@@ -16,18 +19,18 @@ interface Props {
   unit?: string
   rows: QtyRow[]
   value: number
-  showCustom: boolean
-  customValue: string
+  showCustom?: boolean
+  customValue?: string
   onSelect: (qty: number) => void
-  onSelectCustom: () => void
-  onCustomChange: (val: string) => void
+  onSelectCustom?: () => void
+  onCustomChange?: (val: string) => void
   minCustom?: number
   maxCustom?: number
   stepCustom?: number
 }
 
 export default function QuantityDropdown({
-  rows, value, showCustom, customValue, unit = 'unit',
+  rows, value, showCustom = false, customValue = '', unit = 'unit',
   onSelect, onSelectCustom, onCustomChange,
   minCustom = 50, maxCustom, stepCustom = 50,
 }: Props) {
@@ -49,7 +52,7 @@ export default function QuantityDropdown({
   const displayLabel = showCustom
     ? `Custom — ${customValue || '…'}`
     : selected
-      ? `${selected.qty.toLocaleString()} — ${selected.totalFmt} · ${unitPriceLabel(selected.totalCents, selected.qty, unit)}`
+      ? `${selected.label ?? selected.qty.toLocaleString()} — ${selected.totalFmt} · ${unitPriceLabel(selected.totalCents, selected.unitQuantity ?? selected.qty, unit)}`
       : 'Select quantity'
 
   return (
@@ -57,6 +60,9 @@ export default function QuantityDropdown({
       {/* Trigger */}
       <button
         type="button"
+        aria-label="Quantity"
+        aria-expanded={open}
+        onKeyDown={e => { if (e.key === 'Escape') setOpen(false) }}
         onClick={() => setOpen(o => !o)}
         className={`w-full flex items-center justify-between px-4 py-3 rounded-lg border text-sm font-medium bg-white transition-all duration-150 ${
           open ? 'border-lp-green ring-2 ring-lp-green/20' : 'border-gray-200 hover:border-gray-400'
@@ -100,11 +106,12 @@ export default function QuantityDropdown({
                       {isSelected && <Check size={9} className="text-white" strokeWidth={3} />}
                     </div>
                     <span className={`text-sm font-medium ${isSelected ? 'text-gray-900' : ''}`}>
-                      {row.qty.toLocaleString()}
+                      {row.label ?? row.qty.toLocaleString()}
+                      {row.note && <span className="block text-xs font-normal text-gray-500">{row.note}</span>}
                     </span>
                   </div>
                   <div className="flex items-center gap-2 flex-wrap justify-end">
-                    <span className="text-sm font-semibold text-gray-900">{row.totalFmt}<span className="block text-xs font-normal text-gray-500">{unitPriceLabel(row.totalCents, row.qty, unit)}</span></span>
+                    <span className="text-sm font-semibold text-gray-900">{row.totalFmt}<span className="block text-xs font-normal text-gray-500">{unitPriceLabel(row.totalCents, row.unitQuantity ?? row.qty, unit)}</span></span>
                     {row.save > 0 && (
                       <span className="text-[11px] font-bold text-lp-green bg-lp-green/10 px-2 py-0.5 rounded-full whitespace-nowrap">
                         Save {row.save}%
@@ -116,7 +123,7 @@ export default function QuantityDropdown({
             })}
 
             {/* Custom qty option */}
-            <button
+            {onSelectCustom && <button
               type="button"
               onClick={() => { onSelectCustom(); setOpen(false) }}
               className={`w-full flex items-center gap-3 px-4 py-3 text-left border-t border-gray-100 transition-colors duration-100 ${
@@ -129,7 +136,7 @@ export default function QuantityDropdown({
                 {showCustom && <Check size={9} className="text-white" strokeWidth={3} />}
               </div>
               <span className="text-sm font-medium text-gray-700">Custom quantity…</span>
-            </button>
+            </button>}
           </motion.div>
         )}
       </AnimatePresence>
@@ -150,7 +157,7 @@ export default function QuantityDropdown({
               max={maxCustom}
               step={stepCustom}
               value={customValue}
-              onChange={e => onCustomChange(e.target.value)}
+              onChange={e => onCustomChange?.(e.target.value)}
               placeholder={`Enter quantity (min ${minCustom.toLocaleString()})`}
               className="w-full mt-2 px-4 py-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-lp-green focus:ring-2 focus:ring-lp-green/20"
             />

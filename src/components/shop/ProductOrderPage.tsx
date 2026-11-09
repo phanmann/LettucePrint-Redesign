@@ -13,6 +13,7 @@ import { ArrowRight, CheckCircle, FileText, Layers, Zap } from 'lucide-react'
 import ProductImageGallery from '@/components/shop/ProductImageGallery'
 import { usePathname } from 'next/navigation'
 import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
+import QuantityDropdown from '@/components/shop/QuantityDropdown'
 import { unitPriceLabel } from '@/lib/unit-price'
 import JsonLd, { productJsonLd } from '@/components/seo/JsonLd'
 
@@ -238,21 +239,14 @@ function ConfiguratorOptions({
       {hasQtyTiers && (
         <div className="mb-6">
           <p className={sectionLabel}>Quantity</p>
-          <select
+          <QuantityDropdown
             value={selectedRowIdx}
-            onChange={e => setSelectedRowIdx(Number(e.target.value))}
-            className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm font-medium text-gray-900 bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-lp-green/30 focus:border-lp-green"
-          >
-            {pricingTable!.map((row, i) => (
-              <option key={i} value={i}>
-                {typeof row.qty === 'number' ? row.qty.toLocaleString() : row.qty} units
-                {' — '}
-                {fmt(isRush && row.rushPrice ? row.rushPrice : row.standardPrice)}
-                {typeof row.qty === 'number' && row.qty > 0 ? ` · ${unitPriceLabel(Math.round((isRush && row.rushPrice ? row.rushPrice : row.standardPrice) * 100), row.qty)}` : ''}
-                {row.note ? ` (${row.note})` : ''}
-              </option>
-            ))}
-          </select>
+            onSelect={setSelectedRowIdx}
+            rows={pricingTable!.map((row, i) => {
+              const total = isRush && row.rushPrice ? row.rushPrice : row.standardPrice
+              return { qty: i, label: String(typeof row.qty === 'number' ? row.qty.toLocaleString() : row.qty), note: row.note, totalCents: Math.round(total * 100), totalFmt: fmt(total), save: 0, unitQuantity: typeof row.qty === 'number' ? row.qty : parseInt(row.qty, 10) || 1 }
+            })}
+          />
           {pricingNote && <p className="text-xs text-gray-500 mt-2 leading-relaxed">{pricingNote}</p>}
           {hasRush && (
             <label role="checkbox" aria-checked={isRush} tabIndex={0} onKeyDown={e => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); setIsRush(!isRush) } }} className={`mt-2 ${radioRow(isRush)}`} onClick={() => setIsRush(!isRush)}>
