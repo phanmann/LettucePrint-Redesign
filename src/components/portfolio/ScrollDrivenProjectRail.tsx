@@ -15,6 +15,8 @@ const MAX_VELOCITY = 0.9
 const FRAME_DURATION = 1000 / 60
 
 interface TouchState {
+  x: number
+  axis: 'x' | 'y' | null
   y: number
   time: number
 }
@@ -26,11 +28,13 @@ export default function ScrollDrivenProjectRail({ children, className }: ScrollD
   const velocityRef = useRef(0)
   const animationFrameRef = useRef<number | null>(null)
   const previousFrameRef = useRef<number | null>(null)
+  const draggedRef = useRef(false)
   const touchRef = useRef<TouchState | null>(null)
 
   useEffect(() => {
     const track = trackRef.current
-    if (!track || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (!track) return
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
     const wrapOffset = (value: number) => {
       const cycleWidth = cycleWidthRef.current
@@ -73,7 +77,7 @@ export default function ScrollDrivenProjectRail({ children, className }: ScrollD
     }
 
     const startGlide = () => {
-      if (animationFrameRef.current === null && Math.abs(velocityRef.current) > MIN_VELOCITY) {
+      if (!reducedMotion.matches && animationFrameRef.current === null && Math.abs(velocityRef.current) > MIN_VELOCITY) {
         animationFrameRef.current = requestAnimationFrame(glide)
       }
     }
@@ -87,6 +91,7 @@ export default function ScrollDrivenProjectRail({ children, className }: ScrollD
     }
 
     const handleWheel = (event: WheelEvent) => {
+      if (window.matchMedia('(max-width: 767px)').matches) return
       const unit = event.deltaMode === WheelEvent.DOM_DELTA_LINE
         ? 16
         : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
@@ -102,55 +107,68 @@ export default function ScrollDrivenProjectRail({ children, className }: ScrollD
     }
 
     const handleTouchStart = (event: TouchEvent) => {
-      const y = event.touches[0]?.clientY
-      if (y === undefined) return
-
       stopGlide()
       velocityRef.current = 0
-      touchRef.current = { y, time: performance.now() }
+      draggedRef.current = false
+      const touch = event.touches[0]
+      touchRef.current = event.touches.length === 1 && touch
+        ? { x: touch.clientX, y: touch.clientY, axis: null, time: performance.now() }
+        : null
     }
-
     const handleTouchMove = (event: TouchEvent) => {
-      const currentY = event.touches[0]?.clientY
-      const previousTouch = touchRef.current
-      if (currentY === undefined || previousTouch === null) return
-
+      const touch = event.touches[0]
+      const previous = touchRef.current
+      if (event.touches.length !== 1) { touchRef.current = null; velocityRef.current = 0; return }
+      if (!touch || !previous) return
+      const dx = touch.clientX - previous.x
+      const dy = touch.clientY - previous.y
+      if (!previous.axis) {
+        if (Math.max(Math.abs(dx), Math.abs(dy)) < 6) return
+        previous.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'
+      }
+      if (previous.axis !== 'x') return
+      if (event.cancelable) event.preventDefault()
+      draggedRef.current = true
       const now = performance.now()
-      const elapsed = Math.max(now - previousTouch.time, 1)
-      const movement = -(previousTouch.y - currentY) * TOUCH_MULTIPLIER
+      const movement = dx * TOUCH_MULTIPLIER
       offsetRef.current = wrapOffset(offsetRef.current + movement)
-      velocityRef.current = Math.max(-MAX_VELOCITY, Math.min(MAX_VELOCITY, movement / elapsed))
-      touchRef.current = { y: currentY, time: now }
+      velocityRef.current = Math.max(-MAX_VELOCITY, Math.min(MAX_VELOCITY, movement / Math.max(now - previous.time, 1)))
+      touchRef.current = { x: touch.clientX, y: touch.clientY, axis: 'x', time: now }
       renderOffset()
     }
-
-    const clearTouch = () => {
-      touchRef.current = null
-      startGlide()
+    const clearTouch = () => { touchRef.current = null; startGlide() }
+    const cancelTouch = () => { touchRef.current = null; velocityRef.current = 0; stopGlide() }
+    const suppressDragClick = (event: MouseEvent) => {
+      if (!draggedRef.current || event.detail === 0) return
+      event.preventDefault()
+      event.stopPropagation()
+      draggedRef.current = false
     }
 
     measure()
     const resizeObserver = new ResizeObserver(measure)
     resizeObserver.observe(track)
     window.addEventListener('wheel', handleWheel, { passive: true })
-    window.addEventListener('touchstart', handleTouchStart, { passive: true })
-    window.addEventListener('touchmove', handleTouchMove, { passive: true })
-    window.addEventListener('touchend', clearTouch, { passive: true })
-    window.addEventListener('touchcancel', clearTouch, { passive: true })
+    track.addEventListener('touchstart', handleTouchStart, { passive: true })
+    track.addEventListener('touchmove', handleTouchMove, { passive: false })
+    track.addEventListener('touchend', clearTouch, { passive: true })
+    track.addEventListener('touchcancel', cancelTouch, { passive: true })
 
+    track.addEventListener('click', suppressDragClick, true)
     return () => {
+      track.removeEventListener('click', suppressDragClick, true)
       stopGlide()
       resizeObserver.disconnect()
       window.removeEventListener('wheel', handleWheel)
-      window.removeEventListener('touchstart', handleTouchStart)
-      window.removeEventListener('touchmove', handleTouchMove)
-      window.removeEventListener('touchend', clearTouch)
-      window.removeEventListener('touchcancel', clearTouch)
+      track.removeEventListener('touchstart', handleTouchStart)
+      track.removeEventListener('touchmove', handleTouchMove)
+      track.removeEventListener('touchend', clearTouch)
+      track.removeEventListener('touchcancel', cancelTouch)
     }
   }, [])
 
   return (
-    <div ref={trackRef} className={className} data-scroll-driven-project-rail>
+    <div ref={trackRef} className={className} style={{ touchAction: 'pan-y pinch-zoom' }} data-scroll-driven-project-rail>
       {children}
     </div>
   )
