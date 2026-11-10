@@ -71,7 +71,7 @@ export default function TypeProductPage({
               </div>
 
               <div className="mb-8 border border-gray-200 rounded-card px-5 py-4">
-                <Disclosure title={<div className="flex items-center gap-2"><Layers size={16} className="text-gray-500" /><h2 className="text-small font-semibold text-gray-500 uppercase tracking-wider">Specifications</h2></div>}>
+                <Disclosure title={<span className="flex items-center gap-2"><Layers size={16} className="text-gray-500" /><span className="text-small font-semibold text-gray-500 uppercase tracking-wider">Specifications</span></span>}>
                   <div className="divide-y divide-gray-100">
                     {specs.map(spec => (
                       <div key={spec.label} className="flex justify-between py-3">
@@ -84,7 +84,7 @@ export default function TypeProductPage({
               </div>
 
               <div className="bg-white rounded-card border border-gray-200 px-5 py-4 mb-8">
-                <Disclosure title={<div className="flex items-center gap-2"><FileText size={16} className="text-gray-500" /><h2 className="text-small font-semibold text-gray-500 uppercase tracking-wider">Artwork Requirements</h2></div>}>
+                <Disclosure title={<span className="flex items-center gap-2"><FileText size={16} className="text-gray-500" /><span className="text-small font-semibold text-gray-500 uppercase tracking-wider">Artwork Requirements</span></span>}>
                   <div className="space-y-2">
                     {artworkRequirements.map(req => (
                       <div key={req.label} className="flex justify-between">

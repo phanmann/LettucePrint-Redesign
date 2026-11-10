@@ -83,7 +83,7 @@ export default async function GetQuotePage({ searchParams }: GetQuotePageProps) 
             {/* Right — Sidebar */}
             <div className="space-y-6">
               <div className="bg-gray-50 rounded-card border border-gray-100 p-6">
-                <h3 className="text-h4 font-semibold text-gray-900 mb-4">What happens next?</h3>
+                <h2 className="text-h4 font-semibold text-gray-900 mb-4">What happens next?</h2>
                 <ol className="space-y-4">
                   {[
                     { step: '01', text: 'We review your request and any details you provided.' },
@@ -102,7 +102,7 @@ export default async function GetQuotePage({ searchParams }: GetQuotePageProps) 
               </div>
 
               <div className="bg-lp-green rounded-card p-6">
-                <h3 className="text-h4 font-semibold text-white mb-2">Need it faster?</h3>
+                <h2 className="text-h4 font-semibold text-white mb-2">Need it faster?</h2>
                 <p className="text-small text-white/80 mb-4">
                   Call or text us directly for urgent orders.
                 </p>
@@ -115,7 +115,7 @@ export default async function GetQuotePage({ searchParams }: GetQuotePageProps) 
               </div>
 
               <div className="rounded-card border border-gray-200 p-6">
-                <h3 className="text-h4 font-semibold text-gray-900 mb-2">Standard products?</h3>
+                <h2 className="text-h4 font-semibold text-gray-900 mb-2">Standard products?</h2>
                 <p className="text-small text-gray-600 mb-4">
                   Skip the form — order stickers and labels directly with live pricing.
                 </p>

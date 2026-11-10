@@ -206,7 +206,7 @@ export default function ShopPage() {
           {/* Custom CTA */}
           <div className="bg-gray-50 rounded-card border border-gray-200 p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
-              <h3 className="text-h3 font-semibold text-gray-900 mb-2">Need something not listed here?</h3>
+              <h2 className="text-h3 font-semibold text-gray-900 mb-2">Need something not listed here?</h2>
               <p className="text-small text-gray-600">
                 Packaging, large format, screen printing, signage - get a custom quote for any project.
               </p>

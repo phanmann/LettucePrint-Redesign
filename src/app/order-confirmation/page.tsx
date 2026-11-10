@@ -106,6 +106,7 @@ export default async function OrderConfirmationPage({ searchParams }: PageProps)
     <>
       <Navbar />
       <main className="pt-[72px] min-h-screen">
+        <h1 className="sr-only">Order confirmation</h1>
 
         {/* Hero */}
         <div className="bg-lp-green py-16">

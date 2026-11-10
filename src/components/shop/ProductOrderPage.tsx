@@ -505,9 +505,9 @@ export default function ProductOrderPage({
 
               {/* Every order includes */}
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">
-                <h3 className="text-small font-semibold text-lp-green uppercase tracking-wider mb-4">
+                <h2 className="text-small font-semibold text-lp-green uppercase tracking-wider mb-4">
                   Every order includes
-                </h3>
+                </h2>
                 <ul className="space-y-2.5">
                   {included.map(item => (
                     <li key={item} className="flex items-center gap-3 text-small text-gray-700">
@@ -522,12 +522,12 @@ export default function ProductOrderPage({
               <div className="mb-8 border border-gray-200 rounded-card px-5 py-4">
                 <Disclosure
                   title={
-                    <div className="flex items-center gap-2">
+                    <span className="flex items-center gap-2">
                       <Layers size={16} className="text-gray-500" />
-                      <h3 className="text-small font-semibold text-gray-500 uppercase tracking-wider">
+                      <span className="text-small font-semibold text-gray-500 uppercase tracking-wider">
                         Specifications
-                      </h3>
-                    </div>
+                      </span>
+                    </span>
                   }
                 >
                   <div className="divide-y divide-gray-100">
@@ -546,12 +546,12 @@ export default function ProductOrderPage({
                 <div className="bg-white rounded-card border border-gray-200 px-5 py-4 mb-8">
                   <Disclosure
                     title={
-                      <div className="flex items-center gap-2">
+                      <span className="flex items-center gap-2">
                         <FileText size={16} className="text-gray-500" />
-                        <h3 className="text-small font-semibold text-gray-500 uppercase tracking-wider">
+                        <span className="text-small font-semibold text-gray-500 uppercase tracking-wider">
                           Artwork Requirements
-                        </h3>
-                      </div>
+                        </span>
+                      </span>
                     }
                   >
                     <div className="space-y-2">
@@ -574,7 +574,7 @@ export default function ProductOrderPage({
 
               {quoteOnlyAddOns && quoteOnlyAddOns.length > 0 && (
                 <div className="mb-8 rounded-card border border-gray-200 bg-gray-50 p-6">
-                  <h3 className="text-h4 font-semibold text-gray-900 mb-3">Specialty finishes</h3>
+                  <h2 className="text-h4 font-semibold text-gray-900 mb-3">Specialty finishes</h2>
                   <p className="text-small text-gray-600 mb-4">Available by custom quote; not included in the online prices above.</p>
                   <div className="space-y-3">
                     {quoteOnlyAddOns.map(addOn => (
@@ -592,7 +592,7 @@ export default function ProductOrderPage({
 
               {/* Custom escape */}
               <div className="rounded-card border border-gray-200 p-6">
-                <h3 className="text-h4 font-semibold text-gray-900 mb-2">Need something custom?</h3>
+                <h2 className="text-h4 font-semibold text-gray-900 mb-2">Need something custom?</h2>
                 <p className="text-small text-gray-600 mb-4">
                   {customNote ?? "Unusual sizes, specialty materials, bulk orders, or branded packaging? Let's talk."}
                 </p>

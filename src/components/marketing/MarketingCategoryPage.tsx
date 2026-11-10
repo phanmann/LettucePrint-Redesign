@@ -64,6 +64,7 @@ export default function MarketingCategoryPage({ title, introduction, allLabel, g
 
         {/* Product sections — same layout as the Banners page */}
         <section className="py-16 bg-gray-50">
+          {combineGroups && <h2 className="sr-only">{allLabel}</h2>}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
             <AnimatePresence mode="wait">
               {combineGroups ? (

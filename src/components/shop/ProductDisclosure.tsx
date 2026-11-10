@@ -15,6 +15,7 @@ export function Disclosure({ title, children, defaultOpen = false, className = '
 
   return (
     <div className={className}>
+      <h2>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -29,6 +30,7 @@ export function Disclosure({ title, children, defaultOpen = false, className = '
           }`}
         />
       </button>
+      </h2>
 
       {open && <div className="mt-4">{children}</div>}
     </div>

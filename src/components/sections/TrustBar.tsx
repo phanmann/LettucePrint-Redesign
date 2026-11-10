@@ -48,9 +48,9 @@ export default function TrustBar() {
         transition={{ duration: 0.5 }}
         className="text-center mb-8"
       >
-        <p className="text-xs uppercase tracking-[0.2em] text-gray-900/60 font-semibold">
+        <h2 className="text-xs uppercase tracking-[0.2em] text-gray-900/60 font-semibold">
           Trusted by brands that take their image seriously
-        </p>
+        </h2>
       </motion.div>
 
       {/* Two identical tracks — first slides out, second seamlessly takes over */}

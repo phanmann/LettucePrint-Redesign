@@ -35,7 +35,7 @@ export default function BannerConfigurator({ order, kind, configuration: c, onCo
     setAdded(true)
   }
   return <section aria-label="Banner configurator" className="space-y-5">
-    <h2 className="text-xl font-semibold">Build your banner</h2>
+    <p className="text-xl font-semibold">Build your banner</p>
     <label className="block text-sm font-semibold">Size preset (feet)
       <select className={inputClass} value={presets.some(([w,h]) => w*12 === c.width && h*12 === c.height) ? `${c.width/12}x${c.height/12}` : 'custom'} onChange={e => { if (e.target.value !== 'custom') { const [w,h] = e.target.value.split('x').map(Number); update({ width: w*12, height: h*12 }) } }}>
         <option value="custom">Custom — enter inches below</option>

@@ -92,7 +92,7 @@ export default function ServicesPage() {
                   <div className="w-12 h-12 rounded-full bg-lp-green/10 text-lp-green flex items-center justify-center mb-5 group-hover:bg-lp-green group-hover:text-white transition-colors">
                     <Icon size={22} />
                   </div>
-                  <h3 className="text-h3 font-semibold text-gray-900 mb-3">{service.title}</h3>
+                  <h2 className="text-h3 font-semibold text-gray-900 mb-3">{service.title}</h2>
                   <p className="text-small text-gray-600 mb-5">{service.description}</p>
                   <ul className="space-y-2 mb-6">
                     {service.items.map((item) => (

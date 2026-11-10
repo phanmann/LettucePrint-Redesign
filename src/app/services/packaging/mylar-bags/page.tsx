@@ -85,7 +85,7 @@ export default function MylarBagsPage() {
                     />
                   </div>
                   <div className="p-5">
-                    <h3 className="text-base font-semibold text-gray-900 mb-1">{product.name}</h3>
+                    <h2 className="text-base font-semibold text-gray-900 mb-1">{product.name}</h2>
                     <p className="text-xs text-gray-400 mb-3">{product.subtitle}</p>
                     <p className="text-sm text-gray-600 mb-4 leading-relaxed">{product.description}</p>
                     <button onClick={() => setExpanded(expanded === product.id ? null : product.id)} className="flex items-center gap-1.5 text-xs font-medium text-gray-400 hover:text-lp-green transition-colors mb-4">

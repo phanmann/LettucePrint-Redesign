@@ -127,6 +127,7 @@ export default function BusinessCardsPage() {
                   transition={{ duration: 0.2 }}
                   className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
                 >
+                  <h2 className="sr-only">Business card options</h2>
                   {CATEGORIES.map(cat => (
                     <ProductCard
                       key={cat.id}

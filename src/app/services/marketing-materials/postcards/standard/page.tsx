@@ -265,7 +265,7 @@ export default function PostcardsPage() {
 
 
               <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">
-                <h3 className="text-small font-semibold text-lp-green uppercase tracking-wider mb-4">Every order includes</h3>
+                <h2 className="text-small font-semibold text-lp-green uppercase tracking-wider mb-4">Every order includes</h2>
                 <ul className="space-y-2.5">
                   {included.map(item => (
                     <li key={item} className="flex items-center gap-3 text-small text-gray-700">
@@ -280,10 +280,10 @@ export default function PostcardsPage() {
               <div className="mb-8 border border-gray-200 rounded-card px-5 py-4">
                 <Disclosure
                   title={
-                    <div className="flex items-center gap-2">
+                    <span className="flex items-center gap-2">
                       <Layers size={16} className="text-gray-500" />
-                      <h3 className="text-small font-semibold text-gray-500 uppercase tracking-wider">Specifications</h3>
-                    </div>
+                      <span className="text-small font-semibold text-gray-500 uppercase tracking-wider">Specifications</span>
+                    </span>
                   }
                 >
                   <div className="divide-y divide-gray-100">
@@ -301,10 +301,10 @@ export default function PostcardsPage() {
               <div className="bg-white rounded-card border border-gray-200 px-5 py-4 mb-8">
                 <Disclosure
                   title={
-                    <div className="flex items-center gap-2">
+                    <span className="flex items-center gap-2">
                       <FileText size={16} className="text-gray-500" />
-                      <h3 className="text-small font-semibold text-gray-500 uppercase tracking-wider">Artwork Requirements</h3>
-                    </div>
+                      <span className="text-small font-semibold text-gray-500 uppercase tracking-wider">Artwork Requirements</span>
+                    </span>
                   }
                 >
                   <div className="space-y-2">
