@@ -62,7 +62,7 @@ export function useProductOrder() {
 
 export default function ProductArtwork({ artwork, quote = false }: { artwork: ReturnType<typeof useProductOrder>['artwork']; quote?: boolean }) {
   const id = useId()
-  return <section aria-label="Product artwork" className="my-5 rounded-xl border border-dashed border-gray-300 bg-gray-50 p-4 min-w-0">
+  return <section aria-label="Product artwork" className="my-5 rounded-xl border border-dashed border-gray-300 bg-lp-blue/30 p-4 min-w-0">
     <p className="text-sm font-bold text-gray-900 mb-1">Artwork</p>
     <p className="text-xs text-gray-600 mb-3">{quote ? 'Upload artwork to include with your quote request.' : 'Upload for this item now, or add it in your cart later.'}</p>
     <div className="flex items-center gap-3 min-w-0">
