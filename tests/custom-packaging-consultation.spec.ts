@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test'
 
-const path = '/services/packaging/custom-packaging'
+const path = '/shop/packaging/custom-packaging'
 
 async function fillConsultation(page: Page) {
   await page.getByLabel('Name *').fill('Alex Rivera')

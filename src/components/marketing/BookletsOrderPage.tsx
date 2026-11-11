@@ -13,11 +13,11 @@ export default function BookletsOrderPage({ binding, size }: { binding: 'saddle'
  captureConfiguration
  showQuantity
  initialSelections={{ Size: size }}
- cartPathsBySize={Object.fromEntries(sizes.map((value, i) => [value, "/services/marketing-materials/booklets/" + slugs[i]]))}
+ cartPathsBySize={Object.fromEntries(sizes.map((value, i) => [value, "/shop/marketing-materials/booklets/" + slugs[i]]))}
       tagline="Choose your size, cover, interior, and page count for a custom booklet quote."
-      parentHref="/services/marketing-materials/booklets"
+      parentHref="/shop/marketing-materials/booklets"
       breadcrumb={[
-        { label: "Booklets", href: "/services/marketing-materials/booklets" },
+        { label: "Booklets", href: "/shop/marketing-materials/booklets" },
         { label: name, href: "" },
       ]}
       badges={["Fast Turnaround"]}
@@ -63,8 +63,8 @@ export default function BookletsOrderPage({ binding, size }: { binding: 'saddle'
         "Quality check before ship",
       ]}
       relatedProducts={[
-        { href: "/services/marketing-materials/booklets", name: "All Booklets", description: "Full booklet lineup." },
-        { href: "/services/marketing-materials/brochures", name: "Brochures", description: "Shorter format options.", dark: true },
+        { href: "/shop/marketing-materials/booklets", name: "All Booklets", description: "Full booklet lineup." },
+        { href: "/shop/marketing-materials/brochures", name: "Brochures", description: "Shorter format options.", dark: true },
       ]}
     />
   )

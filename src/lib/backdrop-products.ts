@@ -6,11 +6,11 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
     "showQuantity": true,
     "name": "Premium Step and Repeat 8 × 8 ft.",
     "tagline": "Luxury adjustable telescopic stand. Our team checks every proof.",
-    "parentHref": "/services/signage/backdrops",
+    "parentHref": "/shop/signage/backdrops",
     "breadcrumb": [
       {
         "label": "Backdrops",
-        "href": "/services/signage/backdrops"
+        "href": "/shop/signage/backdrops"
       },
       {
         "label": "Premium Step and Repeat 8 × 8 ft.",
@@ -163,11 +163,11 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
     "showQuantity": true,
     "name": "Premium Step and Repeat 10 × 8 ft.",
     "tagline": "Luxury adjustable telescopic stand. Our team checks every proof.",
-    "parentHref": "/services/signage/backdrops",
+    "parentHref": "/shop/signage/backdrops",
     "breadcrumb": [
       {
         "label": "Backdrops",
-        "href": "/services/signage/backdrops"
+        "href": "/shop/signage/backdrops"
       },
       {
         "label": "Premium Step and Repeat 10 × 8 ft.",
@@ -320,11 +320,11 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
     "showQuantity": true,
     "name": "EuroFit Backdrop 8 × 8 ft.",
     "tagline": "Dye-sublimated fabric display. Double-sided at no extra cost.",
-    "parentHref": "/services/signage/backdrops",
+    "parentHref": "/shop/signage/backdrops",
     "breadcrumb": [
       {
         "label": "Backdrops",
-        "href": "/services/signage/backdrops"
+        "href": "/shop/signage/backdrops"
       },
       {
         "label": "EuroFit Backdrop 8 × 8 ft.",
@@ -731,11 +731,11 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
     "showQuantity": true,
     "name": "EuroFit Backdrop 10 × 8 ft.",
     "tagline": "Dye-sublimated fabric display. Double-sided at no extra cost.",
-    "parentHref": "/services/signage/backdrops",
+    "parentHref": "/shop/signage/backdrops",
     "breadcrumb": [
       {
         "label": "Backdrops",
-        "href": "/services/signage/backdrops"
+        "href": "/shop/signage/backdrops"
       },
       {
         "label": "EuroFit Backdrop 10 × 8 ft.",
@@ -1142,11 +1142,11 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
     "showQuantity": true,
     "name": "Pop-Up Display 8 × 8 ft.",
     "tagline": "Dye-sublimated fabric display. Choose straight or wrap styling.",
-    "parentHref": "/services/signage/backdrops",
+    "parentHref": "/shop/signage/backdrops",
     "breadcrumb": [
       {
         "label": "Backdrops",
-        "href": "/services/signage/backdrops"
+        "href": "/shop/signage/backdrops"
       },
       {
         "label": "Pop-Up Display 8 × 8 ft.",
@@ -1475,11 +1475,11 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
     "showQuantity": true,
     "name": "Pop-Up Display 10 × 8 ft.",
     "tagline": "Dye-sublimated fabric display. Choose straight or wrap styling.",
-    "parentHref": "/services/signage/backdrops",
+    "parentHref": "/shop/signage/backdrops",
     "breadcrumb": [
       {
         "label": "Backdrops",
-        "href": "/services/signage/backdrops"
+        "href": "/shop/signage/backdrops"
       },
       {
         "label": "Pop-Up Display 10 × 8 ft.",
@@ -1808,11 +1808,11 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
     "showQuantity": true,
     "name": "Pop-Up Display 20 × 8 ft.",
     "tagline": "Dye-sublimated fabric display. Choose straight or wrap styling.",
-    "parentHref": "/services/signage/backdrops",
+    "parentHref": "/shop/signage/backdrops",
     "breadcrumb": [
       {
         "label": "Backdrops",
-        "href": "/services/signage/backdrops"
+        "href": "/shop/signage/backdrops"
       },
       {
         "label": "Pop-Up Display 20 × 8 ft.",
@@ -2297,11 +2297,11 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
     "showQuantity": true,
     "name": "SEG Pop-Up Stand 10 × 8 ft.",
     "tagline": "Dye-sublimated fabric display. Not backlit.",
-    "parentHref": "/services/signage/backdrops",
+    "parentHref": "/shop/signage/backdrops",
     "breadcrumb": [
       {
         "label": "Backdrops",
-        "href": "/services/signage/backdrops"
+        "href": "/shop/signage/backdrops"
       },
       {
         "label": "SEG Pop-Up Stand 10 × 8 ft.",
@@ -2454,11 +2454,11 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
     "showQuantity": true,
     "name": "SEG Pop-Up Stand 8 × 10 ft.",
     "tagline": "Dye-sublimated fabric display. Not backlit.",
-    "parentHref": "/services/signage/backdrops",
+    "parentHref": "/shop/signage/backdrops",
     "breadcrumb": [
       {
         "label": "Backdrops",
-        "href": "/services/signage/backdrops"
+        "href": "/shop/signage/backdrops"
       },
       {
         "label": "SEG Pop-Up Stand 8 × 10 ft.",
@@ -2611,11 +2611,11 @@ export const backdropProducts: Record<string, ProductOrderPageProps> = {
     "showQuantity": true,
     "name": "SEG Pop-Up Stand 20 × 8 ft.",
     "tagline": "Dye-sublimated fabric display. Not backlit.",
-    "parentHref": "/services/signage/backdrops",
+    "parentHref": "/shop/signage/backdrops",
     "breadcrumb": [
       {
         "label": "Backdrops",
-        "href": "/services/signage/backdrops"
+        "href": "/shop/signage/backdrops"
       },
       {
         "label": "SEG Pop-Up Stand 20 × 8 ft.",

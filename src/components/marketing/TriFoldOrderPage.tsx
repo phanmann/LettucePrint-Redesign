@@ -16,15 +16,15 @@ export default function TriFoldOrderPage({ initialSize = FLAT_SHEET_SIZES[0] }: 
     name="Tri-Fold Brochure"
     cartProductName={legal ? 'Tri-Fold Brochure - Legal' : TRI_FOLD_PRODUCT}
     tagline="Full-color trifold brochures. Choose your flat size and available paper options below."
-    parentHref="/services/marketing-materials/brochures"
-    breadcrumb={[{ label: 'Brochures & Booklets', href: '/services/marketing-materials/brochures' }, { label: 'Tri-Fold Brochure', href: '' }]}
+    parentHref="/shop/marketing-materials/brochures"
+    breadcrumb={[{ label: 'Brochures & Booklets', href: '/shop/marketing-materials/brochures' }, { label: 'Tri-Fold Brochure', href: '' }]}
     color="#E8F5F1"
-    galleryPath={legal ? '/services/marketing-materials/brochures/tri-fold-legal' : '/services/marketing-materials/brochures/tri-fold-letter'}
+    galleryPath={legal ? '/shop/marketing-materials/brochures/tri-fold-legal' : '/shop/marketing-materials/brochures/tri-fold-letter'}
     cartPathsBySize={{
-      [LEGAL]: '/services/marketing-materials/brochures/tri-fold-legal',
-      [FLAT_SHEET_SIZES[0]]: '/services/marketing-materials/brochures/tri-fold-letter',
-      [FLAT_SHEET_SIZES[1]]: '/services/marketing-materials/brochures/tri-fold-letter?size=tabloid',
-      [FLAT_SHEET_SIZES[2]]: '/services/marketing-materials/brochures/tri-fold-letter?size=oversized',
+      [LEGAL]: '/shop/marketing-materials/brochures/tri-fold-legal',
+      [FLAT_SHEET_SIZES[0]]: '/shop/marketing-materials/brochures/tri-fold-letter',
+      [FLAT_SHEET_SIZES[1]]: '/shop/marketing-materials/brochures/tri-fold-letter?size=tabloid',
+      [FLAT_SHEET_SIZES[2]]: '/shop/marketing-materials/brochures/tri-fold-letter?size=oversized',
     }}
     initialSelections={{ Size: size }}
     onSizeChange={setSize}
@@ -68,6 +68,6 @@ export default function TriFoldOrderPage({ initialSize = FLAT_SHEET_SIZES[0] }: 
     ]}
     included={['Digital proof before production', 'Full-color CMYK printing', 'Quality check before ship']}
     customNote={legal ? 'Legal-size brochures are quoted individually. We will confirm pricing and turnaround before production.' : undefined}
-    relatedProducts={[{ href: '/services/marketing-materials/brochures', name: 'All Brochures & Booklets', description: 'Browse brochures and booklets.' }]}
+    relatedProducts={[{ href: '/shop/marketing-materials/brochures', name: 'All Brochures & Booklets', description: 'Browse brochures and booklets.' }]}
   />
 }

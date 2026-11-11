@@ -1,3 +1,4 @@
+import { toShopPath } from './shop-paths'
 export const MAX_EMBROIDERY_LOCATIONS = 10
 export const GARMENT_TYPES = ['Polo', 'Hat', 'Jacket', 'Hoodie', 'Bag', 'Other'] as const
 export const GARMENT_SOURCES = ['Lettuce Print supplies garments', 'I supply garments'] as const
@@ -5,7 +6,7 @@ export const GARMENT_SOURCES = ['Lettuce Print supplies garments', 'I supply gar
 export interface EmbroideryQuotePayload {
   formType: 'embroidery'
   service: 'Embroidery'
-  source: '/services/apparel/embroidery'
+  source: '/shop/apparel/embroidery'
   garmentType: string
   quantity: string
   garmentSource: string
@@ -24,7 +25,7 @@ export function validateEmbroideryQuote(input: unknown): { success: true; data: 
   const locations = Array.isArray(value.locations) ? value.locations : []
   const artworkLocations = Array.isArray(value.artworkLocations) ? value.artworkLocations : []
   const string = (item: unknown, max = 300) => typeof item === 'string' && item.trim().length > 0 && item.length <= max
-  if (value.formType !== 'embroidery' || value.service !== 'Embroidery' || value.source !== '/services/apparel/embroidery'
+  if (value.formType !== 'embroidery' || value.service !== 'Embroidery' || toShopPath(value.source) !== '/shop/apparel/embroidery'
     || !GARMENT_TYPES.includes(value.garmentType as typeof GARMENT_TYPES[number])
     || !GARMENT_SOURCES.includes(value.garmentSource as typeof GARMENT_SOURCES[number])
     || typeof value.quantity !== 'string' || !/^[1-9]\d{0,5}$/.test(value.quantity)
@@ -44,7 +45,7 @@ export function validateEmbroideryQuote(input: unknown): { success: true; data: 
     return { success: false, error: 'Please check the required embroidery details, contact information, date, ZIP, and artwork.' }
   }
   return { success: true, data: {
-    formType: 'embroidery', service: 'Embroidery', source: '/services/apparel/embroidery',
+    formType: 'embroidery', service: 'Embroidery', source: '/shop/apparel/embroidery',
     garmentType: value.garmentType as string, quantity: value.quantity, garmentSource: value.garmentSource as string,
     locations: locations.map(item => ({ placement: item.placement.trim(), approximateSize: item.approximateSize.trim() })),
     notes: value.notes.trim(), inHandsDate: value.inHandsDate, shippingZip: value.shippingZip,

@@ -16,15 +16,15 @@ export default function FlyersOrderPage({ initialSize = FLAT_SHEET_SIZES[0] }: {
     name="Flyers"
     cartProductName={half ? 'Half Page Flyers' : FLYERS_PRODUCT}
     tagline="Full-color flyers for handouts, menus, launches, and promotions. Select your size and available paper options below."
-    parentHref="/services/marketing-materials/flyers"
-    breadcrumb={[{ label: 'Flyers & Posters', href: '/services/marketing-materials/flyers' }, { label: 'Flyers', href: '' }]}
+    parentHref="/shop/marketing-materials/flyers"
+    breadcrumb={[{ label: 'Flyers & Posters', href: '/shop/marketing-materials/flyers' }, { label: 'Flyers', href: '' }]}
     color="#E8F5F1"
-    galleryPath={half ? '/services/marketing-materials/flyers/half-page' : '/services/marketing-materials/flyers/full-page'}
+    galleryPath={half ? '/shop/marketing-materials/flyers/half-page' : '/shop/marketing-materials/flyers/full-page'}
     cartPathsBySize={{
-      [HALF]: '/services/marketing-materials/flyers/half-page',
-      [FLAT_SHEET_SIZES[0]]: '/services/marketing-materials/flyers/full-page',
-      [FLAT_SHEET_SIZES[1]]: '/services/marketing-materials/flyers/full-page?size=tabloid',
-      [FLAT_SHEET_SIZES[2]]: '/services/marketing-materials/flyers/full-page?size=oversized',
+      [HALF]: '/shop/marketing-materials/flyers/half-page',
+      [FLAT_SHEET_SIZES[0]]: '/shop/marketing-materials/flyers/full-page',
+      [FLAT_SHEET_SIZES[1]]: '/shop/marketing-materials/flyers/full-page?size=tabloid',
+      [FLAT_SHEET_SIZES[2]]: '/shop/marketing-materials/flyers/full-page?size=oversized',
     }}
     initialSelections={{ Size: size }}
     onSizeChange={setSize}
@@ -67,6 +67,6 @@ export default function FlyersOrderPage({ initialSize = FLAT_SHEET_SIZES[0] }: {
     ]}
     included={['Digital proof before production', 'Full-color CMYK printing', 'Quality check before ship']}
     customNote={half ? 'Half-page flyers are quoted individually. We will confirm pricing and turnaround before production.' : undefined}
-    relatedProducts={[{ href: '/services/marketing-materials/flyers', name: 'All Flyers & Posters', description: 'Browse posters and specialty finishes.' }]}
+    relatedProducts={[{ href: '/shop/marketing-materials/flyers', name: 'All Flyers & Posters', description: 'Browse posters and specialty finishes.' }]}
   />
 }

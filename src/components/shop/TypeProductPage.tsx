@@ -96,7 +96,7 @@ export default function TypeProductPage({
                   </div>
                   <p className="text-xs text-gray-500 mt-4 pt-4 border-t border-gray-100">
                     Don&apos;t have print-ready files? Our design team can help.{' '}
-                    <Link href="/services/graphic-design" className="text-lp-green font-semibold hover:underline">Ask about design services →</Link>
+                    <Link href="/shop/graphic-design" className="text-lp-green font-semibold hover:underline">Ask about design services →</Link>
                   </p>
                 </Disclosure>
               </div>

@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
     const signageQuote = 'formType' in quote && quote.formType === 'signage-booth'
     const embroideryQuote = 'formType' in quote && quote.formType === 'embroidery'
     const dtgQuote = 'formType' in quote && quote.formType === 'dtg'
-    const source = quote.service === 'DTF Printing' ? '/services/apparel/dtf' : quote.service === 'Embroidery' ? '/services/apparel/embroidery' : quote.service === 'Screen Printing' ? '/services/apparel/screenprint' : quote.service === 'DTG Printing' ? '/services/apparel/dtg' : dtgQuote ? '/services/apparel/dtg' : embroideryQuote ? '/services/apparel/embroidery' : signageQuote ? '/services/signage/quote' : 'quoteType' in quote && quote.quoteType ? quote.source : '/get-quote'
+    const source = quote.service === 'DTF Printing' ? '/shop/apparel/dtf' : quote.service === 'Embroidery' ? '/shop/apparel/embroidery' : quote.service === 'Screen Printing' ? '/shop/apparel/screenprint' : quote.service === 'DTG Printing' ? '/shop/apparel/dtg' : dtgQuote ? '/shop/apparel/dtg' : embroideryQuote ? '/shop/apparel/embroidery' : signageQuote ? '/shop/signage/quote' : 'quoteType' in quote && quote.quoteType ? quote.source : '/get-quote'
     const mylarQuote = !consultation && 'quoteType' in quote && quote.quoteType === 'mylar-bags'
     const detailsRows = !consultation && !mylarQuote && !embroideryQuote && !dtgQuote ? legacyDetailRows(quote as LegacyQuotePayload) : ''
 

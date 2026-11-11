@@ -13,7 +13,7 @@ async function main() {
 const payload: MylarBagsQuotePayload = {
   quoteType: 'mylar-bags',
   service: 'Mylar Bags',
-  source: '/services/packaging/mylar-bags',
+  source: '/shop/packaging/mylar-bags',
   contact: { name: 'Alex Rivera', email: 'alex@example.com', phone: '(917) 555-0198' },
   projectDetails: {
     bagSizes: [

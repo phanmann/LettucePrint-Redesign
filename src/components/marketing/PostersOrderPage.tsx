@@ -6,20 +6,20 @@ export default function PostersOrderPage({ size = '11" × 17"' }: { size?: strin
       captureConfiguration
       name="Posters"
       tagline="Full-color posters for retail displays, events, and storefronts. Choose small, medium, or large below."
-      parentHref="/services/marketing-materials/posters"
+      parentHref="/shop/marketing-materials/posters"
       breadcrumb={[
-        { label: "Posters", href: "/services/marketing-materials/posters" },
+        { label: "Posters", href: "/shop/marketing-materials/posters" },
         { label: "Posters", href: "" },
       ]}
       badges={["Fast Turnaround"]}
       color="#E8F5F1"
       cartPathsBySize={{
-        '11" × 17"': '/services/marketing-materials/posters/small',
-        '18" × 24"': '/services/marketing-materials/posters/medium',
-        '24" × 36"': '/services/marketing-materials/posters/large',
+        '11" × 17"': '/shop/marketing-materials/posters/small',
+        '18" × 24"': '/shop/marketing-materials/posters/medium',
+        '24" × 36"': '/shop/marketing-materials/posters/large',
       }}
       initialSelections={{ Size: size }}
-      galleryPath="/services/marketing-materials/posters/small"
+      galleryPath="/shop/marketing-materials/posters/small"
       showQuantity
       optionGroups={[
         { label: 'Size', options: [
@@ -56,8 +56,8 @@ export default function PostersOrderPage({ size = '11" × 17"' }: { size?: strin
         "Bulk quantity discounts available",
       ]}
       relatedProducts={[
-        { href: "/services/marketing-materials/posters", name: "All Posters", description: "Full poster lineup." },
-        { href: "/services/signage/banners/retractable-33", name: "Banners", description: "Retractable banners for events.", dark: true },
+        { href: "/shop/marketing-materials/posters", name: "All Posters", description: "Full poster lineup." },
+        { href: "/shop/signage/banners/retractable-33", name: "Banners", description: "Retractable banners for events.", dark: true },
       ]}
     />
   )

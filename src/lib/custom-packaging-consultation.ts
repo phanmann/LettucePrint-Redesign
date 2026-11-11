@@ -1,3 +1,4 @@
+import { toShopPath } from './shop-paths'
 export const CUSTOM_PACKAGING_TYPES = [
   'Box',
   'Pouch / Bag',
@@ -16,7 +17,7 @@ export type ArtworkDielineStatus = (typeof ARTWORK_DIELINE_OPTIONS)[number]
 export interface CustomPackagingConsultationPayload {
   quoteType: 'custom-packaging'
   service: 'Packaging'
-  source: '/services/packaging/custom-packaging'
+  source: '/shop/packaging/custom-packaging'
   contact: {
     name: string
     company: string
@@ -100,7 +101,7 @@ export function validateCustomPackagingConsultation(
   if (
     value.quoteType !== 'custom-packaging'
     || value.service !== 'Packaging'
-    || value.source !== '/services/packaging/custom-packaging'
+    || toShopPath(value.source) !== '/shop/packaging/custom-packaging'
     || hasUnexpectedKeys(value, ALLOWED_TOP_LEVEL_KEYS)
     || hasUnexpectedKeys(contact, ALLOWED_CONTACT_KEYS)
     || hasUnexpectedKeys(details, ALLOWED_DETAIL_KEYS)
@@ -141,7 +142,7 @@ export function validateCustomPackagingConsultation(
     data: {
       quoteType: 'custom-packaging',
       service: 'Packaging',
-      source: '/services/packaging/custom-packaging',
+      source: '/shop/packaging/custom-packaging',
       contact: { name, company, email, phone },
       projectDetails: {
         packagingContents,

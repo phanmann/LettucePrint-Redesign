@@ -1,0 +1,159 @@
+'use client'
+
+import Navbar from '@/components/layout/Navbar'
+import RelatedProducts from '@/components/shop/RelatedProducts'
+import Footer from '@/components/layout/Footer'
+import Link from 'next/link'
+import Badge from '@/components/ui/Badge'
+import { Disclosure } from '@/components/shop/ProductDisclosure'
+import { ArrowRight, CheckCircle, FileText, Layers } from 'lucide-react'
+import ProductImageGallery from '@/components/shop/ProductImageGallery'
+import PremiumBusinessCardCalculator from '@/components/shop/PremiumBusinessCardCalculator'
+
+const specs = [
+  { label: 'Size', value: '3.5" × 2" (standard)' },
+  { label: 'Finish options', value: 'Soft Touch, Raised Spot Gloss, Raised Foil, Extra Thick' },
+  { label: 'Stock weights', value: '14 pt, 16 pt, 38 pt (Extra Thick)' },
+  { label: 'Color mode', value: 'Full-color CMYK' },
+  { label: 'Minimum order', value: '50 cards' },
+  { label: 'Turnaround', value: '3–7 business days after approval' },
+  { label: 'Corner options', value: 'Square or rounded (+cost)' },
+]
+
+const artworkRequirements = [
+  { label: 'Preferred formats', value: 'AI, PDF, EPS' },
+  { label: 'Accepted formats', value: 'PSD, PNG, JPG (300 DPI min)' },
+  { label: 'Color mode', value: 'CMYK preferred' },
+  { label: 'Bleed', value: '0.125" on all sides' },
+  { label: 'Safe zone', value: '0.125" from all edges' },
+]
+
+const included = [
+  'Digital proof before production',
+  'Full-color CMYK printing',
+  'Quality check before ship',
+  'Bulk quantity discounts available',
+]
+
+export default function PremiumBusinessCardsPage() {
+  return (
+    <>
+      <Navbar />
+      <main className="pt-[72px]">
+
+        {/* Breadcrumb */}
+        <div className="bg-gray-50 border-b border-gray-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <nav className="flex items-center gap-2 text-xs text-gray-500">
+              <Link href="/" className="hover:text-lp-green transition-colors">Home</Link>
+              <span>/</span>
+              <Link href="/shop/marketing-materials/business-cards" className="hover:text-lp-green transition-colors">Business Cards</Link>
+              <span>/</span>
+              <span className="text-gray-900 font-medium">Premium</span>
+            </nav>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_600px] gap-12 items-start">
+
+            {/* Right — Pricing Calculator (desktop only) */}
+            <div className="hidden lg:block lg:order-last lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
+              <PremiumBusinessCardCalculator productName="Premium Business Cards" />
+            </div>
+
+            {/* Left — Product Info */}
+            <div className="lg:order-first">
+              {/* Header */}
+              <div className="mb-8">
+                <div className="flex items-center gap-2 mb-4">
+                  <Badge variant="popular">Premium</Badge>
+                  <Badge variant="new">Luxury Finishes</Badge>
+                </div>
+                <h1 className="text-h1 font-semibold text-gray-900 mb-4">Premium Business Cards</h1>
+                <p className="text-body-lg text-gray-600 leading-relaxed">
+                  Elevated finishes that make a lasting first impression — soft-touch laminate, raised spot gloss, metallic foil, and extra-thick 38pt board. For brands that want to leave an impression.
+                </p>
+              </div>
+
+              <ProductImageGallery
+              />
+
+              {/* Mobile-only calculator — inline after gallery */}
+              <div className="lg:hidden mb-8">
+                <PremiumBusinessCardCalculator productName="Premium Business Cards" />
+              </div>
+
+              {/* What's included */}
+              <div className="bg-lp-green/5 rounded-card border border-lp-green/20 p-6 mb-8">
+                <h2 className="text-small font-semibold text-lp-green uppercase tracking-wider mb-4">Every order includes</h2>
+                <ul className="space-y-2.5">
+                  {included.map(item => (
+                    <li key={item} className="flex items-center gap-3 text-small text-gray-700">
+                      <CheckCircle size={15} className="text-lp-green flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Specs */}
+              <div className="mb-8 border border-gray-200 rounded-card px-5 py-4">
+                <Disclosure title={
+                  <span className="flex items-center gap-2">
+                    <Layers size={16} className="text-gray-500" />
+                    <span className="text-small font-semibold text-gray-500 uppercase tracking-wider">Specifications</span>
+                  </span>
+                }>
+                  <div className="divide-y divide-gray-100">
+                    {specs.map(spec => (
+                      <div key={spec.label} className="flex justify-between py-3">
+                        <span className="text-small font-semibold text-gray-500">{spec.label}</span>
+                        <span className="text-small text-gray-900 text-right max-w-[60%]">{spec.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Disclosure>
+              </div>
+
+              {/* Artwork Requirements */}
+              <div className="bg-white rounded-card border border-gray-200 px-5 py-4 mb-8">
+                <Disclosure title={
+                  <span className="flex items-center gap-2">
+                    <FileText size={16} className="text-gray-500" />
+                    <span className="text-small font-semibold text-gray-500 uppercase tracking-wider">Artwork Requirements</span>
+                  </span>
+                }>
+                  <div className="space-y-2">
+                    {artworkRequirements.map(req => (
+                      <div key={req.label} className="flex justify-between">
+                        <span className="text-small font-semibold text-gray-500">{req.label}</span>
+                        <span className="text-small text-gray-700 text-right max-w-[55%]">{req.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-4 pt-4 border-t border-gray-100">
+                    Don&apos;t have print-ready files? Our design team can help.{' '}
+                    <Link href="/get-quote" className="text-lp-green font-semibold hover:underline">Ask about design services →</Link>
+                  </p>
+                </Disclosure>
+              </div>
+
+              {/* Standard downgrade */}
+              <div className="rounded-card border border-gray-200 p-6">
+                <h2 className="text-h4 font-semibold text-gray-900 mb-2">Want something simpler?</h2>
+                <p className="text-small text-gray-600 mb-4">Matte, gloss, or uncoated standard cards with fast turnaround.</p>
+                <Link href="/shop/marketing-materials/business-cards/standard" className="inline-flex items-center gap-2 text-small font-semibold text-lp-green hover:text-lp-green-dark transition-colors">
+                  See Standard Business Cards <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <RelatedProducts currentPath="/shop/marketing-materials/business-cards/premium" />
+        </div>
+      </main>
+      <Footer />
+    </>
+  )
+}

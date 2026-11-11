@@ -9,12 +9,12 @@ const sources = [
   { path: '/shop/roll-labels', alt: 'Lettuce Print roll labels', all: true },
   { path: '/shop/stickers', alt: 'Lettuce Print custom stickers', all: true },
   { path: '/shop/spot-uv', alt: 'Lettuce Print Spot UV stickers' },
-  { path: '/services/signage/banners/retractable-standard', alt: 'Lettuce Print retractable banners' },
-  { path: '/services/stickers/rolllabels', alt: 'Lettuce Print roll labels', all: true },
-  { path: '/services/signage/backdrops', alt: 'Lettuce Print large format', all: true },
-  { path: '/services/apparel/screenprint', alt: 'Lettuce Print screen printing', all: true },
-  { path: '/services/signage', alt: 'Lettuce Print signage', all: true },
-  { path: '/services/packaging', alt: 'Lettuce Print packaging', all: true },
+  { path: '/shop/signage/banners/retractable-standard', alt: 'Lettuce Print retractable banners' },
+  { path: '/shop/stickers/rolllabels', alt: 'Lettuce Print roll labels', all: true },
+  { path: '/shop/signage/backdrops', alt: 'Lettuce Print large format', all: true },
+  { path: '/shop/apparel/screenprint', alt: 'Lettuce Print screen printing', all: true },
+  { path: '/shop/signage', alt: 'Lettuce Print signage', all: true },
+  { path: '/shop/packaging', alt: 'Lettuce Print packaging', all: true },
 ]
 
 // Deterministic shuffle so a per-load seed keeps one stable order through rotation and gallery refreshes.

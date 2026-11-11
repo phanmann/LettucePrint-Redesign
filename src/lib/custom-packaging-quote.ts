@@ -1,3 +1,4 @@
+import { toShopPath } from './shop-paths'
 export const PRINT_FINISHES = ['Matte', 'Gloss', 'Soft-Touch'] as const
 export const SPOT_FINISHES = [
   'None',
@@ -30,13 +31,13 @@ export const PACKAGING_QUOTE_CONFIGS = {
   'custom-packaging': {
     quoteType: 'custom-packaging',
     service: 'Packaging',
-    source: '/services/packaging/custom-packaging',
+    source: '/shop/packaging/custom-packaging',
     successHeading: 'We got your packaging request.',
   },
   'mylar-bags': {
     quoteType: 'mylar-bags',
     service: 'Mylar Bags',
-    source: '/services/packaging/mylar-bags',
+    source: '/shop/packaging/mylar-bags',
     successHeading: 'We got your Mylar Bags request.',
   },
 } as const
@@ -146,7 +147,7 @@ export function validatePackagingQuote<T extends PackagingQuoteType>(
   const config = PACKAGING_QUOTE_CONFIGS[expectedQuoteType]
 
   const errors: CustomPackagingFieldErrors = {}
-  if (value.quoteType !== config.quoteType || value.service !== config.service || value.source !== config.source) {
+  if (value.quoteType !== config.quoteType || value.service !== config.service || toShopPath(value.source) !== config.source) {
     errors.name = 'This quote request is not in the expected format.'
   } else if (!name) {
     errors.name = 'Enter your name.'

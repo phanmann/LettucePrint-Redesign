@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test'
 
-const listingPath = '/services/marketing-materials/booklets'
+const listingPath = '/shop/marketing-materials/booklets'
 
 const products = [
   { pageName: 'Saddle-Stitch Booklet', path: `${listingPath}/saddle-stitch-55x85`, card: '/images/products/booklets/saddle-stitch-55x85/card.webp', primary: '/images/products/booklets/saddle-stitch-55x85/booklet-set.webp' },

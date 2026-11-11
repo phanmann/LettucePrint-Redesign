@@ -4,6 +4,7 @@ import {
   createContext, useContext, useEffect, useState, useCallback,
   type ReactNode,
 } from 'react'
+import { toShopPath } from '@/lib/shop-paths'
 import type { CartItem } from '@/lib/cart'
 
 interface CartContextValue {
@@ -29,7 +30,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
       // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time localStorage hydration
-      if (raw) setItems(JSON.parse(raw))
+      if (raw) setItems(JSON.parse(raw).map((item: CartItem) => ({ ...item, productPath: toShopPath(item.productPath) })))
     } catch {
       // ignore parse errors
     }
@@ -45,6 +46,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addItem = useCallback((item: Omit<CartItem, 'id' | 'addedAt'>) => {
     const newItem: CartItem = {
       ...item,
+      productPath: toShopPath(item.productPath),
       // getRandomValues also works on private HTTP previews; randomUUID requires HTTPS.
       id: typeof crypto.randomUUID === 'function' ? crypto.randomUUID() :
         Array.from(crypto.getRandomValues(new Uint8Array(16)), byte => byte.toString(16).padStart(2, '0')).join(''),

@@ -1,0 +1,97 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
+import FaqSection from '@/components/seo/FaqSection'
+import { ArrowRight } from 'lucide-react'
+import Navbar from '@/components/layout/Navbar'
+import Footer from '@/components/layout/Footer'
+import Button from '@/components/ui/Button'
+
+export const metadata: Metadata = {
+  title: 'Signs, Banners & Event Displays',
+  description: 'Vinyl banners, retractable banners, mesh banners, backdrops, step-and-repeats, and SEG displays from Lettuce Print.',
+  alternates: { canonical: 'https://lettuceprint.com/shop/signage' },
+}
+
+// Category summaries reflect the linked catalogs; options vary by product.
+const products = [
+  { title: 'Banners', alt: 'Standard retractable banner display', href: '/shop/signage/banners', note: 'Vinyl, mesh, fabric, retractable, luxury retractable, tabletop, and oversized banners.', options: [
+    { label: 'Styles', values: ['Retractable', 'X-Stand', 'Hanging'] },
+    { label: 'Materials', values: ['Vinyl', 'Mesh', 'Fabric'] },
+  ] },
+  { title: 'Backdrops', alt: 'Green Lettuce Print step-and-repeat backdrop on a freestanding event display', href: '/shop/signage/backdrops', note: 'Pop-up, eurofit, SEG, and step-and-repeat backdrops for events and retail spaces.', options: [
+    { label: 'Styles', values: ['Step & Repeat', 'Eurofit', 'Pop-up', 'SEG'] },
+    { label: 'Sizes', values: ['8×8 ft', '10×8 ft', '20×8 ft', '8×10 ft'] },
+  ] },
+  { title: 'SEG Light Displays', alt: 'SEG fabric display in an aluminum frame', href: '/shop/signage/backdrops#seg', imagePath: '/shop/signage/backdrops/seg-10x8', note: 'Silicone edge graphic (SEG) fabric displays in lightweight aluminum frames — seamless, tool-free graphic swaps.', options: [
+    { label: 'Sizes', values: ['10×8 ft', '8×10 ft', '20×8 ft'] },
+    { label: 'Includes', values: ['Frame', 'Fabric graphic', 'Carry bag'] },
+  ] },
+]
+
+export default function SignagePage() {
+  return (
+    <>
+      <Navbar />
+      <main className="pt-[72px]">
+        <section className="bg-white border-b border-gray-100 py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-4">Signs & Banners</p>
+            <h1 className="text-display font-semibold text-gray-900 mb-5 max-w-3xl">Big-format pieces without big-agency friction.</h1>
+            <p className="text-body-lg text-gray-500 max-w-2xl">Outdoor promos, trade show booths, retail backdrops, step-and-repeats, and pop-up event graphics — produced clean and spec-ready.</p>
+          </div>
+        </section>
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-5">
+            {products.map((product) => (
+              <Link key={product.href} href={product.href} className="group flex flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lp-green bg-white border border-gray-100 rounded-card p-7 min-w-0 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all">
+                <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-50 mb-6">
+                  <ProductPreviewImage
+                    productPath={'imagePath' in product && product.imagePath ? product.imagePath : product.href}
+                    alt={product.alt}
+                    sizes="(min-width: 1280px) 344px, (min-width: 768px) calc((100vw - 240px) / 3), (min-width: 640px) calc(100vw - 106px), calc(100vw - 90px)"
+                    className="object-cover"
+                  />
+                </div>
+                <h2 className="text-h3 font-semibold text-gray-900 mb-3">{product.title}</h2>
+                <p className="text-small text-gray-600 mb-6">{product.note}</p>
+                <dl className="space-y-2 mb-3">
+                  {product.options.map((group) => (
+                    <div key={group.label} className="flex flex-wrap items-start gap-2">
+                      <dt className="text-xs font-semibold text-gray-500 w-16 shrink-0 pt-0.5">{group.label}:</dt>
+                      <dd className="flex min-w-0 flex-1 flex-wrap gap-1.5">
+                        {group.values.map((value) => (
+                          <span key={value} className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">{value}</span>
+                        ))}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                <p className="text-xs text-gray-500 mb-6">Options vary by product.</p>
+                <span className="mt-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-lp-green">View options <ArrowRight size={13} /></span>
+              </Link>
+            ))}
+          </div>
+        </section>
+        <section className="py-16 bg-white border-t border-gray-100">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-h2 font-semibold text-gray-900 mb-4">Need help with your booth design?</h2>
+            <p className="text-body text-gray-500 mb-8">Send us the event date, booth specs, and venue requirements. We’ll quote the print, hardware, and timeline together.</p>
+            <Link href="/shop/signage/quote"><Button size="lg">Request a Signage Quote</Button></Link>
+          </div>
+        </section>
+        <section className="py-16 bg-white">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <FaqSection faqs={[
+              { q: 'What signage do you print?', a: 'Retractable banner stands, X-stands, vinyl, mesh and fabric banners, step and repeat backdrops, Eurofit and pop-up displays, and SEG fabric light displays.' },
+              { q: 'What is an SEG display?', a: 'SEG (silicone edge graphic) displays use a dye-sublimated fabric graphic with a silicone edge that presses into an aluminum frame — seamless, with no visible hardware and tool-free graphic swaps.' },
+              { q: 'How fast can you produce trade show signage?', a: 'Most backdrops ship 3 business days after proof approval plus UPS transit. Rush production is available on many items.' },
+              { q: 'Do I get a proof?', a: 'Yes. Every signage order includes a digital proof before production.' },
+            ]} />
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  )
+}

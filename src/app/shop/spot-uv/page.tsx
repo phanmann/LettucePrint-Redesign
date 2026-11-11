@@ -185,7 +185,7 @@ export default function SpotUVPage() {
                   </div>
                   <p className="text-xs text-gray-500 mt-4 pt-4 border-t border-gray-100">
                     Not sure how to set up your spot layer? Our design team can prep your file.{' '}
-                    <Link href="/services/graphic-design" className="text-lp-green font-semibold hover:underline">
+                    <Link href="/shop/graphic-design" className="text-lp-green font-semibold hover:underline">
                       Ask about design services →
                     </Link>
                   </p>

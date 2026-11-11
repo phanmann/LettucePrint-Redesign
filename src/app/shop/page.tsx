@@ -55,26 +55,26 @@ const categories: Category[] = [
     products: [
       {
         name: 'Business Cards',
-        href: '/services/marketing-materials/business-cards',
-        imagePath: '/services/marketing-materials/business-cards/standard',
+        href: '/shop/marketing-materials/business-cards',
+        imagePath: '/shop/marketing-materials/business-cards/standard',
         features: ['Standard & premium stock', 'Soft touch & gloss options', 'Spot UV available', 'Fast turnaround'],
       },
       {
         name: 'Flyers & Posters',
-        href: '/services/marketing-materials/flyers',
-        imagePath: '/services/marketing-materials/flyers/half-page',
+        href: '/shop/marketing-materials/flyers',
+        imagePath: '/shop/marketing-materials/flyers/half-page',
         features: ['Flyers and standard posters', 'Sizes from 5.5×8.5 to 24×36', 'Full-color printing', 'Fast turnaround'],
       },
       {
         name: 'Postcards',
-        href: '/services/marketing-materials/postcards',
-        imagePath: '/services/marketing-materials/postcards/standard',
+        href: '/shop/marketing-materials/postcards',
+        imagePath: '/shop/marketing-materials/postcards/standard',
         features: ['Standard & premium stock', 'Single or double-sided', 'Rounded corners available', 'Great for direct mail'],
       },
       {
         name: 'Brochures & Booklets',
-        href: '/services/marketing-materials/brochures',
-        imagePath: '/services/marketing-materials/brochures/tri-fold-letter',
+        href: '/shop/marketing-materials/brochures',
+        imagePath: '/shop/marketing-materials/brochures/tri-fold-letter',
         features: ['Tri-fold & bi-fold brochures', 'Saddle-stitch & perfect bound booklets', 'Uncoated & soft touch options', 'Custom sizes'],
       },
     ],
@@ -84,12 +84,12 @@ const categories: Category[] = [
     products: [
       {
         name: 'Mylar Bags',
-        href: '/services/packaging/mylar-bags',
+        href: '/shop/packaging/mylar-bags',
         features: ['Standard & die-cut shapes', 'Child-resistant options', 'High-barrier material', 'Custom print'],
       },
       {
         name: 'Custom Packaging',
-        href: '/services/packaging/custom-packaging',
+        href: '/shop/packaging/custom-packaging',
         features: ['Fully custom structures', 'Full-color & specialty finishes', 'Sampling available', 'Retail-ready'],
       },
     ],
@@ -99,12 +99,12 @@ const categories: Category[] = [
     products: [
       {
         name: 'Banners',
-        href: '/services/signage/banners',
+        href: '/shop/signage/banners',
         features: ['Vinyl, mesh & fabric options', 'Retractable banner stands', 'Indoor & outdoor use', 'Fast turnaround'],
       },
       {
         name: 'Backdrops & Step-Repeats',
-        href: '/services/signage/backdrops',
+        href: '/shop/signage/backdrops',
         features: ['Pop-up, euro & SEG frames', 'Multiple sizes available', 'Event-ready hardware', 'Custom graphics'],
       },
     ],
@@ -114,25 +114,25 @@ const categories: Category[] = [
     products: [
       {
         name: 'Screen Printing',
-        href: '/services/apparel/screenprint',
+        href: '/shop/apparel/screenprint',
         features: ['T-shirts, hoodies & totes', 'Pantone color matching', 'Bulk discounts', 'Minimum 12 pcs'],
       },
       {
         name: 'Embroidery',
-        href: '/services/apparel/embroidery',
+        href: '/shop/apparel/embroidery',
         imagePath: '/shop/cards/embroidery',
         features: ['Hats, polos & more', 'Thread color matching', 'Digitizing included', 'Premium finish'],
       },
       {
         name: 'DTG Printing',
-        href: '/services/apparel/dtg',
+        href: '/shop/apparel/dtg',
         imagePath: '/shop/cards/dtg',
         features: ['Full-color direct to garment', 'No minimums', 'Photo-quality prints', 'Quick turnaround'],
       },
       {
         name: 'Custom Promo Items',
-        href: '/services/apparel/custom-items',
-        imagePath: '/services/packaging/custom-packaging',
+        href: '/shop/apparel/custom-items',
+        imagePath: '/shop/packaging/custom-packaging',
         features: ['Totes, drinkware & more', "Logo'd merch & swag", 'Event giveaways', 'Custom sourcing'],
       },
     ],

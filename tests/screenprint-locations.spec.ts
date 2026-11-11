@@ -100,7 +100,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 
       payload = route.request().postDataJSON()
       await route.fulfill({ status: 200, contentType: 'application/json', body: '{"success":true}' })
     })
-    await page.goto('/services/apparel/screenprint')
+    await page.goto('/shop/apparel/screenprint')
     const formSection = page.getByRole('region', { name: 'Request a screen printing quote' })
     await expect(formSection.getByRole('heading', { name: 'Tell us about the project' })).toBeVisible()
     await expect(formSection.getByRole('button', { name: /Screen Printing/ })).toHaveCount(0)
@@ -130,7 +130,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 
 }
 
 test('other apparel service keeps generic quote CTA', async ({ page }) => {
-  await page.goto('/services/apparel/custom-items')
+  await page.goto('/shop/apparel/custom-items')
   await expect(page.getByRole('link', { name: 'Request a Quote' })).toHaveAttribute('href', '/get-quote')
   await expect(page.getByRole('heading', { name: 'Tell us about the project' })).toHaveCount(0)
 })

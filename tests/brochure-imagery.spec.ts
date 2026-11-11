@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test'
 
-const listingPath = '/services/marketing-materials/brochures'
+const listingPath = '/shop/marketing-materials/brochures'
 
 const products = [
   {

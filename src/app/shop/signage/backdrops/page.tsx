@@ -1,0 +1,208 @@
+'use client'
+
+import { useState, useSyncExternalStore } from 'react'
+import Navbar from '@/components/layout/Navbar'
+import Footer from '@/components/layout/Footer'
+import Link from 'next/link'
+import Button from '@/components/ui/Button'
+import ProductCard from '@/components/shop/ProductCard'
+import { motion, AnimatePresence } from 'framer-motion'
+
+const CATEGORIES = [
+  {
+    id: 'step-repeat',
+    label: 'Premium Step and Repeat',
+    description: 'The classic branded photo backdrop — tiled logos on fabric or vinyl for red carpets, press walls, events, and activations.',
+    products: [
+      {
+        id: 'sr-8x8',
+        href: '/shop/signage/backdrops/step-repeat-8x8',
+        name: 'Premium Step and Repeat',
+        subtitle: '8ft x 8ft',
+        description: 'Premium event backdrop with a luxury adjustable telescopic stand. Choose 13 oz vinyl or wrinkle-resistant Oxford fabric; our team checks every proof.',
+        features: ['13 oz vinyl or Oxford fabric', 'Wrinkle-resistant fabric option', 'Luxury adjustable telescopic stand', 'Team-reviewed proof', 'Kit, graphic or hardware only'],
+        turnaround: '3 business days after proof + UPS transit',
+        color: '#E8F5F1',
+      },
+      {
+        id: 'sr-10x8',
+        href: '/shop/signage/backdrops/step-repeat-10x8',
+        name: 'Premium Step and Repeat',
+        subtitle: '10ft x 8ft',
+        description: 'Wider format for larger press walls, red carpets, and branded activations with more visual real estate.',
+        features: ['13 oz vinyl or Oxford fabric', 'Wrinkle-resistant fabric option', 'Luxury adjustable telescopic stand', 'Team-reviewed proof', 'Kit, graphic or hardware only'],
+        turnaround: '3 business days after proof + UPS transit',
+        color: '#F5F0E8',
+      },
+    ],
+  },
+  {
+    id: 'eurofit',
+    label: 'Eurofit Backdrops',
+    description: 'Seamless fabric backdrops with a pillowcase-style stretch fit — no wrinkles, no hardware visible, ultra-clean presentation.',
+    products: [
+      {
+        id: 'eurofit-8x8',
+        href: '/shop/signage/backdrops/eurofit-8x8',
+        name: 'Eurofit Backdrop',
+        subtitle: '8ft x 8ft',
+        description: 'Stretch-fit fabric graphic slides over the aluminum extrusion frame for a taut, seamless display. Clean and professional.',
+        features: ['Stretch dye-sublimation fabric', 'Pillow-case edge fit', 'Aluminum extrusion frame', 'No visible hardware', 'Carry bag included'],
+        turnaround: '3 business days after proof + UPS transit',
+        color: '#E8F0F5',
+      },
+      {
+        id: 'eurofit-10x8',
+        href: '/shop/signage/backdrops/eurofit-10x8',
+        name: 'Eurofit Backdrop',
+        subtitle: '10ft x 8ft',
+        description: 'Wider Eurofit configuration for larger event footprints — same seamless finish, more coverage.',
+        features: ['Stretch dye-sublimation fabric', 'Pillow-case edge fit', 'Aluminum extrusion frame', 'No visible hardware', 'Carry bag included'],
+        turnaround: '3 business days after proof + UPS transit',
+        color: '#F0E8F5',
+      },
+    ],
+  },
+  {
+    id: 'popup',
+    label: 'Pop Up Displays',
+    description: 'Straight or wrap pop-up frame systems with dye-sublimated fabric — fast setup, big presence.',
+    products: [
+      {
+        id: 'popup-8x8',
+        href: '/shop/signage/backdrops/popup-8x8',
+        name: 'Pop Up Display',
+        subtitle: '8ft x 8ft',
+        description: 'Compact pop-up backdrop ideal for smaller booths, photo ops, and press setups. Collapses into a carry case in minutes.',
+        features: ['Dye-sublimated fabric graphic', 'Spring-loaded frame', 'Collapses to carry case', 'Reusable graphic panels', 'Setup under 10 minutes'],
+        turnaround: '3 business days after proof + UPS transit',
+        color: '#E8F5EF',
+      },
+      {
+        id: 'popup-10x8',
+        href: '/shop/signage/backdrops/popup-10x8',
+        name: 'Pop Up Display',
+        subtitle: '10ft x 8ft',
+        description: 'Mid-size pop-up for standard trade show booths and event backdrops. Maximum visual impact with minimal setup time.',
+        features: ['Dye-sublimated fabric graphic', 'Spring-loaded frame', 'Collapses to carry case', 'Reusable graphic panels', 'Setup under 10 minutes'],
+        turnaround: '3 business days after proof + UPS transit',
+        color: '#F5E8E8',
+      },
+      {
+        id: 'popup-20x8',
+        href: '/shop/signage/backdrops/popup-20x8',
+        name: 'Pop Up Display',
+        subtitle: '20ft x 8ft',
+        description: 'Full-width trade show wall — commands the back of any 20-foot booth. Multiple frame sections connect seamlessly.',
+        features: ['Dye-sublimated fabric graphic', 'Multi-section frame system', 'Collapses to carry cases', 'Continuous seamless graphic', 'Setup under 20 minutes'],
+        turnaround: '3 business days after proof + UPS transit',
+        color: '#E8F5F5',
+      },
+    ],
+  },
+  {
+    id: 'seg',
+    label: 'SEG Pop Up Stands',
+    description: 'Silicone Edge Graphics (SEG) stretched into a lightweight aluminum frame — the cleanest, most professional backdrop available.',
+    products: [
+      {
+        id: 'seg-10x8',
+        href: '/shop/signage/backdrops/seg-10x8',
+        name: 'SEG Pop Up Stand',
+        subtitle: '10ft x 8ft',
+        description: 'SEG fabric graphic with a silicone bead edge pressed into an aluminum frame channel. Zero hardware visible, perfectly flat print.',
+        features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Aluminum extrusion frame', 'Tool-free graphic swap', 'Carry bag included'],
+        turnaround: '3 business days after proof + UPS transit',
+        color: '#F0E8F5',
+      },
+      {
+        id: 'seg-8x10',
+        href: '/shop/signage/backdrops/seg-8x10',
+        name: 'SEG Pop Up Stand',
+        subtitle: '8ft x 10ft',
+        description: 'Taller SEG configuration — great for double-deck activations, stage backdrops, and high-ceiling venues.',
+        features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Aluminum extrusion frame', 'Tool-free graphic swap', 'Carry bag included'],
+        turnaround: '3 business days after proof + UPS transit',
+        color: '#E8F0F5',
+      },
+      {
+        id: 'seg-20x8',
+        href: '/shop/signage/backdrops/seg-20x8',
+        name: 'SEG Pop Up Stand',
+        subtitle: '20ft x 8ft',
+        description: 'Full 20-foot SEG wall for large activations, keynote stages, and trade show island booths. Maximum presence, seamless execution.',
+        features: ['SEG dye-sublimation fabric', 'Silicone bead edge', 'Multi-section aluminum frame', 'Continuous seamless graphic', 'Carry bags included'],
+        turnaround: '3 business days after proof + UPS transit',
+        color: '#E8F5F1',
+      },
+    ],
+  },
+]
+
+
+function subscribeToHash(onChange: () => void) {
+  window.addEventListener('hashchange', onChange)
+  return () => window.removeEventListener('hashchange', onChange)
+}
+
+export default function BackdropsPage() {
+  // Links like /shop/signage/backdrops#seg preselect that section.
+  const hash = useSyncExternalStore(subscribeToHash, () => window.location.hash.slice(1), () => '')
+  const [pickedCategory, setActiveCategory] = useState<string | null>(null)
+  const activeCategory = pickedCategory ?? (CATEGORIES.some(c => c.id === hash) ? hash : 'all')
+  const filtered = activeCategory === 'all' ? CATEGORIES : CATEGORIES.filter(c => c.id === activeCategory)
+
+  return (
+    <>
+      <Navbar />
+      <main>
+        <section className="pt-[calc(72px+4rem)] pb-12 bg-white border-b border-gray-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-4">Signs & Banners</p>
+            <h1 className="text-display font-semibold text-gray-900 mb-4 max-w-2xl">
+              Backdrops that set the scene.
+            </h1>
+            <p className="text-body-lg text-gray-500 max-w-xl mb-8">
+              Premium Step and Repeat, Eurofit fabric walls, pop-up displays, and SEG stands — full-color backdrops for events, trade shows, and brand activations.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <button onClick={() => setActiveCategory('all')} className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-150 ${activeCategory === 'all' ? 'bg-lp-green text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>All Backdrops</button>
+              {CATEGORIES.map(cat => (
+                <button key={cat.id} onClick={() => setActiveCategory(cat.id)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-150 ${activeCategory === cat.id ? 'bg-lp-green text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>{cat.label}</button>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            <AnimatePresence mode="wait">
+              {filtered.map(category => (
+                <motion.div key={category.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.2 }}>
+                  <div className="mb-8">
+                    <h2 className="text-h2 font-semibold text-gray-900 mb-2">{category.label}</h2>
+                    <p className="text-body text-gray-500 max-w-2xl">{category.description}</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {category.products.map(product => (
+                      <ProductCard key={product.id} {...product} categoryLabel={category.label} href={product.href} />
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        </section>
+
+        <section className="py-16 bg-white border-t border-gray-100">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-h2 font-semibold text-gray-900 mb-4">Got an event coming up?</h2>
+            <p className="text-body text-gray-500 mb-8">Tell us the venue, setup, and vibe — we&apos;ll recommend the right backdrop and make sure it arrives on time.</p>
+            <Link href="/get-quote"><Button size="lg">Talk to Us</Button></Link>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  )
+}

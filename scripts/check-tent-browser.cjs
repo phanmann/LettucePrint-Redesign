@@ -9,7 +9,7 @@ const fs = require('node:fs');
   // No application submissions or external service traffic during local QA.
   await page.route('**/*',route=>{ const url=new URL(route.request().url());return ['localhost','127.0.0.1'].includes(url.hostname)?route.continue():route.abort() });
   for(const [size,base,rush] of [['10x10','$789.00','$1,109.00'],['20x10','$1,419.00','$1,849.00']]) {
-   await page.goto(`http://127.0.0.1:3109/services/signage/tents/${size}`);
+   await page.goto(`http://127.0.0.1:3109/shop/signage/tents/${size}`);
    await page.getByTestId('tent-total').waitFor();assert.equal(await page.getByTestId('tent-total').innerText(),base);
    await page.getByLabel('Production',{exact:false}).selectOption('next-day');assert.equal(await page.getByTestId('tent-total').innerText(),rush);
    await page.getByLabel('Backwall',{exact:false}).selectOption('double');
@@ -32,7 +32,7 @@ const fs = require('node:fs');
    for (const pkg of ['frame-only','top-only']) {
     const checkPage=await browser.newPage({viewport});checkPage.on('pageerror',e=>errors.push(e.message));
     await checkPage.route('**/*',route=>{const url=new URL(route.request().url());return ['localhost','127.0.0.1'].includes(url.hostname)?route.continue():route.abort()});
-    await checkPage.goto(`http://127.0.0.1:3109/services/signage/tents/${size}`);
+    await checkPage.goto(`http://127.0.0.1:3109/shop/signage/tents/${size}`);
     await checkPage.getByLabel('Backwall',{exact:false}).selectOption('double');
     await checkPage.getByLabel('Premium wheel bag',{exact:false}).check();
     await checkPage.getByLabel('Package',{exact:false}).selectOption(pkg);
@@ -51,7 +51,7 @@ const fs = require('node:fs');
     await checkPage.close();
    }
   }
-  await page.goto('http://127.0.0.1:3109/services/signage');
+  await page.goto('http://127.0.0.1:3109/shop/signage');
   assert.deepEqual(await page.locator('section a.group h2').allTextContents(),['Banners','Backdrops','Canopy Tents']);
   const cardY=await page.locator('section a.group').evaluateAll(xs=>xs.map(x=>Math.round(x.getBoundingClientRect().y)));
   assert.equal(viewport.width===1440?new Set(cardY).size===1:cardY[0]<cardY[1]&&cardY[1]<cardY[2],true);

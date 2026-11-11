@@ -12,7 +12,7 @@ export default function OrderingPageLayout({ title, introduction, customPrompt, 
 }) {
   return <><Navbar /><main className="pt-[72px]">
     <section className="border-b border-gray-100 bg-white py-16"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <Link href="/services/marketing-materials" className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-lp-green hover:underline">Marketing Materials</Link>
+      <Link href="/shop/marketing-materials" className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-lp-green hover:underline">Marketing Materials</Link>
       <h1 className="text-display font-semibold text-gray-900">{title}</h1>
       <p className="mt-4 max-w-2xl text-body-lg text-gray-500">{introduction}</p>
     </div></section>

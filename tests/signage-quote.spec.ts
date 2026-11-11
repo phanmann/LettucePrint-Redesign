@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 test('focused signage inquiry validates dates, preserves failed requests, and submits details', async ({ page }) => {
-  await page.goto('http://127.0.0.1:3107/services/signage')
+  await page.goto('http://127.0.0.1:3107/shop/signage')
   await expect(page.getByRole('heading', { name: 'Need help with your booth design?' })).toBeVisible()
   await page.getByRole('link', { name: 'Request a Signage Quote' }).click()
   await expect(page.getByRole('heading', { name: 'Let’s plan your booth.' })).toBeVisible()

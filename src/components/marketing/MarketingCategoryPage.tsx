@@ -46,7 +46,7 @@ export default function MarketingCategoryPage({ title, introduction, allLabel, g
       <main>
         <section className="pt-[calc(72px+4rem)] pb-12 bg-white border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Link href="/services/marketing-materials" className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-4 hover:underline">
+            <Link href="/shop/marketing-materials" className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-4 hover:underline">
               Marketing Materials
             </Link>
             <h1 className="text-display font-semibold text-gray-900 mb-4 max-w-2xl">{title}</h1>

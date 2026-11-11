@@ -14,7 +14,7 @@ export default defineConfig({
   },
   webServer: externalBaseURL ? undefined : {
     command: `npm run dev -- --hostname 127.0.0.1 --port ${localPort}`,
-    url: `http://127.0.0.1:${localPort}/services/packaging/custom-packaging`,
+    url: `http://127.0.0.1:${localPort}/shop/packaging/custom-packaging`,
     reuseExistingServer: false,
     timeout: 120_000,
   },

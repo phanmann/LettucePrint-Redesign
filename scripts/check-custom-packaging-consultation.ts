@@ -14,7 +14,7 @@ async function main() {
 const payload: CustomPackagingConsultationPayload = {
   quoteType: 'custom-packaging',
   service: 'Packaging',
-  source: '/services/packaging/custom-packaging',
+  source: '/shop/packaging/custom-packaging',
   contact: {
     name: 'Alex Rivera',
     company: 'North Star Goods',
@@ -159,3 +159,8 @@ main().catch(error => {
   console.error(error)
   process.exitCode = 1
 })
+
+// Open tabs created before the route migration keep working.
+const legacySourceResult = validateCustomPackagingConsultation({quoteType:'custom-packaging',service:'Packaging',source:'/services/packaging/custom-packaging',contact:{name:'Alex Rivera',company:'QA',email:'qa@example.com',phone:'9175550198'},projectDetails:{packagingContents:'Candles',packagingTypes:['Box'],estimatedQuantity:'1000',approximateSize:'4x4',artworkDielineStatus:'Not sure',targetTimeline:'Eight weeks',projectDescription:'Retail cartons'}})
+assert.equal(legacySourceResult.success, true)
+if (legacySourceResult.success) assert.equal(legacySourceResult.data.source, '/shop/packaging/custom-packaging')

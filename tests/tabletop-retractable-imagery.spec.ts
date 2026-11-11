@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto'
 import { expect, test, type Locator, type Page } from '@playwright/test'
 
-const listingPath = '/services/signage/banners'
+const listingPath = '/shop/signage/banners'
 const productPath = `${listingPath}/retractable-tabletop`
 const assetPath = '/images/products/banners/retractable-tabletop/tabletop-retractable.webp'
 const assetSha256 = '9aa0fb67b7d0efb57293517cadbbe44c4168def0bfc131ac87cd9ffe9b2ed98a'

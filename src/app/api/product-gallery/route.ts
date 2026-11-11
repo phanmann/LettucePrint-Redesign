@@ -1,3 +1,4 @@
+import { toShopPath, legacyServicePath } from '@/lib/shop-paths'
 import { NextResponse } from 'next/server'
 import { freshClient } from '@/sanity/client'
 import { productGalleryByPathQuery } from '@/sanity/queries'
@@ -11,12 +12,16 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'Invalid product path' }, { status: 400 })
   }
 
-  const gallery = await freshClient.fetch(
+  let gallery = await freshClient.fetch(
     productGalleryByPathQuery,
-    { productPath },
+    { productPath: toShopPath(productPath) },
     { cache: 'no-store' },
   )
 
+  const legacyPath = legacyServicePath(productPath)
+  if (!gallery && legacyPath) {
+    gallery = await freshClient.fetch(productGalleryByPathQuery, { productPath: legacyPath }, { cache: 'no-store' })
+  }
   return NextResponse.json(gallery, {
     headers: {
       'Cache-Control': 'no-store, max-age=0',

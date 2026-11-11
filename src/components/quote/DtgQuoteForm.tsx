@@ -39,7 +39,7 @@ export default function DtgQuoteForm() {
     if (pending.current) return
     const chosen = Object.entries(artwork).filter((entry): entry is [string, File] => Boolean(entry[1])).sort(([a], [b]) => Number(a) - Number(b))
     const payload = {
-      formType: 'dtg', service: 'DTG Printing', source: '/services/apparel/dtg',
+      formType: 'dtg', service: 'DTG Printing', source: '/shop/apparel/dtg',
       garmentType, quantity, garmentSource, garmentColor, locations, notes, inHandsDate, shippingZip, contact,
       artworkLocations: chosen.map(([number]) => Number(number)),
     }

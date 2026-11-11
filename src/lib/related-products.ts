@@ -22,28 +22,28 @@ export const recommendationProducts = [
   },
   {
     name: 'Standard Retractable Banner',
-    href: '/services/signage/banners/retractable-standard',
+    href: '/shop/signage/banners/retractable-standard',
     description: 'A lightweight 33 × 80 in. pull-up banner with an aluminum stand and carry bag.',
     features: ['Fast setup', 'Print or full kit', 'Carry bag included'],
     badge: 'Event Ready',
   },
   {
     name: 'Standard Mylar Bag',
-    href: '/services/packaging/mylar-bags/standard',
+    href: '/shop/packaging/mylar-bags/standard',
     description: 'Custom-printed 4 × 5 in. eighth-size bags with zipper and finish options.',
     features: ['Full-color print', 'Zipper options', '1,000 minimum'],
     badge: 'Packaging',
   },
   {
     name: 'Premium Step and Repeat (10 × 8 ft)',
-    href: '/services/signage/backdrops/step-repeat-10x8',
+    href: '/shop/signage/backdrops/step-repeat-10x8',
     description: 'A 10 × 8 ft event backdrop with an adjustable telescopic stand and proof review.',
     features: ['Event backdrop', 'Frame or graphic', 'Proof reviewed'],
     badge: 'Large Format',
   },
-  { name: 'Standard Business Cards', href: '/services/marketing-materials/business-cards/standard', description: 'Classic business cards with crisp full-color printing and your choice of paper finish.', features: ['Matte or gloss', 'Paper stock options', 'Order online'], badge: 'Classic' },
-  { name: 'Premium Business Cards', href: '/services/marketing-materials/business-cards/premium', description: 'Make a lasting impression with specialty finishes and substantial card stocks.', features: ['Soft-touch options', 'Specialty finishes', 'Full-color printing'], badge: 'Premium' },
-  { name: 'Standard Postcards', href: '/services/marketing-materials/postcards/standard', description: 'Full-color postcards for promotions, announcements, and packaging inserts.', features: ['Size options', 'Full-color printing', 'Order online'], badge: 'Marketing' },
+  { name: 'Standard Business Cards', href: '/shop/marketing-materials/business-cards/standard', description: 'Classic business cards with crisp full-color printing and your choice of paper finish.', features: ['Matte or gloss', 'Paper stock options', 'Order online'], badge: 'Classic' },
+  { name: 'Premium Business Cards', href: '/shop/marketing-materials/business-cards/premium', description: 'Make a lasting impression with specialty finishes and substantial card stocks.', features: ['Soft-touch options', 'Specialty finishes', 'Full-color printing'], badge: 'Premium' },
+  { name: 'Standard Postcards', href: '/shop/marketing-materials/postcards/standard', description: 'Full-color postcards for promotions, announcements, and packaging inserts.', features: ['Size options', 'Full-color printing', 'Order online'], badge: 'Marketing' },
 ]
 
 export function getRelatedProducts(currentPath: string, preferred: string[] = []) {

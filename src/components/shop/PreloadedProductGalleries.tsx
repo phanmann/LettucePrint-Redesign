@@ -1,3 +1,4 @@
+import { toShopPath } from '@/lib/shop-paths'
 import { freshClient } from '@/sanity/client'
 import { ProductGalleryProvider, type CmsProductGallery } from './ProductGalleryProvider'
 
@@ -10,6 +11,10 @@ export default async function PreloadedProductGalleries({ children }: { children
       {}, { cache: 'no-store' },
     )
     for (const row of rows) if (row.productPath && !galleries[row.productPath]) galleries[row.productPath] = row
+    for (const row of rows) {
+      const currentPath = toShopPath(row.productPath)
+      if (currentPath && !galleries[currentPath]) galleries[currentPath] = row
+    }
   } catch {
     // No bundled fallback: client refresh may recover after a CMS outage.
     galleries = {}

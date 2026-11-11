@@ -1,3 +1,4 @@
+import { toShopPath } from './shop-paths'
 export const MAX_DTG_LOCATIONS = 10
 export const GARMENT_TYPES = ['T-shirts', 'Hoodies', 'Sweatshirts', 'Other'] as const
 export const GARMENT_SOURCES = ['Lettuce Print supplies garments', 'I supply garments'] as const
@@ -5,7 +6,7 @@ export const GARMENT_SOURCES = ['Lettuce Print supplies garments', 'I supply gar
 export interface DtgQuotePayload {
   formType: 'dtg'
   service: 'DTG Printing'
-  source: '/services/apparel/dtg'
+  source: '/shop/apparel/dtg'
   garmentType: string
   quantity: string
   garmentSource: string
@@ -25,7 +26,7 @@ export function validateDtgQuote(input: unknown): { success: true; data: DtgQuot
   const locations = Array.isArray(value.locations) ? value.locations : []
   const artworkLocations = Array.isArray(value.artworkLocations) ? value.artworkLocations : []
   const string = (item: unknown, max = 300) => typeof item === 'string' && item.trim().length > 0 && item.length <= max
-  if (value.formType !== 'dtg' || value.service !== 'DTG Printing' || value.source !== '/services/apparel/dtg'
+  if (value.formType !== 'dtg' || value.service !== 'DTG Printing' || toShopPath(value.source) !== '/shop/apparel/dtg'
     || !GARMENT_TYPES.includes(value.garmentType as typeof GARMENT_TYPES[number])
     || !GARMENT_SOURCES.includes(value.garmentSource as typeof GARMENT_SOURCES[number])
     || !string(value.garmentColor, 100)
@@ -46,7 +47,7 @@ export function validateDtgQuote(input: unknown): { success: true; data: DtgQuot
     return { success: false, error: 'Please check the required DTG details, contact information, date, ZIP, and artwork.' }
   }
   return { success: true, data: {
-    formType: 'dtg', service: 'DTG Printing', source: '/services/apparel/dtg',
+    formType: 'dtg', service: 'DTG Printing', source: '/shop/apparel/dtg',
     garmentType: value.garmentType as string, quantity: value.quantity, garmentSource: value.garmentSource as string, garmentColor: (value.garmentColor as string).trim(),
     locations: locations.map(item => ({ placement: item.placement.trim(), approximateSize: item.approximateSize.trim() })),
     notes: value.notes.trim(), inHandsDate: value.inHandsDate, shippingZip: value.shippingZip,

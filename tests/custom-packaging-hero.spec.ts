@@ -3,7 +3,7 @@ import { expect, test, type Page } from '@playwright/test'
 const routes = [
   {
     name: 'Mylar Bags',
-    path: '/services/packaging/mylar-bags',
+    path: '/shop/packaging/mylar-bags',
     heading: 'Custom Mylar Bags',
     successHeading: 'We got your Mylar Bags request.',
     quoteType: 'mylar-bags',
@@ -138,7 +138,7 @@ for (const routeConfig of routes) {
       data: {
         quoteType: routeConfig.quoteType,
         service: routeConfig.service,
-        source: '/services/packaging/custom-packaging',
+        source: '/shop/packaging/custom-packaging',
         contact: { name: 'Schema Test', email: '', phone: '(917) 555-0198' },
         projectDetails: {
           bagSizes: [{ width: 4, length: 6, unit: 'cm' }],

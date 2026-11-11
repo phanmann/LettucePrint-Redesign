@@ -74,7 +74,7 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
       rush: 'standard',
       totalCents: price.totalCents,
       totalFormatted: price.totalFormatted,
-      productPath: '/services/marketing-materials/business-cards/premium',
+      productPath: '/shop/marketing-materials/business-cards/premium',
     })
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)

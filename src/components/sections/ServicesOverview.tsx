@@ -76,7 +76,7 @@ export default function ServicesOverview() {
             </p>
           </div>
           <Link
-            href="/services"
+            href="/shop"
             className="text-small font-semibold text-lp-green hover:text-lp-green-dark transition-colors flex-shrink-0"
           >
             View all services →

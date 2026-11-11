@@ -48,9 +48,9 @@ function product(p: {
   return {
     name: p.name,
     tagline: p.tagline,
-    parentHref: '/services/signage/banners',
+    parentHref: '/shop/signage/banners',
     breadcrumb: [
-      { label: 'Banners', href: '/services/signage/banners' },
+      { label: 'Banners', href: '/shop/signage/banners' },
       { label: p.name, href: '' },
     ],
     badges: ['Fast Turnaround'],
@@ -82,8 +82,8 @@ export const retractableProducts = {
     ],
     color: '#E8F5F1',
     related: [
-      { href: '/services/signage/banners/retractable-luxury-33', name: 'Luxury Base Retractable', description: 'Premium teardrop base for upscale displays.' },
-      { href: '/services/signage/banners', name: 'All Banners', description: 'Vinyl, double-sided, X-stands and more.', dark: true },
+      { href: '/shop/signage/banners/retractable-luxury-33', name: 'Luxury Base Retractable', description: 'Premium teardrop base for upscale displays.' },
+      { href: '/shop/signage/banners', name: 'All Banners', description: 'Vinyl, double-sided, X-stands and more.', dark: true },
     ],
   }),
   'retractable-luxury-33': product({
@@ -98,8 +98,8 @@ export const retractableProducts = {
     ],
     color: '#E8F0F5',
     related: [
-      { href: '/services/signage/banners/retractable-standard', name: 'Standard Retractable Banner', description: 'Lightweight aluminum pull-up banner.' },
-      { href: '/services/signage/backdrops', name: 'Backdrops', description: 'Step and repeat, EuroFit and pop-up displays.', dark: true },
+      { href: '/shop/signage/banners/retractable-standard', name: 'Standard Retractable Banner', description: 'Lightweight aluminum pull-up banner.' },
+      { href: '/shop/signage/backdrops', name: 'Backdrops', description: 'Step and repeat, EuroFit and pop-up displays.', dark: true },
     ],
   }),
   'x-stand-24x63': product({
@@ -114,8 +114,8 @@ export const retractableProducts = {
     ],
     color: '#F5F0E8',
     related: [
-      { href: '/services/signage/banners/x-stand-32x71', name: 'X-Stand Banner 32" × 71"', description: 'Larger X-stand for more presence.' },
-      { href: '/services/signage/banners/retractable-standard', name: 'Standard Retractable Banner', description: 'Pull-up banner, 33" × 80".', dark: true },
+      { href: '/shop/signage/banners/x-stand-32x71', name: 'X-Stand Banner 32" × 71"', description: 'Larger X-stand for more presence.' },
+      { href: '/shop/signage/banners/retractable-standard', name: 'Standard Retractable Banner', description: 'Pull-up banner, 33" × 80".', dark: true },
     ],
   }),
   'x-stand-32x71': product({
@@ -130,8 +130,8 @@ export const retractableProducts = {
     ],
     color: '#F5F0E8',
     related: [
-      { href: '/services/signage/banners/x-stand-24x63', name: 'X-Stand Banner 24" × 63"', description: 'Compact budget X-stand.' },
-      { href: '/services/signage/banners/retractable-standard', name: 'Standard Retractable Banner', description: 'Pull-up banner, 33" × 80".', dark: true },
+      { href: '/shop/signage/banners/x-stand-24x63', name: 'X-Stand Banner 24" × 63"', description: 'Compact budget X-stand.' },
+      { href: '/shop/signage/banners/retractable-standard', name: 'Standard Retractable Banner', description: 'Pull-up banner, 33" × 80".', dark: true },
     ],
   }),
 } satisfies Record<string, ProductOrderPageProps>

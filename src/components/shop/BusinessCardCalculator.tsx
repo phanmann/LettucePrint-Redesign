@@ -54,7 +54,7 @@ export default function BusinessCardCalculator({ productName }: Props) {
       rush: 'standard',
       totalCents: price.totalCents,
       totalFormatted: price.totalFormatted,
-      productPath: '/services/marketing-materials/business-cards/standard',
+      productPath: '/shop/marketing-materials/business-cards/standard',
     })
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)

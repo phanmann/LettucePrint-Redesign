@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 for (const kind of ['vinyl', 'double-sided']) {
   test(`${kind} live pricing, cart persistence and quote gates`, async ({ page }) => {
-    await page.goto(`/services/signage/banners/${kind}-banner`)
+    await page.goto(`/shop/signage/banners/${kind}-banner`)
     const form = page.locator('section[aria-label="Banner configurator"]:visible')
     await expect(form.getByTestId('banner-total')).toHaveText(kind === 'vinyl' ? '$39.00' : '$59.00')
     await form.getByLabel('Size preset (feet)').selectOption('4x8')
@@ -22,7 +22,7 @@ for (const kind of ['vinyl', 'double-sided']) {
     await expect(page.getByText(/Rush: next-day production after proof approval/)).toBeVisible()
     await page.reload()
     await expect(page.getByText(/48 × 96 in · Qty 5/)).toBeVisible()
-    await page.goto(`/services/signage/banners/${kind}-banner`)
+    await page.goto(`/shop/signage/banners/${kind}-banner`)
     await form.getByLabel('Width (inches)').fill('127')
     await expect(form.getByRole('link', { name:'Request a quote', exact:true })).toBeVisible()
     await expect(form.getByRole('button', { name:'Add to Cart', exact:true })).toHaveCount(0)
@@ -33,7 +33,7 @@ for (const kind of ['vinyl', 'double-sided']) {
   })
 }
 test('double-sided kit enforces width, pockets and included pocket price', async ({page}) => {
-  await page.goto('/services/signage/banners/double-sided-banner')
+  await page.goto('/shop/signage/banners/double-sided-banner')
   const form=page.locator('section[aria-label="Banner configurator"]:visible')
   await form.getByLabel('Width (inches)').fill('18')
   await form.getByLabel('Pole-mount kit', {exact:false}).check()
@@ -47,10 +47,10 @@ test('double-sided kit enforces width, pockets and included pocket price', async
   await expect(form.getByLabel('Pole-mount kit',{exact:false})).toBeDisabled()
 })
 test('new listing exists in banners, Shop All and navbar',async({page})=>{
-  for(const path of ['/services/signage/banners','/shop']){
+  for(const path of ['/shop/signage/banners','/shop']){
     await page.goto(path)
     await expect(page.getByRole('heading',{name:'Double-Sided Banner',exact:true})).toBeVisible()
-    expect(await page.locator('a[href="/services/signage/banners/double-sided-banner"]').count()).toBeGreaterThan(0)
+    expect(await page.locator('a[href="/shop/signage/banners/double-sided-banner"]').count()).toBeGreaterThan(0)
   }
 })
 test('banner checkout refuses generic shipping and validates configuration',async({request})=>{

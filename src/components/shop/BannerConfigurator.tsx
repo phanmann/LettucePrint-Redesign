@@ -29,7 +29,7 @@ export default function BannerConfigurator({ order, kind, configuration: c, onCo
     addItem({ product: bannerNames[kind], size: `${c.width} × ${c.height} in`, qty: c.quantity,
       material: bannerMaterials[kind], finish: bannerFinishing(c), rush: bannerTurnarounds[c.turnaround],
       totalCents: price.totalCents, totalFormatted: usd(price.totalCents / 100),
-      productPath: `/services/signage/banners/${kind === 'vinyl' ? 'vinyl-banner' : 'double-sided-banner'}`,
+      productPath: `/shop/signage/banners/${kind === 'vinyl' ? 'vinyl-banner' : 'double-sided-banner'}`,
       bannerConfiguration: c,
     })
     setAdded(true)

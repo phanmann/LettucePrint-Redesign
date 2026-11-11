@@ -1,0 +1,130 @@
+'use client'
+
+import { useState } from 'react'
+import Navbar from '@/components/layout/Navbar'
+import Footer from '@/components/layout/Footer'
+import Link from 'next/link'
+import Button from '@/components/ui/Button'
+import CustomPackagingHeroForm from '@/components/quote/CustomPackagingHeroForm'
+import { ArrowRight, ChevronDown } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
+import CollectionGallery from '@/components/shop/CollectionGallery'
+
+const PRODUCTS = [
+  {
+    id: 'mylar-standard',
+        href: '/shop/packaging/mylar-bags/standard',
+    name: 'Standard Mylar Bag',
+    subtitle: '4 × 5 in. eighth size · from $1,200 / 1,000',
+    description: 'Custom-printed 4 × 5 in. eighth-size bags. Choose a standard or child-resistant zipper. Gloss and Matte are included; Soft-Touch is +$50 per order. Metallic and Holographic available by quote.',
+    features: [
+      'Smell-proof barrier',
+      'Heat-sealable top',
+      'Child-resistant zipper option',
+      'Full-color custom print',
+      '4 × 5 in. online pricing · 1,000 minimum',
+      'Gloss or Matte included · Soft-Touch +$50',
+    ],
+    turnaround: 'Confirmed after proof approval',
+    color: '#E8F5F1',
+    imageAlt: 'Standard mylar bag printed with custom design',
+  },
+  {
+    id: 'mylar-diecut',
+        href: '/shop/packaging/mylar-bags/die-cut',
+    name: 'Die-Cut Mylar Bag',
+    subtitle: 'Custom shapes available',
+    description: "Custom-shaped mylar bags cut to your brand's silhouette. Stand out on the shelf with a unique form factor.",
+    features: [
+      'Custom die-cut shape',
+      'Smell-proof barrier',
+      'Heat-sealable',
+      'Full-color print',
+      'Zipper or tear-notch options',
+      'Great for cannabis & boutique food brands',
+    ],
+    turnaround: '14–21 business days',
+    color: '#F5F0E8',
+    imageAlt: 'Die-cut mylar bag with custom shape',
+  },
+]
+
+export default function MylarBagsPage() {
+  const [expanded, setExpanded] = useState<string | null>(null)
+
+  return (
+    <>
+      <Navbar />
+      <main>
+        <section className="bg-white pb-20 pt-[calc(72px+4rem)] border-b border-gray-100">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-16 lg:px-8">
+            <div className="lg:sticky lg:top-28">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-lp-green">Boxes & Packaging</p>
+              <h1 className="text-display max-w-2xl font-semibold text-gray-900">Custom Mylar Bags</h1>
+              <p className="text-body-lg mt-6 max-w-xl text-gray-500">Custom-printed packaging for cannabis brands, food products, supplements, and specialty retail. Shop 4 × 5 in. eighth-size standard bags online; request a quote for other sizes and specialty finishes.</p>
+              <CollectionGallery
+                label="Custom Mylar Bags"
+                sources={['/shop/packaging/mylar-bags', '/shop/packaging/mylar-bags/standard', '/shop/packaging/mylar-bags/die-cut']}
+              />
+            </div>
+            <CustomPackagingHeroForm quoteType="mylar-bags" />
+          </div>
+        </section>
+
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {PRODUCTS.map(product => (
+                <div key={product.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200">
+                  <div className="relative w-full h-48 overflow-hidden" style={{ backgroundColor: product.color }}>
+                    <ProductPreviewImage
+                      productPath={product.href}
+                      alt={product.imageAlt ?? product.name}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <h2 className="text-base font-semibold text-gray-900 mb-1">{product.name}</h2>
+                    <p className="text-xs text-gray-400 mb-3">{product.subtitle}</p>
+                    <p className="text-sm text-gray-600 mb-4 leading-relaxed">{product.description}</p>
+                    <button onClick={() => setExpanded(expanded === product.id ? null : product.id)} className="flex items-center gap-1.5 text-xs font-medium text-gray-400 hover:text-lp-green transition-colors mb-4">
+                      <ChevronDown size={14} className={`transition-transform duration-200 ${expanded === product.id ? 'rotate-180' : ''}`} />
+                      {expanded === product.id ? 'Hide details' : 'See details'}
+                    </button>
+                    <AnimatePresence>
+                      {expanded === product.id && (
+                        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.15 }} className="overflow-hidden">
+                          <ul className="space-y-1.5 mb-4">
+                            {product.features.map(f => (
+                              <li key={f} className="flex items-center gap-2 text-sm text-gray-600">
+                                <span className="w-1.5 h-1.5 rounded-full bg-lp-green flex-shrink-0" />{f}
+                              </li>
+                            ))}
+                          </ul>
+                          <p className="text-xs text-gray-400 mb-4">Production: {product.turnaround}</p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                    <Link href={product.href}>
+                      <Button variant="secondary" size="sm" className="w-full bg-white">Order Now <ArrowRight size={14} className="ml-1" /></Button>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 bg-white border-t border-gray-100">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-h2 font-semibold text-gray-900 mb-4">Need compliance packaging?</h2>
+            <p className="text-body text-gray-500 mb-8">We understand cannabis compliance requirements. Tell us your state and product type and we&apos;ll make sure your bags meet the rules.</p>
+            <Link href="/get-quote"><Button size="lg">Talk to Us</Button></Link>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  )
+}

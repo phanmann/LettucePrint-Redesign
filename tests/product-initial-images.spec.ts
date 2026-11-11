@@ -9,7 +9,7 @@ for (const [group, slugs] of Object.entries(groups)) {
   test(`${group}: CMS images render before client gallery requests`, async ({ page, request }) => {
     // A failed refresh must not replace a valid server-resolved image.
     await page.route('**/api/product-gallery?**', route => route.abort())
-    const root = `/services/signage/${group}`
+    const root = `/shop/signage/${group}`
     const listing = await request.get(root)
     expect(listing.ok()).toBeTruthy()
     const html = await listing.text()

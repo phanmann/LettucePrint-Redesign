@@ -45,7 +45,7 @@ export default function TentConfigurator({ size }: { size: TentSize }) {
     <p className="text-sm text-gray-600">Merchandise only. Shipping and tax excluded. No quantity discount.</p>
     <button type="button" disabled={!price || artwork.busy} className="w-full rounded-lg bg-lp-green text-white font-semibold py-4 disabled:opacity-50" onClick={() => {
       if (!price) return
-      addItem({ product: tentNames[size], size, qty: Number(quantity), material: tentMaterial(config), finish: tentDescription(config), rush: config.production, tentConfiguration: { ...config }, ...price, totalFormatted: money(price.totalCents), productPath: `/services/signage/tents/${size}` })
+      addItem({ product: tentNames[size], size, qty: Number(quantity), material: tentMaterial(config), finish: tentDescription(config), rush: config.production, tentConfiguration: { ...config }, ...price, totalFormatted: money(price.totalCents), productPath: `/shop/signage/tents/${size}` })
       setAdded(true)
     }}>Add to Cart</button>
     <p role="status">{added ? 'Added to cart.' : ''}</p>

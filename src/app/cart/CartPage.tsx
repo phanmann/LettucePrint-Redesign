@@ -231,9 +231,9 @@ export default function CartPage() {
   const subtotalCents = items.reduce((sum, i) => sum + i.totalCents, 0)
   const subtotalFormatted = `$${(subtotalCents / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
   // Banners and backdrops require a paid UPS quote until live rates are connected.
-  const quoteItems = items.filter(i => i.bannerConfiguration || i.productPath?.startsWith('/services/signage/backdrops/'))
+  const quoteItems = items.filter(i => i.bannerConfiguration || i.productPath?.startsWith('/shop/signage/backdrops/'))
   const hasBanners = quoteItems.some(i => i.bannerConfiguration)
-  const hasBackdrops = quoteItems.some(i => i.productPath?.startsWith('/services/signage/backdrops/'))
+  const hasBackdrops = quoteItems.some(i => i.productPath?.startsWith('/shop/signage/backdrops/'))
   const quoteProduct = hasBanners && hasBackdrops ? 'banners-backdrops' : hasBackdrops ? 'backdrops' : 'banners'
   const quoteLabel = hasBanners && hasBackdrops ? 'banners and backdrops' : hasBackdrops ? 'backdrops' : 'banners'
   const shippingQuoteHref = `/get-quote?${new URLSearchParams({
@@ -314,13 +314,13 @@ export default function CartPage() {
             <Link href="/shop/roll-labels" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-lp-green transition-colors">
               <Plus size={14} /> Add roll labels
             </Link>
-            <Link href="/services/marketing-materials/business-cards/standard" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-lp-green transition-colors">
+            <Link href="/shop/marketing-materials/business-cards/standard" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-lp-green transition-colors">
               <Plus size={14} /> Add business cards
             </Link>
-            <Link href="/services/marketing-materials/flyers" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-lp-green transition-colors">
+            <Link href="/shop/marketing-materials/flyers" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-lp-green transition-colors">
               <Plus size={14} /> Request flyer quote
             </Link>
-            <Link href="/services/marketing-materials/postcards/standard" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-lp-green transition-colors">
+            <Link href="/shop/marketing-materials/postcards/standard" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-lp-green transition-colors">
               <Plus size={14} /> Add postcards
             </Link>
           </div>

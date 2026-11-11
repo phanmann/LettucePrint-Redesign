@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
       row('Name',x.contact.name),row('Email',x.contact.email),row('Company',x.contact.company),row('Phone',x.contact.phone),row('Needed by',x.dueDate || 'Not specified'),row('Date flexible',x.flexible ? 'Yes':'No'),row('Firm deadline',x.firmDeadline ? 'Yes':'No'),row('Fulfillment',x.fulfillment),row('Shipping ZIP',x.zip)
     ].join('')}</table><h2>Garments</h2>${garmentRows}<h2>Placements</h2>${placementRows}<h2>Setup & notes</h2><table>${[
       row('Repeat job',x.repeatJob ? 'Yes':'No'),row('Prior order reference',x.orderReference),row('Machine-ready embroidery file',x.machineFile),row('Thread requirements',x.threadRequirements),row('Notes',x.notes),row('Reference attachments',attachments.map(a => a.filename).join(', ') || 'None')
-    ].join('')}</table><p>Submitted via /services/apparel/embroidery</p></div>`
+    ].join('')}</table><p>Submitted via /shop/apparel/embroidery</p></div>`
     const sent = await getResend().emails.send({
       from: 'Lettuce Print Website <onboarding@resend.dev>', to: 'info@lettuceprint.com',
       subject: `Embroidery quote request — ${x.contact.name.slice(0,80)}`, html, attachments,

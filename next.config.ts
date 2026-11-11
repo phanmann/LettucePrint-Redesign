@@ -2,42 +2,47 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   async redirects() {
-    return [
+    const aliases = [
       {
         source: "/services/marketing-materials/postcards/premium",
-        destination: "/services/marketing-materials/postcards",
+        destination: "/shop/marketing-materials/postcards",
         permanent: true,
       },
       {
         source: '/services/marketing-materials/flyers/tabloid',
-        destination: '/services/marketing-materials/flyers/full-page?size=tabloid',
+        destination: '/shop/marketing-materials/flyers/full-page?size=tabloid',
         permanent: false,
       },
       {
         source: '/services/marketing-materials/brochures/bi-fold-tabloid',
-        destination: '/services/marketing-materials/brochures/bi-fold-letter',
+        destination: '/shop/marketing-materials/brochures/bi-fold-letter',
         permanent: false,
       },
       {
         source: '/services/marketing-materials/posters',
-        destination: '/services/marketing-materials/flyers#posters',
+        destination: '/shop/marketing-materials/flyers#posters',
         permanent: false,
       },
       {
         source: '/services/marketing-materials/booklets',
-        destination: '/services/marketing-materials/brochures#booklets',
+        destination: '/shop/marketing-materials/brochures#booklets',
         permanent: false,
       },
       {
         source: '/services/signage/banners/double-sided-banner',
-        destination: '/services/signage/banners',
+        destination: '/shop/signage/banners',
         permanent: true,
       },
       {
         source: '/services/packaging/boxes',
-        destination: '/services/packaging',
+        destination: '/shop/packaging',
         permanent: true,
       },
+    ]
+    return [
+      ...aliases.map(rule => ({ ...rule, permanent: true })),
+      ...aliases.map(rule => ({ ...rule, source: rule.source.replace('/services', '/shop') })),
+      { source: '/services/:path*', destination: '/shop/:path*', permanent: true },
     ]
   },
   images: {

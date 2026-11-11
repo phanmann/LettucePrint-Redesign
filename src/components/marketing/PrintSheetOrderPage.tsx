@@ -30,8 +30,8 @@ export default function PrintSheetOrderPage({ product, tagline, fold, breadcrumb
     <ProductOrderPage
       name={product}
       tagline={tagline}
-      parentHref={breadcrumbLabel === 'Flyers' ? '/services/marketing-materials/flyers' : '/services/marketing-materials/brochures'}
-      breadcrumb={[{ label: breadcrumbLabel, href: breadcrumbLabel === 'Flyers' ? '/services/marketing-materials/flyers' : '/services/marketing-materials/brochures' }, { label: product, href: '' }]}
+      parentHref={breadcrumbLabel === 'Flyers' ? '/shop/marketing-materials/flyers' : '/shop/marketing-materials/brochures'}
+      breadcrumb={[{ label: breadcrumbLabel, href: breadcrumbLabel === 'Flyers' ? '/shop/marketing-materials/flyers' : '/shop/marketing-materials/brochures' }, { label: product, href: '' }]}
       color="#E8F5F1"
       optionGroups={[
         { label: 'Size', options: SIZE_OPTIONS },

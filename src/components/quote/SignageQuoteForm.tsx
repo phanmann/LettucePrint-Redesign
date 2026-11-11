@@ -50,7 +50,7 @@ export default function SignageQuoteForm() {
     <div role="status" className="rounded-card border border-lp-green/30 bg-lp-green/5 p-8">
       <h2 className="text-h2 font-semibold mb-4">Your signage request is in.</h2>
       <p className="text-body text-gray-600 mb-6">We’ll review your event date, booth specs, and venue requirements, then follow up to put the print, hardware, and timeline together.</p>
-      <Link href="/services/signage" className="font-semibold text-lp-green underline">Back to signs & banners</Link>
+      <Link href="/shop/signage" className="font-semibold text-lp-green underline">Back to signs & banners</Link>
     </div>
   )
 

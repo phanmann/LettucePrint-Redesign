@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test'
 
-const listingPath = '/services/signage/banners'
+const listingPath = '/shop/signage/banners'
 const productPath = `${listingPath}/retractable-luxury-33`
 const assetPath = '/images/products/banners/retractable-luxury-33/luxury-base-retractable.webp'
 

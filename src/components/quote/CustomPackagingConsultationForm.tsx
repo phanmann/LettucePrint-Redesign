@@ -47,7 +47,7 @@ export default function CustomPackagingConsultationForm() {
     const candidate = {
       quoteType: 'custom-packaging',
       service: 'Packaging',
-      source: '/services/packaging/custom-packaging',
+      source: '/shop/packaging/custom-packaging',
       contact: {
         name: formData.get('name'),
         company: formData.get('company'),

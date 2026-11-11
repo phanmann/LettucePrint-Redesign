@@ -8,11 +8,11 @@ import HeroSlideshow from './HeroSlideshow'
 import Button from '@/components/ui/Button'
 
 const heroCards = [
-  { label: 'Packaging', href: '/services/packaging', bg: '#00A175', },
-  { label: 'Screen Printing', href: '/services/apparel/screenprint', bg: '#7E6AAE', },
-  { label: 'Signage', href: '/services/signage', bg: '#ffffff', },
+  { label: 'Packaging', href: '/shop/packaging', bg: '#00A175', },
+  { label: 'Screen Printing', href: '/shop/apparel/screenprint', bg: '#7E6AAE', },
+  { label: 'Signage', href: '/shop/signage', bg: '#ffffff', },
   { label: 'Stickers', href: '/shop/stickers', bg: '#acf2f9', },
-  { label: 'Large Format', href: '/services/signage/backdrops', bg: '#0a0a0a', },
+  { label: 'Large Format', href: '/shop/signage/backdrops', bg: '#0a0a0a', },
 ]
 
 export default function Hero() {
