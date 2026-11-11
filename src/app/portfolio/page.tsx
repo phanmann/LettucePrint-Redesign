@@ -75,7 +75,7 @@ function ProjectMarquee() {
 
 export default function PortfolioMicrositePage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#080808] text-[#f5f0e8] selection:bg-[#f2ff70] selection:text-black">
+    <main data-portfolio-home className="min-h-screen overflow-hidden bg-[#080808] text-[#f5f0e8] selection:bg-[#f2ff70] selection:text-black">
       <Header />
 
       <section className="relative mx-auto flex max-w-[1600px] flex-col px-4 pb-10 pt-24 sm:px-8 sm:pt-32 lg:min-h-screen lg:pb-6">
@@ -88,7 +88,7 @@ export default function PortfolioMicrositePage() {
               Design
             </span>
           </h1>
-          <p className="mx-auto mt-12 max-w-3xl text-balance text-center text-[19px] leading-[1.45] tracking-[-0.02em] text-white/55 sm:mt-16">
+          <p className="mx-auto mt-12 max-w-3xl text-balance text-center text-[14px] sm:text-[19px] leading-[1.45] tracking-[-0.02em] text-white/55 sm:mt-16">
             We are Lettuce Print&apos;s creative studio, specializing in crafting{' '}
             <br className="hidden sm:block" />
             cohesive brand identities and striking packaging. Our portfolio showcases{' '}

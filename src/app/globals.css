@@ -171,3 +171,12 @@ body {
 .portfolio-dossier-scrollbar::-webkit-scrollbar-track { background: #202020; }
 .portfolio-dossier-scrollbar::-webkit-scrollbar-thumb { background: #777; }
 .portfolio-dossier-scrollbar::-webkit-scrollbar-thumb:hover { background: #999; }
+
+/* Match the mobile portfolio canvas during rubber-band overscroll. */
+@media (max-width: 639px) {
+  html:has([data-portfolio-home]),
+  body:has([data-portfolio-home]) {
+    background-color: #080808;
+    overscroll-behavior-y: none;
+  }
+}
