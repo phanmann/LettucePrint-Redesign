@@ -8,7 +8,7 @@ import Button from '@/components/ui/Button'
 
 export const metadata: Metadata = {
   title: 'Apparel & Promo Printing',
-  description: 'Screen printing, embroidery, DTG, and custom promotional items from Lettuce Print in Brooklyn.',
+  description: 'Screen printing, embroidery, DTG, DTF, and custom promotional items from Lettuce Print in Brooklyn.',
   alternates: { canonical: 'https://lettuceprint.com/services/apparel' },
 }
 
@@ -50,6 +50,7 @@ export default function ApparelPage() {
             ))}
           </div>
         </section>
+        <div className="bg-gray-50 pb-10 text-center px-4"><Link href="/services/apparel/dtf" className="text-lp-green font-semibold underline underline-offset-4">Explore Direct-To-Film (DTF) apparel printing →</Link></div>
         <section className="py-16 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-h2 font-semibold text-gray-900 mb-4">Bring the logo. We’ll build the merch plan.</h2>

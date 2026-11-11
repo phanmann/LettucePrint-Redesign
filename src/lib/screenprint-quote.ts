@@ -10,7 +10,7 @@ export function validateScreenprintDetails(details: Record<string, string>, colo
   const count = printLocationCount(details.printLocations)
   if (!count) return `Choose the number of ${colorType === 'thread' ? 'embroidery' : 'print'} locations.`
   if (!details.garmentType?.trim() || !details.quantity?.trim()) return 'Add the garment type and quantity.'
-  if (details.colors !== undefined || (colorType === 'none' && Object.keys(details).some(key => /^location\d+Colors$/.test(key)))) return colorType === 'none' ? 'Remove color counts from DTG requests.' : `Choose ${colorType} colors for each location.`
+  if (details.colors !== undefined || (colorType === 'none' && Object.keys(details).some(key => /^location\d+Colors$/.test(key)))) return colorType === 'none' ? 'Remove color counts from full-color apparel requests.' : `Choose ${colorType} colors for each location.`
 
   for (let index = 1; index <= count; index++) {
     if (colorType !== 'none' && !INK_COLOR_OPTIONS.includes(details[`location${index}Colors`] as typeof INK_COLOR_OPTIONS[number])) {

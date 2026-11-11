@@ -43,6 +43,14 @@ const services: ApparelService[] = [
     details: ['Low minimums', 'Best on cotton garments', 'Soft hand feel', 'Fast option for detailed prints'],
   },
   {
+    slug: 'dtf',
+    title: 'DTF Printing',
+    eyebrow: 'Apparel & Promo',
+    description: 'Full-color Direct-To-Film printing for detailed artwork on tees, hoodies, and apparel. Printed transfers are heat-applied to your garments for bold, versatile branding.',
+    bestFor: ['Full-color logos', 'Detailed artwork', 'Brand merch', 'Team apparel'],
+    details: ['Artwork is printed onto transfer film, then heat-applied to the garment', 'Suitable for many cotton, polyester, and blended garments; compatibility confirmed with your quote', 'Share your garment colors, sizes, and print placements', 'Pricing and production timing confirmed after artwork and garment review'],
+  },
+  {
     slug: 'custom-items',
     title: 'Custom Promo Items',
     eyebrow: 'Apparel & Promo',
@@ -70,6 +78,12 @@ const SERVICE_FAQS: Record<string, { q: string; a: string }[]> = {
     { q: 'When should I choose DTG over screen printing?', a: 'Choose DTG for small runs, samples and full-color or photo-style artwork. Screen printing is usually more cost-effective for large runs with a few solid colors.' },
     { q: 'What garments work best for DTG?', a: 'DTG works best on cotton garments and produces a soft hand feel.' },
     { q: 'How do I get a quote?', a: 'Tell us about your garments, print placements, artwork and in-hands date using the form on this page.' },
+  ],
+  dtf: [
+    { q: 'What is DTF printing?', a: 'Direct-To-Film (DTF) printing creates your artwork on transfer film, which is then heat-applied to apparel. It supports full-color designs and fine detail.' },
+    { q: 'How is DTF different from DTG?', a: 'DTG prints ink directly onto the garment. DTF prints onto film first, then transfers the design with heat. We can recommend a method based on your artwork, garment, and desired finish.' },
+    { q: 'Which garments can be printed with DTF?', a: 'DTF can work with many cotton, polyester, and blended garments. Send the garment brand, fabric, and color so we can confirm compatibility before production.' },
+    { q: 'How do I get a DTF quote?', a: 'Use the form on this page to share garment type, quantity, print placements, artwork, and timeline. We will review the details and quote the finished apparel.' },
   ],
   'custom-items': [
     { q: 'What promo items can you source?', a: 'Tote bags, drinkware, giveaway kits, retail add-ons and more. We source products and recommend the right decoration method.' },
@@ -115,7 +129,7 @@ export default async function ApparelServicePage({ params }: { params: Promise<{
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
               <h2 className="text-h2 font-semibold text-gray-900 mb-4">Ready to price it?</h2>
-              <p className="text-body text-gray-500">{service.slug === 'embroidery' ? 'Send garment type, quantity, embroidery locations, thread colors, and deadline. We’ll prepare a quote.' : service.slug === 'dtg' ? 'Tell us about your garments, print placements, artwork, and in-hands date. We’ll review the details and prepare a quote.' : 'Send garment type, quantity, print locations, artwork, and deadline. We’ll recommend the cleanest production route.'}</p>
+              <p className="text-body text-gray-500">{service.slug === 'embroidery' ? 'Send garment type, quantity, embroidery locations, thread colors, and deadline. We’ll prepare a quote.' : (service.slug === 'dtg' || service.slug === 'dtf') ? 'Tell us about your garments, print placements, artwork, and in-hands date. We’ll review the details and prepare a quote.' : 'Send garment type, quantity, print locations, artwork, and deadline. We’ll recommend the cleanest production route.'}</p>
             </div>
             {service.slug === 'screenprint' ? (
               <QuoteForm initialValues={{ service: 'Screen Printing', projectDetails: {} }} lockService allowArtwork />
@@ -123,6 +137,8 @@ export default async function ApparelServicePage({ params }: { params: Promise<{
               <QuoteForm initialValues={{ service: 'Embroidery', projectDetails: {} }} lockService allowArtwork />
             ) : service.slug === 'dtg' ? (
               <QuoteForm initialValues={{ service: 'DTG Printing', projectDetails: {} }} lockService allowArtwork />
+            ) : service.slug === 'dtf' ? (
+              <QuoteForm initialValues={{ service: 'DTF Printing', projectDetails: {} }} lockService allowArtwork />
             ) : (
               <div className="text-center"><Link href="/get-quote"><Button size="lg">Request a Quote</Button></Link></div>
             )}

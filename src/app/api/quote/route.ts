@@ -44,7 +44,7 @@ type ParsedQuote =
   | { success: false; errors: CustomPackagingConsultationErrors | Record<string, string> }
 
 // Apparel quote pages may attach artwork to the general quote form.
-const APPAREL_LEGACY_SERVICES = new Set(['Screen Printing', 'Embroidery', 'DTG Printing'])
+const APPAREL_LEGACY_SERVICES = new Set(['Screen Printing', 'Embroidery', 'DTG Printing', 'DTF Printing'])
 // Vercel rejects request bodies over ~4.5 MB, so apparel artwork is capped at 4 MB combined.
 const APPAREL_ARTWORK_LIMITS = { maxFiles: 3, maxFileBytes: 4 * 1024 * 1024, maxTotalBytes: 4 * 1024 * 1024, allowVector: true }
 
@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
     const signageQuote = 'formType' in quote && quote.formType === 'signage-booth'
     const embroideryQuote = 'formType' in quote && quote.formType === 'embroidery'
     const dtgQuote = 'formType' in quote && quote.formType === 'dtg'
-    const source = quote.service === 'Embroidery' ? '/services/apparel/embroidery' : quote.service === 'Screen Printing' ? '/services/apparel/screenprint' : quote.service === 'DTG Printing' ? '/services/apparel/dtg' : dtgQuote ? '/services/apparel/dtg' : embroideryQuote ? '/services/apparel/embroidery' : signageQuote ? '/services/signage/quote' : 'quoteType' in quote && quote.quoteType ? quote.source : '/get-quote'
+    const source = quote.service === 'DTF Printing' ? '/services/apparel/dtf' : quote.service === 'Embroidery' ? '/services/apparel/embroidery' : quote.service === 'Screen Printing' ? '/services/apparel/screenprint' : quote.service === 'DTG Printing' ? '/services/apparel/dtg' : dtgQuote ? '/services/apparel/dtg' : embroideryQuote ? '/services/apparel/embroidery' : signageQuote ? '/services/signage/quote' : 'quoteType' in quote && quote.quoteType ? quote.source : '/get-quote'
     const mylarQuote = !consultation && 'quoteType' in quote && quote.quoteType === 'mylar-bags'
     const detailsRows = !consultation && !mylarQuote && !embroideryQuote && !dtgQuote ? legacyDetailRows(quote as LegacyQuotePayload) : ''
 
@@ -120,7 +120,7 @@ export async function POST(req: NextRequest) {
       await sendCustomPackagingInternalEmail(email => resend.emails.send(email), quote, incoming.files)
     } else if (internalEmail) {
       const result = await resend.emails.send(internalEmail)
-      if ((signageQuote || embroideryQuote || dtgQuote || service === 'Screen Printing' || service === 'Embroidery' || service === 'DTG Printing') && result.error) {
+      if ((signageQuote || embroideryQuote || dtgQuote || service === 'Screen Printing' || service === 'Embroidery' || (service === 'DTG Printing' || service === 'DTF Printing')) && result.error) {
         return NextResponse.json({ error: 'Unable to deliver quote request.' }, { status: 502 })
       }
     }
@@ -156,10 +156,10 @@ export async function POST(req: NextRequest) {
         `,
       })
       } catch (error) {
-        if (!signageQuote && !embroideryQuote && !dtgQuote && service !== 'Screen Printing' && service !== 'Embroidery' && service !== 'DTG Printing') throw error
+        if (!signageQuote && !embroideryQuote && !dtgQuote && service !== 'Screen Printing' && service !== 'Embroidery' && (service !== 'DTG Printing' && service !== 'DTF Printing')) throw error
         console.error('Quote confirmation delivery failed')
       }
-      if ((signageQuote || embroideryQuote || dtgQuote || service === 'Screen Printing' || service === 'Embroidery' || service === 'DTG Printing') && confirmationResult?.error) console.error('Quote confirmation delivery failed')
+      if ((signageQuote || embroideryQuote || dtgQuote || service === 'Screen Printing' || service === 'Embroidery' || (service === 'DTG Printing' || service === 'DTF Printing')) && confirmationResult?.error) console.error('Quote confirmation delivery failed')
       if (consultation && confirmationResult?.error) {
         throw new Error(`Consultation confirmation email failed: ${confirmationResult.error.message}`)
       }
@@ -264,8 +264,8 @@ function parseQuote(input: unknown): ParsedQuote {
     return { success: false, errors: { request: 'Missing or invalid quote fields.' } }
   }
 
-  if (value.service === 'Screen Printing' || value.service === 'Embroidery' || value.service === 'DTG Printing') {
-    const validationError = validateScreenprintDetails(projectDetails as Record<string, string>, value.service === 'Embroidery' ? 'thread' : value.service === 'DTG Printing' ? 'none' : 'ink')
+  if (value.service === 'Screen Printing' || value.service === 'Embroidery' || (value.service === 'DTG Printing' || value.service === 'DTF Printing')) {
+    const validationError = validateScreenprintDetails(projectDetails as Record<string, string>, value.service === 'Embroidery' ? 'thread' : (value.service === 'DTG Printing' || value.service === 'DTF Printing') ? 'none' : 'ink')
     if (validationError) return { success: false, errors: { projectDetails: validationError } }
   }
 
@@ -315,16 +315,16 @@ function isCustomPackagingConsultation(quote: QuotePayload): quote is CustomPack
 }
 
 function legacyDetailRows(quote: LegacyQuotePayload): string {
-  const count = (quote.service === 'Screen Printing' || quote.service === 'Embroidery' || quote.service === 'DTG Printing') ? printLocationCount(quote.projectDetails.printLocations) : 0
+  const count = (quote.service === 'Screen Printing' || quote.service === 'Embroidery' || (quote.service === 'DTG Printing' || quote.service === 'DTF Printing')) ? printLocationCount(quote.projectDetails.printLocations) : 0
   const details = Object.entries(quote.projectDetails)
-    .filter(([key, value]) => value && ((quote.service !== 'Screen Printing' && quote.service !== 'Embroidery' && quote.service !== 'DTG Printing') || !/^location\d+(Name|Colors)$/.test(key)))
+    .filter(([key, value]) => value && ((quote.service !== 'Screen Printing' && quote.service !== 'Embroidery' && (quote.service !== 'DTG Printing' && quote.service !== 'DTF Printing')) || !/^location\d+(Name|Colors)$/.test(key)))
     .map(([key, value]) => row(formatKey(key), value))
     .join('')
   const locations = Array.from({ length: count }, (_, index) => {
     const number = index + 1
     const name = quote.projectDetails[`location${number}Name`]?.trim()
     const colors = quote.projectDetails[`location${number}Colors`]
-    return quote.service === 'DTG Printing'
+    return (quote.service === 'DTG Printing' || quote.service === 'DTF Printing')
       ? row(`Location ${number}`, name || 'Placement not specified')
       : row(`Location ${number}${name ? ` (${name})` : ''} — ${quote.service === 'Embroidery' ? 'thread' : 'ink'} colors`, colors === '5+' ? '5+ colors' : `${colors} ${colors === '1' ? 'color' : 'colors'}`)
   }).join('')

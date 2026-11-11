@@ -15,6 +15,7 @@ type ServiceType =
   | 'Screen Printing'
   | 'Embroidery'
   | 'DTG Printing'
+  | 'DTF Printing'
   | 'Large Format'
   | 'Other'
 
@@ -51,6 +52,7 @@ const SERVICES: { id: ServiceType; icon: LucideIcon; desc: string }[] = [
   { id: 'Packaging',         icon: Package,  desc: 'Custom boxes, bags, tissue, inserts' },
   { id: 'Signage & Displays',icon: PanelTop, desc: 'Banners, foam boards, window graphics' },
   { id: 'Screen Printing',   icon: Shirt,    desc: 'Apparel, merch drops, event tees' },
+  { id: 'DTF Printing', icon: Shirt, desc: 'Full-color direct-to-film apparel printing' },
   { id: 'Large Format',      icon: Expand,   desc: 'Murals, wraps, backdrops, trade show' },
   { id: 'Other',             icon: Sparkles, desc: 'Something else — tell us about it' },
 ]
@@ -64,7 +66,7 @@ const TIMELINE_OPTIONS = [
 ]
 
 // Apparel artwork uploads reuse the server-side quote attachment limits.
-const APPAREL_SERVICES: ServiceType[] = ['Screen Printing', 'Embroidery', 'DTG Printing']
+const APPAREL_SERVICES: ServiceType[] = ['Screen Printing', 'Embroidery', 'DTG Printing', 'DTF Printing']
 const ARTWORK_ACCEPT = '.pdf,.jpg,.jpeg,.png,.webp,.ai,.eps,.svg'
 // Checked by extension: browsers report inconsistent MIME types for AI/EPS files.
 const ARTWORK_EXTENSIONS = new Set(['pdf', 'jpg', 'jpeg', 'png', 'webp', 'ai', 'eps', 'svg'])
@@ -115,11 +117,12 @@ function getProjectFields(service: ServiceType): {
     case 'Screen Printing':
     case 'Embroidery':
     case 'DTG Printing':
+    case 'DTF Printing':
       return [
         { key: 'garmentType',       label: 'Garment type',          type: 'select',   options: ['T-shirt', 'Hoodie', 'Long sleeve', 'Tote bag', 'Hat', 'Other'], required: true },
         { key: 'quantity',          label: 'Quantity',              type: 'text',     placeholder: 'e.g. 48', required: true },
         { key: 'printLocations',    label: service === 'Embroidery' ? 'Embroidery locations' : 'Print locations',       type: 'select',   options: Array.from({ length: MAX_PRINT_LOCATIONS }, (_, index) => String(index + 1)), required: true },
-        { key: 'details',           label: 'Anything else',         type: 'textarea', placeholder: service === 'Embroidery' ? 'Garment brand preference, sizes breakdown, thread preferences…' : service === 'DTG Printing' ? 'Garment brand preference, sizes breakdown, artwork details…' : 'Garment brand preference, sizes breakdown, special inks…' },
+        { key: 'details',           label: 'Anything else',         type: 'textarea', placeholder: service === 'Embroidery' ? 'Garment brand preference, sizes breakdown, thread preferences…' : (service === 'DTG Printing' || service === 'DTF Printing') ? 'Garment brand preference, sizes breakdown, artwork details…' : 'Garment brand preference, sizes breakdown, special inks…' },
       ]
     case 'Large Format':
       return [
@@ -193,7 +196,7 @@ export default function QuoteForm({ initialValues, lockService = false, allowArt
   const setDetail = (key: string, value: string) =>
     setForm(f => {
       const projectDetails = { ...f.projectDetails, [key]: value }
-      if ((f.service === 'Screen Printing' || f.service === 'Embroidery' || f.service === 'DTG Printing') && key === 'printLocations') {
+      if ((f.service === 'Screen Printing' || f.service === 'Embroidery' || (f.service === 'DTG Printing' || f.service === 'DTF Printing')) && key === 'printLocations') {
         const count = printLocationCount(value)
         for (const detailKey of Object.keys(projectDetails)) {
           const match = /^location(\d+)(Colors|Name)$/.exec(detailKey)
@@ -225,7 +228,7 @@ export default function QuoteForm({ initialValues, lockService = false, allowArt
       if (!form.service) return false
       const fields = getProjectFields(form.service)
       return fields.filter(f => f.required).every(f => !!form.projectDetails[f.key]?.trim())
-        && ((form.service !== 'Screen Printing' && form.service !== 'Embroidery' && form.service !== 'DTG Printing') || !validateScreenprintDetails(form.projectDetails, form.service === 'Embroidery' ? 'thread' : form.service === 'DTG Printing' ? 'none' : 'ink'))
+        && ((form.service !== 'Screen Printing' && form.service !== 'Embroidery' && (form.service !== 'DTG Printing' && form.service !== 'DTF Printing')) || !validateScreenprintDetails(form.projectDetails, form.service === 'Embroidery' ? 'thread' : (form.service === 'DTG Printing' || form.service === 'DTF Printing') ? 'none' : 'ink'))
     }
     if (step === 2) return !!form.timeline
     if (step === 3) return !!(form.contact.name.trim() && form.contact.email.trim())
@@ -400,7 +403,7 @@ export default function QuoteForm({ initialValues, lockService = false, allowArt
                           className="w-full px-4 py-3 rounded-input border border-gray-200 text-small focus:outline-none focus:border-lp-green focus:ring-2 focus:ring-lp-green/10 bg-white"
                         />
                       )}
-                      {(form.service === 'Screen Printing' || form.service === 'Embroidery' || form.service === 'DTG Printing') && field.key === 'printLocations' &&
+                      {(form.service === 'Screen Printing' || form.service === 'Embroidery' || (form.service === 'DTG Printing' || form.service === 'DTF Printing')) && field.key === 'printLocations' &&
                         Array.from({ length: printLocationCount(form.projectDetails.printLocations) }, (_, index) => {
                           const number = index + 1
                           return (
@@ -417,7 +420,7 @@ export default function QuoteForm({ initialValues, lockService = false, allowArt
                                     placeholder="e.g. Front chest, back, sleeve"
                                     className="w-full px-4 py-3 rounded-input border border-gray-200 text-small focus:outline-none focus:border-lp-green focus:ring-2 focus:ring-lp-green/10 bg-white" />
                                 </div>
-                                {form.service !== 'DTG Printing' && <div>
+                                {(form.service !== 'DTG Printing' && form.service !== 'DTF Printing') && <div>
                                   <label htmlFor={`location${number}Colors`} className="block text-small font-semibold text-gray-700 mb-2">
                                     Number of {form.service === 'Embroidery' ? 'thread' : 'ink'} colors <span className="text-lp-green">*</span>
                                   </label>

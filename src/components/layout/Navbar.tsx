@@ -45,6 +45,7 @@ const allProducts = [
   { label: 'Screenprint',                  href: '/services/apparel/screenprint',                           tags: ['screen print', 'apparel', 't-shirts', 'clothing'] },
   { label: 'Embroidery',                   href: '/services/apparel/embroidery',                            tags: ['embroidery', 'apparel', 'hats', 'clothing'] },
   { label: 'DTG Printing',                 href: '/services/apparel/dtg',                                   tags: ['dtg', 'direct to garment', 'apparel', 't-shirts'] },
+  { label: 'DTF Printing', href: '/services/apparel/dtf', tags: ['dtf', 'direct to film', 'direct-to-film', 'apparel', 't-shirts'] },
   { label: 'Custom Promo Items',           href: '/services/apparel/custom-items',                          tags: ['custom', 'promo', 'merch', 'swag'] },
 ]
 
@@ -73,6 +74,7 @@ const navLinks: NavLink[] = [
     { label: 'Screenprint', href: '/services/apparel/screenprint' },
     { label: 'Embroidery', href: '/services/apparel/embroidery' },
     { label: 'DTG', href: '/services/apparel/dtg' },
+    { label: 'DTF', href: '/services/apparel/dtf' },
     { label: 'Custom Items', href: '/services/apparel/custom-items' },
   ]},
 ]

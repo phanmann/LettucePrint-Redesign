@@ -44,6 +44,7 @@ const entries: SitemapEntry[] = [
   { path: '/services/apparel/screenprint', changeFrequency: 'monthly', priority: 0.6 },
   { path: '/services/apparel/embroidery', changeFrequency: 'monthly', priority: 0.6 },
   { path: '/services/apparel/dtg', changeFrequency: 'monthly', priority: 0.6 },
+  { path: '/services/apparel/dtf', changeFrequency: 'monthly', priority: 0.6 },
   { path: '/services/apparel/custom-items', changeFrequency: 'monthly', priority: 0.6 },
   { path: '/get-quote', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/portfolio', changeFrequency: 'weekly', priority: 0.75 },
