@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import RelatedProducts from '@/components/shop/RelatedProducts'
 import BannerConfigurator from './BannerConfigurator'
 import { defaultBannerConfiguration, type BannerKind } from '@/lib/banner-pricing'
 import Navbar from '@/components/layout/Navbar'
@@ -606,35 +607,7 @@ export default function ProductOrderPage({
             </div>
           </div>
 
-          {/* Related Products */}
-          {relatedProducts.length > 0 && (
-            <div className="mt-20 pt-12 border-t border-gray-100">
-              <h2 className="text-h2 font-semibold text-gray-900 mb-8">You might also want</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {relatedProducts.map(rp => (
-                  <Link
-                    key={rp.href}
-                    href={rp.href}
-                    className={`group block rounded-card p-6 transition-all duration-250 ${
-                      rp.dark
-                        ? 'bg-lp-black hover:opacity-90'
-                        : 'bg-white shadow-card hover:shadow-card-hover border border-gray-100'
-                    }`}
-                  >
-                    <h3 className={`text-h4 font-semibold mb-2 group-hover:text-lp-green transition-colors ${rp.dark ? 'text-white' : 'text-gray-900'}`}>
-                      {rp.name}
-                    </h3>
-                    <p className={`text-small mb-4 ${rp.dark ? 'text-white/70' : 'text-gray-600'}`}>
-                      {rp.description}
-                    </p>
-                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-lp-green">
-                      View product <ArrowRight size={12} />
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
+          <RelatedProducts currentPath={pathname} preferred={relatedProducts.map(product => product.href)} />
         </div>
         <JsonLd data={productJsonLd({ name, description: tagline, path: pathname, lowPrice: [...(pricingTable ?? []), ...(pricingRules ?? []).flatMap(r => r.pricingTable)].reduce<number | undefined>((min, row) => (min === undefined || row.standardPrice < min ? row.standardPrice : min), undefined) })} />
       </main>

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import RelatedProducts from '@/components/shop/RelatedProducts'
 import Link from 'next/link'
 import { CheckCircle, FileText, ArrowRight, Layers } from 'lucide-react'
 import { Disclosure } from '@/components/shop/ProductDisclosure'
@@ -112,19 +113,7 @@ export default function TypeProductPage({
             </div>
           </div>
 
-          {related.length > 0 && (
-            <div className="mt-20 pt-12 border-t border-gray-100">
-              <h2 className="text-h2 font-semibold text-gray-900 mb-8">More from {parent.name}</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {related.map(r => (
-                  <Link key={r.href} href={r.href} className="group block bg-white rounded-card shadow-card hover:shadow-card-hover border border-gray-100 p-6 transition-all">
-                    <h3 className="text-h4 font-semibold text-gray-900 group-hover:text-lp-green transition-colors mb-2">{r.name}</h3>
-                    <p className="text-small text-gray-600">{r.summary}</p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
+          <RelatedProducts currentPath={path} preferred={related.map(product => product.href)} />
         </div>
 
         <JsonLd data={productJsonLd({ name, description: metaDescription, path })} />

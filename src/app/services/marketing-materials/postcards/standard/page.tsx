@@ -1,13 +1,14 @@
 'use client'
 
 import { useState } from 'react'
+import RelatedProducts from '@/components/shop/RelatedProducts'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
 import { Disclosure } from '@/components/shop/ProductDisclosure'
-import { ArrowRight, CheckCircle, FileText, Layers } from 'lucide-react'
+import { CheckCircle, FileText, Layers } from 'lucide-react'
 import ProductImageGallery from '@/components/shop/ProductImageGallery'
 import { useRouter } from 'next/navigation'
 import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
@@ -328,23 +329,7 @@ export default function PostcardsPage() {
             </div>
           </div>
 
-          {/* Related */}
-          <div className="mt-20 pt-12 border-t border-gray-100">
-            <h2 className="text-h2 font-semibold text-gray-900 mb-8">You might also want</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <Link
-                href="/services/marketing-materials/business-cards"
-                className="group block bg-white rounded-card shadow-card hover:shadow-card-hover border border-gray-100 p-6 transition-all duration-250"
-              >
-                <Badge variant="new" className="mb-4">Popular</Badge>
-                <h3 className="text-h4 font-semibold text-gray-900 group-hover:text-lp-green transition-colors mb-2">Business Cards</h3>
-                <p className="text-small text-gray-600 mb-4">Standard and premium business cards printed in Brooklyn.</p>
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-lp-green">
-                  View product <ArrowRight size={12} />
-                </span>
-              </Link>
-            </div>
-          </div>
+          <RelatedProducts currentPath="/services/marketing-materials/postcards/standard" />
         </div>
       </main>
       <Footer />

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import RelatedProducts from '@/components/shop/RelatedProducts'
 import Link from 'next/link'
 import { CheckCircle, FileText, ArrowRight, Layers } from 'lucide-react'
 import { Disclosure } from '@/components/shop/ProductDisclosure'
@@ -207,36 +208,7 @@ export default function SpotUVPage() {
             </div>
           </div>
 
-          {/* Related Products */}
-          <div className="mt-20 pt-12 border-t border-gray-100">
-            <h2 className="text-h2 font-semibold text-gray-900 mb-8">You might also want</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <Link href="/shop/stickers" className="group block bg-white rounded-card shadow-card hover:shadow-card-hover border border-gray-100 p-6 transition-all duration-250">
-                <Badge variant="popular" className="mb-4">Most Popular</Badge>
-                <h3 className="text-h4 font-semibold text-gray-900 group-hover:text-lp-green transition-colors mb-2">
-                  Standard & Holographic Stickers
-                </h3>
-                <p className="text-small text-gray-600 mb-4">
-                  Die-cut stickers on premium vinyl. Standard, holographic, matte or gloss.
-                </p>
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-lp-green">
-                  View product <ArrowRight size={12} />
-                </span>
-              </Link>
-              <Link href="/shop/roll-labels" className="group block bg-white rounded-card shadow-card hover:shadow-card-hover border border-gray-100 p-6 transition-all duration-250">
-                <Badge variant="new" className="mb-4">Bulk</Badge>
-                <h3 className="text-h4 font-semibold text-gray-900 group-hover:text-lp-green transition-colors mb-2">
-                  Roll Labels
-                </h3>
-                <p className="text-small text-gray-600 mb-4">
-                  High-volume roll labels for product packaging, retail, food & beverage.
-                </p>
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-lp-green">
-                  View product <ArrowRight size={12} />
-                </span>
-              </Link>
-            </div>
-          </div>
+          <RelatedProducts currentPath="/shop/spot-uv" />
         </div>
       </main>
       <Footer />
