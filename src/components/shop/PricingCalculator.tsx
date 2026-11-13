@@ -24,15 +24,18 @@ interface Props {
   productName: string
   /** Materials offered on this page; the first is preselected. */
   materials?: StickerMaterial[]
+  /** Lock the existing finish contract when a product has no finish selector. */
+  fixedFinish?: StickerFinish
   productPath?: string
 }
 
-export default function PricingCalculator({ productName, materials = ['standard'], productPath = '/shop/stickers' }: Props) {
+export default function PricingCalculator({ productName, materials = ['standard'], productPath = '/shop/stickers', fixedFinish }: Props) {
   const MATERIALS = materials
   const [customWidth, setCustomWidth] = useState('')
   const [customHeight, setCustomHeight] = useState('')
   const [material, setMaterial] = useState<StickerMaterial>(materials[0])
-  const [finish, setFinish] = useState<StickerFinish>('matte')
+  const [selectedFinish, setFinish] = useState<StickerFinish>('matte')
+  const finish = fixedFinish ?? selectedFinish
   const [quantity, setQuantity] = useState<number>(100)
   const [customQty, setCustomQty] = useState('')
   const [showCustomQty, setShowCustomQty] = useState(false)
@@ -142,30 +145,34 @@ export default function PricingCalculator({ productName, materials = ['standard'
 
       <div className="border-t border-gray-100 mb-6" />
 
-      {/* ── Finish ── */}
-      <div className="mb-6">
-        <p className={sectionLabel}>Select a finish</p>
-        <div className="grid grid-cols-2 gap-2" data-option-grid>
-          {FINISHES.map(f => (
-            <label key={f} className={radioRow(finish === f)} onClick={() => setFinish(f)}>
-              <div className="flex min-w-0 items-center gap-2">
-                <div className={radioCircle(finish === f)} />
-                <div>
-                  <p className={`text-sm font-bold leading-snug ${finish === f ? 'text-gray-900' : 'text-gray-700'}`}>
-                    {FINISH_LABELS[f]}
-                    {f === 'laminate' && (
-                      <span className="ml-2 text-xs font-semibold text-lp-green bg-lp-green/10 px-1.5 py-0.5 rounded-full">Add-on</span>
-                    )}
-                  </p>
-                  <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">{FINISH_DESCRIPTIONS[f]}</p>
-                </div>
-              </div>
-            </label>
-          ))}
-        </div>
-      </div>
+      {fixedFinish === undefined && (
+        <>
+          {/* ── Finish ── */}
+          <div className="mb-6">
+            <p className={sectionLabel}>Select a finish</p>
+            <div className="grid grid-cols-2 gap-2" data-option-grid>
+              {FINISHES.map(f => (
+                <label key={f} className={radioRow(finish === f)} onClick={() => setFinish(f)}>
+                  <div className="flex min-w-0 items-center gap-2">
+                    <div className={radioCircle(finish === f)} />
+                    <div>
+                      <p className={`text-sm font-bold leading-snug ${finish === f ? 'text-gray-900' : 'text-gray-700'}`}>
+                        {FINISH_LABELS[f]}
+                        {f === 'laminate' && (
+                          <span className="ml-2 text-xs font-semibold text-lp-green bg-lp-green/10 px-1.5 py-0.5 rounded-full">Add-on</span>
+                        )}
+                      </p>
+                      <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">{FINISH_DESCRIPTIONS[f]}</p>
+                    </div>
+                  </div>
+                </label>
+              ))}
+            </div>
+          </div>
 
-      <div className="border-t border-gray-100 mb-6" />
+          <div className="border-t border-gray-100 mb-6" />
+        </>
+      )}
 
       {/* ── Quantity ── */}
       <div className="mb-6">

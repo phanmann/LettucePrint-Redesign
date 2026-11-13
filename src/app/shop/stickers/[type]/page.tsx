@@ -23,7 +23,7 @@ export default async function StickerTypePage({ params }: { params: Promise<{ ty
   const t = STICKER_TYPES.find(x => x.slug === type)
   if (!t) notFound()
   const path = `/shop/stickers/${t.slug}`
-  const calculator = <PricingCalculator productName={t.productName} materials={t.materials} productPath={path} />
+  const calculator = <PricingCalculator productName={t.productName} materials={t.materials} productPath={path} fixedFinish={t.slug === 'clear' ? 'matte' : undefined} />
   return <TypeProductPage
     name={t.name} intro={t.intro} path={path} parent={{ name: 'Stickers', path: '/shop/stickers' }}
     shape={t.shape} tone={t.tone} calculator={calculator} faqs={t.faqs} metaDescription={t.metaDescription}
