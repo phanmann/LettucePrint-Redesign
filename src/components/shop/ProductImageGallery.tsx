@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { urlFor } from '@/sanity/image'
@@ -9,6 +9,7 @@ import { useInitialProductGallery, type CmsProductGallery } from './ProductGalle
 interface ProductImageGalleryProps {
   productPath?: string
   background?: 'white' | 'muted'
+  fallback?: ReactNode
 }
 
 export default function ProductImageGallery(props: ProductImageGalleryProps) {
@@ -16,7 +17,7 @@ export default function ProductImageGallery(props: ProductImageGalleryProps) {
   return <ProductImageGalleryForPath key={props.productPath ?? pathname} pathname={props.productPath ?? pathname} {...props} />
 }
 
-function ProductImageGalleryForPath({ background = 'muted', pathname }: ProductImageGalleryProps & { pathname: string }) {
+function ProductImageGalleryForPath({ background = 'muted', pathname, fallback }: ProductImageGalleryProps & { pathname: string }) {
   const [active, setActive] = useState(0)
   const [cmsGallery, setCmsGallery] = useState<CmsProductGallery | null>(useInitialProductGallery(pathname))
 
@@ -67,6 +68,7 @@ function ProductImageGalleryForPath({ background = 'muted', pathname }: ProductI
     ? (cmsGallery?.galleryBackground ?? background)
     : background
 
+  if (resolvedImages.length === 0 && fallback) return <>{fallback}</>
   if (resolvedImages.length === 0) return <div data-product-gallery={pathname} data-gallery-source="empty" role="img" aria-label="Product image unavailable" className="mb-8 aspect-square rounded-card bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-500">Image coming soon</div>
   const activeIndex = Math.min(active, resolvedImages.length - 1)
 

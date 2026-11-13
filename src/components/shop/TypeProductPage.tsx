@@ -6,6 +6,7 @@ import { Disclosure } from '@/components/shop/ProductDisclosure'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import ShapePlaceholder from '@/components/shop/ShapePlaceholder'
+import ProductImageGallery from '@/components/shop/ProductImageGallery'
 import FaqSection from '@/components/seo/FaqSection'
 import JsonLd, { breadcrumbJsonLd, productJsonLd } from '@/components/seo/JsonLd'
 import type { Faq, PlaceholderShape } from '@/lib/sticker-catalog'
@@ -56,7 +57,10 @@ export default function TypeProductPage({
                 <p className="text-body-lg text-gray-600 leading-relaxed">{intro}</p>
               </div>
 
-              <ShapePlaceholder shape={shape} tone={tone} roll={roll} label={`${name} example`} className="mb-8 aspect-square rounded-card border border-gray-100" />
+              <ProductImageGallery
+                productPath={path}
+                fallback={<ShapePlaceholder shape={shape} tone={tone} roll={roll} label={`${name} example`} className="mb-8 aspect-square rounded-card border border-gray-100" />}
+              />
 
               <div className="lg:hidden mb-8">{calculator}</div>
 
