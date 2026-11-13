@@ -1,5 +1,7 @@
 'use client'
 
+import MobileOptionSelect from '@/components/shop/MobileOptionSelect'
+
 import { useState } from 'react'
 import RelatedProducts from '@/components/shop/RelatedProducts'
 import BannerConfigurator from './BannerConfigurator'
@@ -200,7 +202,8 @@ function ConfiguratorOptions({
         <div key={group.label}>
           <div className="mb-6">
             <p className={sectionLabel}>{group.label}</p>
-            <div className="grid grid-cols-2 gap-2" data-option-grid>
+            <MobileOptionSelect label={group.label} value={selections[group.label] ?? ''} onChange={value => setSelections({ ...selections, [group.label]: value })} options={group.options.map(option => ({ value: option.id, label: option.label, description: option.description, badge: option.badge }))} />
+            <div className="hidden md:grid grid-cols-2 gap-2" data-option-grid>
               {group.options.map(opt => (
                 <label
                   key={opt.id}

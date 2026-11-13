@@ -1,5 +1,7 @@
 'use client'
 
+import MobileOptionSelect from '@/components/shop/MobileOptionSelect'
+
 import { useRef, useState } from 'react'
 import { CheckCircle, Loader2, Upload } from 'lucide-react'
 import Button from '@/components/ui/Button'
@@ -36,7 +38,7 @@ export default function CustomPackagingConsultationForm() {
 
   const focusFirstError = () => {
     requestAnimationFrame(() => {
-      formRef.current?.querySelector<HTMLElement>('[aria-invalid="true"], [data-invalid="true"] input')?.focus()
+      Array.from(formRef.current?.querySelectorAll<HTMLElement>('[aria-invalid="true"], [data-invalid="true"] input') ?? []).find(element => element.getClientRects().length > 0)?.focus()
     })
   }
 
@@ -164,7 +166,8 @@ export default function CustomPackagingConsultationForm() {
 
       <fieldset className="mt-7" aria-describedby={errors.artworkDielineStatus ? 'artwork-dieline-error' : undefined} data-invalid={errors.artworkDielineStatus ? 'true' : undefined}>
         <legend className="text-small font-semibold text-gray-800">Do you have artwork or a dieline? <span aria-hidden="true" className="text-lp-green">*</span></legend>
-        <div className="mt-3 flex flex-wrap gap-3">
+        <div className="mt-3 md:hidden"><MobileOptionSelect label="Do you have artwork or a dieline?" value={artworkDielineStatus} onChange={setArtworkDielineStatus} options={ARTWORK_DIELINE_OPTIONS.map(value => ({ value, label: value }))} invalid={Boolean(errors.artworkDielineStatus)} describedBy={errors.artworkDielineStatus ? 'artwork-dieline-error' : undefined} /></div>
+        <div className="mt-3 hidden md:flex flex-wrap gap-3">
           {ARTWORK_DIELINE_OPTIONS.map(option => (
             <label key={option} className="flex min-w-28 cursor-pointer items-center gap-3 rounded-input border border-gray-200 bg-white px-4 py-2.5 text-small text-gray-700">
               <input type="radio" name="artworkDielineStatus" value={option} checked={artworkDielineStatus === option} onChange={() => setArtworkDielineStatus(option)} className={choiceClass} />

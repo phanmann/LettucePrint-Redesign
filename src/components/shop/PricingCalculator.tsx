@@ -1,5 +1,7 @@
 'use client'
 
+import MobileOptionSelect from '@/components/shop/MobileOptionSelect'
+
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
@@ -123,7 +125,8 @@ export default function PricingCalculator({ productName, materials = ['standard'
       {/* ── Material ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Select a material</p>
-        <div className="grid grid-cols-2 gap-2" data-option-grid>
+        <MobileOptionSelect label="Select a material" value={material} onChange={setMaterial} options={MATERIALS.map(value => ({ value, label: MATERIAL_LABELS[value], description: MATERIAL_DESCRIPTIONS[value], badge: value === 'holographic' ? 'Premium' : undefined }))} />
+        <div className="hidden md:grid grid-cols-2 gap-2" data-option-grid>
           {MATERIALS.map(m => (
             <label key={m} className={radioRow(material === m)} onClick={() => setMaterial(m)}>
               <div className="flex min-w-0 items-center gap-2">
@@ -150,7 +153,8 @@ export default function PricingCalculator({ productName, materials = ['standard'
           {/* ── Finish ── */}
           <div className="mb-6">
             <p className={sectionLabel}>Select a finish</p>
-            <div className="grid grid-cols-2 gap-2" data-option-grid>
+            <MobileOptionSelect label="Select a finish" value={finish} onChange={setFinish} options={FINISHES.map(value => ({ value, label: FINISH_LABELS[value], description: FINISH_DESCRIPTIONS[value], badge: value === 'laminate' ? 'Add-on' : undefined }))} />
+            <div className="hidden md:grid grid-cols-2 gap-2" data-option-grid>
               {FINISHES.map(f => (
                 <label key={f} className={radioRow(finish === f)} onClick={() => setFinish(f)}>
                   <div className="flex min-w-0 items-center gap-2">

@@ -1,5 +1,7 @@
 'use client'
 
+import MobileOptionSelect from '@/components/shop/MobileOptionSelect'
+
 import { useState } from 'react'
 import { useUploadThing } from '@/lib/uploadthingClient'
 import { CheckCircle, Upload, Eye, CreditCard, RotateCcw } from 'lucide-react'
@@ -307,10 +309,11 @@ export default function RollLabelCheckoutFlow({ config }: { config: Config }) {
               </p>
               <p className="text-xs text-gray-400 mb-6">
                 Not sure? Check your label applicator manual, or{' '}
-                <a href="mailto:steve@lettuceprint.com" className="text-lp-green underline">email us</a> — we'll confirm before printing.
+                <a href="mailto:steve@lettuceprint.com" className="text-lp-green underline">email us</a> — we&apos;ll confirm before printing.
               </p>
 
-              <div className="grid grid-cols-4 gap-3 mb-6">
+              <div className="mb-6 md:hidden"><MobileOptionSelect label="Select unwind direction" value={direction ?? ''} placeholder="Select unwind direction" onChange={setDirection} options={DIRECTIONS.map(option => ({ value: option.id, label: option.label, description: option.description }))} /></div>
+              <div className="hidden md:grid grid-cols-4 gap-3 mb-6">
                 {DIRECTIONS.map((d) => (
                   <button
                     key={d.id}
@@ -332,7 +335,7 @@ export default function RollLabelCheckoutFlow({ config }: { config: Config }) {
               </div>
 
               {direction && (
-                <div className="mb-6 p-3 bg-lp-green/5 border border-lp-green/20 rounded-lg">
+                <div className="hidden md:block mb-6 p-3 bg-lp-green/5 border border-lp-green/20 rounded-lg">
                   <p className="text-sm font-semibold text-lp-green">Direction {direction} selected</p>
                   <p className="text-xs text-gray-600 mt-0.5">{DIRECTIONS[direction - 1].description}</p>
                 </div>

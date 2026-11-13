@@ -1,5 +1,7 @@
 'use client'
 
+import MobileOptionSelect from '@/components/shop/MobileOptionSelect'
+
 import { useState } from 'react'
 import { CheckCircle, Loader2, Minus } from 'lucide-react'
 import Button from '@/components/ui/Button'
@@ -98,7 +100,7 @@ export default function CustomPackagingHeroForm({ quoteType = 'custom-packaging'
     if (!result.success) {
       setErrors(result.errors)
       requestAnimationFrame(() => {
-        document.querySelector<HTMLElement>('[aria-invalid="true"], [data-invalid="true"] input')?.focus()
+        Array.from(document.querySelectorAll<HTMLElement>('[aria-invalid="true"], [data-invalid="true"] input')).find(element => element.getClientRects().length > 0)?.focus()
       })
       return
     }
@@ -227,7 +229,8 @@ export default function CustomPackagingHeroForm({ quoteType = 'custom-packaging'
 
       <fieldset className="mt-7" aria-describedby={errors.artworkPrintReady ? 'artwork-error' : undefined} data-invalid={errors.artworkPrintReady ? 'true' : undefined}>
         <legend className="text-small font-semibold text-gray-800">Is your artwork print ready? <span aria-hidden="true" className="text-lp-green">*</span></legend>
-        <div className="mt-3 grid grid-cols-2 gap-3" data-option-grid>
+        <div className="mt-3 md:hidden"><MobileOptionSelect label="Is your artwork print ready?" value={artworkPrintReady} onChange={setArtworkPrintReady} options={ARTWORK_OPTIONS.map(value => ({ value, label: value }))} invalid={Boolean(errors.artworkPrintReady)} describedBy={errors.artworkPrintReady ? 'artwork-error' : undefined} /></div>
+        <div className="mt-3 hidden md:grid grid-cols-2 gap-3" data-option-grid>
           {ARTWORK_OPTIONS.map(option => (
             <label key={option} className="flex min-w-0 [overflow-wrap:anywhere] cursor-pointer items-center gap-3 rounded-input border border-gray-200 bg-white px-4 py-2.5 text-small text-gray-700">
               <input type="radio" name="artworkPrintReady" value={option} checked={artworkPrintReady === option} onChange={() => setArtworkPrintReady(option)} className={checkboxClass} />

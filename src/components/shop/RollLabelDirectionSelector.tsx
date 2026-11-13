@@ -1,5 +1,7 @@
 'use client'
 
+import MobileOptionSelect from '@/components/shop/MobileOptionSelect'
+
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Hand, Settings2 } from 'lucide-react'
 import {
   UNWIND_EDGES,
@@ -38,7 +40,11 @@ export default function RollLabelDirectionSelector({ value, onChange }: Props) {
         This determines how your artwork is positioned on the finished roll.
       </p>
 
-      <div className="grid grid-cols-2 gap-3">
+      <MobileOptionSelect label="How will you apply the labels?" value={value.applicationMethod} onChange={method => onChange(method === 'hand' ? { applicationMethod: 'hand' } : { applicationMethod: 'machine', unwindFace: value.unwindFace ?? 'out', unwindEdge: value.unwindEdge })} options={[
+        { value: 'hand', label: 'By hand', description: "No direction preference. We'll optimize it." },
+        { value: 'machine', label: 'With a machine', description: 'Choose the leading edge and printed face.' },
+      ]} />
+      <div className="hidden md:grid grid-cols-2 gap-3">
         <button
           type="button"
           aria-pressed={!machineApplied}
@@ -77,7 +83,8 @@ export default function RollLabelDirectionSelector({ value, onChange }: Props) {
       {machineApplied && (
         <div className="mt-4 rounded-xl border border-gray-200 bg-gray-50 p-4">
           <p className="text-xs font-semibold text-gray-900 mb-2">Which edge should come off the roll first?</p>
-          <div className="grid grid-cols-2 gap-2">
+          <MobileOptionSelect label="Which edge should come off the roll first?" value={value.unwindEdge ?? ''} placeholder="Select the leading edge" onChange={edge => onChange({ applicationMethod: 'machine', unwindEdge: edge, unwindFace: value.unwindFace ?? 'out' })} options={UNWIND_EDGES.map(edge => ({ value: edge, label: EDGE_OPTIONS[edge].label }))} />
+          <div className="hidden md:grid grid-cols-2 gap-2">
             {UNWIND_EDGES.map((edge) => {
               const { label, icon: Icon } = EDGE_OPTIONS[edge]
               const active = value.unwindEdge === edge
@@ -106,7 +113,11 @@ export default function RollLabelDirectionSelector({ value, onChange }: Props) {
 
           <div className="mt-4">
             <p className="text-xs font-semibold text-gray-900 mb-2">Where should the printed face sit?</p>
-            <div className="grid grid-cols-2 gap-2" role="group" aria-label="Printed face position">
+            <MobileOptionSelect label="Where should the printed face sit?" value={value.unwindFace ?? 'out'} onChange={setFace} options={[
+              { value: 'out', label: 'Face outside', description: 'Most common' },
+              { value: 'in', label: 'Face inside', description: 'For applicators that require it' },
+            ]} />
+            <div className="hidden md:grid grid-cols-2 gap-2" role="group" aria-label="Printed face position">
               {([
                 ['out', 'Face outside', 'Most common'],
                 ['in', 'Face inside', 'For applicators that require it'],

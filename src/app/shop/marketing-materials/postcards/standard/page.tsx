@@ -1,5 +1,7 @@
 'use client'
 
+import MobileOptionSelect from '@/components/shop/MobileOptionSelect'
+
 import { useState } from 'react'
 import RelatedProducts from '@/components/shop/RelatedProducts'
 import Navbar from '@/components/layout/Navbar'
@@ -156,7 +158,8 @@ function Configurator() {
       {/* ── Finish ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Paper finish</p>
-        <div className="grid grid-cols-2 gap-2" data-option-grid>
+        <MobileOptionSelect label="Paper finish" value={finish} onChange={setFinish} options={FINISHES.map(option => ({ ...option, value: option.id }))} />
+        <div className="hidden md:grid grid-cols-2 gap-2" data-option-grid>
           {FINISHES.map(f => (
             <label key={f.id} className={radioRow(finish === f.id)} onClick={() => setFinish(f.id)}>
               <div className={radioCircle(finish === f.id)} />
@@ -174,7 +177,8 @@ function Configurator() {
       {/* ── Sides ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Printing sides</p>
-        <div className="grid grid-cols-2 gap-2" data-option-grid>
+        <MobileOptionSelect label="Printing sides" value={sides} onChange={setSides} options={SIDES.map(option => ({ ...option, value: option.id }))} />
+        <div className="hidden md:grid grid-cols-2 gap-2" data-option-grid>
           {SIDES.map(s => (
             <label key={s.id} className={radioRow(sides === s.id)} onClick={() => setSides(s.id)}>
               <div className={radioCircle(sides === s.id)} />

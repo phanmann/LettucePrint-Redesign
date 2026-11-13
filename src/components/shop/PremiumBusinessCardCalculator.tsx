@@ -1,5 +1,7 @@
 'use client'
 
+import MobileOptionSelect from '@/components/shop/MobileOptionSelect'
+
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
@@ -40,12 +42,12 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
   // Update weight when finish changes
   const availableWeights = useMemo(() => getWeightsForFinish(finish), [finish])
 
-  // Reset weight to first available when finish changes
-  useMemo(() => {
-    if (!availableWeights.includes(weight)) {
-      setWeight(availableWeights[0])
-    }
-  }, [finish, availableWeights, weight])
+  // Both mobile and desktop finish controls reset an incompatible stock together.
+  const selectFinish = (nextFinish: PremiumFinish) => {
+    setFinish(nextFinish)
+    const weights = getWeightsForFinish(nextFinish)
+    if (!weights.includes(weight)) setWeight(weights[0])
+  }
 
   // Compute price
   const price = useMemo(() => {
@@ -96,9 +98,10 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
       {/* ── Finish ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Premium finish</p>
-        <div className="grid grid-cols-2 gap-2" data-option-grid>
+        <MobileOptionSelect label="Premium finish" value={finish} onChange={selectFinish} options={FINISHES.map(value => ({ value, label: FINISH_LABELS[value], description: FINISH_DESCRIPTIONS[value] }))} />
+        <div className="hidden md:grid grid-cols-2 gap-2" data-option-grid>
           {FINISHES.map(f => (
-            <label key={f} className={radioRow(finish === f)} onClick={() => setFinish(f)}>
+            <label key={f} className={radioRow(finish === f)} onClick={() => selectFinish(f)}>
               <div className="flex min-w-0 items-center gap-2">
                 <div className={radioCircle(finish === f)} />
                 <div>
@@ -118,7 +121,8 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
       {/* ── Weight ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Paper stock weight</p>
-        <div className="grid grid-cols-2 gap-2" data-option-grid>
+        <MobileOptionSelect label="Paper stock weight" value={weight} onChange={setWeight} options={availableWeights.map(value => ({ value, label: WEIGHT_LABELS[value], description: WEIGHT_DESCRIPTIONS[value] }))} />
+        <div className="hidden md:grid grid-cols-2 gap-2" data-option-grid>
           {availableWeights.map(w => (
             <label key={w} className={radioRow(weight === w)} onClick={() => setWeight(w)}>
               <div className="flex min-w-0 items-center gap-2">
@@ -141,7 +145,11 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
           <div className="border-t border-gray-100 mb-6" />
           <div className="mb-6">
             <p className={sectionLabel}>Printing sides</p>
-            <div className="grid grid-cols-2 gap-2" data-option-grid>
+            <MobileOptionSelect label="Printing sides" value={sides} onChange={setSides} options={[
+              { value: 'single', label: 'Single-Sided', description: 'Print on front only.' },
+              { value: 'double', label: 'Double-Sided', description: 'Print on both sides.' },
+            ]} />
+            <div className="hidden md:grid grid-cols-2 gap-2" data-option-grid>
               {[
                 { id: 'single' as const, label: 'Single-Sided', desc: 'Print on front only.' },
                 { id: 'double' as const, label: 'Double-Sided', desc: 'Print on both sides.' },
@@ -170,7 +178,11 @@ export default function PremiumBusinessCardCalculator({ productName }: Props) {
           <div className="mb-6">
             <p className={sectionLabel}>{FINISH_LABELS[finish]} side</p>
             <p className="text-xs text-gray-500 mb-3">The {FINISH_LABELS[finish].toLowerCase()} finish is applied to one side only.</p>
-            <div className="grid grid-cols-2 gap-2" data-option-grid>
+            <MobileOptionSelect label={FINISH_LABELS[finish] + ' side'} value={spotSide} onChange={setSpotSide} options={[
+              { value: 'front', label: 'Front side', description: 'Finish on the front, standard print on back.' },
+              { value: 'back', label: 'Back side', description: 'Finish on the back, standard print on front.' },
+            ]} />
+            <div className="hidden md:grid grid-cols-2 gap-2" data-option-grid>
               {[
                 { id: 'front' as SpotSide, label: 'Front side', desc: 'Finish on the front, standard print on back.' },
                 { id: 'back' as SpotSide, label: 'Back side', desc: 'Finish on the back, standard print on front.' },

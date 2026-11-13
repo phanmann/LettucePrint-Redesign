@@ -1,5 +1,7 @@
 'use client'
 
+import MobileOptionSelect from '@/components/shop/MobileOptionSelect'
+
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
@@ -116,7 +118,8 @@ export default function SpotUVCalculator({ productName }: Props) {
       <div className="mb-6">
         <p className={sectionLabel}>Clear UV coating</p>
         <p className="text-xs text-gray-500 mb-3">More UV hits create a deeper raised texture.</p>
-        <div className="grid grid-cols-2 gap-2" data-option-grid>
+        <MobileOptionSelect label="Clear UV coating" value={hits} onChange={setHits} options={SPOT_UV_HIT_OPTIONS.map(value => ({ value, label: SPOT_UV_HIT_LABELS[value], description: hitDescriptions[value], badge: value === 1 ? 'Included' : undefined }))} />
+        <div className="hidden md:grid grid-cols-2 gap-2" data-option-grid>
           {SPOT_UV_HIT_OPTIONS.map(hit => (
             <label key={hit} className={radioRow(hits === hit)} onClick={() => setHits(hit)}>
               <div className="flex min-w-0 items-center gap-2">

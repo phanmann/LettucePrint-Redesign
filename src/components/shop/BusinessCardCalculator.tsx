@@ -1,5 +1,7 @@
 'use client'
 
+import MobileOptionSelect from '@/components/shop/MobileOptionSelect'
+
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import ProductArtwork, { useProductOrder } from '@/components/shop/ProductArtwork'
@@ -76,7 +78,8 @@ export default function BusinessCardCalculator({ productName }: Props) {
       {/* ── Finish ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Paper stock finish</p>
-        <div className="grid grid-cols-2 gap-2" data-option-grid>
+        <MobileOptionSelect label="Paper stock finish" value={finish} onChange={setFinish} options={FINISHES.map(value => ({ value, label: FINISH_LABELS[value], description: FINISH_DESCRIPTIONS[value] }))} />
+        <div className="hidden md:grid grid-cols-2 gap-2" data-option-grid>
           {FINISHES.map(f => (
             <label key={f} className={radioRow(finish === f)} onClick={() => setFinish(f)}>
               <div className="flex min-w-0 items-center gap-2">
@@ -98,7 +101,8 @@ export default function BusinessCardCalculator({ productName }: Props) {
       {/* ── Weight ── */}
       <div className="mb-6">
         <p className={sectionLabel}>Paper stock weight</p>
-        <div className="grid grid-cols-2 gap-2" data-option-grid>
+        <MobileOptionSelect label="Paper stock weight" value={weight} onChange={setWeight} options={WEIGHTS.map(value => ({ value, label: WEIGHT_LABELS[value], description: WEIGHT_DESCRIPTIONS[value] }))} />
+        <div className="hidden md:grid grid-cols-2 gap-2" data-option-grid>
           {WEIGHTS.map(w => (
             <label key={w} className={radioRow(weight === w)} onClick={() => setWeight(w)}>
               <div className="flex min-w-0 items-center gap-2">
