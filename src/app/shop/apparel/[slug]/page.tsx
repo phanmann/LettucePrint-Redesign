@@ -1,3 +1,4 @@
+import OrderShortcut from '@/components/shop/OrderShortcut'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -116,7 +117,7 @@ export default async function ApparelServicePage({ params }: { params: Promise<{
   return (
     <>
       <Navbar />
-      <main className="pt-[72px]">
+      <main className="pt-[72px] product-apparel-layout">
         <section className="bg-white border-b border-gray-100 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lp-green mb-4">{service.eyebrow}</p>
@@ -125,7 +126,7 @@ export default async function ApparelServicePage({ params }: { params: Promise<{
           </div>
         </section>
 
-        <section id="request-quote" aria-label={service.slug === 'embroidery' ? 'Request an embroidery quote' : `Request a ${service.title.toLowerCase()} quote`} className="py-16 bg-white border-t border-gray-100">
+        <section data-mobile-order-module tabIndex={-1} id="request-quote" aria-label={service.slug === 'embroidery' ? 'Request an embroidery quote' : `Request a ${service.title.toLowerCase()} quote`} className="product-order-panel product-order-target product-apparel-panel py-16 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
               <h2 className="text-h2 font-semibold text-gray-900 mb-4">Ready to price it?</h2>
@@ -166,7 +167,7 @@ export default async function ApparelServicePage({ params }: { params: Promise<{
         </section>
         <JsonLd data={productJsonLd({ name: service.title, description: service.description, path: `/shop/apparel/${service.slug}` })} />
       </main>
-      <Footer />
+      <OrderShortcut label="Request quote" /><Footer />
     </>
   )
 }

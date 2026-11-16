@@ -1,5 +1,6 @@
 'use client'
 
+import OrderShortcut from '@/components/shop/OrderShortcut'
 import FaqSection from '@/components/seo/FaqSection'
 import { postcardFaqs } from '@/lib/department-product-faqs'
 
@@ -123,7 +124,7 @@ function Configurator() {
   }
 
   return (
-    <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
+    <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
 
       {/* ── Size ── */}
       <div className="mb-6">
@@ -243,10 +244,10 @@ export default function PostcardsPage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_520px] gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] gap-12 items-start">
 
             {/* Right — Configurator (first on mobile) */}
-            <div className="hidden lg:block lg:order-last">
+            <div className="hidden lg:block lg:order-last product-order-panel">
               <Configurator />
             </div>
 
@@ -266,7 +267,7 @@ export default function PostcardsPage() {
               <ProductImageGallery
               />
               {/* Mobile-only configurator — inline after gallery */}
-              <div className="lg:hidden mb-8">
+              <div data-mobile-order-module role="region" aria-label="Order options" tabIndex={-1} className="lg:hidden mb-8 product-order-target">
                 <Configurator />
               </div>
 
@@ -334,13 +335,12 @@ export default function PostcardsPage() {
 
               <FaqSection faqs={postcardFaqs} />
 
+              <div className="product-order-related"><RelatedProducts currentPath="/shop/marketing-materials/postcards/standard" /></div>
             </div>
           </div>
-
-          <RelatedProducts currentPath="/shop/marketing-materials/postcards/standard" />
         </div>
       </main>
-      <Footer />
+      <OrderShortcut /><Footer />
     </>
   )
 }

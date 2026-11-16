@@ -1,5 +1,6 @@
 'use client'
 
+import OrderShortcut from '@/components/shop/OrderShortcut'
 import { useState } from 'react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -56,10 +57,10 @@ export default function MylarBagsPage() {
   return (
     <>
       <Navbar />
-      <main>
-        <section className="bg-white pb-20 pt-[calc(72px+4rem)] border-b border-gray-100">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-16 lg:px-8">
-            <div className="lg:sticky lg:top-28">
+      <main className="product-quote-layout">
+        <section className="product-quote-hero bg-white pb-20 pt-[calc(72px+4rem)] border-b border-gray-100">
+          <div className="product-quote-hero-grid mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-16 lg:px-8">
+            <div className="product-quote-intro">
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-lp-green">Boxes & Packaging</p>
               <h1 className="text-display max-w-2xl font-semibold text-gray-900">Custom Mylar Bags</h1>
               <p className="text-body-lg mt-6 max-w-xl text-gray-500">Custom-printed packaging for cannabis brands, food products, supplements, and specialty retail. Shop 4 × 5 in. eighth-size standard bags online; request a quote for other sizes and specialty finishes.</p>
@@ -68,7 +69,7 @@ export default function MylarBagsPage() {
                 sources={['/shop/packaging/mylar-bags', '/shop/packaging/mylar-bags/standard', '/shop/packaging/mylar-bags/die-cut']}
               />
             </div>
-            <CustomPackagingHeroForm quoteType="mylar-bags" />
+            <div data-mobile-order-module role="region" aria-label="Request quote" tabIndex={-1} className="product-order-panel product-order-target product-quote-panel"><CustomPackagingHeroForm quoteType="mylar-bags" /></div>
           </div>
         </section>
 
@@ -124,7 +125,7 @@ export default function MylarBagsPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <OrderShortcut label="Request quote" /><Footer />
     </>
   )
 }

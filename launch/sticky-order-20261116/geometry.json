@@ -1,0 +1,2438 @@
+[
+  {
+    "route": "/shop/marketing-materials/postcards/standard",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 957,
+        "height": 796,
+        "scrollHeight": 1156,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3177.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1156,
+        "clientHeight": 796,
+        "y": 311,
+        "position": "sticky",
+        "footer": 2866.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1156,
+        "clientHeight": 796,
+        "y": 2234,
+        "position": "sticky",
+        "footer": 943.734375
+      },
+      {
+        "top": -418.265625,
+        "bottom": 377.734375,
+        "height": 796,
+        "scrollHeight": 1156,
+        "clientHeight": 796,
+        "y": 2752,
+        "position": "sticky",
+        "footer": 425.734375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/postcards/standard",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 657,
+        "height": 496,
+        "scrollHeight": 1156,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3982.5
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1156,
+        "clientHeight": 496,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3671.5
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1156,
+        "clientHeight": 496,
+        "y": 3339,
+        "position": "sticky",
+        "footer": 643.5
+      },
+      {
+        "top": -396.5,
+        "bottom": 99.5,
+        "height": 496,
+        "scrollHeight": 1156,
+        "clientHeight": 496,
+        "y": 3835,
+        "position": "sticky",
+        "footer": 147.5
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/postcards/standard",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/postcards/standard",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards/standard",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 957,
+        "height": 796,
+        "scrollHeight": 873,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3433.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 873,
+        "clientHeight": 796,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3122.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 873,
+        "clientHeight": 796,
+        "y": 2490,
+        "position": "sticky",
+        "footer": 943.734375
+      },
+      {
+        "top": -418.265625,
+        "bottom": 377.734375,
+        "height": 796,
+        "scrollHeight": 873,
+        "clientHeight": 796,
+        "y": 3008,
+        "position": "sticky",
+        "footer": 425.734375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards/standard",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 657,
+        "height": 496,
+        "scrollHeight": 873,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 4384.25
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 873,
+        "clientHeight": 496,
+        "y": 311,
+        "position": "sticky",
+        "footer": 4073.25
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 873,
+        "clientHeight": 496,
+        "y": 3740,
+        "position": "sticky",
+        "footer": 644.25
+      },
+      {
+        "top": -395.75,
+        "bottom": 100.25,
+        "height": 496,
+        "scrollHeight": 873,
+        "clientHeight": 496,
+        "y": 4236,
+        "position": "sticky",
+        "footer": 148.25
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards/standard",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards/standard",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards/premium",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 957,
+        "height": 796,
+        "scrollHeight": 1119,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3412.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1119,
+        "clientHeight": 796,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3101.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1119,
+        "clientHeight": 796,
+        "y": 2469,
+        "position": "sticky",
+        "footer": 943.734375
+      },
+      {
+        "top": -418.265625,
+        "bottom": 377.734375,
+        "height": 796,
+        "scrollHeight": 1119,
+        "clientHeight": 796,
+        "y": 2987,
+        "position": "sticky",
+        "footer": 425.734375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards/premium",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 657,
+        "height": 496,
+        "scrollHeight": 1119,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 4409.203125
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1119,
+        "clientHeight": 496,
+        "y": 311,
+        "position": "sticky",
+        "footer": 4098.203125
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1119,
+        "clientHeight": 496,
+        "y": 3765,
+        "position": "sticky",
+        "footer": 644.203125
+      },
+      {
+        "top": -395.796875,
+        "bottom": 100.203125,
+        "height": 496,
+        "scrollHeight": 1119,
+        "clientHeight": 496,
+        "y": 4261,
+        "position": "sticky",
+        "footer": 148.203125
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards/premium",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards/premium",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/stickers/die-cut",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 957,
+        "height": 796,
+        "scrollHeight": 957,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3229.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 957,
+        "clientHeight": 796,
+        "y": 311,
+        "position": "sticky",
+        "footer": 2918.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 957,
+        "clientHeight": 796,
+        "y": 2286,
+        "position": "sticky",
+        "footer": 943.734375
+      },
+      {
+        "top": -418.265625,
+        "bottom": 377.734375,
+        "height": 796,
+        "scrollHeight": 957,
+        "clientHeight": 796,
+        "y": 2804,
+        "position": "sticky",
+        "footer": 425.734375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/stickers/die-cut",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 657,
+        "height": 496,
+        "scrollHeight": 957,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 4140.34375
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 957,
+        "clientHeight": 496,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3829.34375
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 957,
+        "clientHeight": 496,
+        "y": 3496,
+        "position": "sticky",
+        "footer": 644.34375
+      },
+      {
+        "top": -395.65625,
+        "bottom": 100.34375,
+        "height": 496,
+        "scrollHeight": 957,
+        "clientHeight": 496,
+        "y": 3992,
+        "position": "sticky",
+        "footer": 148.34375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/stickers/die-cut",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/stickers/die-cut",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/stickers/clear",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 852.75,
+        "height": 691.75,
+        "scrollHeight": 692,
+        "clientHeight": 692,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3229.734375
+      },
+      {
+        "top": 88,
+        "bottom": 779.75,
+        "height": 691.75,
+        "scrollHeight": 692,
+        "clientHeight": 692,
+        "y": 311,
+        "position": "sticky",
+        "footer": 2918.734375
+      },
+      {
+        "top": 88,
+        "bottom": 779.75,
+        "height": 691.75,
+        "scrollHeight": 692,
+        "clientHeight": 692,
+        "y": 2390,
+        "position": "sticky",
+        "footer": 839.734375
+      },
+      {
+        "top": -314.015625,
+        "bottom": 377.734375,
+        "height": 691.75,
+        "scrollHeight": 692,
+        "clientHeight": 692,
+        "y": 2804,
+        "position": "sticky",
+        "footer": 425.734375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/stickers/clear",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 657,
+        "height": 496,
+        "scrollHeight": 692,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 4160.34375
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 692,
+        "clientHeight": 496,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3849.34375
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 692,
+        "clientHeight": 496,
+        "y": 3516,
+        "position": "sticky",
+        "footer": 644.34375
+      },
+      {
+        "top": -395.65625,
+        "bottom": 100.34375,
+        "height": 496,
+        "scrollHeight": 692,
+        "clientHeight": 496,
+        "y": 4012,
+        "position": "sticky",
+        "footer": 148.34375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/stickers/clear",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/stickers/clear",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/roll-labels/circle",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 957,
+        "height": 796,
+        "scrollHeight": 1079,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3190.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1079,
+        "clientHeight": 796,
+        "y": 311,
+        "position": "sticky",
+        "footer": 2879.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1079,
+        "clientHeight": 796,
+        "y": 2247,
+        "position": "sticky",
+        "footer": 943.734375
+      },
+      {
+        "top": -418.265625,
+        "bottom": 377.734375,
+        "height": 796,
+        "scrollHeight": 1079,
+        "clientHeight": 796,
+        "y": 2765,
+        "position": "sticky",
+        "footer": 425.734375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/roll-labels/circle",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 657,
+        "height": 496,
+        "scrollHeight": 1079,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 4103.1875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1079,
+        "clientHeight": 496,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3792.1875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1079,
+        "clientHeight": 496,
+        "y": 3459,
+        "position": "sticky",
+        "footer": 644.1875
+      },
+      {
+        "top": -395.8125,
+        "bottom": 100.1875,
+        "height": 496,
+        "scrollHeight": 1079,
+        "clientHeight": 496,
+        "y": 3955,
+        "position": "sticky",
+        "footer": 148.1875
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/roll-labels/circle",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/roll-labels/circle",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/spot-uv",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 957,
+        "height": 796,
+        "scrollHeight": 797,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3382.296875
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 797,
+        "clientHeight": 796,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3071.296875
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 797,
+        "clientHeight": 796,
+        "y": 2438,
+        "position": "sticky",
+        "footer": 944.296875
+      },
+      {
+        "top": -418.703125,
+        "bottom": 377.296875,
+        "height": 796,
+        "scrollHeight": 797,
+        "clientHeight": 796,
+        "y": 2957,
+        "position": "sticky",
+        "footer": 425.296875
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/spot-uv",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 657,
+        "height": 496,
+        "scrollHeight": 797,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 4264.828125
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 797,
+        "clientHeight": 496,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3953.828125
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 797,
+        "clientHeight": 496,
+        "y": 3621,
+        "position": "sticky",
+        "footer": 643.828125
+      },
+      {
+        "top": -396.171875,
+        "bottom": 99.828125,
+        "height": 496,
+        "scrollHeight": 797,
+        "clientHeight": 496,
+        "y": 4117,
+        "position": "sticky",
+        "footer": 147.828125
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/spot-uv",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/spot-uv",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/posters/art-print",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 858.25,
+        "height": 697.25,
+        "scrollHeight": 697,
+        "clientHeight": 697,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3339.234375
+      },
+      {
+        "top": 88,
+        "bottom": 785.25,
+        "height": 697.25,
+        "scrollHeight": 697,
+        "clientHeight": 697,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3028.234375
+      },
+      {
+        "top": 88,
+        "bottom": 785.25,
+        "height": 697.25,
+        "scrollHeight": 697,
+        "clientHeight": 697,
+        "y": 2494,
+        "position": "sticky",
+        "footer": 845.234375
+      },
+      {
+        "top": -319.015625,
+        "bottom": 378.234375,
+        "height": 697.25,
+        "scrollHeight": 697,
+        "clientHeight": 697,
+        "y": 2913,
+        "position": "sticky",
+        "footer": 426.234375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/posters/art-print",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 657,
+        "height": 496,
+        "scrollHeight": 697,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 4242.75
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 697,
+        "clientHeight": 496,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3931.75
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 697,
+        "clientHeight": 496,
+        "y": 3599,
+        "position": "sticky",
+        "footer": 643.75
+      },
+      {
+        "top": -396.25,
+        "bottom": 99.75,
+        "height": 496,
+        "scrollHeight": 697,
+        "clientHeight": 496,
+        "y": 4095,
+        "position": "sticky",
+        "footer": 147.75
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/posters/art-print",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/marketing-materials/posters/art-print",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/banners/vinyl-banner",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 957,
+        "height": 796,
+        "scrollHeight": 1535,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3245.234375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1535,
+        "clientHeight": 796,
+        "y": 311,
+        "position": "sticky",
+        "footer": 2934.234375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1535,
+        "clientHeight": 796,
+        "y": 2301,
+        "position": "sticky",
+        "footer": 944.234375
+      },
+      {
+        "top": -417.765625,
+        "bottom": 378.234375,
+        "height": 796,
+        "scrollHeight": 1535,
+        "clientHeight": 796,
+        "y": 2819,
+        "position": "sticky",
+        "footer": 426.234375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/banners/vinyl-banner",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 657,
+        "height": 496,
+        "scrollHeight": 1535,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 4052.046875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1535,
+        "clientHeight": 496,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3741.046875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1535,
+        "clientHeight": 496,
+        "y": 3408,
+        "position": "sticky",
+        "footer": 644.046875
+      },
+      {
+        "top": -395.953125,
+        "bottom": 100.046875,
+        "height": 496,
+        "scrollHeight": 1535,
+        "clientHeight": 496,
+        "y": 3904,
+        "position": "sticky",
+        "footer": 148.046875
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/banners/vinyl-banner",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/banners/vinyl-banner",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/backdrops/seg-10x8",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 957,
+        "height": 796,
+        "scrollHeight": 1070,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3341.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1070,
+        "clientHeight": 796,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3030.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1070,
+        "clientHeight": 796,
+        "y": 2398,
+        "position": "sticky",
+        "footer": 943.734375
+      },
+      {
+        "top": -418.265625,
+        "bottom": 377.734375,
+        "height": 796,
+        "scrollHeight": 1070,
+        "clientHeight": 796,
+        "y": 2916,
+        "position": "sticky",
+        "footer": 425.734375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/backdrops/seg-10x8",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 657,
+        "height": 496,
+        "scrollHeight": 1070,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 4199.34375
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1070,
+        "clientHeight": 496,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3888.34375
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1070,
+        "clientHeight": 496,
+        "y": 3555,
+        "position": "sticky",
+        "footer": 644.34375
+      },
+      {
+        "top": -395.65625,
+        "bottom": 100.34375,
+        "height": 496,
+        "scrollHeight": 1070,
+        "clientHeight": 496,
+        "y": 4051,
+        "position": "sticky",
+        "footer": 148.34375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/backdrops/seg-10x8",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/backdrops/seg-10x8",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/tents/10x10",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 366,
+        "bottom": 1162,
+        "height": 796,
+        "scrollHeight": 1298,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2693.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1298,
+        "clientHeight": 796,
+        "y": 516,
+        "position": "sticky",
+        "footer": 2177.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1298,
+        "clientHeight": 796,
+        "y": 1734,
+        "position": "sticky",
+        "footer": 959.734375
+      },
+      {
+        "top": -434.265625,
+        "bottom": 361.734375,
+        "height": 796,
+        "scrollHeight": 1298,
+        "clientHeight": 796,
+        "y": 2268,
+        "position": "sticky",
+        "footer": 425.734375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/tents/10x10",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 366,
+        "bottom": 862,
+        "height": 496,
+        "scrollHeight": 1322,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3460.1875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1322,
+        "clientHeight": 496,
+        "y": 516,
+        "position": "sticky",
+        "footer": 2944.1875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1322,
+        "clientHeight": 496,
+        "y": 2800,
+        "position": "sticky",
+        "footer": 660.1875
+      },
+      {
+        "top": -395.8125,
+        "bottom": 100.1875,
+        "height": 496,
+        "scrollHeight": 1322,
+        "clientHeight": 496,
+        "y": 3296,
+        "position": "sticky",
+        "footer": 164.1875
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/tents/10x10",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/tents/10x10",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/tents/20x10",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 366,
+        "bottom": 1162,
+        "height": 796,
+        "scrollHeight": 1298,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2693.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1298,
+        "clientHeight": 796,
+        "y": 516,
+        "position": "sticky",
+        "footer": 2177.734375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1298,
+        "clientHeight": 796,
+        "y": 1734,
+        "position": "sticky",
+        "footer": 959.734375
+      },
+      {
+        "top": -434.265625,
+        "bottom": 361.734375,
+        "height": 796,
+        "scrollHeight": 1298,
+        "clientHeight": 796,
+        "y": 2268,
+        "position": "sticky",
+        "footer": 425.734375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/tents/20x10",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 366,
+        "bottom": 862,
+        "height": 496,
+        "scrollHeight": 1322,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3460.1875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1322,
+        "clientHeight": 496,
+        "y": 516,
+        "position": "sticky",
+        "footer": 2944.1875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1322,
+        "clientHeight": 496,
+        "y": 2800,
+        "position": "sticky",
+        "footer": 660.1875
+      },
+      {
+        "top": -395.8125,
+        "bottom": 100.1875,
+        "height": 496,
+        "scrollHeight": 1322,
+        "clientHeight": 496,
+        "y": 3296,
+        "position": "sticky",
+        "footer": 164.1875
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/tents/20x10",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/signage/tents/20x10",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/boxes/mailer-box",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 957,
+        "height": 796,
+        "scrollHeight": 1049,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3339.234375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1049,
+        "clientHeight": 796,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3028.234375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1049,
+        "clientHeight": 796,
+        "y": 2395,
+        "position": "sticky",
+        "footer": 944.234375
+      },
+      {
+        "top": -417.765625,
+        "bottom": 378.234375,
+        "height": 796,
+        "scrollHeight": 1049,
+        "clientHeight": 796,
+        "y": 2913,
+        "position": "sticky",
+        "footer": 426.234375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/boxes/mailer-box",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 657,
+        "height": 496,
+        "scrollHeight": 1049,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 4146.59375
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1049,
+        "clientHeight": 496,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3835.59375
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1049,
+        "clientHeight": 496,
+        "y": 3503,
+        "position": "sticky",
+        "footer": 643.59375
+      },
+      {
+        "top": -396.40625,
+        "bottom": 99.59375,
+        "height": 496,
+        "scrollHeight": 1049,
+        "clientHeight": 496,
+        "y": 3999,
+        "position": "sticky",
+        "footer": 147.59375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/boxes/mailer-box",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/boxes/mailer-box",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/mylar-bags/standard",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 957,
+        "height": 796,
+        "scrollHeight": 1266,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3582.984375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1266,
+        "clientHeight": 796,
+        "y": 311,
+        "position": "sticky",
+        "footer": 3271.984375
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1266,
+        "clientHeight": 796,
+        "y": 2639,
+        "position": "sticky",
+        "footer": 943.984375
+      },
+      {
+        "top": -418.015625,
+        "bottom": 377.984375,
+        "height": 796,
+        "scrollHeight": 1266,
+        "clientHeight": 796,
+        "y": 3157,
+        "position": "sticky",
+        "footer": 425.984375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/mylar-bags/standard",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 161,
+        "bottom": 657,
+        "height": 496,
+        "scrollHeight": 1266,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 4492.796875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1266,
+        "clientHeight": 496,
+        "y": 311,
+        "position": "sticky",
+        "footer": 4181.796875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1266,
+        "clientHeight": 496,
+        "y": 3849,
+        "position": "sticky",
+        "footer": 643.796875
+      },
+      {
+        "top": -396.203125,
+        "bottom": 99.796875,
+        "height": 496,
+        "scrollHeight": 1266,
+        "clientHeight": 496,
+        "y": 4345,
+        "position": "sticky",
+        "footer": 147.796875
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/mylar-bags/standard",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/mylar-bags/standard",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/custom-packaging",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 916,
+        "height": 796,
+        "scrollHeight": 1303,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2880.90625
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1303,
+        "clientHeight": 796,
+        "y": 270,
+        "position": "sticky",
+        "footer": 2610.90625
+      },
+      {
+        "top": 120,
+        "bottom": 916,
+        "height": 796,
+        "scrollHeight": 1303,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2880.90625
+      },
+      {
+        "top": 120,
+        "bottom": 916,
+        "height": 796,
+        "scrollHeight": 1303,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2880.90625
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/custom-packaging",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 616,
+        "height": 496,
+        "scrollHeight": 1327,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2963.4375
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1327,
+        "clientHeight": 496,
+        "y": 270,
+        "position": "sticky",
+        "footer": 2693.4375
+      },
+      {
+        "top": 120,
+        "bottom": 616,
+        "height": 496,
+        "scrollHeight": 1327,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2963.4375
+      },
+      {
+        "top": 120,
+        "bottom": 616,
+        "height": 496,
+        "scrollHeight": 1327,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2963.4375
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/custom-packaging",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/custom-packaging",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/mylar-bags",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 916,
+        "height": 796,
+        "scrollHeight": 998,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2169.015625
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 998,
+        "clientHeight": 796,
+        "y": 270,
+        "position": "sticky",
+        "footer": 1899.015625
+      },
+      {
+        "top": 120,
+        "bottom": 916,
+        "height": 796,
+        "scrollHeight": 998,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2169.015625
+      },
+      {
+        "top": 120,
+        "bottom": 916,
+        "height": 796,
+        "scrollHeight": 998,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2169.015625
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/mylar-bags",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 616,
+        "height": 496,
+        "scrollHeight": 1034,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2241.71875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1034,
+        "clientHeight": 496,
+        "y": 270,
+        "position": "sticky",
+        "footer": 1971.71875
+      },
+      {
+        "top": 120,
+        "bottom": 616,
+        "height": 496,
+        "scrollHeight": 1034,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2241.71875
+      },
+      {
+        "top": 120,
+        "bottom": 616,
+        "height": 496,
+        "scrollHeight": 1034,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 2241.71875
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/mylar-bags",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/packaging/mylar-bags",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/screenprint",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 916,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 0,
+        "position": "sticky",
+        "footer": 1352.5625
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 270,
+        "position": "sticky",
+        "footer": 1082.5625
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 393,
+        "position": "sticky",
+        "footer": 959.5625
+      },
+      {
+        "top": -434.4375,
+        "bottom": 361.5625,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 927,
+        "position": "sticky",
+        "footer": 425.5625
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/screenprint",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 616,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 0,
+        "position": "sticky",
+        "footer": 1382.5625
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 270,
+        "position": "sticky",
+        "footer": 1112.5625
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 723,
+        "position": "sticky",
+        "footer": 659.5625
+      },
+      {
+        "top": -396.4375,
+        "bottom": 99.5625,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 1219,
+        "position": "sticky",
+        "footer": 163.5625
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/screenprint",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/screenprint",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/embroidery",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 916,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 0,
+        "position": "sticky",
+        "footer": 1209.5625
+      },
+      {
+        "top": 79.5625,
+        "bottom": 875.5625,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 270,
+        "position": "sticky",
+        "footer": 939.5625
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 250,
+        "position": "sticky",
+        "footer": 959.5625
+      },
+      {
+        "top": -434.4375,
+        "bottom": 361.5625,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 784,
+        "position": "sticky",
+        "footer": 425.5625
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/embroidery",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 616,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 0,
+        "position": "sticky",
+        "footer": 1258.125
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 270,
+        "position": "sticky",
+        "footer": 988.125
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 598,
+        "position": "sticky",
+        "footer": 660.125
+      },
+      {
+        "top": -395.875,
+        "bottom": 100.125,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 1094,
+        "position": "sticky",
+        "footer": 164.125
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/embroidery",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/embroidery",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/dtg",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 916,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 0,
+        "position": "sticky",
+        "footer": 1188.5625
+      },
+      {
+        "top": 58.5625,
+        "bottom": 854.5625,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 270,
+        "position": "sticky",
+        "footer": 918.5625
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 229,
+        "position": "sticky",
+        "footer": 959.5625
+      },
+      {
+        "top": -434.4375,
+        "bottom": 361.5625,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 763,
+        "position": "sticky",
+        "footer": 425.5625
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/dtg",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 616,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 0,
+        "position": "sticky",
+        "footer": 1215.125
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 270,
+        "position": "sticky",
+        "footer": 945.125
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 555,
+        "position": "sticky",
+        "footer": 660.125
+      },
+      {
+        "top": -395.875,
+        "bottom": 100.125,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 1051,
+        "position": "sticky",
+        "footer": 164.125
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/dtg",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/dtg",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/dtf",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 916,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 0,
+        "position": "sticky",
+        "footer": 1443.5625
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 270,
+        "position": "sticky",
+        "footer": 1173.5625
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 484,
+        "position": "sticky",
+        "footer": 959.5625
+      },
+      {
+        "top": -434.4375,
+        "bottom": 361.5625,
+        "height": 796,
+        "scrollHeight": 1164,
+        "clientHeight": 795,
+        "y": 1018,
+        "position": "sticky",
+        "footer": 425.5625
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/dtf",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 616,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 0,
+        "position": "sticky",
+        "footer": 1591.546875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 270,
+        "position": "sticky",
+        "footer": 1321.546875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 932,
+        "position": "sticky",
+        "footer": 659.546875
+      },
+      {
+        "top": -396.453125,
+        "bottom": 99.546875,
+        "height": 496,
+        "scrollHeight": 1163,
+        "clientHeight": 495,
+        "y": 1428,
+        "position": "sticky",
+        "footer": 163.546875
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/dtf",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/shop/apparel/dtf",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  },
+  {
+    "route": "/lp/roll-labels",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 916,
+        "height": 796,
+        "scrollHeight": 1147,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3116.640625
+      },
+      {
+        "top": 88,
+        "bottom": 884,
+        "height": 796,
+        "scrollHeight": 1147,
+        "clientHeight": 796,
+        "y": 270,
+        "position": "sticky",
+        "footer": 2846.640625
+      },
+      {
+        "top": 120,
+        "bottom": 916,
+        "height": 796,
+        "scrollHeight": 1147,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3116.640625
+      },
+      {
+        "top": 120,
+        "bottom": 916,
+        "height": 796,
+        "scrollHeight": 1147,
+        "clientHeight": 796,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3116.640625
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/lp/roll-labels",
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "geometry": [
+      {
+        "top": 120,
+        "bottom": 616,
+        "height": 496,
+        "scrollHeight": 1308,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3471.1875
+      },
+      {
+        "top": 88,
+        "bottom": 584,
+        "height": 496,
+        "scrollHeight": 1308,
+        "clientHeight": 496,
+        "y": 270,
+        "position": "sticky",
+        "footer": 3201.1875
+      },
+      {
+        "top": 120,
+        "bottom": 616,
+        "height": 496,
+        "scrollHeight": 1308,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3471.1875
+      },
+      {
+        "top": 120,
+        "bottom": 616,
+        "height": 496,
+        "scrollHeight": 1308,
+        "clientHeight": 496,
+        "y": 0,
+        "position": "sticky",
+        "footer": 3471.1875
+      }
+    ],
+    "pass": true
+  },
+  {
+    "route": "/lp/roll-labels",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "pass": true
+  },
+  {
+    "route": "/lp/roll-labels",
+    "viewport": {
+      "width": 320,
+      "height": 640
+    },
+    "pass": true
+  }
+]

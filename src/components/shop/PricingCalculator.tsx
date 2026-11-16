@@ -92,7 +92,7 @@ export default function PricingCalculator({ productName, materials = ['standard'
     }`
 
   return (
-    <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
+    <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
 
       {/* ── Size ── */}
       <div className="mb-6">

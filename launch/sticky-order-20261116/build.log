@@ -1,0 +1,138 @@
+
+> lettuceprint-web@0.1.0 build
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /workspace/projects/lettuceprint/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles:
+   * /workspace/projects/lettuceprint/.worktrees/sticky-order-20261116/package-lock.json
+
+▲ Next.js 16.2.4 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 25.3s
+  Running TypeScript ...
+  Finished TypeScript in 7.0s ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/132) ...
+  Generating static pages using 3 workers (33/132)
+  Generating static pages using 3 workers (66/132)
+  Generating static pages using 3 workers (99/132)
+✓ Generating static pages using 3 workers (132/132) in 21.4s
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /about-us
+├ ƒ /api/artwork
+├ ƒ /api/checkout
+├ ƒ /api/contact
+├ ƒ /api/embroidery-quote
+├ ƒ /api/newsletter
+├ ƒ /api/product-gallery
+├ ƒ /api/proof/respond
+├ ƒ /api/proof/send
+├ ƒ /api/quote
+├ ƒ /api/uploadthing
+├ ƒ /api/webhook/stripe
+├ ƒ /cart
+├ ƒ /contact-us
+├ ƒ /get-quote
+├ ƒ /lp/roll-labels
+├ ƒ /order-confirmation
+├ ƒ /portfolio
+├ ƒ /portfolio/[slug]
+├ ƒ /privacy-policy
+├ ƒ /projects
+├ ƒ /proof/[token]
+├ ○ /robots.txt
+├ ƒ /search
+├ ƒ /shipping-policy
+├ ƒ /shop
+├ ƒ /shop/apparel
+├ ƒ /shop/apparel/[slug]
+├ ƒ /shop/graphic-design
+├ ƒ /shop/marketing-materials
+├ ƒ /shop/marketing-materials/booklets/perfect-bound-6x9
+├ ƒ /shop/marketing-materials/booklets/perfect-bound-85x11
+├ ƒ /shop/marketing-materials/booklets/saddle-stitch-55x85
+├ ƒ /shop/marketing-materials/booklets/saddle-stitch-85x11
+├ ƒ /shop/marketing-materials/booklets/saddle-stitch-square
+├ ƒ /shop/marketing-materials/booklets/soft-touch-cover
+├ ƒ /shop/marketing-materials/brochures
+├ ƒ /shop/marketing-materials/brochures/bi-fold
+├ ƒ /shop/marketing-materials/brochures/bi-fold-letter
+├ ƒ /shop/marketing-materials/brochures/soft-touch
+├ ƒ /shop/marketing-materials/brochures/tri-fold
+├ ƒ /shop/marketing-materials/brochures/tri-fold-legal
+├ ƒ /shop/marketing-materials/brochures/tri-fold-letter
+├ ƒ /shop/marketing-materials/brochures/uncoated
+├ ƒ /shop/marketing-materials/business-cards
+├ ƒ /shop/marketing-materials/business-cards/premium
+├ ƒ /shop/marketing-materials/business-cards/standard
+├ ƒ /shop/marketing-materials/checkout
+├ ƒ /shop/marketing-materials/flyers
+├ ƒ /shop/marketing-materials/flyers/full-page
+├ ƒ /shop/marketing-materials/flyers/half-page
+├ ƒ /shop/marketing-materials/postcards
+├ ƒ /shop/marketing-materials/postcards/standard
+├ ƒ /shop/marketing-materials/posters/art-print
+├ ƒ /shop/marketing-materials/posters/large
+├ ƒ /shop/marketing-materials/posters/medium
+├ ƒ /shop/marketing-materials/posters/small
+├ ƒ /shop/marketing-materials/posters/soft-touch
+├ ƒ /shop/packaging
+├ ƒ /shop/packaging/boxes/box-sleeve
+├ ƒ /shop/packaging/boxes/folding-carton
+├ ƒ /shop/packaging/boxes/lid-base-box
+├ ƒ /shop/packaging/boxes/magnetic-closure-box
+├ ƒ /shop/packaging/boxes/mailer-box
+├ ƒ /shop/packaging/boxes/rsc-box
+├ ƒ /shop/packaging/custom-packaging
+├ ƒ /shop/packaging/mylar-bags
+├ ƒ /shop/packaging/mylar-bags/die-cut
+├ ƒ /shop/packaging/mylar-bags/standard
+├ ƒ /shop/roll-labels
+├ ƒ /shop/roll-labels/[shape]
+├ ƒ /shop/roll-labels/checkout
+├ ƒ /shop/signage
+├ ƒ /shop/signage/backdrops
+├ ƒ /shop/signage/backdrops/eurofit-10x8
+├ ƒ /shop/signage/backdrops/eurofit-8x8
+├ ƒ /shop/signage/backdrops/popup-10x8
+├ ƒ /shop/signage/backdrops/popup-20x8
+├ ƒ /shop/signage/backdrops/popup-8x8
+├ ƒ /shop/signage/backdrops/seg-10x8
+├ ƒ /shop/signage/backdrops/seg-20x8
+├ ƒ /shop/signage/backdrops/seg-8x10
+├ ƒ /shop/signage/backdrops/step-repeat-10x8
+├ ƒ /shop/signage/backdrops/step-repeat-8x8
+├ ƒ /shop/signage/banners
+├ ƒ /shop/signage/banners/fabric-banner
+├ ƒ /shop/signage/banners/mesh-banner
+├ ƒ /shop/signage/banners/retractable-33
+├ ƒ /shop/signage/banners/retractable-48
+├ ƒ /shop/signage/banners/retractable-60
+├ ƒ /shop/signage/banners/retractable-luxury-33
+├ ƒ /shop/signage/banners/retractable-standard
+├ ƒ /shop/signage/banners/retractable-tabletop
+├ ƒ /shop/signage/banners/vinyl-banner
+├ ƒ /shop/signage/banners/x-stand-24x63
+├ ƒ /shop/signage/banners/x-stand-32x71
+├ ƒ /shop/signage/quote
+├ ƒ /shop/signage/tents/[size]
+├ ƒ /shop/spot-uv
+├ ƒ /shop/spot-uv/checkout
+├ ƒ /shop/stickers
+├ ƒ /shop/stickers/[type]
+├ ƒ /shop/stickers/checkout
+├ ○ /sitemap.xml
+├ ƒ /studio/[[...tool]]
+└ ƒ /terms
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand

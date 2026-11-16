@@ -1,0 +1,50 @@
+[
+  {
+    "route": "/shop/marketing-materials/postcards/standard",
+    "mobile": "selection, FAQ keyboard, existing module preserved"
+  },
+  {
+    "route": "/shop/stickers/die-cut",
+    "mobile": "selection, FAQ keyboard, existing module preserved"
+  },
+  {
+    "route": "/shop/stickers/clear",
+    "mobile": "selection, FAQ keyboard, existing module preserved"
+  },
+  {
+    "route": "/shop/roll-labels/circle",
+    "mobile": "selection, FAQ keyboard, existing module preserved"
+  },
+  {
+    "route": "/shop/packaging/custom-packaging",
+    "mobile": "selection, FAQ keyboard, existing module preserved"
+  },
+  {
+    "route": "/shop/apparel/dtf",
+    "mobile": "selection, FAQ keyboard, existing module preserved"
+  },
+  {
+    "route": "/shop/marketing-materials/postcards/standard",
+    "desktop": "wheel chaining, expanded FAQ containment"
+  },
+  {
+    "route": "/shop/stickers/die-cut",
+    "desktop": "wheel chaining, expanded FAQ containment"
+  },
+  {
+    "route": "/shop/roll-labels/circle",
+    "desktop": "wheel chaining, expanded FAQ containment"
+  },
+  {
+    "route": "/shop/signage/tents/10x10",
+    "desktop": "wheel chaining, expanded FAQ containment"
+  },
+  {
+    "route": "/shop/packaging/custom-packaging",
+    "desktop": "wheel chaining, expanded FAQ containment"
+  },
+  {
+    "route": "/shop/apparel/dtf",
+    "desktop": "wheel chaining, expanded FAQ containment"
+  }
+]

@@ -1,0 +1,8 @@
+
+/workspace/projects/lettuceprint/.worktrees/sticky-order-20261116/src/components/shop/BusinessCardCalculator.tsx
+  12:3  warning  'QUANTITY_TIERS' is defined but never used  @typescript-eslint/no-unused-vars
+
+/workspace/projects/lettuceprint/.worktrees/sticky-order-20261116/src/components/shop/PremiumBusinessCardCalculator.tsx
+  12:3  warning  'QUANTITY_TIERS' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)

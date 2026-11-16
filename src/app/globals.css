@@ -180,3 +180,64 @@ body {
     overscroll-behavior-y: none;
   }
 }
+
+/* Sticky belongs to the grid item, not its same-height child. Only the
+   outer order panel scrolls; calculators never create nested scrollports. */
+.product-order-panel { min-width: 0; }
+.product-order-target { scroll-margin-top: 88px; }
+.product-order-shortcut {
+  position: fixed;
+  z-index: 30;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  left: max(16px, env(safe-area-inset-left));
+  right: max(16px, env(safe-area-inset-right));
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.product-order-shortcut button { pointer-events: auto; }
+@media (min-width: 1024px) {
+  .product-order-shortcut { display: none; }
+  .product-order-panel {
+    position: sticky;
+    top: 88px;
+    align-self: start;
+    max-height: calc(100vh - 104px);
+    max-height: calc(100dvh - 104px);
+    overflow-y: auto;
+    overscroll-behavior-y: auto;
+    scrollbar-gutter: stable;
+    scroll-padding-block: 16px;
+  }
+  .product-quote-layout, .product-apparel-layout, .product-label-landing {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    column-gap: 48px;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: 120px 32px 64px;
+  }
+  .product-quote-hero, .product-quote-hero-grid,
+  .product-label-hero, .product-label-hero-grid { display: contents; }
+  .product-quote-layout > *, .product-apparel-layout > *, .product-label-landing > * { min-width: 0; grid-column: 1; }
+  .product-quote-intro, .product-label-intro { grid-column: 1; }
+  .product-quote-panel, .product-apparel-panel, .product-label-panel {
+    grid-column: 2;
+    grid-row: 1 / span 20;
+  }
+  .product-apparel-panel { padding: 24px 0; }
+  .product-quote-layout > section, .product-apparel-layout > section,
+  .product-label-landing > section { padding-block: 32px; }
+  .product-label-landing > nav { position: fixed; top: 0; left: 0; right: 0; }
+  .product-label-landing > footer { grid-column: 1 / -1; grid-row: 21; margin-top: 32px; }
+}
+
+/* Keep the sticky containing block tall through the last FAQ and related
+   products. Related cards follow the info column, never underneath the panel. */
+@media (min-width: 1024px) {
+  .product-order-related section > .grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (min-width: 1280px) {
+  .product-order-related section > .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

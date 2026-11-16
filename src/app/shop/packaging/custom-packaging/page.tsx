@@ -1,3 +1,4 @@
+import OrderShortcut from '@/components/shop/OrderShortcut'
 import FaqSection from '@/components/seo/FaqSection'
 import { customPackagingFaqs } from '@/lib/department-product-faqs'
 import Navbar from '@/components/layout/Navbar'
@@ -20,11 +21,11 @@ export default function CustomPackagingPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="product-quote-layout">
         {/* Hero */}
-        <section className="bg-white pb-20 pt-[calc(72px+4rem)]">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-16 lg:px-8">
-            <div className="lg:sticky lg:top-28">
+        <section className="product-quote-hero bg-white pb-20 pt-[calc(72px+4rem)]">
+          <div className="product-quote-hero-grid mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-16 lg:px-8">
+            <div className="product-quote-intro">
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-lp-green">Boxes & Packaging</p>
               <h1 className="text-display max-w-2xl font-semibold text-gray-900">Custom packaging, built around your brand.</h1>
               <p className="text-body-lg mt-6 max-w-2xl text-gray-500">
@@ -42,7 +43,7 @@ export default function CustomPackagingPage() {
                 ]}
               />
             </div>
-            <CustomPackagingConsultationForm />
+            <div data-mobile-order-module role="region" aria-label="Request quote" tabIndex={-1} className="product-order-panel product-order-target product-quote-panel"><CustomPackagingConsultationForm /></div>
           </div>
         </section>
 
@@ -75,7 +76,7 @@ export default function CustomPackagingPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <OrderShortcut label="Request quote" /><Footer />
     </>
   )
 }

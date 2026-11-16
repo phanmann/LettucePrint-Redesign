@@ -1,0 +1,492 @@
+[
+  {
+    "route": "/shop/apparel/screenprint",
+    "source": "src/app/shop/apparel/[slug]/page.tsx",
+    "owner": "ApparelServicePage"
+  },
+  {
+    "route": "/shop/apparel/embroidery",
+    "source": "src/app/shop/apparel/[slug]/page.tsx",
+    "owner": "ApparelServicePage"
+  },
+  {
+    "route": "/shop/apparel/dtg",
+    "source": "src/app/shop/apparel/[slug]/page.tsx",
+    "owner": "ApparelServicePage"
+  },
+  {
+    "route": "/shop/apparel/dtf",
+    "source": "src/app/shop/apparel/[slug]/page.tsx",
+    "owner": "ApparelServicePage"
+  },
+  {
+    "route": "/shop/apparel",
+    "source": "src/app/shop/apparel/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/graphic-design",
+    "source": "src/app/shop/graphic-design/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/marketing-materials/booklets/perfect-bound-6x9",
+    "source": "src/app/shop/marketing-materials/booklets/perfect-bound-6x9/page.tsx",
+    "owner": "ProductOrderPage via marketing adapter"
+  },
+  {
+    "route": "/shop/marketing-materials/booklets/perfect-bound-85x11",
+    "source": "src/app/shop/marketing-materials/booklets/perfect-bound-85x11/page.tsx",
+    "owner": "ProductOrderPage via marketing adapter"
+  },
+  {
+    "route": "/shop/marketing-materials/booklets/saddle-stitch-55x85",
+    "source": "src/app/shop/marketing-materials/booklets/saddle-stitch-55x85/page.tsx",
+    "owner": "ProductOrderPage via marketing adapter"
+  },
+  {
+    "route": "/shop/marketing-materials/booklets/saddle-stitch-85x11",
+    "source": "src/app/shop/marketing-materials/booklets/saddle-stitch-85x11/page.tsx",
+    "owner": "ProductOrderPage via marketing adapter"
+  },
+  {
+    "route": "/shop/marketing-materials/booklets/saddle-stitch-square",
+    "source": "src/app/shop/marketing-materials/booklets/saddle-stitch-square/page.tsx",
+    "owner": "ProductOrderPage via marketing adapter"
+  },
+  {
+    "route": "/shop/marketing-materials/booklets/soft-touch-cover",
+    "source": "src/app/shop/marketing-materials/booklets/soft-touch-cover/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/bi-fold",
+    "source": "src/app/shop/marketing-materials/brochures/bi-fold/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/bi-fold-letter",
+    "source": "src/app/shop/marketing-materials/brochures/bi-fold-letter/page.tsx",
+    "owner": "ProductOrderPage via marketing adapter"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures",
+    "source": "src/app/shop/marketing-materials/brochures/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/soft-touch",
+    "source": "src/app/shop/marketing-materials/brochures/soft-touch/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/tri-fold",
+    "source": "src/app/shop/marketing-materials/brochures/tri-fold/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/tri-fold-legal",
+    "source": "src/app/shop/marketing-materials/brochures/tri-fold-legal/page.tsx",
+    "owner": "ProductOrderPage via marketing adapter"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/tri-fold-letter",
+    "source": "src/app/shop/marketing-materials/brochures/tri-fold-letter/page.tsx",
+    "owner": "ProductOrderPage via marketing adapter"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/uncoated",
+    "source": "src/app/shop/marketing-materials/brochures/uncoated/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards",
+    "source": "src/app/shop/marketing-materials/business-cards/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards/premium",
+    "source": "src/app/shop/marketing-materials/business-cards/premium/page.tsx",
+    "owner": "Standalone calculator"
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards/standard",
+    "source": "src/app/shop/marketing-materials/business-cards/standard/page.tsx",
+    "owner": "Standalone calculator"
+  },
+  {
+    "route": "/shop/marketing-materials/checkout",
+    "source": "src/app/shop/marketing-materials/checkout/page.tsx",
+    "owner": null,
+    "exclusion": "Redirect"
+  },
+  {
+    "route": "/shop/marketing-materials/flyers/full-page",
+    "source": "src/app/shop/marketing-materials/flyers/full-page/page.tsx",
+    "owner": "ProductOrderPage via marketing adapter"
+  },
+  {
+    "route": "/shop/marketing-materials/flyers/half-page",
+    "source": "src/app/shop/marketing-materials/flyers/half-page/page.tsx",
+    "owner": "ProductOrderPage via marketing adapter"
+  },
+  {
+    "route": "/shop/marketing-materials/flyers",
+    "source": "src/app/shop/marketing-materials/flyers/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/marketing-materials",
+    "source": "src/app/shop/marketing-materials/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/marketing-materials/postcards",
+    "source": "src/app/shop/marketing-materials/postcards/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/marketing-materials/postcards/standard",
+    "source": "src/app/shop/marketing-materials/postcards/standard/page.tsx",
+    "owner": "Standalone calculator"
+  },
+  {
+    "route": "/shop/marketing-materials/posters/art-print",
+    "source": "src/app/shop/marketing-materials/posters/art-print/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/marketing-materials/posters/large",
+    "source": "src/app/shop/marketing-materials/posters/large/page.tsx",
+    "owner": "ProductOrderPage via marketing adapter"
+  },
+  {
+    "route": "/shop/marketing-materials/posters/medium",
+    "source": "src/app/shop/marketing-materials/posters/medium/page.tsx",
+    "owner": "ProductOrderPage via marketing adapter"
+  },
+  {
+    "route": "/shop/marketing-materials/posters/small",
+    "source": "src/app/shop/marketing-materials/posters/small/page.tsx",
+    "owner": "ProductOrderPage via marketing adapter"
+  },
+  {
+    "route": "/shop/marketing-materials/posters/soft-touch",
+    "source": "src/app/shop/marketing-materials/posters/soft-touch/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/packaging/boxes/box-sleeve",
+    "source": "src/app/shop/packaging/boxes/box-sleeve/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/packaging/boxes/folding-carton",
+    "source": "src/app/shop/packaging/boxes/folding-carton/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/packaging/boxes/lid-base-box",
+    "source": "src/app/shop/packaging/boxes/lid-base-box/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/packaging/boxes/magnetic-closure-box",
+    "source": "src/app/shop/packaging/boxes/magnetic-closure-box/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/packaging/boxes/mailer-box",
+    "source": "src/app/shop/packaging/boxes/mailer-box/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/packaging/boxes/rsc-box",
+    "source": "src/app/shop/packaging/boxes/rsc-box/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/packaging/custom-packaging",
+    "source": "src/app/shop/packaging/custom-packaging/page.tsx",
+    "owner": "Packaging quote layout"
+  },
+  {
+    "route": "/shop/packaging/mylar-bags/die-cut",
+    "source": "src/app/shop/packaging/mylar-bags/die-cut/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/packaging/mylar-bags",
+    "source": "src/app/shop/packaging/mylar-bags/page.tsx",
+    "owner": "Packaging quote layout"
+  },
+  {
+    "route": "/shop/packaging/mylar-bags/standard",
+    "source": "src/app/shop/packaging/mylar-bags/standard/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/packaging",
+    "source": "src/app/shop/packaging/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop",
+    "source": "src/app/shop/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/roll-labels/rectangle",
+    "source": "src/app/shop/roll-labels/[shape]/page.tsx",
+    "owner": "TypeProductPage"
+  },
+  {
+    "route": "/shop/roll-labels/circle",
+    "source": "src/app/shop/roll-labels/[shape]/page.tsx",
+    "owner": "TypeProductPage"
+  },
+  {
+    "route": "/shop/roll-labels/square",
+    "source": "src/app/shop/roll-labels/[shape]/page.tsx",
+    "owner": "TypeProductPage"
+  },
+  {
+    "route": "/shop/roll-labels/oval",
+    "source": "src/app/shop/roll-labels/[shape]/page.tsx",
+    "owner": "TypeProductPage"
+  },
+  {
+    "route": "/shop/roll-labels/checkout",
+    "source": "src/app/shop/roll-labels/checkout/page.tsx",
+    "owner": null,
+    "exclusion": "Redirect"
+  },
+  {
+    "route": "/shop/roll-labels",
+    "source": "src/app/shop/roll-labels/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/signage/backdrops/eurofit-10x8",
+    "source": "src/app/shop/signage/backdrops/eurofit-10x8/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/backdrops/eurofit-8x8",
+    "source": "src/app/shop/signage/backdrops/eurofit-8x8/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/backdrops",
+    "source": "src/app/shop/signage/backdrops/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/signage/backdrops/popup-10x8",
+    "source": "src/app/shop/signage/backdrops/popup-10x8/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/backdrops/popup-20x8",
+    "source": "src/app/shop/signage/backdrops/popup-20x8/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/backdrops/popup-8x8",
+    "source": "src/app/shop/signage/backdrops/popup-8x8/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/backdrops/seg-10x8",
+    "source": "src/app/shop/signage/backdrops/seg-10x8/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/backdrops/seg-20x8",
+    "source": "src/app/shop/signage/backdrops/seg-20x8/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/backdrops/seg-8x10",
+    "source": "src/app/shop/signage/backdrops/seg-8x10/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/backdrops/step-repeat-10x8",
+    "source": "src/app/shop/signage/backdrops/step-repeat-10x8/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/backdrops/step-repeat-8x8",
+    "source": "src/app/shop/signage/backdrops/step-repeat-8x8/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/banners/fabric-banner",
+    "source": "src/app/shop/signage/banners/fabric-banner/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/banners/mesh-banner",
+    "source": "src/app/shop/signage/banners/mesh-banner/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/banners",
+    "source": "src/app/shop/signage/banners/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/signage/banners/retractable-33",
+    "source": "src/app/shop/signage/banners/retractable-33/page.tsx",
+    "owner": null,
+    "exclusion": "Redirect"
+  },
+  {
+    "route": "/shop/signage/banners/retractable-48",
+    "source": "src/app/shop/signage/banners/retractable-48/page.tsx",
+    "owner": null,
+    "exclusion": "Redirect"
+  },
+  {
+    "route": "/shop/signage/banners/retractable-60",
+    "source": "src/app/shop/signage/banners/retractable-60/page.tsx",
+    "owner": null,
+    "exclusion": "Redirect"
+  },
+  {
+    "route": "/shop/signage/banners/retractable-luxury-33",
+    "source": "src/app/shop/signage/banners/retractable-luxury-33/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/banners/retractable-standard",
+    "source": "src/app/shop/signage/banners/retractable-standard/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/banners/retractable-tabletop",
+    "source": "src/app/shop/signage/banners/retractable-tabletop/page.tsx",
+    "owner": null,
+    "exclusion": "Redirect"
+  },
+  {
+    "route": "/shop/signage/banners/vinyl-banner",
+    "source": "src/app/shop/signage/banners/vinyl-banner/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/banners/x-stand-24x63",
+    "source": "src/app/shop/signage/banners/x-stand-24x63/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage/banners/x-stand-32x71",
+    "source": "src/app/shop/signage/banners/x-stand-32x71/page.tsx",
+    "owner": "ProductOrderPage"
+  },
+  {
+    "route": "/shop/signage",
+    "source": "src/app/shop/signage/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/shop/signage/quote",
+    "source": "src/app/shop/signage/quote/page.tsx",
+    "owner": null,
+    "exclusion": "Dedicated intake form, no product browsing content"
+  },
+  {
+    "route": "/shop/signage/tents/10x10",
+    "source": "src/app/shop/signage/tents/[size]/page.tsx",
+    "owner": "TentPage"
+  },
+  {
+    "route": "/shop/signage/tents/20x10",
+    "source": "src/app/shop/signage/tents/[size]/page.tsx",
+    "owner": "TentPage"
+  },
+  {
+    "route": "/shop/spot-uv/checkout",
+    "source": "src/app/shop/spot-uv/checkout/page.tsx",
+    "owner": null,
+    "exclusion": "Redirect"
+  },
+  {
+    "route": "/shop/spot-uv",
+    "source": "src/app/shop/spot-uv/page.tsx",
+    "owner": "Standalone calculator"
+  },
+  {
+    "route": "/shop/stickers/die-cut",
+    "source": "src/app/shop/stickers/[type]/page.tsx",
+    "owner": "TypeProductPage"
+  },
+  {
+    "route": "/shop/stickers/kiss-cut",
+    "source": "src/app/shop/stickers/[type]/page.tsx",
+    "owner": "TypeProductPage"
+  },
+  {
+    "route": "/shop/stickers/circle",
+    "source": "src/app/shop/stickers/[type]/page.tsx",
+    "owner": "TypeProductPage"
+  },
+  {
+    "route": "/shop/stickers/square",
+    "source": "src/app/shop/stickers/[type]/page.tsx",
+    "owner": "TypeProductPage"
+  },
+  {
+    "route": "/shop/stickers/rectangle",
+    "source": "src/app/shop/stickers/[type]/page.tsx",
+    "owner": "TypeProductPage"
+  },
+  {
+    "route": "/shop/stickers/oval",
+    "source": "src/app/shop/stickers/[type]/page.tsx",
+    "owner": "TypeProductPage"
+  },
+  {
+    "route": "/shop/stickers/clear",
+    "source": "src/app/shop/stickers/[type]/page.tsx",
+    "owner": "TypeProductPage"
+  },
+  {
+    "route": "/shop/stickers/holographic",
+    "source": "src/app/shop/stickers/[type]/page.tsx",
+    "owner": "TypeProductPage"
+  },
+  {
+    "route": "/shop/stickers/checkout",
+    "source": "src/app/shop/stickers/checkout/page.tsx",
+    "owner": null,
+    "exclusion": "Redirect"
+  },
+  {
+    "route": "/shop/stickers",
+    "source": "src/app/shop/stickers/page.tsx",
+    "owner": null,
+    "exclusion": "Category/service overview with links; no inline order module"
+  },
+  {
+    "route": "/lp/roll-labels",
+    "source": "src/app/lp/roll-labels/page.tsx",
+    "owner": "Standalone RollLabelCalculator landing page"
+  }
+]

@@ -1,3 +1,4 @@
+import OrderShortcut from '@/components/shop/OrderShortcut'
 import type { Metadata } from 'next'
 import RelatedProducts from '@/components/shop/RelatedProducts'
 import Link from 'next/link'
@@ -76,10 +77,10 @@ export default function SpotUVPage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_600px] gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,600px)] gap-12 items-start">
 
             {/* Right — Calculator (desktop only) */}
-            <div className="hidden lg:block lg:order-last lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
+            <div className="hidden lg:block lg:order-last product-order-panel">
               <SpotUVCalculator productName="Spot UV Stickers" />
             </div>
 
@@ -108,7 +109,7 @@ export default function SpotUVPage() {
               />
 
               {/* Mobile-only calculator — inline after gallery */}
-              <div className="lg:hidden mb-8">
+              <div data-mobile-order-module role="region" aria-label="Order options" tabIndex={-1} className="lg:hidden mb-8 product-order-target">
                 <SpotUVCalculator productName="Spot UV Stickers" />
               </div>
 
@@ -205,13 +206,12 @@ export default function SpotUVPage() {
                   Request a custom quote <ArrowRight size={14} />
                 </Link>
               </div>
+              <div className="product-order-related"><RelatedProducts currentPath="/shop/spot-uv" /></div>
             </div>
           </div>
-
-          <RelatedProducts currentPath="/shop/spot-uv" />
         </div>
       </main>
-      <Footer />
+      <OrderShortcut /><Footer />
     </>
   )
 }

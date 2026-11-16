@@ -1,3 +1,4 @@
+import OrderShortcut from '@/components/shop/OrderShortcut'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import ProductPreviewImage from '@/components/shop/ProductPreviewImage'
@@ -42,7 +43,7 @@ const faqs = [
 
 export default function RollLabelsLandingPage() {
   return (
-    <main className="min-h-screen overflow-x-clip bg-[#f7f7f2] pb-20 text-gray-950 md:pb-0">
+    <main className="product-label-landing min-h-screen overflow-x-clip bg-[#f7f7f2] pb-20 text-gray-950 md:pb-0">
       <nav className="sticky top-0 z-50 border-b border-black/10 bg-[#f7f7f2]/95 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link href="/" className="block flex-shrink-0" aria-label="Lettuce Print home">
@@ -62,9 +63,9 @@ export default function RollLabelsLandingPage() {
         </div>
       </nav>
 
-      <section className="mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 sm:pt-16 lg:px-8 lg:pb-24">
-        <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(460px,1.1fr)] lg:gap-16">
-          <div className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
+      <section className="product-label-hero mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 sm:pt-16 lg:px-8 lg:pb-24">
+        <div className="product-label-hero-grid grid items-start gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(460px,1.1fr)] lg:gap-16">
+          <div className="product-label-intro">
             <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-lp-green">Printed in Brooklyn</p>
             <h1 className="max-w-2xl text-4xl font-semibold leading-[0.98] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
               Custom roll labels. Sized for your packaging.
@@ -96,7 +97,7 @@ export default function RollLabelsLandingPage() {
             </div>
           </div>
 
-          <div id="pricing" className="scroll-mt-24">
+          <div id="pricing" data-mobile-order-module role="region" aria-label="Order options" tabIndex={-1} className="product-order-panel product-order-target product-label-panel">
             <div className="mb-4 flex items-center justify-between gap-4">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-lp-green">Configure your labels</p>
@@ -188,9 +189,7 @@ export default function RollLabelsLandingPage() {
         </div>
       </footer>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-black/10 bg-white/95 p-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur md:hidden">
-        <a href="#pricing" className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-lp-green px-5 py-3 text-sm font-bold uppercase tracking-[0.08em] text-lp-green">Get Instant Pricing <ArrowRight size={16} /></a>
-      </div>
+      <OrderShortcut />
     </main>
   )
 }

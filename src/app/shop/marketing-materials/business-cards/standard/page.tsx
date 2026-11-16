@@ -1,5 +1,6 @@
 'use client'
 
+import OrderShortcut from '@/components/shop/OrderShortcut'
 import FaqSection from '@/components/seo/FaqSection'
 import { businessCardFaqs } from '@/lib/department-product-faqs'
 
@@ -58,10 +59,10 @@ export default function StandardBusinessCardsPage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_600px] gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,600px)] gap-12 items-start">
 
             {/* Right — Pricing Calculator (desktop only) */}
-            <div className="hidden lg:block lg:order-last lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
+            <div className="hidden lg:block lg:order-last product-order-panel">
               <BusinessCardCalculator productName="Standard Business Cards" />
             </div>
 
@@ -83,7 +84,7 @@ export default function StandardBusinessCardsPage() {
               />
 
               {/* Mobile-only calculator — inline after gallery */}
-              <div className="lg:hidden mb-8">
+              <div data-mobile-order-module role="region" aria-label="Order options" tabIndex={-1} className="lg:hidden mb-8 product-order-target">
                 <BusinessCardCalculator productName="Standard Business Cards" />
               </div>
 
@@ -152,13 +153,12 @@ export default function StandardBusinessCardsPage() {
                   See Premium Business Cards <ArrowRight size={14} />
                 </Link>
               </div>
+              <div className="product-order-related"><RelatedProducts currentPath="/shop/marketing-materials/business-cards/standard" /></div>
             </div>
           </div>
-
-          <RelatedProducts currentPath="/shop/marketing-materials/business-cards/standard" />
         </div>
       </main>
-      <Footer />
+      <OrderShortcut /><Footer />
     </>
   )
 }

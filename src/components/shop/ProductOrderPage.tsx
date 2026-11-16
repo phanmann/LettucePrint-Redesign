@@ -1,5 +1,6 @@
 'use client'
 
+import OrderShortcut from '@/components/shop/OrderShortcut'
 import FaqSection from '@/components/seo/FaqSection'
 import { departmentProductFaqs } from '@/lib/department-product-faqs'
 
@@ -423,11 +424,11 @@ export default function ProductOrderPage({
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_520px] gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] gap-12 items-start">
 
             {/* Right — Configurator panel: desktop only (hidden on mobile, rendered inline in left col) */}
-            <div className="hidden lg:block lg:order-last">
-              <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
+            <div className="hidden lg:block lg:order-last product-order-panel">
+              <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
                 {bannerKind ? <BannerConfigurator order={order} kind={bannerKind} configuration={bannerConfiguration} onConfigurationChange={setBannerConfiguration} /> : <>
                 <ConfiguratorOptions
                   optionGroups={visibleGroups}
@@ -479,7 +480,7 @@ export default function ProductOrderPage({
               <ProductImageGallery background={galleryBackground} productPath={galleryPath} />
 
               {/* Mobile-only configurator — inline after gallery, hidden on desktop */}
-              <div className="lg:hidden mb-8">
+              <div data-mobile-order-module role="region" aria-label="Order options" tabIndex={-1} className="lg:hidden mb-8 product-order-target">
                 <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
                   {bannerKind ? <BannerConfigurator order={order} kind={bannerKind} configuration={bannerConfiguration} onConfigurationChange={setBannerConfiguration} /> : <>
                   <ConfiguratorOptions
@@ -613,14 +614,13 @@ export default function ProductOrderPage({
                   Request a custom quote <ArrowRight size={14} />
                 </Link>
               </div>
+              <div className="product-order-related"><RelatedProducts currentPath={pathname} preferred={relatedProducts.map(product => product.href)} /></div>
             </div>
           </div>
-
-          <RelatedProducts currentPath={pathname} preferred={relatedProducts.map(product => product.href)} />
         </div>
         <JsonLd data={productJsonLd({ name, description: tagline, path: pathname, lowPrice: [...(pricingTable ?? []), ...(pricingRules ?? []).flatMap(r => r.pricingTable)].reduce<number | undefined>((min, row) => (min === undefined || row.standardPrice < min ? row.standardPrice : min), undefined) })} />
       </main>
-      <Footer />
+      <OrderShortcut /><Footer />
     </>
   )
 }
