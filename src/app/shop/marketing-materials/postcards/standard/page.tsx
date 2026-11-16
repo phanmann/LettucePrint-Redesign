@@ -1,5 +1,8 @@
 'use client'
 
+import FaqSection from '@/components/seo/FaqSection'
+import { postcardFaqs } from '@/lib/department-product-faqs'
+
 import MobileOptionSelect from '@/components/shop/MobileOptionSelect'
 
 import { useState } from 'react'
@@ -329,6 +332,7 @@ export default function PostcardsPage() {
                 </Disclosure>
               </div>
 
+              <FaqSection faqs={postcardFaqs} />
 
             </div>
           </div>

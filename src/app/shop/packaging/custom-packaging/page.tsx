@@ -1,3 +1,5 @@
+import FaqSection from '@/components/seo/FaqSection'
+import { customPackagingFaqs } from '@/lib/department-product-faqs'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
@@ -59,6 +61,8 @@ export default function CustomPackagingPage() {
             </div>
           </div>
         </section>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8"><FaqSection faqs={customPackagingFaqs} /></div>
 
         {/* CTA */}
         <section className="py-20 bg-white border-t border-gray-100">

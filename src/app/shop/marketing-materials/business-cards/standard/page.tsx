@@ -1,5 +1,8 @@
 'use client'
 
+import FaqSection from '@/components/seo/FaqSection'
+import { businessCardFaqs } from '@/lib/department-product-faqs'
+
 import Navbar from '@/components/layout/Navbar'
 import RelatedProducts from '@/components/shop/RelatedProducts'
 import Footer from '@/components/layout/Footer'
@@ -138,6 +141,8 @@ export default function StandardBusinessCardsPage() {
                   </p>
                 </Disclosure>
               </div>
+
+              <FaqSection faqs={businessCardFaqs(false)} />
 
               {/* Premium upgrade */}
               <div className="rounded-card border border-gray-200 p-6">

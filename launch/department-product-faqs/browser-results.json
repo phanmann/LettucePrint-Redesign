@@ -1,0 +1,1810 @@
+{
+  "base": "http://127.0.0.1:3116",
+  "results": [
+    {
+      "route": "/shop/marketing-materials/booklets/perfect-bound-6x9",
+      "kind": "product",
+      "template": "BookletsOrderPage",
+      "source": "src/app/shop/marketing-materials/booklets/perfect-bound-6x9/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How do binding and page count affect my booklet quote?",
+          "a": "Cover: 100 lb. gloss or matte; Interior: 60-70 lb. text; Binding: Perfect bound. Select your page count or request a custom count. The page count and binding combination are reviewed with the quote before production."
+        },
+        {
+          "q": "What sizes or materials are available for perfect bound book?",
+          "a": "Size: 8.5\" × 11\", 6\" × 9\". For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Cover: Gloss Cover, Matte Cover; Interior: 60 lb. uncoated, 70 lb. text. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for perfect bound book?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/booklets/perfect-bound-85x11",
+      "kind": "product",
+      "template": "BookletsOrderPage",
+      "source": "src/app/shop/marketing-materials/booklets/perfect-bound-85x11/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How do binding and page count affect my booklet quote?",
+          "a": "Cover: 100 lb. gloss or matte; Interior: 60-70 lb. text; Binding: Perfect bound. Select your page count or request a custom count. The page count and binding combination are reviewed with the quote before production."
+        },
+        {
+          "q": "What sizes or materials are available for perfect bound book?",
+          "a": "Size: 8.5\" × 11\", 6\" × 9\". For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Cover: Gloss Cover, Matte Cover; Interior: 60 lb. uncoated, 70 lb. text. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for perfect bound book?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/booklets/saddle-stitch-55x85",
+      "kind": "product",
+      "template": "BookletsOrderPage",
+      "source": "src/app/shop/marketing-materials/booklets/saddle-stitch-55x85/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How do binding and page count affect my booklet quote?",
+          "a": "Cover: 100 lb. gloss or matte; Interior: 60-70 lb. text; Binding: Saddle-stitch. Select your page count or request a custom count. The page count and binding combination are reviewed with the quote before production."
+        },
+        {
+          "q": "What sizes or materials are available for saddle-stitch booklet?",
+          "a": "Size: 5.5\" × 8.5\", 8.5\" × 11\", 8.5\" × 8.5\". For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Cover: Gloss Cover, Matte Cover; Interior: 60 lb. uncoated, 70 lb. text. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for saddle-stitch booklet?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/booklets/saddle-stitch-85x11",
+      "kind": "product",
+      "template": "BookletsOrderPage",
+      "source": "src/app/shop/marketing-materials/booklets/saddle-stitch-85x11/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How do binding and page count affect my booklet quote?",
+          "a": "Cover: 100 lb. gloss or matte; Interior: 60-70 lb. text; Binding: Saddle-stitch. Select your page count or request a custom count. The page count and binding combination are reviewed with the quote before production."
+        },
+        {
+          "q": "What sizes or materials are available for saddle-stitch booklet?",
+          "a": "Size: 5.5\" × 8.5\", 8.5\" × 11\", 8.5\" × 8.5\". For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Cover: Gloss Cover, Matte Cover; Interior: 60 lb. uncoated, 70 lb. text. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for saddle-stitch booklet?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/booklets/saddle-stitch-square",
+      "kind": "product",
+      "template": "BookletsOrderPage",
+      "source": "src/app/shop/marketing-materials/booklets/saddle-stitch-square/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How do binding and page count affect my booklet quote?",
+          "a": "Cover: 100 lb. gloss or matte; Interior: 60-70 lb. text; Binding: Saddle-stitch. Select your page count or request a custom count. The page count and binding combination are reviewed with the quote before production."
+        },
+        {
+          "q": "What sizes or materials are available for saddle-stitch booklet?",
+          "a": "Size: 5.5\" × 8.5\", 8.5\" × 11\", 8.5\" × 8.5\". For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Cover: Gloss Cover, Matte Cover; Interior: 60 lb. uncoated, 70 lb. text. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for saddle-stitch booklet?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/booklets/soft-touch-cover",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/marketing-materials/booklets/soft-touch-cover/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How do binding and page count affect my booklet quote?",
+          "a": "Cover: 100 lb. with soft-touch laminate; Interior: 60-70 lb. text; Binding: Saddle-stitch or perfect-bound. Select your page count or request a custom count. The page count and binding combination are reviewed with the quote before production."
+        },
+        {
+          "q": "What sizes or materials are available for soft touch cover booklet?",
+          "a": "Size: 8.5 x 11 in., 6 x 9 in.. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Interior: 60 lb. uncoated, 70 lb. text. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for soft touch cover booklet?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/brochures/bi-fold",
+      "kind": "product",
+      "template": "OrderingPageLayout",
+      "source": "src/app/shop/marketing-materials/brochures/bi-fold/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How many panels does a bi-fold brochure have?",
+          "a": "A bi-fold brochure folds once to create four panels. Plan the front, inside spread and back as a connected reading sequence."
+        },
+        {
+          "q": "Which specifications should I choose for a quote?",
+          "a": "Select the size, paper stock, finish and lamination in the form, then enter your quantity. These selections are carried into your quote request."
+        },
+        {
+          "q": "How should I lay out the fold?",
+          "a": "Keep important text clear of the center fold and trim edges. Confirm the flat dimensions and panel layout before preparing the final artwork."
+        },
+        {
+          "q": "Can I include artwork with my request?",
+          "a": "Use the artwork option on the quote card if you already have a file. If you need layout help, describe the content and design work needed in your request."
+        },
+        {
+          "q": "Does requesting a quote place an order?",
+          "a": "No. The selected options go to the quote request flow. Pricing and production timing are confirmed before you order."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/brochures/bi-fold-letter",
+      "kind": "product",
+      "template": "PrintSheetOrderPage",
+      "source": "src/app/shop/marketing-materials/brochures/bi-fold-letter/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How should I plan artwork around the brochure folds?",
+          "a": "Plan the reading order across the cover, inside panels and back. Keep important text away from folds and trim edges, and confirm the panel layout before final artwork. Where the size is marked as flat, it describes the sheet before folding."
+        },
+        {
+          "q": "What sizes or materials are available for bi-fold brochure?",
+          "a": "Size: 8.5\" × 11\", 11\" × 17\", 12\" × 18\"; Stock: Standard, Premium. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Use the options shown in the configurator for this product. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for bi-fold brochure?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/brochures/soft-touch",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/marketing-materials/brochures/soft-touch/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How should I plan artwork around the brochure folds?",
+          "a": "Plan the reading order across the cover, inside panels and back. Keep important text away from folds and trim edges, and confirm the panel layout before final artwork. Where the size is marked as flat, it describes the sheet before folding."
+        },
+        {
+          "q": "What sizes or materials are available for soft touch brochure?",
+          "a": "Size: 8.5 x 11 in., 8.5 x 14 in., Custom. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Finish: Soft-touch matte laminate. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for soft touch brochure?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/brochures/tri-fold",
+      "kind": "product",
+      "template": "standalone",
+      "source": "src/app/shop/marketing-materials/brochures/tri-fold/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How should I plan artwork around the brochure folds?",
+          "a": "Plan the reading order across the cover, inside panels and back. Keep important text away from folds and trim edges, and confirm the panel layout before final artwork. Where the size is marked as flat, it describes the sheet before folding."
+        },
+        {
+          "q": "What sizes or materials are available for tri-fold brochure?",
+          "a": "Size: 8.5\" × 14\", 8.5\" × 11\", 11\" × 17\", 12\" × 18\"; Stock: Standard, Premium. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Use the options shown in the configurator for this product. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for tri-fold brochure?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/brochures/tri-fold-legal",
+      "kind": "product",
+      "template": "TriFoldOrderPage",
+      "source": "src/app/shop/marketing-materials/brochures/tri-fold-legal/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How should I plan artwork around the brochure folds?",
+          "a": "Plan the reading order across the cover, inside panels and back. Keep important text away from folds and trim edges, and confirm the panel layout before final artwork. Where the size is marked as flat, it describes the sheet before folding."
+        },
+        {
+          "q": "What sizes or materials are available for tri-fold brochure?",
+          "a": "Size: 8.5\" × 14\", 8.5\" × 11\", 11\" × 17\", 12\" × 18\"; Stock: 100 lb. Text, 100 lb. Cover. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Finish: Gloss, Matte; Laminate: None, Soft Touch. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for tri-fold brochure?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/brochures/tri-fold-letter",
+      "kind": "product",
+      "template": "TriFoldOrderPage",
+      "source": "src/app/shop/marketing-materials/brochures/tri-fold-letter/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How should I plan artwork around the brochure folds?",
+          "a": "Plan the reading order across the cover, inside panels and back. Keep important text away from folds and trim edges, and confirm the panel layout before final artwork. Where the size is marked as flat, it describes the sheet before folding."
+        },
+        {
+          "q": "What sizes or materials are available for tri-fold brochure?",
+          "a": "Size: 8.5\" × 14\", 8.5\" × 11\", 11\" × 17\", 12\" × 18\"; Stock: Standard, Premium. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Use the options shown in the configurator for this product. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for tri-fold brochure?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/brochures/uncoated",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/marketing-materials/brochures/uncoated/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How should I plan artwork around the brochure folds?",
+          "a": "Plan the reading order across the cover, inside panels and back. Keep important text away from folds and trim edges, and confirm the panel layout before final artwork. Where the size is marked as flat, it describes the sheet before folding."
+        },
+        {
+          "q": "What sizes or materials are available for uncoated brochure?",
+          "a": "Size: 8.5 x 11 in., 8.5 x 14 in., Custom. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Finish: Uncoated - writable surface. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for uncoated brochure?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/business-cards/premium",
+      "kind": "product",
+      "template": "standalone",
+      "source": "src/app/shop/marketing-materials/business-cards/premium/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "What distinguishes premium business cards?",
+          "a": "Premium cards offer Soft Touch, Raised Spot Gloss, Raised Foil and Extra Thick choices. Choose the treatment in the calculator to see the stock and pricing available for that option."
+        },
+        {
+          "q": "What is the business card size?",
+          "a": "The standard size is 3.5 × 2 inches. Lay out the design at that finished size, with 0.125 inch bleed on every side and important text at least 0.125 inch inside the edges."
+        },
+        {
+          "q": "What if I need a different size or corner treatment?",
+          "a": "The calculator is for the standard card format shown. Request a custom quote for a different size or corner treatment so availability and pricing can be confirmed before ordering."
+        },
+        {
+          "q": "What files should I provide?",
+          "a": "AI, PDF and EPS are preferred. PSD, PNG and JPG are accepted at 300 DPI minimum; CMYK is preferred. For specialty effects, ask how to prepare the effect artwork before finalizing the file."
+        },
+        {
+          "q": "Will I review a proof before the cards are printed?",
+          "a": "A digital proof is included before production. Check names, contact details, text placement and any specialty-effect areas carefully before approving."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/business-cards/standard",
+      "kind": "product",
+      "template": "standalone",
+      "source": "src/app/shop/marketing-materials/business-cards/standard/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "What distinguishes standard business cards?",
+          "a": "Standard cards offer Matte, Gloss and Uncoated finishes on 14 pt or 16 pt stock. Choose the paper and finish in the calculator before selecting your quantity."
+        },
+        {
+          "q": "What is the business card size?",
+          "a": "The standard size is 3.5 × 2 inches. Lay out the design at that finished size, with 0.125 inch bleed on every side and important text at least 0.125 inch inside the edges."
+        },
+        {
+          "q": "What if I need a different size or corner treatment?",
+          "a": "The calculator is for the standard card format shown. Request a custom quote for a different size or corner treatment so availability and pricing can be confirmed before ordering."
+        },
+        {
+          "q": "What files should I provide?",
+          "a": "AI, PDF and EPS are preferred. PSD, PNG and JPG are accepted at 300 DPI minimum; CMYK is preferred. For specialty effects, ask how to prepare the effect artwork before finalizing the file."
+        },
+        {
+          "q": "Will I review a proof before the cards are printed?",
+          "a": "A digital proof is included before production. Check names, contact details, text placement and any specialty-effect areas carefully before approving."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/flyers/full-page",
+      "kind": "product",
+      "template": "FlyersOrderPage",
+      "source": "src/app/shop/marketing-materials/flyers/full-page/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Are half-page and full-page flyers ordered the same way?",
+          "a": "Half-page flyers are quoted individually. The larger sheet sizes have online pricing with Standard or Premium stock. Changing the size can change the available paper options and pricing flow."
+        },
+        {
+          "q": "What sizes or materials are available for flyers?",
+          "a": "Size: 5.5\" × 8.5\", 8.5\" × 11\", 11\" × 17\", 12\" × 18\"; Stock: Standard, Premium. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Use the options shown in the configurator for this product. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for flyers?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/flyers/half-page",
+      "kind": "product",
+      "template": "FlyersOrderPage",
+      "source": "src/app/shop/marketing-materials/flyers/half-page/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Are half-page and full-page flyers ordered the same way?",
+          "a": "Half-page flyers are quoted individually. The larger sheet sizes have online pricing with Standard or Premium stock. Changing the size can change the available paper options and pricing flow."
+        },
+        {
+          "q": "What sizes or materials are available for flyers?",
+          "a": "Size: 5.5\" × 8.5\", 8.5\" × 11\", 11\" × 17\", 12\" × 18\"; Stock: 80 lb. Text, 100 lb. Cover. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Finish: Gloss, Matte. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for flyers?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/postcards/standard",
+      "kind": "product",
+      "template": "standalone",
+      "source": "src/app/shop/marketing-materials/postcards/standard/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How do I choose a postcard size?",
+          "a": "Choose 4 × 6, 5 × 7 or 6 × 9 inches in the calculator before selecting stock and quantity. If the card is intended for mailing, confirm the mailing layout and address area before final artwork."
+        },
+        {
+          "q": "Where should text and artwork sit on a postcard?",
+          "a": "Extend the background through the 0.125 inch bleed on all sides. Keep essential text at least 0.125 inch inside the trim edge so it is not too close to the cut."
+        },
+        {
+          "q": "What files work best for postcard printing?",
+          "a": "AI, PDF and EPS are preferred. PSD, PNG and JPG are accepted at 300 DPI minimum. Supply artwork sized for the postcard you select and use CMYK where possible."
+        },
+        {
+          "q": "How do I compare postcard options and prices?",
+          "a": "Standard stock is 100 lb. gloss cover; Premium is 16 pt C2S cover. Use the size, stock and quantity controls to compare the displayed order total. Review the configuration before adding it to the cart; shipping is calculated separately at checkout."
+        },
+        {
+          "q": "Can I check the postcard before production?",
+          "a": "A digital proof is included before production. Check both the content and placement of the design, including any address or mailing area, before approving it."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/posters/art-print",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/marketing-materials/posters/art-print/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How do I prepare a design for art print poster?",
+          "a": "Build the design at your chosen print size and keep essential text inside the safe zone. Use the paper and finish options below to choose the look you want, and review the proof before production."
+        },
+        {
+          "q": "What sizes or materials are available for art print poster?",
+          "a": "Size: 11 x 14 in., 16 x 20 in., 18 x 24 in., 24 x 36 in.; Paper: Matte Art Paper, Lustre Photo Paper. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Use the options shown in the configurator for this product. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for art print poster?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/posters/large",
+      "kind": "product",
+      "template": "PostersOrderPage",
+      "source": "src/app/shop/marketing-materials/posters/large/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How do I prepare a design for posters?",
+          "a": "Build the design at your chosen print size and keep essential text inside the safe zone. Use the paper and finish options below to choose the look you want, and review the proof before production."
+        },
+        {
+          "q": "What sizes or materials are available for posters?",
+          "a": "Size: 11\" × 17\", 18\" × 24\", 24\" × 36\"; Stock: 100 lb. text, 100 lb. cover. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Finish: Gloss, Matte. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for posters?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/posters/medium",
+      "kind": "product",
+      "template": "PostersOrderPage",
+      "source": "src/app/shop/marketing-materials/posters/medium/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How do I prepare a design for posters?",
+          "a": "Build the design at your chosen print size and keep essential text inside the safe zone. Use the paper and finish options below to choose the look you want, and review the proof before production."
+        },
+        {
+          "q": "What sizes or materials are available for posters?",
+          "a": "Size: 11\" × 17\", 18\" × 24\", 24\" × 36\"; Stock: 100 lb. text, 100 lb. cover. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Finish: Gloss, Matte. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for posters?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/posters/small",
+      "kind": "product",
+      "template": "PostersOrderPage",
+      "source": "src/app/shop/marketing-materials/posters/small/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How do I prepare a design for posters?",
+          "a": "Build the design at your chosen print size and keep essential text inside the safe zone. Use the paper and finish options below to choose the look you want, and review the proof before production."
+        },
+        {
+          "q": "What sizes or materials are available for posters?",
+          "a": "Size: 11\" × 17\", 18\" × 24\", 24\" × 36\"; Stock: 100 lb. text, 100 lb. cover. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Finish: Gloss, Matte. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for posters?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/marketing-materials/posters/soft-touch",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/marketing-materials/posters/soft-touch/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How do I prepare a design for soft touch poster?",
+          "a": "Build the design at your chosen print size and keep essential text inside the safe zone. Use the paper and finish options below to choose the look you want, and review the proof before production."
+        },
+        {
+          "q": "What sizes or materials are available for soft touch poster?",
+          "a": "Size: 18 x 24 in., 24 x 36 in.; Stock: 100 lb. cover, 120 lb. cover. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Finish: Soft-touch matte laminate. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for soft touch poster?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. Keep text clear of trim edges and any folds, and check the layout on your proof."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/backdrops/eurofit-10x8",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/backdrops/eurofit-10x8/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Does this backdrop include a frame or just the graphic?",
+          "a": "Choose the package that matches your setup: Package: Full kit (frame + graphic), Graphic only (replacement print), Hardware only (frame, no print). A replacement graphic does not include a frame; confirm the display system and size before ordering a replacement."
+        },
+        {
+          "q": "What sizes or materials are available for eurofit backdrop 10 × 8 ft.?",
+          "a": "Size: 10 × 8 ft.; Material: Dye-sublimated fabric. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Use the options shown in the configurator for this product. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for eurofit backdrop 10 × 8 ft.?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min). For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/backdrops/eurofit-8x8",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/backdrops/eurofit-8x8/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Does this backdrop include a frame or just the graphic?",
+          "a": "Choose the package that matches your setup: Package: Full kit (frame + graphic), Graphic only (replacement print), Hardware only (frame, no print). A replacement graphic does not include a frame; confirm the display system and size before ordering a replacement."
+        },
+        {
+          "q": "What sizes or materials are available for eurofit backdrop 8 × 8 ft.?",
+          "a": "Size: 8 × 8 ft.; Material: Dye-sublimated fabric. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Use the options shown in the configurator for this product. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for eurofit backdrop 8 × 8 ft.?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min). For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/backdrops/popup-10x8",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/backdrops/popup-10x8/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Does this backdrop include a frame or just the graphic?",
+          "a": "Choose the package that matches your setup: Package: Full kit (frame + graphic), Graphic only (replacement print), Hardware only (frame, no print). A replacement graphic does not include a frame; confirm the display system and size before ordering a replacement."
+        },
+        {
+          "q": "What sizes or materials are available for pop-up display 10 × 8 ft.?",
+          "a": "Size: 10 × 8 ft.; Material: Dye-sublimated fabric. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Use the options shown in the configurator for this product. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for pop-up display 10 × 8 ft.?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min). For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/backdrops/popup-20x8",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/backdrops/popup-20x8/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Does this backdrop include a frame or just the graphic?",
+          "a": "Choose the package that matches your setup: Package: Full kit (frame + graphic), Graphic only (replacement print), Hardware only (frame, no print). A replacement graphic does not include a frame; confirm the display system and size before ordering a replacement."
+        },
+        {
+          "q": "What sizes or materials are available for pop-up display 20 × 8 ft.?",
+          "a": "Size: 20 × 8 ft.; Material: Dye-sublimated fabric. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Use the options shown in the configurator for this product. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for pop-up display 20 × 8 ft.?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min). For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/backdrops/popup-8x8",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/backdrops/popup-8x8/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Does this backdrop include a frame or just the graphic?",
+          "a": "Choose the package that matches your setup: Package: Full kit (frame + graphic), Graphic only (replacement print), Hardware only (frame, no print). A replacement graphic does not include a frame; confirm the display system and size before ordering a replacement."
+        },
+        {
+          "q": "What sizes or materials are available for pop-up display 8 × 8 ft.?",
+          "a": "Size: 8 × 8 ft.; Material: Dye-sublimated fabric. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Use the options shown in the configurator for this product. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for pop-up display 8 × 8 ft.?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min). For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/backdrops/seg-10x8",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/backdrops/seg-10x8/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Does this backdrop include a frame or just the graphic?",
+          "a": "Choose the package that matches your setup: Package: Full kit (frame + graphic), Graphic only (replacement print), Hardware only (frame, no print). A replacement graphic does not include a frame; confirm the display system and size before ordering a replacement."
+        },
+        {
+          "q": "What sizes or materials are available for seg pop-up stand 10 × 8 ft.?",
+          "a": "Size: 10 × 8 ft.; Material: Dye-sublimated fabric. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Use the options shown in the configurator for this product. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for seg pop-up stand 10 × 8 ft.?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min). For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/backdrops/seg-20x8",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/backdrops/seg-20x8/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Does this backdrop include a frame or just the graphic?",
+          "a": "Choose the package that matches your setup: Package: Full kit (frame + graphic), Graphic only (replacement print), Hardware only (frame, no print). A replacement graphic does not include a frame; confirm the display system and size before ordering a replacement."
+        },
+        {
+          "q": "What sizes or materials are available for seg pop-up stand 20 × 8 ft.?",
+          "a": "Size: 20 × 8 ft.; Material: Dye-sublimated fabric. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Use the options shown in the configurator for this product. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for seg pop-up stand 20 × 8 ft.?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min). For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/backdrops/seg-8x10",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/backdrops/seg-8x10/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Does this backdrop include a frame or just the graphic?",
+          "a": "Choose the package that matches your setup: Package: Full kit (frame + graphic), Graphic only (replacement print), Hardware only (frame, no print). A replacement graphic does not include a frame; confirm the display system and size before ordering a replacement."
+        },
+        {
+          "q": "What sizes or materials are available for seg pop-up stand 8 × 10 ft.?",
+          "a": "Size: 8 × 10 ft.; Material: Dye-sublimated fabric. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Use the options shown in the configurator for this product. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for seg pop-up stand 8 × 10 ft.?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min). For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/backdrops/step-repeat-10x8",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/backdrops/step-repeat-10x8/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Does this backdrop include a frame or just the graphic?",
+          "a": "Choose the package that matches your setup: Package: Full kit (frame + graphic), Graphic only (replacement print), Hardware only (frame, no print). A replacement graphic does not include a frame; confirm the display system and size before ordering a replacement."
+        },
+        {
+          "q": "What sizes or materials are available for premium step and repeat 10 × 8 ft.?",
+          "a": "Size: 10 × 8 ft.; Material: 13 oz vinyl banner or Oxford fabric. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Material: 13 oz vinyl banner, Oxford fabric (wrinkle-resistant). Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for premium step and repeat 10 × 8 ft.?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min). For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/backdrops/step-repeat-8x8",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/backdrops/step-repeat-8x8/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Does this backdrop include a frame or just the graphic?",
+          "a": "Choose the package that matches your setup: Package: Full kit (frame + graphic), Graphic only (replacement print), Hardware only (frame, no print). A replacement graphic does not include a frame; confirm the display system and size before ordering a replacement."
+        },
+        {
+          "q": "What sizes or materials are available for premium step and repeat 8 × 8 ft.?",
+          "a": "Size: 8 × 8 ft.; Material: 13 oz vinyl banner or Oxford fabric. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Material: 13 oz vinyl banner, Oxford fabric (wrinkle-resistant). Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for premium step and repeat 8 × 8 ft.?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min). For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/banners/fabric-banner",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/banners/fabric-banner/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "What makes the fabric banner different from vinyl?",
+          "a": "This banner uses soft, lightweight, wrinkle-resistant fabric with dye-sublimation printing. It suits displays where you want a fabric look rather than a vinyl surface."
+        },
+        {
+          "q": "What sizes or materials are available for fabric banner?",
+          "a": "Size: Custom sizes; Material: Premium banner material. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Finish: Gloss print, Matte print; Hardware: Hardware Included, Graphic Only. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for fabric banner?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/banners/mesh-banner",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/banners/mesh-banner/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Why choose a mesh banner for an outdoor display?",
+          "a": "The perforated mesh allows wind to pass through the print. Share your installation size and mounting plan when requesting a quote so the banner can be specified for your location."
+        },
+        {
+          "q": "What sizes or materials are available for perforated mesh banner?",
+          "a": "Size: Custom sizes; Material: Premium banner material. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Finish: Gloss print, Matte print; Hardware: Hardware Included, Graphic Only. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for perforated mesh banner?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/banners/retractable-luxury-33",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/banners/retractable-luxury-33/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Can I order a complete stand or a replacement print?",
+          "a": "Package: Full kit (stand + print + carry bag), Print only (replacement graphic), Hardware only (stand + carry bag, no print). Choose the full kit for a new display, or the appropriate print-only or hardware-only package for an existing setup. Check the size and stand type before ordering replacement parts."
+        },
+        {
+          "q": "What sizes or materials are available for luxury base retractable?",
+          "a": "Size: 33 × 80 in.; Hardware: Luxury teardrop aluminum base with carry bag; Graphic: 420 gsm curl-free matte print with grey blockout back (stand pole stays hidden). For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Hardware: Luxury teardrop aluminum base with carry bag; Graphic: 420 gsm curl-free matte print with grey blockout back (stand pole stays hidden). Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for luxury base retractable?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Bleed: 0.125 in. on all sides. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/banners/retractable-standard",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/banners/retractable-standard/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Can I order a complete stand or a replacement print?",
+          "a": "Package: Full kit (stand + print + carry bag), Print only (replacement graphic), Hardware only (stand + carry bag, no print). Choose the full kit for a new display, or the appropriate print-only or hardware-only package for an existing setup. Check the size and stand type before ordering replacement parts."
+        },
+        {
+          "q": "What sizes or materials are available for standard retractable banner?",
+          "a": "Size: 33 × 80 in.; Hardware: Anodized aluminum roll-up base with carry bag; Graphic: 420 gsm curl-free matte print with grey blockout back (stand pole stays hidden). For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Hardware: Anodized aluminum roll-up base with carry bag; Graphic: 420 gsm curl-free matte print with grey blockout back (stand pole stays hidden). Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for standard retractable banner?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Bleed: 0.125 in. on all sides. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/banners/vinyl-banner",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/banners/vinyl-banner/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How is the vinyl banner finished for hanging?",
+          "a": "Hemmed edges and grommets every 24 inches are included. Keep important text and logos within the artwork safe zone so hems and grommets do not cover them."
+        },
+        {
+          "q": "What sizes or materials are available for vinyl banner?",
+          "a": "Material: 13 oz matte vinyl (indoor/outdoor); Size: Custom, 12 in to 126 in wide. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Included: Hemmed edges + grommets every 24 in. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for vinyl banner?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 1 in from all edges (hems/grommets). For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/banners/x-stand-24x63",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/banners/x-stand-24x63/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Can I order a complete stand or a replacement print?",
+          "a": "Package: Full kit (stand + print + carry bag), Print only (replacement graphic), Hardware only (stand + carry bag, no print). Choose the full kit for a new display, or the appropriate print-only or hardware-only package for an existing setup. Check the size and stand type before ordering replacement parts."
+        },
+        {
+          "q": "What sizes or materials are available for x-stand banner 24\" × 63\"?",
+          "a": "Size: 24 × 63 in.; Hardware: Lightweight fiberglass X-frame with carry bag; Graphic: 420 gsm curl-free matte print with grey blockout back (stand pole stays hidden). For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Hardware: Lightweight fiberglass X-frame with carry bag; Graphic: 420 gsm curl-free matte print with grey blockout back (stand pole stays hidden). Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for x-stand banner 24\" × 63\"?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Bleed: 0.125 in. on all sides. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/banners/x-stand-32x71",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/signage/banners/x-stand-32x71/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Can I order a complete stand or a replacement print?",
+          "a": "Package: Full kit (stand + print + carry bag), Print only (replacement graphic), Hardware only (stand + carry bag, no print). Choose the full kit for a new display, or the appropriate print-only or hardware-only package for an existing setup. Check the size and stand type before ordering replacement parts."
+        },
+        {
+          "q": "What sizes or materials are available for x-stand banner 32\" × 71\"?",
+          "a": "Size: 32 × 71 in.; Hardware: Lightweight fiberglass X-frame with carry bag; Graphic: 420 gsm curl-free matte print with grey blockout back (stand pole stays hidden). For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Hardware: Lightweight fiberglass X-frame with carry bag; Graphic: 420 gsm curl-free matte print with grey blockout back (stand pole stays hidden). Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for x-stand banner 32\" × 71\"?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Bleed: 0.125 in. on all sides. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/tents/10x10",
+      "kind": "product",
+      "template": "TentPage",
+      "source": "src/app/shop/signage/tents/[size]/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "What is included with the 10 × 10 canopy tent?",
+          "a": "The full kit includes a printed canopy and frame. Select the full kit, replacement printed fabric top or replacement frame in the configurator; the replacement packages do not include the other part."
+        },
+        {
+          "q": "Which walls can I add to a full tent kit?",
+          "a": "Choose no backwall, a single-sided backwall or a double-sided backwall. Side walls are sold as a pair, with half-wall or full-wall options and single- or double-sided printing."
+        },
+        {
+          "q": "Are flag holders and a wheel bag included?",
+          "a": "They are optional full-kit accessories. Choose zero, one or two flag holders and whether to add the premium wheel bag. Review the configured total for your selections."
+        },
+        {
+          "q": "Can I add accessories to a replacement top or frame?",
+          "a": "Replacement packages are offered without the full-kit accessories and use standard production. Choose the matching tent size and confirm compatibility before ordering replacement parts."
+        },
+        {
+          "q": "Does a production option mean delivery on that day?",
+          "a": "No. Production timing and shipping transit are separate. Printed orders require proof approval, and fulfillment timing for frame-only orders is confirmed after ordering. Shipping is quoted to your address."
+        }
+      ]
+    },
+    {
+      "route": "/shop/signage/tents/20x10",
+      "kind": "product",
+      "template": "TentPage",
+      "source": "src/app/shop/signage/tents/[size]/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "What is included with the 20 × 10 canopy tent?",
+          "a": "The full kit includes a printed canopy and frame. Select the full kit, replacement printed fabric top or replacement frame in the configurator; the replacement packages do not include the other part."
+        },
+        {
+          "q": "Which walls can I add to a full tent kit?",
+          "a": "Choose no backwall, a single-sided backwall or a double-sided backwall. Side walls are sold as a pair, with half-wall or full-wall options and single- or double-sided printing."
+        },
+        {
+          "q": "Are flag holders and a wheel bag included?",
+          "a": "They are optional full-kit accessories. Choose zero, one or two flag holders and whether to add the premium wheel bag. Review the configured total for your selections."
+        },
+        {
+          "q": "Can I add accessories to a replacement top or frame?",
+          "a": "Replacement packages are offered without the full-kit accessories and use standard production. Choose the matching tent size and confirm compatibility before ordering replacement parts."
+        },
+        {
+          "q": "Does a production option mean delivery on that day?",
+          "a": "No. Production timing and shipping transit are separate. Printed orders require proof approval, and fulfillment timing for frame-only orders is confirmed after ordering. Shipping is quoted to your address."
+        }
+      ]
+    },
+    {
+      "route": "/shop/packaging/boxes/box-sleeve",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/packaging/boxes/box-sleeve/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How should I size my box sleeve?",
+          "a": "A printed sleeve wraps around an existing box. Send the dimensions of that box so the sleeve can be sized to fit."
+        },
+        {
+          "q": "What sizes or materials are available for box sleeve?",
+          "a": "Material: Corrugated or paperboard. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Print: Outside Only, Inside + Outside; Finish: Matte Laminate, Gloss Laminate, Soft Touch. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for box sleeve?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/packaging/boxes/folding-carton",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/packaging/boxes/folding-carton/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How should I size my folding carton?",
+          "a": "A folding carton is a folded retail packaging structure. Share the product dimensions and how it will be packed so the dieline can be planned."
+        },
+        {
+          "q": "What sizes or materials are available for folding carton?",
+          "a": "Material: Corrugated or paperboard. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Print: Outside Only, Inside + Outside; Finish: Matte Laminate, Gloss Laminate, Soft Touch. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for folding carton?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/packaging/boxes/lid-base-box",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/packaging/boxes/lid-base-box/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How should I size my lid and base box?",
+          "a": "This is a two-piece box with a separate lid and base. Share product dimensions and the fit you want so both pieces can be specified together."
+        },
+        {
+          "q": "What sizes or materials are available for lid and base box?",
+          "a": "Material: Corrugated or paperboard. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Print: Outside Only, Inside + Outside; Finish: Matte Laminate, Gloss Laminate, Soft Touch. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for lid and base box?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/packaging/boxes/magnetic-closure-box",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/packaging/boxes/magnetic-closure-box/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How should I size my magnetic closure box?",
+          "a": "This box uses a magnetic closure for a presentation-style package. Share product dimensions and any insert requirements when requesting a quote."
+        },
+        {
+          "q": "What sizes or materials are available for magnetic closure box?",
+          "a": "Material: Corrugated or paperboard. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Print: Outside Only, Inside + Outside; Finish: Matte Laminate, Gloss Laminate, Soft Touch. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for magnetic closure box?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/packaging/boxes/mailer-box",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/packaging/boxes/mailer-box/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How should I size my mailer box?",
+          "a": "Mailer boxes are intended for e-commerce, subscription packaging and brand gifting. Share the product dimensions and any inserts needed when requesting a size."
+        },
+        {
+          "q": "What sizes or materials are available for mailer box?",
+          "a": "Material: Corrugated or paperboard. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Print: Outside Only, Inside + Outside; Finish: Matte Laminate, Gloss Laminate, Soft Touch. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for mailer box?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/packaging/boxes/rsc-box",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/packaging/boxes/rsc-box/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How should I size my regular slotted carton?",
+          "a": "An RSC box is a regular slotted carton. Share the packed product dimensions and intended use so the box size and material can be confirmed."
+        },
+        {
+          "q": "What sizes or materials are available for regular slotted carton?",
+          "a": "Material: Corrugated or paperboard. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Print: Outside Only, Inside + Outside; Finish: Matte Laminate, Gloss Laminate, Soft Touch. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for regular slotted carton?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/packaging/custom-packaging",
+      "kind": "product",
+      "template": "CustomPackagingPage",
+      "source": "src/app/shop/packaging/custom-packaging/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "What should I share to start a custom packaging project?",
+          "a": "Share the product dimensions, desired packaging structure, quantity and finish ideas. Include how the product will fit inside and any inserts or assembly needs."
+        },
+        {
+          "q": "Do I need a finished dieline?",
+          "a": "You can start with your own dieline or describe the structure you need. The consultation helps establish the dimensions and structure before final print artwork."
+        },
+        {
+          "q": "Can I discuss finishes before choosing a box?",
+          "a": "Yes. Include the finish ideas you are considering, such as soft-touch laminate, spot UV, foil or embossing. The appropriate material and finish combination is confirmed for the project."
+        },
+        {
+          "q": "Can I upload references for the consultation?",
+          "a": "The consultation form accepts project details and reference files. Include drawings, artwork or packaging examples that explain the direction you want."
+        },
+        {
+          "q": "Is the consultation a checkout or confirmed order?",
+          "a": "No. It starts a project discussion. Structure, materials, quantity, pricing and timing need to be confirmed for your packaging before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/packaging/mylar-bags/die-cut",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/packaging/mylar-bags/die-cut/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "How do I specify a custom-shaped mylar bag?",
+          "a": "Provide your dieline or describe the shape you want. Include the intended product and dimensions so the shape, usable space and seal can be reviewed together before production."
+        },
+        {
+          "q": "What sizes or materials are available for die-cut mylar bag?",
+          "a": "Material: Multi-layer mylar. For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Seal: Zip Lock, Child Resistant Zip; Finish: Gloss, Matte. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for die-cut mylar bag?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "This product is priced by quote. Choose the available options and provide your dimensions, quantity and artwork needs so pricing and production timing can be confirmed before production."
+        }
+      ]
+    },
+    {
+      "route": "/shop/packaging/mylar-bags/standard",
+      "kind": "product",
+      "template": "ProductOrderPage",
+      "source": "src/app/shop/packaging/mylar-bags/standard/page.tsx",
+      "questions": 5,
+      "status": "PASS",
+      "answers": [
+        {
+          "q": "Which mylar bag size has online pricing?",
+          "a": "The standard bag is the 4 × 5 inch eighth-size pouch. Other sizes, metallic effects, holographic effects and specialty constructions are quoted separately; they are not included in the standard online price."
+        },
+        {
+          "q": "What sizes or materials are available for standard mylar bag?",
+          "a": "Size: 4 x 5 in. (eighth). For a different size or construction, request a custom quote before preparing final artwork."
+        },
+        {
+          "q": "Which print, finish or display options can I choose?",
+          "a": "Seal: Standard zipper, Child-resistant zipper; Finish: Gloss, Matte, Soft-Touch. Options depend on the product and package selected; review your configuration before adding it to the cart."
+        },
+        {
+          "q": "What artwork should I supply for standard mylar bag?",
+          "a": "Preferred formats: AI, PDF, EPS; Accepted formats: PSD, PNG, JPG (300 DPI min); Color mode: CMYK preferred; Bleed: 0.125 in. on all sides; Safe zone: 0.125 in. from all edges. For a replacement graphic or shaped package, confirm the matching template before laying out the design."
+        },
+        {
+          "q": "How is my configuration priced and reviewed?",
+          "a": "The configurator shows pricing for the available selections. Review the selected size, options and quantity before adding to cart. Custom requests need a separate quote; production timing is confirmed for your order, not a guaranteed delivery date."
+        }
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "route": "/shop/marketing-materials/flyers/full-page",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/brochures/tri-fold-legal",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/brochures/bi-fold-letter",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/booklets/perfect-bound-6x9",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/posters/art-print",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/business-cards/standard",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/business-cards/premium",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/postcards/standard",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/brochures/bi-fold",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/signage/banners/vinyl-banner",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/signage/banners/retractable-standard",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/signage/backdrops/seg-10x8",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/signage/tents/10x10",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/signage/tents/20x10",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/packaging/boxes/mailer-box",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/packaging/mylar-bags/standard",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/packaging/custom-packaging",
+      "width": 390,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/flyers/full-page",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/brochures/tri-fold-legal",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/brochures/bi-fold-letter",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/booklets/perfect-bound-6x9",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/posters/art-print",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/business-cards/standard",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/business-cards/premium",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/postcards/standard",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/marketing-materials/brochures/bi-fold",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/signage/banners/vinyl-banner",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/signage/banners/retractable-standard",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/signage/backdrops/seg-10x8",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/signage/tents/10x10",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/signage/tents/20x10",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/packaging/boxes/mailer-box",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/packaging/mylar-bags/standard",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    },
+    {
+      "route": "/shop/packaging/custom-packaging",
+      "width": 1440,
+      "keyboard": "Enter opens / Space closes",
+      "pointer": "opens",
+      "overflow": false,
+      "status": "PASS"
+    }
+  ],
+  "errors": []
+}

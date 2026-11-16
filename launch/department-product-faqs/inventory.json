@@ -1,0 +1,446 @@
+[
+  {
+    "route": "/shop/marketing-materials/booklets/perfect-bound-6x9",
+    "kind": "product",
+    "template": "BookletsOrderPage",
+    "source": "src/app/shop/marketing-materials/booklets/perfect-bound-6x9/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/booklets/perfect-bound-85x11",
+    "kind": "product",
+    "template": "BookletsOrderPage",
+    "source": "src/app/shop/marketing-materials/booklets/perfect-bound-85x11/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/booklets/saddle-stitch-55x85",
+    "kind": "product",
+    "template": "BookletsOrderPage",
+    "source": "src/app/shop/marketing-materials/booklets/saddle-stitch-55x85/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/booklets/saddle-stitch-85x11",
+    "kind": "product",
+    "template": "BookletsOrderPage",
+    "source": "src/app/shop/marketing-materials/booklets/saddle-stitch-85x11/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/booklets/saddle-stitch-square",
+    "kind": "product",
+    "template": "BookletsOrderPage",
+    "source": "src/app/shop/marketing-materials/booklets/saddle-stitch-square/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/booklets/soft-touch-cover",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/marketing-materials/booklets/soft-touch-cover/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/bi-fold",
+    "kind": "product",
+    "template": "OrderingPageLayout",
+    "source": "src/app/shop/marketing-materials/brochures/bi-fold/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/bi-fold-letter",
+    "kind": "product",
+    "template": "PrintSheetOrderPage",
+    "source": "src/app/shop/marketing-materials/brochures/bi-fold-letter/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures",
+    "kind": "category",
+    "template": "standalone",
+    "source": "src/app/shop/marketing-materials/brochures/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/soft-touch",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/marketing-materials/brochures/soft-touch/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/tri-fold",
+    "kind": "product",
+    "template": "standalone",
+    "source": "src/app/shop/marketing-materials/brochures/tri-fold/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/tri-fold-legal",
+    "kind": "product",
+    "template": "TriFoldOrderPage",
+    "source": "src/app/shop/marketing-materials/brochures/tri-fold-legal/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/tri-fold-letter",
+    "kind": "product",
+    "template": "TriFoldOrderPage",
+    "source": "src/app/shop/marketing-materials/brochures/tri-fold-letter/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/uncoated",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/marketing-materials/brochures/uncoated/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards",
+    "kind": "category",
+    "template": "standalone",
+    "source": "src/app/shop/marketing-materials/business-cards/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards/premium",
+    "kind": "product",
+    "template": "standalone",
+    "source": "src/app/shop/marketing-materials/business-cards/premium/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/business-cards/standard",
+    "kind": "product",
+    "template": "standalone",
+    "source": "src/app/shop/marketing-materials/business-cards/standard/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/checkout",
+    "kind": "utility",
+    "template": "standalone",
+    "source": "src/app/shop/marketing-materials/checkout/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/flyers/full-page",
+    "kind": "product",
+    "template": "FlyersOrderPage",
+    "source": "src/app/shop/marketing-materials/flyers/full-page/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/flyers/half-page",
+    "kind": "product",
+    "template": "FlyersOrderPage",
+    "source": "src/app/shop/marketing-materials/flyers/half-page/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/flyers",
+    "kind": "category",
+    "template": "standalone",
+    "source": "src/app/shop/marketing-materials/flyers/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials",
+    "kind": "category",
+    "template": "standalone",
+    "source": "src/app/shop/marketing-materials/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/postcards",
+    "kind": "category",
+    "template": "standalone",
+    "source": "src/app/shop/marketing-materials/postcards/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/postcards/standard",
+    "kind": "product",
+    "template": "standalone",
+    "source": "src/app/shop/marketing-materials/postcards/standard/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/posters/art-print",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/marketing-materials/posters/art-print/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/posters/large",
+    "kind": "product",
+    "template": "PostersOrderPage",
+    "source": "src/app/shop/marketing-materials/posters/large/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/posters/medium",
+    "kind": "product",
+    "template": "PostersOrderPage",
+    "source": "src/app/shop/marketing-materials/posters/medium/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/posters/small",
+    "kind": "product",
+    "template": "PostersOrderPage",
+    "source": "src/app/shop/marketing-materials/posters/small/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/posters/soft-touch",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/marketing-materials/posters/soft-touch/page.tsx"
+  },
+  {
+    "route": "/shop/signage/backdrops/eurofit-10x8",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/backdrops/eurofit-10x8/page.tsx"
+  },
+  {
+    "route": "/shop/signage/backdrops/eurofit-8x8",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/backdrops/eurofit-8x8/page.tsx"
+  },
+  {
+    "route": "/shop/signage/backdrops",
+    "kind": "category",
+    "template": "standalone",
+    "source": "src/app/shop/signage/backdrops/page.tsx"
+  },
+  {
+    "route": "/shop/signage/backdrops/popup-10x8",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/backdrops/popup-10x8/page.tsx"
+  },
+  {
+    "route": "/shop/signage/backdrops/popup-20x8",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/backdrops/popup-20x8/page.tsx"
+  },
+  {
+    "route": "/shop/signage/backdrops/popup-8x8",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/backdrops/popup-8x8/page.tsx"
+  },
+  {
+    "route": "/shop/signage/backdrops/seg-10x8",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/backdrops/seg-10x8/page.tsx"
+  },
+  {
+    "route": "/shop/signage/backdrops/seg-20x8",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/backdrops/seg-20x8/page.tsx"
+  },
+  {
+    "route": "/shop/signage/backdrops/seg-8x10",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/backdrops/seg-8x10/page.tsx"
+  },
+  {
+    "route": "/shop/signage/backdrops/step-repeat-10x8",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/backdrops/step-repeat-10x8/page.tsx"
+  },
+  {
+    "route": "/shop/signage/backdrops/step-repeat-8x8",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/backdrops/step-repeat-8x8/page.tsx"
+  },
+  {
+    "route": "/shop/signage/banners/fabric-banner",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/banners/fabric-banner/page.tsx"
+  },
+  {
+    "route": "/shop/signage/banners/mesh-banner",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/banners/mesh-banner/page.tsx"
+  },
+  {
+    "route": "/shop/signage/banners",
+    "kind": "category",
+    "template": "standalone",
+    "source": "src/app/shop/signage/banners/page.tsx"
+  },
+  {
+    "route": "/shop/signage/banners/retractable-33",
+    "kind": "redirect",
+    "template": "standalone",
+    "source": "src/app/shop/signage/banners/retractable-33/page.tsx"
+  },
+  {
+    "route": "/shop/signage/banners/retractable-48",
+    "kind": "redirect",
+    "template": "standalone",
+    "source": "src/app/shop/signage/banners/retractable-48/page.tsx"
+  },
+  {
+    "route": "/shop/signage/banners/retractable-60",
+    "kind": "redirect",
+    "template": "standalone",
+    "source": "src/app/shop/signage/banners/retractable-60/page.tsx"
+  },
+  {
+    "route": "/shop/signage/banners/retractable-luxury-33",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/banners/retractable-luxury-33/page.tsx"
+  },
+  {
+    "route": "/shop/signage/banners/retractable-standard",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/banners/retractable-standard/page.tsx"
+  },
+  {
+    "route": "/shop/signage/banners/retractable-tabletop",
+    "kind": "redirect",
+    "template": "standalone",
+    "source": "src/app/shop/signage/banners/retractable-tabletop/page.tsx"
+  },
+  {
+    "route": "/shop/signage/banners/vinyl-banner",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/banners/vinyl-banner/page.tsx"
+  },
+  {
+    "route": "/shop/signage/banners/x-stand-24x63",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/banners/x-stand-24x63/page.tsx"
+  },
+  {
+    "route": "/shop/signage/banners/x-stand-32x71",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/signage/banners/x-stand-32x71/page.tsx"
+  },
+  {
+    "route": "/shop/signage",
+    "kind": "category",
+    "template": "standalone",
+    "source": "src/app/shop/signage/page.tsx"
+  },
+  {
+    "route": "/shop/signage/quote",
+    "kind": "utility",
+    "template": "standalone",
+    "source": "src/app/shop/signage/quote/page.tsx"
+  },
+  {
+    "route": "/shop/signage/tents/10x10",
+    "kind": "product",
+    "template": "TentPage",
+    "source": "src/app/shop/signage/tents/[size]/page.tsx"
+  },
+  {
+    "route": "/shop/signage/tents/20x10",
+    "kind": "product",
+    "template": "TentPage",
+    "source": "src/app/shop/signage/tents/[size]/page.tsx"
+  },
+  {
+    "route": "/shop/packaging/boxes/box-sleeve",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/packaging/boxes/box-sleeve/page.tsx"
+  },
+  {
+    "route": "/shop/packaging/boxes/folding-carton",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/packaging/boxes/folding-carton/page.tsx"
+  },
+  {
+    "route": "/shop/packaging/boxes/lid-base-box",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/packaging/boxes/lid-base-box/page.tsx"
+  },
+  {
+    "route": "/shop/packaging/boxes/magnetic-closure-box",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/packaging/boxes/magnetic-closure-box/page.tsx"
+  },
+  {
+    "route": "/shop/packaging/boxes/mailer-box",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/packaging/boxes/mailer-box/page.tsx"
+  },
+  {
+    "route": "/shop/packaging/boxes/rsc-box",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/packaging/boxes/rsc-box/page.tsx"
+  },
+  {
+    "route": "/shop/packaging/custom-packaging",
+    "kind": "product",
+    "template": "CustomPackagingPage",
+    "source": "src/app/shop/packaging/custom-packaging/page.tsx"
+  },
+  {
+    "route": "/shop/packaging/mylar-bags/die-cut",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/packaging/mylar-bags/die-cut/page.tsx"
+  },
+  {
+    "route": "/shop/packaging/mylar-bags",
+    "kind": "category",
+    "template": "standalone",
+    "source": "src/app/shop/packaging/mylar-bags/page.tsx"
+  },
+  {
+    "route": "/shop/packaging/mylar-bags/standard",
+    "kind": "product",
+    "template": "ProductOrderPage",
+    "source": "src/app/shop/packaging/mylar-bags/standard/page.tsx"
+  },
+  {
+    "route": "/shop/packaging",
+    "kind": "category",
+    "template": "standalone",
+    "source": "src/app/shop/packaging/page.tsx"
+  },
+  {
+    "route": "/shop/marketing-materials/postcards/premium",
+    "target": "/shop/marketing-materials/postcards",
+    "kind": "config-redirect",
+    "source": "next.config.ts"
+  },
+  {
+    "route": "/shop/marketing-materials/flyers/tabloid",
+    "target": "/shop/marketing-materials/flyers/full-page?size=tabloid",
+    "kind": "config-redirect",
+    "source": "next.config.ts"
+  },
+  {
+    "route": "/shop/marketing-materials/brochures/bi-fold-tabloid",
+    "target": "/shop/marketing-materials/brochures/bi-fold-letter",
+    "kind": "config-redirect",
+    "source": "next.config.ts"
+  },
+  {
+    "route": "/shop/marketing-materials/posters",
+    "target": "/shop/marketing-materials/flyers#posters",
+    "kind": "config-redirect",
+    "source": "next.config.ts"
+  },
+  {
+    "route": "/shop/marketing-materials/booklets",
+    "target": "/shop/marketing-materials/brochures#booklets",
+    "kind": "config-redirect",
+    "source": "next.config.ts"
+  },
+  {
+    "route": "/shop/signage/banners/double-sided-banner",
+    "target": "/shop/signage/banners",
+    "kind": "config-redirect",
+    "source": "next.config.ts"
+  },
+  {
+    "route": "/shop/packaging/boxes",
+    "target": "/shop/packaging",
+    "kind": "config-redirect",
+    "source": "next.config.ts"
+  }
+]

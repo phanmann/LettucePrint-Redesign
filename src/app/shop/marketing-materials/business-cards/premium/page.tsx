@@ -1,5 +1,8 @@
 'use client'
 
+import FaqSection from '@/components/seo/FaqSection'
+import { businessCardFaqs } from '@/lib/department-product-faqs'
+
 import Navbar from '@/components/layout/Navbar'
 import RelatedProducts from '@/components/shop/RelatedProducts'
 import Footer from '@/components/layout/Footer'
@@ -140,6 +143,8 @@ export default function PremiumBusinessCardsPage() {
               </div>
 
               {/* Standard downgrade */}
+              <FaqSection faqs={businessCardFaqs(true)} />
+
               <div className="rounded-card border border-gray-200 p-6">
                 <h2 className="text-h4 font-semibold text-gray-900 mb-2">Want something simpler?</h2>
                 <p className="text-small text-gray-600 mb-4">Matte, gloss, or uncoated standard cards with fast turnaround.</p>

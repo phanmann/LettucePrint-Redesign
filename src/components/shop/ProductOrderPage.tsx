@@ -1,5 +1,8 @@
 'use client'
 
+import FaqSection from '@/components/seo/FaqSection'
+import { departmentProductFaqs } from '@/lib/department-product-faqs'
+
 import MobileOptionSelect from '@/components/shop/MobileOptionSelect'
 
 import { useState } from 'react'
@@ -329,6 +332,7 @@ export default function ProductOrderPage({
 }: ProductOrderPageProps) {
   const [bannerConfiguration, setBannerConfiguration] = useState(() => defaultBannerConfiguration(bannerKind ?? 'vinyl'))
   const pathname = usePathname()
+  const faqs = departmentProductFaqs({ path: pathname, name, specs, artworkRequirements, optionGroups, priced: Boolean(pricingTable?.length || pricingRules?.length || bannerKind) })
   const order = useProductOrder()
   const { addItem, artwork } = order
 
@@ -593,6 +597,8 @@ export default function ProductOrderPage({
                   </div>
                 </div>
               )}
+
+              {faqs.length > 0 && <FaqSection faqs={faqs} />}
 
               {/* Custom escape */}
               <div className="rounded-card border border-gray-200 p-6">
