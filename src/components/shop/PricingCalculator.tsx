@@ -153,7 +153,7 @@ export default function PricingCalculator({ productName, materials = ['standard'
           {/* ── Finish ── */}
           <div className="mb-6">
             <p className={sectionLabel}>Select a finish</p>
-            <MobileOptionSelect label="Select a finish" value={finish} onChange={setFinish} options={FINISHES.map(value => ({ value, label: FINISH_LABELS[value], description: FINISH_DESCRIPTIONS[value], badge: value === 'laminate' ? 'Add-on' : undefined }))} />
+            <MobileOptionSelect label="Select a finish" value={finish} onChange={setFinish} options={FINISHES.map(value => ({ value, label: FINISH_LABELS[value], description: FINISH_DESCRIPTIONS[value] }))} />
             <div className="hidden md:grid grid-cols-2 gap-2" data-option-grid>
               {FINISHES.map(f => (
                 <label key={f} className={radioRow(finish === f)} onClick={() => setFinish(f)}>
