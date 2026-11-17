@@ -7,7 +7,6 @@ const cases = [
   ['supplier minimum + markup', calculateCustomStickerPrice(3, 3, 100, 'standard', 'matte').totalCents, 7000],
   ['standard linear rate', calculateCustomStickerPrice(3, 3, 1000, 'standard', 'matte').totalCents, 26838],
   ['supplier rounding before markup', calculateCustomStickerPrice(2.5, 3.5, 777, 'standard', 'matte').totalCents, 20273],
-  ['standard laminate rate', calculateCustomStickerPrice(3, 3, 1000, 'standard', 'laminate').totalCents, 29988],
   ['holographic rate', calculateCustomStickerPrice(3, 3, 1000, 'holographic', 'matte').totalCents, 94500],
   ['Spot UV 1 hit', calculateCustomSpotUVPrice(3, 3, 1000, 1).totalCents, 51660],
   ['Spot UV 2 hits', calculateCustomSpotUVPrice(3, 3, 1000, 2).totalCents, 75960],

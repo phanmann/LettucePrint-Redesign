@@ -6,7 +6,7 @@
 
 export type StickerSize = '1x1' | '2x2' | '3x3' | '4x4' | '5x5'
 export type StickerMaterial = 'standard' | 'clear' | 'holographic'
-export type StickerFinish = 'matte' | 'gloss' | 'laminate'
+export type StickerFinish = 'matte' | 'gloss'
 export type RushOption = 'standard' | '48hr' | '24hr'
 export type SpotUVHits = 1 | 2 | 3
 
@@ -49,13 +49,11 @@ export const MATERIAL_DESCRIPTIONS: Record<StickerMaterial, string> = {
 export const FINISH_LABELS: Record<StickerFinish, string> = {
   matte: 'Matte',
   gloss: 'Gloss',
-  laminate: 'Protective Laminate',
 }
 
 export const FINISH_DESCRIPTIONS: Record<StickerFinish, string> = {
   matte: 'Smooth, non-reflective appearance.',
   gloss: 'Bright, high-shine appearance.',
-  laminate: 'Added protective layer for greater durability.',
 }
 
 export const SPOT_UV_HIT_OPTIONS: SpotUVHits[] = [1, 2, 3]
@@ -73,7 +71,6 @@ const CUSTOMER_MARKUP_NUMERATOR = 140
 const CUSTOMER_MARKUP_DENOMINATOR = 100
 const SUPPLIER_RATE_CENTS = {
   standard: 2.13,
-  standardLaminate: 2.38,
   holographic: 7.5,
   spotUv1: 4.1,
 } as const
@@ -83,11 +80,6 @@ const SUPPLIER_RATE_CENTS = {
 const SPOT_UV_ADDITIONAL_HIT_COST_CENTS = 1.35
 const SPOT_UV_1_HIT_SELL_RATE_CENTS = 5.74
 const SPOT_UV_ADDITIONAL_HIT_SELL_CENTS = 2.7
-
-// Paper Strategies' separate "Lamination Required" option adds $0.006/unit.
-// This applies when holographic is paired with our laminate finish. Standard
-// laminate has its own authoritative material rate above.
-const LAMINATION_ADDON_CENTS_PER_STICKER = 0.6
 
 const RUSH_FEES: Record<RushOption, number> = {
   standard: 0,
@@ -197,13 +189,8 @@ export function calculateCustomStickerPrice(
 ): PriceResult {
   const rate = material === 'holographic'
     ? SUPPLIER_RATE_CENTS.holographic
-    : finish === 'laminate'
-      ? SUPPLIER_RATE_CENTS.standardLaminate
-      : SUPPLIER_RATE_CENTS.standard
-  const laminationAddon = material === 'holographic' && finish === 'laminate'
-    ? Math.round(quantity * LAMINATION_ADDON_CENTS_PER_STICKER)
-    : 0
-  const cost = supplierCostCents(width, height, quantity, rate, laminationAddon)
+    : SUPPLIER_RATE_CENTS.standard
+  const cost = supplierCostCents(width, height, quantity, rate)
   return resultFromSupplierCost(cost, quantity, rush)
 }
 

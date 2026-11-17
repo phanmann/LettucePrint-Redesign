@@ -20,7 +20,7 @@ export default function StickersPage() {
     ]}
     faqs={[
       { q: 'Which sticker type should I choose?', a: 'Die cut follows the outline of your design. Kiss cut keeps an easy-peel border. Circle, square, rectangle and oval are classic shapes for logos and labels. Clear and holographic change the vinyl itself, and spot UV adds a raised gloss effect.' },
-      { q: 'Are your stickers waterproof?', a: 'Yes. Our vinyl stickers are waterproof, UV resistant and scratch resistant. Add a protective laminate for extra durability.' },
+      { q: 'Are your stickers waterproof?', a: 'Yes. Our vinyl stickers are waterproof, UV resistant and scratch resistant.' },
       { q: 'How fast can I get stickers?', a: 'Standard production is 3–5 business days after proof approval, plus shipping. Call us for rush options.' },
       { q: 'Do you print roll labels too?', a: 'Yes. For high-volume product labels, see our roll labels in rectangle, circle, square and oval shapes.' },
     ]}

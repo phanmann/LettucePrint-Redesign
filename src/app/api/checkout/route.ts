@@ -114,7 +114,7 @@ function authoritativeStickerPrice(item: {
     if (!(allowedMaterials as string[]).includes(item.material)) {
       throw new Error('Invalid sticker material')
     }
-    if (!['matte', 'gloss', 'laminate'].includes(item.finish)) {
+    if (!['matte', 'gloss'].includes(item.finish)) {
       throw new Error('Invalid sticker finish')
     }
     return calculateCustomStickerPrice(

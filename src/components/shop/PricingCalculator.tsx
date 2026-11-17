@@ -20,7 +20,7 @@ import {
   type StickerFinish,
 } from '@/lib/pricing'
 
-const FINISHES: StickerFinish[] = ['matte', 'gloss', 'laminate']
+const FINISHES: StickerFinish[] = ['matte', 'gloss']
 
 interface Props {
   productName: string
@@ -162,10 +162,7 @@ export default function PricingCalculator({ productName, materials = ['standard'
                     <div>
                       <p className={`text-sm font-bold leading-snug ${finish === f ? 'text-gray-900' : 'text-gray-700'}`}>
                         {FINISH_LABELS[f]}
-                        {f === 'laminate' && (
-                          <span className="ml-2 text-xs font-semibold text-lp-green bg-lp-green/10 px-1.5 py-0.5 rounded-full">Add-on</span>
-                        )}
-                      </p>
+                          </p>
                       <p className="text-xs font-normal leading-relaxed text-gray-500 mt-1">{FINISH_DESCRIPTIONS[f]}</p>
                     </div>
                   </div>

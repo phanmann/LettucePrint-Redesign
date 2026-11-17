@@ -29,7 +29,7 @@ export default async function StickerTypePage({ params }: { params: Promise<{ ty
     shape={t.shape} tone={t.tone} calculator={calculator} faqs={t.faqs} metaDescription={t.metaDescription}
     specs={[
       { label: 'Material', value: t.materials.map(m => MATERIAL_LABELS[m]).join(', ') },
-      { label: 'Finish', value: 'Matte, gloss, or protective laminate' },
+      { label: 'Finish', value: 'Matte or gloss' },
       { label: 'Cut', value: t.cut },
       { label: 'Adhesive', value: 'Permanent, removable available on request' },
       { label: 'Durability', value: 'Waterproof, UV resistant, scratch resistant' },

@@ -31,7 +31,7 @@ interface PageProps {
 }
 
 const VALID_MATERIALS: StickerMaterial[] = ['standard', 'clear', 'holographic']
-const VALID_FINISHES: StickerFinish[] = ['matte', 'gloss', 'laminate']
+const VALID_FINISHES: StickerFinish[] = ['matte', 'gloss']
 const VALID_RUSH: RushOption[] = ['standard', '48hr', '24hr']
 
 export default async function StickerCheckoutPage({ searchParams }: PageProps) {
