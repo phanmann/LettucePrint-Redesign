@@ -1,5 +1,6 @@
 'use client'
 
+import type { CSSProperties } from 'react'
 import { motion } from 'framer-motion'
 
 // Target ~44px tall for each logo, derived from viewBox aspect ratios.
@@ -22,14 +23,14 @@ function LogoTrack() {
       {items.map((item, i) => (
         <span
           key={i}
-          className="inline-flex items-center justify-center gap-8 px-8"
+          className="inline-flex items-center justify-center w-20 shrink-0 gap-2 px-2 md:w-auto md:gap-8 md:px-8"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={item.logo}
             alt={item.name}
-            className="w-auto object-contain brightness-0 opacity-70 hover:opacity-100 transition-opacity"
-            style={{ height: `${item.height}px` }}
+            className="h-[calc(var(--logo-height)*0.5)] max-w-14 md:h-[var(--logo-height)] md:max-w-none w-auto object-contain brightness-0 opacity-70 hover:opacity-100 transition-opacity"
+            style={{ '--logo-height': `${item.height}px` } as CSSProperties}
           />
           <span className="text-gray-900/30 text-xl">·</span>
         </span>
@@ -40,16 +41,16 @@ function LogoTrack() {
 
 export default function TrustBar() {
   return (
-    <section className="py-12 bg-lp-blue">
+    <section className="py-6 md:py-12 bg-lp-blue">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.5 }}
-        className="text-center mb-8"
+        className="text-center mb-4 md:mb-8"
       >
         <h2 className="text-xs uppercase tracking-[0.2em] text-gray-900/60 font-semibold">
-          Trusted by brands that take their image seriously
+          Brands we work with
         </h2>
       </motion.div>
 
