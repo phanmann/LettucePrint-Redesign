@@ -333,6 +333,15 @@ export default function ProductOrderPage({
 }: ProductOrderPageProps) {
   const [bannerConfiguration, setBannerConfiguration] = useState(() => defaultBannerConfiguration(bannerKind ?? 'vinyl'))
   const pathname = usePathname()
+  const bannerSize = pathname.startsWith('/shop/signage/banners/') && !bannerKind
+    ? specs.find(spec => spec.label === 'Size')?.value
+    : undefined
+  const bannerSizeSection = bannerSize ? (
+    <section aria-label="Size / dimensions" className="mb-6">
+      <h2 className="text-sm font-semibold text-gray-900">Size / dimensions</h2>
+      <p className="mt-2 text-sm text-gray-700">{bannerSize}</p>
+    </section>
+  ) : null
   const faqs = departmentProductFaqs({ path: pathname, name, specs, artworkRequirements, optionGroups, priced: Boolean(pricingTable?.length || pricingRules?.length || bannerKind) })
   const order = useProductOrder()
   const { addItem, artwork } = order
@@ -430,6 +439,7 @@ export default function ProductOrderPage({
             <div className="hidden lg:block lg:order-last product-order-panel">
               <div className="w-full max-w-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
                 {bannerKind ? <BannerConfigurator order={order} kind={bannerKind} configuration={bannerConfiguration} onConfigurationChange={setBannerConfiguration} /> : <>
+                {bannerSizeSection}
                 <ConfiguratorOptions
                   optionGroups={visibleGroups}
                   pricingTable={activePricingTable}
@@ -483,7 +493,8 @@ export default function ProductOrderPage({
               <div data-mobile-order-module role="region" aria-label="Order options" tabIndex={-1} className="lg:hidden mb-8 product-order-target">
                 <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
                   {bannerKind ? <BannerConfigurator order={order} kind={bannerKind} configuration={bannerConfiguration} onConfigurationChange={setBannerConfiguration} /> : <>
-                  <ConfiguratorOptions
+                  {bannerSizeSection}
+                <ConfiguratorOptions
                     optionGroups={visibleGroups}
                     pricingTable={activePricingTable}
                     pricingNote={pricingNote}
